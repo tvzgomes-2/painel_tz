@@ -1,5 +1,12 @@
 # Painel Tarifa Zero × Grupos Econômicos (protótipo)
 
+[![Status](https://img.shields.io/badge/status-prot%C3%B3tipo-orange)](./CHANGELOG.md)
+[![Ver online](https://img.shields.io/badge/ver-online-2ea44f)](https://tvzgomes-2.github.io/painel_tz/)
+[![Último commit](https://img.shields.io/github/last-commit/tvzgomes-2/painel_tz)](https://github.com/tvzgomes-2/painel_tz/commits/main)
+[![Tamanho do repositório](https://img.shields.io/github/repo-size/tvzgomes-2/painel_tz)](https://github.com/tvzgomes-2/painel_tz)
+[![Licença código](https://img.shields.io/badge/código-MIT-lightgrey)](./LICENSE.md)
+[![Licença dados](https://img.shields.io/badge/dados-CC%20BY--NC%204.0-lightgrey)](./LICENSE.md)
+
 Painel interativo de trabalho, parte da pesquisa de doutorado sobre Tarifa Zero e grupos econômicos do transporte coletivo no Brasil (PGT/UFABC).
 
 **⚠️ Protótipo — não é uma peça da tese.** Serve para explorar os dados e recolher feedback. Há pendências de qualidade de dados sinalizadas no próprio painel (seção "Notas metodológicas").
@@ -46,6 +53,6 @@ scripts/
 **Autor:** Thiago Von Zeidler Gomes
 **Orientadora:** Prof.ª Silvana Zioni
 
-## Licença dos dados
+## Licença
 
-Dados de fontes públicas (IBGE, TSE, Siconfi, DENATRAN, Min. Cidades, DATASUS, OSM, NTU). Ver seção "Fontes" no rodapé do painel.
+Código (scripts, `logic.js`, `head.html`): **MIT**. Dados e conteúdo compilados (dataset municipal, painel publicado): **CC BY-NC 4.0** — uso comercial reservado ao autor/Polo Planejamento. Ver [`LICENSE.md`](./LICENSE.md) para o texto completo e a nota sobre `index.html` (que combina os dois). Dados de origem de fontes públicas (IBGE, TSE, Siconfi, DENATRAN, Min. Cidades, DATASUS, OSM, NTU); ver `METADADOS.md` para a fonte de cada variável.
