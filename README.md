@@ -12,11 +12,23 @@ Arquivo único autocontido (HTML + dados embutidos) — sem backend, sem depend�
 
 ## Ver online
 
-Depois de publicado no GitHub Pages: `https://<seu-usuario>.github.io/<nome-do-repo>/`
+**https://tvzgomes-2.github.io/painel_tz/**
 
 ## Rodar localmente
 
 Basta abrir `index.html` em qualquer navegador.
+
+## Feedback recebido / pendências de ajuste
+
+Comentários de Ivan Pereira Pereira (23/07/2026, WhatsApp) — a incorporar numa próxima versão:
+
+- [ ] Aumentar o tamanho do título do painel
+- [ ] Adicionar borda luminosa leve nos municípios com TZ no mapa (destaque visual sutil)
+- [ ] Manter a borda dos estados (UF) sempre visível no mapa — hoje, ao filtrar só municípios com TZ, eles ficam "flutuando" sem referência geográfica
+- [ ] (Futuro, depende de dados ainda não coletados) Número de viagens antes × depois da adoção da TZ, por município
+- [ ] (Futuro, depende de dados ainda não coletados) Investimento em infraestrutura antes × depois da adoção da TZ
+
+Log completo (com o texto original dos comentários) no cofre Obsidian: `03 - Dados/Painel TZ - log de feedback.md`.
 
 ## Autoria
 
