@@ -29,6 +29,7 @@ index.html          painel publicado (autocontido — não editar direto, ver sc
 README.md           este arquivo
 CHANGELOG.md         histórico de versões e notas de metodologia/achados
 FEEDBACK.md          log de comentários recebidos e backlog de ajustes
+METADADOS.md          dicionário das 54 variáveis embutidas no painel
 scripts/
   build_data.py       gera municipios_dados.json a partir das fontes brutas (privadas)
   build_stats.py       gera stats.json (agregados/cortes/listas)
