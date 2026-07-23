@@ -20,15 +20,25 @@ Basta abrir `index.html` em qualquer navegador.
 
 ## Feedback recebido / pendências de ajuste
 
-Comentários de Ivan Pereira Pereira (23/07/2026, WhatsApp) — a incorporar numa próxima versão:
+Ver [`FEEDBACK.md`](./FEEDBACK.md) — log cronológico de comentários e backlog de ajustes.
 
-- [ ] Aumentar o tamanho do título do painel
-- [ ] Adicionar borda luminosa leve nos municípios com TZ no mapa (destaque visual sutil)
-- [ ] Manter a borda dos estados (UF) sempre visível no mapa — hoje, ao filtrar só municípios com TZ, eles ficam "flutuando" sem referência geográfica
-- [ ] (Futuro, depende de dados ainda não coletados) Número de viagens antes × depois da adoção da TZ, por município
-- [ ] (Futuro, depende de dados ainda não coletados) Investimento em infraestrutura antes × depois da adoção da TZ
+## Estrutura do repositório
 
-Log completo (com o texto original dos comentários) no cofre Obsidian: `03 - Dados/Painel TZ - log de feedback.md`.
+```
+index.html          painel publicado (autocontido — não editar direto, ver scripts/)
+README.md           este arquivo
+CHANGELOG.md         histórico de versões e notas de metodologia/achados
+FEEDBACK.md          log de comentários recebidos e backlog de ajustes
+scripts/
+  build_data.py       gera municipios_dados.json a partir das fontes brutas (privadas)
+  build_stats.py       gera stats.json (agregados/cortes/listas)
+  preparar_geometria.sh converte o shapefile do IBGE em topojson simplificado
+  montar_html.sh        remonta index.html a partir de head.html + dados + logic.js
+  head.html            estrutura/CSS/controles do painel (fonte legível)
+  logic.js             lógica do painel (mapa, filtros, gráficos — fonte legível)
+```
+
+`index.html` é gerado, não editado à mão: para mudar algo (cores, filtros, layout), edite `head.html`/`logic.js` em `scripts/` e rode `montar_html.sh`. Ver comentários nos próprios scripts para o passo a passo completo.
 
 ## Autoria
 
