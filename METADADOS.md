@@ -91,4 +91,4 @@ Descreve os 54 campos por município embutidos em `index.html` (ver `municipios_
 
 ## Fontes completas
 
-FINBRA/Siconfi · IBGE (PIB, Censo 2022, REGIC 2018) · DENATRAN · MUNIC 2020 · PEMOB/SIMU (Ministério das Cidades) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · Base POLO Planejamento · Dataverse Santini (base-mestre TZ).
+FINBRA/Siconfi · IBGE (PIB, Censo 2022, REGIC 2018) · DENATRAN · MUNIC 2020 · PEMOB/SIMU (Ministério das Cidades) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · Base Polo Planejamento · Dataverse Santini (base-mestre TZ).
