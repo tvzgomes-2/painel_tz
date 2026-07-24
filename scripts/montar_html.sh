@@ -6,8 +6,8 @@
 #   2. rodar build_data.py e build_stats.py (gera ../build/municipios_dados.json e stats.json)
 #   3. rodar este script para colar tudo de volta em ../index.html
 #
-# Pré-requisito: ../build/municipios.topojson (geometria simplificada — ver
-# preparar_geometria.sh) e ../build/municipios_dados_col.json (versão colunar
+# Pré-requisito: ../build/geo.topojson (geometria simplificada com camadas de
+# municípios + UFs — ver preparar_geometria.sh) e ../build/municipios_dados_col.json (versão colunar
 # de municipios_dados.json, mais compacta — gerar com:
 #   python3 -c "import json; d=json.load(open('../build/municipios_dados.json'));
 #   cols=list(d[0].keys()); json.dump({'cols':cols,'data':[[r[c] for c in cols] for r in d]},
@@ -20,7 +20,7 @@ OUT=../index.html
 
 {
   cat head.html
-  cat "$BUILD/municipios.topojson"
+  cat "$BUILD/geo.topojson"
   printf '</script>\n<script id="data-stats" type="application/json">\n'
   cat "$BUILD/stats.json"
   printf '</script>\n<script id="data-muni" type="application/json">\n'

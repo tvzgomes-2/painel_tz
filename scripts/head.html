@@ -2,41 +2,79 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Painel Nacional v2 — Tarifa Zero × Grupos Econômicos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transporte Público em Crise — A influência dos grupos econômicos nas experiências de Tarifa Zero</title>
 <style>
   :root{
-    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --border:#2a2f3a;
-    --text:#e7e9ee; --muted:#9aa3b2; --accent:#4f8cff;
-    --tz-ativa:#2e9e5b; --tz-encerrada:#e2892c; --nao-tz:#3a3f4a;
+    /* identidade visual da pesquisa: rosa · amarelo · azul sobre preto */
+    --rosa:#f43f6f; --amarelo:#ffd400; --azul:#2b50d9;
+    --bg:#0b0b0e; --panel:#141419; --panel2:#1d1d25; --border:#2a2a33;
+    --text:#f0f0f2; --muted:#9a9aa6; --accent:#5c7cff;
+    --tz-ativa:#ffd400; --tz-encerrada:#f43f6f; --nao-tz:#3a3a45;
+    --map-bg:#101014; --map-stroke:#3c3c48; --uf-stroke:#8f8f9e; --tz-outline:#ffd400; --tz-outline-enc:#f43f6f;
+    --tag-ativa-fg:#ffd400; --tag-enc-fg:#f96d92;
+  }
+  html[data-theme="light"]{
+    --bg:#f4f5f7; --panel:#ffffff; --panel2:#eef0f3; --border:#d5d9e0;
+    --text:#17171c; --muted:#5b6472; --accent:#2b50d9;
+    --nao-tz:#c9cfd8;
+    --map-bg:#e9ecf1; --map-stroke:#b8bfca; --uf-stroke:#4a5568; --tz-outline:#a68a00; --tz-outline-enc:#c2185b;
+    --tag-ativa-fg:#8a6d00; --tag-enc-fg:#c2185b;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;}
-  header{padding:18px 24px 8px;border-bottom:1px solid var(--border);}
-  header h1{margin:0 0 4px;font-size:20px;font-weight:600;}
-  header .badge{display:inline-block;background:rgba(79,140,255,.18);color:var(--accent);font-size:11px;font-weight:700;
-    padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Montserrat','Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;}
+  header{padding:22px 24px 14px;border-bottom:2px solid var(--amarelo);display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;}
+  header .htext{flex:1 1 600px;}
+  header h1{margin:0 0 10px;font-size:30px;font-weight:800;letter-spacing:.01em;text-transform:uppercase;line-height:1.12;}
+  header h1 .hl{color:var(--amarelo);border-bottom:5px solid var(--rosa);padding-bottom:1px;}
+  header .subtitle{margin:0 0 12px;color:var(--text);font-size:15.5px;font-weight:500;line-height:1.4;}
+  header .resumo{margin:0 0 8px;color:var(--text);font-size:13px;line-height:1.55;max-width:1050px;}
+  header a{color:var(--accent);text-decoration:none;}
+  header a:hover{text-decoration:underline;}
+  header .badge{display:inline-block;background:var(--amarelo);color:#111;font-size:11.5px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:4px;margin-left:10px;
+    vertical-align:middle;transform:rotate(-2deg);}
   header p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.5;}
+  #themeToggle{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:20px;
+    padding:6px 14px;font-size:12.5px;cursor:pointer;white-space:nowrap;align-self:flex-start;}
+  #themeToggle:hover{border-color:var(--accent);}
   .wrap{max-width:1440px;margin:0 auto;padding:16px 24px 60px;}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0;}
+  .cards, .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;}
+  .cards{margin:14px 0 10px;}
+  .controls{margin:0 0 16px;align-items:end;}
   .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
-  .card .n{font-size:22px;font-weight:700;}
-  .card .l{color:var(--muted);font-size:11.5px;margin-top:2px;}
-  .controls{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;align-items:center;}
+  .card .n{font-size:24px;font-weight:700;line-height:1.15;}
+  .card .l{color:var(--muted);font-size:11.5px;margin-top:3px;line-height:1.35;}
+  .card .warn-n{color:var(--tz-encerrada);font-size:10.5px;font-weight:600;display:block;margin-top:2px;}
   .controls label{color:var(--muted);font-size:11.5px;display:block;margin-bottom:3px;}
-  .controls select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px;min-width:170px;}
-  .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start;}
+  .controls select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px;width:100%;}
+  .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:26px;align-items:start;}
   @media (max-width:980px){.grid{grid-template-columns:1fr;}}
-  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px;}
-  .panel h2{margin:0 0 10px;font-size:14px;font-weight:600;color:var(--text);}
-  .panel h3{margin:14px 0 8px;font-size:12.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;}
-  #mapSvg{width:100%;height:auto;background:#12151b;border-radius:8px;display:block;}
-  #mapSvg path{stroke:#0f1115;stroke-width:.3;cursor:pointer;transition:opacity .15s;}
-  #mapSvg path:hover{stroke:#fff;stroke-width:1;}
+  .rightcol{display:flex;flex-direction:column;gap:16px;}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .panel h2{margin:0 0 6px;font-size:14.5px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.05em;
+    display:inline-block;border-bottom:2px solid var(--amarelo);padding-bottom:4px;}
+  .panel .sub{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.5;}
+  .panel h3{margin:18px 0 10px;font-size:14px;font-weight:700;color:var(--text);border-top:1px solid var(--border);padding-top:14px;}
+  .maptools{display:flex;gap:8px;align-items:center;margin:0 0 8px;}
+  .maptools button{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;
+    padding:4px 12px;font-size:12px;cursor:pointer;}
+  .maptools button:hover{border-color:var(--accent);}
+  .maptools .hint{color:var(--muted);font-size:11px;}
+  #mapSvg{width:100%;height:auto;background:var(--map-bg);border-radius:8px;display:block;touch-action:pan-y;}
+  #mapSvg path.mun{stroke:var(--map-stroke);stroke-width:.35;cursor:pointer;transition:opacity .15s;vector-effect:non-scaling-stroke;}
+  #mapSvg path.mun:hover{stroke:var(--accent);stroke-width:1.4;}
+  #mapSvg path.mun.tzpath{stroke:var(--tz-outline);stroke-width:.9;}
+  #mapSvg path.mun.tzpath.enc{stroke:var(--tz-outline-enc);}
+  #mapSvg path.mun.tzpath:hover{stroke:var(--accent);stroke-width:1.6;}
+  #mapSvg path.ufline{fill:none;stroke:var(--uf-stroke);stroke-width:1.1;pointer-events:none;vector-effect:non-scaling-stroke;}
   .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11.5px;color:var(--muted);}
   .legend span.sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
-  #tooltip{position:fixed;pointer-events:none;background:#0b0d11;border:1px solid var(--border);border-radius:8px;
-    padding:8px 10px;font-size:12px;display:none;z-index:50;max-width:280px;box-shadow:0 6px 18px rgba(0,0,0,.4);}
+  #tooltip{position:fixed;pointer-events:none;background:var(--panel);border:1px solid var(--border);border-radius:8px;
+    padding:9px 11px;font-size:12px;display:none;z-index:50;max-width:300px;box-shadow:0 6px 18px rgba(0,0,0,.35);color:var(--text);}
   #tooltip b{display:block;margin-bottom:3px;font-size:13px;}
+  #tooltip .tt-grid{display:grid;grid-template-columns:auto auto;gap:1px 12px;color:var(--muted);}
+  #tooltip .tt-grid span:nth-child(even){color:var(--text);text-align:right;}
   #detail{min-height:120px;}
   #detail .empty{color:var(--muted);font-size:12.5px;}
   #detail table{width:100%;border-collapse:collapse;font-size:12.5px;}
@@ -53,27 +91,45 @@
   table.tzlist{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;}
   table.tzlist th{position:sticky;top:0;background:var(--panel);text-align:left;color:var(--muted);font-weight:600;
     padding:5px 6px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;}
-  table.tzlist td{padding:5px 6px;border-bottom:1px solid #20242c;}
+  table.tzlist td{padding:5px 6px;border-bottom:1px solid var(--border);}
   table.tzlist tr:hover td{background:var(--panel2);cursor:pointer;}
   .tzlistwrap{max-height:360px;overflow:auto;margin-top:8px;border:1px solid var(--border);border-radius:8px;}
   .tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10.5px;font-weight:600;}
-  .tag.ativa{background:rgba(46,158,91,.18);color:var(--tz-ativa);}
-  .tag.encerrada{background:rgba(226,137,44,.18);color:var(--tz-encerrada);}
+  .tag.ativa{background:rgba(255,212,0,.16);color:var(--tag-ativa-fg);}
+  .tag.encerrada{background:rgba(244,63,111,.16);color:var(--tag-enc-fg);}
   .notes{font-size:12px;color:var(--muted);line-height:1.6;}
   .notes b{color:var(--text);}
-  .notes .warn{color:#e2892c;}
-  .crosstabgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:10px;}
-  .xt h4{margin:0 0 8px;font-size:12px;color:var(--text);font-weight:600;}
-  .xtrow{display:grid;grid-template-columns:1fr auto;gap:6px;font-size:11.5px;color:var(--muted);align-items:center;margin-bottom:5px;}
-  .xtrow .xtrack{grid-column:1/3;height:8px;background:var(--panel2);border-radius:4px;overflow:hidden;margin-bottom:2px;}
-  .xtrow .xtfill{height:100%;background:var(--accent);}
-  footer{margin-top:24px;padding-top:14px;border-top:1px solid var(--border);color:var(--muted);font-size:11.5px;line-height:1.7;}
+  .notes .warn{color:var(--tz-encerrada);}
+  .crosstabgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:10px;}
+  .xt h4{margin:0 0 10px;font-size:12.5px;color:var(--text);font-weight:700;}
+  .xtitem{margin-bottom:11px;}
+  .xtitem .xtlab{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-bottom:3px;}
+  .xtitem .xtlab b{color:var(--text);}
+  .xtitem .xtrack{height:8px;background:var(--panel2);border-radius:4px;overflow:hidden;}
+  .xtitem .xtfill{height:100%;background:var(--accent);}
+  #timeline{width:100%;height:auto;display:block;margin-top:6px;}
+  #timeline text{font-family:inherit;}
+  details.gloss{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-top:16px;}
+  details.gloss summary{font-size:15px;font-weight:700;cursor:pointer;}
+  details.gloss dl{font-size:12.5px;color:var(--muted);line-height:1.6;margin:12px 0 0;}
+  details.gloss dt{color:var(--text);font-weight:600;float:left;clear:left;margin-right:8px;}
+  details.gloss dd{margin:0 0 8px 0;overflow:hidden;}
+  footer{margin-top:28px;padding-top:16px;border-top:2px solid var(--amarelo);color:var(--muted);font-size:11.5px;line-height:1.7;}
+  footer .fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;margin-bottom:14px;}
+  footer .fgrid b{color:var(--text);font-size:12.5px;}
+  footer .fgrid .fright{text-align:right;}
+  @media (max-width:640px){footer .fgrid .fright{text-align:left;}}
 </style>
 </head>
 <body>
 <header>
-  <h1>Painel Nacional — Tarifa Zero × Grupos Econômicos <span class="badge">v2</span></h1>
-  <p>Universo: 5.570 municípios do Brasil. Base-mestre Tarifa Zero universal (Dataverse Santini, abr/2026) cruzada com <i>base_municipal_v3.csv</i> (234 variáveis: PEMOB/SIMU, MUNIC 2020, REGIC 2018, OSM, TSE 2024, DATASUS, NTU). Protótipo de trabalho — dados descritivos, não causais.</p>
+  <div class="htext">
+    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v3</span></h1>
+    <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero</p>
+    <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a estrutura de poder dos grupos econômicos do transporte coletivo e a difusão espacial das políticas de gratuidade universal no Brasil. A hipótese central é que os grupos econômicos restringem a difusão da TZ nos municípios de maior interesse comercial, atuando como barreira sistêmica — enquanto a política floresce nas franjas do sistema, pouco atrativas ao capital. O método é misto (quantitativo + qualitativo), em panorama nacional; este painel interativo é o instrumento exploratório do eixo quantitativo.</p>
+    <p>Universo: 5.570 municípios do Brasil. Base-mestre Tarifa Zero universal (Dataverse Santini, abr/2026) cruzada com base municipal integrada de 234 variáveis (PEMOB/SIMU, MUNIC 2020, REGIC 2018, OSM, TSE 2024, DATASUS, NTU). Protótipo de trabalho — dados descritivos, não causais. Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a></p>
+  </div>
+  <button id="themeToggle" title="Alternar tema claro/escuro">◐ Tema claro</button>
 </header>
 <div class="wrap">
 
@@ -141,20 +197,36 @@
 
   <div class="grid">
     <div class="panel">
-      <h2>Mapa coroplético</h2>
+      <h2>Mapa</h2>
+      <p class="sub">Duplo clique num município aproxima; selecionar uma UF no filtro enquadra o estado automaticamente.</p>
+      <div class="maptools">
+        <button id="resetZoom">↺ Brasil</button>
+        <span class="hint" id="zoomHint"></span>
+      </div>
       <svg id="mapSvg" viewBox="0 0 760 800" preserveAspectRatio="xMidYMid meet"></svg>
       <div class="legend" id="legend"></div>
     </div>
-    <div class="panel">
-      <h2>Município selecionado</h2>
-      <div id="detail"><div class="empty">Clique em um município no mapa ou na lista abaixo.</div></div>
-      <h3>TZ × Não-TZ — comparação (recorte atual)</h3>
-      <div class="bars" id="bars"></div>
+    <div class="rightcol">
+      <div class="panel">
+        <h2>Município selecionado</h2>
+        <div id="detail"><div class="empty">Clique em um município no mapa ou na lista abaixo.</div></div>
+      </div>
+      <div class="panel">
+        <h2>TZ × Não-TZ — comparação de medianas (recorte atual)</h2>
+        <div class="bars" id="bars"></div>
+      </div>
     </div>
   </div>
 
   <div class="panel" style="margin-top:16px;">
-    <h2>% de municípios com Tarifa Zero por eixo (nacional, sem filtro)</h2>
+    <h2>Linha do tempo das adoções de Tarifa Zero</h2>
+    <p class="sub">Municípios que iniciaram TZ universal por ano (verde) e revogações (laranja, abaixo do eixo). Responde aos filtros de UF, faixa, REGIC, arranjo e modelo.</p>
+    <svg id="timeline"></svg>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>% de municípios com Tarifa Zero por eixo</h2>
+    <p class="sub">Cada barra mostra a proporção de municípios com TZ <b>dentro daquela categoria</b> (nacional, sem filtro). As categorias têm tamanhos muito diferentes — o <i>n</i> indica quantos municípios TZ há em cada uma; não compare volumes absolutos entre categorias.</p>
     <div class="crosstabgrid" id="crosstabs"></div>
   </div>
 
@@ -172,22 +244,50 @@
     </div>
   </div>
 
+  <details class="gloss">
+    <summary>Glossário de siglas e termos</summary>
+    <dl>
+      <dt>TZ (Tarifa Zero)</dt><dd>política de gratuidade universal do transporte coletivo municipal — todos os passageiros, todos os dias, sem condição.</dd>
+      <dt>IBEU</dt><dd>Índice de Bem-Estar Urbano (Observatório das Metrópoles, 2013) — mede condições urbanas de vida (mobilidade, ambiente, habitação, serviços, infraestrutura); 0 a 1, maior = melhor.</dd>
+      <dt>IDH</dt><dd>Índice de Desenvolvimento Humano Municipal (Atlas PNUD, 2010) — renda, educação e longevidade; 0 a 1, maior = melhor.</dd>
+      <dt>PDMU</dt><dd>Plano Diretor de Mobilidade Urbana — plano municipal exigido pela Lei 12.587/2012 para municípios acima de 20 mil habitantes e integrantes de regiões metropolitanas.</dd>
+      <dt>REGIC</dt><dd>Regiões de Influência das Cidades (IBGE, 2018) — hierarquia funcional urbana: 1 Metrópole · 2 Capital Regional · 3 Centro Sub-Regional · 4 Centro de Zona · 5 Centro Local.</dd>
+      <dt>Arranjo metropolitano</dt><dd>agrupamento de municípios com forte integração (REGIC). <b>Sede/co-sede</b>: a cidade-polo que dá nome ao arranjo. <b>Satélite</b>: os demais municípios do arranjo. <b>Fora de arranjo</b>: municípios que não integram nenhum.</dd>
+      <dt>MUNIC</dt><dd>Pesquisa de Informações Básicas Municipais (IBGE, 2020) — questionário respondido pelas prefeituras; a pergunta sobre modelo de prestação do transporte teve 1.727 respostas (31% dos municípios).</dd>
+      <dt>NTU</dt><dd>Associação Nacional das Empresas de Transportes Urbanos — fonte dos dados de subsídio ao custo dos sistemas de ônibus.</dd>
+      <dt>FINBRA/Siconfi</dt><dd>Finanças do Brasil / Sistema de Informações Contábeis e Fiscais (Tesouro Nacional) — receitas e despesas municipais declaradas.</dd>
+      <dt>Motorização</dt><dd>veículos registrados por habitante (DENATRAN 2023) — proxy de dependência do transporte individual.</dd>
+    </dl>
+  </details>
+
   <div class="panel" style="margin-top:16px;">
     <h2>Notas metodológicas e achados a interpretar com cautela</h2>
     <div class="notes">
       <p><b>Discrepância no arquivo-mestre:</b> <span class="warn">Municípios TZ - consolidado.xlsx</span> traz 155 linhas (145 Ativa + 10 Encerrada), mas <b>Palmas-TO aparece duas vezes</b> como "Encerrada" (períodos 2023-02-02 e 2025-01-01/2025-02-03) — são 154 municípios únicos (145 ativas + 9 encerradas distintas). Ainda não reconciliado — mesma pendência da v1.</p>
       <p><b>Desatualização pontual:</b> São Caetano do Sul consta aqui como "Ativa"; a planilha-mestre (abr/2026) ainda não reflete a revogação de 15/07/2026 registrada no <i>CLAUDE.md</i>. Não corrigido aqui — pendente na fonte.</p>
-      <p><b>Novidade v2 — hierarquia urbana (REGIC) em vez de só população:</b> usando o nível REGIC 2018 (1=Metrópole…5=Centro Local) como proxy de centralidade/interesse comercial, o nível 1 aparece com a <i>maior</i> proporção de TZ (14,5%) e o nível 5 com a <i>menor</i> (1,2%) — à primeira vista, o oposto da hipótese. Mas isso é artefato de composição: <b>dos 31 municípios de nível 1 com TZ, nenhum é a cidade-polo do arranjo metropolitano — todos são satélites</b> (ex.: Caucaia/Fortaleza, Canoas/Porto Alegre, Itaboraí/Maricá/Japeri/Guapimirim/Paracambi/Tanguá no Rio, Luziânia em Brasília, São Caetano/Santa Isabel/Vargem Grande Paulista em São Paulo, Brumadinho/Caeté/Sarzedo em BH). Nenhuma das ~15-20 maiores metrópoles do país (a própria capital-polo) tem TZ. Olhando por <b>sede × satélite de arranjo</b> em qualquer nível: sedes/co-sedes têm 5,8% de TZ, satélites 8,9%, municípios fora de arranjo 1,8% — TZ é mais comum em satélites de arranjos (grandes ou pequenos), mas <b>20 cidades-polo menores</b> (não das grandes metrópoles) também têm TZ, como Teresina/PI, Itapetininga/SP e São João del Rei/MG — o padrão "nunca é a cidade-polo" só se sustenta nos maiores arranjos, não em geral.</p>
-      <p><b>Novidade v2 — modelo de prestação (MUNIC 2020):</b> só 1.727/5.570 municípios (31%) responderam essa pergunta do IBGE — tratar qualquer leitura aqui como amostra parcial, não painel nacional. Dentro dela, "Prestação direta" tem a maior proporção de TZ (13,5%) e "Não regulamentado" a menor (2,5%); Concessão fica em 8,6%. Isso é o eixo mais próximo de testar a hipótese dos grupos econômicos diretamente (concessão = operador privado estabelecido), mas ainda não é a variável de presença de grupo por si — e a amostra de 1.727 pode não ser aleatória (municípios que respondem ao módulo de transporte da MUNIC tendem a ser os que já têm alguma estrutura formal).</p>
-      <p><b>Tarifa e subsídio — dados novos, cobertura muito baixa:</b> tarifa reconciliada (PEMOB/SIMU/ANTP) só existe para 111/5.570 municípios (2%); % do custo subsidiado (NTU) só para 80/5.570 (1,4%). Úteis para casos individuais na lista de TZ, mas não para generalizar ao universo nacional — não construí choropleth denso para eles no mapa, é majoritariamente cinza "sem dado" por desenho, não por erro.</p>
+      <p><b>Hierarquia urbana (REGIC) em vez de só população:</b> usando o nível REGIC 2018 (1=Metrópole…5=Centro Local) como proxy de centralidade/interesse comercial, o nível 1 aparece com a <i>maior</i> proporção de TZ (14,5%) e o nível 5 com a <i>menor</i> (1,2%) — à primeira vista, o oposto da hipótese. Mas isso é artefato de composição: <b>dos 31 municípios de nível 1 com TZ, nenhum é a cidade-polo do arranjo metropolitano — todos são satélites</b> (ex.: Caucaia/Fortaleza, Canoas/Porto Alegre, Itaboraí/Maricá/Japeri/Guapimirim/Paracambi/Tanguá no Rio, Luziânia em Brasília, São Caetano/Santa Isabel/Vargem Grande Paulista em São Paulo, Brumadinho/Caeté/Sarzedo em BH). Nenhuma das ~15-20 maiores metrópoles do país (a própria capital-polo) tem TZ. Olhando por <b>sede × satélite de arranjo</b> em qualquer nível: sedes/co-sedes têm 5,8% de TZ, satélites 8,9%, municípios fora de arranjo 1,8% — TZ é mais comum em satélites de arranjos (grandes ou pequenos), mas <b>20 cidades-polo menores</b> (não das grandes metrópoles) também têm TZ, como Teresina/PI, Itapetininga/SP e São João del Rei/MG — o padrão "nunca é a cidade-polo" só se sustenta nos maiores arranjos, não em geral.</p>
+      <p><b>Modelo de prestação (MUNIC 2020):</b> só 1.727/5.570 municípios (31%) responderam essa pergunta do IBGE — tratar qualquer leitura aqui como amostra parcial, não painel nacional. Dentro dela, "Prestação direta" tem a maior proporção de TZ (13,5%) e "Não regulamentado" a menor (2,5%); Concessão fica em 8,6%. Isso é o eixo mais próximo de testar a hipótese dos grupos econômicos diretamente (concessão = operador privado estabelecido), mas ainda não é a variável de presença de grupo por si — e a amostra de 1.727 pode não ser aleatória (municípios que respondem ao módulo de transporte da MUNIC tendem a ser os que já têm alguma estrutura formal).</p>
+      <p><b>Tarifa e subsídio — dados novos, cobertura muito baixa:</b> tarifa reconciliada (PEMOB/SIMU/ANTP) só existe para 111/5.570 municípios (2%); % do custo subsidiado (NTU) só para 80/5.570 (1,4%). Úteis para casos individuais na lista de TZ, mas não para generalizar ao universo nacional — no mapa, esses eixos ficam majoritariamente em cinza "sem dado" por desenho, não por erro.</p>
+      <p><b>Grandes números respondem aos filtros:</b> os cartões do topo recalculam conforme o recorte (UF, faixa, REGIC, arranjo, modelo). Em recortes com poucos municípios TZ, os valores perdem robustez — o painel sinaliza "amostra pequena" quando há menos de 5 municípios TZ no recorte.</p>
       <p><b>Variável ainda ausente:</b> presença/atuação de grupo econômico por município (rede ARS/CNPJ) — sem ela, mesmo os eixos novos (REGIC, modelo de prestação) são proxies indiretos, não o teste direto da hipótese central da tese.</p>
     </div>
   </div>
 
   <footer>
+    <div class="fgrid">
+      <div>
+        <b>Thiago Von Zeidler Gomes</b><br>
+        Doutorado em Planejamento e Gestão do Território<br>
+        PPG-PGT · UFABC
+      </div>
+      <div class="fright">
+        <b>Orientadora</b><br>
+        Prof.ª Dr.ª Silvana Maria Zioni<br>
+        Painel v3 · 2026
+      </div>
+    </div>
     Fontes: Dataverse Santini v8 (abr/2026) · PEMOB/SIMU (Min. Cidades) · MUNIC 2020 (IBGE) · REGIC 2018 (IBGE) · FINBRA/Siconfi 2019–2023 · IBGE (PIB 2013/2021, Censo 2022) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Base Polo Planejamento.<br>
-    Painel gerado a partir de <i>base_municipal_v3.csv</i> e <i>Municípios TZ - consolidado.xlsx</i> — protótipo de trabalho, não substitui a análise da tese. Versão anterior (v1, base_municipal_integrada_v2) preservada como histórico.<br>
-    Autor: Thiago Von Zeidler Gomes · Orientadora: Prof.ª Silvana Zioni
+    Painel gerado a partir de <i>base_municipal_v3.csv</i> e <i>Municípios TZ - consolidado.xlsx</i> — protótipo de trabalho, não substitui a análise da tese. Histórico de versões no CHANGELOG do repositório.
   </footer>
 </div>
 <div id="tooltip"></div>

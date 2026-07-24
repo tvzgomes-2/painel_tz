@@ -28,4 +28,12 @@ mapshaper "$BUILD/municipios_simpl.geojson" \
   -clean \
   -o format=topojson quantization=1e5 "$BUILD/municipios.topojson"
 
-echo "gerado: $BUILD/municipios.topojson"
+# v3+: acrescenta a camada de UFs (dissolvida dos municípios) no mesmo topojson
+mapshaper "$BUILD/municipios.topojson" \
+  -target municipios_simpl \
+  -each 'uf2=cod_ibge.substr(0,2)' \
+  -dissolve uf2 + name=ufs \
+  -target municipios_simpl -filter-fields cod_ibge \
+  -o "$BUILD/geo.topojson" format=topojson target='*' quantization=1e5
+
+echo "gerado: $BUILD/geo.topojson (objetos: municipios_simpl + ufs)"

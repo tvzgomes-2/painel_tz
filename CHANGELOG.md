@@ -1,6 +1,39 @@
 # Changelog e notas de metodologia
 
-## v2 (atual — publicada 2026-07-23)
+## v3 (atual — publicada 2026-07-24)
+
+Release de melhorias guiada pelo feedback de 5 leitores (ver `FEEDBACK.md`) e pelo pedido da orientação (mais gráficos e grandes números). Mesmos dados da v2 — nenhuma mudança de base.
+
+**Mapa:**
+
+- Bordas estaduais sempre visíveis (camada de UFs dissolvida dos municípios, +17 KB) — o item mais pedido do feedback.
+- Bordas municipais mais visíveis; contorno claro destacando os municípios TZ (decisão: contorno em vez do "glow" pedido — ver ROADMAP, registro de decisões).
+- Auto-encaixe: selecionar UF no filtro enquadra o estado; duplo clique num município aproxima; botão "↺ Brasil" reseta. Strokes com `vector-effect: non-scaling-stroke` (espessura constante em qualquer zoom).
+- Tooltip completo nos municípios TZ (situação, início/fim, REGIC, arranjo, população, PIB pc, motorização, operador); tooltip suprimido fora do recorte quando há filtro ativo.
+
+**Grandes números e gráficos (pedido da orientadora):**
+
+- Cards do topo agora são dinâmicos — recalculam conforme o recorte (UF/faixa/REGIC/arranjo/modelo), com aviso de "amostra pequena" quando há <5 municípios TZ no recorte. Novo indicador: **pessoas vivendo com TZ ativa** (soma da população dos municípios ativos; nacional: ~7,6 milhões).
+- Novo gráfico: **linha do tempo das adoções** (por ano de início, com revogações abaixo do eixo), reagindo aos filtros — evidencia a aceleração recente (37 adoções só em 2023).
+
+**Leitura e estrutura:**
+
+- Cabeçalho reescrito: título oficial da tese ("Tarifa Zero e Grupos Econômicos no Brasil"), resumo da pesquisa (pergunta, hipótese e método — redigido a partir do projeto de qualificação, a revisar pelo autor) e link para este repositório. Sigla "(TZ)" definida na primeira menção do resumo.
+- Títulos de seção maiores; cards e controles no mesmo grid (alinhados).
+- Bloco "% por eixo": subtítulo explicando que a % é dentro de cada categoria; rótulo agora fica acima da própria barra (sem ambiguidade barra↔legenda).
+- Glossário de siglas (IBEU, IDH, PDMU, REGIC, NTU, MUNIC, FINBRA, arranjo metropolitano, motorização) em bloco colapsável.
+- **Toggle tema claro/escuro** (preferência salva no navegador); paleta neutra do mapa acompanha o tema.
+
+**Identidade visual da pesquisa** (aplicada 24/07/2026, a partir da base de identidade do autor — rosa `#f43f6f` · amarelo `#ffd400` · azul `#2b50d9` sobre preto):
+
+- Cores semânticas: **amarelo = TZ ativa**, **rosa = encerrada/revogação**, azul = interface (links, barras, filtros) — no mapa, na linha do tempo, nas tags e na legenda.
+- Título em caixa alta com "Tarifa Zero" destacado (amarelo + sublinhado rosa); títulos de seção em caixa alta com filete amarelo; selo "painel · v3" no estilo do adesivo da identidade.
+- Rodapé no padrão da capa: autor/programa à esquerda, orientadora à direita.
+- No tema claro, os textos em amarelo usam tom escurecido para manter contraste (fills do mapa não mudam).
+- Título do trabalho no cabeçalho: "Transporte Público em Crise — A influência dos grupos econômicos nas experiências de Tarifa Zero" (com "Crise" destacado, como na capa da identidade).
+- Ajustes do autor: "Mapa coroplético" → "Mapa"; municípios com TZ encerrada têm contorno rosa (ativas seguem com contorno amarelo); caixa "Município selecionado" separada do bloco de comparação TZ×Não-TZ (painéis independentes).
+
+## v2 (2026-07-23)
 
 Reconstruído sobre `base_municipal_v3.csv` (234 variáveis), no lugar da v1 (`base_municipal_integrada_v2.csv`, 131 variáveis). Mesma geometria municipal (topojson simplificado) e mesmo cruzamento com a base-mestre de Tarifa Zero — só a base de atributos mudou.
 

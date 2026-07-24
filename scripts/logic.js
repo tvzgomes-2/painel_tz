@@ -11,12 +11,12 @@ for (const row of MUNI_COL.data) {
   for (let i = 0; i < COLS.length; i++) obj[COLS[i]] = row[i];
   obj.rec_prop_pc = (obj.rec_prop != null && obj.pop) ? obj.rec_prop / obj.pop : null;
   obj.tz_bin = (obj.tz_status === 'Ativa' || obj.tz_status === 'Encerrada') ? 'TZ' : 'Não TZ';
+  obj.tz_ano_num = obj.tz_ano != null ? parseInt(String(obj.tz_ano).slice(0, 4)) : null;
+  obj.tz_fim_num = obj.tz_fim != null ? parseInt(String(obj.tz_fim).slice(0, 4)) : null;
   MUNI.set(obj.id, obj);
 }
 
-// ---------- decode topojson ----------
-const objName = Object.keys(TOPO.objects)[0];
-const geometries = TOPO.objects[objName].geometries;
+// ---------- decode topojson (two layers: municipios + ufs) ----------
 const scale = TOPO.transform.scale, translate = TOPO.transform.translate;
 
 function decodeArc(arc) {
@@ -44,24 +44,32 @@ function arcsToRing(arcIdx) {
   return coords;
 }
 
-// bounding box
-let lonMin = Infinity, lonMax = -Infinity, latMin = Infinity, latMax = -Infinity;
-const features = geometries.map(g => {
-  let rings;
-  if (g.type === 'Polygon') {
-    rings = g.arcs.map(arcsToRing);
-  } else if (g.type === 'MultiPolygon') {
-    rings = [];
+function geomToRings(g) {
+  if (g.type === 'Polygon') return g.arcs.map(arcsToRing);
+  if (g.type === 'MultiPolygon') {
+    const rings = [];
     for (const poly of g.arcs) for (const ring of poly) rings.push(arcsToRing(ring));
-  } else {
-    rings = [];
+    return rings;
   }
+  return [];
+}
+
+const muniGeoms = TOPO.objects.municipios_simpl.geometries;
+const ufGeoms = TOPO.objects.ufs.geometries;
+
+let lonMin = Infinity, lonMax = -Infinity, latMin = Infinity, latMax = -Infinity;
+const features = muniGeoms.map(g => {
+  const rings = geomToRings(g);
+  let bLonMin = Infinity, bLonMax = -Infinity, bLatMin = Infinity, bLatMax = -Infinity;
   for (const ring of rings) for (const [lon, lat] of ring) {
-    if (lon < lonMin) lonMin = lon; if (lon > lonMax) lonMax = lon;
-    if (lat < latMin) latMin = lat; if (lat > latMax) latMax = lat;
+    if (lon < bLonMin) bLonMin = lon; if (lon > bLonMax) bLonMax = lon;
+    if (lat < bLatMin) bLatMin = lat; if (lat > bLatMax) bLatMax = lat;
   }
-  return { id: g.properties.cod_ibge, rings };
+  if (bLonMin < lonMin) lonMin = bLonMin; if (bLonMax > lonMax) lonMax = bLonMax;
+  if (bLatMin < latMin) latMin = bLatMin; if (bLatMax > latMax) latMax = bLatMax;
+  return { id: g.properties.cod_ibge, rings, bbox: [bLonMin, bLatMin, bLonMax, bLatMax] };
 });
+const ufFeatures = ufGeoms.map(g => ({ uf2: g.properties.uf2, rings: geomToRings(g) }));
 
 const latMean = (latMin + latMax) / 2;
 const cosLat = Math.cos(latMean * Math.PI / 180);
@@ -72,9 +80,12 @@ const offX = PAD + ((W - 2 * PAD) - spanX * K) / 2;
 const offY = PAD + ((H - 2 * PAD) - spanY * K) / 2;
 
 function project([lon, lat]) {
-  const x = offX + (lon - lonMin) * cosLat * K;
-  const y = offY + (latMax - lat) * K;
-  return [x, y];
+  return [offX + (lon - lonMin) * cosLat * K, offY + (latMax - lat) * K];
+}
+function projectBbox([bLonMin, bLatMin, bLonMax, bLatMax]) {
+  const [x1, y1] = project([bLonMin, bLatMax]);
+  const [x2, y2] = project([bLonMax, bLatMin]);
+  return [x1, y1, x2 - x1, y2 - y1]; // x, y, w, h em coordenadas do svg
 }
 
 function ringToPath(ring) {
@@ -86,20 +97,89 @@ function ringToPath(ring) {
   return d + 'Z';
 }
 
-// ---------- render map paths ----------
+// ---------- render map paths (não-TZ primeiro, TZ depois — contorno fica por cima; UF por último) ----------
 const svg = document.getElementById('mapSvg');
 svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-const frag = document.createDocumentFragment();
+const HOME_VB = [0, 0, W, H];
 const pathById = new Map();
+const gMun = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+const gTz = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+const gUf = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
 for (const f of features) {
   const d = f.rings.map(ringToPath).join(' ');
   const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   el.setAttribute('d', d);
   el.dataset.id = f.id;
-  frag.appendChild(el);
+  el.classList.add('mun');
+  const m = MUNI.get(f.id);
+  if (m && m.tz_bin === 'TZ') {
+    el.classList.add('tzpath');
+    if (m.tz_status === 'Encerrada') el.classList.add('enc');
+    gTz.appendChild(el);
+  } else {
+    gMun.appendChild(el);
+  }
   pathById.set(f.id, el);
 }
-svg.appendChild(frag);
+for (const uf of ufFeatures) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  el.setAttribute('d', uf.rings.map(ringToPath).join(' '));
+  el.classList.add('ufline');
+  gUf.appendChild(el);
+}
+svg.appendChild(gMun);
+svg.appendChild(gTz);
+svg.appendChild(gUf);
+
+// ---------- auto-encaixe (animação do viewBox) ----------
+let vbAnim = null;
+function setViewBox(vb) {
+  svg.setAttribute('viewBox', vb.map(v => v.toFixed(1)).join(' '));
+}
+function animateViewBox(target, ms = 350) {
+  if (vbAnim) cancelAnimationFrame(vbAnim);
+  const from = svg.getAttribute('viewBox').split(' ').map(Number);
+  const t0 = performance.now();
+  function step(t) {
+    const p = Math.min(1, (t - t0) / ms);
+    const e = 1 - Math.pow(1 - p, 3); // ease-out cúbico
+    setViewBox(from.map((v, i) => v + (target[i] - v) * e));
+    if (p < 1) vbAnim = requestAnimationFrame(step);
+  }
+  vbAnim = requestAnimationFrame(step);
+}
+function bboxToViewBox(x, y, w, h, padFrac = 0.12) {
+  const pad = Math.max(w, h) * padFrac;
+  let vw = w + 2 * pad, vh = h + 2 * pad;
+  const ar = W / H; // manter a proporção do canvas
+  if (vw / vh > ar) vh = vw / ar; else vw = vh * ar;
+  return [x + w / 2 - vw / 2, y + h / 2 - vh / 2, vw, vh];
+}
+function zoomToUF(uf) {
+  let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
+  for (const f of features) {
+    const m = MUNI.get(f.id);
+    if (!m || m.uf !== uf) continue;
+    const [x, y, w, h] = projectBbox(f.bbox);
+    if (x < x1) x1 = x; if (y < y1) y1 = y;
+    if (x + w > x2) x2 = x + w; if (y + h > y2) y2 = y + h;
+  }
+  if (x1 === Infinity) return;
+  animateViewBox(bboxToViewBox(x1, y1, x2 - x1, y2 - y1));
+  document.getElementById('zoomHint').textContent = 'enquadrado: ' + uf;
+}
+function zoomToMuni(f) {
+  const [x, y, w, h] = projectBbox(f.bbox);
+  animateViewBox(bboxToViewBox(x, y, w, h, 1.6));
+  const m = MUNI.get(f.id);
+  document.getElementById('zoomHint').textContent = 'enquadrado: ' + (m ? m.nome + ' – ' + m.uf : '');
+}
+function resetZoom() {
+  animateViewBox(HOME_VB);
+  document.getElementById('zoomHint').textContent = '';
+}
+document.getElementById('resetZoom').addEventListener('click', resetZoom);
 
 // ---------- color scales ----------
 const PALETTES = {
@@ -120,12 +200,26 @@ const FAIXA_COLORS = {
 };
 const REGIC_COLORS = { 1: '#54278f', 2: '#807dba', 3: '#9e9ac8', 4: '#bcbddc', 5: '#dadaeb' };
 const REGIC_LABELS = { 1: 'Metrópole', 2: 'Capital Regional', 3: 'Centro Sub-Regional', 4: 'Centro de Zona', 5: 'Centro Local' };
-const ARRANJO_COLORS = { 'Sede/co-sede do arranjo': '#08519c', 'Satélite do arranjo': '#6baed6', 'Fora de arranjo': '#3a3f4a' };
+const ARRANJO_COLORS = { 'Sede/co-sede do arranjo': '#08519c', 'Satélite do arranjo': '#6baed6', 'Fora de arranjo': '#5c6470' };
 const MODELO_COLORS = {
   'Concessão': '#2171b5', 'Prestação direta': '#2e9e5b', 'Permissão': '#e2892c',
   'Autorização': '#c9b458', 'Não regulamentado': '#a63603', 'Misto (2+ modelos)': '#756bb1'
 };
-const TZ_COLORS_HEX = { 'Ativa': '#2e9e5b', 'Encerrada': '#e2892c', 'Não TZ': '#2b2f39' };
+// identidade visual da pesquisa: amarelo = TZ ativa, rosa = encerrada/revogação
+const TZ_COLORS_HEX = { 'Ativa': '#ffd400', 'Encerrada': '#f43f6f' };
+// versões mais escuras para texto pequeno no tema claro (amarelo puro some no branco)
+function tzUi() {
+  return state.theme === 'light'
+    ? { ativa: '#a68a00', enc: '#c2185b' }
+    : { ativa: '#ffd400', enc: '#f96d92' };
+}
+
+// tons neutros por tema (fills aplicados via JS precisam acompanhar o tema)
+const NEUTRALS = {
+  dark: { naoTz: '#2b2f39', noData: '#22262e', filteredOut: '#1a1d23' },
+  light: { naoTz: '#cdd3dc', noData: '#e2e6ec', filteredOut: '#eef0f4' },
+};
+function neutrals() { return NEUTRALS[state.theme]; }
 
 function classify(v, breaks) {
   if (v == null || isNaN(v)) return null;
@@ -135,24 +229,23 @@ function classify(v, breaks) {
   return breaks.length - 2;
 }
 
-const CATEGORICAL_AXES = new Set(['tz', 'faixa_pop', 'regic_nivel', 'tipo_arranjo', 'modelo_prestacao_simples']);
-
 function colorFor(m, colorBy) {
-  if (!m) return '#22262e';
-  if (colorBy === 'tz') return TZ_COLORS_HEX[m.tz_status] || TZ_COLORS_HEX['Não TZ'];
-  if (colorBy === 'faixa_pop') return FAIXA_COLORS[m.faixa_pop] || '#22262e';
-  if (colorBy === 'regic_nivel') return REGIC_COLORS[m.regic_nivel] || '#22262e';
-  if (colorBy === 'tipo_arranjo') return ARRANJO_COLORS[m.tipo_arranjo] || '#22262e';
-  if (colorBy === 'modelo_prestacao_simples') return m.modelo_prestacao_simples ? (MODELO_COLORS[m.modelo_prestacao_simples] || '#22262e') : '#22262e';
+  const nt = neutrals();
+  if (!m) return nt.noData;
+  if (colorBy === 'tz') return TZ_COLORS_HEX[m.tz_status] || nt.naoTz;
+  if (colorBy === 'faixa_pop') return FAIXA_COLORS[m.faixa_pop] || nt.noData;
+  if (colorBy === 'regic_nivel') return REGIC_COLORS[m.regic_nivel] || nt.noData;
+  if (colorBy === 'tipo_arranjo') return ARRANJO_COLORS[m.tipo_arranjo] || nt.noData;
+  if (colorBy === 'modelo_prestacao_simples') return m.modelo_prestacao_simples ? (MODELO_COLORS[m.modelo_prestacao_simples] || nt.noData) : nt.noData;
   const v = colorBy === 'rec_prop_pc' ? m.rec_prop_pc : m[colorBy];
   const breaks = STATS.breaks[colorBy];
   const cls = classify(v, breaks);
-  if (cls == null) return '#22262e';
+  if (cls == null) return nt.noData;
   return PALETTES[colorBy][cls];
 }
 
 // ---------- filters state ----------
-const state = { colorBy: 'tz', uf: '', faixa: '', regic: '', arranjo: '', modelo: '', tzFilter: '', selected: null };
+const state = { colorBy: 'tz', uf: '', faixa: '', regic: '', arranjo: '', modelo: '', tzFilter: '', theme: 'dark' };
 
 function passesFilter(m) {
   if (!m) return false;
@@ -164,25 +257,42 @@ function passesFilter(m) {
   if (state.tzFilter && m.tz_bin !== state.tzFilter) return false;
   return true;
 }
+// subconjunto que ignora o recorte TZ (para comparações TZ×Não-TZ, cards e linha do tempo)
+function subsetNoTz() {
+  const rows = [];
+  for (const m of MUNI.values()) {
+    if (state.uf && m.uf !== state.uf) continue;
+    if (state.faixa && m.faixa_pop !== state.faixa) continue;
+    if (state.regic && String(m.regic_nivel) !== state.regic) continue;
+    if (state.arranjo && m.tipo_arranjo !== state.arranjo) continue;
+    if (state.modelo && m.modelo_prestacao_simples !== state.modelo) continue;
+    rows.push(m);
+  }
+  return rows;
+}
 
 function render() {
+  const nt = neutrals();
   for (const [id, el] of pathById) {
     const m = MUNI.get(id);
     const pass = passesFilter(m);
-    el.setAttribute('fill', pass ? colorFor(m, state.colorBy) : '#1a1d23');
-    el.style.opacity = pass ? '1' : '.25';
+    el.setAttribute('fill', pass ? colorFor(m, state.colorBy) : nt.filteredOut);
+    el.style.opacity = pass ? '1' : (state.theme === 'dark' ? '.25' : '.45');
   }
   renderLegend();
   renderBars();
+  renderCards();
+  renderTimeline();
 }
 
 function renderLegend() {
   const el = document.getElementById('legend');
+  const nt = neutrals();
   let html = '';
   if (state.colorBy === 'tz') {
     html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Ativa</span>
             <span><span class="sw" style="background:${TZ_COLORS_HEX.Encerrada}"></span>Encerrada</span>
-            <span><span class="sw" style="background:${TZ_COLORS_HEX['Não TZ']}"></span>Não TZ</span>`;
+            <span><span class="sw" style="background:${nt.naoTz}"></span>Não TZ</span>`;
   } else if (state.colorBy === 'faixa_pop') {
     html = STATS.faixa_order.map(f => `<span><span class="sw" style="background:${FAIXA_COLORS[f]}"></span>${f}</span>`).join('');
   } else if (state.colorBy === 'regic_nivel') {
@@ -191,7 +301,7 @@ function renderLegend() {
     html = STATS.arranjo_order.map(a => `<span><span class="sw" style="background:${ARRANJO_COLORS[a]}"></span>${a}</span>`).join('');
   } else if (state.colorBy === 'modelo_prestacao_simples') {
     html = STATS.modelo_order.map(a => `<span><span class="sw" style="background:${MODELO_COLORS[a]}"></span>${a}</span>`).join('')
-      + `<span><span class="sw" style="background:#22262e"></span>Sem dado (MUNIC 2020, ${5570 - STATS.totais.modelo_prestacao_n} municípios)</span>`;
+      + `<span><span class="sw" style="background:${nt.noData}"></span>Sem dado (MUNIC 2020, ${5570 - STATS.totais.modelo_prestacao_n} municípios)</span>`;
   } else {
     const breaks = STATS.breaks[state.colorBy];
     const pal = PALETTES[state.colorBy];
@@ -208,19 +318,96 @@ function fmtNum(v) {
   if (Math.abs(v) < 5) return v.toLocaleString('pt-BR', { maximumFractionDigits: 3 });
   return v.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
 }
+function fmtCompact(v) {
+  if (v == null || isNaN(v)) return '—';
+  if (v >= 1e6) return (v / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' mi';
+  if (v >= 1e3) return (v / 1e3).toLocaleString('pt-BR', { maximumFractionDigits: 0 }) + ' mil';
+  return v.toLocaleString('pt-BR');
+}
+function median(arr) {
+  const a = arr.filter(v => v != null && !isNaN(v)).sort((x, y) => x - y);
+  if (!a.length) return null;
+  const mid = Math.floor(a.length / 2);
+  return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+}
 
-// ---------- cards ----------
+// ---------- grandes números dinâmicos (reagem ao recorte atual) ----------
 function renderCards() {
-  const t = STATS.totais;
+  const rows = subsetNoTz();
+  const tzRows = rows.filter(m => m.tz_bin === 'TZ');
+  const ativas = tzRows.filter(m => m.tz_status === 'Ativa');
+  const popTZ = ativas.reduce((s, m) => s + (m.pop || 0), 0);
+  const pibMed = median(rows.map(m => m.pib_pc));
+  const hasFilter = state.uf || state.faixa || state.regic || state.arranjo || state.modelo;
+  const scopeLabel = hasFilter ? 'no recorte' : 'no Brasil';
+  const smallN = tzRows.length > 0 && tzRows.length < 5;
+  const warn = smallN ? '<span class="warn-n">⚠ amostra pequena</span>' : '';
   const cards = [
-    { n: t.municipios.toLocaleString('pt-BR'), l: 'Municípios (universo)' },
-    { n: t.tz_ativa, l: 'TZ ativas (base-mestre)' },
-    { n: t.tz_encerrada, l: 'TZ encerradas (distintas)' },
-    { n: (100 * (t.tz_ativa + t.tz_encerrada) / t.municipios).toFixed(1) + '%', l: '% do universo com histórico de TZ' },
-    { n: t.modelo_prestacao_n.toLocaleString('pt-BR'), l: 'Com modelo de prestação (MUNIC 2020)' },
-    { n: t.tarifa_n, l: 'Com tarifa reconciliada' },
+    { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
+    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas ${scopeLabel}`, w: warn },
+    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ ${scopeLabel}`, w: warn },
+    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ ativa ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
+    { n: pibMed != null ? 'R$ ' + fmtNum(pibMed) : '—', l: `PIB per capita mediano ${scopeLabel} (2021)` },
+    { n: (tzRows.length - ativas.length).toLocaleString('pt-BR'), l: `TZ encerradas ${scopeLabel}` },
   ];
-  document.getElementById('cards').innerHTML = cards.map(c => `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}</div></div>`).join('');
+  document.getElementById('cards').innerHTML = cards.map(c =>
+    `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}${c.w || ''}</div></div>`).join('');
+}
+
+// ---------- linha do tempo das adoções (reage ao recorte) ----------
+function renderTimeline() {
+  const rows = subsetNoTz().filter(m => m.tz_bin === 'TZ');
+  const el = document.getElementById('timeline');
+  const adopt = {}, revoke = {};
+  let yMin = Infinity, yMax = -Infinity;
+  for (const m of rows) {
+    if (m.tz_ano_num && m.tz_ano_num > 1980 && m.tz_ano_num <= 2026) {
+      adopt[m.tz_ano_num] = (adopt[m.tz_ano_num] || 0) + 1;
+      if (m.tz_ano_num < yMin) yMin = m.tz_ano_num;
+      if (m.tz_ano_num > yMax) yMax = m.tz_ano_num;
+    }
+    if (m.tz_status === 'Encerrada' && m.tz_fim_num && m.tz_fim_num > 1980 && m.tz_fim_num <= 2026) {
+      revoke[m.tz_fim_num] = (revoke[m.tz_fim_num] || 0) + 1;
+      if (m.tz_fim_num < yMin) yMin = m.tz_fim_num;
+      if (m.tz_fim_num > yMax) yMax = m.tz_fim_num;
+    }
+  }
+  if (yMin === Infinity) { el.innerHTML = ''; el.removeAttribute('viewBox'); return; }
+  const years = []; for (let y = yMin; y <= yMax; y++) years.push(y);
+  const maxA = Math.max(1, ...Object.values(adopt));
+  const maxR = Math.max(0, ...Object.values(revoke));
+  const TW = 1200, TH = 230, padL = 34, padR = 10, padT = 18;
+  const axisY = padT + 140; // adoções acima do eixo, revogações abaixo
+  const revH = 40;
+  const bw = (TW - padL - padR) / years.length;
+  const css = getComputedStyle(document.body);
+  const mutedC = css.getPropertyValue('--muted').trim() || '#9aa3b2';
+  const borderC = css.getPropertyValue('--border').trim() || '#2a2f3a';
+  let s = '';
+  s += `<line x1="${padL}" y1="${axisY}" x2="${TW - padR}" y2="${axisY}" stroke="${borderC}" stroke-width="1"/>`;
+  for (let i = 0; i < years.length; i++) {
+    const y = years[i];
+    const x = padL + i * bw;
+    const a = adopt[y] || 0, r = revoke[y] || 0;
+    if (a > 0) {
+      const h = (a / maxA) * 130;
+      s += `<rect x="${(x + bw * 0.12).toFixed(1)}" y="${(axisY - h).toFixed(1)}" width="${(bw * 0.76).toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${TZ_COLORS_HEX.Ativa}"><title>${y}: ${a} adoção(ões)</title></rect>`;
+      s += `<text x="${(x + bw / 2).toFixed(1)}" y="${(axisY - h - 4).toFixed(1)}" font-size="9.5" fill="${mutedC}" text-anchor="middle">${a}</text>`;
+    }
+    if (r > 0) {
+      const h = maxR ? (r / maxR) * revH : 0;
+      s += `<rect x="${(x + bw * 0.12).toFixed(1)}" y="${axisY + 2}" width="${(bw * 0.76).toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${TZ_COLORS_HEX.Encerrada}"><title>${y}: ${r} revogação(ões)</title></rect>`;
+      s += `<text x="${(x + bw / 2).toFixed(1)}" y="${(axisY + h + 13).toFixed(1)}" font-size="9.5" fill="${mutedC}" text-anchor="middle">${r}</text>`;
+    }
+    if (y % 5 === 0 || y === yMin || y === yMax) {
+      s += `<text x="${(x + bw / 2).toFixed(1)}" y="${TH - 6}" font-size="10" fill="${mutedC}" text-anchor="middle">${y}</text>`;
+    }
+  }
+  const ui = tzUi();
+  s += `<text x="${padL}" y="${padT - 5}" font-size="10.5" font-weight="700" fill="${ui.ativa}">▮ adoções</text>`;
+  s += `<text x="${padL + 78}" y="${padT - 5}" font-size="10.5" font-weight="700" fill="${ui.enc}">▮ revogações</text>`;
+  el.setAttribute('viewBox', `0 0 ${TW} ${TH}`);
+  el.innerHTML = s;
 }
 
 // ---------- detail panel ----------
@@ -258,7 +445,7 @@ function renderDetail(m) {
     </table>`;
 }
 
-// ---------- comparison bars (recomputed live from filtered subset) ----------
+// ---------- comparison bars ----------
 const BAR_METRICS = [
   { k: 'pib_pc', label: 'PIB per capita mediano (R$)', fmt: v => 'R$ ' + fmtNum(v) },
   { k: 'motorizacao', label: 'Motorização mediana (veíc/hab)', fmt: fmtNum },
@@ -268,24 +455,10 @@ const BAR_METRICS = [
   { k: 'taxa_obitos_transito', label: 'Óbitos no trânsito /100mil mediano (2019)', fmt: fmtNum },
 ];
 
-function median(arr) {
-  const a = arr.filter(v => v != null && !isNaN(v)).sort((x, y) => x - y);
-  if (!a.length) return null;
-  const mid = Math.floor(a.length / 2);
-  return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
-}
-
 function renderBars() {
-  // subset by uf/faixa/regic/arranjo/modelo (ignore tzFilter so we always compare TZ vs Não-TZ)
-  const rowsTZ = [], rowsNao = [];
-  for (const m of MUNI.values()) {
-    if (state.uf && m.uf !== state.uf) continue;
-    if (state.faixa && m.faixa_pop !== state.faixa) continue;
-    if (state.regic && String(m.regic_nivel) !== state.regic) continue;
-    if (state.arranjo && m.tipo_arranjo !== state.arranjo) continue;
-    if (state.modelo && m.modelo_prestacao_simples !== state.modelo) continue;
-    (m.tz_bin === 'TZ' ? rowsTZ : rowsNao).push(m);
-  }
+  const rows = subsetNoTz();
+  const rowsTZ = rows.filter(m => m.tz_bin === 'TZ');
+  const rowsNao = rows.filter(m => m.tz_bin !== 'TZ');
   const el = document.getElementById('bars');
   if (!rowsTZ.length) {
     el.innerHTML = '<div class="empty">Nenhum município TZ neste recorte.</div>';
@@ -307,7 +480,7 @@ function renderBars() {
   el.innerHTML = html;
 }
 
-// ---------- crosstabs panel (% TZ por eixo, nacional, sem filtro) ----------
+// ---------- crosstabs (rótulo acima da própria barra; % dentro de cada categoria) ----------
 function renderCrosstabs() {
   const el = document.getElementById('crosstabs');
   const defs = [
@@ -325,9 +498,9 @@ function renderCrosstabs() {
       const row = ct[String(k)];
       if (!row) continue;
       const pct = (row.pct_tz * 100).toFixed(1);
-      html += `<div class="xtrow">
+      html += `<div class="xtitem">
+        <div class="xtlab"><span>${d.labelFn(k)}</span><b>${pct}% (n=${row.n_tz})</b></div>
         <div class="xtrack"><div class="xtfill" style="width:${(100 * row.pct_tz / maxPct).toFixed(1)}%"></div></div>
-        <span>${d.labelFn(k)}</span><b style="color:var(--text)">${pct}% (n=${row.n_tz})</b>
       </div>`;
     }
     html += `</div>`;
@@ -376,7 +549,11 @@ function populateSelects() {
 }
 
 document.getElementById('colorBy').addEventListener('change', e => { state.colorBy = e.target.value; render(); });
-document.getElementById('ufFilter').addEventListener('change', e => { state.uf = e.target.value; render(); renderTZTable(); });
+document.getElementById('ufFilter').addEventListener('change', e => {
+  state.uf = e.target.value;
+  render(); renderTZTable();
+  if (state.uf) zoomToUF(state.uf); else resetZoom();
+});
 document.getElementById('faixaFilter').addEventListener('change', e => { state.faixa = e.target.value; render(); renderTZTable(); });
 document.getElementById('regicFilter').addEventListener('change', e => { state.regic = e.target.value; render(); renderTZTable(); });
 document.getElementById('arranjoFilter').addEventListener('change', e => { state.arranjo = e.target.value; render(); renderTZTable(); });
@@ -399,39 +576,80 @@ document.querySelector('#tzTable tbody').addEventListener('click', e => {
   renderDetail(m);
 });
 
+// ---------- tooltip (completo nos TZ; suprimido fora do recorte ativo) ----------
 const tooltip = document.getElementById('tooltip');
 svg.addEventListener('mousemove', e => {
-  const path = e.target.closest('path');
+  const path = e.target.closest('path.mun');
   if (!path) { tooltip.style.display = 'none'; return; }
   const m = MUNI.get(path.dataset.id);
-  if (!m) { tooltip.style.display = 'none'; return; }
-  const metricLabel = {
-    tz: m.tz_status, faixa_pop: m.faixa_pop,
-    regic_nivel: m.regic_label, tipo_arranjo: m.tipo_arranjo,
-    modelo_prestacao_simples: m.modelo_prestacao ?? 'sem dado',
-    pib_pc: 'R$ ' + fmtNum(m.pib_pc), motorizacao: fmtNum(m.motorizacao), ibeu: fmtNum(m.ibeu), idh: fmtNum(m.idh),
-    cresc_pop: fmtNum(m.cresc_pop), rec_prop_pc: 'R$ ' + fmtNum(m.rec_prop_pc),
-    taxa_obitos_transito: fmtNum(m.taxa_obitos_transito) + ' /100mil',
-    pct_investimento_desp: fmtNum(m.pct_investimento_desp) + '%',
-    tarifa: m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) : 'sem dado',
-    subsidio_ntu_pct: m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '%' : 'sem dado',
-  }[state.colorBy];
-  tooltip.innerHTML = `<b>${m.nome} – ${m.uf}</b>${metricLabel}`;
-  tooltip.style.left = (e.clientX + 14) + 'px';
-  tooltip.style.top = (e.clientY + 14) + 'px';
+  if (!m || !passesFilter(m)) { tooltip.style.display = 'none'; return; }
+  let inner;
+  if (m.tz_bin === 'TZ') {
+    inner = `<b>${m.nome} – ${m.uf} ${m.tz_status === 'Ativa' ? '· TZ ativa' : '· TZ encerrada'}</b>
+      <div class="tt-grid">
+        <span>Início</span><span>${m.tz_ano ?? '—'}</span>
+        ${m.tz_fim ? `<span>Fim</span><span>${m.tz_fim}</span>` : ''}
+        <span>REGIC</span><span>${m.regic_label ?? '—'}</span>
+        <span>Arranjo</span><span>${m.tipo_arranjo ?? '—'}</span>
+        <span>População</span><span>${fmtNum(m.pop)}</span>
+        <span>PIB pc</span><span>R$ ${fmtNum(m.pib_pc)}</span>
+        <span>Motorização</span><span>${fmtNum(m.motorizacao)}</span>
+        ${m.tz_operador ? `<span>Operador</span><span>${m.tz_operador}</span>` : ''}
+      </div>`;
+  } else {
+    const metricLabel = {
+      tz: m.tz_status, faixa_pop: m.faixa_pop,
+      regic_nivel: m.regic_label, tipo_arranjo: m.tipo_arranjo,
+      modelo_prestacao_simples: m.modelo_prestacao ?? 'sem dado',
+      pib_pc: 'R$ ' + fmtNum(m.pib_pc), motorizacao: fmtNum(m.motorizacao), ibeu: fmtNum(m.ibeu), idh: fmtNum(m.idh),
+      cresc_pop: fmtNum(m.cresc_pop), rec_prop_pc: 'R$ ' + fmtNum(m.rec_prop_pc),
+      taxa_obitos_transito: fmtNum(m.taxa_obitos_transito) + ' /100mil',
+      pct_investimento_desp: fmtNum(m.pct_investimento_desp) + '%',
+      tarifa: m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) : 'sem dado',
+      subsidio_ntu_pct: m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '%' : 'sem dado',
+    }[state.colorBy];
+    inner = `<b>${m.nome} – ${m.uf}</b>${metricLabel}`;
+  }
+  tooltip.innerHTML = inner;
+  const pad = 14;
+  let tx = e.clientX + pad, ty = e.clientY + pad;
   tooltip.style.display = 'block';
+  const r = tooltip.getBoundingClientRect();
+  if (tx + r.width > window.innerWidth - 8) tx = e.clientX - r.width - pad;
+  if (ty + r.height > window.innerHeight - 8) ty = e.clientY - r.height - pad;
+  tooltip.style.left = tx + 'px';
+  tooltip.style.top = ty + 'px';
 });
 svg.addEventListener('mouseleave', () => tooltip.style.display = 'none');
 svg.addEventListener('click', e => {
-  const path = e.target.closest('path');
+  const path = e.target.closest('path.mun');
   if (!path) return;
   const m = MUNI.get(path.dataset.id);
+  if (!m || !passesFilter(m)) return;
   renderDetail(m);
 });
+svg.addEventListener('dblclick', e => {
+  const path = e.target.closest('path.mun');
+  if (!path) return;
+  const f = features.find(ft => ft.id === path.dataset.id);
+  if (f) zoomToMuni(f);
+});
+
+// ---------- toggle claro/escuro ----------
+const themeBtn = document.getElementById('themeToggle');
+function applyTheme(t) {
+  state.theme = t;
+  document.documentElement.setAttribute('data-theme', t);
+  themeBtn.textContent = t === 'dark' ? '◐ Tema claro' : '◑ Tema escuro';
+  try { localStorage.setItem('tz_theme', t); } catch (err) { /* file:// pode bloquear */ }
+  render();
+}
+themeBtn.addEventListener('click', () => applyTheme(state.theme === 'dark' ? 'light' : 'dark'));
+let savedTheme = 'dark';
+try { savedTheme = localStorage.getItem('tz_theme') || 'dark'; } catch (err) { /* noop */ }
 
 // ---------- init ----------
 populateSelects();
-renderCards();
-render();
 renderCrosstabs();
 renderTZTable();
+applyTheme(savedTheme); // applyTheme chama render(), que desenha mapa, legenda, barras, cards e linha do tempo

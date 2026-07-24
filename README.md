@@ -29,6 +29,10 @@ Basta abrir `index.html` em qualquer navegador.
 
 Ver [`FEEDBACK.md`](./FEEDBACK.md) — log cronológico de comentários e backlog de ajustes.
 
+## Plano de melhorias
+
+Ver [`ROADMAP.md`](./ROADMAP.md) — análise detalhada do painel e plano em 5 fases (legibilidade → mapa → grandes números e novos gráficos → estrutura → dados futuros), consolidando o feedback recebido e os pedidos da orientação.
+
 ## Estrutura do repositório
 
 ```
@@ -36,6 +40,7 @@ index.html          painel publicado (autocontido — não editar direto, ver sc
 README.md           este arquivo
 CHANGELOG.md         histórico de versões e notas de metodologia/achados
 FEEDBACK.md          log de comentários recebidos e backlog de ajustes
+ROADMAP.md           análise do painel e plano de melhorias em fases
 METADADOS.md          dicionário das 54 variáveis embutidas no painel
 scripts/
   build_data.py       gera municipios_dados.json a partir das fontes brutas (privadas)
