@@ -1,8 +1,8 @@
 # Análise e plano de melhorias — Painel TZ
 
-Nota de planejamento do projeto. Consolida a análise técnica do painel v2, o feedback recebido de 5 leitores ([`FEEDBACK.md`](./FEEDBACK.md)) e o pedido da orientadora (mais gráficos e grandes números). Organizada em fases priorizadas por consenso × esforço.
+Nota de planejamento do projeto. Consolida a análise técnica do painel v0.2, o feedback recebido de 5 leitores ([`FEEDBACK.md`](./FEEDBACK.md)) e o pedido da orientadora (mais gráficos e grandes números). Organizada em fases priorizadas por consenso × esforço.
 
-*Escrita em 24/07/2026. Painel analisado: v2 (publicado em https://tvzgomes-2.github.io/painel_tz/).*
+*Escrita em 24/07/2026. Painel analisado: v0.2 (publicado em https://tvzgomes-2.github.io/painel_tz/).*
 
 ---
 
@@ -113,7 +113,9 @@ Critério de priorização: nº de pessoas que pediram × valor analítico × es
 
 ## 4. Registro de decisões
 
-- **24/07/2026 — v3 entregue.** Fase 1 completa; Fase 2 completa (com contorno no lugar do glow e auto-encaixe no lugar de zoom/pan); da Fase 3, entregues 3.1 (cards dinâmicos) e 3.2 (linha do tempo); da Fase 4, antecipado o 4.2 (toggle claro/escuro, a pedido do autor). Pendentes para v4: 3.3 (TZ por região/UF), 3.4 (dispersão), 3.5 (diferenciar os dois blocos de barras — mitigado com subtítulos), 4.1 (seções colapsáveis) e 4.3 (revisão mobile). Detalhes no CHANGELOG (v3) e checklist no FEEDBACK.md.
+- **24/07/2026 — v0.3 entregue.** Fase 1 completa; Fase 2 completa (com contorno no lugar do glow e auto-encaixe no lugar de zoom/pan); da Fase 3, entregues 3.1 (cards dinâmicos) e 3.2 (linha do tempo); da Fase 4, antecipado o 4.2 (toggle claro/escuro, a pedido do autor). Pendentes para v0.4: 3.3 (TZ por região/UF), 3.4 (dispersão), 3.5 (diferenciar os dois blocos de barras — mitigado com subtítulos), 4.1 (seções colapsáveis) e 4.3 (revisão mobile). Detalhes no CHANGELOG (v0.3) e checklist no FEEDBACK.md.
+
+- **25/07/2026 — Versionamento formalizado (Opção A: remapeamento retroativo).** Adotado esquema semântico v0.x (prototipagem) → v1.0.0 (lançamento para grupos de pesquisa) → patch/minor/major pós-lançamento. As versões antes chamadas v1/v2/v3 foram renomeadas para v0.1/v0.2/v0.3 (mudança só de rótulo, no CHANGELOG, no selo da UI e neste ROADMAP) — sem isso, "v3" já publicado colidia com o "v0.2" que as anotações de planejamento do autor já usavam para descrever o mesmo painel. Política completa no CHANGELOG.md.
 
 - **24/07/2026 — Glow descartado.** O "outer glow" nos municípios TZ (pedido do Ivan, 2×) não será usado — preferência estética do autor + risco de performance de filtros SVG. O objetivo por trás do pedido (destacar visualmente os TZ) será atendido com contorno/stroke destacado (item 2.3).
 - **24/07/2026 — Auto-encaixe em vez de zoom/pan livre.** Entre zoom/pan manual e enquadramento automático pela seleção, escolhido o auto-encaixe (+ duplo clique para zoom local + botão de reset): resolve os dois casos relatados, é determinístico (prints reproduzíveis) e evita o conflito pinça×rolagem no celular. Zoom/pan livre adiado para a Fase 5.

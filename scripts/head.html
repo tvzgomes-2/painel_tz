@@ -124,7 +124,7 @@
 <body>
 <header>
   <div class="htext">
-    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v3</span></h1>
+    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v0.3</span></h1>
     <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero</p>
     <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a estrutura de poder dos grupos econômicos do transporte coletivo e a difusão espacial das políticas de gratuidade universal no Brasil. A hipótese central é que os grupos econômicos restringem a difusão da TZ nos municípios de maior interesse comercial, atuando como barreira sistêmica — enquanto a política floresce nas franjas do sistema, pouco atrativas ao capital. O método é misto (quantitativo + qualitativo), em panorama nacional; este painel interativo é o instrumento exploratório do eixo quantitativo.</p>
     <p>Universo: 5.570 municípios do Brasil. Base-mestre Tarifa Zero universal (Dataverse Santini, abr/2026) cruzada com base municipal integrada de 234 variáveis (PEMOB/SIMU, MUNIC 2020, REGIC 2018, OSM, TSE 2024, DATASUS, NTU). Protótipo de trabalho — dados descritivos, não causais. Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a></p>
@@ -263,7 +263,7 @@
   <div class="panel" style="margin-top:16px;">
     <h2>Notas metodológicas e achados a interpretar com cautela</h2>
     <div class="notes">
-      <p><b>Discrepância no arquivo-mestre:</b> <span class="warn">Municípios TZ - consolidado.xlsx</span> traz 155 linhas (145 Ativa + 10 Encerrada), mas <b>Palmas-TO aparece duas vezes</b> como "Encerrada" (períodos 2023-02-02 e 2025-01-01/2025-02-03) — são 154 municípios únicos (145 ativas + 9 encerradas distintas). Ainda não reconciliado — mesma pendência da v1.</p>
+      <p><b>Discrepância no arquivo-mestre:</b> <span class="warn">Municípios TZ - consolidado.xlsx</span> traz 155 linhas (145 Ativa + 10 Encerrada), mas <b>Palmas-TO aparece duas vezes</b> como "Encerrada" (períodos 2023-02-02 e 2025-01-01/2025-02-03) — são 154 municípios únicos (145 ativas + 9 encerradas distintas). Ainda não reconciliado — mesma pendência da v0.1.</p>
       <p><b>Desatualização pontual:</b> São Caetano do Sul consta aqui como "Ativa"; a planilha-mestre (abr/2026) ainda não reflete a revogação de 15/07/2026 registrada no <i>CLAUDE.md</i>. Não corrigido aqui — pendente na fonte.</p>
       <p><b>Hierarquia urbana (REGIC) em vez de só população:</b> usando o nível REGIC 2018 (1=Metrópole…5=Centro Local) como proxy de centralidade/interesse comercial, o nível 1 aparece com a <i>maior</i> proporção de TZ (14,5%) e o nível 5 com a <i>menor</i> (1,2%) — à primeira vista, o oposto da hipótese. Mas isso é artefato de composição: <b>dos 31 municípios de nível 1 com TZ, nenhum é a cidade-polo do arranjo metropolitano — todos são satélites</b> (ex.: Caucaia/Fortaleza, Canoas/Porto Alegre, Itaboraí/Maricá/Japeri/Guapimirim/Paracambi/Tanguá no Rio, Luziânia em Brasília, São Caetano/Santa Isabel/Vargem Grande Paulista em São Paulo, Brumadinho/Caeté/Sarzedo em BH). Nenhuma das ~15-20 maiores metrópoles do país (a própria capital-polo) tem TZ. Olhando por <b>sede × satélite de arranjo</b> em qualquer nível: sedes/co-sedes têm 5,8% de TZ, satélites 8,9%, municípios fora de arranjo 1,8% — TZ é mais comum em satélites de arranjos (grandes ou pequenos), mas <b>20 cidades-polo menores</b> (não das grandes metrópoles) também têm TZ, como Teresina/PI, Itapetininga/SP e São João del Rei/MG — o padrão "nunca é a cidade-polo" só se sustenta nos maiores arranjos, não em geral.</p>
       <p><b>Modelo de prestação (MUNIC 2020):</b> só 1.727/5.570 municípios (31%) responderam essa pergunta do IBGE — tratar qualquer leitura aqui como amostra parcial, não painel nacional. Dentro dela, "Prestação direta" tem a maior proporção de TZ (13,5%) e "Não regulamentado" a menor (2,5%); Concessão fica em 8,6%. Isso é o eixo mais próximo de testar a hipótese dos grupos econômicos diretamente (concessão = operador privado estabelecido), mas ainda não é a variável de presença de grupo por si — e a amostra de 1.727 pode não ser aleatória (municípios que respondem ao módulo de transporte da MUNIC tendem a ser os que já têm alguma estrutura formal).</p>
@@ -283,7 +283,7 @@
       <div class="fright">
         <b>Orientadora</b><br>
         Prof.ª Dr.ª Silvana Maria Zioni<br>
-        Painel v3 · 2026
+        Painel v0.3 · 2026
       </div>
     </div>
     Fontes: Dataverse Santini v8 (abr/2026) · PEMOB/SIMU (Min. Cidades) · MUNIC 2020 (IBGE) · REGIC 2018 (IBGE) · FINBRA/Siconfi 2019–2023 · IBGE (PIB 2013/2021, Censo 2022) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Base Polo Planejamento.<br>
