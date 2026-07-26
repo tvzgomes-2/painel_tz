@@ -6,6 +6,17 @@ Nota de planejamento do projeto. Consolida a análise técnica do painel v0.2, o
 
 ---
 
+## 0. Arquitetura do site *(decidido 25/07/2026)*
+
+O repositório passou de "um painel" para **um site com páginas independentes**, cada uma com seu próprio banco de dados e seu próprio número de versão:
+
+- **`index.html`** — hub do site. Página pequena, editada à mão (não gerada por script), com o resumo da pesquisa e um card de acesso por página. Mostra só as páginas já publicadas.
+- **`painel.html`** (tag **TZ**, "Painel Brasil") — panorama nacional de Tarifa Zero. É o que antes se chamava `index.html`; todo o conteúdo deste ROADMAP (Fases 1-5) é sobre esta página especificamente. Gerado por `scripts/montar_html.sh`, não editar direto.
+- **`rede-ge.html`** (tag **GE**, "Rede da ARS", planejado) — estrutura de poder dos grupos econômicos do transporte coletivo (rede societária/CNPJ da tese). Ainda não construído; só aparece no hub quando estiver pronto para publicar (sem placeholder "em construção" clicável — o card já existe no hub, mas sem link, para sinalizar que vem por aí).
+- **Pesquisa de novos casos** — não é uma página/botão do hub. Vira uma chamada contextual *dentro* do Painel Brasil (ex.: ao navegar pelos casos municipais, um link tipo "não achou seu município? envie um novo caso ou estudo"), acionada só quando alguém quiser contribuir. Fica como item da Fase 6 (abaixo) até o formulário (Frente 1 das anotações de planejamento) ser redesenhado.
+
+**Versionamento:** a regra em `VERSIONING.md` é uma só, mas cada página conta seu próprio número (Painel Brasil segue de v0.3; Rede da ARS começa do zero quando existir). O site como um todo não tem número de versão — tem uma **era**, nomeada com modo de transporte em ordem alfabética (**Era Andarilho**, letra A, é a atual), trocada só quando acontece um evento "major" na definição do VERSIONING.md (novo painel irmão publicado, ou redesign completo de alguma página).
+
 ## 1. Diagnóstico do estado atual
 
 ### O que está funcionando (confirmado pelo feedback)
@@ -102,6 +113,30 @@ Critério de priorização: nº de pessoas que pediram × valor analítico × es
 - **Variável de presença de grupo econômico por município** (rede ARS/CNPJ) — quando integrada, vira o eixo central do painel e o teste da hipótese da tese.
 - Correções na fonte: duplicata Palmas-TO e situação de São Caetano do Sul (base-mestre).
 
+### Fase 6 — Integração com o site *(depende da Fase 0; esforço a estimar)*
+
+| # | Item | Depende de |
+|---|------|-----------|
+| 6.1 | CTA contextual "não achou seu município? envie um novo caso ou estudo" dentro do painel (ex.: no painel de detalhe do município, ou como rodapé da tabela de casos) | Formulário de coleta redesenhado (Frente 1 das anotações de planejamento) — hoje só existe a versão antiga em Microsoft Forms |
+| 6.2 | Link cruzado para a Rede da ARS quando ela existir (ex.: ao ver um município TZ, mostrar se algum grupo econômico mapeado atua ali) | Página `rede-ge.html` publicada |
+
+### Fase 7 — Identidade institucional e créditos *(depende de autorização externa; ver plano estratégico interno)*
+
+| # | Item | Depende de |
+|---|------|-----------|
+| 7.1 | Obter autorização da orientadora para uso dos logos UFABC e Laplan (cor, restrição de tamanho) | Confirmação da Prof.ª Silvana Zioni |
+| 7.2 | Baixar logos em versão branca/transparente (PNG ou SVG) | 7.1 |
+| 7.3 | Seção de créditos no Painel Brasil: autoria, orientação, instituições de apoio (UFABC, Laplan), apoio técnico (Polo Planejamento), fonte de dados | 7.1, 7.2 |
+| 7.4 | Decidir se os logos institucionais ficam fora da paleta autoral (preto/rosa + 1 cor) — provavelmente rodapé neutro, não misturado com a identidade visual da pesquisa | — |
+
+### Fase 8 — Repositório de estudos e enriquecimento *(próxima fase prioritária, 26/07/2026)*
+
+| # | Item | Depende de |
+|---|------|-----------|
+| 8.1 | Mapear qual estudo acadêmico/grey literature (NTU, Ministério das Cidades etc.) pesquisa qual município | — |
+| 8.2 | Validar se a base atual suporta a relação N:N estudo↔município; se precisar mudar estrutura, sobe **minor** (ver VERSIONING.md) | 8.1 |
+| 8.3 | Desenhar a visualização no painel (ex.: "este município tem N estudos vinculados", com lista) | 8.2 |
+
 ---
 
 ## 3. Riscos e cuidados
@@ -120,3 +155,5 @@ Critério de priorização: nº de pessoas que pediram × valor analítico × es
 - **24/07/2026 — Glow descartado.** O "outer glow" nos municípios TZ (pedido do Ivan, 2×) não será usado — preferência estética do autor + risco de performance de filtros SVG. O objetivo por trás do pedido (destacar visualmente os TZ) será atendido com contorno/stroke destacado (item 2.3).
 - **24/07/2026 — Auto-encaixe em vez de zoom/pan livre.** Entre zoom/pan manual e enquadramento automático pela seleção, escolhido o auto-encaixe (+ duplo clique para zoom local + botão de reset): resolve os dois casos relatados, é determinístico (prints reproduzíveis) e evita o conflito pinça×rolagem no celular. Zoom/pan livre adiado para a Fase 5.
 - *(a preencher conforme as fases forem sendo implementadas — anotar versão/commit de cada item entregue, espelhando o checklist do FEEDBACK.md)*
+
+- **26/07/2026 — Fases 7 e 8 criadas a partir do plano estratégico interno.** Identidade institucional/créditos (Fase 7) e repositório de estudos/enriquecimento (Fase 8) não tinham Fase própria; Fase 8 é a prioridade imediata. Detalhe da estratégia (contatos, cronograma de divulgação, escopo da Rede da ARS) fica em `estrategia-interna/PLANO-ESTRATEGICO.md` (não publicável) — este ROADMAP só registra as ações de produto derivadas dela.

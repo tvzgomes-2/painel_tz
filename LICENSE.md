@@ -32,7 +32,7 @@ SOFTWARE.
 
 ## Dados e conteúdo — CC BY-NC 4.0 (Atribuição-NãoComercial)
 
-Aplica-se a: o dataset municipal compilado (`municipios_dados.json`/`stats.json`, embutidos em `index.html`), `METADADOS.md`, `CHANGELOG.md`, `FEEDBACK.md` e o painel publicado como produto (a combinação específica de dados + visualização sobre Tarifa Zero e grupos econômicos).
+Aplica-se a: o dataset municipal compilado (`municipios_dados.json`/`stats.json`, embutidos em `painel.html`), `METADADOS.md`, `CHANGELOG.md`, `FEEDBACK.md` e o painel publicado como produto (a combinação específica de dados + visualização sobre Tarifa Zero e grupos econômicos).
 
 Você tem o direito de compartilhar e adaptar este material, **exceto para fins comerciais**, desde que dê crédito apropriado.
 
@@ -40,9 +40,9 @@ Uso comercial do painel/dataset compilado é reservado ao autor e à Polo Planej
 
 Texto legal completo: https://creativecommons.org/licenses/by-nc/4.0/legalcode.pt
 
-## ⚠️ Nota sobre `index.html`
+## ⚠️ Nota sobre `painel.html`
 
-O arquivo publicado (`index.html`) **contém os dois** — a lógica de exibição (MIT) e o dataset compilado embutido (CC BY-NC). Reusar/adaptar a lógica de visualização isoladamente é livre (MIT); reusar o dataset compilado ou republicar o painel com fins comerciais requer autorização do autor.
+O arquivo publicado (`painel.html`) **contém os dois** — a lógica de exibição (MIT) e o dataset compilado embutido (CC BY-NC). Reusar/adaptar a lógica de visualização isoladamente é livre (MIT); reusar o dataset compilado ou republicar o painel com fins comerciais requer autorização do autor. O hub do site (`index.html`) não tem dados embutidos — é só MIT.
 
 ## Como citar
 

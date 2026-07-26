@@ -1,19 +1,10 @@
 # Changelog e notas de metodologia
 
-## Política de versionamento (adotada 2026-07-25)
+O site tem páginas independentes, cada uma com seu próprio número de versão (ver arquitetura em `ROADMAP.md` § 0). **Tudo abaixo é sobre a página Painel Brasil (`painel.html`, tag TZ)** — é a única página com histórico até agora. Quando `rede-ge.html` (Rede da ARS) for publicada, ganha sua própria seção de changelog, separada desta.
 
-**Fase de prototipagem — v0.x:** enquanto o painel circula só entre orientação e equipe próxima, cada iteração soma um patch (v0.1, v0.2, v0.3...).
+## Política de versionamento
 
-**Lançamento — v1.0.0:** quando o painel sair da prototipagem e for considerado pronto para circular em grupos de pesquisa.
-
-**Pós-lançamento:**
-- *Patch* (v1.0.1, v1.0.2...) — dados atualizados/enriquecidos ou correções pontuais, mesma estrutura de banco de dados.
-- *Minor* (v1.1.0, v1.2.0...) — mudança estrutural no banco de dados; reseta o patch para zero.
-- *Major* (v2.0.0) — redesign ou mudança conceitual grande.
-
-**Hierarquia quando várias mudanças coincidem na mesma iteração:** mudança estrutural de BD (sobe minor) > feature/melhoria implementada (sobe patch) > enriquecimento de dados (não gera versão sozinha, entra dentro do patch da vez).
-
-**Nota de remapeamento:** as versões antes chamadas de v1, v2 e v3 neste changelog foram renomeadas retroativamente para v0.1, v0.2 e v0.3 — mudança só de rótulo, sem alteração de conteúdo, para alinhar o histórico a esta política.
+Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
 ## v0.3 (atual — publicada 2026-07-24)
 
@@ -77,4 +68,4 @@ Primeira versão, construída sobre `base_municipal_integrada_v2.csv` (131 vari�
 
 ## Pipeline / reprodutibilidade
 
-Scripts em `scripts/` (`build_data.py`, `build_stats.py`) documentam como os dados embutidos no `index.html` foram gerados a partir das fontes brutas. As fontes brutas (CSVs/XLSX) são parte do cofre de pesquisa privado do autor e **não estão incluídas neste repositório público** — os scripts servem como documentação do método, não para execução direta por terceiros. Ver também `FEEDBACK.md` para pendências de ajuste na visualização.
+Scripts em `scripts/` (`build_data.py`, `build_stats.py`) documentam como os dados embutidos no `painel.html` foram gerados a partir das fontes brutas. As fontes brutas (CSVs/XLSX) são parte do cofre de pesquisa privado do autor e **não estão incluídas neste repositório público** — os scripts servem como documentação do método, não para execução direta por terceiros. Ver também `FEEDBACK.md` para pendências de ajuste na visualização.

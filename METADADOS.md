@@ -1,6 +1,6 @@
 # Metadados — dicionário de variáveis do painel
 
-Descreve os 54 campos por município embutidos em `index.html` (ver `municipios_dados_col.json` gerado por `scripts/build_data.py`). Nomes entre parênteses = nome da coluna na fonte original, quando diferente do usado no painel.
+Descreve os 54 campos por município embutidos em `painel.html` (ver `municipios_dados_col.json` gerado por `scripts/build_data.py`). Nomes entre parênteses = nome da coluna na fonte original, quando diferente do usado no painel.
 
 ⚠️ = cobertura parcial ou ressalva de qualidade — ver coluna "Observações".
 

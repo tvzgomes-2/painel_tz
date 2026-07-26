@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# montar_html.sh — remonta index.html a partir de head.html + dados + logic.js.
+# montar_html.sh — remonta painel.html (página "Painel Brasil") a partir de head.html + dados + logic.js.
 #
-# index.html não é editado diretamente (tem ~4 MB de JSON embutido). O fluxo é:
+# painel.html não é editado diretamente (tem ~4 MB de JSON embutido). O fluxo é:
 #   1. editar head.html (estrutura/CSS/controles) e/ou logic.js (lógica) aqui em scripts/
 #   2. rodar build_data.py e build_stats.py (gera ../build/municipios_dados.json e stats.json)
-#   3. rodar este script para colar tudo de volta em ../index.html
+#   3. rodar este script para colar tudo de volta em ../painel.html
+#
+# painel.html é uma das páginas do site (hub em ../index.html). Não confundir os dois.
 #
 # Pré-requisito: ../build/geo.topojson (geometria simplificada com camadas de
 # municípios + UFs — ver preparar_geometria.sh) e ../build/municipios_dados_col.json (versão colunar
@@ -16,7 +18,7 @@
 set -e
 cd "$(dirname "$0")"
 BUILD=../build
-OUT=../index.html
+OUT=../painel.html
 
 {
   cat head.html
