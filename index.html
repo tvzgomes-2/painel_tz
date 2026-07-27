@@ -6,15 +6,14 @@
 <title>Transporte Público em Crise — Tarifa Zero e Grupos Econômicos no Brasil</title>
 <style>
   :root{
-    --rosa:#f43f6f; --amarelo:#ffd400; --azul:#2b50d9;
-    --bg:#0b0b0e; --panel:#141419; --panel2:#1d1d25; --border:#2a2a33;
+    /* identidade visual oficial da pesquisa (ver Identidade Visual da Pesquisa) */
+    --rosa:#FF2D6B; --amarelo:#F5E400; --azul:#1A54C7; --verde:#6FBE44;
+    --bg:#0E0E10; --panel:#141419; --panel2:#1d1d25; --border:#2a2a33;
     --text:#f0f0f2; --muted:#9a9aa6; --accent:#5c7cff;
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--text);font-family:'Montserrat','Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
   .wrap{max-width:880px;margin:0 auto;padding:60px 24px 40px;min-height:100vh;display:flex;flex-direction:column;}
-  .era{display:inline-block;background:var(--amarelo);color:#111;font-size:11.5px;font-weight:800;
-    text-transform:uppercase;letter-spacing:.06em;padding:4px 12px;border-radius:4px;transform:rotate(-2deg);margin-bottom:22px;}
   h1{margin:0 0 14px;font-size:38px;font-weight:800;letter-spacing:.01em;text-transform:uppercase;line-height:1.15;}
   h1 .hl{color:var(--amarelo);border-bottom:5px solid var(--rosa);padding-bottom:2px;}
   .subtitle{margin:0 0 22px;font-size:17px;font-weight:500;color:var(--text);line-height:1.45;max-width:640px;}
@@ -31,17 +30,27 @@
   .card.future{opacity:.45;border-style:dashed;cursor:default;}
   .card.future:hover{border-color:var(--border);}
   footer{margin-top:48px;padding-top:18px;border-top:2px solid var(--amarelo);color:var(--muted);font-size:11.5px;line-height:1.7;}
-  footer .fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;margin-bottom:12px;}
+  footer .fgrid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;margin-bottom:14px;}
   footer .fgrid b{color:var(--text);font-size:12.5px;}
+  footer .fgrid .fleft{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
   footer .fgrid .fright{text-align:right;}
   @media (max-width:640px){footer .fgrid .fright{text-align:left;}}
+  footer .fcredits{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:10px 24px;
+    margin:0 0 14px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  footer .flogos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  footer .flogos img{height:46px;width:auto;display:block;}
+  footer .finst{color:var(--muted);font-size:11px;}
+  footer .fapoio{display:flex;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:11px;line-height:1.55;max-width:560px;}
+  footer .fapoio img{height:46px;width:auto;display:block;}
+  footer .fapoio b{color:var(--text);}
   footer a{color:var(--accent);text-decoration:none;}
   footer a:hover{text-decoration:underline;}
+  footer .era-tag{display:inline-block;background:var(--amarelo);color:#111;font-size:10px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:3px;margin-right:8px;vertical-align:middle;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <span class="era">Era Andarilho</span>
   <h1>Transporte Público em <span class="hl">Crise</span></h1>
   <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero no Brasil</p>
   <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a <b>estrutura de poder dos grupos econômicos</b> do transporte coletivo e a <b>difusão espacial das políticas de gratuidade universal</b> no Brasil. A hipótese central é que os grupos econômicos restringem a difusão da TZ nos municípios de maior interesse comercial, atuando como barreira sistêmica — enquanto a política floresce nas franjas do sistema, pouco atrativas ao capital. Este site reúne os instrumentos exploratórios de trabalho da pesquisa.</p>
@@ -61,17 +70,27 @@
 
   <footer>
     <div class="fgrid">
-      <div>
-        <b>Thiago Von Zeidler Gomes</b><br>
-        Doutorado em Planejamento e Gestão do Território<br>
-        PPG-PGT · UFABC
+      <div class="fleft">
+        <div>
+          <b>Thiago Von Zeidler Gomes</b> · Doutorando
+        </div>
+        <div class="flogos">
+          <img src="assets/logos/ufabc/negativo/logo-ufabc-sigla-lateral-negativo.svg" alt="Universidade Federal do ABC">
+          <img src="assets/logos/pgt/negativo/logo-pgt-extenso-negativo.png" alt="Programa de Pós-Graduação em Planejamento e Gestão do Território">
+          <span class="finst">Laplan (logo em autorização)</span>
+        </div>
       </div>
       <div class="fright">
-        <b>Orientadora</b><br>
-        Prof.ª Dr.ª Silvana Maria Zioni
+        <b>Prof.ª Dr.ª Silvana Maria Zioni</b> · Orientadora
       </div>
     </div>
-    Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a> · Histórico de versões por página no <a href="./CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a>.
+    <div class="fcredits">
+      <div class="fapoio">
+        <img src="assets/logos/polo/negativo/logo-polo-icon-negativo.svg" alt="Polo Planejamento">
+        <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
+      </div>
+    </div>
+    <span class="era-tag">Era Andarilho</span>Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a> · Histórico de versões por página no <a href="./CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a>.
   </footer>
 </div>
 </body>

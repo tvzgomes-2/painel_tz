@@ -6,7 +6,46 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.3 (atual — publicada 2026-07-24)
+## v0.4 (atual — 2026-07-27)
+
+Rodada de ajustes estéticos + Fase 8 (repositório de estudos), em duas passagens no mesmo dia — a segunda corrige e substitui partes da primeira a partir do primeiro uso real do painel (feedback direto do autor). Mesma estrutura de banco (nenhuma coluna nova na base municipal em si — os dados novos usam agregados pré-computados à parte; ver nota abaixo).
+
+**Identidade visual:**
+
+- Paleta corrigida dos hex antigos (`#f43f6f`/`#ffd400`/`#2b50d9`) para os oficiais (`#FF2D6B`/`#F5E400`/`#1A54C7`), com `--verde` (`#6FBE44`) adicionado — alinhado com `pesquisa.html`/`index.html` (Fase 9.1 do ROADMAP).
+- Status "Ativa" passou por verde e voltou para **amarelo** (mapa, tags, tabela, linha do tempo) — decisão final do autor após ver as duas opções; rosa marca só "Encerrada".
+- Tema claro removido — painel passa a ser **só escuro**; toggle, CSS e lógica de tema retirados.
+- Logo do PGT trocado da sigla (raster) para o logotipo extenso oficial (SVG); todos os logos do rodapé ampliados (34px → 46px).
+
+**Estrutura e grandes números:**
+
+- Seções colapsáveis (comparação TZ×Não-TZ, % por eixo, notas metodológicas — glossário já era) — permite ver mapa + tabela juntos (Fase 4.1).
+- CTA de contribuição ("não achou seu município? envie um caso ou estudo") como rodapé da tabela de casos, apontando para `pesquisa.html` (Fase 6.1).
+- Card "TZ ativas" agora deixa explícito que é sobre a camada **universal**; novo card "TZ parciais" (32 = 24 temporal-dias + 4 espacial-periférico + 4 grupo social — exclui de propósito as 324 gratuidades eleitorais/eventuais, fenômeno distinto). Card "TZ encerradas" e o filtro "Sede × satélite" removidos do topo.
+
+**Card "Município selecionado":**
+
+- "PDMU (2025)" renomeado para **"PlanMob (2025)"**; "Tarifa reconciliada" renomeado para **"Tarifa"**, mostrando "Gratuito (TZ universal)" nos municípios com TZ ativa em vez de "sem dado".
+
+**Fase 8 — repositório de estudos:**
+
+- Crosswalk estudo/fonte → município construído a partir de 11 arquivos de `casos por fonte` (Santini 2019, Pereira 2023, Angelo 2023, Vermander 2021, brinco 2017, NTU 2023/2025, reportagens por município, TZ fim de semana, TZ bairros periféricos, municípios com FFPT) — 88 municípios, 181 entradas no crosswalk bruto (`casos_por_fonte.json`). Ainda faltam incorporar outros arquivos da pasta (ver Pendências.md).
+- **Citação pública restrita a artigos acadêmicos** (decisão do autor, 27/07/2026): a coluna "Fontes" da tabela e o card de detalhe do município mostram só entradas com tipo "Estudo acadêmico" (38 municípios, 69 entradas) — relatórios institucionais (NTU), reportagens de jornal/revista e levantamentos de coleta própria (ex.: planilha "Municípios com FFPT") ficam de fora da citação, mesmo constando no crosswalk bruto.
+- Nova coluna "Fontes" na tabela de municípios, com expansão inline por linha, e seção "Fontes" no card de município selecionado. Das 3 formas de exibição testadas, o painel separado "Repositório de fontes por município" foi descartado (ficaram só coluna+expansão e card).
+- Novo bloco **"Referências bibliográficas"** em formato ABNT NBR 6023 para os 5 estudos acadêmicos citados no crosswalk de fontes (Santini 2019, Pereira 2023, Angelo 2023, Vermander 2021, Brinco 2017) — citekeys conferidos em `biblioteca.bib`.
+
+**Gráfico de partição modal:**
+
+- Testados dois gráficos novos com dados do Censo 2022/DENATRAN (evolução da motorização em linha; meio de transporte em 5 barras separadas por modo); ambos foram descartados e substituídos por um único gráfico **"Partição modal — TZ × Não-TZ"**, uma barra 100% empilhada por grupo (TZ/Não-TZ), destacando Ônibus (azul) e Ativo = a pé + bicicleta (rosa) — únicas cores da identidade usadas, sem combinar com amarelo/verde; Automóvel/Motocicleta/Outros em neutros.
+- ⚠️ Os agregados usados no gráfico foram **pré-computados à parte** (script avulso, não o pipeline `montar_html.sh`/`build_stats.py` — que não roda neste ambiente) — mover para o build regular quando rodar localmente, para não depender de números "congelados" na próxima atualização de dados.
+
+**Dois gráficos novos** (dados novos de `base_municipal_v3.csv`, adicionados fora deste ambiente — ver Pendências.md 26/07):
+
+- **Evolução da motorização (DENATRAN, 2013-2022), TZ × Não-TZ** — grupo TZ restrito, em cada ano, aos municípios já adotantes até aquele ano (mesma correção cronológica da Análise II do Cap. 2).
+- **Meio de transporte (Censo 2022), TZ × Não-TZ** — % de deslocamentos por modo, mesmo critério de corte (TZ até 2022, n=73).
+- ⚠️ Os dois gráficos usam **agregados pré-computados à parte** (script avulso, não o pipeline `montar_html.sh`/`build_stats.py` — que não roda neste ambiente) — mover para o build regular quando rodar localmente, para não depender de números "congelados" na próxima atualização de dados.
+
+## v0.3 (publicada 2026-07-24)
 
 Release de melhorias guiada pelo feedback de 5 leitores (ver `FEEDBACK.md`) e pelo pedido da orientação (mais gráficos e grandes números). Mesmos dados da v0.2 — nenhuma mudança de base.
 

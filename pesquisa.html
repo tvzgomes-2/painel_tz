@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pesquisa colaborativa — Tarifa Zero e Grupos Econômicos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* identidade visual da pesquisa (hex oficiais — ver Identidade Visual da Pesquisa) */
+    --preto:#0E0E10; --rosa:#FF2D6B; --azul:#1A54C7; --amarelo:#F5E400; --verde:#6FBE44; --papel:#FAF9F5;
+    --bg:var(--preto); --panel:#17171a; --panel2:#1f1f24; --border:#2c2c33;
+    --text:#f2f2f0; --muted:#a3a3ab; --accent:var(--rosa);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;}
+  header{padding:22px 24px 16px;border-bottom:2px solid var(--amarelo);}
+  header .back{font-size:12.5px;opacity:.75;text-decoration:none;color:var(--text);}
+  header .back:hover{text-decoration:underline;}
+  header h1{margin:10px 0 10px;font-size:28px;font-weight:800;letter-spacing:.01em;text-transform:uppercase;line-height:1.15;max-width:760px;}
+  header h1 .hl{color:var(--amarelo);border-bottom:5px solid var(--rosa);padding-bottom:1px;}
+  header .resumo{margin:0;color:var(--text);font-size:13.5px;line-height:1.6;max-width:720px;}
+  .wrap{max-width:760px;margin:0 auto;padding:28px 24px 60px;}
+  .aviso{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--amarelo);border-radius:6px;
+    padding:12px 14px;font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:26px;}
+  .aviso b{color:var(--text);}
+  [data-fs-success], [data-fs-error]{display:none;border-radius:6px;padding:12px 14px;font-size:13px;line-height:1.6;margin-bottom:18px;}
+  [data-fs-success]:not(:empty){display:block;background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--verde);color:var(--verde);font-weight:600;}
+  [data-fs-error]:not(:empty){display:block;background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--rosa);color:var(--text);}
+  span[data-fs-error]{margin:4px 0 0;padding:0;border:none;background:none;font-size:12px;color:var(--rosa);}
+  span[data-fs-error]:not(:empty){display:block;}
+  [data-fs-field][aria-invalid="true"]{border-color:var(--rosa);}
+  button.enviar[disabled]{opacity:.6;cursor:default;}
+  fieldset{border:1px solid var(--border);border-radius:10px;padding:18px 20px 20px;margin:0 0 20px;background:var(--panel);}
+  legend{padding:0 8px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--amarelo);}
+  label{display:block;font-size:12.5px;color:var(--muted);margin:14px 0 5px;}
+  label:first-of-type{margin-top:2px;}
+  label b{color:var(--text);font-weight:600;}
+  label .opc{font-weight:400;opacity:.7;}
+  input[type=text], input[type=email], input[type=url], textarea, select{
+    width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;
+    padding:9px 11px;font-family:inherit;font-size:13.5px;}
+  input[type=file]{
+    width:100%;background:var(--panel2);color:var(--muted);border:1px solid var(--border);border-radius:6px;
+    padding:9px 11px;font-family:inherit;font-size:12.5px;}
+  input[type=file]::file-selector-button{
+    background:var(--rosa);color:#fff;border:none;border-radius:5px;padding:6px 12px;
+    font-family:inherit;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+    margin-right:10px;cursor:pointer;}
+  input:focus, textarea:focus, select:focus{outline:none;border-color:var(--accent);}
+  textarea{resize:vertical;min-height:80px;}
+  .radios{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+  .radios label{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--text);margin:0;cursor:pointer;}
+  .radios input{width:auto;accent-color:var(--rosa);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+  @media (max-width:600px){.grid2{grid-template-columns:1fr;}}
+  .condicional{display:none;border-top:1px dashed var(--border);margin-top:14px;padding-top:14px;}
+  .condicional.ativo{display:block;}
+  button.enviar{display:block;width:100%;background:var(--rosa);color:#fff;border:none;border-radius:8px;
+    padding:14px;font-family:inherit;font-size:14.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    cursor:pointer;margin-top:6px;}
+  button.enviar:hover{background:#e0215c;}
+  .privacidade{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:12px;}
+  footer{margin-top:36px;padding-top:16px;border-top:2px solid var(--amarelo);color:var(--muted);font-size:11.5px;line-height:1.7;}
+  footer .fgrid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;margin-bottom:14px;}
+  footer .fgrid b{color:var(--text);font-size:12.5px;}
+  footer .fgrid .fleft{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+  footer .fgrid .fright{text-align:right;}
+  @media (max-width:640px){footer .fgrid .fright{text-align:left;}}
+  footer .fcredits{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:10px 24px;
+    margin:0 0 14px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  footer .flogos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  footer .flogos img{height:46px;width:auto;display:block;}
+  footer .finst{color:var(--muted);font-size:11px;}
+  footer .fapoio{display:flex;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:11px;line-height:1.55;max-width:560px;}
+  footer .fapoio img{height:46px;width:auto;display:block;}
+  footer .fapoio b{color:var(--text);}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← voltar ao site</a>
+  <h1>Pesquisa <span class="hl">colaborativa</span></h1>
+  <p class="resumo">Contribua com estudos acadêmicos, relatórios institucionais (grey literature), dados operacionais de empresas ou a sugestão de um novo caso municipal para a pesquisa de doutorado sobre Tarifa Zero e Grupos Econômicos. Cada envio passa por revisão antes de ser incorporado ao <a href="painel.html" style="color:var(--amarelo);">Painel Brasil</a>.</p>
+</header>
+
+<div class="wrap">
+  <div data-fs-success role="status"></div>
+  <div data-fs-error role="alert"></div>
+
+  <form id="formPesquisa" action="https://formspree.io/f/xpqvkqnk" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_subject" value="Nova contribuição — Pesquisa Tarifa Zero e Grupos Econômicos">
+
+    <fieldset>
+      <legend>Seus dados</legend>
+      <label for="nome"><b>Nome</b></label>
+      <input type="text" id="nome" name="nome" data-fs-field required>
+      <span data-fs-error="nome"></span>
+      <div class="grid2">
+        <div>
+          <label for="email"><b>E-mail</b></label>
+          <input type="email" id="email" name="_replyto" data-fs-field required>
+          <span data-fs-error="_replyto"></span>
+        </div>
+        <div>
+          <label for="instituicao"><b>Instituição/vínculo</b> <span class="opc">(opcional)</span></label>
+          <input type="text" id="instituicao" name="instituicao">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Tipo de contribuição</legend>
+      <div class="radios" id="tipoContribuicao">
+        <label><input type="radio" name="tipo" value="Estudo acadêmico" required> Estudo acadêmico (artigo, dissertação, tese)</label>
+        <label><input type="radio" name="tipo" value="Grey literature"> Relatório institucional / grey literature (NTU, Ministério das Cidades etc.)</label>
+        <label><input type="radio" name="tipo" value="Dado operacional"> Dado operacional de empresa de transporte</label>
+        <label><input type="radio" name="tipo" value="Novo caso municipal"> Sugestão de novo caso municipal de Tarifa Zero</label>
+        <label><input type="radio" name="tipo" value="Outro"> Outro</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Vínculo territorial</legend>
+      <div class="grid2">
+        <div>
+          <label for="municipio"><b>Município</b> <span class="opc">(se aplicável)</span></label>
+          <input type="text" id="municipio" name="municipio">
+        </div>
+        <div>
+          <label for="uf"><b>UF</b></label>
+          <input type="text" id="uf" name="uf" maxlength="2" placeholder="ex.: SP">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Detalhes da contribuição</legend>
+      <label for="titulo"><b>Título ou referência da fonte</b></label>
+      <input type="text" id="titulo" name="titulo" data-fs-field required>
+      <span data-fs-error="titulo"></span>
+      <div class="grid2">
+        <div>
+          <label for="autores"><b>Autoras(es)</b> <span class="opc">(se for texto/estudo)</span></label>
+          <input type="text" id="autores" name="autores">
+        </div>
+        <div>
+          <label for="ano"><b>Ano de publicação</b> <span class="opc">(opcional)</span></label>
+          <input type="text" id="ano" name="ano" maxlength="4" placeholder="ex.: 2024">
+        </div>
+      </div>
+      <label for="link"><b>Link, DOI ou URL</b> <span class="opc">(se disponível)</span></label>
+      <input type="url" id="link" name="link" placeholder="https://">
+      <label for="arquivo"><b>Anexar arquivo</b> <span class="opc">(opcional — PDF, planilha, documento; até 25 MB)</span></label>
+      <input type="file" id="arquivo" name="arquivo" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.ppt,.pptx">
+      <label for="descricao"><b>Resumo ou descrição</b></label>
+      <textarea id="descricao" name="descricao" data-fs-field required placeholder="O que essa fonte/dado mostra, e por que é relevante para a pesquisa"></textarea>
+      <span data-fs-error="descricao"></span>
+    </fieldset>
+
+    <fieldset>
+      <legend>Foco e atores citados</legend>
+      <label><b>Foco principal do texto</b> <span class="opc">(se aplicável, marque quantos quiser)</span></label>
+      <div class="radios">
+        <label><input type="checkbox" name="foco" value="Análise financeira/orçamentária"> Análise financeira/orçamentária (custos, subsídios)</label>
+        <label><input type="checkbox" name="foco" value="Impacto social"> Impacto social (acesso, exclusão, perfil do usuário)</label>
+        <label><input type="checkbox" name="foco" value="Aspectos jurídicos/contratuais"> Aspectos jurídicos/contratuais (leis, concessões)</label>
+        <label><input type="checkbox" name="foco" value="Disputa política/movimentos sociais"> Disputa política/movimentos sociais</label>
+        <label><input type="checkbox" name="foco" value="Operação e demanda"> Operação e demanda (frota, rotas, número de passageiros)</label>
+      </div>
+      <label for="empresas"><b>Empresas operadoras ou grupos econômicos citados</b> <span class="opc">(se lembrar, cite o(s) nome(s))</span></label>
+      <input type="text" id="empresas" name="empresas" placeholder="ex.: Grupo Guanabara, Viação Cidade Dutra...">
+    </fieldset>
+
+    <fieldset>
+      <legend>Observações finais</legend>
+      <label for="observacoes"><b>Algo mais que devêssemos saber?</b> <span class="opc">(opcional)</span></label>
+      <textarea id="observacoes" name="observacoes"></textarea>
+    </fieldset>
+
+    <button type="submit" class="enviar" data-fs-submit-btn>Enviar contribuição</button>
+    <p class="privacidade">Seus dados de contato são usados só para eventual retorno da equipe de pesquisa sobre esta contribuição, não são publicados nem compartilhados com terceiros.</p>
+  </form>
+
+  <footer>
+    <div class="fgrid">
+      <div class="fleft">
+        <div>
+          <b>Thiago Von Zeidler Gomes</b> · Doutorando
+        </div>
+        <div class="flogos">
+          <img src="assets/logos/ufabc/negativo/logo-ufabc-sigla-lateral-negativo.svg" alt="Universidade Federal do ABC">
+          <img src="assets/logos/pgt/negativo/logo-pgt-extenso-negativo.png" alt="Programa de Pós-Graduação em Planejamento e Gestão do Território">
+          <span class="finst">Laplan (logo em autorização)</span>
+        </div>
+      </div>
+      <div class="fright">
+        <b>Prof.ª Dr.ª Silvana Maria Zioni</b> · Orientadora
+      </div>
+    </div>
+    <div class="fcredits">
+      <div class="fapoio">
+        <img src="assets/logos/polo/negativo/logo-polo-icon-negativo.svg" alt="Polo Planejamento">
+        <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
+      </div>
+    </div>
+    Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener" style="color:var(--accent);">github.com/tvzgomes-2/painel_tz</a>
+  </footer>
+</div>
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', {
+    formElement: '#formPesquisa',
+    formId: 'xpqvkqnk',
+    renderSuccess: function () {
+      var el = document.querySelector('[data-fs-success]');
+      if (el) {
+        el.textContent = 'Obrigado! Recebemos sua contribuição — nossa equipe vai revisar e retornar se for necessário.';
+        el.style.display = 'block';
+      }
+    }
+  });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+</body>
+</html>

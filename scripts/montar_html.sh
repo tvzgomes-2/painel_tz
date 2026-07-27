@@ -14,6 +14,8 @@
 #   python3 -c "import json; d=json.load(open('../build/municipios_dados.json'));
 #   cols=list(d[0].keys()); json.dump({'cols':cols,'data':[[r[c] for c in cols] for r in d]},
 #   open('../build/municipios_dados_col.json','w'), ensure_ascii=False)"
+# Também requer scripts/casos_por_fonte.json (crosswalk estudo/fonte → município, Fase 8 —
+# ver build_crosswalk.py e ROADMAP.md §3).
 
 set -e
 cd "$(dirname "$0")"
@@ -27,6 +29,8 @@ OUT=../painel.html
   cat "$BUILD/stats.json"
   printf '</script>\n<script id="data-muni" type="application/json">\n'
   cat "$BUILD/municipios_dados_col.json"
+  printf '</script>\n<script id="data-fontes" type="application/json">\n'
+  cat casos_por_fonte.json
   printf '</script>\n<script>\n'
   cat logic.js
   printf '</script>\n</body>\n</html>\n'

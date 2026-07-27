@@ -2,6 +2,7 @@
 const TOPO = JSON.parse(document.getElementById('topo-data').textContent);
 const STATS = JSON.parse(document.getElementById('data-stats').textContent);
 const MUNI_COL = JSON.parse(document.getElementById('data-muni').textContent);
+const FONTES_RAW = JSON.parse(document.getElementById('data-fontes').textContent);
 
 // zip columnar municipal data into id -> row object
 const COLS = MUNI_COL.cols;
@@ -15,6 +16,43 @@ for (const row of MUNI_COL.data) {
   obj.tz_fim_num = obj.tz_fim != null ? parseInt(String(obj.tz_fim).slice(0, 4)) : null;
   MUNI.set(obj.id, obj);
 }
+
+// ---------- fontes por município (Fase 8 — casos por fonte, ver ROADMAP §3/§8) ----------
+// crosswalk gerado a partir de 03 - Dados/_data/casos por fonte (11 arquivos incorporados nesta
+// rodada; ver Pendências.md/ROADMAP.md para a lista dos ainda não incorporados).
+function normKey(nome, uf) {
+  return (nome || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') + '|' + (uf || '').toUpperCase();
+}
+// Painel cita só artigos/estudos acadêmicos (tipo "Estudo acadêmico") — a pedido do autor
+// (27/07/2026), levantamentos de coleta própria (ex.: "Municípios com FFPT", planilha de
+// levantamento) e reportagens de jornal/revista ficam de fora da citação pública, mesmo
+// aparecendo no crosswalk bruto de casos_por_fonte.json.
+const FONTES = new Map();
+const FONTES_FLAT = [];
+for (const k in FONTES_RAW) {
+  const [nome, uf] = k.split('|');
+  const academicas = FONTES_RAW[k].filter(f => f.tipo === 'Estudo acadêmico');
+  if (academicas.length) FONTES.set(normKey(nome, uf), academicas);
+  for (const f of academicas) FONTES_FLAT.push({ nome, uf, ...f });
+}
+function fontesFor(m) { return (m && FONTES.get(normKey(m.nome, m.uf))) || []; }
+for (const r of STATS.tz_list) r.n_fontes = fontesFor(r).length;
+
+// ---------- agregados extras (censo22 modal, série motorização) ----------
+// Pré-computados 26/07/2026 a partir de base_municipal_v3.csv (script avulso, fora do build
+// regular) — mover para build_stats.py quando o pipeline completo rodar de novo. Metodologia:
+// grupo TZ restrito a tz_ano_inicio<=ano de referência (mesma correção cronológica já aplicada
+// nas Análises I/II do Cap 2 — ver Pendências.md, evita comparar "antes da TZ" com rótulo "TZ").
+const MODAL_COMPARACAO = {
+  n_tz: 73, n_ntz: 5426, ano_ref: 2022,
+  modos: [
+    { k: 'onibus', label: 'Ônibus', tz: 15.06, ntz: 9.41 },
+    { k: 'automovel', label: 'Automóvel', tz: 35.19, ntz: 24.29 },
+    { k: 'motocicleta', label: 'Motocicleta', tz: 13.55, ntz: 24.83 },
+    { k: 'a_pe', label: 'A pé', tz: 22.76, ntz: 28.68 },
+    { k: 'bicicleta', label: 'Bicicleta', tz: 8.31, ntz: 7.15 },
+  ],
+};
 
 // ---------- decode topojson (two layers: municipios + ufs) ----------
 const scale = TOPO.transform.scale, translate = TOPO.transform.translate;
@@ -206,20 +244,15 @@ const MODELO_COLORS = {
   'Autorização': '#c9b458', 'Não regulamentado': '#a63603', 'Misto (2+ modelos)': '#756bb1'
 };
 // identidade visual da pesquisa: amarelo = TZ ativa, rosa = encerrada/revogação
-const TZ_COLORS_HEX = { 'Ativa': '#ffd400', 'Encerrada': '#f43f6f' };
-// versões mais escuras para texto pequeno no tema claro (amarelo puro some no branco)
+const TZ_COLORS_HEX = { 'Ativa': '#F5E400', 'Encerrada': '#FF2D6B' };
+// versões mais escuras para texto pequeno no tema claro (amarelo/rosa puros perdem contraste no branco)
 function tzUi() {
-  return state.theme === 'light'
-    ? { ativa: '#a68a00', enc: '#c2185b' }
-    : { ativa: '#ffd400', enc: '#f96d92' };
+  return { ativa: '#F5E400', enc: '#f96d92' };
 }
 
 // tons neutros por tema (fills aplicados via JS precisam acompanhar o tema)
-const NEUTRALS = {
-  dark: { naoTz: '#2b2f39', noData: '#22262e', filteredOut: '#1a1d23' },
-  light: { naoTz: '#cdd3dc', noData: '#e2e6ec', filteredOut: '#eef0f4' },
-};
-function neutrals() { return NEUTRALS[state.theme]; }
+const NEUTRALS = { naoTz: '#2b2f39', noData: '#22262e', filteredOut: '#1a1d23' };
+function neutrals() { return NEUTRALS; }
 
 function classify(v, breaks) {
   if (v == null || isNaN(v)) return null;
@@ -245,7 +278,7 @@ function colorFor(m, colorBy) {
 }
 
 // ---------- filters state ----------
-const state = { colorBy: 'tz', uf: '', faixa: '', regic: '', arranjo: '', modelo: '', tzFilter: '', theme: 'dark' };
+const state = { colorBy: 'tz', uf: '', faixa: '', regic: '', arranjo: '', modelo: '', tzFilter: '' };
 
 function passesFilter(m) {
   if (!m) return false;
@@ -277,7 +310,7 @@ function render() {
     const m = MUNI.get(id);
     const pass = passesFilter(m);
     el.setAttribute('fill', pass ? colorFor(m, state.colorBy) : nt.filteredOut);
-    el.style.opacity = pass ? '1' : (state.theme === 'dark' ? '.25' : '.45');
+    el.style.opacity = pass ? '1' : '.25';
   }
   renderLegend();
   renderBars();
@@ -332,23 +365,30 @@ function median(arr) {
 }
 
 // ---------- grandes números dinâmicos (reagem ao recorte atual) ----------
+// TZ parciais (Tipologias TZ - consolidado.xlsx, RESUMO, 26/07/2026): 24 temporal-dias +
+// 4 espacial-periférico + 4 grupo social = 32. Exclui de propósito as 324 "temporal-eventos"
+// (gratuidade eleitoral/pontual) — fenômeno qualitativamente diferente (não é política de TZ
+// contínua), somar junto inflaria o número e misturaria categorias. Estático/nacional — ainda
+// não tem recorte por município no painel (fora do escopo do base_municipal_v3.csv atual).
+const TZ_PARCIAIS_N = 32;
+
 function renderCards() {
   const rows = subsetNoTz();
   const tzRows = rows.filter(m => m.tz_bin === 'TZ');
   const ativas = tzRows.filter(m => m.tz_status === 'Ativa');
   const popTZ = ativas.reduce((s, m) => s + (m.pop || 0), 0);
   const pibMed = median(rows.map(m => m.pib_pc));
-  const hasFilter = state.uf || state.faixa || state.regic || state.arranjo || state.modelo;
+  const hasFilter = state.uf || state.faixa || state.regic || state.modelo;
   const scopeLabel = hasFilter ? 'no recorte' : 'no Brasil';
   const smallN = tzRows.length > 0 && tzRows.length < 5;
   const warn = smallN ? '<span class="warn-n">⚠ amostra pequena</span>' : '';
   const cards = [
     { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
-    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas ${scopeLabel}`, w: warn },
-    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ ${scopeLabel}`, w: warn },
-    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ ativa ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
+    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas (<b>universal</b>) ${scopeLabel}`, w: warn },
+    { n: TZ_PARCIAIS_N, l: `TZ <b>parciais</b> no Brasil (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
+    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ universal ${scopeLabel}`, w: warn },
+    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ativa ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
     { n: pibMed != null ? 'R$ ' + fmtNum(pibMed) : '—', l: `PIB per capita mediano ${scopeLabel} (2021)` },
-    { n: (tzRows.length - ativas.length).toLocaleString('pt-BR'), l: `TZ encerradas ${scopeLabel}` },
   ];
   document.getElementById('cards').innerHTML = cards.map(c =>
     `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}${c.w || ''}</div></div>`).join('');
@@ -437,12 +477,23 @@ function renderDetail(m) {
       <tr><td>IDH</td><td>${fmtNum(m.idh)}</td></tr>
       <tr><td>Receita própria per capita</td><td>R$ ${fmtNum(m.rec_prop_pc)}</td></tr>
       <tr><td>Óbitos no trânsito /100mil (2019)</td><td>${fmtNum(m.taxa_obitos_transito)}</td></tr>
-      <tr><td>Tarifa reconciliada</td><td>${m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) + ' (' + m.tarifa_ano + ', ' + m.tarifa_fonte + ')' : 'sem dado'}</td></tr>
+      <tr><td>Tarifa</td><td>${m.tz_status === 'Ativa' ? 'Gratuito (TZ universal)' : (m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) + ' (' + m.tarifa_ano + ', ' + m.tarifa_fonte + ')' : 'sem dado')}</td></tr>
       <tr><td>% custo subsidiado (NTU)</td><td>${m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '% (' + m.subsidio_ntu_ano + ')' : 'sem dado'}</td></tr>
       <tr><td>Plano Diretor</td><td>${m.plano_diretor ?? '—'}</td></tr>
-      <tr><td>PDMU (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
+      <tr><td>PlanMob (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
       ${extra}
-    </table>`;
+    </table>
+    ${renderFontesDetail(m)}`;
+}
+
+function renderFontesDetail(m) {
+  const fontes = fontesFor(m);
+  if (!fontes.length) return '';
+  const items = fontes.map(f => `<li><b>${f.fonte}</b>${f.ano ? ' (' + f.ano + ')' : ''} — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Fontes (${fontes.length})</b>
+    <ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;">${items}</ul>
+  </div>`;
 }
 
 // ---------- comparison bars ----------
@@ -508,8 +559,58 @@ function renderCrosstabs() {
   el.innerHTML = html;
 }
 
+// ---------- partição modal (Censo 2022) — TZ × Não-TZ, barra única 100% empilhada ----------
+// Paleta restrita à identidade: azul (Ônibus) + rosa (Ativo) são as únicas cores oficiais usadas
+// aqui — não combinam entre si nem com amarelo/verde (regra da Identidade Visual da Pesquisa) — e
+// destacam os dois modos citados explicitamente (uso de ônibus e modos ativos). Automóvel/moto/
+// outros ficam em neutros para não competir visualmente com os dois modos de interesse.
+const MODAL_STACK_COLORS = { onibus: '#1A54C7', automovel: '#5c6470', motocicleta: '#8a8f9c', ativo: '#FF2D6B', outros: '#33333d' };
+const MODAL_STACK_LABELS = { onibus: 'Ônibus', automovel: 'Automóvel', motocicleta: 'Motocicleta', ativo: 'Ativo (a pé + bicicleta)', outros: 'Outros' };
+function renderModalStack() {
+  const el = document.getElementById('modalStack');
+  if (!el) return;
+  const d = MODAL_COMPARACAO;
+  const val = (grupo, k) => (d.modos.find(m => m.k === k) || {})[grupo] || 0;
+  const linha = (grupo, label, n) => {
+    const onibus = val(grupo, 'onibus'), automovel = val(grupo, 'automovel'), motocicleta = val(grupo, 'motocicleta');
+    const ativo = val(grupo, 'a_pe') + val(grupo, 'bicicleta');
+    const outros = Math.max(0, 100 - (onibus + automovel + motocicleta + ativo));
+    const segs = [
+      { k: 'onibus', v: onibus }, { k: 'automovel', v: automovel }, { k: 'motocicleta', v: motocicleta },
+      { k: 'ativo', v: ativo }, { k: 'outros', v: outros },
+    ];
+    const bar = segs.map(s => `<div class="seg" style="width:${s.v.toFixed(2)}%;background:${MODAL_STACK_COLORS[s.k]};" title="${MODAL_STACK_LABELS[s.k]}: ${s.v.toFixed(1)}%"></div>`).join('');
+    return `<div class="msrow"><div class="mslab"><b>${label}</b><span>n=${n}</span></div><div class="msbar">${bar}</div></div>`;
+  };
+  let html = linha('tz', `TZ (adotantes até ${d.ano_ref})`, d.n_tz);
+  html += linha('ntz', 'Não-TZ', d.n_ntz);
+  html += `<div class="mslegend">${Object.keys(MODAL_STACK_LABELS).map(k =>
+    `<span><i style="background:${MODAL_STACK_COLORS[k]}"></i>${MODAL_STACK_LABELS[k]}</span>`).join('')}</div>`;
+  el.innerHTML = html;
+}
+
+// ---------- referências bibliográficas ABNT (estudos acadêmicos citados no repositório de fontes) ----------
+// Citekeys conferidos em biblioteca.bib (05 - Referências/_zotero): santini2019, angelo2023,
+// vermander2021, brinco2018 (fonte citada como "brinco 2017", ano do artigo na FEE; citekey do
+// Zotero usa 2018, ano dos direitos autorais — mantido "2017" na citação curta por já estar em uso
+// no crosswalk de casos_por_fonte.json). "Pereira 2023" (Thais Fernandes Pereira, XIII Seminário
+// Discente de Ciência Política da USP) ainda não tem citekey BBT no .bib (entrada sem chave).
+const REFERENCIAS_ABNT = [
+  { chave: 'Santini 2019', ref: 'SANTINI, Daniel et al. <i>Passe livre</i>: as possibilidades da tarifa zero contra a distopia da uberização. São Paulo: Autonomia Literária: Fundação Rosa Luxemburgo, 2019.' },
+  { chave: 'Pereira 2023', ref: 'PEREIRA, Thais Fernandes. As capacidades estatais das cidades brasileiras com tarifa zero no transporte público. In: SEMINÁRIO DISCENTE DA PÓS-GRADUAÇÃO EM CIÊNCIA POLÍTICA DA USP, 13., 2023, São Paulo. <i>Anais eletrônicos</i> [...]. São Paulo: USP, 2023.' },
+  { chave: 'Angelo 2023', ref: 'ANGELO, Danielle Andrade. <i>Tarifa Zero</i>: formas de financiamento e experiências nacionais. 2023. Trabalho de Conclusão de Curso (Graduação em Planejamento Territorial) – Universidade Federal do ABC, São Bernardo do Campo, 2023.' },
+  { chave: 'Vermander 2021', ref: 'VERMANDER, Marijke. <i>Exploring fare-free public transport in Brazil</i>: rationales and characteristics of Tarifa Zero policies in small Brazilian municipalities. 2021. Dissertação (Mestrado) – Vrije Universiteit Brussel, Bruxelas, 2021.' },
+  { chave: 'brinco 2017', ref: 'BRINCO, Ricardo. Tarifação e gratuidade no transporte público urbano. <i>Indicadores Econômicos FEE</i>, Porto Alegre, v. 45, n. 2, p. 79-96, 2017.' },
+];
+function renderReferenciasAbnt() {
+  const el = document.getElementById('referenciasAbnt');
+  if (!el) return;
+  el.innerHTML = '<ol class="refs">' + REFERENCIAS_ABNT.map(r => `<li>${r.ref}</li>`).join('') + '</ol>';
+}
+
 // ---------- TZ table ----------
 let tzSort = { k: 'pib_pc', dir: -1 };
+const fontesExpandedIds = new Set();
 function renderTZTable() {
   let rows = STATS.tz_list.filter(r => {
     if (state.uf && r.uf !== state.uf) return false;
@@ -524,12 +625,23 @@ function renderTZTable() {
     return av > bv ? tzSort.dir : av < bv ? -tzSort.dir : 0;
   });
   const tbody = document.querySelector('#tzTable tbody');
-  tbody.innerHTML = rows.map(r => `<tr data-id="${r.id}">
+  const parts = [];
+  for (const r of rows) {
+    const nf = r.n_fontes || 0;
+    const expanded = fontesExpandedIds.has(r.id);
+    parts.push(`<tr data-id="${r.id}">
       <td>${r.nome}</td><td>${r.uf}</td>
       <td>${r.tz_status === 'Ativa' ? '<span class="tag ativa">Ativa</span>' : '<span class="tag encerrada">Encerrada</span>'}</td>
       <td>${r.tz_ano ?? '—'}</td><td>${r.regic_label ?? '—'}</td><td>${r.tipo_arranjo ?? '—'}</td>
       <td>${fmtNum(r.pop)}</td><td>${fmtNum(r.pib_pc)}</td><td>${fmtNum(r.motorizacao)}</td>
-    </tr>`).join('');
+      <td>${nf ? `<button type="button" class="fontes-toggle" data-id="${r.id}">${nf} ${expanded ? '▲' : '▼'}</button>` : '—'}</td>
+    </tr>`);
+    if (expanded && nf) {
+      const list = fontesFor(r).map(f => `<li><b>${f.fonte}</b>${f.ano ? ' (' + f.ano + ')' : ''} — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
+      parts.push(`<tr class="fontes-row"><td colspan="10"><ul class="fontes-inline">${list}</ul></td></tr>`);
+    }
+  }
+  tbody.innerHTML = parts.join('');
 }
 
 // ---------- controls wiring ----------
@@ -556,7 +668,6 @@ document.getElementById('ufFilter').addEventListener('change', e => {
 });
 document.getElementById('faixaFilter').addEventListener('change', e => { state.faixa = e.target.value; render(); renderTZTable(); });
 document.getElementById('regicFilter').addEventListener('change', e => { state.regic = e.target.value; render(); renderTZTable(); });
-document.getElementById('arranjoFilter').addEventListener('change', e => { state.arranjo = e.target.value; render(); renderTZTable(); });
 document.getElementById('modeloFilter').addEventListener('change', e => { state.modelo = e.target.value; render(); });
 document.getElementById('tzFilter').addEventListener('change', e => { state.tzFilter = e.target.value; render(); });
 
@@ -570,8 +681,15 @@ document.querySelectorAll('#tzTable th').forEach(th => {
 });
 
 document.querySelector('#tzTable tbody').addEventListener('click', e => {
+  const toggle = e.target.closest('.fontes-toggle');
+  if (toggle) {
+    const id = toggle.dataset.id;
+    if (fontesExpandedIds.has(id)) fontesExpandedIds.delete(id); else fontesExpandedIds.add(id);
+    renderTZTable();
+    return;
+  }
   const tr = e.target.closest('tr');
-  if (!tr) return;
+  if (!tr || !tr.dataset.id) return;
   const m = MUNI.get(tr.dataset.id);
   renderDetail(m);
 });
@@ -635,21 +753,10 @@ svg.addEventListener('dblclick', e => {
   if (f) zoomToMuni(f);
 });
 
-// ---------- toggle claro/escuro ----------
-const themeBtn = document.getElementById('themeToggle');
-function applyTheme(t) {
-  state.theme = t;
-  document.documentElement.setAttribute('data-theme', t);
-  themeBtn.textContent = t === 'dark' ? '◐ Tema claro' : '◑ Tema escuro';
-  try { localStorage.setItem('tz_theme', t); } catch (err) { /* file:// pode bloquear */ }
-  render();
-}
-themeBtn.addEventListener('click', () => applyTheme(state.theme === 'dark' ? 'light' : 'dark'));
-let savedTheme = 'dark';
-try { savedTheme = localStorage.getItem('tz_theme') || 'dark'; } catch (err) { /* noop */ }
-
 // ---------- init ----------
 populateSelects();
 renderCrosstabs();
+renderModalStack();
+renderReferenciasAbnt();
 renderTZTable();
-applyTheme(savedTheme); // applyTheme chama render(), que desenha mapa, legenda, barras, cards e linha do tempo
+render(); // desenha mapa, legenda, barras, cards e linha do tempo

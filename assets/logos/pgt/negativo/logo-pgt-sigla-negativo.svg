@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 60">
+  <style>
+    .pgt-mono { font-family: 'Poppins', Arial, sans-serif; font-weight: 800; }
+  </style>
+  <text x="0" y="40" class="pgt-mono" font-size="40" fill="#E63329">PG</text>
+  <text x="62" y="40" class="pgt-mono" font-size="40" fill="#FFFFFF">T</text>
+  <rect x="2" y="48" width="86" height="4" fill="#E63329"/>
+</svg>

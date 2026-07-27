@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 60">
+  <style>
+    .pgt-mono { font-family: 'Poppins', Arial, sans-serif; font-weight: 800; }
+    .pgt-word { font-family: 'Poppins', Arial, sans-serif; font-weight: 700; }
+  </style>
+  <text x="0" y="40" class="pgt-mono" font-size="40" fill="#E63329">PG</text>
+  <text x="62" y="40" class="pgt-mono" font-size="40" fill="#1A1A1A">T</text>
+  <rect x="2" y="48" width="86" height="4" fill="#E63329"/>
+  <text x="98" y="24" class="pgt-word" font-size="9.5" letter-spacing="0.2" fill="#1A1A1A">PROGRAMA DE PÓS-GRADUAÇÃO</text>
+  <text x="98" y="38" class="pgt-word" font-size="9.5" letter-spacing="0.2" fill="#1A1A1A">EM PLANEJAMENTO E GESTÃO</text>
+  <text x="98" y="52" class="pgt-word" font-size="9.5" letter-spacing="0.2" fill="#1A1A1A">DO TERRITÓRIO</text>
+</svg>

@@ -1,0 +1,1445 @@
+{
+  "Abaeté|MG": [
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1996,
+      "link": null
+    }
+  ],
+  "Agudos|SP": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2002,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2003,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2003,
+      "link": null
+    }
+  ],
+  "Alagoinhas|BA": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados — interior BA — [status no cofre: NOVO]",
+      "ano": 2026,
+      "link": "https://diariodotransporte.com.br/2026/01/10/alagoinhas-ba-inicia-tarifa-zero-aos-domingos-e-feriados-a-partir-de-11-de-janeiro/"
+    }
+  ],
+  "Anicuns|GO": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2019,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": null,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": null,
+      "link": null
+    }
+  ],
+  "Aquiraz|CE": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2018,
+      "link": null
+    }
+  ],
+  "Araranguá|SC": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    }
+  ],
+  "Araucária|PR": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": null,
+      "link": null
+    },
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "fins de semana — RM Curitiba — [status no cofre: JÁ TEMOS]",
+      "ano": null,
+      "link": null
+    }
+  ],
+  "Arceburgo|MG": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2020,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2013,
+      "link": null
+    }
+  ],
+  "Artur Nogueira|SP": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2021,
+      "link": null
+    }
+  ],
+  "Assis|SP": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 101409)",
+      "ano": 2021,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Retoma TZ com nova frota ('Grande Assis')",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/07/02/assis-sp-retoma-tarifa-zero-com-nova-frota-de-onibus-e-operacao-da-transporte-coletivo-grande-marilia/"
+    }
+  ],
+  "Balneário Camboriú|SC": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 139155)",
+      "ano": 2023,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "TZ (jun/2023) mantida +6 meses; +43% de demanda",
+      "ano": 2023,
+      "link": "https://diariodotransporte.com.br/2023/12/14/tarifa-zero-em-balneario-camboriu-sc-continua-por-mais-seis-meses/"
+    }
+  ],
+  "Belford Roxo|RJ": [
+    {
+      "fonte": "tz_bairros_perifericos (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "linha Jardim Gláucia→centro; expansão p/ Bela Vista, Vila Magalhães, Nova Aurora, Shangrilá [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://prefeituradebelfordroxo.rj.gov.br/2025/09/29/bairros-que-receberao-a-nova-linha-do-onibus-tarifa-zero-recebem-obras-de-concretagem/"
+    }
+  ],
+  "Belo Horizonte|MG": [
+    {
+      "fonte": "tz_bairros_perifericos (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "linhas que atendem vilas e favelas (capital) [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://www.otempo.com.br/politica/2025/10/2/tarifa-zero-saiba-quais-cidades-brasileiras-aderiram-a-gratuidade-no-transporte-coletivo"
+    },
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados — capital — Catraca Livre — [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://prefeitura.pbh.gov.br/sumob/catraca-livre"
+    }
+  ],
+  "Belém|PA": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados — capital — [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://www.otempo.com.br/cidades/2025/12/7/assim-como-bh-veja-quais-outras-capitais-do-pais-tem-onibus-de-graca-aos-domingos"
+    }
+  ],
+  "Brasília|DF": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados (ônibus e metrô) — capital — [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://www.otempo.com.br/cidades/2025/12/7/assim-como-bh-veja-quais-outras-capitais-do-pais-tem-onibus-de-graca-aos-domingos"
+    }
+  ],
+  "Cacoal|RO": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    }
+  ],
+  "Caeté|MG": [
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2021,
+      "link": null
+    }
+  ],
+  "Campo Belo|MG": [
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2019,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2019,
+      "link": null
+    }
+  ],
+  "Canoas|RS": [
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Oficializa TZ permanente (era emergencial nas enchentes de 2024)",
+      "ano": 2026,
+      "link": "https://diariodotransporte.com.br/2026/02/28/canoas-rs-oficializa-tarifa-zero-permanente-no-transporte-publico/"
+    }
+  ],
+  "Caucaia|CE": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2020,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 355679)",
+      "ano": 2021,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Remove catracas p/ 3 anos de TZ ('Bora de Graça')",
+      "ano": 2024,
+      "link": "https://diariodotransporte.com.br/2024/09/07/caucaia-ce-removera-catracas-de-onibus-para-comemorar-tres-anos-de-tarifa-zero-no-transporte-publico/"
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Prefeitura afirma que manterá o programa (dívida ~R$14mi)",
+      "ano": 2024,
+      "link": "https://diariodotransporte.com.br/2024/12/05/prefeitura-de-caucaia-ce-divulga-nota-afirmando-que-mantera-programa-tarifa-zero/"
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Caucaia adota tarifa zero",
+      "ano": 2021,
+      "link": "https://diariodotransporte.com.br/2021/07/23/caucaia-ce-e-mais-uma-cidade-a-ter-tarifa-zero-no-sistema-de-onibus/"
+    },
+    {
+      "fonte": "Reportagem — Mobilize",
+      "tipo": "Reportagem",
+      "descricao": "'Bolsa família sobre rodas'",
+      "ano": 2025,
+      "link": "https://www.mobilize.org.br/noticias/14144/bolsa-familia-sobre-rodas-a-tarifa-zero-em-caucaia-ce.html"
+    }
+  ],
+  "Cerquilho|SP": [
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2020,
+      "link": null
+    }
+  ],
+  "Cianorte|PR": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "'Passe Livre' aumentou +90% o uso (R$500 mil/mês)",
+      "ano": 2024,
+      "link": "https://diariodotransporte.com.br/2024/01/10/programa-passe-livre-em-cianorte-pr-aumenta-em-90-o-uso-do-transporte-publico-no-municipio/"
+    }
+  ],
+  "Cláudio|MG": [
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2021,
+      "link": null
+    }
+  ],
+  "Cotia|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos — RMSP — Tarifa Zero Inclusiva aos Domingos — [status no cofre: NOVO]",
+      "ano": 2026,
+      "link": "https://diariodostrilhos.com/2026/06/13/cidade-de-cotia-tera-tarifa-zero-nos-onibus-aos-domingos/"
+    }
+  ],
+  "Cuiabá|MT": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados — capital — [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://www.otempo.com.br/cidades/2025/12/7/assim-como-bh-veja-quais-outras-capitais-do-pais-tem-onibus-de-graca-aos-domingos"
+    }
+  ],
+  "Dourado|SP": [
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2014,
+      "link": null
+    }
+  ],
+  "Eusébio|CE": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2011,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2010,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2010,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2010,
+      "link": null
+    }
+  ],
+  "Faxinal|PR": [
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2001,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2001,
+      "link": null
+    }
+  ],
+  "Ferraz de Vasconcelos|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados — RMSP — [status no cofre: NOVO]",
+      "ano": 2026,
+      "link": "https://noticiasdotransporte.com.br/ferraz-de-vasconcelos-implanta-tarifa-zero-aos-domingos-e-feriados-no-transporte-municipal-a-partir-deste-sabado-5/"
+    }
+  ],
+  "Florianópolis|SC": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "último domingo do mês — capital — Domingo na faixa — [status no cofre: JÁ TEMOS (como encerrada — REVER)]",
+      "ano": 2021,
+      "link": "https://www.otempo.com.br/cidades/2025/12/7/assim-como-bh-veja-quais-outras-capitais-do-pais-tem-onibus-de-graca-aos-domingos"
+    }
+  ],
+  "Formosa|GO": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 115669)",
+      "ano": 2021,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Mobilize",
+      "tipo": "Reportagem",
+      "descricao": "Adota TZ — programa 'Transporte para Todos'",
+      "ano": 2021,
+      "link": "https://www.mobilize.org.br/noticias/12780/cidade-de-formosa-go-adota-tarifa-zero-no-transporte-coletivo.html"
+    }
+  ],
+  "Holambra|SP": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1993,
+      "link": null
+    },
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2010,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1995,
+      "link": null
+    }
+  ],
+  "Ibirité|MG": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 170387)",
+      "ano": 2021,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Transporte gratuito desde 29/01/2023 (+106% em 3 meses)",
+      "ano": 2023,
+      "link": "https://diariodotransporte.com.br/2023/01/29/transporte-coletivo-de-ibirite-mg-passa-a-ser-gratis-a-partir-deste-domingo-29/"
+    }
+  ],
+  "Irati|PR": [
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "TZ emergencial por 90 dias (01/05/2025; empresa parou)",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/05/03/irati-pr-tera-transporte-coletivo-gratuito-por-90-dias/"
+    }
+  ],
+  "Itaboraí|RJ": [
+    {
+      "fonte": "Reportagem — Brasil de Fato",
+      "tipo": "Reportagem",
+      "descricao": "16º município do RJ com passe livre (TZ total desde 2025)",
+      "ano": 2025,
+      "link": "https://www.brasildefato.com.br/2025/05/26/tarifa-zero-no-rj-estado-lidera-em-proporcao-de-municipios-com-passe-livre-em-16-cidades/"
+    }
+  ],
+  "Itapecerica da Serra|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "sábados, domingos e feriados — RMSP — Transporte Para Todos — [status no cofre: NOVO]",
+      "ano": null,
+      "link": "https://www.itapecerica.sp.gov.br/noticias/seguranca-publica/transporte-para-todos-oferece-onibus-gratuito-na-cidade-aos-finais-de-semana-e-feriados"
+    }
+  ],
+  "Itapetininga|SP": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 157790)",
+      "ano": 2023,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "'Ônibus de Graça' desde 30/12/2023",
+      "ano": 2023,
+      "link": "https://diariodotransporte.com.br/2023/12/28/itapetininga-sp-anuncia-tarifa-zero-nos-onibus-a-partir-deste-sabado-30/"
+    }
+  ],
+  "Itapeva|SP": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2021,
+      "link": null
+    }
+  ],
+  "Itatiaiuçu|MG": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2015,
+      "link": null
+    },
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2015,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2015,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2015,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2015,
+      "link": null
+    },
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2015,
+      "link": null
+    }
+  ],
+  "Ituiutaba|MG": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 102217)",
+      "ano": 2023,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "'Busão do Povo' desde 10/07/2023",
+      "ano": 2023,
+      "link": "https://diariodotransporte.com.br/2023/07/02/ituiutaba-mg-vai-oferecer-tarifa-zero-nos-onibus-municipais-a-partir-de-10-de-julho/"
+    }
+  ],
+  "Ivaiporã|PR": [
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2001,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2001,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2001,
+      "link": null
+    }
+  ],
+  "Jales|SP": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2020,
+      "link": null
+    }
+  ],
+  "Japeri|RJ": [
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Inicia TZ com três linhas municipais",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/05/03/japeri-rj-inicia-operacao-de-transporte-gratuito-com-tres-linhas-municipais/"
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Amplia com nova linha (Chacrinha, Beira Rio, Nova Belém)",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/05/06/japeri-rj-amplia-transporte-gratuito-com-nova-linha-entre-chacrinha-beira-rio-e-nova-belem/"
+    }
+  ],
+  "Lins|SP": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    }
+  ],
+  "Luziânia|GO": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 208725)",
+      "ano": 2023,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Mobilize",
+      "tipo": "Reportagem",
+      "descricao": "2º município goiano com TZ; desde 27/11/2023 (+202% demanda)",
+      "ano": 2023,
+      "link": "https://www.mobilize.org.br/noticias/13873/luziania-o-segundo-municipio-goiano-a-adotar-tarifa-zero.html"
+    }
+  ],
+  "Macatuba|SP": [
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2004,
+      "link": null
+    }
+  ],
+  "Maceió|AL": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos — capital — [status no cofre: NOVO]",
+      "ano": 2022,
+      "link": "https://www.otempo.com.br/cidades/2025/12/7/assim-como-bh-veja-quais-outras-capitais-do-pais-tem-onibus-de-graca-aos-domingos"
+    }
+  ],
+  "Mariana|MG": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2022,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2022,
+      "link": null
+    }
+  ],
+  "Maricá|RJ": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2014,
+      "link": null
+    },
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2014,
+      "link": null
+    },
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2013,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2013,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2013,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2013,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2021,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 197300)",
+      "ano": 2021,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Brasil de Fato",
+      "tipo": "Reportagem",
+      "descricao": "Economia de R$16 mi/mês com passagem",
+      "ano": 2025,
+      "link": "https://www.brasildefato.com.br/2025/10/06/tarifa-zero-em-marica-rj-representa-economia-de-r-16-milhoes-por-mes-com-passagem/"
+    },
+    {
+      "fonte": "Reportagem — Brasil de Fato",
+      "tipo": "Reportagem",
+      "descricao": "'Vermelhinhos' poupam 20% da renda das famílias",
+      "ano": 2023,
+      "link": "https://www.brasildefato.com.br/2023/06/06/tarifa-zero-em-marica-onibus-vermelhinhos-poupam-20-da-renda-das-familias/"
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Programa completa nove anos",
+      "ano": 2023,
+      "link": "https://diariodotransporte.com.br/2023/09/12/programa-tarifa-zero-do-transporte-coletivo-completa-nove-anos-em-marica-rj/"
+    },
+    {
+      "fonte": "Reportagem — Brasil de Fato",
+      "tipo": "Reportagem",
+      "descricao": "Novas linhas começam a circular",
+      "ano": 2024,
+      "link": "https://www.brasildefato.com.br/2024/03/03/tarifa-zero-em-marica-rj-novas-linhas-de-onibus-comecam-a-circular-na-segunda-4/"
+    },
+    {
+      "fonte": "Reportagem — Brasil de Fato",
+      "tipo": "Reportagem",
+      "descricao": "Pesquisa p/ eletrificação da frota",
+      "ano": 2026,
+      "link": "https://www.brasildefato.com.br/2026/06/25/marica-realiza-pesquisas-para-aumentar-taxa-de-eletrificacao-da-frota-do-sistema-tarifa-zero/"
+    }
+  ],
+  "Monte Carmelo|MG": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1994,
+      "link": null
+    },
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 1994,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1994,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 1994,
+      "link": null
+    }
+  ],
+  "Monte Mor|SP": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    }
+  ],
+  "Morungaba|SP": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2017,
+      "link": null
+    },
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2019,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2019,
+      "link": null
+    }
+  ],
+  "Muzambinho|MG": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2011,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2011,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2011,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2011,
+      "link": null
+    }
+  ],
+  "Nova Lima|MG": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "fins de semana — RM BH — [status no cofre: JÁ TEMOS]",
+      "ano": null,
+      "link": null
+    }
+  ],
+  "Palmas|TO": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados — capital — [status no cofre: NOVO]",
+      "ano": 2023,
+      "link": "https://www.otempo.com.br/cidades/2025/12/7/assim-como-bh-veja-quais-outras-capitais-do-pais-tem-onibus-de-graca-aos-domingos"
+    }
+  ],
+  "Paranaguá|PR": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2022,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 145829)",
+      "ano": 2022,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Cartão do Tarifa Zero disponível; menor intervalo",
+      "ano": 2022,
+      "link": "https://diariodotransporte.com.br/2022/02/22/cartao-do-tarifa-zero-em-paranagua-ja-pode-ser-retirado-e-no-dia-28-intervalos-entre-onibus-diminuem/"
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Novos ônibus (ar-cond., wi-fi) chegam ao TZ",
+      "ano": 2026,
+      "link": "https://diariodotransporte.com.br/2026/05/30/novos-onibus-do-tarifa-zero-devem-comecar-a-chegar-a-paranagua-pr-apos-conclusao-de-testes-em-fabrica/"
+    }
+  ],
+  "Paulínia|SP": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1995,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2013,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2013,
+      "link": null
+    }
+  ],
+  "Pedro Osório|RS": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2020,
+      "link": null
+    }
+  ],
+  "Piedade|SP": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    }
+  ],
+  "Pirapora|MG": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2022,
+      "link": null
+    }
+  ],
+  "Pitanga|PR": [
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2012,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2012,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2012,
+      "link": null
+    }
+  ],
+  "Porto Alegre|RS": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": null,
+      "link": null
+    }
+  ],
+  "Porto Feliz|SP": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2020,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2022,
+      "link": null
+    }
+  ],
+  "Porto Real|RJ": [
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2011,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2011,
+      "link": null
+    }
+  ],
+  "Potirendaba|SP": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1998,
+      "link": null
+    },
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 1998,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 1998,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 1998,
+      "link": null
+    }
+  ],
+  "Presidente Kennedy|RJ": [
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2014,
+      "link": null
+    }
+  ],
+  "Presidente Prudente|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "fins de semana (sáb/dom) — interior SP — [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://portalprudentino.com.br/noticia/noticias/presidente-prudente-noticias/transporte-coletivo-gratuito-comeca-a-operar-neste-fim-de-semana-em-pp"
+    }
+  ],
+  "Ribeirão Pires|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados — RMSP — [status no cofre: NOVO]",
+      "ano": null,
+      "link": "https://www.mobilize.org.br/noticias/12910/ribeirao-pires-sp-tera-tarifa-zero-no-transporte-aos-domingos-e-feriados.html"
+    }
+  ],
+  "Rio Branco do Sul|PR": [
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2022,
+      "link": null
+    }
+  ],
+  "Rio Grande da Serra|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos — RMSP — [status no cofre: NOVO]",
+      "ano": null,
+      "link": "https://www.mobilize.org.br/noticias/14386/tarifa-zero-aos-domingos-ja-vale-em-sao-jose-do-rio-preto-sp.html"
+    }
+  ],
+  "Salto|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "fins de semana — interior SP — [status no cofre: JÁ TEMOS]",
+      "ano": null,
+      "link": null
+    }
+  ],
+  "Santa Isabel|SP": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    }
+  ],
+  "Santa Luzia|MG": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "fins de semana — RM BH — [status no cofre: JÁ TEMOS]",
+      "ano": null,
+      "link": null
+    }
+  ],
+  "Santo André|SP": [
+    {
+      "fonte": "tz_bairros_perifericos (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "linha Circular Luzitinha — micro-ônibus em comunidades periféricas (Vila Luzita) [status no cofre: NOVO]",
+      "ano": 2026,
+      "link": "https://diariodotransporte.com.br/2026/04/25/em-primeira-mao-santo-andre-sp-tera-tarifa-zero-em-nova-linha-circular-luzitinha-em-iniciativa-da-gestao-gilvan-ferreira-veja-itinerario/"
+    }
+  ],
+  "Silva Jardim|RJ": [
+    {
+      "fonte": "Santini 2019",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2014,
+      "link": null
+    },
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2014,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2014,
+      "link": null
+    }
+  ],
+  "Sorocaba|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados (com Cartão Social) — interior SP — [status no cofre: NOVO]",
+      "ano": 2024,
+      "link": "https://noticias.sorocaba.sp.gov.br/transporte-publico-em-sorocaba-tem-passagem-gratuita-aos-domingos-e-feriados-a-partir-de-22-de-junho/"
+    }
+  ],
+  "Sorriso|MT": [
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 110635)",
+      "ano": 2025,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Passe livre no transporte coletivo (desde 02/05/2025)",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/05/01/sorriso-mt-adota-passe-livre-no-transporte-coletivo-para-incentivar-mobilidade-e-sustentabilidade/"
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Prefeitura propõe transporte gratuito",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/04/03/prefeitura-de-sorriso-mt-propoe-transporte-coletivo-gratuito-para-estimular-uso-e-melhorar-transito/"
+    }
+  ],
+  "São Caetano do Sul|SP": [
+    {
+      "fonte": "NTU 2023",
+      "tipo": "Relatório institucional",
+      "descricao": "estudo de caso (relatório NTU)",
+      "ano": 2023,
+      "link": null
+    },
+    {
+      "fonte": "NTU 2025 - TZ maiores cidades",
+      "tipo": "Relatório institucional",
+      "descricao": "cidade com TZ universal e população >100 mil hab. (pop. 165655)",
+      "ano": 2023,
+      "link": "NTU — 'Tarifa zero nas cidades do Brasil 2025' (Série Pesquisas Temáticas NTU nº4), págs. 19-25. Dados consolidados até maio/2025. As 12 cidades com tarifa zero UNIVERSAL e população total >100 mil habitantes no país, segundo levantamento próprio da NTU ('Clipping NTU')."
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "6 meses: +320% demanda, 9 mi passageiros",
+      "ano": 2024,
+      "link": "https://diariodotransporte.com.br/2024/05/20/tarifa-zero-nos-onibus-de-sao-caetano-do-sul-completa-seis-meses-com-320-de-aumento-de-demanda-e-nove-milhoes-de-passageiros-transportados/"
+    },
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Fim da TZ universal chega à Câmara; prefeitura propõe tarifa de R$5",
+      "ano": 2026,
+      "link": "https://diariodotransporte.com.br/2026/06/10/fim-da-tarifa-zero-para-todos-os-passageiros-em-sao-caetano-do-sul-sp-chega-a-camara-empresas-apresentam-formula-e-prefeitura-propoe-tarifa-de-r-5/"
+    }
+  ],
+  "São Carlos|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos — interior SP — [status no cofre: NOVO]",
+      "ano": null,
+      "link": "https://www.mobilize.org.br/noticias/14386/tarifa-zero-aos-domingos-ja-vale-em-sao-jose-do-rio-preto-sp.html"
+    }
+  ],
+  "São José do Rio Preto|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos — interior SP — [status no cofre: NOVO]",
+      "ano": null,
+      "link": "https://www.riopreto.sp.gov.br/"
+    }
+  ],
+  "São João del Rei|MG": [
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Inicia transporte gratuito em 23/06/2025 (30º município de MG)",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/06/22/sao-joao-del-rei-mg-inicia-transporte-coletivo-gratuito-a-partir-desta-segunda-feira-23/"
+    },
+    {
+      "fonte": "Reportagem — Mobilize",
+      "tipo": "Reportagem",
+      "descricao": "'Mais uma cidade Tarifa Zero em Minas'",
+      "ano": 2025,
+      "link": "https://www.mobilize.org.br/noticias/14363/sao-joao-delrei-mais-uma-cidade-tarifa-zero-em-minas.html"
+    }
+  ],
+  "São Paulo|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos — capital — Domingão Tarifa Zero — [status no cofre: JÁ TEMOS]",
+      "ano": 2023,
+      "link": "https://www.sptrans.com.br/domingao-tarifa-zero/"
+    }
+  ],
+  "Taboão da Serra|SP": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "fins de semana — RMSP — [status no cofre: JÁ TEMOS]",
+      "ano": null,
+      "link": null
+    }
+  ],
+  "Teresina|PI": [
+    {
+      "fonte": "Reportagem — Diário do Transporte",
+      "tipo": "Reportagem",
+      "descricao": "Metrô de Teresina passa a operar com tarifa zero",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2025/01/09/metro-de-teresina-pi-passa-a-funcionar-com-tarifa-zero/"
+    },
+    {
+      "fonte": "Reportagem — Mobilize",
+      "tipo": "Reportagem",
+      "descricao": "Contexto: 'Teresina tem o pior transporte público do Brasil'",
+      "ano": null,
+      "link": "https://www.mobilize.org.br/noticias/13494/teresina-tem-o-pior-transporte-publico-do-brasil-e-podemos-provar.html"
+    }
+  ],
+  "Teresópolis|RJ": [
+    {
+      "fonte": "tz_fim_de_semana (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "domingos e feriados específicos — interior RJ — Domingão Tarifa Zero — [status no cofre: NOVO]",
+      "ano": 2025,
+      "link": "https://diariodotransporte.com.br/2026/01/01/domingao-tarifa-zero-em-teresopolis-rj-supera-13-milhao-de-embarques-gratuitos-em-um-ano/"
+    }
+  ],
+  "Vargem Grande Paulista|SP": [
+    {
+      "fonte": "Angelo 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2020,
+      "link": null
+    },
+    {
+      "fonte": "Pereira 2023",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2019,
+      "link": null
+    },
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2019,
+      "link": null
+    }
+  ],
+  "Volta Redonda|RJ": [
+    {
+      "fonte": "Vermander 2021",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT, pioneiros)",
+      "ano": 2017,
+      "link": null
+    },
+    {
+      "fonte": "tz_bairros_perifericos (coleta própria)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "restrito a bairros/regiões periféricas [status no cofre: JÁ TEMOS]",
+      "ano": null,
+      "link": "Quadro TZ Brasil (base)"
+    }
+  ],
+  "Wenceslau Braz|PR": [
+    {
+      "fonte": "brinco 2017",
+      "tipo": "Estudo acadêmico",
+      "descricao": "estudo de caso (FFPT)",
+      "ano": 2008,
+      "link": null
+    },
+    {
+      "fonte": "Municípios com FFPT (planilha de coleta)",
+      "tipo": "Dado operacional/coleta própria",
+      "descricao": "levantamento de municípios com FFPT",
+      "ano": 2008,
+      "link": null
+    }
+  ]
+}
