@@ -12,6 +12,8 @@ Enquanto o painel circula só entre orientação e equipe próxima (antes de ir 
 
 Não há distinção patch/minor/major nessa fase — qualquer mudança (dado, feature, correção **ou regressão/hotfix**) sobe o número seguinte (+0.1). Não existe granularidade extra de hotfix (tipo "v0.3.1") no pré-lançamento — mesmo consertar algo que quebrou soma +0.1 normalmente.
 
+**Exceção — sub-patch v0.x.NN (adotada 28/07/2026):** quando uma rodada adicional, pequena e no mesmo ciclo de uso de um v0.x já testado (tipicamente no mesmo dia ou dia seguinte), acrescenta conteúdo sem alterar a estrutura de dados nem redesenhar nada — típico de "mais um achado para incorporar" —, o autor pode optar por marcá-la como sub-patch de duas casas (v0.4.01, v0.4.02...) em vez de subir para o próximo v0.x inteiro. É uma decisão pontual do autor, não automática: por padrão continua valendo "qualquer mudança soma +0.1" (linha acima); o sufixo `.NN` é usado quando o autor explicitamente quer sinalizar que a rodada é um adendo menor a um v0.x específico, não uma iteração nova por direito próprio. Primeiro uso: v0.4.01 (Painel Brasil), rodada de notícias por município + referências bibliográficas adicionais.
+
 ## Lançamento — v1.0.0
 
 Marca a saída da prototipagem: o painel é considerado pronto para circular fora do círculo próximo, em grupos de pesquisa.

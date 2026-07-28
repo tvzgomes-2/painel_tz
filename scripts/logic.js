@@ -3,6 +3,7 @@ const TOPO = JSON.parse(document.getElementById('topo-data').textContent);
 const STATS = JSON.parse(document.getElementById('data-stats').textContent);
 const MUNI_COL = JSON.parse(document.getElementById('data-muni').textContent);
 const FONTES_RAW = JSON.parse(document.getElementById('data-fontes').textContent);
+const NOTICIAS_RAW = JSON.parse(document.getElementById('data-noticias').textContent);
 
 // zip columnar municipal data into id -> row object
 const COLS = MUNI_COL.cols;
@@ -37,6 +38,17 @@ for (const k in FONTES_RAW) {
 }
 function fontesFor(m) { return (m && FONTES.get(normKey(m.nome, m.uf))) || []; }
 for (const r of STATS.tz_list) r.n_fontes = fontesFor(r).length;
+
+// ---------- notícias por município (consolidação de referências, 27/07/2026) ----------
+// Reportagens de imprensa mapeadas em 05 - Referências/Reportagens por município (cofre), separadas
+// das "Fontes" acima por decisão do autor (27/07/2026): "Fontes" segue restrita a estudo acadêmico;
+// notícias de jornal/revista/site aparecem numa seção própria, sem se misturar com a citação acadêmica.
+const NOTICIAS = new Map();
+for (const k in NOTICIAS_RAW) {
+  const [nome, uf] = k.split('|');
+  NOTICIAS.set(normKey(nome, uf), NOTICIAS_RAW[k]);
+}
+function noticiasFor(m) { return (m && NOTICIAS.get(normKey(m.nome, m.uf))) || []; }
 
 // ---------- agregados extras (censo22 modal, série motorização) ----------
 // Pré-computados 26/07/2026 a partir de base_municipal_v3.csv (script avulso, fora do build
@@ -483,7 +495,8 @@ function renderDetail(m) {
       <tr><td>PlanMob (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
       ${extra}
     </table>
-    ${renderFontesDetail(m)}`;
+    ${renderFontesDetail(m)}
+    ${renderNoticiasDetail(m)}`;
 }
 
 function renderFontesDetail(m) {
@@ -492,6 +505,16 @@ function renderFontesDetail(m) {
   const items = fontes.map(f => `<li><b>${f.fonte}</b>${f.ano ? ' (' + f.ano + ')' : ''} — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
   return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
     <b style="font-size:12.5px;">Fontes (${fontes.length})</b>
+    <ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;">${items}</ul>
+  </div>`;
+}
+
+function renderNoticiasDetail(m) {
+  const noticias = noticiasFor(m);
+  if (!noticias.length) return '';
+  const items = noticias.map(n => `<li><b>${n.veiculo}</b>${n.data ? ' (' + n.data + ')' : ''} — ${n.tema || ''}${n.url ? ' — <a href="' + n.url + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Notícias (${noticias.length})</b>
     <ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;">${items}</ul>
   </div>`;
 }
@@ -602,10 +625,31 @@ const REFERENCIAS_ABNT = [
   { chave: 'Vermander 2021', ref: 'VERMANDER, Marijke. <i>Exploring fare-free public transport in Brazil</i>: rationales and characteristics of Tarifa Zero policies in small Brazilian municipalities. 2021. Dissertação (Mestrado) – Vrije Universiteit Brussel, Bruxelas, 2021.' },
   { chave: 'brinco 2017', ref: 'BRINCO, Ricardo. Tarifação e gratuidade no transporte público urbano. <i>Indicadores Econômicos FEE</i>, Porto Alegre, v. 45, n. 2, p. 79-96, 2017.' },
 ];
+
+// Referências levantadas na consolidação bibliográfica de 27/07/2026 (fontes: artigo ANPET/versão
+// cega, PGT092 — bibliografia + anexo de artigos selecionados, Observatório de Tarifa Zero — 3
+// documentos do autor). Conferidas contra biblioteca.bib (leitura completa via bibtexparser +
+// similaridade de título, não só sobrenome+ano) — nenhuma das 8 abaixo tem citekey no Zotero.
+// Ainda não vinculadas a um município específico no crosswalk de Fontes (por isso ficam separadas
+// da lista acima, que é só sobre os estudos citados nesse crosswalk).
+const REFERENCIAS_ADICIONAIS = [
+  { chave: 'Landin 2022', ref: 'LANDIN, Lucas de Paula. <i>Tarifa Zero</i>: la financiación del transporte público gratuito en el Municipio de Vargem Grande Paulista. 2022. Dissertação (Mestrado) – Universidad de Chile, Santiago, 2022.' },
+  { chave: 'Campos; Santini 2024', ref: 'CAMPOS, Marcos; SANTINI, Daniel. Os sentidos da gratuidade universal no Brasil. In: <i>Institucionalização simbólica nas interações socioestatais</i>. Rio de Janeiro: EdUERJ, 2024. (referência incompleta na fonte de origem — capítulo/organizador(es) do livro a conferir antes de citar).' },
+  { chave: 'CEM [s.d.]', ref: 'CENTRO DE ESTUDOS DA METRÓPOLE (CEM). <i>Base cartográfica digital georreferenciada das sedes municipais brasileiras 2010</i>. São Paulo: CEM, [s.d.]. Disponível em: https://centrodametropole.fflch.usp.br/pt-br/file/17640/download?token=K0XXrRXh. Acesso em: 27 jul. 2026.' },
+  { chave: 'Fearnley 2013', ref: 'FEARNLEY, N. Free fares policies: impact on public transport mode share and other transport policy goals. <i>[periódico não especificado na fonte de origem — a conferir antes de citar]</i>, 2013.' },
+  { chave: 'IBGE 2020', ref: 'INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA (IBGE). <i>Munic 2020</i>: pesquisa de informações básicas municipais. Rio de Janeiro: IBGE, 2020.' },
+  { chave: 'Silva 2017', ref: 'SILVA, M. de L. <i>A gestão Luiza Erundina (1989-1992)</i>: participação popular nas políticas de transporte. 2017. Tese (Doutorado) – Universidade de São Paulo, São Paulo, 2017.' },
+  { chave: 'Studenmund; Connor 1982', ref: 'STUDENMUND, A.; CONNOR, D. The free-fare transit experiments. <i>Transportation Research Part A: General</i>, v. 16, n. 4, p. 261-269, 1982.' },
+  { chave: 'Kębłowski 2024 ⚠', ref: 'KĘBŁOWSKI, Wojciech. <i>Fare-free public transport</i>: an international perspective. Berlim: Rosa-Luxemburg-Stiftung, 2024. <b>⚠ Possível duplicata/versão anterior de "keblowski2025a"</b> (já no Zotero, título 2025 diferente — "Fare-Free Public Transport: From Policy Fringes to an Established Practice") — a confirmar antes de tratar como obra distinta.' },
+];
+
 function renderReferenciasAbnt() {
   const el = document.getElementById('referenciasAbnt');
   if (!el) return;
-  el.innerHTML = '<ol class="refs">' + REFERENCIAS_ABNT.map(r => `<li>${r.ref}</li>`).join('') + '</ol>';
+  let html = '<ol class="refs">' + REFERENCIAS_ABNT.map(r => `<li>${r.ref}</li>`).join('') + '</ol>';
+  html += '<p class="sub" style="margin-top:14px;">Referências adicionais levantadas na consolidação bibliográfica de 27/07/2026 (ANPET, PGT092, Observatório de Tarifa Zero) — confirmadas como ausentes do Zotero (<code>biblioteca.bib</code>), ainda não vinculadas a um município específico no crosswalk de Fontes.</p>';
+  html += '<ol class="refs">' + REFERENCIAS_ADICIONAIS.map(r => `<li>${r.ref}</li>`).join('') + '</ol>';
+  el.innerHTML = html;
 }
 
 // ---------- TZ table ----------

@@ -6,7 +6,23 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.4 (atual — 2026-07-27)
+## v0.4.01 (atual — 2026-07-28)
+
+Sub-patch de v0.4 (decisão do autor — ver `VERSIONING.md` § Exceção sub-patch v0.x.NN): terceira passagem, incorpora os achados da consolidação de referências (bibliografia + notícias mapeadas) feita no cofre a pedido do autor. Mesma estrutura de banco (nenhuma coluna nova na base municipal — dados novos entram como crosswalks à parte, no mesmo padrão do `casos_por_fonte.json` da Fase 8).
+
+**Referências bibliográficas:**
+
+- Bloco ABNT ganha uma segunda lista, **"Referências adicionais"**, com as 8 referências acadêmicas levantadas na consolidação de 3 documentos do autor (artigo ANPET/versão cega, PGT092, Observatório de Tarifa Zero) que **não têm citekey no Zotero** (`biblioteca.bib`) — confirmado por leitura completa do `.bib` via `bibtexparser` + similaridade de título (não só sobrenome+ano, método refinado a pedido do autor após a primeira tentativa ter gerado falsos positivos). Mantida separada da lista original (que é só sobre os 5 estudos citados no crosswalk de Fontes) porque essas 8 ainda não estão vinculadas a um município específico.
+- Uma delas (Kębłowski 2024, "Fare-free public transport: An international perspective") está sinalizada com ⚠ como possível duplicata/versão anterior de `keblowski2025a` (já no Zotero, título 2025 diferente) — decisão deixada para o autor, não resolvida aqui.
+- Uma referência (Campos; Santini, 2024) está com dados de publicação incompletos na fonte de origem — sinalizado no próprio texto da citação, "a conferir antes de citar".
+
+**Notícias por município (nova seção, separada de Fontes):**
+
+- Novo crosswalk `casos_por_noticia.json`, gerado a partir de `05 - Referências/Reportagens por município` (cofre) — 42 municípios, 70 matérias de imprensa.
+- Card de detalhe do município ganha seção **"Notícias"**, ao lado (não junto) da seção "Fontes" — mantém a separação decidida na Fase 8 entre estudo acadêmico (citação pública em "Fontes") e reportagem de jornal/revista/site (agora com seção própria, sem se misturar com a citação acadêmica).
+- Não altera a tabela principal nem a coluna "Fontes" (que segue restrita a estudo acadêmico) — notícias aparecem só no card expandido do município selecionado.
+
+## v0.4 (2026-07-27)
 
 Rodada de ajustes estéticos + Fase 8 (repositório de estudos), em duas passagens no mesmo dia — a segunda corrige e substitui partes da primeira a partir do primeiro uso real do painel (feedback direto do autor). Mesma estrutura de banco (nenhuma coluna nova na base municipal em si — os dados novos usam agregados pré-computados à parte; ver nota abaixo).
 
