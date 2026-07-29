@@ -24,7 +24,9 @@
    "camada": "4",
    "label": "Grupo social",
    "detalhe": "passe livre estudantil",
-   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
+   "pop_estimada": 579497,
+   "pop_estimada_fonte": "Censo 2022, proxy \"estudo_total\" (pessoas que se deslocam para estudar) — base_municipal_v3.csv; não é a contagem real de beneficiários do passe"
   }
  ],
  "Brasília|DF": [
@@ -241,7 +243,9 @@
    "camada": "4",
    "label": "Grupo social",
    "detalhe": "passe livre estudantil",
-   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
+   "pop_estimada": 187195,
+   "pop_estimada_fonte": "Censo 2022, proxy \"estudo_total\" (pessoas que se deslocam para estudar) — base_municipal_v3.csv; não é a contagem real de beneficiários do passe"
   }
  ],
  "São Caetano do Sul|SP": [

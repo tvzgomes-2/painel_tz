@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verbetes — Tarifa Zero e Grupos Econômicos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* identidade visual da pesquisa (hex oficiais — ver Identidade Visual da Pesquisa) */
+    --preto:#0E0E10; --rosa:#FF2D6B; --azul:#1A54C7; --amarelo:#F5E400; --verde:#6FBE44; --papel:#FAF9F5;
+    --bg:var(--preto); --panel:#17171a; --panel2:#1f1f24; --border:#2c2c33;
+    --text:#f2f2f0; --muted:#a3a3ab; --accent:var(--rosa);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;}
+  header{padding:22px 24px 16px;border-bottom:2px solid var(--amarelo);}
+  header .back{font-size:12.5px;opacity:.75;text-decoration:none;color:var(--text);}
+  header .back:hover{text-decoration:underline;}
+  header h1{margin:10px 0 10px;font-size:28px;font-weight:800;letter-spacing:.01em;text-transform:uppercase;line-height:1.15;max-width:760px;}
+  header h1 .hl{color:var(--amarelo);border-bottom:5px solid var(--rosa);padding-bottom:1px;}
+  header .resumo{margin:0;color:var(--text);font-size:13.5px;line-height:1.6;max-width:760px;}
+  .wrap{max-width:760px;margin:0 auto;padding:28px 24px 60px;}
+  .aviso{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--amarelo);border-radius:6px;
+    padding:12px 14px;font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:26px;}
+  .aviso b{color:var(--text);}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px;}
+  .toc a{background:var(--panel2);border:1px solid var(--border);color:var(--text);text-decoration:none;
+    font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;transition:border-color .15s;}
+  .toc a:hover{border-color:var(--accent);}
+  .verbete{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px 24px;margin-bottom:22px;scroll-margin-top:20px;}
+  .verbete .tag{display:inline-block;background:var(--rosa);color:#fff;font-size:10.5px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.05em;padding:2px 9px;border-radius:4px;margin-bottom:10px;}
+  .verbete h2{margin:0 0 14px;font-size:19px;font-weight:800;color:var(--text);}
+  .callout{background:var(--panel2);border-left:3px solid var(--amarelo);border-radius:6px;padding:12px 14px;
+    margin:0 0 16px;font-size:13.5px;line-height:1.6;color:var(--text);}
+  .callout .k{display:block;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--amarelo);margin-bottom:5px;}
+  .verbete h3{margin:16px 0 6px;font-size:13.5px;font-weight:700;color:var(--text);text-transform:uppercase;
+    letter-spacing:.03em;border-top:1px solid var(--border);padding-top:14px;}
+  .verbete h3:first-of-type{border-top:none;padding-top:0;margin-top:2px;}
+  .verbete p{margin:0 0 4px;font-size:13.5px;line-height:1.65;color:var(--text);}
+  .verbete .ligacoes{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);}
+  .verbete .ligacoes b{color:var(--text);}
+  .verbete .ligacoes a{color:var(--accent);text-decoration:none;}
+  .verbete .ligacoes a:hover{text-decoration:underline;}
+  .termo-represado{opacity:.85;font-style:italic;}
+  footer{margin-top:36px;padding-top:16px;border-top:2px solid var(--amarelo);color:var(--muted);font-size:11.5px;line-height:1.7;}
+  footer .fgrid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;margin-bottom:14px;}
+  footer .fgrid b{color:var(--text);font-size:12.5px;}
+  footer .fnames{display:flex;flex-direction:column;gap:5px;}
+  footer .fcredits{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:10px 24px;
+    margin:0 0 14px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  footer .flogos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  footer .flogos img{height:46px;width:auto;display:block;}
+  footer .finst{color:var(--muted);font-size:11px;}
+  footer .fapoio{display:flex;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:11px;line-height:1.55;max-width:560px;}
+  footer .fapoio img{height:46px;width:auto;display:block;}
+  footer .fapoio b{color:var(--text);}
+  footer .flogos a, footer .fapoio a{display:inline-flex;opacity:.92;transition:opacity .15s;}
+  footer .flogos a:hover, footer .fapoio a:hover{opacity:1;}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← voltar ao site</a>
+  <h1>Verbetes <span class="hl">da pesquisa</span></h1>
+  <p class="resumo">Conceitos centrais da tese de doutorado sobre Tarifa Zero e Grupos Econômicos, explicados um por um. Cada verbete traz "em uma frase", o que é, por que importa e como se liga aos demais.</p>
+</header>
+
+<div class="wrap">
+  <div class="aviso">
+    <b>Liberação progressiva:</b> esta página cresce aos poucos, conforme os verbetes são revisados e liberados pelo autor — não é o glossário completo da tese. Hoje são 5: os dois pilares da hipótese (Tarifa Zero, Grupos econômicos) e as três notas sobre a régua de medição (Eixo 3 da tese).
+  </div>
+
+  <div class="toc">
+    <a href="#tarifa-zero">Tarifa Zero</a>
+    <a href="#grupos-economicos">Grupos econômicos</a>
+    <a href="#regua-tz">A Régua da Tarifa Zero</a>
+    <a href="#regua-descritiva">Régua Descritiva</a>
+    <a href="#regua-analitica">Régua Analítica</a>
+  </div>
+
+  <article class="verbete" id="tarifa-zero">
+    <span class="tag">Núcleo</span>
+    <h2>Tarifa Zero</h2>
+    <div class="callout"><span class="k">Em uma frase</span>Política de transporte público que <b>elimina a cobrança direta do usuário</b> no embarque: o serviço não é "de graça", mas custeado indiretamente pela sociedade, de modo a garantir acesso universal à cidade.</div>
+
+    <h3>O que é</h3>
+    <p>Tarifa Zero (TZ) — também chamada de <i>fare-free public transport</i> ou passe livre — é a <b>abolição da passagem paga na catraca</b>. O ponto essencial, e a fonte de muita confusão, é que o transporte continua tendo custo (combustível, manutenção, salários): o que muda é <b>quem paga e como</b>. Em vez de recair sobre o indivíduo no momento do embarque, o custo passa a ser coberto por <b>fontes extratarifárias</b> — orçamento público, impostos, fundos municipais, taxas sobre o automóvel, entre outras. Daí a formulação preferida por parte da literatura: "transporte a tarifa zero", e não "transporte de graça".</p>
+
+    <h3>Por que importa</h3>
+    <p>Ao remover a barreira econômica de acesso, a TZ busca <b>democratizar a mobilidade</b>, reduzir desigualdades socioespaciais e tratar o transporte como um <b>bem comum</b> e um direito, não como mercadoria. Mais do que uma questão de preço, ela <b>redefine a relação entre o usuário e o serviço</b> e altera a própria lógica de planejamento: sem catraca, o sistema pode ser pensado pela sua utilidade social (quem ele conecta) em vez da receita por passageiro.</p>
+
+    <h3>Não é um modelo único</h3>
+    <p>A TZ não é uma política monolítica, mas um <b>contínuo de arranjos</b>. Kębłowski distingue a forma <b>universal</b> (<i>Full FFPT</i> — gratuita para todos, sempre, em toda a rede) das formas <b>parciais</b> (<i>Partial FFPT</i> — limitadas por tempo, espaço ou grupo social). Esta pesquisa refina essa distinção em uma <a href="#regua-tz">régua</a> de camadas e graus de gratuidade.</p>
+
+    <h3>Como financiar (e o risco)</h3>
+    <p>O desenho do custeio é decisivo: ele define se a política serve ao <b>direito à cidade</b> (gestão do comum, com mudança contratual e controle social) ou apenas à <b>sobrevivência empresarial</b> — o risco da "bolsa-empresário", em que o Estado banca o lucro do operador sem contrapartidas, ou do <i>alter-washing</i>, quando a gratuidade preserva a governança de sempre sob fachada progressista. Essa é a leitura desenvolvida na <a href="#regua-analitica">régua analítica</a>.</p>
+
+    <h3>No Brasil</h3>
+    <p>O país tornou-se <b>líder mundial</b> em experiências universais de Tarifa Zero — <b>155</b> na base consolidada desta pesquisa (Dataverse Santini v8, 2026). O fenômeno acelerou após a pandemia, concentrando-se em cidades pequenas e médias, mas já alcançando metrópoles no debate. Ver o panorama nacional no <a href="painel.html">Painel Brasil</a>.</p>
+
+    <h3>Benefícios em disputa</h3>
+    <p>Além do debate sobre financiamento e captura por grupos econômicos, a literatura testa efeitos da TZ em outras dimensões — trânsito, ambiente, mercado de trabalho e, mais recentemente, segurança pública: um estudo recente encontra queda causal no furto ao redor de pontos de ônibus em municípios paulistas que adotaram TZ, por um mecanismo de vigilância informal — um co-benefício modesto (0,9%–3,9% do custo fiscal), não uma justificativa isolada da política.</p>
+
+    <div class="ligacoes"><b>Ligações:</b> <a href="#grupos-economicos">Grupos econômicos</a> · <a href="#regua-tz">A Régua da Tarifa Zero</a> · <span class="termo-represado">Bem Comum e Bolsa-Empresário</span> · <span class="termo-represado">Mobilidade como Comum</span> · <span class="termo-represado">Cercamento e a Catraca</span></div>
+  </article>
+
+  <article class="verbete" id="grupos-economicos">
+    <span class="tag">Núcleo</span>
+    <h2>Grupos econômicos</h2>
+    <div class="callout"><span class="k">Em uma frase</span>Conglomerados empresariais que controlam a operação do transporte coletivo — muitas vezes sob várias empresas e marcas — e que, pela concentração de mercado, exercem forte influência sobre tarifas, contratos, regulação e financiamento do serviço.</div>
+
+    <h3>O que é</h3>
+    <p>No transporte coletivo urbano, "grupo econômico" designa não uma única empresa, mas um <b>conjunto de empresas controladas pelas mesmas pessoas ou famílias</b>, que atuam de forma coordenada. Uma mesma operação — as linhas de ônibus de uma cidade ou região — costuma ser prestada por várias razões sociais (CNPJs), consórcios e empresas de participação (<i>holdings</i>) que, no papel, parecem independentes, mas na prática respondem ao mesmo comando.</p>
+    <p>Essa <b>fragmentação jurídica com controle unificado</b> é a característica central: ela dilui e, com frequência, oculta a real concentração do mercado. Por isso, identificar um grupo econômico exige ir além do nome de cada empresa e reconstruir os vínculos societários (quem é sócio de quem) e as marcas comerciais pelas quais o grupo é conhecido publicamente (ex.: "Grupo Guanabara", "Grupo Comporte").</p>
+
+    <h3>Por que importa nesta tese</h3>
+    <p>Os grupos econômicos são a <b>principal variável explicativa</b> da pesquisa. A hipótese central é que eles influenciam a difusão da Tarifa Zero: usando seu poder político e econômico, tendem a <b>bloquear a gratuidade nos municípios de maior interesse comercial</b> e a tolerá-la nas franjas do sistema, onde o mercado é pouco atrativo. Mapear onde esses grupos estão e qual seu "peso" é, portanto, condição para testar a hipótese.</p>
+
+    <h3>No Brasil</h3>
+    <p>Historicamente, esses grupos se consolidaram por meio de <b>concessões e subsídios públicos</b>, num modelo de regulação municipalizada e fiscalização fraca. O resultado é a <b>concentração de mercado</b> e a predominância de poucas famílias com poder significativo sobre tarifas, contratos e políticas de mobilidade. Muitos grupos diversificam a atuação (fretamento, imobiliário, participações), o que reforça o capital e ajuda a blindar a operação regular.</p>
+    <p>A gênese histórica desses grupos passa pela <b>diversificação vertical e horizontal</b> (Veloso, 2023): verticalmente, controlando garagens, postos de combustível e fabricantes de carrocerias; horizontalmente, expandindo-se para múltiplos municípios sob CNPJs distintos que mascaram a concentração real.</p>
+
+    <h3>Como a pesquisa os mapeia</h3>
+    <p>A partir dos dados societários abertos do <b>CNPJ (Receita Federal)</b>, a pesquisa reconstrói a rede de sócios e empresas com <b>Análise de Redes Sociais (ARS)</b>, identificando os agrupamentos (clusters) que correspondem, empiricamente, a cada grupo econômico. Ver o desenvolvimento na tese na parte sobre a estrutura de poder no transporte coletivo.</p>
+
+    <div class="ligacoes"><b>Ligações:</b> <a href="#tarifa-zero">Tarifa Zero</a> · <span class="termo-represado">Núcleo Transporte</span> · <span class="termo-represado">Mundo Pequeno</span></div>
+  </article>
+
+  <article class="verbete" id="regua-tz">
+    <span class="tag" style="background:var(--azul);">Método</span>
+    <h2>A Régua da Tarifa Zero</h2>
+    <div class="callout"><span class="k">Em uma frase</span>O instrumento analítico central da tese para classificar as experiências de gratuidade no Brasil — não como "tem ou não tem Tarifa Zero", mas como um gradiente, medido em duas leituras complementares: o quanto de gratuidade existe, e a quem ela serve.</div>
+
+    <h3>O que é</h3>
+    <p>Termo guarda-chuva para a constatação de que a dicotomia de Kębłowski (2020) entre Tarifa Zero <i>universal</i> (<i>Full FFPT</i>) e <i>parcial</i> (<i>Partial FFPT</i>) é um bom ponto de partida, mas insuficiente para o caso brasileiro, onde a gratuidade convive com um gradiente de subsídios, gratuidades legais e recortes municipais. A tese responde com uma régua em <b>duas leituras complementares</b>, que não devem ser confundidas e têm verbete próprio:</p>
+    <p>— <a href="#regua-descritiva"><b>Régua Descritiva</b></a>: quanto e que tipo de gratuidade existe.<br>
+    — <a href="#regua-analitica"><b>Régua Analítica</b></a>: a quem esse subsídio serve.</p>
+
+    <h3>Por que importa nesta tese</h3>
+    <p>Sem essa distinção, a tese cairia na armadilha que ela mesma critica: tratar qualquer isenção tarifária como equivalente, quando o financiamento e a governança por trás de duas TZUs administrativamente idênticas (mesma posição na régua descritiva) podem servir a propósitos opostos na régua analítica — uma para desmercantilizar o acesso à cidade, outra para garantir a rentabilidade de operadores privados sob nova roupagem.</p>
+
+    <div class="ligacoes"><b>Ligações:</b> <a href="#regua-descritiva">Régua Descritiva</a> · <a href="#regua-analitica">Régua Analítica</a> · <a href="#tarifa-zero">Tarifa Zero</a> · <span class="termo-represado">Bem Comum e Bolsa-Empresário</span></div>
+  </article>
+
+  <article class="verbete" id="regua-descritiva">
+    <span class="tag" style="background:var(--azul);">Método</span>
+    <h2>Régua Descritiva</h2>
+    <div class="callout"><span class="k">Em uma frase</span>O instrumento que classifica cada experiência de gratuidade por <i>quanto</i> e <i>que tipo</i> de Tarifa Zero existe — um contínuo do modelo tarifado ao universal, mais quatro camadas de recorte dentro da própria TZ parcial.</div>
+
+    <h3>O que é</h3>
+    <p>Proposta a partir da distinção de Kębłowski (2020) entre TZ <i>universal</i> (<i>Full FFPT</i>) e <i>parcial</i> (<i>Partial FFPT</i>) — insuficiente isoladamente para o caso brasileiro, onde a gratuidade convive com um gradiente de subsídios, gratuidades legais e recortes municipais. A régua descritiva estende essa tipologia em duas direções: (1) um <i>contínuo de gratuidade</i>, posicionando cada sistema entre o modelo integralmente tarifado e o gratuito universal, passando pela tarifa social e pelas gratuidades legais (idosos, PcD, estudantes); (2) dentro da própria Tarifa Zero, <b>quatro camadas</b> de recorte — universal, temporal (dias/eventos), espacial e por grupo social. Responde à pergunta "quanto e que tipo de gratuidade existe" — não "a quem ela serve" (essa é a <a href="#regua-analitica">Régua Analítica</a>).</p>
+
+    <h3>Por que importa nesta tese</h3>
+    <p>É a régua descritiva que o painel nacional aplica às 155 experiências universais da base consolidada da pesquisa, permitindo ir além de "onde tem TZ" para "qual o tipo de TZ". O predomínio esmagador da camada universal entre os casos permanentes brasileiros (155 contra poucas dezenas de parciais robustas) — ao contrário do padrão europeu, mais concentrado em arranjos parciais — só é visível depois de aplicar esta régua. Ver o <a href="painel.html">Painel Brasil</a>, filtro "Régua descritiva (camada)".</p>
+
+    <h3>Régua descreve trajetória, não rótulo fixo</h3>
+    <p>A posição de um município na régua não é permanente: São Caetano do Sul, caso-vitrine da camada universal, revogou a universalidade em 15/07/2026, migrando para a camada 4 (grupo social) — um exemplo documentado de regressão na régua, não de exceção isolada.</p>
+
+    <div class="ligacoes"><b>Ligações:</b> <a href="#regua-analitica">Régua Analítica</a> · <a href="#tarifa-zero">Tarifa Zero</a> · <a href="painel.html">Painel Brasil</a></div>
+  </article>
+
+  <article class="verbete" id="regua-analitica">
+    <span class="tag" style="background:var(--azul);">Método</span>
+    <h2>Régua Analítica</h2>
+    <div class="callout"><span class="k">Em uma frase</span>O instrumento que qualifica cada arranjo de Tarifa Zero por sua <i>finalidade</i> na economia política do transporte — não quanto de gratuidade existe, mas a quem ela serve: à lógica de mercado ou ao direito à cidade.</div>
+
+    <h3>O que é</h3>
+    <p>Organiza os arranjos de financiamento e gestão da Tarifa Zero entre dois polos — a Lógica de Mercado e o Direito à Cidade — em <b>três tipologias</b>: subsídio parcial (manutenção do preço, um "freio" paliativo que preserva a remuneração por passageiro), inequidade cruzada (gratuidades financiadas pela tarifa dos demais usuários ou por encargos trabalhistas, caso do Vale-Transporte) e Tarifa Zero Universal (TZU), onde o subsídio integral rompe com a lógica da catraca. Responde à pergunta "a quem serve o subsídio" — pressupõe a <a href="#regua-descritiva">Régua Descritiva</a> (que já determinou "quanto e que tipo de gratuidade existe") como ponto de partida, não a substitui. Origem: artigo CLATPU (Gomes; Zioni, 2026).</p>
+
+    <h3>Por que importa nesta tese</h3>
+    <p>Dentro da própria TZU, a régua analítica introduz a tensão central da tese entre <b>gestão do comum</b> e <b>"Bolsa-Empresário"</b>: duas TZUs administrativamente idênticas (mesma camada na régua descritiva) podem servir a propósitos opostos — uma desmercantilizando o acesso à cidade, outra garantindo a rentabilidade de operadores privados sob nova roupagem. Sem essa leitura, a tese cairia na armadilha que ela mesma critica: tratar qualquer isenção tarifária como equivalente.</p>
+
+    <div class="ligacoes"><b>Ligações:</b> <a href="#regua-descritiva">Régua Descritiva</a> · <span class="termo-represado">Vale-Transporte e a Inequidade Cruzada</span> · <span class="termo-represado">Bem Comum e Bolsa-Empresário</span></div>
+  </article>
+
+  <footer>
+    <div class="fgrid">
+      <div class="fnames">
+        <div><b>Thiago Von Zeidler Gomes</b> · Doutorando</div>
+        <div><b>Prof.ª Dr.ª Silvana Maria Zioni</b> · Orientadora</div>
+      </div>
+      <div class="flogos">
+        <a href="https://www.ufabc.edu.br/" target="_blank" rel="noopener"><img src="assets/logos/ufabc/negativo/logo-ufabc-extenso-negativo.svg" alt="Universidade Federal do ABC"></a>
+        <a href="https://propg.ufabc.edu.br/ppgpgt/" target="_blank" rel="noopener"><img src="assets/logos/pgt/negativo/logo-pgt-extenso-negativo.png" alt="Programa de Pós-Graduação em Planejamento e Gestão do Território"></a>
+        <a href="https://laplan.pesquisa.ufabc.edu.br/" target="_blank" rel="noopener"><img src="assets/logos/laplan/negativo/logo-laplan-extenso-negativo.png" alt="Laboratório de Planejamento Territorial (Laplan/UFABC)"></a>
+      </div>
+    </div>
+    <div class="fcredits">
+      <div class="fapoio">
+        <a href="https://poloplanejamento.com/" target="_blank" rel="noopener"><img src="assets/logos/polo/negativo/logo-polo-icon-negativo.svg" alt="Polo Planejamento"></a>
+        <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
+      </div>
+    </div>
+    Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener" style="color:var(--accent);">github.com/tvzgomes-2/painel_tz</a>
+  </footer>
+</div>
+</body>
+</html>

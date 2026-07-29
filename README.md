@@ -33,11 +33,11 @@ Abra `index.html` para o hub, ou `painel.html` diretamente para ir direto ao Pai
 
 ## Feedback recebido / pendências de ajuste
 
-Ver [`FEEDBACK.md`](./FEEDBACK.md) — log cronológico de comentários e backlog de ajustes.
+Ver [`FEEDBACK.md`](./FEEDBACK.md) — log cronológico dos relatos brutos recebidos (identidades anonimizadas). Status de cada item (feito/pendente, versão) vive só no `ROADMAP.md` e no `CHANGELOG.md`, não duplicado ali.
 
 ## Plano de melhorias
 
-Ver [`ROADMAP.md`](./ROADMAP.md) — arquitetura do site (hub + páginas) e análise detalhada do Painel Brasil com plano em 5 fases (legibilidade → mapa → grandes números e novos gráficos → estrutura → dados futuros), consolidando o feedback recebido e os pedidos da orientação.
+Ver [`ROADMAP.md`](./ROADMAP.md) — arquitetura do site (hub + páginas) e análise detalhada do Painel Brasil com plano em 5 fases (legibilidade → mapa → grandes números e novos gráficos → estrutura → dados futuros), com tabelas de Status por item, consolidando o feedback recebido e os pedidos da orientação.
 
 ## Estrutura do repositório
 
@@ -47,7 +47,7 @@ painel.html         página "Painel Brasil" (TZ), publicada (autocontida — nã
 README.md           este arquivo
 CHANGELOG.md         histórico de versões e notas de metodologia/achados, por página
 VERSIONING.md        política de versionamento (uma regra, aplicada por página)
-FEEDBACK.md          log de comentários recebidos e backlog de ajustes (Painel Brasil)
+FEEDBACK.md          log de relatos brutos recebidos, anonimizado (Painel Brasil) — status fica no ROADMAP/CHANGELOG
 ROADMAP.md           arquitetura do site e plano de melhorias em fases (Painel Brasil)
 METADADOS.md          dicionário das 54 variáveis embutidas no Painel Brasil
 scripts/

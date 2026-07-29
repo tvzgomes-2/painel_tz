@@ -67,6 +67,36 @@ for (const k in CAMADAS_RAW) {
 function camadasFor(m) { return (m && CAMADAS.get(normKey(m.nome, m.uf))) || []; }
 const CAMADA_LABELS = { '2a': 'Temporal (dias)', '3': 'Espacial (periférica)', '4': 'Grupo social' };
 
+// ---------- lista de municípios com TZ parcial (para a tabela "Municípios com Tarifa Zero") ----------
+// Município com alguma camada (2a/3/4) que NÃO está no bucket universal (tz_bin!=='TZ') — evita
+// duplicar quem a base principal já classifica como Ativa/Encerrada (ex.: Palmas, já contado na
+// universal; São Caetano do Sul, ainda "Ativa" na base apesar da revogação — ver flag no card de
+// detalhe). Ano de início é uma extração best-effort de um ano de 4 dígitos no texto de "detalhe"
+// de camadas_tz.json — nem toda camada tem essa informação estruturada (ex.: passe estudantil de
+// BH/Uberlândia e o programa de desempregados de Curitiba não têm data), fica "—" nesses casos.
+function camadaAnoInicio(m) {
+  let minYear = null;
+  for (const c of camadasFor(m)) {
+    const match = (c.detalhe || '').match(/(19[89]\d|20[0-2]\d)/);
+    if (match) {
+      const y = parseInt(match[1], 10);
+      if (minYear == null || y < minYear) minYear = y;
+    }
+  }
+  return minYear;
+}
+const PARCIAL_LIST = [];
+for (const m of MUNI.values()) {
+  if (m.tz_bin === 'TZ') continue;
+  const camadas = camadasFor(m);
+  if (!camadas.length) continue;
+  PARCIAL_LIST.push(Object.assign({}, m, {
+    tz_status: 'Parcial',
+    tz_ano: camadaAnoInicio(m),
+    n_fontes: fontesFor(m).length,
+  }));
+}
+
 // ---------- agregados extras (censo22 modal, série motorização) ----------
 // Pré-computados 26/07/2026 a partir de base_municipal_v3.csv (script avulso, fora do build
 // regular) — mover para build_stats.py quando o pipeline completo rodar de novo. Metodologia:
@@ -169,8 +199,13 @@ const svg = document.getElementById('mapSvg');
 svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 const HOME_VB = [0, 0, W, H];
 const pathById = new Map();
-const gMun = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-const gTz = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+// Ordem de empilhamento no mapa (ajuste 29/07/2026, a pedido do autor): não-TZ (base) → ativa →
+// parcial → encerrada (topo) → limites de UF. Cada camada em seu próprio grupo SVG, para que o
+// contorno de quem está "por cima" apareça em municípios vizinhos de categorias diferentes.
+const gNaoTz = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+const gAtiva = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+const gParcial = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+const gEncerrada = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 const gUf = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
 for (const f of features) {
@@ -182,13 +217,15 @@ for (const f of features) {
   const m = MUNI.get(f.id);
   if (m && m.tz_bin === 'TZ') {
     el.classList.add('tzpath');
-    if (m.tz_status === 'Encerrada') el.classList.add('enc');
-    gTz.appendChild(el);
-  } else {
+    if (m.tz_status === 'Encerrada') { el.classList.add('enc'); gEncerrada.appendChild(el); }
+    else { gAtiva.appendChild(el); }
+  } else if (m && camadasFor(m).length) {
     // contorno tracejado para camada parcial (2a/3/4) — só quando o município não já tem
     // contorno sólido de TZ universal acima (evita duplo contorno e mantém a distinção visual).
-    if (m && camadasFor(m).length) el.classList.add('tzparcial');
-    gMun.appendChild(el);
+    el.classList.add('tzparcial');
+    gParcial.appendChild(el);
+  } else {
+    gNaoTz.appendChild(el);
   }
   pathById.set(f.id, el);
 }
@@ -198,8 +235,10 @@ for (const uf of ufFeatures) {
   el.classList.add('ufline');
   gUf.appendChild(el);
 }
-svg.appendChild(gMun);
-svg.appendChild(gTz);
+svg.appendChild(gNaoTz);
+svg.appendChild(gAtiva);
+svg.appendChild(gParcial);
+svg.appendChild(gEncerrada);
 svg.appendChild(gUf);
 
 // ---------- auto-encaixe (animação do viewBox) ----------
@@ -275,11 +314,38 @@ const MODELO_COLORS = {
   'Concessão': '#2171b5', 'Prestação direta': '#2e9e5b', 'Permissão': '#e2892c',
   'Autorização': '#c9b458', 'Não regulamentado': '#a63603', 'Misto (2+ modelos)': '#756bb1'
 };
-// identidade visual da pesquisa: amarelo = TZ ativa, rosa = encerrada/revogação
-const TZ_COLORS_HEX = { 'Ativa': '#F5E400', 'Encerrada': '#FF2D6B' };
-// versões mais escuras para texto pequeno no tema claro (amarelo/rosa puros perdem contraste no branco)
+// identidade visual da pesquisa: verde = TZ ativa (universal), rosa = encerrada/revogação, amarelo
+// reservado à gradação de TZ parcial (corParcial, abaixo) — decisão de 29/07/2026 (autor já havia
+// testado verde antes, ver CHANGELOG v0.4/Fase 9; volta agora para diferenciar visualmente da
+// escala amarela do parcial. Nota: combina 3 das 4 cores da identidade num mesmo painel — exceção
+// registrada no CHANGELOG, já que a regra de "não misturar duas das três" foi pensada para peças
+// gráficas isoladas, não para um painel com várias camadas de informação simultâneas).
+const TZ_COLORS_HEX = { 'Ativa': '#6FBE44', 'Encerrada': '#FF2D6B' };
+
+// ---------- gradação da régua descritiva (v0.4.03, a pedido do autor) ----------
+// Substitui o contorno tracejado (v0.4.02, achado ruim pelo autor) por preenchimento em variação
+// de saturação do amarelo: quanto mais camadas parciais (2a/3/4) um município acumula, mais perto
+// do amarelo pleno (universal) ele chega — nunca chega lá de fato, para não confundir com universal.
+// É uma gradação por CONTAGEM de camadas (não por tipo — não há hierarquia documentada entre
+// 2a/3/4 na régua), decisão de design registrada no CHANGELOG.
+function hexToRgbArr(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+function mixHex(hexA, hexB, t) {
+  const [ar, ag, ab] = hexToRgbArr(hexA), [br, bg, bb] = hexToRgbArr(hexB);
+  const r = Math.round(ar + (br - ar) * t), g = Math.round(ag + (bg - ag) * t), b = Math.round(ab + (bb - ab) * t);
+  return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+function corParcial(nCamadas) {
+  // rampa invertida (ajuste 29/07/2026, a pedido do autor): amarelo mais forte em 1 camada,
+  // decaindo conforme acumula camadas — 1→0.75, 2→0.5, 3+→0.25 (nunca 1.0 = universal, nunca 0 = não-TZ).
+  const t = 1 - Math.min(nCamadas, 3) / 4;
+  return mixHex(NEUTRALS.naoTz, '#F5E400', t);
+}
+// cores de texto pequeno (legenda da linha do tempo) — acompanham TZ_COLORS_HEX
 function tzUi() {
-  return { ativa: '#F5E400', enc: '#f96d92' };
+  return { ativa: '#6FBE44', enc: '#f96d92', parcial: '#F5E400' };
 }
 
 // tons neutros por tema (fills aplicados via JS precisam acompanhar o tema)
@@ -297,7 +363,12 @@ function classify(v, breaks) {
 function colorFor(m, colorBy) {
   const nt = neutrals();
   if (!m) return nt.noData;
-  if (colorBy === 'tz') return TZ_COLORS_HEX[m.tz_status] || nt.naoTz;
+  if (colorBy === 'tz') {
+    if (TZ_COLORS_HEX[m.tz_status]) return TZ_COLORS_HEX[m.tz_status];
+    const camadas = camadasFor(m);
+    if (camadas.length) return corParcial(camadas.length);
+    return nt.naoTz;
+  }
   if (colorBy === 'faixa_pop') return FAIXA_COLORS[m.faixa_pop] || nt.noData;
   if (colorBy === 'regic_nivel') return REGIC_COLORS[m.regic_nivel] || nt.noData;
   if (colorBy === 'tipo_arranjo') return ARRANJO_COLORS[m.tipo_arranjo] || nt.noData;
@@ -310,7 +381,13 @@ function colorFor(m, colorBy) {
 }
 
 // ---------- filters state ----------
-const state = { colorBy: 'tz', uf: '', faixa: '', regic: '', arranjo: '', modelo: '', tzFilter: '' };
+const state = { colorBy: 'tz', uf: '', faixa: '', regic: '', arranjo: '', modelo: '', tzFilter: '', camada: '' };
+
+function passesCamadaFilter(m) {
+  if (!state.camada) return true;
+  if (state.camada === '1') return m.tz_bin === 'TZ';
+  return camadasFor(m).some(c => c.camada === state.camada);
+}
 
 function passesFilter(m) {
   if (!m) return false;
@@ -320,6 +397,7 @@ function passesFilter(m) {
   if (state.arranjo && m.tipo_arranjo !== state.arranjo) return false;
   if (state.modelo && m.modelo_prestacao_simples !== state.modelo) return false;
   if (state.tzFilter && m.tz_bin !== state.tzFilter) return false;
+  if (!passesCamadaFilter(m)) return false;
   return true;
 }
 // subconjunto que ignora o recorte TZ (para comparações TZ×Não-TZ, cards e linha do tempo)
@@ -348,6 +426,7 @@ function render() {
   renderBars();
   renderCards();
   renderTimeline();
+  renderPopScore();
 }
 
 function renderLegend() {
@@ -355,9 +434,11 @@ function renderLegend() {
   const nt = neutrals();
   let html = '';
   if (state.colorBy === 'tz') {
-    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Ativa</span>
+    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Ativa (universal)</span>
+            <span><span class="sw" style="background:${corParcial(1)}"></span>Parcial · 1 camada</span>
+            <span><span class="sw" style="background:${corParcial(2)}"></span>Parcial · 2 camadas</span>
+            <span><span class="sw" style="background:${corParcial(3)}"></span>Parcial · 3 camadas</span>
             <span><span class="sw" style="background:${TZ_COLORS_HEX.Encerrada}"></span>Encerrada</span>
-            <span><span class="sw" style="background:${nt.naoTz};border:1px dashed ${TZ_COLORS_HEX.Ativa};"></span>TZ parcial (dias/espacial/grupo social)</span>
             <span><span class="sw" style="background:${nt.naoTz}"></span>Não TZ</span>`;
   } else if (state.colorBy === 'faixa_pop') {
     html = STATS.faixa_order.map(f => `<span><span class="sw" style="background:${FAIXA_COLORS[f]}"></span>${f}</span>`).join('');
@@ -434,27 +515,108 @@ function renderCards() {
     `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}${c.w || ''}</div></div>`).join('');
 }
 
+// ---------- score de população abrangida pela Tarifa Zero (v1, 29/07/2026) ----------
+// Metodologia aprovada pelo autor (29/07/2026): "quando é universal soma todos, quando é
+// parcial, soma a estimativa de população daquele grupo". v1 simplificada:
+//   - camada universal (tz_bin==='TZ'): 100% da população residente (Censo 2022).
+//   - camada 4/grupo social COM estimativa carregada em camadas_tz.json (pop_estimada) — hoje só
+//     Belo Horizonte e Uberlândia, proxy "estudo_total" do Censo 2022 (deslocamento p/ estudo,
+//     não a contagem real de beneficiários do passe estudantil).
+//   - demais casos de TZ parcial (temporal-dias/2a, espacial-periférica/3, grupo social sem dado
+//     direto — Curitiba/desempregados) ficam de fora da soma, marcados "sem estimativa": não há
+//     recorte sub-municipal defensável na base atual (ver Pendências.md, 29/07/2026).
+//   - gratuidades por lei federal (idoso/PcD) NÃO somadas nesta v1: a base não tem população
+//     idosa/PcD por município (pendência aberta, mesma nota).
+// Evita contar 2x: um município só entra em UM dos dois buckets (universal OU parcial-estimado),
+// nunca nos dois — mesma regra de exclusividade já usada em countParciais()/tzparcial no mapa.
+function popScore(rows) {
+  let popUniversal = 0, popParcialEstimada = 0;
+  const semEstimativa = [];
+  for (const m of rows) {
+    if (m.tz_bin === 'TZ') { popUniversal += (m.pop || 0); continue; }
+    const camadas = camadasFor(m);
+    if (!camadas.length) continue;
+    const comEstimativa = camadas.find(c => c.pop_estimada != null);
+    if (comEstimativa) popParcialEstimada += comEstimativa.pop_estimada;
+    else semEstimativa.push(m.nome + '/' + m.uf);
+  }
+  return { popUniversal, popParcialEstimada, semEstimativa };
+}
+
+function renderPopScore() {
+  const el = document.getElementById('popScore');
+  if (!el) return;
+  const rows = subsetNoTz();
+  const totalPop = rows.reduce((s, m) => s + (m.pop || 0), 0);
+  const { popUniversal, popParcialEstimada, semEstimativa } = popScore(rows);
+  const popTotal = popUniversal + popParcialEstimada;
+  const pct = totalPop ? (100 * popTotal / totalPop) : 0;
+  const cards = [
+    { n: fmtCompact(popUniversal), l: 'População com TZ <b>universal</b> (100% dos moradores do município, Censo 2022)' },
+    { n: fmtCompact(popParcialEstimada), l: 'População estimada com TZ <b>parcial por grupo social</b> (proxy Censo 2022 "estudo_total" — hoje só BH e Uberlândia, passe estudantil)' },
+    { n: fmtCompact(popTotal) + ` (${pct.toFixed(2)}%)`, l: 'Total com algum acesso à TZ, das duas anteriores — % da população do recorte' },
+    { n: String(semEstimativa.length), l: 'Municípios com TZ parcial <b>sem estimativa</b> (temporal-dias, espacial ou grupo social sem dado direto) — não somados' },
+  ];
+  let html = '<div class="cards" style="margin:4px 0 0;">' + cards.map(c =>
+    `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}</div></div>`).join('') + '</div>';
+  html += `<p class="sub" style="margin-top:12px;">
+    <b>Metodologia v1 (aprovada pelo autor, 29/07/2026):</b> universal = 100% da população residente; grupo social/estudantil = proxy "estudo_total" (Censo 2022, deslocamento p/ estudo) — superestima levemente, pois nem todo estudante necessariamente usa o benefício. Camadas temporal (2a), espacial (3) e grupo social sem dado municipal direto (Curitiba/desempregados) ficam <b>fora da soma</b> — sem estimativa sub-municipal defensável na base atual. Gratuidades por lei federal (idoso/PcD) também não somadas: sem população idosa/PcD por município na base — pendência registrada no cofre da tese.
+    ${semEstimativa.length ? `<br><b>Sem estimativa (${semEstimativa.length}):</b> ${semEstimativa.join(', ')}.` : ''}
+  </p>`;
+  el.innerHTML = html;
+}
+
 // ---------- linha do tempo das adoções (reage ao recorte) ----------
+// Listas de municípios por ano/tipo, para o tooltip de hover das barras (ver listener de
+// mousemove em '#timeline' junto do tooltip do mapa, mais abaixo) — recalculadas a cada render.
+let TIMELINE_MUNIS = { universal: {}, parcial: {}, revogacao: {} };
+// Ajuste pós-uso do v0.4.03 (29/07/2026, a pedido do autor): inclui o início das TZ parciais (camadas 2a/3/4), não só
+// da universal. Ano de início da parcial vem de camadaAnoInicio() — extração best-effort de um ano
+// de 4 dígitos no texto livre de "detalhe" (camadas_tz.json); nem todo caso tem essa informação
+// (ex.: passe estudantil de BH/Uberlândia, desempregados de Curitiba) — esses ficam de fora do
+// gráfico, não estimados. Correção do mesmo dia: as duas séries de adoção (universal/verde,
+// parcial/amarelo) primeiro foram desenhadas lado a lado com escala própria cada uma — o autor
+// notou que isso distorcia a leitura (uma barra pequena de uma série podia parecer tão alta quanto
+// uma grande da outra). Agora são **empilhadas** numa única barra por ano, com uma única escala
+// vertical compartilhada — altura honesta em relação ao total, universal na base e parcial por cima.
 function renderTimeline() {
-  const rows = subsetNoTz().filter(m => m.tz_bin === 'TZ');
+  const allRows = subsetNoTz();
+  const rows = allRows.filter(m => m.tz_bin === 'TZ');
+  const rowsParcial = allRows.filter(m => m.tz_bin !== 'TZ' && camadasFor(m).length);
   const el = document.getElementById('timeline');
-  const adopt = {}, revoke = {};
+  const adopt = {}, adoptParcial = {}, revoke = {};
+  const adoptMunis = {}, adoptParcialMunis = {}, revokeMunis = {};
   let yMin = Infinity, yMax = -Infinity;
   for (const m of rows) {
     if (m.tz_ano_num && m.tz_ano_num > 1980 && m.tz_ano_num <= 2026) {
       adopt[m.tz_ano_num] = (adopt[m.tz_ano_num] || 0) + 1;
+      (adoptMunis[m.tz_ano_num] = adoptMunis[m.tz_ano_num] || []).push(m.nome + '/' + m.uf);
       if (m.tz_ano_num < yMin) yMin = m.tz_ano_num;
       if (m.tz_ano_num > yMax) yMax = m.tz_ano_num;
     }
     if (m.tz_status === 'Encerrada' && m.tz_fim_num && m.tz_fim_num > 1980 && m.tz_fim_num <= 2026) {
       revoke[m.tz_fim_num] = (revoke[m.tz_fim_num] || 0) + 1;
+      (revokeMunis[m.tz_fim_num] = revokeMunis[m.tz_fim_num] || []).push(m.nome + '/' + m.uf);
       if (m.tz_fim_num < yMin) yMin = m.tz_fim_num;
       if (m.tz_fim_num > yMax) yMax = m.tz_fim_num;
     }
   }
+  for (const m of rowsParcial) {
+    const y = camadaAnoInicio(m);
+    if (y && y > 1980 && y <= 2026) {
+      adoptParcial[y] = (adoptParcial[y] || 0) + 1;
+      (adoptParcialMunis[y] = adoptParcialMunis[y] || []).push(m.nome + '/' + m.uf);
+      if (y < yMin) yMin = y;
+      if (y > yMax) yMax = y;
+    }
+  }
+  // guarda as listas para o tooltip de hover (ver listener de mousemove em '#timeline', mais abaixo)
+  TIMELINE_MUNIS = { universal: adoptMunis, parcial: adoptParcialMunis, revogacao: revokeMunis };
   if (yMin === Infinity) { el.innerHTML = ''; el.removeAttribute('viewBox'); return; }
   const years = []; for (let y = yMin; y <= yMax; y++) years.push(y);
-  const maxA = Math.max(1, ...Object.values(adopt));
+  // escala única, pelo total empilhado (universal + parcial) de cada ano — não pelo máximo de
+  // cada série isoladamente, para a altura da barra refletir o volume real.
+  const maxTotal = Math.max(1, ...years.map(y => (adopt[y] || 0) + (adoptParcial[y] || 0)));
   const maxR = Math.max(0, ...Object.values(revoke));
   const TW = 1200, TH = 230, padL = 34, padR = 10, padT = 18;
   const axisY = padT + 140; // adoções acima do eixo, revogações abaixo
@@ -468,24 +630,34 @@ function renderTimeline() {
   for (let i = 0; i < years.length; i++) {
     const y = years[i];
     const x = padL + i * bw;
-    const a = adopt[y] || 0, r = revoke[y] || 0;
-    if (a > 0) {
-      const h = (a / maxA) * 130;
-      s += `<rect x="${(x + bw * 0.12).toFixed(1)}" y="${(axisY - h).toFixed(1)}" width="${(bw * 0.76).toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${TZ_COLORS_HEX.Ativa}"><title>${y}: ${a} adoção(ões)</title></rect>`;
-      s += `<text x="${(x + bw / 2).toFixed(1)}" y="${(axisY - h - 4).toFixed(1)}" font-size="9.5" fill="${mutedC}" text-anchor="middle">${a}</text>`;
+    const a = adopt[y] || 0, ap = adoptParcial[y] || 0, r = revoke[y] || 0;
+    const total = a + ap;
+    const xBar = x + bw * 0.12;
+    const wBar = bw * 0.76;
+    if (total > 0) {
+      const hA = (a / maxTotal) * 130;
+      const hAP = (ap / maxTotal) * 130;
+      if (a > 0) {
+        s += `<rect x="${xBar.toFixed(1)}" y="${(axisY - hA).toFixed(1)}" width="${wBar.toFixed(1)}" height="${hA.toFixed(1)}" rx="1.5" fill="${TZ_COLORS_HEX.Ativa}" data-year="${y}" data-tipo="universal"/>`;
+      }
+      if (ap > 0) {
+        s += `<rect x="${xBar.toFixed(1)}" y="${(axisY - hA - hAP).toFixed(1)}" width="${wBar.toFixed(1)}" height="${hAP.toFixed(1)}" rx="1.5" fill="#F5E400" data-year="${y}" data-tipo="parcial"/>`;
+      }
+      s += `<text x="${(xBar + wBar / 2).toFixed(1)}" y="${(axisY - hA - hAP - 4).toFixed(1)}" font-size="9.5" fill="${mutedC}" text-anchor="middle">${total}</text>`;
     }
     if (r > 0) {
       const h = maxR ? (r / maxR) * revH : 0;
-      s += `<rect x="${(x + bw * 0.12).toFixed(1)}" y="${axisY + 2}" width="${(bw * 0.76).toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${TZ_COLORS_HEX.Encerrada}"><title>${y}: ${r} revogação(ões)</title></rect>`;
-      s += `<text x="${(x + bw / 2).toFixed(1)}" y="${(axisY + h + 13).toFixed(1)}" font-size="9.5" fill="${mutedC}" text-anchor="middle">${r}</text>`;
+      s += `<rect x="${xBar.toFixed(1)}" y="${axisY + 2}" width="${wBar.toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${TZ_COLORS_HEX.Encerrada}" data-year="${y}" data-tipo="revogacao"/>`;
+      s += `<text x="${(xBar + wBar / 2).toFixed(1)}" y="${(axisY + h + 13).toFixed(1)}" font-size="9.5" fill="${mutedC}" text-anchor="middle">${r}</text>`;
     }
     if (y % 5 === 0 || y === yMin || y === yMax) {
       s += `<text x="${(x + bw / 2).toFixed(1)}" y="${TH - 6}" font-size="10" fill="${mutedC}" text-anchor="middle">${y}</text>`;
     }
   }
   const ui = tzUi();
-  s += `<text x="${padL}" y="${padT - 5}" font-size="10.5" font-weight="700" fill="${ui.ativa}">▮ adoções</text>`;
-  s += `<text x="${padL + 78}" y="${padT - 5}" font-size="10.5" font-weight="700" fill="${ui.enc}">▮ revogações</text>`;
+  s += `<text x="${padL}" y="${padT - 5}" font-size="10.5" font-weight="700" fill="${ui.ativa}">▮ adoções (universal)</text>`;
+  s += `<text x="${padL + 165}" y="${padT - 5}" font-size="10.5" font-weight="700" fill="${ui.parcial}">▮ adoções (parcial, início aprox.)</text>`;
+  s += `<text x="${padL + 430}" y="${padT - 5}" font-size="10.5" font-weight="700" fill="${ui.enc}">▮ revogações</text>`;
   el.setAttribute('viewBox', `0 0 ${TW} ${TH}`);
   el.innerHTML = s;
 }
@@ -531,7 +703,7 @@ function renderDetail(m) {
 function renderCamadaDetail(m) {
   const camadas = camadasFor(m);
   if (!camadas.length) return '';
-  const items = camadas.map(c => `<li><b>${CAMADA_LABELS[c.camada] || c.camada}</b> — ${c.detalhe || ''}${c.flag ? ` <span style="color:#e2892c;">⚠ ${c.flag}</span>` : ''}</li>`).join('');
+  const items = camadas.map(c => `<li><b>${CAMADA_LABELS[c.camada] || c.camada}</b> — ${c.detalhe || ''}${c.pop_estimada != null ? ` — <i>pop. estimada: ${fmtCompact(c.pop_estimada)} (${c.pop_estimada_fonte || 'estimativa'})</i>` : ''}${c.flag ? ` <span style="color:#e2892c;">⚠ ${c.flag}</span>` : ''}</li>`).join('');
   return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
     <b style="font-size:12.5px;">Camada da régua descritiva (${camadas.length})</b>
     <ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;">${items}</ul>
@@ -695,7 +867,7 @@ function renderReferenciasAbnt() {
 let tzSort = { k: 'pib_pc', dir: -1 };
 const fontesExpandedIds = new Set();
 function renderTZTable() {
-  let rows = STATS.tz_list.filter(r => {
+  let rows = STATS.tz_list.concat(PARCIAL_LIST).filter(r => {
     if (state.uf && r.uf !== state.uf) return false;
     if (state.faixa && r.faixa_pop !== state.faixa) return false;
     if (state.regic && String(r.regic_nivel) !== state.regic) return false;
@@ -712,9 +884,12 @@ function renderTZTable() {
   for (const r of rows) {
     const nf = r.n_fontes || 0;
     const expanded = fontesExpandedIds.has(r.id);
+    const tag = r.tz_status === 'Ativa' ? '<span class="tag ativa">Ativa</span>'
+      : r.tz_status === 'Encerrada' ? '<span class="tag encerrada">Encerrada</span>'
+      : '<span class="tag parcial">Parcial</span>';
     parts.push(`<tr data-id="${r.id}">
       <td>${r.nome}</td><td>${r.uf}</td>
-      <td>${r.tz_status === 'Ativa' ? '<span class="tag ativa">Ativa</span>' : '<span class="tag encerrada">Encerrada</span>'}</td>
+      <td>${tag}</td>
       <td>${r.tz_ano ?? '—'}</td><td>${r.regic_label ?? '—'}</td><td>${r.tipo_arranjo ?? '—'}</td>
       <td>${fmtNum(r.pop)}</td><td>${fmtNum(r.pib_pc)}</td><td>${fmtNum(r.motorizacao)}</td>
       <td>${nf ? `<button type="button" class="fontes-toggle" data-id="${r.id}">${nf} ${expanded ? '▲' : '▼'}</button>` : '—'}</td>
@@ -753,6 +928,7 @@ document.getElementById('faixaFilter').addEventListener('change', e => { state.f
 document.getElementById('regicFilter').addEventListener('change', e => { state.regic = e.target.value; render(); renderTZTable(); });
 document.getElementById('modeloFilter').addEventListener('change', e => { state.modelo = e.target.value; render(); });
 document.getElementById('tzFilter').addEventListener('change', e => { state.tzFilter = e.target.value; render(); });
+document.getElementById('camadaFilter').addEventListener('change', e => { state.camada = e.target.value; render(); renderTZTable(); });
 
 document.querySelectorAll('#tzTable th').forEach(th => {
   th.addEventListener('click', () => {
@@ -779,6 +955,17 @@ document.querySelector('#tzTable tbody').addEventListener('click', e => {
 
 // ---------- tooltip (completo nos TZ; suprimido fora do recorte ativo) ----------
 const tooltip = document.getElementById('tooltip');
+function showTooltip(e, inner) {
+  tooltip.innerHTML = inner;
+  const pad = 14;
+  let tx = e.clientX + pad, ty = e.clientY + pad;
+  tooltip.style.display = 'block';
+  const r = tooltip.getBoundingClientRect();
+  if (tx + r.width > window.innerWidth - 8) tx = e.clientX - r.width - pad;
+  if (ty + r.height > window.innerHeight - 8) ty = e.clientY - r.height - pad;
+  tooltip.style.left = tx + 'px';
+  tooltip.style.top = ty + 'px';
+}
 svg.addEventListener('mousemove', e => {
   const path = e.target.closest('path.mun');
   if (!path) { tooltip.style.display = 'none'; return; }
@@ -811,17 +998,27 @@ svg.addEventListener('mousemove', e => {
     }[state.colorBy];
     inner = `<b>${m.nome} – ${m.uf}</b>${metricLabel}`;
   }
-  tooltip.innerHTML = inner;
-  const pad = 14;
-  let tx = e.clientX + pad, ty = e.clientY + pad;
-  tooltip.style.display = 'block';
-  const r = tooltip.getBoundingClientRect();
-  if (tx + r.width > window.innerWidth - 8) tx = e.clientX - r.width - pad;
-  if (ty + r.height > window.innerHeight - 8) ty = e.clientY - r.height - pad;
-  tooltip.style.left = tx + 'px';
-  tooltip.style.top = ty + 'px';
+  showTooltip(e, inner);
 });
 svg.addEventListener('mouseleave', () => tooltip.style.display = 'none');
+
+// ---------- tooltip da linha do tempo (lista de municípios por barra, a pedido do autor) ----------
+const TIMELINE_TIPO_LABEL = {
+  universal: 'adoção(ões) de TZ universal',
+  parcial: 'adoção(ões) de TZ parcial (início aproximado)',
+  revogacao: 'revogação(ões) de TZ universal',
+};
+const timelineSvg = document.getElementById('timeline');
+timelineSvg.addEventListener('mousemove', e => {
+  const rect = e.target.closest('rect[data-year]');
+  if (!rect) { tooltip.style.display = 'none'; return; }
+  const y = rect.dataset.year, tipo = rect.dataset.tipo;
+  const munis = (TIMELINE_MUNIS[tipo] && TIMELINE_MUNIS[tipo][y]) || [];
+  const inner = `<b>${y} · ${munis.length} ${TIMELINE_TIPO_LABEL[tipo] || tipo}</b>
+    <div style="max-height:180px;overflow-y:auto;margin-top:6px;max-width:260px;color:var(--muted);">${munis.join(', ') || '—'}</div>`;
+  showTooltip(e, inner);
+});
+timelineSvg.addEventListener('mouseleave', () => tooltip.style.display = 'none');
 svg.addEventListener('click', e => {
   const path = e.target.closest('path.mun');
   if (!path) return;
@@ -842,4 +1039,4 @@ renderCrosstabs();
 renderModalStack();
 renderReferenciasAbnt();
 renderTZTable();
-render(); // desenha mapa, legenda, barras, cards e linha do tempo
+render(); // desenha mapa, legenda, barras, cards, linha do tempo e score de população

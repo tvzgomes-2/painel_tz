@@ -6,7 +6,52 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.4.02 (atual — 2026-07-29)
+## v0.4.03 (atual — 2026-07-29)
+
+Sub-patch de v0.4 (mesma exceção do v0.x.NN, ver `VERSIONING.md`): rodada de 8 pontos de melhoria pedidos pelo autor sobre o v0.4.02 ("Tudo nesta rodada (v0.4.03)"), cobrindo rodapé, identidade visual do mapa, régua descritiva, uma página nova de conceitos e um primeiro score de população.
+
+**Rodapé — logo do Laplan + hiperlinks:**
+
+- Logo do Laplan processado a partir do arquivo fornecido pelo autor (recorte + conversão seletiva de preto/cinza para branco, preservando o vermelho e a transparência) e adicionado ao rodapé de `painel.html`, `index.html` e `pesquisa.html`, no mesmo tratamento negativo já usado para PGT/UFABC. **Limitação conhecida:** o arquivo de origem é um recorte de thumbnail do WordPress que trunca o texto "LABORATÓRIO DE" antes do nome completo do instituto — usado assim por falta de um arquivo-fonte melhor.
+- Todos os logos do rodapé (UFABC, PGT, Laplan, POLO) ganharam hiperlink para o site oficial de cada instituição, nas três páginas.
+
+**Régua descritiva — gradação por saturação (substitui o contorno tracejado do v0.4.02):**
+
+- O contorno tracejado amarelo (`.tzparcial`) do v0.4.02 foi identificado pelo autor como uma visualização ruim e foi substituído por **preenchimento em variação de saturação do amarelo** (`corParcial()`): quanto mais camadas parciais (2a/3/4) um município acumula, mais perto do amarelo pleno ele fica — sem nunca chegar lá, para não ser confundido com a universal. Gradação por **contagem de camadas**, não por tipo (não há hierarquia documentada entre 2a/3/4 na régua). Fica dentro da família do amarelo já usado para TZ ativa — não introduz cor nova, mantém a regra da identidade visual.
+- Legenda do mapa (quando colorido por status de TZ) passa a mostrar 3 amostras de gradação (1/2/3 camadas) em vez do símbolo de contorno tracejado.
+
+**Filtro por camada da régua:**
+
+- Novo seletor "Régua descritiva (camada)" nos controles do painel — filtra o mapa e a tabela por universal (1), temporal-dias (2a), espacial-periférica (3) ou grupo social (4). Reage junto com os demais filtros (UF, faixa, REGIC, arranjo, modelo).
+
+**Seção "TZ × Não-TZ" redesenhada:**
+
+- Sai da coluna lateral do mapa e vira uma caixa de largura total, abaixo do mapa, com as métricas organizadas em **colunas** (grid responsivo) em vez de empilhadas — mesmo conteúdo (medianas por indicador), só reorganizado.
+
+**Nova página `verbetes.html`:**
+
+- Página pública nova, no mesmo padrão visual do site, com os 5 verbetes já liberados no cofre da tese: **Tarifa Zero**, **Grupos econômicos** (os dois pilares da hipótese) e **A Régua da Tarifa Zero** / **Régua Descritiva** / **Régua Analítica** (o instrumento de medição, Eixo 3). Lista, sem linkar, os outros 12 verbetes já escritos mas ainda represados pelo autor — mesma decisão de liberação progressiva já adotada no cofre (`Verbetes - MOC.md`).
+- Link para a página adicionado no cabeçalho de `painel.html` e `pesquisa.html`, e como novo card na página inicial (`index.html`).
+
+**Score: população abrangida pela Tarifa Zero (v1):**
+
+- Nova seção no painel somando quantas pessoas têm algum acesso a alguma camada de TZ. Metodologia v1 aprovada pelo autor (29/07/2026): camada universal soma 100% da população residente do município; camada 4/grupo social soma uma **estimativa** só quando há dado defensável — hoje só Belo Horizonte e Uberlândia (passe estudantil), usando "estudo_total" do Censo 2022 (proxy de deslocamento para estudo, carregado em `camadas_tz.json`) como aproximação do número de beneficiários, não a contagem real.
+- **Deliberadamente não somado:** as demais camadas parciais sem dado sub-municipal defensável (temporal-dias/2a, espacial/3, e o caso de Curitiba/desempregados na camada 4) — o painel lista esses municípios como "sem estimativa" em vez de estimar sem base. Gratuidades por lei federal (idoso/PcD) também não somadas nesta v1: a base municipal não tem população idosa/PcD por município (pendência registrada em `Pendências.md` do cofre, 29/07/2026).
+- Card de detalhe do município passa a mostrar a população estimada (quando existente) junto de cada camada da régua descritiva.
+
+**Ajustes pós-uso (mesmo dia, dois pontos pedidos pelo autor depois de ver o v0.4.03 em uso):**
+
+- Tabela "Municípios com Tarifa Zero universal" renomeada para "Municípios com Tarifa Zero (universal + parcial)": além dos 155 registros/154 municípios únicos da base-mestre universal, agora lista os **28 municípios com camada parcial** (2a/3/4, `camadas_tz.json`) que ainda não estavam no bucket universal — mesma regra de exclusividade já usada no card "TZ parciais" e no mapa (evita duplicar, por exemplo, Palmas e São Caetano do Sul, que a base principal já classifica como Ativa/Encerrada). Nova tag "Parcial" (amarelo) na coluna Situação; coluna "Início" usa uma extração best-effort de ano a partir do texto de "detalhe" de cada camada — 14 dos 28 municípios têm um ano identificável, os demais ficam "—" (sem inventar data).
+- Cor de TZ ativa volta a ser **verde** (era amarelo desde a Fase 9) — mapa, tags, tabela e linha do tempo; amarelo fica reservado à gradação de TZ parcial (`corParcial`, acima), rosa continua em Encerrada/revogação. **Nota de identidade visual:** essa combinação usa verde + amarelo + rosa no mesmo painel, o que a princípio conflita com a regra de "nunca combinar duas das três cores (amarelo/azul/verde) entre si" da nota "Identidade Visual da Pesquisa" — regra pensada para peças gráficas isoladas (cartaz, slide), não para um painel com várias camadas de informação simultâneas que precisam ser distinguíveis. Registrado aqui como exceção deliberada, a formalizar na nota de identidade visual se o autor confirmar o critério para painéis multi-camada.
+- Linha do tempo ganha o início das TZ parciais (amarelo), **empilhado** sobre a barra da universal (verde) em cada ano, com uma única escala vertical compartilhada — usa o mesmo `camadaAnoInicio()` da tabela. Primeira tentativa desenhou as duas séries lado a lado com escala própria cada uma; o autor notou que isso distorcia a leitura (uma barra pequena parecia tão alta quanto uma grande de outra série) — corrigido para empilhado/escala única no mesmo dia. Casos sem data identificável (passe estudantil de BH/Uberlândia, desempregados de Curitiba) não entram no gráfico. Revogações continuam abaixo do eixo, em rosa.
+- Ordem de empilhamento das camadas no mapa reorganizada: não-TZ (base) → ativa → parcial → encerrada (topo) → limites de UF, cada uma em seu próprio grupo SVG (antes, ativa e encerrada dividiam um grupo único e parcial ficava junto do não-TZ). Legenda reordenada para acompanhar: Ativa, Parcial (1/2/3 camadas), Encerrada, Não TZ.
+- Rampa de cor do parcial invertida: amarelo mais forte com **1** camada, decaindo (mais próximo do neutro) conforme acumula camadas — antes era o oposto (mais fraco com 1, mais forte com 3+).
+- Linha do tempo ganha tooltip customizado (reaproveita o mesmo `#tooltip` do mapa) que lista os municípios ao passar o mouse sobre qualquer segmento da barra (universal, parcial ou revogação) — antes só mostrava a contagem via `<title>` nativo do SVG.
+- Rodapé reestruturado em `painel.html`, `index.html`, `pesquisa.html` e `verbetes.html`: nomes (autor + orientadora) agora ficam agrupados de um lado (`.fnames`, empilhados), logos institucionais do outro (`.flogos`) — antes o autor ficava misturado com os logos de um lado e só a orientadora do outro, layout assimétrico. Logo da UFABC trocado da variante "sigla-lateral" (proporção ~1,64, lia-se pequena/quadrada) para a "extenso" (proporção ~4,95), agora com peso visual comparável a PGT/Laplan na mesma altura fixa de 46px.
+- `verbetes.html`: removido o bloco de observação "Mais 12 verbetes escritos, ainda represados" — a decisão de liberação progressiva continua válida, só a caixa de aviso sobre os não publicados saiu da página pública.
+- `FEEDBACK.md` e `ROADMAP.md`: identidades dos 5 leitores que deram feedback (nomes reais) substituídas por rótulos de papel (Colega 1-5, por ordem de 1ª aparição cronológica) em ambos os arquivos — são rastreados num repositório público (github.com/tvzgomes-2/painel_tz). A checklist de status que existia em `FEEDBACK.md` (desatualizada, parava em 25/07) foi removida de lá para não duplicar/divergir do que já é mantido aqui e no `ROADMAP.md`; `FEEDBACK.md` agora guarda só os relatos brutos, e o `ROADMAP.md` ganhou colunas de Status nas tabelas das Fases 1-3 (Fase 4 já tinha) para centralizar o que foi/não foi implementado.
+
+## v0.4.02 (2026-07-29)
 
 Sub-patch de v0.4 (mesma exceção do v0.x.NN, ver `VERSIONING.md`): leva a régua descritiva ampliada — além da universal — para o painel, a pedido do autor. Mesma estrutura de banco (novo crosswalk à parte, `camadas_tz.json`, mesmo padrão de `casos_por_fonte.json`/`casos_por_noticia.json`).
 
@@ -136,4 +181,4 @@ Primeira versão, construída sobre `base_municipal_integrada_v2.csv` (131 vari�
 
 ## Pipeline / reprodutibilidade
 
-Scripts em `scripts/` (`build_data.py`, `build_stats.py`) documentam como os dados embutidos no `painel.html` foram gerados a partir das fontes brutas. As fontes brutas (CSVs/XLSX) são parte do cofre de pesquisa privado do autor e **não estão incluídas neste repositório público** — os scripts servem como documentação do método, não para execução direta por terceiros. Ver também `FEEDBACK.md` para pendências de ajuste na visualização.
+Scripts em `scripts/` (`build_data.py`, `build_stats.py`) documentam como os dados embutidos no `painel.html` foram gerados a partir das fontes brutas. As fontes brutas (CSVs/XLSX) são parte do cofre de pesquisa privado do autor e **não estão incluídas neste repositório público** — os scripts servem como documentação do método, não para execução direta por terceiros. Ver `ROADMAP.md` (Fases 1-5) para o status de cada pendência de visualização; `FEEDBACK.md` guarda só os relatos brutos que originaram esses itens.

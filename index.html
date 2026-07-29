@@ -32,9 +32,7 @@
   footer{margin-top:48px;padding-top:18px;border-top:2px solid var(--amarelo);color:var(--muted);font-size:11.5px;line-height:1.7;}
   footer .fgrid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;margin-bottom:14px;}
   footer .fgrid b{color:var(--text);font-size:12.5px;}
-  footer .fgrid .fleft{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
-  footer .fgrid .fright{text-align:right;}
-  @media (max-width:640px){footer .fgrid .fright{text-align:left;}}
+  footer .fnames{display:flex;flex-direction:column;gap:5px;}
   footer .fcredits{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:10px 24px;
     margin:0 0 14px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   footer .flogos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
@@ -45,6 +43,8 @@
   footer .fapoio b{color:var(--text);}
   footer a{color:var(--accent);text-decoration:none;}
   footer a:hover{text-decoration:underline;}
+  footer .flogos a, footer .fapoio a{display:inline-flex;opacity:.92;transition:opacity .15s;}
+  footer .flogos a:hover, footer .fapoio a:hover{opacity:1;text-decoration:none;}
   footer .era-tag{display:inline-block;background:var(--amarelo);color:#111;font-size:10px;font-weight:800;
     text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:3px;margin-right:8px;vertical-align:middle;}
 </style>
@@ -66,27 +66,28 @@
       <h2>Rede da ARS</h2>
       <p>Estrutura de poder dos grupos econômicos do transporte coletivo (em construção — aparece aqui quando estiver pronto).</p>
     </div>
+    <a class="card" href="verbetes.html">
+      <span class="tag" style="background:var(--verde);color:#0E0E10;">Conceitos</span>
+      <h2>Verbetes</h2>
+      <p>Os conceitos centrais da pesquisa, explicados um por um: Tarifa Zero, Grupos econômicos e as réguas de medição.</p>
+    </a>
   </div>
 
   <footer>
     <div class="fgrid">
-      <div class="fleft">
-        <div>
-          <b>Thiago Von Zeidler Gomes</b> · Doutorando
-        </div>
-        <div class="flogos">
-          <img src="assets/logos/ufabc/negativo/logo-ufabc-sigla-lateral-negativo.svg" alt="Universidade Federal do ABC">
-          <img src="assets/logos/pgt/negativo/logo-pgt-extenso-negativo.png" alt="Programa de Pós-Graduação em Planejamento e Gestão do Território">
-          <span class="finst">Laplan (logo em autorização)</span>
-        </div>
+      <div class="fnames">
+        <div><b>Thiago Von Zeidler Gomes</b> · Doutorando</div>
+        <div><b>Prof.ª Dr.ª Silvana Maria Zioni</b> · Orientadora</div>
       </div>
-      <div class="fright">
-        <b>Prof.ª Dr.ª Silvana Maria Zioni</b> · Orientadora
+      <div class="flogos">
+        <a href="https://www.ufabc.edu.br/" target="_blank" rel="noopener"><img src="assets/logos/ufabc/negativo/logo-ufabc-extenso-negativo.svg" alt="Universidade Federal do ABC"></a>
+        <a href="https://propg.ufabc.edu.br/ppgpgt/" target="_blank" rel="noopener"><img src="assets/logos/pgt/negativo/logo-pgt-extenso-negativo.png" alt="Programa de Pós-Graduação em Planejamento e Gestão do Território"></a>
+        <a href="https://laplan.pesquisa.ufabc.edu.br/" target="_blank" rel="noopener"><img src="assets/logos/laplan/negativo/logo-laplan-extenso-negativo.png" alt="Laboratório de Planejamento Territorial (Laplan/UFABC)"></a>
       </div>
     </div>
     <div class="fcredits">
       <div class="fapoio">
-        <img src="assets/logos/polo/negativo/logo-polo-icon-negativo.svg" alt="Polo Planejamento">
+        <a href="https://poloplanejamento.com/" target="_blank" rel="noopener"><img src="assets/logos/polo/negativo/logo-polo-icon-negativo.svg" alt="Polo Planejamento"></a>
         <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
       </div>
     </div>

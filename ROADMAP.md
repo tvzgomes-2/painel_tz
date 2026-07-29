@@ -27,38 +27,38 @@ O repositório passou de "um painel" para **um site com páginas independentes**
 
 #### O que está funcionando (confirmado pelo feedback)
 
-- **Ordenação por clique na tabela TZ** — elogiada explicitamente (Carol); manter.
-- **Notas metodológicas** — apontadas como diferencial útil (Gabriel); manter e não cortar.
-- **Legibilidade geral dos dados** — "bem fáceis de analisar" (Gabriel), "ficou muito bom" (Ivan).
+- **Ordenação por clique na tabela TZ** — elogiada explicitamente (Colega 2); manter.
+- **Notas metodológicas** — apontadas como diferencial útil (Colega 3); manter e não cortar.
+- **Legibilidade geral dos dados** — "bem fáceis de analisar" (Colega 3), "ficou muito bom" (Colega 1).
 - **Arquitetura de arquivo único** — abre em qualquer navegador, publica como página estática, zero dependência.
 
 #### Fragilidades identificadas (feedback + análise técnica)
 
 **Mapa (o bloco com mais críticas — 4 dos 5 leitores):**
 
-1. Sem bordas estaduais — pedido 3× (Ivan 2×, Carol). Ao filtrar, municípios "flutuam" sem referência geográfica.
-2. Bordas municipais quase invisíveis (stroke escuro 0.3px sobre fundo escuro) — "difícil ver assim muito escuro" (Carol).
-3. Sem zoom/pan — pedido 2× (Daniel, Ricardo). Na escala nacional é impraticável clicar num município do Sudeste (Ricardo não achou São Caetano do Sul).
-4. Tooltip mostra só a métrica do "colorir por" — Ivan quer os dados completos do município no hover.
-5. Tooltip responde a municípios fora do recorte quando há filtro de UF ativo (Ricardo).
-6. Estética "de Excel" (Ivan) — sem destaque visual para os municípios TZ, que são o assunto do painel.
+1. Sem bordas estaduais — pedido 3× (Colega 1 2×, Colega 2). Ao filtrar, municípios "flutuam" sem referência geográfica.
+2. Bordas municipais quase invisíveis (stroke escuro 0.3px sobre fundo escuro) — "difícil ver assim muito escuro" (Colega 2).
+3. Sem zoom/pan — pedido 2× (Colega 4, Colega 5). Na escala nacional é impraticável clicar num município do Sudeste (Colega 5 não achou São Caetano do Sul).
+4. Tooltip mostra só a métrica do "colorir por" — Colega 1 quer os dados completos do município no hover.
+5. Tooltip responde a municípios fora do recorte quando há filtro de UF ativo (Colega 5).
+6. Estética "de Excel" (Colega 1) — sem destaque visual para os municípios TZ, que são o assunto do painel.
 
 **Gráficos e leitura estatística:**
 
-7. Os dois blocos de barras (comparação TZ×Não-TZ e % por eixo) usam a mesma linguagem visual mas respondem perguntas diferentes — o olho tenta comparar o que não é comparável (Daniel).
-8. No bloco "% por eixo", o `n=` junto da % sugere comparabilidade absoluta entre categorias; falta dizer que a proporção é *dentro* de cada categoria (Daniel).
-9. Associação visual barra↔rótulo ambígua no bloco "% por eixo" — rótulo mais perto da barra errada (Daniel).
+7. Os dois blocos de barras (comparação TZ×Não-TZ e % por eixo) usam a mesma linguagem visual mas respondem perguntas diferentes — o olho tenta comparar o que não é comparável (Colega 4).
+8. No bloco "% por eixo", o `n=` junto da % sugere comparabilidade absoluta entre categorias; falta dizer que a proporção é *dentro* de cada categoria (Colega 4).
+9. Associação visual barra↔rótulo ambígua no bloco "% por eixo" — rótulo mais perto da barra errada (Colega 4).
 10. **Cards de resumo são estáticos** — não reagem aos filtros. Quando se seleciona uma UF, os "grandes números" continuam nacionais. É exatamente a lacuna que o pedido da orientadora expõe.
 11. **Nenhum gráfico temporal** — a base tem `tz_ano` (ano de início) e `tz_fim` para os 154 municípios, mas o painel não mostra a linha do tempo de adoções/revogações. É provavelmente o gráfico de maior valor analítico ausente.
 
 **Estrutura e acesso:**
 
-12. Página muito longa — sem colapsar seções, não dá pra ver mapa + tabela juntos (Ivan).
-13. Cards e controles desalinhados — grids diferentes (Carol).
-14. Títulos de seção pouco destacados (Carol, Gabriel).
-15. Siglas sem explicação para leigos — IBEU, IDH, PDMU, REGIC, NTU, arranjo metropolitano (Ricardo).
-16. Espaçamento apertado entre mapa e painel lateral (Gabriel).
-17. Só tema escuro — Gabriel prefere claro (gosto pessoal, sem consenso; tratar como opção, não troca).
+12. Página muito longa — sem colapsar seções, não dá pra ver mapa + tabela juntos (Colega 1).
+13. Cards e controles desalinhados — grids diferentes (Colega 2).
+14. Títulos de seção pouco destacados (Colega 2, Colega 3).
+15. Siglas sem explicação para leigos — IBEU, IDH, PDMU, REGIC, NTU, arranjo metropolitano (Colega 5).
+16. Espaçamento apertado entre mapa e painel lateral (Colega 3).
+17. Só tema escuro — Colega 3 prefere claro (gosto pessoal, sem consenso; tratar como opção, não troca).
 
 **Dados (registrado, não é retrabalho do painel):**
 
@@ -71,49 +71,50 @@ Critério de priorização: nº de pessoas que pediram × valor analítico × es
 
 #### Fase 1 — Legibilidade e correções rápidas *(só CSS/texto; esforço baixo)*
 
-| # | Item | Origem |
-|---|------|--------|
-| 1.1 | Título maior + acrescentar "(TZ)" após "Tarifa Zero" | Ivan (2×) |
-| 1.2 | Títulos de seção maiores/negrito (h2 e o "TZ × Não-TZ") | Carol, Gabriel |
-| 1.3 | Alinhar cards de resumo com a linha de controles (mesmo grid) | Carol |
-| 1.4 | Bloco "% por eixo": subtítulo explicando que a % é calculada dentro de cada categoria; reposicionar rótulo→barra sem ambiguidade | Daniel |
-| 1.5 | Glossário de siglas (IBEU, IDH, PDMU, REGIC, NTU, arranjo) — painel colapsável antes das notas metodológicas | Ricardo |
-| 1.6 | Mais respiro entre mapa e painel lateral (gap do grid) | Gabriel |
+| # | Item | Origem | Status |
+|---|------|--------|--------|
+| 1.1 | Título maior + acrescentar "(TZ)" após "Tarifa Zero" | Colega 1 (2×) | ✅ v0.3 |
+| 1.2 | Títulos de seção maiores/negrito (h2 e o "TZ × Não-TZ") | Colega 2, Colega 3 | ✅ v0.3 |
+| 1.3 | Alinhar cards de resumo com a linha de controles (mesmo grid) | Colega 2 | ✅ v0.3 |
+| 1.4 | Bloco "% por eixo": subtítulo explicando que a % é calculada dentro de cada categoria; reposicionar rótulo→barra sem ambiguidade | Colega 4 | ✅ v0.3 |
+| 1.5 | Glossário de siglas (IBEU, IDH, PDMU, REGIC, NTU, arranjo) — painel colapsável antes das notas metodológicas | Colega 5 | ✅ v0.3 |
+| 1.6 | Mais respiro entre mapa e painel lateral (gap do grid) | Colega 3 | ✅ v0.3 |
+| 1.7 | Cores/fontes de título diferentes por seção (diferenciação visual entre blocos, além do tamanho já resolvido em 1.2) | Colega 3 | ⏳ pendente — nunca implementado |
 
 #### Fase 2 — Mapa *(o bloco mais criticado; esforço médio)*
 
-| # | Item | Nota técnica |
-|---|------|--------------|
-| 2.1 | **Bordas estaduais sempre visíveis** | Derivar camada de UF dissolvendo os municípios no mapshaper (`-dissolve`) — acréscimo estimado de ~100–200 KB no topojson; desenhar como camada de linha acima dos municípios |
-| 2.2 | Bordas municipais mais claras (stroke mais visível) | Só CSS |
-| 2.3 | Destaque dos municípios TZ **sem glow** (decisão do autor, 24/07/2026): usar borda/stroke mais forte e clara nos TZ ativos | Substitui o "outer glow" pedido pelo Ivan — glow descartado por preferência estética e risco de performance; o objetivo dele (TZ saltar aos olhos, tirar a "cara de Excel") é atendido por contorno destacado |
-| 2.4 | **Auto-encaixe do mapa na seleção** (decisão do autor, 24/07/2026 — no lugar de zoom/pan livre): ao filtrar uma UF, o mapa enquadra automaticamente a UF; duplo clique num município dá zoom local; botão "↺ Brasil" volta ao enquadramento nacional | Animação do viewBox pro bounding box do recorte; determinístico (todos veem o mesmo enquadramento, prints reproduzíveis), sem conflito pinça×rolagem no celular; resolve os dois casos relatados (Daniel e Ricardo) |
-| 2.5 | Tooltip completo nos municípios TZ (situação, início, REGIC, arranjo, pop, PIB pc, motorização) | Reusar os dados já embutidos |
-| 2.6 | Suprimir tooltip/hover fora do recorte quando há filtro ativo | Checagem no handler de mousemove |
+| # | Item | Nota técnica | Status |
+|---|------|--------------|--------|
+| 2.1 | **Bordas estaduais sempre visíveis** | Derivar camada de UF dissolvendo os municípios no mapshaper (`-dissolve`) — acréscimo estimado de ~100–200 KB no topojson; desenhar como camada de linha acima dos municípios | ✅ v0.3 |
+| 2.2 | Bordas municipais mais claras (stroke mais visível) | Só CSS | ✅ v0.3 |
+| 2.3 | Destaque dos municípios TZ **sem glow** (decisão do autor, 24/07/2026): usar borda/stroke mais forte e clara nos TZ ativos | Substitui o "outer glow" pedido pelo Colega 1 — glow descartado por preferência estética e risco de performance; o objetivo dele (TZ saltar aos olhos, tirar a "cara de Excel") é atendido por contorno destacado | ✅ v0.3 |
+| 2.4 | **Auto-encaixe do mapa na seleção** (decisão do autor, 24/07/2026 — no lugar de zoom/pan livre): ao filtrar uma UF, o mapa enquadra automaticamente a UF; duplo clique num município dá zoom local; botão "↺ Brasil" volta ao enquadramento nacional | Animação do viewBox pro bounding box do recorte; determinístico (todos veem o mesmo enquadramento, prints reproduzíveis), sem conflito pinça×rolagem no celular; resolve os dois casos relatados (Colega 4 e Colega 5) | ✅ v0.3 |
+| 2.5 | Tooltip completo nos municípios TZ (situação, início, REGIC, arranjo, pop, PIB pc, motorização) | Reusar os dados já embutidos | ✅ v0.3 |
+| 2.6 | Suprimir tooltip/hover fora do recorte quando há filtro ativo | Checagem no handler de mousemove | ✅ v0.3 |
 
 #### Fase 3 — Grandes números e novos gráficos *(pedido da orientadora; esforço médio-alto, maior valor novo)*
 
-| # | Item | Detalhe |
-|---|------|---------|
-| 3.1 | **Cards dinâmicos (grandes números que reagem ao recorte)** | Ao filtrar UF/faixa/REGIC, os cards recalculam: nº de municípios no recorte, nº TZ ativas, % TZ, **população vivendo com TZ** (soma da pop dos municípios ativos — número forte para apresentações), PIB pc mediano do recorte |
-| 3.2 | **Linha do tempo de adoções** | Gráfico de barras/linha por ano de início (`tz_ano`), com revogações marcadas — mostra a aceleração recente da política, hoje invisível no painel |
-| 3.3 | TZ por região e por UF | Barras horizontais simples (contagem + %), completando os eixos já existentes |
-| 3.4 | Gráfico de dispersão PIB pc × motorização | Pontos = municípios, TZ destacados em cor — visualiza a comparação que hoje só existe como mediana em barra |
-| 3.5 | Diferenciar visualmente os dois blocos de barras | Trocar a forma de um deles (ex.: % por eixo vira dot plot ou barras com escala explícita 0–100%) para separar "comparação pareada" de "proporção por categoria" (Daniel) |
+| # | Item | Detalhe | Status |
+|---|------|---------|--------|
+| 3.1 | **Cards dinâmicos (grandes números que reagem ao recorte)** | Ao filtrar UF/faixa/REGIC, os cards recalculam: nº de municípios no recorte, nº TZ ativas, % TZ, **população vivendo com TZ** (soma da pop dos municípios ativos — número forte para apresentações), PIB pc mediano do recorte | ✅ v0.3 |
+| 3.2 | **Linha do tempo de adoções** | Gráfico de barras/linha por ano de início (`tz_ano`), com revogações marcadas — mostra a aceleração recente da política, hoje invisível no painel | ✅ v0.3, refinado em v0.4.03 (barras empilhadas com escala única, hover lista municípios) |
+| 3.3 | TZ por região e por UF | Barras horizontais simples (contagem + %), completando os eixos já existentes | ⏳ pendente — nunca implementado |
+| 3.4 | Gráfico de dispersão PIB pc × motorização | Pontos = municípios, TZ destacados em cor — visualiza a comparação que hoje só existe como mediana em barra | ⏳ pendente — nunca implementado |
+| 3.5 | Diferenciar visualmente os dois blocos de barras | Trocar a forma de um deles (ex.: % por eixo vira dot plot ou barras com escala explícita 0–100%) para separar "comparação pareada" de "proporção por categoria" (Colega 4) | ⏳ parcial — v0.3 só acrescentou subtítulos explicativos em cada bloco; troca da forma de apresentação em si segue pendente |
 
 #### Fase 4 — Estrutura e conforto *(esforço baixo-médio)*
 
 | # | Item | Status |
 |---|------|--------|
-| 4.1 | Seções colapsáveis (comparação, % por eixo, glossário, notas) — permite ver mapa + tabela juntos (Ivan) | ✅ Implementado 26/07/2026 — `<details><summary>`, abertas por padrão (`open`), estilo reaproveita `.panel h2`; glossário já usava o padrão antes |
-| 4.2 | Toggle tema claro/escuro (preferência do Gabriel vira opção sem impor a ninguém) |
-| 4.3 | Revisão mobile: painel foi lido no celular (print do Ivan) — conferir touch no mapa, tabela com rolagem horizontal |
+| 4.1 | Seções colapsáveis (comparação, % por eixo, glossário, notas) — permite ver mapa + tabela juntos (Colega 1) | ✅ Implementado 26/07/2026 — `<details><summary>`, abertas por padrão (`open`), estilo reaproveita `.panel h2`; glossário já usava o padrão antes |
+| 4.2 | Toggle tema claro/escuro (preferência do Colega 3 vira opção sem impor a ninguém) | ✅ Implementado v0.3 → revertido em v0.4 (decisão final do autor: manter só o tema escuro; toggle, CSS e lógica de tema retirados) |
+| 4.3 | Revisão mobile: painel foi lido no celular (print do Colega 1) — conferir touch no mapa, tabela com rolagem horizontal | ⏳ pendente — não verificado formalmente |
 
 #### Fase 5 — Dados futuros e melhorias adiadas *(fora do escopo imediato)*
 
 - Zoom/pan livre no mapa (roda do mouse/pinça + arrastar) — adiado em favor do auto-encaixe (item 2.4); reavaliar só se leitores sentirem falta de exploração livre após a Fase 2.
-- Viagens antes × depois da adoção (Ivan) — exige série temporal de demanda por município; não existe na base.
-- Investimento em infra antes × depois (Ivan) — idem, possível recorte via FINBRA série 2019–2023 já coletada (explorar antes de descartar).
+- Viagens antes × depois da adoção (Colega 1) — exige série temporal de demanda por município; não existe na base.
+- Investimento em infra antes × depois (Colega 1) — idem, possível recorte via FINBRA série 2019–2023 já coletada (explorar antes de descartar).
 - **Variável de presença de grupo econômico por município** (rede ARS/CNPJ) — quando integrada, vira o eixo central do painel e o teste da hipótese da tese.
 - Correções na fonte: duplicata Palmas-TO e situação de São Caetano do Sul (base-mestre).
 
@@ -128,6 +129,21 @@ Critério de priorização: nº de pessoas que pediram × valor analítico × es
 | 8.5 | **Notícias mapeadas** (consolidação de referências, 27/07/2026) — 70 matérias de imprensa em 42 municípios, levantadas em `05 - Referências/Reportagens por município` (cofre) | ✅ Implementado 28/07/2026 (v0.4.01, sub-patch — ver VERSIONING.md) — mesmo padrão de crosswalk do 8.1-8.2 (`scripts/casos_por_noticia.json`, chave `Município\|UF`), mas em seção própria "Notícias" no card do município, **separada** de "Fontes" (que segue só estudo acadêmico, decisão de 8.3). 8 referências acadêmicas novas da mesma consolidação (não citadas em nenhum município específico do crosswalk) entraram como segunda lista no bloco ABNT ("Referências adicionais"), não na coluna Fontes. |
 | 8.6 | **Régua descritiva ampliada** (pedido do autor, 28-29/07/2026) — levar a régua além da universal (camadas 2a/3/4, 32 municípios) para o painel, não só o card estático de 32 já existente | ✅ Implementado 29/07/2026 (v0.4.02, sub-patch) — `scripts/camadas_tz.json` (chave `Município\|UF`, suporta múltiplas camadas por município); contorno tracejado amarelo no mapa (`.tzparcial`) para quem não é já TZ universal; seção "Camada da régua descritiva" no card do município; card "TZ parciais" passou de estático (32, nacional) para dinâmico por recorte (28, excluindo os 2 com conflito de base — ver Pendência 8.7). Exclui de propósito a camada 2b/eleitoral (324, decisão do STF), mesma lógica do card original. |
 | 8.7 | **Conflitos base principal × camadas descobertos em 8.6** — São Caetano do Sul (`tz_status` ainda "Ativa", já é grupo social) e Florianópolis (`tz_status` "Encerrada", dado novo sugere temporal-dias/2a) | ⏳ Sinalizado no crosswalk (`camadas_tz.json`, campo `flag`) e no card de detalhe; **não corrigido no `tz_status` principal** sem confirmação do autor contra a fonte (Dataverse Santini v8 / achado do cofre). Mesma cautela já aplicada ao caso Teresina (155→154) em `Tipologias de Tarifa Zero (4 camadas).md`. |
+
+### Fase 10 — Pontos de melhoria pedidos pelo autor sobre o v0.4.02 *(29/07/2026 — implementado em v0.4.03, ver CHANGELOG)*
+
+Lista bruta do pedido do autor, registrada aqui para não perder nenhum item antes de perguntar sobre os pontos ambíguos e sequenciar o trabalho. Todos os 8 itens foram implementados na rodada v0.4.03 (29/07/2026) — ver `CHANGELOG.md` para o detalhe de cada um.
+
+| # | Item | Observação |
+|---|------|------------|
+| 10.1 | ✅ Incluir logo do Laplan (`cropped-cropped-Ativo-3-1.png`, fornecido pelo autor) no rodapé, junto dos demais (PGT, UFABC, POLO) | Feito em v0.4.03 — recorte + negativo (preto→branco, preservando o vermelho). Limitação conhecida: o arquivo-fonte trunca "LABORATÓRIO DE" (thumbnail do WordPress), sem arquivo melhor disponível. |
+| 10.2 | ✅ Colocar hiperlink em **todos** os logos do rodapé, apontando para "as páginas" | Resolvido: autor confirmou que é o site oficial de cada instituição (não navegação interna). Feito nas 3 páginas (painel, index, pesquisa). |
+| 10.3 | ✅ Trocar a visualização de "TZ parcial" (contorno tracejado amarelo, v0.4.02) por uma **variação de saturação do amarelo** | Feito em v0.4.03 (`corParcial()`) — gradação por contagem de camadas (1/2/3+), não por tipo (sem hierarquia documentada entre 2a/3/4). |
+| 10.4 | ✅ (parcial) **Readaptar todo o painel para ter diferentes gradações de TZ** (não só Ativa/Encerrada/Não-TZ binário) | A gradação por saturação (10.3) + o filtro por camada (10.5) cobrem o pedido no eixo "colorir por TZ" do mapa. Não estendido aos demais gráficos (barras, crosstabs, linha do tempo) nesta rodada — considerar se o autor quiser o contínuo também ali. |
+| 10.5 | ✅ Caixa de seleção (dropdown/filtro) para a régua — escolher qual camada ver no mapa | Feito em v0.4.03 — novo `state.camada` + select "Régua descritiva (camada)", no padrão de `ufFilter`/`faixaFilter`. |
+| 10.6 | ✅ Incluir os verbetes como um botão em algum lugar do painel | Resolvido: autor escolheu criar página nova no site (`verbetes.html`), não linkar ao Obsidian Publish. Feito em v0.4.03 — 5 verbetes liberados, link no cabeçalho do painel/pesquisa e card no index. |
+| 10.7 | ✅ Seção "TZ × Não TZ" (comparação de barras) — virar uma caixa maior, abaixo do mapa, com as informações divididas em colunas | Feito em v0.4.03 — grid responsivo, mesmo conteúdo. |
+| 10.8 | ✅ (v1) Criar um **score de população abrangida por Tarifa Zero em suas diferentes camadas** | Metodologia v1 aprovada pelo autor (29/07/2026): universal = 100% da população; camada 4/grupo social = estimativa só onde há proxy defensável (BH/Uberlândia, "estudo_total" do Censo 2022). Demais camadas parciais e gratuidades por lei federal (idoso/PcD) ficam fora da soma por falta de dado — ver pendência em `Pendências.md` do cofre. |
 
 ---
 
@@ -214,13 +230,14 @@ Aplica-se ao site como um todo. **Decisão 26/07/2026:** a linha de logos instit
 
 ## 6. Registro de decisões
 
-- **24/07/2026 — v0.3 entregue.** Fase 1 completa; Fase 2 completa (com contorno no lugar do glow e auto-encaixe no lugar de zoom/pan); da Fase 3, entregues 3.1 (cards dinâmicos) e 3.2 (linha do tempo); da Fase 4, antecipado o 4.2 (toggle claro/escuro, a pedido do autor). Pendentes para v0.4: 3.3 (TZ por região/UF), 3.4 (dispersão), 3.5 (diferenciar os dois blocos de barras — mitigado com subtítulos), 4.1 (seções colapsáveis) e 4.3 (revisão mobile). Detalhes no CHANGELOG (v0.3) e checklist no FEEDBACK.md.
+- **24/07/2026 — v0.3 entregue.** Fase 1 completa; Fase 2 completa (com contorno no lugar do glow e auto-encaixe no lugar de zoom/pan); da Fase 3, entregues 3.1 (cards dinâmicos) e 3.2 (linha do tempo); da Fase 4, antecipado o 4.2 (toggle claro/escuro, a pedido do autor). Pendentes para v0.4: 3.3 (TZ por região/UF), 3.4 (dispersão), 3.5 (diferenciar os dois blocos de barras — mitigado com subtítulos), 4.1 (seções colapsáveis) e 4.3 (revisão mobile). Detalhes no CHANGELOG (v0.3); status por item nas tabelas das Fases 1-4 acima.
 
 - **25/07/2026 — Versionamento formalizado (Opção A: remapeamento retroativo).** Adotado esquema semântico v0.x (prototipagem) → v1.0.0 (lançamento para grupos de pesquisa) → patch/minor/major pós-lançamento. As versões antes chamadas v1/v2/v3 foram renomeadas para v0.1/v0.2/v0.3 (mudança só de rótulo, no CHANGELOG, no selo da UI e neste ROADMAP) — sem isso, "v3" já publicado colidia com o "v0.2" que as anotações de planejamento do autor já usavam para descrever o mesmo painel. Política completa no CHANGELOG.md.
 
-- **24/07/2026 — Glow descartado.** O "outer glow" nos municípios TZ (pedido do Ivan, 2×) não será usado — preferência estética do autor + risco de performance de filtros SVG. O objetivo por trás do pedido (destacar visualmente os TZ) será atendido com contorno/stroke destacado (item 2.3).
+- **24/07/2026 — Glow descartado.** O "outer glow" nos municípios TZ (pedido do Colega 1, 2×) não será usado — preferência estética do autor + risco de performance de filtros SVG. O objetivo por trás do pedido (destacar visualmente os TZ) será atendido com contorno/stroke destacado (item 2.3).
 - **24/07/2026 — Auto-encaixe em vez de zoom/pan livre.** Entre zoom/pan manual e enquadramento automático pela seleção, escolhido o auto-encaixe (+ duplo clique para zoom local + botão de reset): resolve os dois casos relatados, é determinístico (prints reproduzíveis) e evita o conflito pinça×rolagem no celular. Zoom/pan livre adiado para a Fase 5.
-- *(a preencher conforme as fases forem sendo implementadas — anotar versão/commit de cada item entregue, espelhando o checklist do FEEDBACK.md)*
+- *(a preencher conforme as fases forem sendo implementadas — anotar versão/commit de cada item entregue diretamente na coluna Status da tabela da Fase correspondente)*
+- **29/07/2026 — FEEDBACK.md e ROADMAP.md anonimizados; status centralizado.** Nomes reais dos 5 leitores substituídos por rótulos de papel (Colega 1-5, por ordem de 1ª aparição) em ambos os arquivos, por serem rastreados num repositório público. A checklist de status que existia em `FEEDBACK.md` (desatualizada — parava em 25/07, antes de v0.4 em diante) foi removida de lá; o arquivo agora só guarda os relatos brutos. Status de implementação passa a viver exclusivamente nas tabelas de Status das Fases 1-4 acima (cruzado com o CHANGELOG, fonte de verdade do que foi publicado).
 
 - **26/07/2026 — Fases 7 e 8 criadas a partir do plano estratégico interno.** Identidade institucional/créditos (Fase 7) e repositório de estudos/enriquecimento (Fase 8) não tinham Fase própria; Fase 8 é a prioridade imediata. Detalhe da estratégia (contatos, cronograma de divulgação, escopo da Rede da ARS) fica em `estrategia-interna/PLANO-ESTRATEGICO.md` (não publicável) — este ROADMAP só registra as ações de produto derivadas dela.
 
