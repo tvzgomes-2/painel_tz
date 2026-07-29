@@ -4,6 +4,7 @@ const STATS = JSON.parse(document.getElementById('data-stats').textContent);
 const MUNI_COL = JSON.parse(document.getElementById('data-muni').textContent);
 const FONTES_RAW = JSON.parse(document.getElementById('data-fontes').textContent);
 const NOTICIAS_RAW = JSON.parse(document.getElementById('data-noticias').textContent);
+const CAMADAS_RAW = JSON.parse(document.getElementById('data-camadas').textContent);
 
 // zip columnar municipal data into id -> row object
 const COLS = MUNI_COL.cols;
@@ -49,6 +50,22 @@ for (const k in NOTICIAS_RAW) {
   NOTICIAS.set(normKey(nome, uf), NOTICIAS_RAW[k]);
 }
 function noticiasFor(m) { return (m && NOTICIAS.get(normKey(m.nome, m.uf))) || []; }
+
+// ---------- régua descritiva ampliada — camadas 2a/3/4 (além da universal) ----------
+// Consolidação 29/07/2026: 24 temporal-dias + 4 espacial-periférica + 4 grupo social = 32
+// municípios, a pedido do autor ("aplicação de uma régua descritiva... ampliando para além da
+// universal"). Exclui de propósito a camada 2b/temporal-eventos (324 gratuidades eleitorais/
+// pontuais — mesma decisão já tomada para o card "TZ parciais", ver comentário mais abaixo):
+// fenômeno de origem judicial (STF), não adesão municipal voluntária — misturar inflaria o número
+// e mudaria o sentido do que está sendo medido. Um município pode ter mais de uma camada ao mesmo
+// tempo (ex.: Belo Horizonte tem 2a + 3 + 4).
+const CAMADAS = new Map();
+for (const k in CAMADAS_RAW) {
+  const [nome, uf] = k.split('|');
+  CAMADAS.set(normKey(nome, uf), CAMADAS_RAW[k]);
+}
+function camadasFor(m) { return (m && CAMADAS.get(normKey(m.nome, m.uf))) || []; }
+const CAMADA_LABELS = { '2a': 'Temporal (dias)', '3': 'Espacial (periférica)', '4': 'Grupo social' };
 
 // ---------- agregados extras (censo22 modal, série motorização) ----------
 // Pré-computados 26/07/2026 a partir de base_municipal_v3.csv (script avulso, fora do build
@@ -168,6 +185,9 @@ for (const f of features) {
     if (m.tz_status === 'Encerrada') el.classList.add('enc');
     gTz.appendChild(el);
   } else {
+    // contorno tracejado para camada parcial (2a/3/4) — só quando o município não já tem
+    // contorno sólido de TZ universal acima (evita duplo contorno e mantém a distinção visual).
+    if (m && camadasFor(m).length) el.classList.add('tzparcial');
     gMun.appendChild(el);
   }
   pathById.set(f.id, el);
@@ -337,6 +357,7 @@ function renderLegend() {
   if (state.colorBy === 'tz') {
     html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Ativa</span>
             <span><span class="sw" style="background:${TZ_COLORS_HEX.Encerrada}"></span>Encerrada</span>
+            <span><span class="sw" style="background:${nt.naoTz};border:1px dashed ${TZ_COLORS_HEX.Ativa};"></span>TZ parcial (dias/espacial/grupo social)</span>
             <span><span class="sw" style="background:${nt.naoTz}"></span>Não TZ</span>`;
   } else if (state.colorBy === 'faixa_pop') {
     html = STATS.faixa_order.map(f => `<span><span class="sw" style="background:${FAIXA_COLORS[f]}"></span>${f}</span>`).join('');
@@ -377,12 +398,19 @@ function median(arr) {
 }
 
 // ---------- grandes números dinâmicos (reagem ao recorte atual) ----------
-// TZ parciais (Tipologias TZ - consolidado.xlsx, RESUMO, 26/07/2026): 24 temporal-dias +
-// 4 espacial-periférico + 4 grupo social = 32. Exclui de propósito as 324 "temporal-eventos"
-// (gratuidade eleitoral/pontual) — fenômeno qualitativamente diferente (não é política de TZ
-// contínua), somar junto inflaria o número e misturaria categorias. Estático/nacional — ainda
-// não tem recorte por município no painel (fora do escopo do base_municipal_v3.csv atual).
-const TZ_PARCIAIS_N = 32;
+// TZ parciais (camadas_tz.json, 29/07/2026): 24 temporal-dias + 4 espacial-periférico + 4 grupo
+// social = 32 nacionalmente. Exclui de propósito as 324 "temporal-eventos" (gratuidade eleitoral/
+// pontual, decisão do STF) — fenômeno qualitativamente diferente (não é adesão municipal
+// voluntária), somar junto inflaria o número e misturaria categorias. Desde 29/07/2026 tem
+// recorte por município (ver camadasFor()) — o card abaixo agora reage ao filtro atual, como os
+// demais.
+function countParciais(rows) {
+  // mesma regra do contorno no mapa (tzparcial): só conta quem NÃO já está no bucket universal
+  // (Ativa/Encerrada) — evita contar duas vezes um município que aparece nas duas camadas por
+  // desatualização da base principal (ex.: São Caetano do Sul, ainda "Ativa" apesar da revogação
+  // de 15/07/2026 — ver flag no card de detalhe do município).
+  return rows.reduce((n, m) => n + (m.tz_bin !== 'TZ' && camadasFor(m).length ? 1 : 0), 0);
+}
 
 function renderCards() {
   const rows = subsetNoTz();
@@ -397,7 +425,7 @@ function renderCards() {
   const cards = [
     { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
     { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas (<b>universal</b>) ${scopeLabel}`, w: warn },
-    { n: TZ_PARCIAIS_N, l: `TZ <b>parciais</b> no Brasil (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
+    { n: countParciais(rows).toLocaleString('pt-BR'), l: `TZ <b>parciais</b> ${scopeLabel} (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
     { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ universal ${scopeLabel}`, w: warn },
     { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ativa ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
     { n: pibMed != null ? 'R$ ' + fmtNum(pibMed) : '—', l: `PIB per capita mediano ${scopeLabel} (2021)` },
@@ -495,8 +523,19 @@ function renderDetail(m) {
       <tr><td>PlanMob (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
       ${extra}
     </table>
+    ${renderCamadaDetail(m)}
     ${renderFontesDetail(m)}
     ${renderNoticiasDetail(m)}`;
+}
+
+function renderCamadaDetail(m) {
+  const camadas = camadasFor(m);
+  if (!camadas.length) return '';
+  const items = camadas.map(c => `<li><b>${CAMADA_LABELS[c.camada] || c.camada}</b> — ${c.detalhe || ''}${c.flag ? ` <span style="color:#e2892c;">⚠ ${c.flag}</span>` : ''}</li>`).join('');
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Camada da régua descritiva (${camadas.length})</b>
+    <ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;">${items}</ul>
+  </div>`;
 }
 
 function renderFontesDetail(m) {

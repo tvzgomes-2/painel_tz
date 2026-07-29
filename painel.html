@@ -60,6 +60,8 @@
   #mapSvg path.mun.tzpath{stroke:var(--tz-outline);stroke-width:.9;}
   #mapSvg path.mun.tzpath.enc{stroke:var(--tz-outline-enc);}
   #mapSvg path.mun.tzpath:hover{stroke:var(--accent);stroke-width:1.6;}
+  #mapSvg path.mun.tzparcial{stroke:var(--tz-outline);stroke-width:.9;stroke-dasharray:1.6,1.2;}
+  #mapSvg path.mun.tzparcial:hover{stroke:var(--accent);stroke-width:1.6;}
   #mapSvg path.ufline{fill:none;stroke:var(--uf-stroke);stroke-width:1.1;pointer-events:none;vector-effect:non-scaling-stroke;}
   .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11.5px;color:var(--muted);}
   .legend span.sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
@@ -155,7 +157,7 @@
 <header>
   <div class="htext">
     <p style="margin:0 0 6px;"><a href="index.html" style="font-size:.85em;opacity:.75;">← voltar ao site</a></p>
-    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v0.4.01</span></h1>
+    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v0.4.02</span></h1>
     <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero</p>
     <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a estrutura de poder dos grupos econômicos do transporte coletivo e a difusão espacial das políticas de gratuidade universal no Brasil. A hipótese central é que os grupos econômicos restringem a difusão da TZ nos municípios de maior interesse comercial, atuando como barreira sistêmica — enquanto a política floresce nas franjas do sistema, pouco atrativas ao capital. O método é misto (quantitativo + qualitativo), em panorama nacional; este painel interativo é o instrumento exploratório do eixo quantitativo.</p>
     <p>Universo: 5.570 municípios do Brasil. Base-mestre Tarifa Zero universal (Dataverse Santini, abr/2026) cruzada com base municipal integrada de 234 variáveis (PEMOB/SIMU, MUNIC 2020, REGIC 2018, OSM, TSE 2024, DATASUS, NTU). Protótipo de trabalho — dados descritivos, não causais. Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a></p>
@@ -334,7 +336,7 @@
         <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
       </div>
     </div>
-    Painel v0.4.01 · 2026<br>
+    Painel v0.4.02 · 2026<br>
     Fontes: Dataverse Santini v8 (abr/2026) · PEMOB/SIMU (Min. Cidades) · MUNIC 2020 (IBGE) · REGIC 2018 (IBGE) · FINBRA/Siconfi 2019–2023 · IBGE (PIB 2013/2021, Censo 2022) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Base Polo Planejamento.<br>
     Painel gerado a partir de <i>base_municipal_v3.csv</i> e <i>Municípios TZ - consolidado.xlsx</i> — protótipo de trabalho, não substitui a análise da tese. Histórico de versões no CHANGELOG do repositório.
   </footer>
@@ -2300,6 +2302,263 @@
   }
  ]
 }</script>
+<script id="data-camadas" type="application/json">
+{
+ "Belém|PA": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde abr/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Belo Horizonte|MG": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — \"Catraca Livre\" — desde dez/2025 (14/12)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  },
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "linhas que atendem vilas e favelas (capital) — desde 2025",
+   "fonte": "tz_bairros_perifericos.csv"
+  },
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "passe livre estudantil",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+  }
+ ],
+ "Brasília|DF": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados (ônibus e metrô) — desde mar/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Cuiabá|MT": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde mai/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Maceió|AL": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos — desde abr/2022",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Palmas|TO": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde mar/2023",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Itapecerica da Serra|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "sábados, domingos e feriados — \"Transporte Para Todos\"",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Ferraz de Vasconcelos|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde jul/2026 (05/07)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Presidente Prudente|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana (sáb/dom) — desde 2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "São Paulo|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos — \"Domingão Tarifa Zero\" — desde dez/2023",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Florianópolis|SC": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "último domingo do mês — \"Domingo na faixa\" — desde jan/2021",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)",
+   "flag": "Status 'JÁ TEMOS (como encerrada — REVER)' — conflita com o status atual deste município na base principal; conferir antes de tratar como definitivo."
+  }
+ ],
+ "Araucária|PR": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Salto|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Taboão da Serra|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Nova Lima|MG": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Santa Luzia|MG": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Cotia|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos — \"Tarifa Zero Inclusiva aos Domingos\" — desde jun/2026 (14/06)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Sorocaba|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados (com Cartão Social) — desde jun/2024 (22/06)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "São José do Rio Preto|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Alagoinhas|BA": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde jan/2026 (11/01)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Teresópolis|RJ": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados específicos — \"Domingão Tarifa Zero\" — desde jan/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "São Carlos|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Rio Grande da Serra|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Ribeirão Pires|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Volta Redonda|RJ": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "restrito a bairros/regiões periféricas",
+   "fonte": "tz_bairros_perifericos.csv"
+  }
+ ],
+ "Santo André|SP": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "linha Circular Luzitinha — micro-ônibus em comunidades periféricas (Vila Luzita) — desde abr/2026",
+   "fonte": "tz_bairros_perifericos.csv"
+  }
+ ],
+ "Belford Roxo|RJ": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "linha Jardim Gláucia→centro — desde expansão p/ Bela Vista, Vila Magalhães, Nova Aurora, Shangrilá",
+   "fonte": "tz_bairros_perifericos.csv"
+  }
+ ],
+ "Curitiba|PR": [
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "desempregados (programa dedicado)",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+  }
+ ],
+ "Uberlândia|MG": [
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "passe livre estudantil",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+  }
+ ],
+ "São Caetano do Sul|SP": [
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "restrito a residentes cadastrados (SancaGov) — universalidade revogada em 15/07/2026",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
+   "flag": "Base principal ainda mostra este município como 'Ativa' (TZ universal) — desatualizado desde a revogação de 15/07/2026; aqui já reclassificado para grupo social."
+  }
+ ]
+}</script>
 <script>
 // ---------- load embedded data ----------
 const TOPO = JSON.parse(document.getElementById('topo-data').textContent);
@@ -2307,6 +2566,7 @@ const STATS = JSON.parse(document.getElementById('data-stats').textContent);
 const MUNI_COL = JSON.parse(document.getElementById('data-muni').textContent);
 const FONTES_RAW = JSON.parse(document.getElementById('data-fontes').textContent);
 const NOTICIAS_RAW = JSON.parse(document.getElementById('data-noticias').textContent);
+const CAMADAS_RAW = JSON.parse(document.getElementById('data-camadas').textContent);
 
 // zip columnar municipal data into id -> row object
 const COLS = MUNI_COL.cols;
@@ -2352,6 +2612,22 @@ for (const k in NOTICIAS_RAW) {
   NOTICIAS.set(normKey(nome, uf), NOTICIAS_RAW[k]);
 }
 function noticiasFor(m) { return (m && NOTICIAS.get(normKey(m.nome, m.uf))) || []; }
+
+// ---------- régua descritiva ampliada — camadas 2a/3/4 (além da universal) ----------
+// Consolidação 29/07/2026: 24 temporal-dias + 4 espacial-periférica + 4 grupo social = 32
+// municípios, a pedido do autor ("aplicação de uma régua descritiva... ampliando para além da
+// universal"). Exclui de propósito a camada 2b/temporal-eventos (324 gratuidades eleitorais/
+// pontuais — mesma decisão já tomada para o card "TZ parciais", ver comentário mais abaixo):
+// fenômeno de origem judicial (STF), não adesão municipal voluntária — misturar inflaria o número
+// e mudaria o sentido do que está sendo medido. Um município pode ter mais de uma camada ao mesmo
+// tempo (ex.: Belo Horizonte tem 2a + 3 + 4).
+const CAMADAS = new Map();
+for (const k in CAMADAS_RAW) {
+  const [nome, uf] = k.split('|');
+  CAMADAS.set(normKey(nome, uf), CAMADAS_RAW[k]);
+}
+function camadasFor(m) { return (m && CAMADAS.get(normKey(m.nome, m.uf))) || []; }
+const CAMADA_LABELS = { '2a': 'Temporal (dias)', '3': 'Espacial (periférica)', '4': 'Grupo social' };
 
 // ---------- agregados extras (censo22 modal, série motorização) ----------
 // Pré-computados 26/07/2026 a partir de base_municipal_v3.csv (script avulso, fora do build
@@ -2470,6 +2746,9 @@ for (const f of features) {
     if (m.tz_status === 'Encerrada') el.classList.add('enc');
     gTz.appendChild(el);
   } else {
+    // contorno tracejado para camada parcial (2a/3/4) — só quando o município não já tem
+    // contorno sólido de TZ universal acima (evita duplo contorno e mantém a distinção visual).
+    if (m && camadasFor(m).length) el.classList.add('tzparcial');
     gMun.appendChild(el);
   }
   pathById.set(f.id, el);
@@ -2639,6 +2918,7 @@ function renderLegend() {
   if (state.colorBy === 'tz') {
     html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Ativa</span>
             <span><span class="sw" style="background:${TZ_COLORS_HEX.Encerrada}"></span>Encerrada</span>
+            <span><span class="sw" style="background:${nt.naoTz};border:1px dashed ${TZ_COLORS_HEX.Ativa};"></span>TZ parcial (dias/espacial/grupo social)</span>
             <span><span class="sw" style="background:${nt.naoTz}"></span>Não TZ</span>`;
   } else if (state.colorBy === 'faixa_pop') {
     html = STATS.faixa_order.map(f => `<span><span class="sw" style="background:${FAIXA_COLORS[f]}"></span>${f}</span>`).join('');
@@ -2679,12 +2959,19 @@ function median(arr) {
 }
 
 // ---------- grandes números dinâmicos (reagem ao recorte atual) ----------
-// TZ parciais (Tipologias TZ - consolidado.xlsx, RESUMO, 26/07/2026): 24 temporal-dias +
-// 4 espacial-periférico + 4 grupo social = 32. Exclui de propósito as 324 "temporal-eventos"
-// (gratuidade eleitoral/pontual) — fenômeno qualitativamente diferente (não é política de TZ
-// contínua), somar junto inflaria o número e misturaria categorias. Estático/nacional — ainda
-// não tem recorte por município no painel (fora do escopo do base_municipal_v3.csv atual).
-const TZ_PARCIAIS_N = 32;
+// TZ parciais (camadas_tz.json, 29/07/2026): 24 temporal-dias + 4 espacial-periférico + 4 grupo
+// social = 32 nacionalmente. Exclui de propósito as 324 "temporal-eventos" (gratuidade eleitoral/
+// pontual, decisão do STF) — fenômeno qualitativamente diferente (não é adesão municipal
+// voluntária), somar junto inflaria o número e misturaria categorias. Desde 29/07/2026 tem
+// recorte por município (ver camadasFor()) — o card abaixo agora reage ao filtro atual, como os
+// demais.
+function countParciais(rows) {
+  // mesma regra do contorno no mapa (tzparcial): só conta quem NÃO já está no bucket universal
+  // (Ativa/Encerrada) — evita contar duas vezes um município que aparece nas duas camadas por
+  // desatualização da base principal (ex.: São Caetano do Sul, ainda "Ativa" apesar da revogação
+  // de 15/07/2026 — ver flag no card de detalhe do município).
+  return rows.reduce((n, m) => n + (m.tz_bin !== 'TZ' && camadasFor(m).length ? 1 : 0), 0);
+}
 
 function renderCards() {
   const rows = subsetNoTz();
@@ -2699,7 +2986,7 @@ function renderCards() {
   const cards = [
     { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
     { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas (<b>universal</b>) ${scopeLabel}`, w: warn },
-    { n: TZ_PARCIAIS_N, l: `TZ <b>parciais</b> no Brasil (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
+    { n: countParciais(rows).toLocaleString('pt-BR'), l: `TZ <b>parciais</b> ${scopeLabel} (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
     { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ universal ${scopeLabel}`, w: warn },
     { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ativa ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
     { n: pibMed != null ? 'R$ ' + fmtNum(pibMed) : '—', l: `PIB per capita mediano ${scopeLabel} (2021)` },
@@ -2797,8 +3084,19 @@ function renderDetail(m) {
       <tr><td>PlanMob (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
       ${extra}
     </table>
+    ${renderCamadaDetail(m)}
     ${renderFontesDetail(m)}
     ${renderNoticiasDetail(m)}`;
+}
+
+function renderCamadaDetail(m) {
+  const camadas = camadasFor(m);
+  if (!camadas.length) return '';
+  const items = camadas.map(c => `<li><b>${CAMADA_LABELS[c.camada] || c.camada}</b> — ${c.detalhe || ''}${c.flag ? ` <span style="color:#e2892c;">⚠ ${c.flag}</span>` : ''}</li>`).join('');
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Camada da régua descritiva (${camadas.length})</b>
+    <ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;">${items}</ul>
+  </div>`;
 }
 
 function renderFontesDetail(m) {

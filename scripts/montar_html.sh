@@ -15,9 +15,13 @@
 #   cols=list(d[0].keys()); json.dump({'cols':cols,'data':[[r[c] for c in cols] for r in d]},
 #   open('../build/municipios_dados_col.json','w'), ensure_ascii=False)"
 # Também requer scripts/casos_por_fonte.json (crosswalk estudo/fonte → município, Fase 8 —
-# ver build_crosswalk.py e ROADMAP.md §3) e scripts/casos_por_noticia.json (crosswalk notícia de
+# ver build_crosswalk.py e ROADMAP.md §3), scripts/casos_por_noticia.json (crosswalk notícia de
 # imprensa → município, gerado a partir de 03 - Dados/_data/casos por fonte/reportagens_por_municipio.csv
-# no cofre — ver Consolidação de referências, 27/07/2026).
+# no cofre — ver Consolidação de referências, 27/07/2026) e scripts/camadas_tz.json (crosswalk
+# camada 2a/3/4 da régua descritiva → município, gerado a partir de 03 - Dados/_data/Base Municipal v3/
+# camada2a_temporal_dias_analise.csv + 03 - Dados/_data/casos por fonte/tz_bairros_perifericos.csv +
+# nota "Tipologias de Tarifa Zero (4 camadas)" do cofre — 29/07/2026, exclui de propósito a camada
+# 2b/eleitoral, ver ROADMAP.md).
 
 set -e
 cd "$(dirname "$0")"
@@ -35,6 +39,8 @@ OUT=../painel.html
   cat casos_por_fonte.json
   printf '</script>\n<script id="data-noticias" type="application/json">\n'
   cat casos_por_noticia.json
+  printf '</script>\n<script id="data-camadas" type="application/json">\n'
+  cat camadas_tz.json
   printf '</script>\n<script>\n'
   cat logic.js
   printf '</script>\n</body>\n</html>\n'

@@ -6,7 +6,20 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.4.01 (atual — 2026-07-28)
+## v0.4.02 (atual — 2026-07-29)
+
+Sub-patch de v0.4 (mesma exceção do v0.x.NN, ver `VERSIONING.md`): leva a régua descritiva ampliada — além da universal — para o painel, a pedido do autor. Mesma estrutura de banco (novo crosswalk à parte, `camadas_tz.json`, mesmo padrão de `casos_por_fonte.json`/`casos_por_noticia.json`).
+
+**Régua descritiva ampliada no mapa e no card de município:**
+
+- Novo crosswalk `camadas_tz.json` — 30 municípios com camada 2a (temporal-dias, 24), 3 (espacial-periférica, 4) ou 4 (grupo social, 4) = 32 entradas (Belo Horizonte tem as três). Fontes: `camada2a_temporal_dias_analise.csv` e `tz_bairros_perifericos.csv` (cofre, `03 - Dados/_data/`) + a nota "Tipologias de Tarifa Zero (4 camadas)" para a camada 4 (sem CSV dedicado ainda).
+- **Exclui de propósito a camada 2b/temporal-eventos** (324 gratuidades eleitorais/pontuais, decisão do STF) — mesma decisão já tomada para o card "TZ parciais" na Fase 8: é adesão por obrigação judicial, não escolha municipal, misturar inflaria o número e mudaria o sentido do que está sendo medido.
+- **Mapa:** município com camada parcial e sem TZ universal ganha contorno tracejado amarelo (`.tzparcial`) — visualmente distinto do contorno sólido de TZ universal (`.tzpath`), sem introduzir cor nova (mesmo amarelo da identidade). Legenda atualizada quando o mapa está colorido por status de TZ.
+- **Card de município:** nova seção "Camada da régua descritiva", ao lado de Fontes/Notícias, com o detalhe de cada camada e, quando existente, um alerta de conflito com a base principal.
+- **Card "TZ parciais":** deixa de ser um número estático nacional (32, sem recorte por município) e passa a contar dinamicamente pelo crosswalk, reagindo ao filtro atual (UF/faixa/REGIC/arranjo/modelo) como os demais cards.
+- **Achado de consistência (não resolvido aqui):** 2 dos 30 municípios têm conflito com a base principal — **São Caetano do Sul** ainda consta "Ativa" (universal) na base, mas já é grupo social desde a revogação de 15/07/2026; **Florianópolis** consta "Encerrada" (universal) na base, mas os dados novos sugerem que era, na verdade, temporal-dias (camada 2a) — sinalizado como "REVER" no crosswalk, não alterado no `tz_status` principal sem confirmação do autor. Por isso o card "TZ parciais" (28) exclui esses 2 para não contar duas vezes — ver comentário no código.
+
+## v0.4.01 (2026-07-28)
 
 Sub-patch de v0.4 (decisão do autor — ver `VERSIONING.md` § Exceção sub-patch v0.x.NN): terceira passagem, incorpora os achados da consolidação de referências (bibliografia + notícias mapeadas) feita no cofre a pedido do autor. Mesma estrutura de banco (nenhuma coluna nova na base municipal — dados novos entram como crosswalks à parte, no mesmo padrão do `casos_por_fonte.json` da Fase 8).
 

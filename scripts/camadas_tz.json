@@ -1,0 +1,256 @@
+{
+ "Belém|PA": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde abr/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Belo Horizonte|MG": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — \"Catraca Livre\" — desde dez/2025 (14/12)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  },
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "linhas que atendem vilas e favelas (capital) — desde 2025",
+   "fonte": "tz_bairros_perifericos.csv"
+  },
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "passe livre estudantil",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+  }
+ ],
+ "Brasília|DF": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados (ônibus e metrô) — desde mar/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Cuiabá|MT": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde mai/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Maceió|AL": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos — desde abr/2022",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Palmas|TO": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde mar/2023",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Itapecerica da Serra|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "sábados, domingos e feriados — \"Transporte Para Todos\"",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Ferraz de Vasconcelos|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde jul/2026 (05/07)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Presidente Prudente|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana (sáb/dom) — desde 2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "São Paulo|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos — \"Domingão Tarifa Zero\" — desde dez/2023",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Florianópolis|SC": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "último domingo do mês — \"Domingo na faixa\" — desde jan/2021",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)",
+   "flag": "Status 'JÁ TEMOS (como encerrada — REVER)' — conflita com o status atual deste município na base principal; conferir antes de tratar como definitivo."
+  }
+ ],
+ "Araucária|PR": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Salto|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Taboão da Serra|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Nova Lima|MG": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Santa Luzia|MG": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Cotia|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos — \"Tarifa Zero Inclusiva aos Domingos\" — desde jun/2026 (14/06)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Sorocaba|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados (com Cartão Social) — desde jun/2024 (22/06)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "São José do Rio Preto|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Alagoinhas|BA": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados — desde jan/2026 (11/01)",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Teresópolis|RJ": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados específicos — \"Domingão Tarifa Zero\" — desde jan/2025",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "São Carlos|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Rio Grande da Serra|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Ribeirão Pires|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "domingos e feriados",
+   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
+  }
+ ],
+ "Volta Redonda|RJ": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "restrito a bairros/regiões periféricas",
+   "fonte": "tz_bairros_perifericos.csv"
+  }
+ ],
+ "Santo André|SP": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "linha Circular Luzitinha — micro-ônibus em comunidades periféricas (Vila Luzita) — desde abr/2026",
+   "fonte": "tz_bairros_perifericos.csv"
+  }
+ ],
+ "Belford Roxo|RJ": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "linha Jardim Gláucia→centro — desde expansão p/ Bela Vista, Vila Magalhães, Nova Aurora, Shangrilá",
+   "fonte": "tz_bairros_perifericos.csv"
+  }
+ ],
+ "Curitiba|PR": [
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "desempregados (programa dedicado)",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+  }
+ ],
+ "Uberlândia|MG": [
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "passe livre estudantil",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
+  }
+ ],
+ "São Caetano do Sul|SP": [
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "restrito a residentes cadastrados (SancaGov) — universalidade revogada em 15/07/2026",
+   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
+   "flag": "Base principal ainda mostra este município como 'Ativa' (TZ universal) — desatualizado desde a revogação de 15/07/2026; aqui já reclassificado para grupo social."
+  }
+ ]
+}
