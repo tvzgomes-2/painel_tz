@@ -6,7 +6,24 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.4.03 (atual — 2026-07-29)
+## v0.4.04 (atual — 2026-08-03)
+
+Ampliação do universo canônico da pesquisa (155→170 municípios TZ universal) + parágrafo descritivo de TZ por município. Estrutura de banco intacta (mesmas colunas) — patch, não minor.
+
+**Ampliação do universo canônico:**
+
+- A pesquisa somou **16 casos próprios** de duas varreduras (141 candidatos verificados em 31/07/2026; funil orçamentário via SICONFI em 03/08/2026): **15 municípios com TZ universal ativa** (Maracaí/SP, Jucás/CE, Centenário do Sul/PR, Lidianópolis/PR, Venda Nova do Imigrante/ES, Brodowski/SP, Engenheiro Beltrão/PR, Tarumã/SP, Pains/MG, Rio das Flores/RJ, São Sebastião da Grama/SP, Águas de São Pedro/SP, Pedregulho/SP, Quaraí/RS, Colina/SP) e **1 encerrada** (Getulina/SP, programa "AMIGÃO", 13/04/2026→27/07/2026, encerrado por baixa demanda). Nenhum desses 16 usa a expressão "tarifa zero" nas fontes — todos usam nome próprio de programa, o que já era invisível às buscas usadas até agora.
+- **5 novos casos de TZ parcial** (régua descritiva): Andrelândia/MG e Embu das Artes/SP (temporal-dias); Áurea/RS e Magé/RJ (espacial); Parauapebas/PA (grupo social, caso de transição legislativa). Áurea e Magé têm reclassificação sinalizada como **provisória** (a confirmar pelo autor) — a régua descritiva original as descrevia como "TZ ativa" bruta, mas o serviço não é circular intraurbano típico; o painel mostra a ressalva no card de detalhe do município.
+- **Teresina/PI excluída do universo universal**: é um programa **estadual** de Metrô/VLT, não Tarifa Zero de ônibus municipal — a pesquisa cobre só sistemas de ônibus (decisão do autor, 03/08/2026). O registro **não foi apagado** dos dados (`tz_status` passa a `"Excluída (Metrô/VLT estadual — fora de escopo, 03/08/2026)"`, uma string que não bate com `'Ativa'`/`'Encerrada'` e por isso não conta em `tz_bin`), só sai da tabela pública e dos destaques — critério que já vinha sendo usado para casos como o de São Caetano do Sul (base desatualizada vs. cofre). Teresina era, até então, o maior "sede TZ" do painel (866 mil hab.) — o destaque agora passa para Itapetininga/SP.
+- Totais recalculados com a mesma lógica de `scripts/build_stats.py` (medianas, crosstabs, cortes por faixa/REGIC/arranjo/modelo, destaques) — não só os números do topo. Painel: **159 ativas + 10 encerradas = 169** municípios TZ universal (número um pouco abaixo do canônico do cofre, 170, por uma divergência pré-existente e não resolvida nesta rodada — Palmas-TO aparece 2× no arquivo-fonte como "Encerrada" com datas diferentes, mas o modelo de dados do painel tem uma linha por município). **33 municípios** com TZ parcial (era 28).
+- **Achado de qualidade de dado, registrado:** o dataset municipal do painel (base MUNIC/IBGE) usa o nome pré-2007 "Embu" para o que hoje é oficialmente Embu das Artes/SP (mesmo código IBGE, 3515004) — `camadas_tz.json` ganhou uma chave duplicada (`"Embu|SP"`) só para não perder o cruzamento; o nome exibido no painel é o do dataset ("Embu"), o vault da tese mantém o nome atual correto.
+- Genealogia completa, ressalvas e decisões (inclusive as 3 reclassificações provisórias) documentadas em `CLAUDE.md` e `Pendências.md` do cofre da tese — não duplicadas aqui, ver lá para o detalhe acadêmico.
+
+**Novo: parágrafo descritivo de TZ por município:**
+
+- O card "Município selecionado" ganhou um parágrafo gerado por template (não escrito à mão — cobre todos os municípios do painel, TZ ou não) logo abaixo do nome, explicando a situação de Tarifa Zero daquele município: universal ativa (com início e operador, se houver), encerrada (com período), parcial (com a(s) camada(s) e ressalva de reclassificação provisória, se houver), excluída por escopo (caso Teresina) ou sem TZ mapeada (com a ressalva de que o painel já mediu subnotificação em varreduras anteriores, então ausência aqui não é prova de ausência real). Implementado em `gerarParagrafoTZ()`, reaproveitando os mesmos campos já estruturados (`tz_status`, `tz_ano`, `tz_fim`, `tz_operador`, `camadasFor()`).
+
+## v0.4.03 (2026-07-29)
 
 Sub-patch de v0.4 (mesma exceção do v0.x.NN, ver `VERSIONING.md`): rodada de 8 pontos de melhoria pedidos pelo autor sobre o v0.4.02 ("Tudo nesta rodada (v0.4.03)"), cobrindo rodapé, identidade visual do mapa, régua descritiva, uma página nova de conceitos e um primeiro score de população.
 

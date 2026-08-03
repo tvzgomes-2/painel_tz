@@ -256,5 +256,57 @@
    "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
    "flag": "Base principal ainda mostra este município como 'Ativa' (TZ universal) — desatualizado desde a revogação de 15/07/2026; aqui já reclassificado para grupo social."
   }
+ ],
+ "Andrelândia|MG": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "só terças-feiras",
+   "fonte": "Funil orçamentário SICONFI (03/08/2026) — Pendências.md do cofre"
+  }
+ ],
+ "Embu das Artes|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana e feriados",
+   "fonte": "Funil orçamentário SICONFI (03/08/2026) — Pendências.md do cofre"
+  }
+ ],
+ "Embu|SP": [
+  {
+   "camada": "2a",
+   "label": "Temporal (dias)",
+   "detalhe": "fins de semana e feriados",
+   "fonte": "Funil orçamentário SICONFI (03/08/2026) — Pendências.md do cofre",
+   "flag": "Chave duplicada de propósito: o dataset municipal do painel (MUNIC/IBGE, id 3515004) ainda usa o nome pré-2007 \"Embu\" para o que hoje é oficialmente Embu das Artes/SP — achado de qualidade de dado, registrado para não perder o cruzamento no painel."
+  }
+ ],
+ "Áurea|RS": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "\"Colônia Tur\" — busca famílias no interior para compras/consultas e leva de volta",
+   "fonte": "Achados 141 candidatos (31/07/2026)",
+   "flag": "⚠️ Reclassificação PROVISÓRIA (a confirmar com o autor): é serviço interior↔sede, não circular intraurbano — pode não caber limpo nesta camada."
+  }
+ ],
+ "Magé|RJ": [
+  {
+   "camada": "3",
+   "label": "Espacial (periférica)",
+   "detalhe": "\"Amarelinho\" — 14 linhas fixas gratuitas diárias, não cobre toda a área do município (consórcio pago continua no resto)",
+   "fonte": "Funil orçamentário SICONFI (03/08/2026)",
+   "flag": "Reclassificação provisória (a confirmar com o autor)."
+  }
+ ],
+ "Parauapebas|PA": [
+  {
+   "camada": "4",
+   "label": "Grupo social",
+   "detalhe": "estudantes/candidatos de concurso (Lei 5.629/2026)",
+   "fonte": "Funil orçamentário SICONFI (03/08/2026)",
+   "flag": "⚠️ Caso de transição legislativa: Lei 5.631/2026 institui universalização 'gradual', ainda sem confirmação de vigência para o público geral — símile inverso de São Caetano do Sul. Acompanhar, não tratar como definitivo."
+  }
  ]
 }

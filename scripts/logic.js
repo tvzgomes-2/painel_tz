@@ -662,12 +662,42 @@ function renderTimeline() {
   el.innerHTML = s;
 }
 
+// ---------- parágrafo descritivo de TZ (gerado por template, não escrito à mão — cobre os ~531
+// casos da pesquisa a partir dos campos já estruturados: situação, camada, datas, população, fonte) ----------
+function gerarParagrafoTZ(m) {
+  const nomeUf = `${m.nome} (${m.uf})`;
+  if (m.tz_status === 'Ativa') {
+    const desde = m.tz_ano ? `desde ${m.tz_ano}` : 'desde uma data ainda não determinada nesta pesquisa';
+    const operador = m.tz_operador ? ` A operação é feita por ${m.tz_operador}.` : '';
+    return `${nomeUf} tem <b>Tarifa Zero universal</b> ${desde}: todo o transporte coletivo municipal é gratuito para qualquer usuário, todos os dias.${operador} Isso corresponde aos ${fmtCompact(m.pop)} habitantes do município (Censo 2022), sujeitos aos gaps de estimativa já registrados no painel (ver Score de população).`;
+  }
+  if (m.tz_status === 'Encerrada') {
+    const periodo = (m.tz_ano && m.tz_fim) ? `entre ${m.tz_ano} e ${m.tz_fim}`
+      : (m.tz_ano ? `a partir de ${m.tz_ano}` : 'em um período não totalmente determinado nesta pesquisa');
+    return `${nomeUf} teve <b>Tarifa Zero universal</b> ${periodo}, mas a política foi <b>encerrada</b> e não está mais em vigor hoje. Entra na pesquisa como caso de reversão/trajetória, não como TZ ativa — não contar entre os municípios com gratuidade vigente.`;
+  }
+  if (typeof m.tz_status === 'string' && m.tz_status.startsWith('Excluída')) {
+    return `${nomeUf} tem um programa de gratuidade no transporte, mas foi <b>excluído do universo desta pesquisa por escopo</b>: ${m.tz_status.replace(/^Excluída\s*/, '').replace(/^\(|\)$/g, '')}. A pesquisa cobre apenas sistemas de ônibus municipais — este caso é mantido nos dados só como registro histórico, sem contar no total canônico.`;
+  }
+  const camadas = camadasFor(m);
+  if (camadas.length) {
+    const partes = camadas.map(c => {
+      const label = (CAMADA_LABELS[c.camada] || c.camada).toLowerCase();
+      const prov = c.flag ? ' (classificação provisória, a confirmar)' : '';
+      return `${label}${c.detalhe ? ' — ' + c.detalhe : ''}${prov}`;
+    });
+    return `${nomeUf} não tem Tarifa Zero universal, mas oferece <b>gratuidade parcial</b> no transporte coletivo: ${partes.join('; ')}. Não conta no total de municípios com TZ universal desta pesquisa, mas soma-se ao universo ampliado de casos mapeados pela régua descritiva.`;
+  }
+  return `${nomeUf} não tem nenhuma política de Tarifa Zero (universal ou parcial) mapeada até agora nesta pesquisa. Isso não significa necessariamente que o município nunca teve ou não tenha um programa de gratuidade — varreduras anteriores já mediram subnotificação nas fontes usuais (ver Achados de TZ não mapeada, 31/07-03/08/2026) — apenas que não há registro no levantamento atual.`;
+}
+
 // ---------- detail panel ----------
 function renderDetail(m) {
   const el = document.getElementById('detail');
   if (!m) { el.innerHTML = '<div class="empty">Clique em um município no mapa ou na lista abaixo.</div>'; return; }
   const tzTag = m.tz_status === 'Ativa' ? '<span class="tag ativa">TZ ativa</span>'
     : m.tz_status === 'Encerrada' ? '<span class="tag encerrada">TZ encerrada</span>' : '';
+  const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>`;
   let extra = '';
   if (m.tz_bin === 'TZ') {
     extra = `<tr><td>Início TZ</td><td>${m.tz_ano ?? '—'}</td></tr>
@@ -676,6 +706,7 @@ function renderDetail(m) {
              <tr><td>Operador</td><td>${m.tz_operador ?? '—'}</td></tr>`;
   }
   el.innerHTML = `<div><b style="font-size:15px;">${m.nome} – ${m.uf}</b> ${tzTag}</div>
+    ${paragrafoTZ}
     <table style="margin-top:8px;">
       <tr><td>Região</td><td>${m.regiao}</td></tr>
       <tr><td>Hierarquia REGIC</td><td>${m.regic_label ?? '—'}</td></tr>
