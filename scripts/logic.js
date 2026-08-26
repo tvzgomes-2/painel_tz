@@ -5,6 +5,13 @@ const MUNI_COL = JSON.parse(document.getElementById('data-muni').textContent);
 const FONTES_RAW = JSON.parse(document.getElementById('data-fontes').textContent);
 const NOTICIAS_RAW = JSON.parse(document.getElementById('data-noticias').textContent);
 const CAMADAS_RAW = JSON.parse(document.getElementById('data-camadas').textContent);
+// Fase 11 / Bloco 3 (26/08/2026). Os dois crosswalks abaixo são chaveados por
+// código IBGE (string) — não por "Município|UF" como os antigos. Escolha
+// deliberada: o código não sofre do problema de grafia que já obrigou uma chave
+// duplicada em camadas_tz.json (caso "Embu" x "Embu das Artes").
+const MODAL_RAW = JSON.parse(document.getElementById('data-modal').textContent);
+const GRUPOS_RAW = JSON.parse(document.getElementById('data-grupos').textContent);
+const LEGISLACAO_RAW = JSON.parse(document.getElementById('data-legislacao').textContent);
 
 // zip columnar municipal data into id -> row object
 const COLS = MUNI_COL.cols;
@@ -65,6 +72,61 @@ for (const k in CAMADAS_RAW) {
   CAMADAS.set(normKey(nome, uf), CAMADAS_RAW[k]);
 }
 function camadasFor(m) { return (m && CAMADAS.get(normKey(m.nome, m.uf))) || []; }
+
+// ---------- 11.9: partição modal do município (Censo 2022) ----------
+// Mesmos 5 baldes do gráfico nacional TZ × não-TZ, para as duas leituras ficarem
+// na mesma gramática. `t` é a soma bruta dos percentuais do Censo antes da
+// normalização (mediana 98,75%): abaixo de 95% o painel avisa em vez de fingir
+// precisão que o dado não tem.
+function modalFor(m) { return (m && MODAL_RAW[String(m.id)]) || null; }
+
+// ---------- 11.10 / 11.11: grupos econômicos por município ----------
+// Exposição mínima (decisão do autor, 26/08/2026): só o nome do grupo. O código
+// GE-xxx aparece no rótulo apenas quando o nome é ambíguo — 20 nomes da base são
+// homônimos (sobrenomes usados por grupos distintos: "Santos" são 7 grupos
+// diferentes). Sem essa desambiguação, contar alcance por nome fundiria grupos
+// separados e inflaria o alcance deles.
+function gruposFor(m) { return (m && GRUPOS_RAW[String(m.id)]) || []; }
+
+// ---------- 8.4: base legal da TZ no município (levantamento jul/2026) ----------
+// 137 municípios verificados, 62 com norma localizada. O levantamento é anterior à
+// ampliação do universo canônico (03/08/2026), então 33 dos 169 municípios TZ de
+// hoje não estavam nele — o card diz isso em vez de deixar o silêncio sugerir que
+// não há norma.
+function legislacaoFor(m) { return (m && LEGISLACAO_RAW[String(m.id)]) || null; }
+
+const CONF_LABEL = {
+  'alta': 'confiabilidade alta — confirmado em fonte primária',
+  'média': 'confiabilidade média — número não confirmado em fonte primária',
+  'baixa': 'confiabilidade baixa — número não verificado',
+};
+
+function renderLegislacaoDetail(m) {
+  const L = legislacaoFor(m);
+  const ehTZ = m.tz_bin === 'TZ';
+  if (!L) {
+    if (!ehTZ) return '';
+    return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+      <b style="font-size:12.5px;">Base legal</b>
+      <p style="margin:5px 0 0;font-size:12px;color:var(--muted);line-height:1.5;">Não verificado. O levantamento legal cobriu 137 municípios (jul/2026), anterior à ampliação do universo desta pesquisa — este caso entrou depois e ainda não passou pela busca de norma.</p>
+    </div>`;
+  }
+  const linhas = [];
+  if (L.norma) {
+    const conf = L.conf ? ` <span class="tag ${L.conf === 'alta' ? 'ativa' : 'parcial'}" title="${CONF_LABEL[L.conf] || ''}">${L.conf}</span>` : '';
+    linhas.push(`<div style="font-size:12.5px;color:var(--text);margin-top:4px;"><b>${L.norma}</b>${conf}</div>`);
+  } else {
+    linhas.push('<div style="font-size:12px;color:var(--muted);margin-top:4px;">Norma não localizada em fonte pública — a gratuidade costuma ter sido implantada por via administrativa (licitação deserta, contrato de concessão) ou por decreto não divulgado.</div>');
+  }
+  const extra = [];
+  if (L.mecanismo) extra.push(`<b>Mecanismo:</b> ${L.mecanismo}`);
+  if (L.fundo) extra.push('<b>Fundo municipal</b> criado na própria lei');
+  if (extra.length) linhas.push(`<div style="font-size:12px;color:var(--muted);margin-top:4px;">${extra.join(' · ')}</div>`);
+  if (L.nota) linhas.push(`<div style="font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.5;"><i>${L.nota}</i></div>`);
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Base legal</b>${linhas.join('')}
+  </div>`;
+}
 const CAMADA_LABELS = { '2a': 'Temporal (dias)', '3': 'Espacial (periférica)', '4': 'Grupo social' };
 
 // ---------- lista de municípios com TZ parcial (para a tabela "Municípios com Tarifa Zero") ----------
@@ -425,6 +487,9 @@ function render() {
   renderLegend();
   renderBars();
   renderCards();
+  renderGrupos();
+  renderRegiaoUf();
+  renderDispersao();
   renderTimeline();
   renderPopScore();
 }
@@ -503,8 +568,14 @@ function renderCards() {
   const scopeLabel = hasFilter ? 'no recorte' : 'no Brasil';
   const smallN = tzRows.length > 0 && tzRows.length < 5;
   const warn = smallN ? '<span class="warn-n">⚠ amostra pequena</span>' : '';
+  // 11.8: quantos municipios declararam ter sistema de onibus. Responde ao recorte,
+  // como os demais cards. Nacionalmente da 1.727 — que e o mesmo numero que o
+  // glossario cita, e sao 31% dos municipios: amostra parcial, nao painel nacional.
+  // A ressalva viaja junto com o numero, no proprio rotulo do card.
+  const comOnibus = rows.reduce((n, m) => n + (m.modelo_prestacao ? 1 : 0), 0);
   const cards = [
     { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
+    { n: comOnibus.toLocaleString('pt-BR'), l: `Com sistema de ônibus declarado ${scopeLabel} (MUNIC 2020 — só 31% dos municípios responderam; ausência aqui não é prova de ausência)` },
     { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas (<b>universal</b>) ${scopeLabel}`, w: warn },
     { n: countParciais(rows).toLocaleString('pt-BR'), l: `TZ <b>parciais</b> ${scopeLabel} (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
     { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ universal ${scopeLabel}`, w: warn },
@@ -697,6 +768,12 @@ function renderDetail(m) {
   if (!m) { el.innerHTML = '<div class="empty">Clique em um município no mapa ou na lista abaixo.</div>'; return; }
   const tzTag = m.tz_status === 'Ativa' ? '<span class="tag ativa">TZ ativa</span>'
     : m.tz_status === 'Encerrada' ? '<span class="tag encerrada">TZ encerrada</span>' : '';
+  // 11.7: a camada da regua descritiva era uma lista no fim do card, depois de ~16
+  // linhas de tabela. Sobe para tag ao lado do status de TZ; o detalhe (ressalvas,
+  // pop. estimada, flags) continua embaixo, em renderCamadaDetail().
+  const camadasTag = camadasFor(m).map(c =>
+    `<span class="tag parcial" title="Camada ${c.camada} da régua descritiva${c.detalhe ? ' — ' + c.detalhe : ''}">${CAMADA_LABELS[c.camada] || c.camada}${c.flag ? ' ⚠' : ''}</span>`
+  ).join(' ');
   const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>`;
   let extra = '';
   if (m.tz_bin === 'TZ') {
@@ -705,13 +782,13 @@ function renderDetail(m) {
              <tr><td>% orçamento (fonte)</td><td>${m.tz_pct_orc ?? '—'}</td></tr>
              <tr><td>Operador</td><td>${m.tz_operador ?? '—'}</td></tr>`;
   }
-  el.innerHTML = `<div><b style="font-size:15px;">${m.nome} – ${m.uf}</b> ${tzTag}</div>
+  el.innerHTML = `<div><b style="font-size:15px;">${m.nome} – ${m.uf}</b> ${tzTag}${camadasTag ? ' ' + camadasTag : ''}</div>
     ${paragrafoTZ}
     <table style="margin-top:8px;">
       <tr><td>Região</td><td>${m.regiao}</td></tr>
-      <tr><td>Hierarquia REGIC</td><td>${m.regic_label ?? '—'}</td></tr>
+      <tr><td>Hierarquia urbana</td><td>${m.regic_label ?? '—'}</td></tr>
       <tr><td>Arranjo metropolitano</td><td>${m.tipo_arranjo ?? '—'}${m.arranjo_nome ? ' — ' + m.arranjo_nome : ''}</td></tr>
-      <tr><td>Modelo de prestação (MUNIC 2020)</td><td>${m.modelo_prestacao ?? 'sem dado'}</td></tr>
+      <tr><td>Modelo de prestação</td><td>${m.modelo_prestacao ?? 'sem dado'}</td></tr>
       <tr><td>Faixa populacional</td><td>${m.faixa_pop}</td></tr>
       <tr><td>População (2022)</td><td>${fmtNum(m.pop)}</td></tr>
       <tr><td>PIB per capita (2021)</td><td>R$ ${fmtNum(m.pib_pc)}</td></tr>
@@ -721,14 +798,53 @@ function renderDetail(m) {
       <tr><td>Receita própria per capita</td><td>R$ ${fmtNum(m.rec_prop_pc)}</td></tr>
       <tr><td>Óbitos no trânsito /100mil (2019)</td><td>${fmtNum(m.taxa_obitos_transito)}</td></tr>
       <tr><td>Tarifa</td><td>${m.tz_status === 'Ativa' ? 'Gratuito (TZ universal)' : (m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) + ' (' + m.tarifa_ano + ', ' + m.tarifa_fonte + ')' : 'sem dado')}</td></tr>
-      <tr><td>% custo subsidiado (NTU)</td><td>${m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '% (' + m.subsidio_ntu_ano + ')' : 'sem dado'}</td></tr>
+      <tr><td>% do custo subsidiado</td><td>${m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '% (' + m.subsidio_ntu_ano + ')' : 'sem dado'}</td></tr>
       <tr><td>Plano Diretor</td><td>${m.plano_diretor ?? '—'}</td></tr>
       <tr><td>PlanMob (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
       ${extra}
     </table>
+    ${renderLegislacaoDetail(m)}
+    ${renderModalDetail(m)}
+    ${renderGruposDetail(m)}
     ${renderCamadaDetail(m)}
     ${renderFontesDetail(m)}
     ${renderNoticiasDetail(m)}`;
+}
+
+function renderModalDetail(m) {
+  const d = modalFor(m);
+  if (!d) return '';
+  const segs = ['onibus', 'automovel', 'motocicleta', 'ativo', 'outros']
+    .map(k => ({ k, v: d[k] || 0 }));
+  const bar = segs.map(s => `<div class="seg" style="width:${s.v.toFixed(2)}%;background:${MODAL_STACK_COLORS[s.k]};" title="${MODAL_STACK_LABELS[s.k]}: ${s.v.toFixed(1)}%"></div>`).join('');
+  const principal = segs.slice().sort((a, b) => b.v - a.v)[0];
+  const ressalva = (d.t != null && d.t < 95)
+    ? ` <span style="color:#e2892c;">⚠ o Censo só classifica ${d.t.toFixed(0)}% dos deslocamentos deste município; os percentuais foram normalizados para 100%.</span>`
+    : '';
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Partição modal (Censo 2022)</b>
+    <div class="msbar" style="height:22px;margin-top:6px;">${bar}</div>
+    <div class="mslegend" style="margin-top:6px;">${segs.map(s =>
+      `<span><i style="background:${MODAL_STACK_COLORS[s.k]}"></i>${MODAL_STACK_LABELS[s.k]} ${s.v.toFixed(1)}%</span>`).join('')}</div>
+    <p style="margin:6px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5;">Modo principal de deslocamento para trabalho e estudo: <b>${MODAL_STACK_LABELS[principal.k]}</b> (${principal.v.toFixed(1)}%).${ressalva}</p>
+  </div>`;
+}
+
+function renderGruposDetail(m) {
+  const gs = gruposFor(m);
+  if (!gs.length) {
+    // ausencia aqui nao e prova de ausencia: o levantamento cobre 796 municipios,
+    // nao os 5.570 — dizer isso e mais honesto que omitir a secao.
+    return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+      <b style="font-size:12.5px;">Grupos econômicos do transporte</b>
+      <p style="margin:5px 0 0;font-size:12px;color:var(--muted);line-height:1.5;">Nenhum grupo mapeado neste município. O levantamento cobre 796 municípios — ausência aqui significa que não há registro, não que não haja operador.</p>
+    </div>`;
+  }
+  const items = gs.map(g => `<li>${g[0]}</li>`).join('');
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Grupos econômicos do transporte (${gs.length})</b>
+    <ul class="grupos">${items}</ul>
+  </div>`;
 }
 
 function renderCamadaDetail(m) {
@@ -744,7 +860,12 @@ function renderCamadaDetail(m) {
 function renderFontesDetail(m) {
   const fontes = fontesFor(m);
   if (!fontes.length) return '';
-  const items = fontes.map(f => `<li><b>${f.fonte}</b>${f.ano ? ' (' + f.ano + ')' : ''} — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
+  // 11.2: o campo `ano` do crosswalk e o ano de ADOCAO da TZ naquele municipio,
+  // nao o ano de publicacao — exibi-lo entre parenteses colado na citacao curta
+  // ("Santini 2019 (2015)") lia-se como se fosse a data da obra. O ano de
+  // publicacao ja esta na propria citacao; o de adocao ja aparece na linha
+  // "Inicio TZ" da tabela acima e na coluna Inicio da lista de municipios.
+  const items = fontes.map(f => `<li><b>${f.fonte}</b> — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
   return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
     <b style="font-size:12.5px;">Fontes (${fontes.length})</b>
     <ul style="margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;">${items}</ul>
@@ -854,43 +975,188 @@ function renderModalStack() {
   el.innerHTML = html;
 }
 
-// ---------- referências bibliográficas ABNT (estudos acadêmicos citados no repositório de fontes) ----------
-// Citekeys conferidos em biblioteca.bib (05 - Referências/_zotero): santini2019, angelo2023,
-// vermander2021, brinco2018 (fonte citada como "brinco 2017", ano do artigo na FEE; citekey do
-// Zotero usa 2018, ano dos direitos autorais — mantido "2017" na citação curta por já estar em uso
-// no crosswalk de casos_por_fonte.json). "Pereira 2023" (Thais Fernandes Pereira, XIII Seminário
-// Discente de Ciência Política da USP) ainda não tem citekey BBT no .bib (entrada sem chave).
+// ---------- 3.3: TZ por região e por UF (pendente desde v0.3) ----------
+// Proporção de municípios com histórico de TZ universal DENTRO de cada categoria.
+// Mesma leitura do painel "% por eixo", em dois recortes territoriais que faltavam.
+// O n de cada barra vai junto: uma UF com 2 municípios TZ em 20 dá 10%, e sem o n
+// isso se lê como se fosse comparável a São Paulo.
+function renderRegiaoUf() {
+  const el = document.getElementById('regiaoUf');
+  if (!el) return;
+  const rows = subsetNoTz();
+
+  const agrupa = (chave) => {
+    const mapa = new Map();
+    for (const m of rows) {
+      const k = m[chave];
+      if (k == null || k === '') continue;
+      let g = mapa.get(k);
+      if (!g) { g = { tot: 0, tz: 0 }; mapa.set(k, g); }
+      g.tot++;
+      if (m.tz_bin === 'TZ') g.tz++;
+    }
+    return [...mapa.entries()]
+      .map(([k, g]) => ({ k, ...g, pct: 100 * g.tz / g.tot }))
+      .sort((a, b) => b.pct - a.pct || b.tz - a.tz);
+  };
+
+  const bloco = (titulo, lista) => {
+    if (!lista.length) return '';
+    const max = Math.max(...lista.map(x => x.pct)) || 1;
+    const bars = lista.map(x => `<div class="gerow" title="${x.k}: ${x.tz} de ${x.tot} municípios com TZ">
+      <div class="gelab">${x.k}</div>
+      <div class="getrack"><div class="gefill" style="width:${(100 * x.pct / max).toFixed(1)}%;background:var(--amarelo);"></div></div>
+      <div class="geval">${x.pct.toFixed(1)}% <span style="opacity:.65;">(${x.tz}/${x.tot})</span></div>
+    </div>`).join('');
+    return `<div><h3 style="font-size:12.5px;margin:0 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;">${titulo}</h3><div class="gebars">${bars}</div></div>`;
+  };
+
+  const porUf = agrupa('uf');
+  el.innerHTML = `<div class="ruGrid">
+    ${bloco('Por região', agrupa('regiao'))}
+    ${bloco(`Por UF (${porUf.length})`, porUf)}
+  </div>`;
+}
+
+// ---------- 3.4: dispersão PIB per capita × motorização (pendente desde v0.3) ----------
+// O painel de medianas comprime cada grupo num ponto só; a dispersão mostra a
+// sobreposição real entre TZ e não-TZ — que é grande, e é justamente o que uma
+// comparação de medianas esconde. Eixo X em escala log: PIB per capita é muito
+// assimétrico e, em escala linear, 95% dos municípios viram uma mancha à esquerda.
+function renderDispersao() {
+  const svg = document.getElementById('dispersao');
+  if (!svg) return;
+  const rows = subsetNoTz().filter(m => m.pib_pc > 0 && m.motorizacao > 0);
+  const W = 760, H = 380, ML = 56, MR = 14, MT = 14, MB = 40;
+  const xs = rows.map(m => Math.log10(m.pib_pc)), ys = rows.map(m => m.motorizacao);
+  if (!rows.length) { svg.innerHTML = ''; return; }
+  const xMin = Math.min(...xs), xMax = Math.max(...xs);
+  const yMax = Math.min(Math.max(...ys), 2.0);   // corta a cauda extrema de motorização
+  const px = v => ML + (Math.log10(v) - xMin) / (xMax - xMin || 1) * (W - ML - MR);
+  const py = v => H - MB - Math.min(v, yMax) / (yMax || 1) * (H - MT - MB);
+
+  const naoTz = [], tz = [];
+  for (const m of rows) (m.tz_bin === 'TZ' ? tz : naoTz).push(m);
+  const ponto = (m, cor, r, op) =>
+    `<circle cx="${px(m.pib_pc).toFixed(1)}" cy="${py(m.motorizacao).toFixed(1)}" r="${r}" fill="${cor}" opacity="${op}"><title>${m.nome} – ${m.uf}\nPIB pc: R$ ${Math.round(m.pib_pc).toLocaleString('pt-BR')}\nMotorização: ${m.motorizacao.toFixed(3)}</title></circle>`;
+
+  const ticksX = [1000, 5000, 10000, 25000, 50000, 100000, 250000].filter(v => Math.log10(v) >= xMin && Math.log10(v) <= xMax);
+  const eixoX = ticksX.map(v => `<line x1="${px(v)}" y1="${MT}" x2="${px(v)}" y2="${H - MB}" stroke="var(--border)" stroke-width="1" opacity=".5"/>
+    <text x="${px(v)}" y="${H - MB + 15}" fill="var(--muted)" font-size="10" text-anchor="middle">${v >= 1000 ? (v / 1000) + 'k' : v}</text>`).join('');
+  const nTicksY = 4;
+  const eixoY = Array.from({ length: nTicksY + 1 }, (_, i) => {
+    const v = yMax * i / nTicksY;
+    return `<line x1="${ML}" y1="${py(v)}" x2="${W - MR}" y2="${py(v)}" stroke="var(--border)" stroke-width="1" opacity=".5"/>
+      <text x="${ML - 8}" y="${py(v) + 3}" fill="var(--muted)" font-size="10" text-anchor="end">${v.toFixed(2)}</text>`;
+  }).join('');
+
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = eixoX + eixoY +
+    naoTz.map(m => ponto(m, 'var(--muted)', 1.6, .28)).join('') +
+    tz.map(m => ponto(m, m.tz_status === 'Encerrada' ? 'var(--rosa)' : 'var(--amarelo)', 3.1, .95)).join('') +
+    `<text x="${ML + (W - ML - MR) / 2}" y="${H - 4}" fill="var(--muted)" font-size="11" text-anchor="middle">PIB per capita (R$, escala log)</text>
+     <text x="14" y="${MT + (H - MT - MB) / 2}" fill="var(--muted)" font-size="11" text-anchor="middle" transform="rotate(-90 14 ${MT + (H - MT - MB) / 2})">Motorização (veíc/hab)</text>`;
+
+  const leg = document.getElementById('dispersaoLegenda');
+  if (leg) leg.innerHTML = `<span><i style="background:var(--amarelo)"></i>TZ ativa (${tz.filter(m => m.tz_status === 'Ativa').length})</span>
+    <span><i style="background:var(--rosa)"></i>TZ encerrada (${tz.filter(m => m.tz_status === 'Encerrada').length})</span>
+    <span><i style="background:var(--muted)"></i>Não-TZ (${naoTz.length.toLocaleString('pt-BR')})</span>`;
+}
+
+// ---------- 11.10: concentração dos grupos econômicos (26/08/2026) ----------
+// Conta alcance por ID de grupo, não por nome (ver nota em gruposFor): 20 nomes da
+// base são homônimos. Responde ao recorte atual, como os demais painéis — com o
+// filtro nacional, os 12 maiores são todos de ID único, então o topo do gráfico não
+// muda por causa disso; a correção pega a cauda.
+const GE_TOP_N = 15;
+
+function renderGrupos() {
+  const el = document.getElementById('grupos');
+  if (!el) return;
+  const rows = subsetNoTz();
+  const alcance = new Map();   // id -> { rot, munis, tz }
+  for (const m of rows) {
+    for (const [rot, id] of gruposFor(m)) {
+      let g = alcance.get(id);
+      if (!g) { g = { rot, munis: 0, tz: 0 }; alcance.set(id, g); }
+      g.munis++;
+      if (m.tz_bin === 'TZ') g.tz++;
+    }
+  }
+  const comGrupo = rows.reduce((n, m) => n + (gruposFor(m).length ? 1 : 0), 0);
+  if (!alcance.size) {
+    el.innerHTML = '<p class="sub">Nenhum grupo econômico mapeado no recorte atual.</p>';
+    return;
+  }
+  const lista = [...alcance.values()].sort((a, b) => b.munis - a.munis || a.rot.localeCompare(b.rot));
+  const top = lista.slice(0, GE_TOP_N);
+  const max = top[0].munis;
+  const bars = top.map(g => {
+    const tzTxt = g.tz ? ` · ${g.tz} com TZ` : '';
+    return `<div class="gerow" title="${g.rot}: ${g.munis} município(s)${tzTxt}">
+      <div class="gelab">${g.rot}</div>
+      <div class="getrack"><div class="gefill" style="width:${(100 * g.munis / max).toFixed(1)}%;"></div></div>
+      <div class="geval">${g.munis}${tzTxt ? ` (${g.tz} TZ)` : ''}</div>
+    </div>`;
+  }).join('');
+  const resto = lista.length - top.length;
+  const plural = (n, s, p) => `${n.toLocaleString('pt-BR')} ${n === 1 ? s : p}`;
+  el.innerHTML = `<p class="sub" style="margin-bottom:4px;">${plural(alcance.size, 'grupo mapeado', 'grupos mapeados')} no recorte, atuando em ${plural(comGrupo, 'município', 'municípios')}. Barras = número de municípios onde o grupo aparece; entre parênteses, quantos desses têm Tarifa Zero.</p>
+    <div class="gebars">${bars}</div>
+    ${resto > 0 ? `<p class="sub" style="margin-top:8px;">Mostrando os ${GE_TOP_N} de maior alcance — outros ${resto.toLocaleString('pt-BR')} grupos do recorte não aparecem no gráfico.</p>` : ''}`;
+}
+
+// ---------- referências bibliográficas ABNT ----------
+// Uma lista só (decisão do autor, 26/08/2026 — item 11.3): cobre TODAS as citações
+// curtas que aparecem na coluna "Fontes" da tabela e no card do município, e nada
+// além delas. A lista anterior tinha 5 entradas para 15 citações em uso (regressão
+// da rodada v0.5, item 11.14) e uma segunda lista de "referências adicionais"
+// que expunha notas internas de trabalho ao leitor ("a conferir antes de citar",
+// "possível duplicata") e fontes de dado que não são bibliografia de TZ (CEM,
+// IBGE/MUNIC). Essas notas saíram do painel e viraram pendência no ROADMAP (11.13).
+//
+// Citekeys conferidos em biblioteca.bib (05 - Referências/_zotero) onde existem:
+// santini2019, angelo2023, vermander2021, brinco2018 (citação curta mantida como
+// "brinco 2017", ano do artigo na FEE, por já estar em uso no crosswalk).
 const REFERENCIAS_ABNT = [
-  { chave: 'Santini 2019', ref: 'SANTINI, Daniel et al. <i>Passe livre</i>: as possibilidades da tarifa zero contra a distopia da uberização. São Paulo: Autonomia Literária: Fundação Rosa Luxemburgo, 2019.' },
-  { chave: 'Pereira 2023', ref: 'PEREIRA, Thais Fernandes. As capacidades estatais das cidades brasileiras com tarifa zero no transporte público. In: SEMINÁRIO DISCENTE DA PÓS-GRADUAÇÃO EM CIÊNCIA POLÍTICA DA USP, 13., 2023, São Paulo. <i>Anais eletrônicos</i> [...]. São Paulo: USP, 2023.' },
   { chave: 'Angelo 2023', ref: 'ANGELO, Danielle Andrade. <i>Tarifa Zero</i>: formas de financiamento e experiências nacionais. 2023. Trabalho de Conclusão de Curso (Graduação em Planejamento Territorial) – Universidade Federal do ABC, São Bernardo do Campo, 2023.' },
-  { chave: 'Vermander 2021', ref: 'VERMANDER, Marijke. <i>Exploring fare-free public transport in Brazil</i>: rationales and characteristics of Tarifa Zero policies in small Brazilian municipalities. 2021. Dissertação (Mestrado) – Vrije Universiteit Brussel, Bruxelas, 2021.' },
   { chave: 'brinco 2017', ref: 'BRINCO, Ricardo. Tarifação e gratuidade no transporte público urbano. <i>Indicadores Econômicos FEE</i>, Porto Alegre, v. 45, n. 2, p. 79-96, 2017.' },
+  { chave: 'Campos et al. 2023', ref: 'CAMPOS, Júlia Pereira <i>et al.</i> Avaliação da qualidade do transporte público de Mariana (MG) com a implantação da política tarifa zero: uma comparação entre a perspectiva do usuário e a técnica. In: CONGRESSO DE PESQUISA E ENSINO EM TRANSPORTES, 37., 2023, Santos. <i>Anais</i>. Santos: ANPET, 2023.' },
+  { chave: 'Costa & Sampaio 2024', ref: 'COSTA, Matheus Gregorini; SAMPAIO, Joelson Oliveira Ubida. Análise da viabilidade financeira da implementação da política de tarifa zero no transporte público urbano por ônibus em grandes municípios brasileiros. <i>Revista Delos</i>, v. 17, n. 61, p. e2597, 8 nov. 2024.' },
+  { chave: 'Gomes et al. 2023', ref: 'GOMES, Thiago Von Zeidler; BAIARDI, Yara Cristina Labronici; ZIONI, Silvana. Caminhos para uma nova gestão e financiamento do Transporte Público Coletivo: experiências de Tarifa Zero na macrometrópole paulista. <i>Journal of Sustainable Urban Mobility</i>, v. 3, n. 1, p. 96-110, mar. 2023.' },
+  { chave: 'Gonçalves & Santini 2023', ref: 'GONÇALVES, Cristiane Costa; SANTINI, Daniel. Tarifa Zero, segregação e desigualdade social: um estudo de caso sobre a experiência de Mariana (MG). <i>Journal of Sustainable Urban Mobility</i>, v. 3, n. 1, p. 111-121, 20 mar. 2023.' },
+  { chave: 'Landin 2022', ref: 'LANDIN, Lucas de Paula. <i>Tarifa Zero</i>: la financiación del transporte público gratuito en el Municipio de Vargem Grande Paulista. 2022. Dissertação (Mestrado) – Universidad de Chile, Santiago, 2022.' },
+  { chave: 'Lima & Kraus Junior 2021', ref: 'LIMA, Lucas Franco; KRAUS JUNIOR, Werner. Experiências de transporte público por passe livre. In: CONGRESSO DE PESQUISA E ENSINO EM TRANSPORTES, 35., 2021. <i>Anais</i>. [<i>S. l.</i>]: ANPET, 2021.' },
+  { chave: 'Lopes & Muniz 2021', ref: 'LOPES, Neiva Aparecida Pereira; MUNIZ, R. M. Transporte público gratuito ou tarifa zero em Monte Carmelo/MG? <i>Revista de Gestão Pública</i>, 2021.' },
+  { chave: 'Pereira 2023', ref: 'PEREIRA, Thais Fernandes. As capacidades estatais das cidades brasileiras com tarifa zero no transporte público. In: SEMINÁRIO DISCENTE DA PÓS-GRADUAÇÃO EM CIÊNCIA POLÍTICA DA USP, 13., 2023, São Paulo. <i>Anais eletrônicos</i> [...]. São Paulo: USP, 2023.' },
+  { chave: 'Pereira 2024', ref: 'PEREIRA, Thais Fernandes. <i>A política de isenção de tarifa no transporte público</i>: uma análise política dos casos brasileiros. 2024. Dissertação (Mestrado) – Universidade de São Paulo, São Paulo, 2024.' },
+  { chave: 'Santini 2019', ref: 'SANTINI, Daniel <i>et al.</i> <i>Passe livre</i>: as possibilidades da tarifa zero contra a distopia da uberização. São Paulo: Autonomia Literária: Fundação Rosa Luxemburgo, 2019.' },
+  { chave: 'Santini 2023', ref: 'SANTINI, Daniel. <i>Tarifa Zero e desigualdade social</i>: um estudo de caso sobre a experiência de Mariana (MG). 2023. Dissertação (Mestrado) – Universidade de São Paulo, São Paulo, 2023.' },
+  { chave: 'Santini et al. 2024', ref: 'SANTINI, Daniel <i>et al.</i> A experiência de Tarifa Zero no transporte público de São Caetano do Sul. In: CONGRESSO DE PESQUISA E ENSINO EM TRANSPORTES, 38., 2024, Florianópolis. <i>Anais</i>. Florianópolis: ANPET, 2024.' },
+  { chave: 'Vermander 2021', ref: 'VERMANDER, Marijke. <i>Exploring fare-free public transport in Brazil</i>: rationales and characteristics of Tarifa Zero policies in small Brazilian municipalities. 2021. Dissertação (Mestrado) – Vrije Universiteit Brussel, Bruxelas, 2021.' },
 ];
 
-// Referências levantadas na consolidação bibliográfica de 27/07/2026 (fontes: artigo ANPET/versão
-// cega, PGT092 — bibliografia + anexo de artigos selecionados, Observatório de Tarifa Zero — 3
-// documentos do autor). Conferidas contra biblioteca.bib (leitura completa via bibtexparser +
-// similaridade de título, não só sobrenome+ano) — nenhuma das 8 abaixo tem citekey no Zotero.
-// Ainda não vinculadas a um município específico no crosswalk de Fontes (por isso ficam separadas
-// da lista acima, que é só sobre os estudos citados nesse crosswalk).
-const REFERENCIAS_ADICIONAIS = [
-  { chave: 'Landin 2022', ref: 'LANDIN, Lucas de Paula. <i>Tarifa Zero</i>: la financiación del transporte público gratuito en el Municipio de Vargem Grande Paulista. 2022. Dissertação (Mestrado) – Universidad de Chile, Santiago, 2022.' },
-  { chave: 'Campos; Santini 2024', ref: 'CAMPOS, Marcos; SANTINI, Daniel. Os sentidos da gratuidade universal no Brasil. In: <i>Institucionalização simbólica nas interações socioestatais</i>. Rio de Janeiro: EdUERJ, 2024. (referência incompleta na fonte de origem — capítulo/organizador(es) do livro a conferir antes de citar).' },
-  { chave: 'CEM [s.d.]', ref: 'CENTRO DE ESTUDOS DA METRÓPOLE (CEM). <i>Base cartográfica digital georreferenciada das sedes municipais brasileiras 2010</i>. São Paulo: CEM, [s.d.]. Disponível em: https://centrodametropole.fflch.usp.br/pt-br/file/17640/download?token=K0XXrRXh. Acesso em: 27 jul. 2026.' },
-  { chave: 'Fearnley 2013', ref: 'FEARNLEY, N. Free fares policies: impact on public transport mode share and other transport policy goals. <i>[periódico não especificado na fonte de origem — a conferir antes de citar]</i>, 2013.' },
-  { chave: 'IBGE 2020', ref: 'INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA (IBGE). <i>Munic 2020</i>: pesquisa de informações básicas municipais. Rio de Janeiro: IBGE, 2020.' },
-  { chave: 'Silva 2017', ref: 'SILVA, M. de L. <i>A gestão Luiza Erundina (1989-1992)</i>: participação popular nas políticas de transporte. 2017. Tese (Doutorado) – Universidade de São Paulo, São Paulo, 2017.' },
-  { chave: 'Studenmund; Connor 1982', ref: 'STUDENMUND, A.; CONNOR, D. The free-fare transit experiments. <i>Transportation Research Part A: General</i>, v. 16, n. 4, p. 261-269, 1982.' },
-  { chave: 'Kębłowski 2024 ⚠', ref: 'KĘBŁOWSKI, Wojciech. <i>Fare-free public transport</i>: an international perspective. Berlim: Rosa-Luxemburg-Stiftung, 2024. <b>⚠ Possível duplicata/versão anterior de "keblowski2025a"</b> (já no Zotero, título 2025 diferente — "Fare-Free Public Transport: From Policy Fringes to an Established Practice") — a confirmar antes de tratar como obra distinta.' },
-];
+// Confere, em tempo de carga, que toda citação exibida tem referência completa —
+// a regressão de v0.5 (15 citações, 5 referências) passou justamente por não
+// haver essa checagem. Falha barulhenta no console em vez de silenciosa na tela.
+function auditarReferencias() {
+  const comRef = new Set(REFERENCIAS_ABNT.map(r => r.chave));
+  const citadas = new Set(FONTES_FLAT.filter(f => f.tipo === 'Estudo acadêmico').map(f => f.fonte));
+  const semRef = [...citadas].filter(c => !comRef.has(c));
+  const semUso = [...comRef].filter(c => !citadas.has(c));
+  if (semRef.length) console.error('[painel] citações sem referência ABNT:', semRef);
+  if (semUso.length) console.warn('[painel] referências ABNT sem citação correspondente:', semUso);
+  return { semRef, semUso };
+}
 
 function renderReferenciasAbnt() {
   const el = document.getElementById('referenciasAbnt');
   if (!el) return;
+  const { semRef } = auditarReferencias();
   let html = '<ol class="refs">' + REFERENCIAS_ABNT.map(r => `<li>${r.ref}</li>`).join('') + '</ol>';
-  html += '<p class="sub" style="margin-top:14px;">Referências adicionais levantadas na consolidação bibliográfica de 27/07/2026 (ANPET, PGT092, Observatório de Tarifa Zero) — confirmadas como ausentes do Zotero (<code>biblioteca.bib</code>), ainda não vinculadas a um município específico no crosswalk de Fontes.</p>';
-  html += '<ol class="refs">' + REFERENCIAS_ADICIONAIS.map(r => `<li>${r.ref}</li>`).join('') + '</ol>';
+  if (semRef.length) {
+    html += `<p class="sub" style="color:var(--rosa);margin-top:10px;">⚠ ${semRef.length} citação(ões) sem referência completa nesta lista: ${semRef.join(', ')}. Pendência de bibliografia — ver ROADMAP.</p>`;
+  }
   el.innerHTML = html;
 }
 
@@ -926,7 +1192,7 @@ function renderTZTable() {
       <td>${nf ? `<button type="button" class="fontes-toggle" data-id="${r.id}">${nf} ${expanded ? '▲' : '▼'}</button>` : '—'}</td>
     </tr>`);
     if (expanded && nf) {
-      const list = fontesFor(r).map(f => `<li><b>${f.fonte}</b>${f.ano ? ' (' + f.ano + ')' : ''} — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
+      const list = fontesFor(r).map(f => `<li><b>${f.fonte}</b> — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
       parts.push(`<tr class="fontes-row"><td colspan="10"><ul class="fontes-inline">${list}</ul></td></tr>`);
     }
   }
@@ -952,14 +1218,86 @@ function populateSelects() {
 document.getElementById('colorBy').addEventListener('change', e => { state.colorBy = e.target.value; render(); });
 document.getElementById('ufFilter').addEventListener('change', e => {
   state.uf = e.target.value;
-  render(); renderTZTable();
+  render(); renderTZTable(); atualizaBotaoLimpar();
   if (state.uf) zoomToUF(state.uf); else resetZoom();
 });
-document.getElementById('faixaFilter').addEventListener('change', e => { state.faixa = e.target.value; render(); renderTZTable(); });
-document.getElementById('regicFilter').addEventListener('change', e => { state.regic = e.target.value; render(); renderTZTable(); });
-document.getElementById('modeloFilter').addEventListener('change', e => { state.modelo = e.target.value; render(); });
-document.getElementById('tzFilter').addEventListener('change', e => { state.tzFilter = e.target.value; render(); });
-document.getElementById('camadaFilter').addEventListener('change', e => { state.camada = e.target.value; render(); renderTZTable(); });
+document.getElementById('faixaFilter').addEventListener('change', e => { state.faixa = e.target.value; render(); renderTZTable(); atualizaBotaoLimpar(); });
+document.getElementById('regicFilter').addEventListener('change', e => { state.regic = e.target.value; render(); renderTZTable(); atualizaBotaoLimpar(); });
+document.getElementById('modeloFilter').addEventListener('change', e => { state.modelo = e.target.value; render(); atualizaBotaoLimpar(); });
+document.getElementById('tzFilter').addEventListener('change', e => { state.tzFilter = e.target.value; render(); atualizaBotaoLimpar(); });
+document.getElementById('camadaFilter').addEventListener('change', e => { state.camada = e.target.value; render(); renderTZTable(); atualizaBotaoLimpar(); });
+
+// ---------- 11.5: busca de município (cobre os 5.570, não só os TZ) ----------
+// Antes, chegar num município só era possível clicando no mapa ou na tabela de TZ —
+// os 5.401 não-TZ ficavam acessíveis apenas pelo mapa, o que num município pequeno
+// significa acertar alguns pixels. O datalist é preenchido sob demanda (no máximo
+// 40 sugestões por digitação) em vez de despejar 5.570 <option> no DOM de uma vez.
+const MUNI_BUSCA = [...MUNI.values()].map(m => ({ m, rot: `${m.nome} – ${m.uf}` }));
+const MUNI_POR_ROTULO = new Map(MUNI_BUSCA.map(x => [x.rot, x.m]));
+
+function normBusca(s) {
+  return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+
+const inputBusca = document.getElementById('muniSearch');
+const listaBusca = document.getElementById('muniList');
+
+function atualizaSugestoes() {
+  const q = normBusca(inputBusca.value);
+  if (q.length < 2) { listaBusca.innerHTML = ''; return; }
+  const hits = [];
+  for (const x of MUNI_BUSCA) {
+    if (normBusca(x.rot).includes(q)) { hits.push(x.rot); if (hits.length >= 40) break; }
+  }
+  listaBusca.innerHTML = hits.map(r => `<option value="${r}"></option>`).join('');
+}
+
+function selecionaMunicipioBuscado() {
+  const m = MUNI_POR_ROTULO.get(inputBusca.value.trim());
+  if (!m) return false;
+  renderDetail(m);
+  const f = features.find(ft => ft.id === String(m.id));
+  if (f) zoomToMuni(f);
+  atualizaBotaoLimpar();
+  return true;
+}
+
+if (inputBusca) {
+  inputBusca.addEventListener('input', () => { atualizaSugestoes(); selecionaMunicipioBuscado(); });
+  inputBusca.addEventListener('change', selecionaMunicipioBuscado);
+  inputBusca.addEventListener('keydown', e => { if (e.key === 'Enter') selecionaMunicipioBuscado(); });
+}
+
+// ---------- 11.4: limpar tudo ----------
+// O `↺ Brasil` que já existia reseta só o enquadramento do mapa; os filtros
+// continuavam aplicados, o que deixava o painel num estado que parecia "inteiro"
+// mas não era. Este zera filtros + busca + seleção + enquadramento de uma vez.
+const btnLimpar = document.getElementById('clearAll');
+
+function algumFiltroAtivo() {
+  return !!(state.uf || state.faixa || state.regic || state.arranjo || state.modelo ||
+            state.tzFilter || state.camada || (inputBusca && inputBusca.value.trim()));
+}
+
+function atualizaBotaoLimpar() {
+  if (btnLimpar) btnLimpar.disabled = !algumFiltroAtivo();
+}
+
+function limparTudo() {
+  state.uf = ''; state.faixa = ''; state.regic = ''; state.arranjo = '';
+  state.modelo = ''; state.tzFilter = ''; state.camada = '';
+  for (const id of ['ufFilter', 'faixaFilter', 'regicFilter', 'modeloFilter', 'tzFilter', 'camadaFilter']) {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  }
+  if (inputBusca) { inputBusca.value = ''; listaBusca.innerHTML = ''; }
+  renderDetail(null);
+  resetZoom();
+  render(); renderTZTable();
+  atualizaBotaoLimpar();
+}
+
+if (btnLimpar) btnLimpar.addEventListener('click', limparTudo);
 
 document.querySelectorAll('#tzTable th').forEach(th => {
   th.addEventListener('click', () => {
@@ -1066,6 +1404,7 @@ svg.addEventListener('dblclick', e => {
 
 // ---------- init ----------
 populateSelects();
+atualizaBotaoLimpar();
 renderCrosstabs();
 renderModalStack();
 renderReferenciasAbnt();

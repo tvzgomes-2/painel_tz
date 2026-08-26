@@ -49,6 +49,26 @@
   .panel > summary::marker{color:var(--amarelo);}
   .panel .sub{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.5;}
   .panel h3{margin:18px 0 10px;font-size:14px;font-weight:700;color:var(--text);border-top:1px solid var(--border);padding-top:14px;}
+  .toolbar{display:flex;gap:12px;align-items:flex-end;margin:0 0 12px;flex-wrap:wrap;}
+  .munisearch{flex:1 1 320px;min-width:240px;}
+  .munisearch label{color:var(--muted);font-size:11.5px;display:block;margin-bottom:3px;}
+  .munisearch input{background:var(--panel2);color:var(--text);border:1px solid var(--border);
+    border-radius:6px;padding:7px 9px;font-size:13px;width:100%;font-family:inherit;}
+  .munisearch input:focus{outline:none;border-color:var(--accent);}
+  .btn-clear{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;
+    padding:7px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;white-space:nowrap;}
+  .btn-clear:hover{border-color:var(--rosa);color:var(--rosa);}
+  .btn-clear[disabled]{opacity:.45;cursor:default;}
+  .btn-clear[disabled]:hover{border-color:var(--border);color:var(--text);}
+  .grupos{margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;}
+  .ruGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;}
+  #dispersao{width:100%;height:auto;display:block;}
+  .gebars{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+  .gerow{display:flex;align-items:center;gap:10px;font-size:12px;}
+  .gelab{flex:0 0 46%;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .getrack{flex:1;background:var(--panel2);border-radius:4px;height:15px;overflow:hidden;}
+  .gefill{height:100%;background:var(--azul);}
+  .geval{flex:0 0 76px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;}
   .maptools{display:flex;gap:8px;align-items:center;margin:0 0 8px;}
   .maptools button{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;
     padding:4px 12px;font-size:12px;cursor:pointer;}
@@ -160,7 +180,7 @@
 <header>
   <div class="htext">
     <p style="margin:0 0 6px;"><a href="index.html" style="font-size:.85em;opacity:.75;">← voltar ao site</a> <a href="verbetes.html" style="font-size:.85em;opacity:.75;margin-left:14px;">Verbetes (conceitos) →</a></p>
-    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v0.4.05</span></h1>
+    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v0.5</span></h1>
     <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero</p>
     <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a estrutura de poder dos grupos econômicos do transporte coletivo e a difusão espacial das políticas de gratuidade universal no Brasil. A hipótese central é que os grupos econômicos restringem a difusão da TZ nos municípios de maior interesse comercial, atuando como barreira sistêmica — enquanto a política floresce nas franjas do sistema, pouco atrativas ao capital. O método é misto (quantitativo + qualitativo), em panorama nacional; este painel interativo é o instrumento exploratório do eixo quantitativo.</p>
     <p>Universo: 5.570 municípios do Brasil. Base-mestre Tarifa Zero universal (Dataverse Santini, abr/2026) cruzada com base municipal integrada de 234 variáveis (PEMOB/SIMU, MUNIC 2020, REGIC 2018, OSM, TSE 2024, DATASUS, NTU). Protótipo de trabalho — dados descritivos, não causais. Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a></p>
@@ -170,13 +190,22 @@
 
   <div class="cards" id="cards"></div>
 
+  <div class="toolbar">
+    <div class="munisearch">
+      <label for="muniSearch">Buscar município (qualquer um dos 5.570, com ou sem Tarifa Zero)</label>
+      <input id="muniSearch" list="muniList" placeholder="digite o nome e escolha na lista…" autocomplete="off" spellcheck="false">
+      <datalist id="muniList"></datalist>
+    </div>
+    <button id="clearAll" class="btn-clear" title="Zera todos os filtros, a busca e o enquadramento do mapa">✕ Limpar tudo</button>
+  </div>
+
   <div class="controls">
     <div><label>Colorir mapa por</label>
       <select id="colorBy">
         <option value="tz">Situação Tarifa Zero</option>
-        <option value="regic_nivel">Hierarquia urbana (REGIC)</option>
+        <option value="regic_nivel">Hierarquia urbana</option>
         <option value="tipo_arranjo">Sede × satélite de arranjo metropolitano</option>
-        <option value="modelo_prestacao_simples">Modelo de prestação (MUNIC 2020)</option>
+        <option value="modelo_prestacao_simples">Modelo de prestação</option>
         <option value="faixa_pop">Faixa populacional</option>
         <option value="pib_pc">PIB per capita</option>
         <option value="motorizacao">Motorização (veíc/hab)</option>
@@ -186,13 +215,13 @@
         <option value="rec_prop_pc">Receita própria per capita</option>
         <option value="taxa_obitos_transito">Óbitos no trânsito /100mil (2019)</option>
         <option value="pct_investimento_desp">% investimento / despesa (2022)</option>
-        <option value="tarifa">Tarifa de ônibus reconciliada (n=111)</option>
-        <option value="subsidio_ntu_pct">% custo subsidiado — NTU (n=80)</option>
+        <option value="tarifa">Tarifa de ônibus (n=111)</option>
+        <option value="subsidio_ntu_pct">% do custo subsidiado (n=80)</option>
       </select>
     </div>
     <div><label>UF</label><select id="ufFilter"><option value="">Todas</option></select></div>
     <div><label>Faixa populacional</label><select id="faixaFilter"><option value="">Todas</option></select></div>
-    <div><label>Hierarquia REGIC</label>
+    <div><label>Hierarquia urbana</label>
       <select id="regicFilter">
         <option value="">Todas</option>
         <option value="1">1 · Metrópole</option>
@@ -262,6 +291,19 @@
     <div id="popScore"></div>
   </details>
 
+  <details class="panel" style="margin-top:16px;" open>
+    <summary>Tarifa Zero por região e por UF</summary>
+    <p class="sub">Proporção de municípios com histórico de TZ universal <b>dentro de cada</b> região e UF, no recorte atual — não o volume absoluto. Entre parênteses, quantos municípios TZ há sobre o total da categoria: uma UF com 2 TZ em 20 municípios dá 10%, e sem esse <i>n</i> o número se leria como comparável ao de São Paulo.</p>
+    <div id="regiaoUf"></div>
+  </details>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>PIB per capita × motorização</h2>
+    <p class="sub">Cada ponto é um município do recorte atual; os com Tarifa Zero aparecem destacados e por cima. É a mesma comparação que o painel de medianas resume em duas barras — aqui sem a compressão, o que deixa ver a <b>sobreposição</b> entre os dois grupos, que é grande. Eixo horizontal em escala logarítmica (o PIB per capita é muito assimétrico; em escala linear quase todos os municípios virariam uma mancha à esquerda). Motorização exibida até 2,0 veíc/hab — acima disso são poucos casos extremos, plotados no topo.</p>
+    <svg id="dispersao" viewBox="0 0 760 380" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="mslegend" id="dispersaoLegenda"></div>
+  </div>
+
   <div class="panel" style="margin-top:16px;">
     <h2>Linha do tempo das adoções de Tarifa Zero</h2>
     <p class="sub">Barra empilhada por ano, acima do eixo: TZ universal (verde) na base, TZ parcial por ano de início aproximado (amarelo) por cima — a altura total reflete o volume real, numa única escala. Revogações da universal ficam abaixo do eixo (rosa). O início da parcial é extraído do texto de origem quando disponível — nem todo caso tem essa informação. Responde aos filtros de UF, faixa, REGIC, arranjo e modelo.</p>
@@ -300,11 +342,11 @@
     </div>
   </div>
 
-  <details class="panel" style="margin-top:16px;">
-    <summary>Referências bibliográficas (estudos acadêmicos citados no repositório de fontes)</summary>
-    <p class="sub">Formato ABNT NBR 6023. As citações abreviadas (ex.: "Santini 2019") aparecem na coluna Fontes da tabela e no card de detalhe do município.</p>
-    <div id="referenciasAbnt"></div>
-  </details>
+  <div class="panel" style="margin-top:16px;">
+    <h2>Grupos econômicos do transporte — concentração territorial</h2>
+    <p class="sub">Quantos municípios cada grupo econômico do transporte coletivo alcança, no recorte atual. É o eixo mais direto da hipótese desta pesquisa: se os grupos restringem a difusão da Tarifa Zero nos municípios de maior interesse comercial, o alcance territorial deles é a medida dessa presença. Levantamento próprio da pesquisa (ago/2026) a partir de dados societários/CNPJ: <b>327 grupos em 796 municípios</b> — não os 5.570, então ausência de grupo num município significa <i>sem registro no levantamento</i>, não ausência de operador. O alcance é contado por grupo identificado, não por nome: 20 nomes da base são homônimos (sobrenomes usados por grupos distintos) e ganham o código do grupo no rótulo para não serem somados como um só.</p>
+    <div id="grupos"></div>
+  </div>
 
   <details class="gloss">
     <summary>Glossário de siglas e termos</summary>
@@ -315,7 +357,10 @@
       <dt>PDMU</dt><dd>Plano Diretor de Mobilidade Urbana — plano municipal exigido pela Lei 12.587/2012 para municípios acima de 20 mil habitantes e integrantes de regiões metropolitanas.</dd>
       <dt>REGIC</dt><dd>Regiões de Influência das Cidades (IBGE, 2018) — hierarquia funcional urbana: 1 Metrópole · 2 Capital Regional · 3 Centro Sub-Regional · 4 Centro de Zona · 5 Centro Local.</dd>
       <dt>Arranjo metropolitano</dt><dd>agrupamento de municípios com forte integração (REGIC). <b>Sede/co-sede</b>: a cidade-polo que dá nome ao arranjo. <b>Satélite</b>: os demais municípios do arranjo. <b>Fora de arranjo</b>: municípios que não integram nenhum.</dd>
+      <dt>Modelo de prestação</dt><dd>como o município declara que o transporte coletivo é prestado — concessão, permissão, autorização, prestação direta, não regulamentado, ou misto. Fonte: <b>MUNIC 2020</b> (ver abaixo).</dd>
       <dt>MUNIC</dt><dd>Pesquisa de Informações Básicas Municipais (IBGE, 2020) — questionário respondido pelas prefeituras; a pergunta sobre modelo de prestação do transporte teve 1.727 respostas (31% dos municípios).</dd>
+      <dt>Grupo econômico (transporte)</dt><dd>conjunto de empresas de transporte coletivo sob controle societário comum, identificado nesta pesquisa por vínculo de sócios/CNPJ. O painel mostra apenas o <b>nome</b> do grupo e em quantos municípios ele aparece; a análise societária, os casos e as fontes primárias ficam na tese, não aqui.</dd>
+      <dt>Base legal</dt><dd>lei ou decreto municipal que institui a gratuidade. Levantamento próprio da pesquisa (jul/2026): 137 municípios verificados, <b>62 com norma localizada</b> e 75 sem — na maioria destes a TZ está em operação, o que não se achou foi o número do ato, em geral porque a gratuidade veio por via administrativa. A etiqueta de confiabilidade diz se o número foi confirmado em fonte primária.</dd>
       <dt>NTU</dt><dd>Associação Nacional das Empresas de Transportes Urbanos — fonte dos dados de subsídio ao custo dos sistemas de ônibus.</dd>
       <dt>FINBRA/Siconfi</dt><dd>Finanças do Brasil / Sistema de Informações Contábeis e Fiscais (Tesouro Nacional) — receitas e despesas municipais declaradas.</dd>
       <dt>Motorização</dt><dd>veículos registrados por habitante (DENATRAN 2023) — proxy de dependência do transporte individual.</dd>
@@ -332,8 +377,14 @@
       <p><b>Modelo de prestação (MUNIC 2020):</b> só 1.727/5.570 municípios (31%) responderam essa pergunta do IBGE — tratar qualquer leitura aqui como amostra parcial, não painel nacional. Dentro dela, "Prestação direta" tem a maior proporção de TZ (13,5%) e "Não regulamentado" a menor (2,5%); Concessão fica em 8,6%. Isso é o eixo mais próximo de testar a hipótese dos grupos econômicos diretamente (concessão = operador privado estabelecido), mas ainda não é a variável de presença de grupo por si — e a amostra de 1.727 pode não ser aleatória (municípios que respondem ao módulo de transporte da MUNIC tendem a ser os que já têm alguma estrutura formal).</p>
       <p><b>Tarifa e subsídio — dados novos, cobertura muito baixa:</b> tarifa reconciliada (PEMOB/SIMU/ANTP) só existe para 111/5.570 municípios (2%); % do custo subsidiado (NTU) só para 80/5.570 (1,4%). Úteis para casos individuais na lista de TZ, mas não para generalizar ao universo nacional — no mapa, esses eixos ficam majoritariamente em cinza "sem dado" por desenho, não por erro.</p>
       <p><b>Grandes números respondem aos filtros:</b> os cartões do topo recalculam conforme o recorte (UF, faixa, REGIC, arranjo, modelo). Em recortes com poucos municípios TZ, os valores perdem robustez — o painel sinaliza "amostra pequena" quando há menos de 5 municípios TZ no recorte.</p>
-      <p><b>Variável ainda ausente:</b> presença/atuação de grupo econômico por município (rede ARS/CNPJ) — sem ela, mesmo os eixos novos (REGIC, modelo de prestação) são proxies indiretos, não o teste direto da hipótese central da tese.</p>
+      <p><b>Grupos econômicos entraram no painel (26/08/2026), com ressalvas:</b> a presença de grupo econômico por município — antes registrada aqui como "variável ainda ausente" — passou a ser exibida a partir do levantamento societário/CNPJ próprio da pesquisa (327 grupos, 796 municípios, ago/2026). Três cuidados de leitura. <b>(1) Cobertura:</b> 796 dos 5.570 municípios; "nenhum grupo mapeado" é ausência de registro, não ausência de operador — e como o levantamento partiu dos casos de interesse da pesquisa, a cobertura não é uma amostra aleatória do país. <b>(2) Homônimos:</b> 20 nomes da base são sobrenomes usados por grupos distintos (só "Santos" são 7 grupos diferentes); o alcance é contado por grupo identificado e esses nomes ganham um código no rótulo, mas a leitura por nome ainda pede atenção. <b>(3) O que o dado não diz:</b> aparecer num município é presença societária mapeada, não prova de que o grupo opera hoje o serviço, nem de que atuou contra a Tarifa Zero ali — o painel descreve coincidência territorial, o nexo causal é trabalho da tese. Por decisão do autor, o painel expõe apenas o <i>nome</i> do grupo: análise societária, capital, processos e casos ficam fora daqui.</p>
     </div>
+  </details>
+
+  <details class="panel" style="margin-top:16px;">
+    <summary>Referências bibliográficas</summary>
+    <p class="sub">Formato ABNT NBR 6023. Lista completa dos estudos acadêmicos citados no painel — as citações curtas (ex.: "Santini 2019") aparecem na coluna Fontes da tabela de municípios e no card do município selecionado. As fontes dos <i>dados</i> (IBGE, Siconfi, DENATRAN, NTU e demais) estão no rodapé, não aqui.</p>
+    <div id="referenciasAbnt"></div>
   </details>
 
   <footer>
@@ -354,7 +405,7 @@
         <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
       </div>
     </div>
-    Painel v0.4.05 · 2026<br>
+    Painel v0.5 · 2026<br>
     Fontes: Dataverse Santini v8 (abr/2026) · PEMOB/SIMU (Min. Cidades) · MUNIC 2020 (IBGE) · REGIC 2018 (IBGE) · FINBRA/Siconfi 2019–2023 · IBGE (PIB 2013/2021, Censo 2022) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Base Polo Planejamento.<br>
     Painel gerado a partir de <i>base_municipal_v3.csv</i> e <i>Municípios TZ - consolidado.xlsx</i> — protótipo de trabalho, não substitui a análise da tese. Histórico de versões no CHANGELOG do repositório.
   </footer>

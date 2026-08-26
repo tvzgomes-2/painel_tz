@@ -5,3 +5,6 @@ estrategia-interna/
 # Rascunho da Rede da ARS (GE) — ainda não corrigido/unificado, não publicar
 # até virar rede-ge.html de fato (ver ROADMAP.md §0 e Fase 9)
 rede-ge-rascunho/
+
+# Backup automatico do remontar_de_painel.py (o historico do git e o backup real)
+painel.html.bak

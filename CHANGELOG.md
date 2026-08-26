@@ -6,7 +6,51 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.4.05 (atual — 2026-08-26)
+## v0.5 (atual — 2026-08-26)
+
+Fase 11 completa (Blocos 1–3) **mais três itens de dívida antiga** — 3.3, 3.4 e 8.4, abertos desde v0.3 e julho/2026. Ao todo: 5 correções, 5 mudanças de navegação, 2 gráficos que nunca tinham sido feitos e **três dados novos** — partição modal por município, legislação municipal e grupos econômicos do transporte. Este último é o eixo central da hipótese da tese, que até esta versão o painel registrava como "variável ainda ausente". Iteração nova por direito próprio, não sub-patch de v0.4.
+
+**Dado novo — grupos econômicos por município (11.10, 11.11):**
+
+- `scripts/grupos_por_municipio.json` — 796 municípios, 327 grupos, 1.603 pares, chave = código IBGE. Derivado de `_data/Cruzamento GE x TZ (ago-2026)/municipio_x_grupo.csv` (cofre).
+- Painel novo "Grupos econômicos do transporte — concentração territorial": top 15 por alcance, responde ao recorte (Brasil 327 grupos → RJ 51 → SE 8 → AC 4), mostrando quantos municípios de cada grupo têm TZ. Maiores alcances: Viação Santa Cruz 58, Eurovida Holding 56, Expresso São Luiz 56, Lessa Carvalho/Aguiar-Carvalho 54, Maldonado 52, Gurgacz 51, Barata 44.
+- Seção no card do município. Quando não há grupo mapeado, o card **diz** que o levantamento cobre 796 dos 5.570 e que ausência ali não é ausência de operador.
+- **Exposição mínima, por decisão do autor (26/08/2026):** só nome e contagem. Ficam fora do painel CNPJ, capital, porte e qualquer narrativa de caso. O escore `cnpj_nucleo_*` embargado em 26/07/2026 **continua fora** — a decisão não o libera.
+- **Homônimos (achado):** 20 nomes são sobrenomes usados por grupos distintos ("Santos" são 7 grupos). O alcance é contado por id de grupo, não por nome, e os ambíguos ganham o código no rótulo. Os 12 maiores não são homônimos, então o topo do gráfico não muda. Ver Pendência 11.15.
+- Nota metodológica reescrita: a que dizia "variável ainda ausente" foi substituída por três ressalvas de leitura — cobertura não aleatória, homônimos, e o que o dado não prova (presença societária mapeada ≠ opera hoje ≠ atuou contra a TZ).
+
+**Dado novo — partição modal por município (11.9):**
+
+- `scripts/modal_por_municipio.json` — **5.570 municípios**, cobertura total, chave = código IBGE. Derivado de `_data/sidra_censo2022/censo2022_matriz_modal_por_municipio.csv`.
+- Barra empilhada no card do município nos mesmos 5 baldes do gráfico nacional (ônibus, automóvel, motocicleta, ativo, outros), mais a frase do modo principal.
+- A soma bruta dos percentuais do Censo varia (mediana 98,75%): os valores são normalizados para 100% e a soma bruta fica no campo `t`. Nos 123 municípios com soma < 95%, o card avisa que normalizou.
+
+**Correções (Bloco 1):**
+
+- **11.2 — ano errado ao lado das citações.** O campo `ano` do crosswalk guarda o ano de adoção da TZ no município, não o de publicação; era exibido colado na citação, de modo que as 5 fontes de Itatiaiuçu apareciam como "(2015)" e "Santini 2019 (2015)" se lia como se fosse a data da obra. O ano saiu da citação e continua onde faz sentido (linha "Início TZ", coluna "Início").
+- **11.14 — 10 citações sem referência (regressão de v0.4.05).** A rodada anterior somou 15 fontes ao crosswalk mas deixou `REFERENCIAS_ABNT` com 5 entradas. A lista agora tem 15 e cobre todas as citações em uso; e ficou uma trava: `auditarReferencias()` roda no carregamento e denuncia órfãs no console e na própria seção. Foi a ausência dessa checagem que deixou a regressão passar.
+- **11.3 — seção de referências.** Lista única, movida para o fim da página. A segunda lista ("Referências adicionais") saiu: expunha notas internas de trabalho ao leitor ("a conferir antes de citar", "⚠ possível duplicata") e 3 fontes de dado que não são bibliografia de TZ. As pendências bibliográficas em si continuam abertas (Pendência 11.13).
+
+**Navegação e leitura (Bloco 2):**
+
+- **11.4** botão "✕ Limpar tudo" — zera filtros, busca, seleção e enquadramento de uma vez; desabilitado quando não há nada a limpar. O `↺ Brasil` que já existia reseta só o mapa.
+- **11.5** busca de município cobrindo os 5.570 — antes, os 5.401 não-TZ só eram acessíveis clicando no mapa. `datalist` preenchido sob demanda (máx. 40 sugestões), não 5.570 `<option>` no DOM.
+- **11.6** nomes de fonte de dado saíram dos rótulos de menu e do card; a atribuição vive no glossário (verbete novo "Modelo de prestação") e no rodapé.
+- **11.7** camada da régua descritiva virou tag no topo do card, ao lado do status de TZ.
+- **11.8** card novo "Com sistema de ônibus declarado" (nacional 1.727), com a ressalva de amostra de 31% no próprio rótulo.
+
+**Dívida antiga quitada — 3 itens que nunca tinham sido implementados:**
+
+- **3.3 — TZ por região e por UF** (aberto desde v0.3). Dois blocos de barras horizontais com a proporção de municípios com TZ *dentro de* cada categoria, o `n` (TZ/total) junto de cada %, respondendo ao recorte. Deixou visível uma assimetria que o painel não mostrava: **RJ com 20,7% dos municípios em TZ (19/92)**, mais que o dobro de SP (9,0%); Nordeste com 0,3% (6/1.794) e 9 UFs zeradas.
+- **3.4 — dispersão PIB per capita × motorização** (aberto desde v0.3). Os 5.570 municípios do recorte em SVG: não-TZ em cinza tênue, TZ por cima em amarelo (ativa) e rosa (encerrada). Eixo X em escala log — em escala linear quase todos virariam uma mancha à esquerda. Mostra o que a comparação de medianas comprimia em duas barras: os municípios TZ **não** estão no aglomerado de menor PIB; concentram-se na faixa média-alta, e a sobreposição com os não-TZ é grande.
+- **8.4 — legislação da TZ por município** (pedido de 27/07/2026). `scripts/legislacao_tz.json`, extraído do levantamento legal do cofre (jul/2026). Os 137 municípios casaram por código IBGE sem exceção, e os totais batem com o resumo executivo da própria fonte (62 com norma, 75 sem; confiabilidade alta=37, média=22, baixa=3). No card: seção "Base legal" com a norma, etiqueta de confiabilidade, mecanismo de gratuidade (23 casos, extraídos da análise de conteúdo das 62 normas) e fundo municipal criado na própria lei (7 casos). 136 dos 169 municípios TZ têm verbete; nos 33 que entraram depois do levantamento, o card **diz** que não foi verificado, em vez de deixar o silêncio sugerir ausência de norma. Não entram no painel a coluna "Zotero" (controle bibliográfico interno) nem os fragmentos de tarefa das observações; as ressalvas substantivas entram — mostrar "Lei 2.185/2006" para Maricá sem dizer que a fonte aponta a LC 244/2014 seria pior que não mostrar.
+
+**Infraestrutura de build:**
+
+- `scripts/remontar_de_painel.py` (novo) — remonta `painel.html` a partir de `head.html` + `logic.js` + os crosswalks, herdando do painel atual os 3 blocos pesados que só o build gera (`geo.topojson`, `stats`, base colunar). Fecha a brecha que o CHANGELOG registrava desde 26/07/2026: sem a pasta `build/`, cada rodada vinha sendo replicada à mão em `head.html` e `painel.html`, e essa réplica manual é a origem de qualquer divergência entre fonte e publicado. Valida cada bloco como JSON e confere marcas esperadas antes de gravar. Quando a `build/` existir, o `montar_html.sh` segue sendo o fluxo canônico.
+- Esta versão foi verificada em navegador (Chromium headless): zero erro de página, os 5.570 registros de modal e 796 de grupos carregados, auditoria de bibliografia sem órfãs, e o "Limpar tudo" restaurando o estado inicial.
+
+## v0.4.05 (2026-08-26)
 
 Sub-patch de v0.4 (mesma exceção do v0.x.NN — precedente v0.4.01, "referências bibliográficas adicionais", ver `VERSIONING.md`): 15 novas entradas de fonte acadêmica no crosswalk `scripts/casos_por_fonte.json`, extraídas do artigo de revisão sistemática do próprio autor sobre a literatura de Tarifa Zero no Brasil (Gomes, 2026 — trabalho da disciplina PGT-092/UFABC, evolução do artigo apresentado no XXIV CLATPU). Estrutura de banco intacta (mesmo schema de fonte) — sub-patch, não patch inteiro.
 

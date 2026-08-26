@@ -15,7 +15,9 @@ Painel interativo de trabalho, parte da pesquisa de doutorado sobre Tarifa Zero 
 
 Site com páginas independentes da pesquisa de doutorado. Hoje tem uma página publicada:
 
-- **Painel Brasil** (`painel.html`, tag "TZ") — mapa coroplético e comparações estatísticas dos 5.570 municípios do Brasil, cruzando a base-mestre de 155 registros de Tarifa Zero universal (145 ativas + 10 encerradas, com uma duplicata conhecida — ver notas no painel) com uma base municipal integrada de ~230 variáveis: FINBRA/Siconfi, PIB (IBGE), frota (DENATRAN), MUNIC 2020, REGIC 2018, Censo 2022, PEMOB/SIMU (Min. Cidades), OSM, TSE 2024, NTU.
+- **Painel Brasil** (`painel.html`, tag "TZ") — mapa coroplético e comparações estatísticas dos 5.570 municípios do Brasil, cruzando a base-mestre de Tarifa Zero universal (169 municípios: 159 ativas + 10 encerradas; mais 33 com TZ parcial pela régua descritiva — ver notas no painel) com uma base municipal integrada de ~230 variáveis: FINBRA/Siconfi, PIB (IBGE), frota (DENATRAN), MUNIC 2020, REGIC 2018, Censo 2022, PEMOB/SIMU (Min. Cidades), OSM, TSE 2024, NTU.
+
+  Desde a v0.5 o painel também mostra **os grupos econômicos do transporte por município** (327 grupos em 796 municípios, levantamento societário/CNPJ próprio da pesquisa) e a **partição modal de cada município** (Censo 2022, todos os 5.570). Sobre os grupos, duas ressalvas que o próprio painel repete: a cobertura de 796 municípios não é amostra aleatória do país, e aparecer num município é presença societária mapeada — não prova de que o grupo opera hoje o serviço, nem de que atuou contra a Tarifa Zero ali. Por decisão do autor, o painel expõe apenas o *nome* do grupo.
 
 Em construção, ainda não publicada:
 
@@ -57,9 +59,20 @@ scripts/
   montar_html.sh        remonta painel.html a partir de head.html + dados + logic.js
   head.html            estrutura/CSS/controles do Painel Brasil (fonte legível)
   logic.js             lógica do Painel Brasil (mapa, filtros, gráficos — fonte legível)
+  remontar_de_painel.py  remonta painel.html a partir de head.html + logic.js + crosswalks,
+                         herdando do painel atual os blocos pesados que só o build gera
+                         (usar quando a pasta build/ não estiver disponível)
+  casos_por_fonte.json   crosswalk estudo acadêmico → município
+  casos_por_noticia.json crosswalk reportagem → município
+  camadas_tz.json        crosswalk camada da régua descritiva → município
+  modal_por_municipio.json   partição modal por município (Censo 2022, 5.570)
+  grupos_por_municipio.json  grupos econômicos do transporte por município (796)
+  legislacao_tz.json         base legal da TZ por município (137 verificados, 62 com norma)
+  build_modal_e_grupos.py    gera os dois primeiros a partir do cofre (fora do git)
+  build_legislacao.py        gera o terceiro a partir do levantamento legal do cofre
 ```
 
-`painel.html` é gerado, não editado à mão: para mudar algo (cores, filtros, layout), edite `head.html`/`logic.js` em `scripts/` e rode `montar_html.sh`. Ver comentários nos próprios scripts para o passo a passo completo. `index.html` (hub) é pequeno o bastante para editar direto.
+`painel.html` é gerado, não editado à mão: para mudar algo (cores, filtros, layout), edite `head.html`/`logic.js` em `scripts/` e rode `montar_html.sh` (fluxo canônico, exige a pasta `build/`) ou `remontar_de_painel.py` (quando a `build/` não estiver disponível — herda os blocos pesados do próprio `painel.html`). Ver comentários nos próprios scripts para o passo a passo completo. `index.html` (hub) é pequeno o bastante para editar direto.
 
 ## Autoria
 
