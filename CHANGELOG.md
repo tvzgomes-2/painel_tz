@@ -6,7 +6,30 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.4.04 (atual — 2026-08-03)
+## v0.4.05 (atual — 2026-08-26)
+
+Sub-patch de v0.4 (mesma exceção do v0.x.NN — precedente v0.4.01, "referências bibliográficas adicionais", ver `VERSIONING.md`): 15 novas entradas de fonte acadêmica no crosswalk `scripts/casos_por_fonte.json`, extraídas do artigo de revisão sistemática do próprio autor sobre a literatura de Tarifa Zero no Brasil (Gomes, 2026 — trabalho da disciplina PGT-092/UFABC, evolução do artigo apresentado no XXIV CLATPU). Estrutura de banco intacta (mesmo schema de fonte) — sub-patch, não patch inteiro.
+
+**Novas fontes linkadas por município** (só onde o artigo nomeia o município explicitamente — nada extrapolado de contagens agregadas):
+
+- Mariana/MG: + Campos et al. 2023, Gonçalves \& Santini 2023, Santini 2023 (dissertação)
+- Vargem Grande Paulista/SP: + Landin 2022, Costa \& Sampaio 2024, Gomes et al. 2023
+- São Caetano do Sul/SP: + Santini et al. 2024
+- Monte Carmelo/MG: + Lopes \& Muniz 2021
+- Agudos/SP: + Angelo 2023 (o TCC já cobria o município, mas a entrada nunca tinha sido crosswalkada)
+- Maricá/RJ: + Lima \& Kraus Junior 2021
+- Caeté/MG, Caucaia/CE, Itapeva/SP: + Pereira 2024 (dissertação — obra diferente do já existente "Pereira 2023")
+- Cerquilho/SP: + Gomes et al. 2023
+- **Guararema/SP (novo no crosswalk — não tinha nenhuma fonte antes desta rodada):** + Gomes et al. 2023
+
+**Divergências de dado encontradas na checagem cruzada, sinalizadas e não corrigidas nesta rodada** (mesma cautela do caso São Caetano do Sul/Florianópolis, v0.4.02 — ver Pendência 8.7 e nova 8.9 no ROADMAP):
+
+- **Araçoiaba da Serra/SP** é citada no artigo do próprio autor (Gomes, Baiardi \& Zioni, 2023) como um dos 4 casos da macrometrópole paulista, mas `tz_status` no painel é **"Não TZ"** — nenhuma fonte foi adicionada para esse município até confirmação do autor contra a fonte primária.
+- **Guararema/SP** — o mesmo artigo (publicado mar/2023) já trata o município como caso de TZ, mas o painel registra `tz_ano=2025` — a fonte foi adicionada, com a divergência anotada na própria descrição exibida no card.
+- Cardozo et al. (2024, 106 municípios) e Cardozo et al. (2025, 44 municípios) citam volume de casos via PCA/clusterização, mas não os nomeiam individualmente no artigo disponível — não deu para crosswalkar sem o artigo/dataset completo.
+- NTU citado no artigo do autor como "NTU, 2024" pode ou não ser a mesma publicação já crosswalkada como "NTU 2023" — ano diverge, não confirmado.
+
+## v0.4.04 (2026-08-03)
 
 Ampliação do universo canônico da pesquisa (155→170 municípios TZ universal) + parágrafo descritivo de TZ por município. Estrutura de banco intacta (mesmas colunas) — patch, não minor.
 
