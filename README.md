@@ -15,7 +15,7 @@ Painel interativo de trabalho, parte da pesquisa de doutorado sobre Tarifa Zero 
 
 Site com páginas independentes da pesquisa de doutorado. Hoje tem uma página publicada:
 
-- **Painel Brasil** (`painel.html`, tag "TZ") — mapa coroplético e comparações estatísticas dos 5.570 municípios do Brasil, cruzando a base-mestre de Tarifa Zero universal (169 municípios: 159 ativas + 10 encerradas; mais 33 com TZ parcial pela régua descritiva — ver notas no painel) com uma base municipal integrada de ~230 variáveis: FINBRA/Siconfi, PIB (IBGE), frota (DENATRAN), MUNIC 2020, REGIC 2018, Censo 2022, PEMOB/SIMU (Min. Cidades), OSM, TSE 2024, NTU.
+- **Painel Brasil** (`painel.html`, tag "TZ") — mapa coroplético e comparações estatísticas dos 5.570 municípios do Brasil, cruzando a base-mestre de Tarifa Zero universal (175 municípios: 165 ativas + 10 encerradas — atualizado 04/09/2026; mais municípios com TZ parcial pela régua descritiva — ver notas no painel) com uma base municipal integrada de ~230 variáveis: FINBRA/Siconfi, PIB (IBGE), frota (DENATRAN), MUNIC 2020, REGIC 2018, Censo 2022, PEMOB/SIMU (Min. Cidades), OSM, TSE 2024, NTU.
 
   Desde a v0.5 o painel também mostra **os grupos econômicos do transporte por município** (327 grupos em 796 municípios, levantamento societário/CNPJ próprio da pesquisa) e a **partição modal de cada município** (Censo 2022, todos os 5.570). Sobre os grupos, duas ressalvas que o próprio painel repete: a cobertura de 796 municípios não é amostra aleatória do país, e aparecer num município é presença societária mapeada — não prova de que o grupo opera hoje o serviço, nem de que atuou contra a Tarifa Zero ali. Por decisão do autor, o painel expõe apenas o *nome* do grupo.
 

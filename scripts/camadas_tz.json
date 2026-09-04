@@ -252,9 +252,8 @@
   {
    "camada": "4",
    "label": "Grupo social",
-   "detalhe": "restrito a residentes cadastrados (SancaGov) — universalidade revogada em 15/07/2026",
-   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
-   "flag": "Base principal ainda mostra este município como 'Ativa' (TZ universal) — desatualizado desde a revogação de 15/07/2026; aqui já reclassificado para grupo social."
+   "detalhe": "universalidade revogada em 15/07/2026 — caso-vitrine T3, hoje gratuidade restrita (grupo social); ver Ficha - São Caetano do Sul (SP)",
+   "fonte": "auditoria de fichas, 04/09/2026 — base principal (Municípios TZ - consolidado.xlsx) já registra tz_status=\"Reclassificada (parcial — grupo social)\" e Fim=2026-07-15"
   }
  ],
  "Andrelândia|MG": [

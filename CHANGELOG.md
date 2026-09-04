@@ -6,7 +6,37 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.5 (atual — 2026-08-26)
+## v0.6 (atual — 2026-09-04)
+
+Patch de dados — auditoria completa das 208 fichas municipais contra a base-mestre (cofre), com achados gravados e investigação dirigida (WebSearch/WebFetch) de divergências abertas. Estrutura de banco intacta (mesmo schema) — enriquecimento de dados, sem feature nova, entra como patch (ver `VERSIONING.md` § hierarquia de precedência).
+
+**Correções na base municipal (`build_data.py` → `data-muni`):**
+
+- **Itararé/SP:** ano de início corrigido de 2021 para 2022 (nenhuma evidência de operação antes da lei sancionada).
+- **Santo Antônio de Posse/SP:** ano de início corrigido de 2024 para 2021 (fonte jornalística especializada + prefeitura, mesma data, 30/06/2021).
+- Total de municípios com TZ universal no painel passa de **169 (159 ativas + 10 encerradas)** para **175 (165 ativas + 10 encerradas)** — reflete adições canônicas já feitas ao cofre desde a última atualização do painel (26/08/2026), não só as duas correções acima.
+- ⚠️ Confirmada, sem alteração: a duplicata de código IBGE identificada em julho (Palmas-TO, dois episódios de universalidade) tem uma **segunda ocorrência do mesmo tipo**, achada nesta rodada — Arthur Nogueira/Artur Nogueira-SP (mesmo município, duas grafias, ambas "Ativa"/2021). O dedup por código IBGE (`keep='first'`) já tratava isso sem quebrar o pipeline; registrado aqui para constar — é uma pendência de qualidade de dado da planilha-mestre, não deste painel.
+
+**Legislação (`data-legislacao`, 8.4 — 10 de 137 registros resolvidos ou corrigidos):**
+
+- **Resolvidos com fonte nova (norma confirmada ou trocada):** Maricá/RJ (LC 244/2014, não a Lei 2.185/2006), Aquiraz/CE (Lei 1.279/2018, não a Lei 1.174/2016), Itapeva/SP (Decreto 11.829/2021, não a Lei 4.039/2017 — que é só reorganização geral), Eusébio/CE (Lei 1.024/2011, não a Lei 960/2010 — que trata de transporte intermunicipal), Piumhi/MG, Ilha Comprida/SP e Ijaci/MG (normas localizadas onde antes constava "não encontrei").
+- **Corrigidos (ano ou data):** Itararé/SP (ano 2021→2022), Santo Antônio de Posse/SP (ano 2024→2021), Pitanga/PR (data da lei: 11/nov→22/dez/2011).
+- Cobertura do crosswalk sobe de 62 para **65 normas identificadas em 137** (confiabilidade alta 37→40).
+- ⚠️ **O que NÃO foi feito nesta rodada:** a sincronização de 137 para os 155(+) municípios canônicos do levantamento legal — pendência já registrada em `Pendências.md` do cofre, meramente confirmada como ainda aberta, não fechada aqui. Aparecida/SP e Igaratá/SP, por exemplo, têm norma confirmada na base-mestre do cofre mas não entraram neste crosswalk por não estarem nos 137 originais.
+
+**Camadas da régua descritiva (`data-camadas`):**
+
+- **São Caetano do Sul/SP adicionado** (camada 4, grupo social) — universalidade revogada em 15/07/2026; a base principal já registrava isso desde então (`tz_status = "Reclassificada (parcial — grupo social)"`), mas o crosswalk de camadas nunca tinha sido atualizado para refletir a mudança. Antes desta correção, o card do município não mostrava nenhuma camada da régua descritiva para São Caetano.
+- Florianópolis continua com o flag "REVER" registrado em v0.4.02 (conflito de status não resolvido) — fora do escopo desta rodada.
+
+**Infraestrutura de build (achado, corrigido nesta rodada):**
+
+- 🔴 **`montar_html.sh` estava desatualizado desde a v0.5 (26/08/2026) — não incluía os blocos `data-modal`, `data-grupos` e `data-legislacao`.** Rodar o script tal como documentado no README teria remontado o `painel.html` **sem partição modal, sem grupos econômicos e sem legislação** — uma regressão silenciosa de três eixos de dado inteiros. Detectado por verificação pós-build (checagem dos 9 blocos esperados) antes de qualquer publicação; corrigido nesta rodada remontando com um script equivalente ao `remontar_de_painel.py` (mesma ordem de 9 blocos), mas alimentado com `build/` fresco em vez de herdar os blocos pesados do painel anterior. **`montar_html.sh` precisa ser atualizado para incluir os 3 blocos que faltam** — não corrigido aqui para não misturar mudança de infraestrutura de build com patch de dados; registrar como pendência.
+- Geometria (`geo.topojson`) reaproveitada do `painel.html` anterior — não mudou desde a última publicação, então `preparar_geometria.sh` não foi executado.
+
+**Verificação:** todos os 9 blocos JSON validados individualmente (`json.loads`) e todas as marcas estruturais esperadas (`#grupos`, `#regiaoUf`, `#dispersao`, `#muniSearch`, `#clearAll`) conferidas no arquivo remontado antes de sobrescrever `painel.html`. Sem navegador disponível neste ambiente para verificação visual em Chromium headless (diferente da v0.5) — spot-check feito lendo os blocos de dados diretamente (Itararé, Santo Antônio de Posse, São Caetano do Sul, Teresina, Maricá, Aquiraz, Eusébio, Itapeva).
+
+## v0.5 (2026-08-26)
 
 Fase 11 completa (Blocos 1–3) **mais três itens de dívida antiga** — 3.3, 3.4 e 8.4, abertos desde v0.3 e julho/2026. Ao todo: 5 correções, 5 mudanças de navegação, 2 gráficos que nunca tinham sido feitos e **três dados novos** — partição modal por município, legislação municipal e grupos econômicos do transporte. Este último é o eixo central da hipótese da tese, que até esta versão o painel registrava como "variável ainda ausente". Iteração nova por direito próprio, não sub-patch de v0.4.
 
