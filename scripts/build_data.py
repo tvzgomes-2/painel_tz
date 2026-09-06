@@ -17,7 +17,9 @@ import json
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-VAULT = os.path.join(BASE_DIR, '..', '..', 'doutorado')  # cofre privado, não incluído neste repo
+# Cofre privado, não incluído neste repo. Por padrão assume as pastas 'painel TZ' e 'doutorado'
+# como irmãs; a variável de ambiente TZ_VAULT permite apontar para outro lugar sem editar o script.
+VAULT = os.environ.get('TZ_VAULT') or os.path.join(BASE_DIR, '..', '..', 'doutorado')
 OUT_DIR = os.path.join(BASE_DIR, '..', 'build')
 os.makedirs(OUT_DIR, exist_ok=True)
 
@@ -135,12 +137,18 @@ cols = {
     'pdmu_possui_2025': 'pdmu_2025', 'pdmu_obrigado_2025': 'pdmu_obrigado_2025',
     'prefeito_2024': 'prefeito_2024', 'partido_2024': 'partido_2024',
     'extensao_viaria_total_km': 'ext_viaria_osm', 'densidade_viaria_km_km2': 'densidade_viaria',
+    # --- CadÚnico (v0.7) — ver METADADOS.md para as ressalvas de leitura ---
+    'cadunico_cobertura_pct_202508': 'cadunico_cobertura',
+    'cadunico_cobertura_pct_202209': 'cadunico_cobertura_2022',
+    'cadunico_pes_202508': 'cadunico_pes',
+    'cadunico_taxa_atualizacao_pct_202508': 'cadunico_taxa_atualizacao',
 }
 out = df[list(cols.keys())].rename(columns=cols)
 
 numeric_cols = ['pop', 'cresc_pop', 'pib_pc', 'rec_total', 'rec_prop', 'desp_tcu', 'motorizacao', 'ibeu', 'idh', 'ext_via',
                 'regic_nivel', 'pct_transporte_desp', 'desp_transporte', 'pct_investimento_desp', 'investimentos',
-                'taxa_obitos_transito', 'tarifa', 'subsidio_ntu_pct', 'ext_viaria_osm', 'densidade_viaria']
+                'taxa_obitos_transito', 'tarifa', 'subsidio_ntu_pct', 'ext_viaria_osm', 'densidade_viaria',
+                'cadunico_cobertura', 'cadunico_cobertura_2022', 'cadunico_pes', 'cadunico_taxa_atualizacao']
 for c in numeric_cols:
     out[c] = pd.to_numeric(out[c], errors='coerce')
 
@@ -167,3 +175,4 @@ print('rows out:', len(records))
 print('modelo_prestacao coverage (non-null):', sum(1 for r in records if r['modelo_prestacao'] is not None))
 print('subsidio coverage:', sum(1 for r in records if r['subsidio_ntu_pct'] is not None))
 print('tarifa coverage:', sum(1 for r in records if r['tarifa'] is not None))
+print('cadunico coverage:', sum(1 for r in records if r['cadunico_cobertura'] is not None))

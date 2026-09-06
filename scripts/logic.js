@@ -364,6 +364,7 @@ const PALETTES = {
   pct_investimento_desp: ['#edf8e9', '#bae4b3', '#74c476', '#31a354', '#006d2c'],
   tarifa: ['#f2f0f7', '#cbc9e2', '#9e9ac8', '#756bb1', '#54278f'],
   subsidio_ntu_pct: ['#fff5eb', '#fdbe85', '#fd8d3c', '#e6550d', '#a63603'],
+  cadunico_cobertura: ['#edf8b1', '#c7e9b4', '#7fcdbb', '#2c7fb8', '#253494'],
 };
 const FAIXA_COLORS = {
   'Inferior a 20 mil': '#c6dbef', 'Entre 20 e 100 mil': '#6baed6',
@@ -795,6 +796,9 @@ function renderDetail(m) {
       <tr><td>Motorização (veíc/hab)</td><td>${fmtNum(m.motorizacao)}</td></tr>
       <tr><td>IBEU</td><td>${fmtNum(m.ibeu)}</td></tr>
       <tr><td>IDH</td><td>${fmtNum(m.idh)}</td></tr>
+      <tr><td>Cobertura do CadÚnico (ago/2025)</td><td>${m.cadunico_cobertura != null ? fmtNum(m.cadunico_cobertura) + '% (' + fmtNum(m.cadunico_pes) + ' pessoas)' : 'sem dado'}</td></tr>
+      <tr><td>Cobertura do CadÚnico (set/2022)</td><td>${m.cadunico_cobertura_2022 != null ? fmtNum(m.cadunico_cobertura_2022) + '%' : 'sem dado'}</td></tr>
+      <tr><td>Cadastro atualizado (ago/2025)</td><td>${m.cadunico_taxa_atualizacao != null ? fmtNum(m.cadunico_taxa_atualizacao) + '% das famílias' : 'sem dado'}</td></tr>
       <tr><td>Receita própria per capita</td><td>R$ ${fmtNum(m.rec_prop_pc)}</td></tr>
       <tr><td>Óbitos no trânsito /100mil (2019)</td><td>${fmtNum(m.taxa_obitos_transito)}</td></tr>
       <tr><td>Tarifa</td><td>${m.tz_status === 'Ativa' ? 'Gratuito (TZ universal)' : (m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) + ' (' + m.tarifa_ano + ', ' + m.tarifa_fonte + ')' : 'sem dado')}</td></tr>
@@ -890,6 +894,7 @@ const BAR_METRICS = [
   { k: 'idh', label: 'IDH mediano', fmt: fmtNum },
   { k: 'rec_prop_pc', label: 'Receita própria per capita mediana (R$)', fmt: v => 'R$ ' + fmtNum(v) },
   { k: 'taxa_obitos_transito', label: 'Óbitos no trânsito /100mil mediano (2019)', fmt: fmtNum },
+  { k: 'cadunico_cobertura', label: 'Cobertura do CadÚnico mediana (%, ago/2025)', fmt: v => fmtNum(v) + '%' },
 ];
 
 function renderBars() {
@@ -1362,6 +1367,7 @@ svg.addEventListener('mousemove', e => {
       cresc_pop: fmtNum(m.cresc_pop), rec_prop_pc: 'R$ ' + fmtNum(m.rec_prop_pc),
       taxa_obitos_transito: fmtNum(m.taxa_obitos_transito) + ' /100mil',
       pct_investimento_desp: fmtNum(m.pct_investimento_desp) + '%',
+      cadunico_cobertura: m.cadunico_cobertura != null ? fmtNum(m.cadunico_cobertura) + '%' : 'sem dado',
       tarifa: m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) : 'sem dado',
       subsidio_ntu_pct: m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '%' : 'sem dado',
     }[state.colorBy];

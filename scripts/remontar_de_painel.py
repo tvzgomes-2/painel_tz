@@ -26,7 +26,18 @@ REPO = Path(__file__).resolve().parent.parent
 SCRIPTS = REPO / "scripts"
 PAINEL = REPO / "painel.html"
 
-# blocos de dados: (id, arquivo em scripts/ ou None se vem do painel atual)
+BUILD = REPO / "build"
+
+# Ajuste 06/09/2026: quando a pasta build/ existe, os blocos pesados vêm DELA em vez de
+# serem herdados do painel.html — é o que permite regerar a base municipal (ex.: colunas
+# novas do CadÚnico) sem depender do montar_html.sh, que exige a build inteira.
+DO_BUILD = {
+    "topo-data": "geo.topojson",
+    "data-stats": "stats.json",
+    "data-muni": "municipios_dados_col.json",
+}
+
+# blocos de dados: (id, arquivo em scripts/ ou None se vem do build/ ou do painel atual)
 BLOCOS = [
     ("topo-data", None),                              # geo.topojson (build)
     ("data-stats", None),                             # stats.json (build)
@@ -51,6 +62,12 @@ def extrai(bloco_id, texto):
 herdados = {}
 for bid, arq in BLOCOS:
     if arq is None:
+        do_build = BUILD / DO_BUILD[bid] if bid in DO_BUILD else None
+        if do_build is not None and do_build.exists():
+            c = do_build.read_text(encoding="utf-8").strip()
+            herdados[bid] = c
+            print(f"  do build/: {bid} <- {do_build.name} ({len(c)/1024:.0f} KB)")
+            continue
         c = extrai(bid, atual)
         if c is None:
             sys.exit(f"ERRO: bloco '{bid}' não encontrado no painel.html atual — "

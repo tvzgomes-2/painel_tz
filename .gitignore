@@ -8,3 +8,13 @@ rede-ge-rascunho/
 
 # Backup automatico do remontar_de_painel.py (o historico do git e o backup real)
 painel.html.bak
+
+# Token do GitHub usado pela tarefa agendada de revisao semanal (nunca versionar)
+credenciais-github.env
+
+# Saidas de build (geo.topojson, stats.json, municipios_dados*.json) — geradas
+# por build_data.py/build_stats.py, pesadas e reproduziveis; nunca versionar
+build/
+
+# Cache do Python
+__pycache__/

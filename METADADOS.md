@@ -38,6 +38,25 @@ Descreve os 54 campos por município embutidos em `painel.html` (ver `municipios
 | `investimentos` (investimentos_2022) | Investimentos, natureza 4.4 (R$) | FINBRA (Anexo I-D) | 2022 | |
 | `pct_investimento_desp` (pct_investimento_desp_2022) | % da despesa total em investimento | derivado | 2022 | |
 
+## Vulnerabilidade social (CadÚnico)
+
+Fonte: **MDS/SAGI — API MI Social**, agregados municipais do Cadastro Único. Duas competências: **set/2022** (comparável a Gonçalves e Santini, 2023, em Mariana) e **ago/2025** (mais recente). Cobertura 5.570/5.570 municípios.
+
+| Campo | Descrição | Fonte | Ano | Observações |
+|---|---|---|---|---|
+| `cadunico_cobertura` | Pessoas inscritas no CadÚnico / população × 100 | MDS/SAGI ÷ IBGE | ago/2025 | denominador `pop_2025`; proxy de demanda cativa |
+| `cadunico_cobertura_2022` | Mesma medida na competência set/2022 | MDS/SAGI ÷ IBGE | set/2022 | denominador `pop_2022`; ⚠️ não comparável direto com a de 2025 — ver abaixo |
+| `cadunico_pes` | Pessoas inscritas (absoluto) | MDS/SAGI | ago/2025 | |
+| `cadunico_taxa_atualizacao` | Famílias com cadastro atualizado / cadastradas × 100 | MDS/SAGI | ago/2025 | medida do estoque **ativo**; indicador de capacidade administrativa |
+
+**Como ler — três ressalvas.**
+
+1. **Inscrição, não pobreza.** A cobertura depende da capacidade de busca ativa do CRAS. Dois municípios igualmente pobres podem ter coberturas distintas por qualidade de gestão. Declarar como *proxy de vulnerabilidade mediada por capacidade administrativa*.
+2. **Estoque, não fotografia.** O campo conta cadastros acumulados, incluindo registros desatualizados de quem já saiu do município — daí **62 municípios pequenos acima de 100%** em set/2022. Multiplicando pela taxa de atualização, os casos acima de 100% caem para 3 e a média municipal converge para o agregado nacional (44,6%).
+3. **Quebra de série entre as competências.** Desde jun/2023 (IN nº 1/SAGICAD/MDS, 02/06/2023) a renda registrada vem do **CNIS** quando maior que a autodeclarada — 2022 é pré-integração, 2025 é pós. E as réguas se moveram em direções opostas em termos reais: linha da pobreza R$ 210 → R$ 218 (+3,8%), meio salário mínimo R$ 606 → R$ 759 (+25,2%). A variação entre as duas mistura renda com instrumento de medida.
+
+**Validação:** agregado nacional 90.525.701 pessoas / 203.080.756 hab = 44,6% em set/2022, compatível com o total oficial da competência. As identidades internas do CadÚnico (faixa 1 + faixa 2 = até ½ SM; + faixa 3 = total) fecham em 5.570/5.570 nas duas competências.
+
 ## Transporte e mobilidade
 
 | Campo | Descrição | Fonte | Ano | Observações |

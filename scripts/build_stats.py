@@ -26,7 +26,8 @@ order_regic = [1, 2, 3, 4, 5]
 order_modelo = ['Concessão', 'Prestação direta', 'Permissão', 'Autorização', 'Não regulamentado', 'Misto (2+ modelos)']
 order_arranjo = ['Sede/co-sede do arranjo', 'Satélite do arranjo', 'Fora de arranjo']
 
-vars_ = ['pib_pc', 'motorizacao', 'ibeu', 'idh', 'cresc_pop', 'rec_prop_pc', 'taxa_obitos_transito', 'pct_investimento_desp']
+vars_ = ['pib_pc', 'motorizacao', 'ibeu', 'idh', 'cresc_pop', 'rec_prop_pc', 'taxa_obitos_transito', 'pct_investimento_desp',
+         'cadunico_cobertura']
 breaks = {v: [round(x, 4) if x == x else None for x in df[v].quantile([0, 0.2, 0.4, 0.6, 0.8, 1.0]).tolist()] for v in vars_}
 # esparsos: usar breaks só sobre quem tem dado
 for v in ['tarifa', 'subsidio_ntu_pct']:
@@ -44,6 +45,7 @@ def agg(g):
         'idh_mediana': float(g['idh'].median(skipna=True)) if g['idh'].notna().any() else None,
         'rec_prop_pc_mediana': float(g['rec_prop_pc'].median()),
         'taxa_obitos_transito_mediana': float(g['taxa_obitos_transito'].median(skipna=True)) if g['taxa_obitos_transito'].notna().any() else None,
+        'cadunico_cobertura_mediana': float(g['cadunico_cobertura'].median(skipna=True)) if g['cadunico_cobertura'].notna().any() else None,
         'pdmu_pct': float((g['pdmu_2025'].astype(str).str.strip() == 'Sim').mean()),
         'pd_pct': float((g['plano_diretor'].astype(str).str.strip() == 'Sim').mean()),
     }

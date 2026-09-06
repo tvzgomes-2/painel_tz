@@ -6,7 +6,38 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.6 (atual — 2026-09-04)
+## v0.7 (atual — 2026-09-06)
+
+Entrada do **CadÚnico** na base municipal: quatro variáveis novas, uma opção de mapa e uma barra comparativa. Adiciona coluna ao banco — na fase de prototipagem qualquer mudança soma +0.1 (ver `VERSIONING.md`).
+
+**Dados novos (`build_data.py` → `data-muni`), fonte MDS/SAGI (API MI Social):**
+
+- `cadunico_cobertura` — pessoas inscritas / população × 100, competência **ago/2025**. Cobertura 5.570/5.570.
+- `cadunico_cobertura_2022` — mesma medida em **set/2022**, a competência que Gonçalves e Santini (2023) usam em Mariana.
+- `cadunico_pes` — pessoas inscritas (ago/2025), valor absoluto.
+- `cadunico_taxa_atualizacao` — % de famílias com cadastro dentro da janela oficial de atualização; é a medida do **estoque ativo** e o antídoto contra a leitura ingênua da cobertura.
+
+**Interface:** nova opção de coloração do mapa (escala YlGnBu, distinta das já usadas); nova barra na comparação TZ × não-TZ; três linhas na ficha do município; valor no tooltip quando o mapa está colorido por CadÚnico; verbete no glossário.
+
+**Validação antes de publicar:** o agregado nacional bate com o oficial da competência (90,5 mi / 203,1 mi = 44,6% em set/2022). As identidades internas do CadÚnico — faixa 1 + faixa 2 = até ½ SM, e + faixa 3 = total — fecham em 5.570/5.570 municípios nas duas competências.
+
+**Três ressalvas gravadas nas notas metodológicas do painel** (não só aqui): (1) o CadÚnico mede inscrição mediada por capacidade de busca ativa do CRAS, não pobreza; (2) é estoque de cadastros, não fotografia — 62 municípios pequenos passam de 100% de cobertura, e aplicar a taxa de atualização derruba isso para 3; (3) as duas competências não são diretamente comparáveis: desde jun/2023 a renda vem do CNIS quando maior que a autodeclarada (IN nº 1/SAGICAD/MDS), e as réguas se moveram em direções opostas em termos reais — linha da pobreza R$ 210 → R$ 218 (+3,8%), meio salário mínimo R$ 606 → R$ 759 (+25,2%).
+
+**⚠️ A barra comparativa exige cautela e a nota diz isso na cara do leitor.** Mediana bruta: 40,3% (TZ) contra 58,6% (não-TZ). Boa parte é composição — a cobertura cai com o PIB per capita (correlação de postos −0,69) e a TZ se concentra no Sudeste/Sul, de menor cobertura. Controlando por região a diferença encolhe (Sudeste −6,7 p.p.), inverte no Sul (+4,2 p.p.) e persiste no Nordeste (−12,4 p.p.). Não é achado; é ponto de partida para o recorte.
+
+**Correções de ferramenta (dívida técnica, sem efeito no publicado):**
+
+- `montar_html.sh` estava **sem os blocos `data-modal`, `data-grupos` e `data-legislacao`**, que o painel usa desde as Fases 11 e 8.4 — rodá-lo como estava geraria um painel quebrado. Corrigido.
+- `remontar_de_painel.py` passa a **preferir a pasta `build/`** quando ela existe, em vez de sempre herdar os blocos pesados do `painel.html`. Sem isso não havia como regerar a base municipal com colunas novas.
+- `build_data.py` aceita a variável de ambiente `TZ_VAULT` para apontar o cofre, sem editar o script.
+
+**⚠️ Pendências herdadas, não resolvidas nesta rodada:**
+
+- O badge da interface exibia **v0.5** enquanto o CHANGELOG registrava v0.6 — corrigido agora para v0.7, mas fica o registro de que a v0.6 não atualizou o rótulo.
+- A duplicata **Arthur/Artur Nogueira-SP** foi resolvida no cofre em `Tipologias TZ - consolidado.xlsx`, mas **persiste em `Municípios TZ - consolidado.xlsx`** (a fonte deste painel). O dedup por código IBGE segue tratando sem quebrar; é pendência de qualidade na planilha-mestre.
+- A nota metodológica sobre São Caetano do Sul ("consta aqui como Ativa") está **desatualizada** — o painel já o classifica como parcial/grupo social. Texto do autor, não reescrito.
+
+## v0.6 (2026-09-04)
 
 Patch de dados — auditoria completa das 208 fichas municipais contra a base-mestre (cofre), com achados gravados e investigação dirigida (WebSearch/WebFetch) de divergências abertas. Estrutura de banco intacta (mesmo schema) — enriquecimento de dados, sem feature nova, entra como patch (ver `VERSIONING.md` § hierarquia de precedência).
 
