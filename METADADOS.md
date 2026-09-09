@@ -57,6 +57,21 @@ Fonte: **MDS/SAGI — API MI Social**, agregados municipais do Cadastro Único. 
 
 **Validação:** agregado nacional 90.525.701 pessoas / 203.080.756 hab = 44,6% em set/2022, compatível com o total oficial da competência. As identidades internas do CadÚnico (faixa 1 + faixa 2 = até ½ SM; + faixa 3 = total) fecham em 5.570/5.570 nas duas competências.
 
+## Deslocamento para trabalho (Censo 2022, microdados da amostra)
+
+| campo | descrição | fonte |
+|---|---|---|
+| `trab_fora` | % dos ocupados que trabalham em outro município | Censo 2022, microdados da amostra (`P1120 = 3`), agregado municipal |
+| bloco `data-od` | matriz origem-destino nas duas direções, top-5 por município | idem, ver supressão abaixo |
+
+**Supressão, e por que ela é parte do dado.** A origem é a versão de **acesso controlado** dos microdados, vinculada a termo de compromisso assinado — o painel é público. Dos 120.435 pares origem-destino, **57,6% se apoiam em uma única pessoa amostrada** (mediana de registros por célula = 1; terceiro quartil = 3). Publicar essas células seria erro de **custódia** (cruzar residência com local de trabalho a partir de um respondente é informação identificável) e de **estatística** (CV da ordem de 100%, lido como fato). Corte publicado: **top-5 destinos por município e mínimo de 5 registros amostrados por célula**, aplicado à célula e portanto igual nas duas direções — 16.560 pares, 80,3% do fluxo, 5.167 de 5.570 municípios. **403 municípios não mostram nada; ali a ausência é ausência de medição.** Os totais exibidos são de antes da supressão, e cada lista declara a fração do fluxo que cobre.
+
+**Como ler.** A direção de **entrada** é a que interessa ao argumento da pesquisa: num município com Tarifa Zero, quem chega de fora paga tarifa intermunicipal para acessar o sistema gratuito; num polo sem TZ, o volume que entra é a mão de obra dos satélites que a gratuidade dos vizinhos não alcança. O marcador ◆ indica que o par é o **polo do próprio arranjo populacional** e ◇ que é outro município do mesmo arranjo — recorte do IBGE por integração de fato, diferente de região metropolitana por lei.
+
+**O que o dado não diz.** Não há direção causal nem tempo de viagem por par (o tempo está no agregado municipal, não na célula OD); a pergunta do Censo é sobre o **trabalho principal**, então quem trabalha em mais de um município fica fora das listas (entra só no total); e o recorte é de 2022, anterior a boa parte das adesões recentes à Tarifa Zero.
+
+**Reprodução.** `scripts/build_od.py` (aceita `TZ_VAULT` e `TZ_PAINEL_SCRIPTS` por variável de ambiente). O cache de pessoa a pessoa usado na análise que originou este dado fica **fora** do OneDrive, ao lado do zip de origem; ao pacote de replicação vão o script e o agregado, nunca o microdado.
+
 ## Transporte e mobilidade
 
 | Campo | Descrição | Fonte | Ano | Observações |

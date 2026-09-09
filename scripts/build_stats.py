@@ -27,9 +27,11 @@ order_modelo = ['Concessão', 'Prestação direta', 'Permissão', 'Autorização
 order_arranjo = ['Sede/co-sede do arranjo', 'Satélite do arranjo', 'Fora de arranjo']
 
 vars_ = ['pib_pc', 'motorizacao', 'ibeu', 'idh', 'cresc_pop', 'rec_prop_pc', 'taxa_obitos_transito', 'pct_investimento_desp',
-         'cadunico_cobertura']
+         'cadunico_cobertura', 'trab_fora']
 breaks = {v: [round(x, 4) if x == x else None for x in df[v].quantile([0, 0.2, 0.4, 0.6, 0.8, 1.0]).tolist()] for v in vars_}
 # esparsos: usar breaks só sobre quem tem dado
+# percentual com 4 casas decimais fica feio na legenda ("0,08 – 3,958"); 1 casa basta
+breaks['trab_fora'] = [round(x, 1) for x in breaks['trab_fora']]
 for v in ['tarifa', 'subsidio_ntu_pct']:
     s = df[v].dropna()
     breaks[v] = [round(x, 4) for x in s.quantile([0, 0.2, 0.4, 0.6, 0.8, 1.0]).tolist()]

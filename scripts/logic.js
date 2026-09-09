@@ -12,6 +12,17 @@ const CAMADAS_RAW = JSON.parse(document.getElementById('data-camadas').textConte
 const MODAL_RAW = JSON.parse(document.getElementById('data-modal').textContent);
 const GRUPOS_RAW = JSON.parse(document.getElementById('data-grupos').textContent);
 const LEGISLACAO_RAW = JSON.parse(document.getElementById('data-legislacao').textContent);
+// Matriz origem-destino de trabalho do Censo 2022 (v0.8), mesma chave de código IBGE.
+// Vem SUPRIMIDA: top-5 destinos (e top-5 origens) por município e no mínimo 5 registros
+// amostrados por célula — 57,6% dos 120 mil pares do microdado se apoiam em UMA pessoa
+// amostrada, e essas células não são publicáveis nem por custódia (o microdado é de
+// acesso controlado) nem por ruído (CV da ordem de 100%). Ver build_od.py e METADADOS.md.
+// Formato: { cod: { s:[[cod_destino, pessoas, rel]], st: total_que_sai, sd: n_destinos,
+//                   e:[[cod_origem, pessoas, rel]], et: total_que_entra, eo: n_origens } }
+// rel: 0 = fora do arranjo · 1 = mesmo arranjo · 2 = polo do próprio arranjo.
+// O percentual NÃO vem no arquivo — é pessoas/total, calculado aqui, para não haver
+// duas versões do mesmo número.
+const OD_RAW = JSON.parse(document.getElementById('data-od').textContent);
 
 // zip columnar municipal data into id -> row object
 const COLS = MUNI_COL.cols;
@@ -94,6 +105,7 @@ function gruposFor(m) { return (m && GRUPOS_RAW[String(m.id)]) || []; }
 // hoje não estavam nele — o card diz isso em vez de deixar o silêncio sugerir que
 // não há norma.
 function legislacaoFor(m) { return (m && LEGISLACAO_RAW[String(m.id)]) || null; }
+function odFor(m) { return (m && OD_RAW[String(m.id)]) || null; }
 
 const CONF_LABEL = {
   'alta': 'confiabilidade alta — confirmado em fonte primária',
@@ -297,11 +309,32 @@ for (const uf of ufFeatures) {
   el.classList.add('ufline');
   gUf.appendChild(el);
 }
+// Grupo das linhas de desejo (v0.8). Criado por último para ficar acima de todas as
+// camadas de município e dos limites de UF — linha de fluxo por baixo do preenchimento
+// desaparece nos municípios grandes.
+const gFluxo = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+gFluxo.setAttribute('pointer-events', 'none');
+
+// Centroide por município, sob demanda. Usa o centro do bbox, não o centroide de área:
+// na escala nacional a diferença é de poucos pixels, e o bbox já está calculado. Em
+// município de forma muito irregular o ponto pode cair fora do polígono — é limitação
+// aceita de propósito, porque a linha serve para indicar direção e intensidade, não
+// para localizar um endereço.
+const centroideCache = new Map();
+function centroideDe(cod) {
+  if (centroideCache.has(cod)) return centroideCache.get(cod);
+  const f = features.find(ft => ft.id === String(cod));
+  const p = f ? project([(f.bbox[0] + f.bbox[2]) / 2, (f.bbox[1] + f.bbox[3]) / 2]) : null;
+  centroideCache.set(cod, p);
+  return p;
+}
+
 svg.appendChild(gNaoTz);
 svg.appendChild(gAtiva);
 svg.appendChild(gParcial);
 svg.appendChild(gEncerrada);
 svg.appendChild(gUf);
+svg.appendChild(gFluxo);
 
 // ---------- auto-encaixe (animação do viewBox) ----------
 let vbAnim = null;
@@ -365,6 +398,7 @@ const PALETTES = {
   tarifa: ['#f2f0f7', '#cbc9e2', '#9e9ac8', '#756bb1', '#54278f'],
   subsidio_ntu_pct: ['#fff5eb', '#fdbe85', '#fd8d3c', '#e6550d', '#a63603'],
   cadunico_cobertura: ['#edf8b1', '#c7e9b4', '#7fcdbb', '#2c7fb8', '#253494'],
+  trab_fora: ['#fde0dd', '#fa9fb5', '#f768a1', '#c51b8a', '#7a0177'],
 };
 const FAIXA_COLORS = {
   'Inferior a 20 mil': '#c6dbef', 'Entre 20 e 100 mil': '#6baed6',
@@ -766,7 +800,17 @@ function gerarParagrafoTZ(m) {
 // ---------- detail panel ----------
 function renderDetail(m) {
   const el = document.getElementById('detail');
-  if (!m) { el.innerHTML = '<div class="empty">Clique em um município no mapa ou na lista abaixo.</div>'; return; }
+  // Não reconstruir o card quando o município já é o que está na tela. A busca
+  // chama isto a cada tecla e a cada blur do campo, e reescrever o innerHTML
+  // destrói elementos interativos no meio de um clique do usuário (foi assim que
+  // o botão "ver no mapa" ficava inerte — ver a nota em trocaDirecaoFluxo).
+  if (m && munSelecionado && String(munSelecionado.id) === String(m.id)) return;
+  munSelecionado = m || null;
+  if (!m) {
+    el.innerHTML = '<div class="empty">Clique em um município no mapa ou na lista abaixo.</div>';
+    desenharFluxos(null);
+    return;
+  }
   const tzTag = m.tz_status === 'Ativa' ? '<span class="tag ativa">TZ ativa</span>'
     : m.tz_status === 'Encerrada' ? '<span class="tag encerrada">TZ encerrada</span>' : '';
   // 11.7: a camada da regua descritiva era uma lista no fim do card, depois de ~16
@@ -808,12 +852,186 @@ function renderDetail(m) {
       ${extra}
     </table>
     ${renderLegislacaoDetail(m)}
+    ${renderODDetail(m)}
     ${renderModalDetail(m)}
     ${renderGruposDetail(m)}
     ${renderCamadaDetail(m)}
     ${renderFontesDetail(m)}
     ${renderNoticiasDetail(m)}`;
+  desenharFluxos(m);
 }
+
+
+// ---------- origem-destino de trabalho (v0.8) ----------
+// Duas listas por município: para onde vão os que saem e de onde vêm os que entram.
+// A direção de ENTRADA é a que carrega o argumento da tese: num município com TZ, quem
+// chega de fora paga a tarifa intermunicipal para acessar o sistema gratuito; num polo
+// sem TZ, o volume que entra é a mão de obra dos satélites que a gratuidade municipal
+// dos vizinhos não alcança.
+let munSelecionado = null;
+let fluxoDir = 's';                         // 's' = saídas · 'e' = entradas
+const OD_REL_TAG = {
+  2: '<span title="destino é o polo do próprio arranjo populacional" style="color:var(--amarelo);">◆</span>',
+  1: '<span title="mesmo arranjo populacional" style="color:var(--muted);">◇</span>',
+  0: ''
+};
+const OD_COR = { s: '#FF2D6B', e: '#1A54C7' };
+
+function odLista(d, chave, total, nDistintos, m) {
+  const lst = d[chave];
+  if (!lst || !lst.length) return '';
+  const coberto = lst.reduce((a, x) => a + x[1], 0);
+  const itens = lst.map(x => {
+    const outro = MUNI.get(String(x[0]));
+    const rot = outro ? `${outro.nome} – ${outro.uf}` : `município ${x[0]}`;
+    const pct = total > 0 ? (x[1] / total * 100) : null;
+    const tz = outro && outro.tz_status === 'Ativa'
+      ? ' <span class="tag ativa" style="font-size:9px;padding:0 3px;">TZ</span>' : '';
+    return `<li>${rot}${tz} ${OD_REL_TAG[x[2]] || ''} — <b>${fmtNum(x[1])}</b>${pct != null ? ` (${pct.toFixed(1)}%)` : ''}</li>`;
+  }).join('');
+  const dir = chave === 's' ? 'saem' : 'entram';
+  const verbo = chave === 's' ? 'trabalham fora' : 'vêm de fora trabalhar aqui';
+  return `<div style="margin-top:6px;">
+    <div style="display:flex;align-items:baseline;gap:6px;">
+      <b style="font-size:11.5px;color:${OD_COR[chave]};">${chave === 's' ? 'Para onde vão' : 'De onde vêm'}</b>
+      <button class="odbtn" data-dir="${chave}" style="font-size:10px;padding:1px 5px;cursor:pointer;background:transparent;border:1px solid var(--border);border-radius:3px;color:var(--muted);">ver no mapa</button>
+    </div>
+    <ul style="margin:4px 0 0;padding-left:16px;font-size:11.5px;color:var(--muted);line-height:1.55;">${itens}</ul>
+    <p style="margin:3px 0 0;font-size:10.5px;color:var(--muted);">${fmtNum(total)} pessoas ${verbo}, distribuídas por ${nDistintos} municípios; os ${lst.length} acima respondem por ${(coberto / total * 100).toFixed(0)}% desse fluxo.</p>
+  </div>`;
+}
+
+function renderODDetail(m) {
+  const d = odFor(m);
+  const fora = m && m.trab_fora != null ? m.trab_fora : null;
+  if (!d && fora == null) return '';
+  const cabeca = fora != null
+    ? `<p style="margin:5px 0 0;font-size:12px;color:var(--text);line-height:1.5;"><b>${fmtNum(fora)}%</b> dos ocupados de ${m.nome} trabalham em outro município — a parcela da mão de obra que uma gratuidade municipal, por definição, não atende inteira.</p>`
+    : '';
+  if (!d) {
+    return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+      <b style="font-size:12.5px;">Deslocamento para trabalho (Censo 2022)</b>${cabeca}
+      <p style="margin:5px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5;">Nenhum fluxo deste município foi amostrado o suficiente para ser publicado (mínimo de 5 registros por par origem-destino). São 403 municípios nessa situação — ausência aqui é ausência de medição, não de deslocamento.</p>
+    </div>`;
+  }
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">Deslocamento para trabalho (Censo 2022)</b>${cabeca}
+    ${odLista(d, 's', d.st, d.sd, m)}
+    ${odLista(d, 'e', d.et, d.eo, m)}
+    <p style="margin:6px 0 0;font-size:10.5px;color:var(--muted);line-height:1.45;">◆ polo do próprio arranjo · ◇ mesmo arranjo. Matriz origem-destino dos microdados da amostra do Censo 2022, suprimida a células com pelo menos 5 registros amostrados — as demais têm coeficiente de variação da ordem de 100% e não são publicáveis. Ver METADADOS.md.</p>
+  </div>`;
+}
+
+// ---------- linhas de desejo no mapa ----------
+function desenharFluxos(m) {
+  gFluxo.innerHTML = '';
+  if (!m) return;
+  const d = odFor(m);
+  if (!d) return;
+  const lst = d[fluxoDir];
+  if (!lst || !lst.length) return;
+  const origem = centroideDe(m.id);
+  if (!origem) return;
+  const maior = Math.max(...lst.map(x => x[1]));
+  const cor = OD_COR[fluxoDir];
+  for (const [outroCod, peso] of lst) {
+    const p = centroideDe(outroCod);
+    if (!p) continue;
+    // A largura vai pela RAIZ do fluxo, não pelo fluxo: São Paulo recebe 871 mil e
+    // Sorocaba 41 mil, e em escala linear a segunda linha seria invisível.
+    const w = 1.1 + 4.2 * Math.sqrt(peso / maior);
+    const [a, b] = fluxoDir === 's' ? [origem, p] : [p, origem];
+    // curva de Bézier com desvio perpendicular de 18% da corda — arco em vez de reta
+    // para que ida e volta entre o mesmo par não se sobreponham
+    const dx = b[0] - a[0], dy = b[1] - a[1];
+    const cx = (a[0] + b[0]) / 2 - dy * 0.18, cy = (a[1] + b[1]) / 2 + dx * 0.18;
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', `M${a[0].toFixed(1)},${a[1].toFixed(1)}Q${cx.toFixed(1)},${cy.toFixed(1)} ${b[0].toFixed(1)},${b[1].toFixed(1)}`);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', cor);
+    path.setAttribute('stroke-width', w.toFixed(2));
+    path.setAttribute('stroke-opacity', '0.85');
+    path.setAttribute('stroke-linecap', 'round');
+    // a linha vive no mesmo espaço de coordenadas dos polígonos, então acompanha o
+    // zoom do viewBox; sem isto, a espessura cresce junto e a linha vira uma mancha
+    path.setAttribute('vector-effect', 'non-scaling-stroke');
+    gFluxo.appendChild(path);
+    gFluxo.appendChild(ponto(b, cor, w / 1.4 + 2.5));
+  }
+  // ancoragem do município selecionado, em branco com contorno, para o olho achar a origem
+  gFluxo.appendChild(ponto(origem, cor, 9, '#fff'));
+}
+
+// Marcador de ponto desenhado como TRAÇO de comprimento zero com ponta redonda, e não
+// como <circle>. Motivo: o `r` de um circle está em unidades do usuário e cresce com o
+// zoom do viewBox, enquanto `stroke-width` com vector-effect="non-scaling-stroke" fica
+// em pixels de tela. Com circle, ao enquadrar a bacia de deslocamento de um município
+// os marcadores viravam manchas que engoliam o mapa e escondiam quatro dos cinco
+// destinos — o primeiro desenho tinha exatamente esse defeito.
+function ponto([x, y], cor, px, preenchimento) {
+  const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  const s = `${x.toFixed(1)},${y.toFixed(1)}`;
+  p.setAttribute('d', `M${s}L${s}`);
+  p.setAttribute('stroke-linecap', 'round');
+  p.setAttribute('vector-effect', 'non-scaling-stroke');
+  p.setAttribute('stroke', preenchimento || cor);
+  p.setAttribute('stroke-width', px.toFixed(2));
+  if (preenchimento) {
+    // dois traços sobrepostos: o de baixo, mais grosso, faz o contorno colorido
+    const fora = p.cloneNode();
+    fora.setAttribute('stroke', cor);
+    fora.setAttribute('stroke-width', (px + 3).toFixed(2));
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.appendChild(fora); g.appendChild(p);
+    return g;
+  }
+  return p;
+}
+
+// Troca a direção desenhada sem re-renderizar o card todo.
+//
+// ⚠️ Escuta 'pointerdown', não só 'click', e isso é correção de bug, não estilo.
+// Depois de escolher o município pela busca, o campo #muniSearch continua com o
+// foco. O primeiro clique real em qualquer lugar tira o foco dele, o que dispara
+// 'change', que chama selecionaMunicipioBuscado() -> renderDetail(), que
+// reescreve o innerHTML de #detail. Resultado: entre o mousedown e o click o
+// botão deixa de existir, o evento 'click' não chega a ele e
+// e.target.closest('.odbtn') não encontra nada — o botão simplesmente não
+// respondia ao primeiro clique. Um .click() programático funcionava (não há
+// blur), e foi o que quase deixou o bug passar no teste. 'pointerdown' acontece
+// antes do blur. O 'click' fica também, para teclado (Enter no botão focado).
+function trocaDirecaoFluxo(e) {
+  const b = e.target.closest('.odbtn');
+  if (!b) return;
+  fluxoDir = b.dataset.dir;
+  desenharFluxos(munSelecionado);
+  enquadrarFluxos(munSelecionado);
+}
+
+// Enquadra o mapa na bacia de deslocamento do município: origem + destinos.
+// Sem isto o recurso quase não serve. Na escala do Brasil os destinos de Sorocaba
+// ficam todos a menos de 100 km, e os arcos saem com poucos pixels de comprimento —
+// as linhas existem no SVG e são invisíveis na prática. O enquadramento acontece só
+// no clique explícito em "ver no mapa", não a cada seleção: mexer no zoom sem o
+// usuário pedir é desorientador, e a seleção também vem do mapa e da tabela.
+function enquadrarFluxos(m) {
+  if (!m) return;
+  const d = odFor(m);
+  const lst = d && d[fluxoDir];
+  if (!lst || !lst.length) return;
+  const pts = [centroideDe(m.id), ...lst.map(x => centroideDe(x[0]))].filter(Boolean);
+  if (pts.length < 2) return;
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]);
+  const x1 = Math.min(...xs), x2 = Math.max(...xs);
+  const y1 = Math.min(...ys), y2 = Math.max(...ys);
+  // padFrac generoso: o arco de Bézier se afasta da corda, e sem folga a curva
+  // mais externa é cortada pela borda do enquadramento
+  animateViewBox(bboxToViewBox(x1, y1, x2 - x1, y2 - y1, 0.35));
+  document.getElementById('zoomHint').textContent =
+    (fluxoDir === 's' ? 'destinos de ' : 'origens de ') + m.nome + ' – ' + m.uf;
+}
+document.addEventListener('pointerdown', trocaDirecaoFluxo);
+document.addEventListener('click', trocaDirecaoFluxo);
 
 function renderModalDetail(m) {
   const d = modalFor(m);

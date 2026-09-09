@@ -6,7 +6,44 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.7 (atual — 2026-09-06)
+## v0.8 (atual — 2026-09-09)
+
+Entrada da **matriz origem-destino de trabalho** do Censo 2022: duas listas na ficha de cada município, linhas de desejo no mapa e uma variável nova de coloração. Adiciona coluna ao banco e um bloco de dados — na fase de prototipagem qualquer mudança soma +0.1 (ver `VERSIONING.md`).
+
+**Dado novo (`build_data.py` → `data-muni`):**
+
+- `trab_fora` — % dos ocupados que trabalham em **outro município** (`md22_trab_outro_munic_pct`). Cobertura 5.570/5.570. É a parcela da mão de obra que uma gratuidade municipal, por definição, não atende inteira; nova opção de coloração do mapa, em escala RdPu, distinta das já usadas.
+
+**Bloco novo (`build_od.py` → `data-od`, 726 KB):** matriz origem-destino por município, nas duas direções, com a relação de cada par com o arranjo populacional (◆ polo do próprio arranjo · ◇ mesmo arranjo).
+
+**⚠️ A matriz sai SUPRIMIDA, e a supressão é parte do dado — não detalhe de conformidade.** A origem é a versão de **acesso controlado** dos microdados da amostra, vinculada a termo de compromisso assinado; o painel é público. Dos 120.435 pares origem-destino do Brasil (fora 3.434 com destino sentinela — exterior e "mais de um município"), **57,6% se apoiam em uma única pessoa amostrada**: a mediana de registros por célula é **1** e o terceiro quartil é 3. Publicar essas células estaria errado duas vezes:
+
+1. **Custódia.** Cruzar município de residência com município de trabalho a partir de um respondente é informação rara o bastante para ser identificável. É o que o termo trata.
+2. **Estatística.** Célula com um registro tem coeficiente de variação da ordem de 100%. Num painel, ela entra na leitura como se fosse fato. A supressão é a mesma disciplina do piso de CV que já vale para os agregados do SIDRA.
+
+Corte adotado (decisão do autor, 09/09/2026): **top-5 destinos por município e no mínimo 5 registros amostrados por célula**, aplicado à **célula** — portanto igual nas duas direções, para que nenhum par apareça numa visão e desapareça na outra por regra diferente.
+
+| | |
+|---|---|
+| pares publicados (saída) | **16.560** de 120.435 |
+| fluxo retido | **80,3%** do total de pessoas representadas |
+| municípios com alguma saída | **5.167** de 5.570 (93%) |
+| municípios em branco | **403** — ali a ausência é ausência de medição, não de deslocamento |
+
+Os totais exibidos ("X pessoas trabalham fora") são os de **antes** da supressão, e cada lista declara que fração do fluxo os cinco destinos cobrem — 57% em Sorocaba na direção de saída, 71% na de entrada. O percentual de cada linha **não** vai no arquivo: é `pessoas / total`, calculado no navegador, para não existirem duas versões do mesmo número (e são ~175 KB menos no bloco embutido).
+
+**Interface:** seção "Deslocamento para trabalho" na ficha do município, com as duas listas e o botão "ver no mapa" por direção; **linhas de desejo** no mapa (arco de Bézier, espessura pela **raiz** do fluxo — em escala linear a segunda linha seria invisível ao lado de São Paulo), que enquadram a bacia de deslocamento do município ao clique explícito; dois verbetes novos no glossário (matriz OD e arranjo populacional) e a ressalva de supressão nas notas metodológicas.
+
+**A direção de ENTRADA é a que carrega o argumento.** Num município com Tarifa Zero, quem chega de fora paga tarifa intermunicipal para acessar um sistema gratuito; num polo sem TZ, o volume que entra é a mão de obra dos satélites que a gratuidade dos vizinhos não alcança. Sorocaba: 25.582 pessoas saem para trabalhar (São Paulo é o principal destino, 20,6%) contra **40.582 que entram** (Votorantim sozinho responde por 45,8%).
+
+**Dois bugs corrigidos, ambos encontrados em teste de navegador antes de publicar:**
+
+- **O botão "ver no mapa" não respondia ao primeiro clique real.** Depois de escolher o município pela busca, o campo continua com o foco; o primeiro clique em qualquer lugar tira o foco, dispara `change`, que chama `selecionaMunicipioBuscado()` → `renderDetail()`, que reescreve o `innerHTML` da ficha. Entre o `mousedown` e o `click` o botão deixava de existir. Um `.click()` programático funcionava — o que quase deixou o bug passar no teste automatizado. Corrigido em dois níveis: o gatilho passa a escutar `pointerdown` (antes do blur) e `renderDetail` **não reconstrói a ficha quando o município já é o que está na tela**, o que era desperdício a cada tecla digitada e é a causa raiz.
+- **Os marcadores de destino engoliam o mapa ao enquadrar.** Eram `<circle>`, e `r` está em unidades do usuário — cresce com o zoom do `viewBox`, ao contrário de `stroke-width` com `vector-effect="non-scaling-stroke"`. Ao enquadrar a bacia de um município, quatro dos cinco destinos desapareciam sob as manchas. Passaram a ser traços de comprimento zero com ponta redonda, que ficam em pixels de tela em qualquer zoom.
+
+**Nota de build:** `build/municipios_dados_col.json` foi regravado sem espaços (`separators`), então **encolheu** de 3,56 MB para 3,20 MB mesmo ganhando uma coluna. O painel montado ficou em **6,19 MB** (era 5,73 MB).
+
+## v0.7 (2026-09-06)
 
 Entrada do **CadÚnico** na base municipal: quatro variáveis novas, uma opção de mapa e uma barra comparativa. Adiciona coluna ao banco — na fase de prototipagem qualquer mudança soma +0.1 (ver `VERSIONING.md`).
 

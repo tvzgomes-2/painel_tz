@@ -52,6 +52,8 @@ OUT=../painel.html
   cat grupos_por_municipio.json
   printf '</script>\n<script id="data-legislacao" type="application/json">\n'
   cat legislacao_tz.json
+  printf '</script>\n<script id="data-od" type="application/json">\n'
+  cat od_por_municipio.json
   printf '</script>\n<script>\n'
   cat logic.js
   printf '</script>\n</body>\n</html>\n'

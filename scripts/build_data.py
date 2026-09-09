@@ -142,13 +142,18 @@ cols = {
     'cadunico_cobertura_pct_202209': 'cadunico_cobertura_2022',
     'cadunico_pes_202508': 'cadunico_pes',
     'cadunico_taxa_atualizacao_pct_202508': 'cadunico_taxa_atualizacao',
+    # --- pendularidade (v0.8) — microdados da amostra do Censo 2022.
+    # Percentual dos ocupados que trabalham em OUTRO municipio. Agregado
+    # municipal: o microdado de origem e de acesso controlado, este numero nao.
+    'md22_trab_outro_munic_pct': 'trab_fora',
 }
 out = df[list(cols.keys())].rename(columns=cols)
 
 numeric_cols = ['pop', 'cresc_pop', 'pib_pc', 'rec_total', 'rec_prop', 'desp_tcu', 'motorizacao', 'ibeu', 'idh', 'ext_via',
                 'regic_nivel', 'pct_transporte_desp', 'desp_transporte', 'pct_investimento_desp', 'investimentos',
                 'taxa_obitos_transito', 'tarifa', 'subsidio_ntu_pct', 'ext_viaria_osm', 'densidade_viaria',
-                'cadunico_cobertura', 'cadunico_cobertura_2022', 'cadunico_pes', 'cadunico_taxa_atualizacao']
+                'cadunico_cobertura', 'cadunico_cobertura_2022', 'cadunico_pes', 'cadunico_taxa_atualizacao',
+                'trab_fora']
 for c in numeric_cols:
     out[c] = pd.to_numeric(out[c], errors='coerce')
 
@@ -176,3 +181,4 @@ print('modelo_prestacao coverage (non-null):', sum(1 for r in records if r['mode
 print('subsidio coverage:', sum(1 for r in records if r['subsidio_ntu_pct'] is not None))
 print('tarifa coverage:', sum(1 for r in records if r['tarifa'] is not None))
 print('cadunico coverage:', sum(1 for r in records if r['cadunico_cobertura'] is not None))
+print('trab_fora coverage:', sum(1 for r in records if r['trab_fora'] is not None))
