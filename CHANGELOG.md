@@ -6,7 +6,29 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.8 (atual — 2026-09-09)
+## v0.9 (atual — 2026-09-18)
+
+**Sincronização com o cofre.** O painel estava rodando com a base-mestre de 09/09; a planilha `Municípios TZ - consolidado.xlsx` foi editada em 17 e 18/09 e o painel não tinha acompanhado. Rodada de rebuild completo pelo pipeline canônico (`build_data.py` → `build_stats.py` → `montar_html.sh`), com o cofre montado ao lado do repositório como os scripts esperam. Estrutura de banco intacta — 59 colunas, mesmas de v0.8; é enriquecimento de dado, que na fase de prototipagem soma +0.1 como qualquer mudança (ver `VERSIONING.md`).
+
+**Universo universal: 175 → 177 municípios** (167 ativas + 10 encerradas, era 165 + 10).
+
+- **Santa Cruz Cabrália/BA — nova, Ativa desde 2025.**
+- **Águas da Prata/SP — nova, Ativa desde 2025.**
+- **Agudos/SP — ano de início corrigido de 2002 para 2003.**
+- **Seis operadores identificados** onde o campo estava vazio: Bela Vista do Toldo/SC (execução direta, locação de micro-ônibus sem motorista), Brotas/SP (frota própria, em terceirização — Pregão 66/2026), Cantagalo/RJ (Sagres → Infinito, contratação emergencial, pregão de longo prazo publicado em 24/04/2026), Lauro Muller/SC (não identificado nas fontes; a lei admite três regimes), Santo Antônio de Posse/SP (Ghilardi Transportes, contratada por licitação — não execução direta) e Tietê/SP (Tieteense, Pregão 39/2022, 7,59% de desconto sobre R$ 7,25/km).
+- População vivendo com TZ universal ativa: **7.031.472 → 7.068.026**.
+- `build/stats.json` regerado (100,5 → 102,4 KB); `painel.html` 6.194.048 → 6.196.948 bytes.
+- **Arthur/Artur Nogueira-SP: duplicata resolvida na fonte** (backup `pre-dedup-arthur-nogueira` de 17/09 no cofre). Resta **Palmas-TO**, com dois episódios de universalidade — o dedup por código IBGE segue tratando sem quebrar.
+
+**O build canônico voltou a rodar.** Desde 26/07/2026 toda mudança vinha sendo replicada à mão em `head.html` e `painel.html` porque os JSONs intermediários não estavam disponíveis no ambiente da tarefa. Nesta rodada `montar_html.sh` rodou de ponta a ponta: `painel.html` é agora produto do build, não de replicação manual, e os dois lados são idênticos por construção. Verificação pós-build: 9 blocos presentes e validados com `json.loads`, cada um idêntico ao arquivo de origem; `head.html` é prefixo exato do painel; `logic.js` embutido sem alteração; e os **38 `id` de elemento são exatamente os mesmos de v0.8** — nenhum perdido, nenhum ganho.
+
+**Verificação em navegador** (Chromium headless, o painel montado carregado de arquivo local): renderiza 5.570 municípios, 167 ativas e 177 no universo universal; mapa desenhado (5.599 paths) e os três SVGs de gráfico presentes; busca por município responde; `auditarReferencias()` devolve 0 citações sem referência e 0 referências sem citação; nenhum erro de console além dos 404 dos logos, que só existem porque o teste carregou o HTML sem a pasta `assets/`.
+
+**⚠️ Não entrou nesta versão, e é o maior item aberto:** a **`Tabela consolidada - Legislação, contratos e réguas (18-09-2026).xlsx`**, criada no cofre no mesmo dia, traz 178 linhas com camada da régua descritiva preenchida em **178/178** e norma identificada em **172/178**. O painel publica hoje `camadas_tz.json` com **36** municípios e `legislacao_tz.json` com **137** (65 com norma). Nenhum script do pipeline lê essa tabela: `build_legislacao.py` continua extraindo dos `.md` da Pesquisa legal e produziu exatamente os mesmos 137 registros desta vez. Incorporá-la exige **um passo de build novo** e uma decisão de vocabulário — os rótulos de camada da tabela ("universal", "procedimento", "espacial (periférico)", "grupo social (residência)", "universal (histórico — encerrado)", "a classificar") não são os mesmos da régua 2a/3/4 que o painel usa. Fica para v0.10, com decisão do autor.
+
+**⚠️ Também não corrigido, pelo mesmo motivo de sempre:** as notas metodológicas seguem citando "169 municípios (159 ativas + 10 encerradas)" — agora a **duas** correções de distância do dado (175 em v0.6, 177 aqui) —, além dos percentuais de sede × satélite, modelo de prestação e REGIC nível 5, e da nota que descreve São Caetano do Sul como "Ativa". É texto do autor; a revisão semanal registrou em 11/09 e 18/09 e aguarda autorização para reescrever.
+
+## v0.8 (2026-09-09)
 
 Entrada da **matriz origem-destino de trabalho** do Censo 2022: duas listas na ficha de cada município, linhas de desejo no mapa e uma variável nova de coloração. Adiciona coluna ao banco e um bloco de dados — na fase de prototipagem qualquer mudança soma +0.1 (ver `VERSIONING.md`).
 
