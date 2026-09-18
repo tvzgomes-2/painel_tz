@@ -24,7 +24,29 @@ Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de re
 
 **Verificação em navegador** (Chromium headless, o painel montado carregado de arquivo local): renderiza 5.570 municípios, 167 ativas e 177 no universo universal; mapa desenhado (5.599 paths) e os três SVGs de gráfico presentes; busca por município responde; `auditarReferencias()` devolve 0 citações sem referência e 0 referências sem citação; nenhum erro de console além dos 404 dos logos, que só existem porque o teste carregou o HTML sem a pasta `assets/`.
 
-**⚠️ Não entrou nesta versão, e é o maior item aberto:** a **`Tabela consolidada - Legislação, contratos e réguas (18-09-2026).xlsx`**, criada no cofre no mesmo dia, traz 178 linhas com camada da régua descritiva preenchida em **178/178** e norma identificada em **172/178**. O painel publica hoje `camadas_tz.json` com **36** municípios e `legislacao_tz.json` com **137** (65 com norma). Nenhum script do pipeline lê essa tabela: `build_legislacao.py` continua extraindo dos `.md` da Pesquisa legal e produziu exatamente os mesmos 137 registros desta vez. Incorporá-la exige **um passo de build novo** e uma decisão de vocabulário — os rótulos de camada da tabela ("universal", "procedimento", "espacial (periférico)", "grupo social (residência)", "universal (histórico — encerrado)", "a classificar") não são os mesmos da régua 2a/3/4 que o painel usa. Fica para v0.10, com decisão do autor.
+### 2ª passagem, mesmo dia — legislação padronizada e tabela consolidada incorporada
+
+Mesma rodada de v0.9, não versão nova (mesmo critério do v0.4 em 27/07/2026: nada foi publicado entre as duas passagens). A pedido do autor: **deixar a norma padronizada para consulta ao selecionar o município.**
+
+**O problema, medido.** As 173 strings de norma disponíveis (65 do painel + 108 da tabela consolidada do cofre) usavam **11 grafias para 3 tipos normativos** — "Lei", "Lei Municipal", "Lei Ordinária", "Lei Ordinária Municipal", "Lei Municipal Nº" são todas lei ordinária municipal —, número com e sem separador de milhar ("2199" e "5.149") e data em três formatos (28 por extenso, 5 em DD/MM/AAAA, 30 apenas `/ano`), com meses ora capitalizados ora não.
+
+**`scripts/build_legislacao_padrao.py` (novo).** Roda depois do `build_legislacao.py`, que segue sendo a fonte de mecanismo, fundo e ressalvas. Decompõe cada norma em `tipo` / `numero` / `ano` / `data` e grava também a string curta de exibição (`norma`) e a de citação (`norma_ext`), mais `norma_orig` para auditoria. **Decompor em vez de limpar a string** é o ponto: um campo por informação faz a exibição virar decisão do painel, não da planilha.
+
+- **108 municípios com norma** (era 65) — **+42**, e nenhum dos 65 anteriores se perde: a tabela é superconjunto.
+- **107 das 108 decompostas** em tipo/número/ano, todas conferindo com o padrão `Tipo nº N/AAAA` (verificado por expressão regular contra os dados publicados, 0 fora do padrão). A única exceção é legítima e fica exibida como veio: *"Ordenança municipal de 1995" (nº não identificado)*, em Paulínia/SP — não há número para padronizar.
+- **64 com data completa**; as demais exibem número/ano, que é o que a fonte tem.
+- **63 com link para o texto da norma**, que passam a abrir direto da ficha.
+- **64 marcadas como `buscada`** — a tabela diz explicitamente "não encontrei". O painel deixa de tratá-las como lacuna de levantamento e passa a dizer que **a ausência é resultado de busca**, que é uma afirmação diferente e mais forte.
+- **Confiabilidade separada em rótulo e nota.** O campo da tabela misturava as duas coisas: além de alta/média/baixa, cerca de 30 células traziam frases inteiras ("alta (texto integral lido — Diário Oficial Municipal, edição 2.340, 04/07/2025); ⚠️ operação ainda não confirmada"). O rótulo vai para `conf` (65 alta, 21 média, 11 baixa; "média-alta" e "baixa-média" colapsam para o rótulo mais conservador) e o resto para `conf_nota`, que aparece no tooltip.
+- **Norma complementar ganhou campo próprio** (`extra`): casos como Itapeva/SP, onde a célula trazia duas normas na mesma string, deixavam a segunda cair no chão.
+
+**Exibição (decisão do autor, 18/09/2026): formato curto e uniforme.** A ficha mostra sempre `Tipo nº NÚMERO/ANO` — toda linha do mesmo tamanho, para varrer muitos municípios em sequência. A data completa e a grafia de citação vão para o `title` do elemento, junto com a nota de confiabilidade; quando há link, o próprio nome da norma é o link.
+
+**Verificação em navegador:** Maricá exibe `Lei Complementar nº 244/2014` com tooltip "de 11 de setembro de 2014"; Aquiraz, `Lei Ordinária nº 1.279/2018` com link para o portal da prefeitura; Itapeva, `Decreto nº 11.829/2021` mais "Também citada: Lei nº 4.039/2017"; e os dois municípios novos desta versão já entram com norma — Santa Cruz Cabrália com `Lei Ordinária nº 766/2025` e Águas da Prata com `Lei Ordinária nº 2.518/2025`. Sem erro de console; `auditarReferencias()` segue limpa.
+
+**⚠️ Ressalva de dado, não corrigida:** em Itapeva/SP o link da base-mestre aponta para a Lei 4.039/2017, que é a norma secundária, enquanto a norma exibida é o Decreto 11.829/2021. É divergência da fonte, não do build.
+
+**⚠️ O que continua fora:** a **régua descritiva**. A mesma tabela traz camada preenchida em 178/178 linhas (uma ainda como "a classificar") e o painel publica `camadas_tz.json` com **36** municípios. Incorporar exige decisão de vocabulário: os rótulos da tabela ("universal", "procedimento", "espacial (periférico)", "grupo social (residência)", "universal (histórico — encerrado)") não são a régua 2a/3/4 do painel, e o mapeamento entre as duas é escolha de método. Fica para v0.10.
 
 **⚠️ Também não corrigido, pelo mesmo motivo de sempre:** as notas metodológicas seguem citando "169 municípios (159 ativas + 10 encerradas)" — agora a **duas** correções de distância do dado (175 em v0.6, 177 aqui) —, além dos percentuais de sede × satélite, modelo de prestação e REGIC nível 5, e da nota que descreve São Caetano do Sul como "Ativa". É texto do autor; a revisão semanal registrou em 11/09 e 18/09 e aguarda autorização para reescrever.
 

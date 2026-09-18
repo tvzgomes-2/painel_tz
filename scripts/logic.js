@@ -100,7 +100,9 @@ function modalFor(m) { return (m && MODAL_RAW[String(m.id)]) || null; }
 function gruposFor(m) { return (m && GRUPOS_RAW[String(m.id)]) || []; }
 
 // ---------- 8.4: base legal da TZ no município (levantamento jul/2026) ----------
-// 137 municípios verificados, 62 com norma localizada. O levantamento é anterior à
+// 173 municípios verificados, 108 com norma localizada e 64 com busca feita sem resultado
+// (flag `buscada`). Campos decompostos em tipo/numero/ano/data por build_legislacao_padrao.py.
+// O levantamento de origem é anterior à
 // ampliação do universo canônico (03/08/2026), então 33 dos 169 municípios TZ de
 // hoje não estavam nele — o card diz isso em vez de deixar o silêncio sugerir que
 // não há norma.
@@ -120,13 +122,29 @@ function renderLegislacaoDetail(m) {
     if (!ehTZ) return '';
     return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
       <b style="font-size:12.5px;">Base legal</b>
-      <p style="margin:5px 0 0;font-size:12px;color:var(--muted);line-height:1.5;">Não verificado. O levantamento legal cobriu 137 municípios (jul/2026), anterior à ampliação do universo desta pesquisa — este caso entrou depois e ainda não passou pela busca de norma.</p>
+      <p style="margin:5px 0 0;font-size:12px;color:var(--muted);line-height:1.5;">Não verificado. O levantamento legal cobre 173 municípios (consolidação de 18/09/2026) — este caso entrou no universo depois e ainda não passou pela busca de norma.</p>
     </div>`;
   }
   const linhas = [];
   if (L.norma) {
-    const conf = L.conf ? ` <span class="tag ${L.conf === 'alta' ? 'ativa' : 'parcial'}" title="${CONF_LABEL[L.conf] || ''}">${L.conf}</span>` : '';
-    linhas.push(`<div style="font-size:12.5px;color:var(--text);margin-top:4px;"><b>${L.norma}</b>${conf}</div>`);
+    // Exibicao padronizada (18/09/2026): sempre "Tipo no NUMERO/ANO", venha a origem
+    // como vier. A data completa e a grafia de citacao ficam no tooltip; o link, quando
+    // existe, abre o texto da norma. Os campos vem decompostos de build_legislacao_padrao.py.
+    let titulo = L.norma_ext || L.norma;
+    if (L.conf_nota) titulo += ` — ${L.conf_nota}`;
+    const conf = L.conf
+      ? ` <span class="tag ${L.conf === 'alta' ? 'ativa' : 'parcial'}" title="${CONF_LABEL[L.conf] || ''}">${L.conf}</span>`
+      : '';
+    // o azul de link da paleta (#1A54C7) nao tem contraste suficiente sobre o fundo
+    // escuro do painel: a norma fica na cor do texto e o link se anuncia pelo sublinhado.
+    const rotulo = L.link
+      ? `<a href="${L.link}" target="_blank" rel="noopener" title="${titulo}"
+           style="color:var(--text);text-decoration:underline;text-decoration-color:var(--amarelo);text-underline-offset:3px;">${L.norma}</a>`
+      : `<span title="${titulo}">${L.norma}</span>`;
+    linhas.push(`<div style="font-size:12.5px;color:var(--text);margin-top:4px;"><b>${rotulo}</b>${conf}</div>`);
+    if (L.extra) linhas.push(`<div style="font-size:11.5px;color:var(--muted);margin-top:2px;">Também citada: ${L.extra}</div>`);
+  } else if (L.buscada) {
+    linhas.push('<div style="font-size:12px;color:var(--muted);margin-top:4px;">Norma procurada e <b>não localizada</b> em fonte pública — a gratuidade costuma ter sido implantada por via administrativa (licitação deserta, contrato de concessão) ou por decreto não divulgado. A ausência aqui é resultado de busca, não lacuna de levantamento.</div>');
   } else {
     linhas.push('<div style="font-size:12px;color:var(--muted);margin-top:4px;">Norma não localizada em fonte pública — a gratuidade costuma ter sido implantada por via administrativa (licitação deserta, contrato de concessão) ou por decreto não divulgado.</div>');
   }
