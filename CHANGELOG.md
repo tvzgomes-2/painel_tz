@@ -6,7 +6,25 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.9 (atual — 2026-09-18)
+## v0.10 (atual — 2026-10-02)
+
+**Pederneiras/SP entra como Tarifa Zero universal ativa.** Achado da revisão semanal de 02/10: o município zerou a tarifa do transporte coletivo em **25/09/2026**, gratuidade para toda a população em todas as linhas municipais, **custeada integralmente com recursos próprios da prefeitura**, dentro de um **contrato de transição de um ano firmado por licitação** que antecede a concessão definitiva. Operadora: **Futura Transportes**. No painel constava como `Não TZ`, sem entrada em nenhum crosswalk.
+
+- `tz_status` `Não TZ` → **`Ativa`**; `tz_ano` → **2026**; `tz_operador` → **Futura Transportes (Privada)**.
+- **Universo universal: 177 → 178 municípios** (168 ativas + 10 encerradas, era 167 + 10).
+- População vivendo com TZ universal ativa: **7.068.026 → 7.112.853** (Pederneiras, 44.827 hab., Censo 2022).
+- `build/stats.json` regerado por `build_stats.py` (102,4 → 102,8 KB); `painel.html` 6.235.188 → 6.235.647 bytes.
+- Estrutura de banco intacta — 59 colunas, mesmas de v0.9. É enriquecimento de dado, que na fase de prototipagem soma +0.1 como qualquer mudança (ver `VERSIONING.md`).
+
+**Fontes.** Notícia regional (JCNET/SAMPI Bauru e 96FM Bauru, 25/09/2026) e DBTV, todas descrevendo o mesmo ato: início em 25/09, gratuidade total, custeio municipal próprio, contrato de transição de um ano. **Não foi localizado número de lei ou decreto** — por isso `legislacao_tz.json` **não recebeu entrada**, em vez de receber uma norma presumida. A norma fica como lacuna declarada, não como dado inventado.
+
+**Build canônico pela segunda vez consecutiva.** `build_stats.py` → `montar_html.sh` rodaram de ponta a ponta com os JSONs intermediários já presentes em `build/` desde a v0.9. Verificação pós-build: `head.html` é prefixo exato de `painel.html`, `logic.js` embutido sem alteração, os **9 blocos de dados** validam com `json.loads`, e os **38 `id` de elemento são exatamente os mesmos de v0.9** — nenhum perdido, nenhum ganho.
+
+**⚠️ A correção precisa subir para o cofre.** O patch desta versão foi aplicado em `build/municipios_dados.json`, que é **produto** de `build_data.py` a partir da base-mestre `Municípios TZ - consolidado.xlsx`. Enquanto Pederneiras não entrar na planilha do cofre, **o próximo rebuild completo desfaz esta versão**. Mesma natureza da pendência de `Presidente Kennedy|RJ` registrada em 25/09.
+
+**⚠️ O que continua fora, sem mudança:** a **régua descritiva** (camada preenchida em 178/178 linhas na tabela consolidada contra 36 publicadas em `camadas_tz.json`) e as **notas metodológicas**, que seguem citando "169 municípios (159 ativas + 10 encerradas)" — agora a **três** correções de distância do dado (175 em v0.6, 177 em v0.9, 178 aqui) —, "33 municípios com TZ parcial" contra 34 no cartão da própria página, os percentuais de sede × satélite, modelo de prestação e REGIC nível 5, a descrição de São Caetano do Sul como "Ativa", e a contradição interna sobre Teresina/PI (excluída do universo num parágrafo, usada como exemplo de cidade-polo com TZ no parágrafo seguinte). É texto do autor; a revisão semanal registrou em 11/09, 18/09 e 25/09 e segue aguardando autorização para reescrever.
+
+## v0.9 (2026-09-18)
 
 **Sincronização com o cofre.** O painel estava rodando com a base-mestre de 09/09; a planilha `Municípios TZ - consolidado.xlsx` foi editada em 17 e 18/09 e o painel não tinha acompanhado. Rodada de rebuild completo pelo pipeline canônico (`build_data.py` → `build_stats.py` → `montar_html.sh`), com o cofre montado ao lado do repositório como os scripts esperam. Estrutura de banco intacta — 59 colunas, mesmas de v0.8; é enriquecimento de dado, que na fase de prototipagem soma +0.1 como qualquer mudança (ver `VERSIONING.md`).
 
