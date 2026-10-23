@@ -464,6 +464,8 @@ with open(OUT, 'w', encoding='utf-8') as f:
                'geo': {'ufs': ufs_svg, 'pontos': pontos},
                'resumo': {'n_grupos': len(nos), 'n_topo': n_topo, 'n_mun': len(presenca),
                           'pop_mun': sum(POP.get(c, 0) for c in presenca),
+                          # empresas dos grupos pela Tabela mestre (1.040, como na tese); a soma de n_emp por grupo dá 1.039
+                          'n_emp': int(v5e['id_grupo'].astype(str).str.startswith('GE').sum()),
                           'retrato': 'Tabela mestre v5, 17/10/2026; cadastro de CNPJ, recorte de maio de 2024'}},
               f, ensure_ascii=False, separators=(',', ':'))
 # auditoria da fronteira de exposição: falha o build se algo escapou

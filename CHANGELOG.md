@@ -4,7 +4,14 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 # Rede de empresas (`rede-ge.html`, tag GE; até 23/10/2026, "Rede da ARS")
 
-## v0.1 (atual — 2026-10-23, primeira versão publicada, Era Bicicleta)
+## v0.2 (atual — 2026-10-24, em validação)
+
+- **Nome de mercado como nome principal** em toda a página (tabela, ficha, listas de centralidade, território, busca); o rótulo do cálculo (holding ou sobrenome) fica embaixo, em cinza. Antes, a rede mostrava "Grupo Carvalho / Mobi" e as listas "Rrf Participacoes Ltda." — o leitor via dois grupos onde havia um. Nomes de mercado repetidos (ramos da mesma família) levam o rótulo depois de um ponto.
+- **Chegada pelo Painel Brasil:** o endereço `rede-ge.html#mun-<código IBGE>-<nome>` abre a busca por município já preenchida; se nenhum grupo tem endereço ali, a página diz isso e lembra que ausência de endereço não é ausência de operador.
+- **1.040 empresas**, como na tese: a contagem passa a sair da Tabela mestre v5 (a soma por grupo dava 1.039).
+- Menu único, prévia de link, cartões em duas colunas e abas legíveis no celular.
+
+## v0.1 (2026-10-23, primeira versão publicada, Era Bicicleta)
 
 **Nome:** a página se chamava "Rede da ARS" até a publicação; o autor a renomeou para **Rede de empresas** (23/10/2026). ARS (análise de redes sociais) segue como nome do método, dentro dela. O arquivo continua `rede-ge.html`.
 
@@ -33,7 +40,26 @@ Primeira versão da página irmã do Painel Brasil, a partir do rascunho de julh
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.13 (atual — 2026-10-23, lançamento de teste, Era Bicicleta)
+## v0.14 (atual — 2026-10-24, em validação)
+
+Correções da análise crítica do site publicado (pedido do autor, 24/10: "faça as correções").
+
+- **Menu único** em todas as páginas (Painel Brasil, Rede de empresas, Verbetes, Contribua), com a página atual marcada; saem os "← voltar ao site" de cada página.
+- **O painel ganha título próprio — "Painel Brasil"** —; antes repetia o título do hub ("Transporte Público em Crise"), e quem vinha do hub não percebia que tinha mudado de página.
+- **Prévia de link:** ícone, descrição e imagem de compartilhamento (`assets/og/compartilhar.png`) em todas as páginas.
+- **Aviso de carregamento** enquanto os dados dos 5.570 municípios chegam (o painel embute vários MB).
+- **Cartões em duas colunas no celular.**
+- **Textos:** "3,2% % com histórico" vira "3,2% dos municípios com histórico"; a linha "n" quebrada do Comparar vira "Municípios comparados: TZ universal 174 · Não-TZ, mesmo porte 5.337"; o vocabulário passa a ser **TZ universal** (saem "TZ ativa", "Ativa (universal)").
+- **O bloco "Score: população abrangida"** sai do Panorama e vai, recolhido, para Sobre os dados — era nota de método, não achado.
+- **Parecer externo (GPT, 24/10), incorporado:**
+  - **"Como os números se relacionam"**, sob os cartões e respondendo ao recorte: a base verificada tem 187 políticas (174 universais, 7 parciais, 6 encerradas); os 44 casos parciais da régua são essas 7 mais 37 municípios da busca exploratória da camada 2, fora da base; 2 regulamentadas não implantadas e 2 pistas ficam fora das duas contagens. Antes o leitor precisava cruzar abas e notas.
+  - **Denominador no cartão de percentual** ("3,2% dos 5.570 municípios do Brasil têm ou tiveram TZ universal (180)"); o PIB per capita sai dos cartões (fica no Comparar) e os seis cartões ficam numa linha só, sem cartão órfão.
+  - **"⚠ n pequeno"** na comparação por faixa de porte quando há menos de 5 municípios com TZ na faixa (em Santa Catarina, três faixas têm um caso só).
+  - **Lista municipal em ordem alfabética** por padrão, com ▲▼ no cabeçalho ordenado.
+  - **Ponte para a Rede de empresas** na ficha de cada município ("Que grupos econômicos têm endereço em …?"), com a ressalva de que endereço não comprova operação. O painel continua sem nomes de grupo (decisão de 23/10); o link abre a busca por município da Rede.
+  - **Apresentação resumida também no computador**, com "ler mais".
+
+## v0.13 (2026-10-23, lançamento de teste, Era Bicicleta)
 
 **Rodada de alinhamento com a tese (r92) para o lançamento de teste.** O painel deixa de ser uma página longa e vira **quatro abas** — Panorama, Explorar, Comparar TZ × Não-TZ e Sobre os dados —, com o filtro fixo no topo e o recorte ativo em etiquetas removíveis (decisão do autor). Toda a página ganha a faixa de "versão de teste".
 

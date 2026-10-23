@@ -16,6 +16,12 @@ const FC = new Map(ARS.familias.map(f => [f.id, f]));
 const FED = new Map(ARS.federacoes.map(f => [f.id, f]));
 const fmt = v => Number(v).toLocaleString('pt-BR');
 const esc = t => String(t ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// nome que o leitor vê (24/10/2026): o nome de mercado, quando há; se o mesmo nome serve a mais de um
+// grupo (ramos da mesma família), o rótulo do cálculo vem depois de um ponto, para desambiguar
+const _repM = {}; for (const n of ARS.nos) if (n.mercado) _repM[n.mercado] = (_repM[n.mercado] || 0) + 1;
+const nomeG = n => !n ? "" : n.mercado ? (_repM[n.mercado] > 1 ? `${n.mercado} · ${n.rot}` : n.mercado) : n.rot;
+for (const n of ARS.nos) n.nomeG = nomeG(n);
+const subG = n => n && n.mercado && !nomeG(n).includes(n.rot) ? n.rot : '';
 const CAP_TOTAL = ARS.nos.reduce((a, n) => a + (n.capital || 0), 0);
 const mi = v => v == null ? '—' : (v / 1e6).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const pct = (v, c = 1) => (v ?? 0).toLocaleString('pt-BR', { minimumFractionDigits: c, maximumFractionDigits: c }) + '%';
@@ -36,7 +42,7 @@ const grupoPrincipal = u => [...u.membros].filter(m => NOS.has(m)).sort((a, b) =
 // ---------- o que a tese encontra (Capítulo 6) ----------
 function renderFind() {
   const r = ARS.resumo, f = ARS.funil;
-  const empresas = ARS.nos.reduce((a, n) => a + (n.n_emp || 0), 0);
+  const empresas = r.n_emp || ARS.nos.reduce((a, n) => a + (n.n_emp || 0), 0);   // Tabela mestre: 1.040
   const itens = [
     [fmt(r.n_grupos), `grupos econômicos no transporte coletivo, reunindo ${fmt(empresas)} das 7.681 empresas do recorte de transporte de passageiros`],
     [fmt(ARS.unidades.length), 'unidades de controle, quando os grupos com controle comum demonstrado ou provável (graus A e B) são somados'],
@@ -305,7 +311,7 @@ svg.addEventListener('pointermove', e => {
   if (!arr) {   // dica ao passar o mouse
     const c = e.target.closest('circle.no'); if (!c) { tooltip.style.display = 'none'; return; }
     const n = NOS.get(c.dataset.id), u = UNI.get(n.ub);
-    mostraTip(e, `<b>${esc(n.rot)}${n.topo ? ' · <span class="topo-marca">topo do capital</span>' : ''}</b>${n.mercado ? `<div style="color:var(--muted);margin:-2px 0 4px;">${esc(n.mercado)}</div>` : ''}<div class="tt-grid"><span>Capital (R$ mi)</span><span>${mi(n.capital)}</span><span>Empresas</span><span>${n.n_emp}</span><span>Ligações</span><span>${n.lig}</span><span>Intermediação</span><span>${posBet.has(n.id) ? posBet.get(n.id) + 'º' : '—'}</span>${u && u.membros.length > 1 ? `<span>Unidade</span><span>${u.id}</span>` : ''}${u?.fed ? `<span>Federação</span><span>${u.fed}</span>` : ''}</div>`);
+    mostraTip(e, `<b>${esc(nomeG(n))}${n.topo ? ' · <span class="topo-marca">topo do capital</span>' : ''}</b>${subG(n) ? `<div style="color:var(--muted);margin:-2px 0 4px;">${esc(subG(n))}</div>` : ''}<div class="tt-grid"><span>Capital (R$ mi)</span><span>${mi(n.capital)}</span><span>Empresas</span><span>${n.n_emp}</span><span>Ligações</span><span>${n.lig}</span><span>Intermediação</span><span>${posBet.has(n.id) ? posBet.get(n.id) + 'º' : '—'}</span>${u && u.membros.length > 1 ? `<span>Unidade</span><span>${u.id}</span>` : ''}${u?.fed ? `<span>Federação</span><span>${u.fed}</span>` : ''}</div>`);
     return;
   }
   tooltip.style.display = 'none';
@@ -386,7 +392,7 @@ function renderMedidas() {
   const fmtD = v => v.toLocaleString('pt-BR', { maximumFractionDigits: 3 });
   const topGrau = [...ARS.nos].sort((a, b) => ADJ.get(b.id).size - ADJ.get(a.id).size).slice(0, 8);
   const topBet = rankBet.slice(0, 8);
-  const li = (n, v) => `<li><a href="#" class="gelink" data-id="${n.id}">${esc(n.rot)}</a> <span class="muted">${v}</span></li>`;
+  const li = (n, v) => `<li><a href="#" class="gelink" data-id="${n.id}">${esc(nomeG(n))}</a> <span class="muted">${v}</span></li>`;
   box.innerHTML = `<div class="medgrid">
       <div><b>${fmt(N)}</b><span>nós (grupos)</span></div><div><b>${fmt(E)}</b><span>ligações</span></div>
       <div><b>${fmtD(dens)}</b><span>densidade da rede</span></div><div><b>${grauMed.toFixed(2).replace('.', ',')}</b><span>ligações por grupo, em média</span></div>
@@ -434,9 +440,9 @@ function seleciona(id, rolar, modo) {
   const gruposMapa = modoMapa === 'unidade' && multi ? u.membros.filter(m => NOS.has(m)) : [id];
   const cods = [...new Set(gruposMapa.flatMap(g => MUN_DO_GRUPO.get(g) || []))];
   const linha = (k, v) => v == null || v === '' ? '' : `<tr><td>${k}</td><td>${v}</td></tr>`;
-  const links = ids => ids.filter(m => NOS.has(m)).map(m => m === id ? `<b>${esc(NOS.get(m).rot)}</b>` : `<a href="#" class="gelink" data-id="${m}">${esc(NOS.get(m).rot)}</a>`).join(', ');
-  box.innerHTML = `<div><b style="font-size:15px;">${esc(n.rot)}</b>${n.topo ? ' <span class="tag" style="background:rgba(245,228,0,.16);color:#F5E400;">topo do capital</span>' : ''}</div>
-    ${n.mercado ? `<div class="mercado">${esc(n.mercado)}</div>` : ''}
+  const links = ids => ids.filter(m => NOS.has(m)).map(m => m === id ? `<b>${esc(nomeG(NOS.get(m)))}</b>` : `<a href="#" class="gelink" data-id="${m}">${esc(nomeG(NOS.get(m)))}</a>`).join(', ');
+  box.innerHTML = `<div><b style="font-size:15px;">${esc(nomeG(n))}</b>${n.topo ? ' <span class="tag" style="background:rgba(245,228,0,.16);color:#F5E400;">topo do capital</span>' : ''}</div>
+    ${subG(n) ? `<div class="mercado">${esc(subG(n))} <span class="muted">· rótulo do cálculo</span></div>` : ''}
     <table>
       ${linha('Capital social declarado', n.capital ? `R$ ${mi(n.capital)} mi <span class="muted">(${pctCap(n.capital)} do setor)</span>` : '—')}
       ${linha('Empresas sob o mesmo controle', n.n_emp)}
@@ -461,7 +467,7 @@ function seleciona(id, rolar, modo) {
     <p class="sub" style="margin:12px 0 4px;"><b>Onde tem endereço</b> — ${fmt(cods.length)} ${cods.length === 1 ? 'município' : 'municípios'} (presença, não operação)</p>
     ${multi ? `<div class="modomapa"><button data-m="grupo" class="${modoMapa === 'grupo' ? 'on' : ''}">Este grupo</button><button data-m="unidade" class="${modoMapa === 'unidade' ? 'on' : ''}">Toda a unidade ${u.id} (${u.membros.length} grupos)</button></div>` : ''}
     ${cods.length ? mapaMunicipios(cods) + listaMunicipios(cods) : '<p class="sub">Sem estabelecimento com município identificado.</p>'}
-    ${viz.length ? `<p class="sub" style="margin:10px 0 3px;"><b>Ligado a</b></p><ul style="margin:0;padding-left:16px;font-size:12px;">${viz.slice(0, 12).map(v => `<li><a href="#" data-id="${v.id}" class="gelink">${esc(v.n.rot)}</a> — ${v.t === 'fusao' ? '<span style="color:#FF2D6B;">mesmo bloco de controle</span>' : `${v.w} ${v.w === 1 ? 'sócio' : 'sócios'} em comum`}</li>`).join('')}${viz.length > 12 ? `<li style="color:var(--muted);">e mais ${viz.length - 12}</li>` : ''}</ul>` : '<p class="sub" style="margin-top:9px;">Sem ligação societária mapeada com outro grupo.</p>'}`;
+    ${viz.length ? `<p class="sub" style="margin:10px 0 3px;"><b>Ligado a</b></p><ul style="margin:0;padding-left:16px;font-size:12px;">${viz.slice(0, 12).map(v => `<li><a href="#" data-id="${v.id}" class="gelink">${esc(nomeG(v.n))}</a> — ${v.t === 'fusao' ? '<span style="color:#FF2D6B;">mesmo bloco de controle</span>' : `${v.w} ${v.w === 1 ? 'sócio' : 'sócios'} em comum`}</li>`).join('')}${viz.length > 12 ? `<li style="color:var(--muted);">e mais ${viz.length - 12}</li>` : ''}</ul>` : '<p class="sub" style="margin-top:9px;">Sem ligação societária mapeada com outro grupo.</p>'}`;
   if (rolar) document.getElementById('fichaPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 document.addEventListener('click', e => {
@@ -493,8 +499,8 @@ function renderAgrupamentos() {
       const g = grupoPrincipal(u); const l = u.lin && LIN.get(u.lin);
       return `<tr><td class="num">${i + 1}</td><td><a href="#" class="gelink" data-id="${g}" data-modo="${u.membros.length > 1 ? 'unidade' : 'grupo'}">${esc(u.nome)}</a></td><td class="num">${u.membros.length}${u.membros.length > 1 ? ` <span class="grau g${u.grau}">${u.grau}</span>` : ''}</td><td class="num">${mi(u.capital)}</td><td class="num">${pct(u.pct, 2)}</td><td class="num">${pct(u.acum, 1)}</td><td>${l ? `<span class="grau gC">C</span> ${esc(l.nome)} ` : ''}${u.fed ? `<span class="grau gD">D</span> ${u.fed}` : ''}</td></tr>`; }).join('')}</tbody></table>`;
   // famílias de controle (A, ramos com capital cruzado)
-  document.getElementById('geFamilias').innerHTML = ARS.familias.map(f => `<li><span class="grau gA">A</span> <b>${esc(f.nome.replace(/\s*\(.*$/, ''))}</b> — ramos ${f.membros.filter(m => NOS.has(m)).map(m => `<a href="#" class="gelink" data-id="${m}" data-modo="unidade">${esc(NOS.get(m).rot)}</a>`).join(' e ')} <span class="muted">· R$ ${mi(f.capital)} mi</span></li>`).join('');
-  document.getElementById('geLinhagens').innerHTML = ARS.linhagens.map(l => `<li><span class="grau gC">C</span> <b>${esc(l.nome)}</b> <span class="muted">— ${esc(l.tipo)}, ${esc(l.status)}</span><br>${l.membros.filter(m => NOS.has(m)).map(m => `<a href="#" class="gelink" data-id="${m}">${esc(NOS.get(m).rot)}</a>`).join(' · ')} <span class="muted">· R$ ${mi(l.capital)} mi</span></li>`).join('');
+  document.getElementById('geFamilias').innerHTML = ARS.familias.map(f => `<li><span class="grau gA">A</span> <b>${esc(f.nome.replace(/\s*\(.*$/, ''))}</b> — ramos ${f.membros.filter(m => NOS.has(m)).map(m => `<a href="#" class="gelink" data-id="${m}" data-modo="unidade">${esc(nomeG(NOS.get(m)))}</a>`).join(' e ')} <span class="muted">· R$ ${mi(f.capital)} mi</span></li>`).join('');
+  document.getElementById('geLinhagens').innerHTML = ARS.linhagens.map(l => `<li><span class="grau gC">C</span> <b>${esc(l.nome)}</b> <span class="muted">— ${esc(l.tipo)}, ${esc(l.status)}</span><br>${l.membros.filter(m => NOS.has(m)).map(m => `<a href="#" class="gelink" data-id="${m}">${esc(nomeG(NOS.get(m)))}</a>`).join(' · ')} <span class="muted">· R$ ${mi(l.capital)} mi</span></li>`).join('');
   document.getElementById('geFederacoes').innerHTML = ARS.federacoes.map(f => `<details class="fed"><summary><span class="grau gD">D</span> <b>${f.id}</b> · ${f.unidades.length} unidades · R$ ${mi(f.capital)} mi <span class="muted">(${pctCap(f.capital)}) — maior: ${esc(maiorDaFed(f))}</span></summary>
       <p>${f.unidades.map(x => UNI.get(x)).filter(Boolean).map(u => `<a href="#" class="gelink" data-id="${grupoPrincipal(u)}" data-modo="${u.membros.length > 1 ? 'unidade' : 'grupo'}">${esc(u.nome)}</a>`).join(' · ')}</p></details>`).join('');
 }
@@ -510,15 +516,15 @@ function renderTabela() {
   document.querySelector('#geTable tbody').innerHTML = linhas.map(n => {
     const u = UNI.get(n.ub); const multi = u && u.membros.length > 1;
     return `<tr data-id="${n.id}"${n.id === selecionado ? ' class="sel"' : ''}>
-    <td>${esc(n.rot)}${n.mercado ? `<div class="merc">${esc(n.mercado)}</div>` : ''}</td>
+    <td>${esc(nomeG(n))}${subG(n) ? `<div class="merc">${esc(subG(n))}</div>` : ''}</td>
     <td class="num">${mi(n.capital)}</td><td class="num">${n.topo ? '<span class="topo-marca">●</span>' : ''}</td>
     <td>${u ? `${u.id}${multi ? ` <span class="grau g${u.grau}">${u.grau}</span>` : ''}` : '—'}</td>
     <td class="num">${n.n_emp}</td><td class="num">${n.n_soc ?? '—'}</td><td class="num">${n.ponte ?? '—'}</td>
     <td class="num">${n.dens != null ? String(n.dens).replace('.', ',') : '—'}</td><td class="num">${n.n_mun}</td><td class="num">${n.lig}</td></tr>`; }).join('');
 }
 document.querySelectorAll('#geTable th').forEach(th => th.addEventListener('click', () => {
-  const k = th.dataset.k === 'nome' ? 'rot' : th.dataset.k;
-  ordem.dir = ordem.k === k ? -ordem.dir : (k === 'rot' || k === 'ub' ? 1 : -1); ordem.k = k; renderTabela();
+  const k = th.dataset.k === 'nome' ? 'nomeG' : th.dataset.k;
+  ordem.dir = ordem.k === k ? -ordem.dir : (k === 'nomeG' || k === 'ub' ? 1 : -1); ordem.k = k; renderTabela();
 }));
 document.querySelector('#geTable tbody').addEventListener('click', e => { const tr = e.target.closest('tr'); if (tr) seleciona(tr.dataset.id, true, 'grupo'); });
 
@@ -527,7 +533,7 @@ function renderTerritorio() {
   const top = [...ARS.nos].sort((a, b) => b.n_mun - a.n_mun || b.n_emp - a.n_emp).slice(0, 20);
   const max = top[0]?.n_mun || 1;
   document.getElementById('geTerr').innerHTML = top.map(n => `<div class="terrlin">
-      <div class="r" data-id="${n.id}" title="${esc(n.mercado || n.rot)}">${esc(n.rot)}${n.topo ? ' <span class="topo-marca">●</span>' : ''}</div>
+      <div class="r" data-id="${n.id}" title="${esc(n.mercado || n.rot)}">${esc(nomeG(n))}${n.topo ? ' <span class="topo-marca">●</span>' : ''}</div>
       <div class="t"><div class="f" style="width:${(100 * n.n_mun / max).toFixed(1)}%"></div></div>
       <div class="n">${n.n_mun}</div></div>`).join('')
     + `<p class="sub" style="margin-top:6px;">Municípios em que o grupo tem ao menos um estabelecimento. <span class="topo-marca">●</span> topo do capital. Clique para ver o mapa do grupo.</p>`;
@@ -547,7 +553,7 @@ function mostraMuni() {
   if (!cod) return;
   const gs = (ARS.presenca[cod] || []).map(id => NOS.get(id)).sort((a, b) => (b.topo - a.topo) || (b.capital || 0) - (a.capital || 0));
   box.innerHTML = `<p class="sub" style="margin-top:8px;"><b>${esc(ARS.mun[cod])}</b>: ${gs.length} ${gs.length === 1 ? 'grupo tem' : 'grupos têm'} endereço no município.</p>
-    <ul>${gs.map(n => `<li><a href="#" class="gelink" data-id="${n.id}">${esc(n.rot)}</a>${n.topo ? ' <span class="topo-marca">●</span>' : ''} <span style="color:var(--muted);">— ${n.mercado ? esc(n.mercado) + ', ' : ''}${n.n_emp} ${n.n_emp === 1 ? 'empresa' : 'empresas'}</span></li>`).join('')}</ul>
+    <ul>${gs.map(n => `<li><a href="#" class="gelink" data-id="${n.id}">${esc(nomeG(n))}</a>${n.topo ? ' <span class="topo-marca">●</span>' : ''} <span style="color:var(--muted);">— ${subG(n) ? esc(subG(n)) + ', ' : ''}${n.n_emp} ${n.n_emp === 1 ? 'empresa' : 'empresas'}</span></li>`).join('')}</ul>
     <p class="sub">Ter endereço não é operar o sistema do município. Quem opera a Tarifa Zero de cada caso está no contrato, no <a href="painel.html#explorar">Painel Brasil</a>.</p>`;
 }
 busca?.addEventListener('input', () => { sugere(); mostraMuni(); });
@@ -577,4 +583,13 @@ document.addEventListener('click', e => {
 renderFind(); renderCards(); desenhaRede(); renderAgrupamentos(); renderTabela(); renderTerritorio();
 const h = decodeURIComponent(location.hash.slice(1));
 if (NOS.has(h)) seleciona(h);
+// vindo da ficha do município no Painel Brasil (24/10/2026): #mun-<código IBGE>-<nome/UF>
+const _mm = location.hash.match(/^#mun-(\d+)(?:-(.*))?$/);
+if (_mm) {
+  const cod = _mm[1], nm = decodeURIComponent(_mm[2] || '');
+  busca.value = ARS.mun[cod] || nm;
+  if (ARS.mun[cod]) mostraMuni();
+  else document.getElementById('muniGrupos').innerHTML = `<p class="sub" style="margin-top:8px;">Nenhum dos 327 grupos tem estabelecimento registrado em <b>${esc(nm || cod)}</b> no cadastro de CNPJ. Ausência de endereço não quer dizer que não haja operador — quem opera o sistema está no contrato, no <a href="painel.html#explorar">Painel Brasil</a>.</p>`;
+  setTimeout(() => document.getElementById('muniBusca').closest('.panel').scrollIntoView({ block: 'start' }), 250);
+}
 // a aba "Além do ônibus" é aberta no fim da montagem (montar_rede_ge.sh), depois de window.PAT existir

@@ -598,7 +598,7 @@ function renderLegend() {
   const nt = neutrals();
   let html = '';
   if (state.colorBy === 'tz') {
-    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Ativa (universal)</span>
+    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>TZ universal</span>
             <span><span class="sw" style="background:${corParcial(1)}"></span>Parcial · 1 camada</span>
             <span><span class="sw" style="background:${corParcial(2)}"></span>Parcial · 2 camadas</span>
             <span><span class="sw" style="background:${corParcial(3)}"></span>Parcial · 3 camadas</span>
@@ -675,14 +675,32 @@ function renderCards() {
   const cards = [
     { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
     { n: comOnibus.toLocaleString('pt-BR'), l: `Com sistema de ônibus declarado ${scopeLabel} (MUNIC 2020 — só 31% dos municípios responderam; ausência aqui não é prova de ausência)` },
-    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas (<b>universal</b>) ${scopeLabel}`, w: warn },
+    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ <b>universal</b> em vigor ${scopeLabel}`, w: warn },
     { n: countParciais(rows).toLocaleString('pt-BR'), l: `TZ <b>parciais</b> ${scopeLabel} (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
-    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ universal ${scopeLabel}`, w: warn },
-    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ativa ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
-    { n: pibMed != null ? 'R$ ' + fmtNum(pibMed) : '—', l: `PIB per capita mediano ${scopeLabel} (2021)` },
+    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `dos ${rows.length.toLocaleString('pt-BR')} municípios ${scopeLabel === 'no Brasil' ? 'do Brasil' : 'do recorte'} têm ou tiveram TZ universal (${tzRows.length.toLocaleString('pt-BR')})`, w: warn },
+    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
   ];
   document.getElementById('cards').innerHTML = cards.map(c =>
     `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}${c.w || ''}</div></div>`).join('');
+  // Como os números se relacionam (24/10/2026, parecer externo): os 187 da base verificada e
+  // os 44 parciais da régua não são o mesmo universo — e o leitor precisava cruzar abas para saber.
+  const conta = st => rows.filter(m => m.tz_status === st).length;
+  const nUni = conta('Ativa'), nPar = conta('Parcial (ativa)'), nEnc = conta('Encerrada');
+  const nReg = rows.filter(m => /Regulamentada/.test(m.tz_status || '')).length, nPis = rows.filter(m => /Pista/.test(m.tz_status || '')).length;
+  const n44 = countParciais(rows), nExtra = Math.max(0, n44 - nPar);
+  const rel = document.getElementById('relUniversos');
+  const pl = (n, um, varios) => `${n.toLocaleString('pt-BR')} ${n === 1 ? um : varios}`;
+  const partes = [[nUni, 'universal', 'universais'], [nPar, 'parcial', 'parciais'], [nEnc, 'encerrada', 'encerradas']].filter(([n]) => n).map(([n, a, b]) => pl(n, a, b));
+  const lista = partes.length > 1 ? partes.slice(0, -1).join(', ') + ' e ' + partes.at(-1) : (partes[0] || 'nenhuma');
+  const base = nUni + nPar + nEnc;
+  let txt = `<b>Como os números se relacionam${hasFilter ? ' no recorte' : ''}.</b> A base verificada da pesquisa — cada política conferida na norma, no contrato ou na prova de operação — tem <b>${pl(base, 'política', 'políticas')}</b>${base ? ': ' + lista : ''}. `;
+  if (!n44) txt += 'Não há casos parciais da régua neste recorte.';
+  else if (!nPar) txt += `${n44 === 1 ? 'O <b>caso parcial</b> da régua vem' : `Os <b>${n44} casos parciais</b> da régua vêm`} da busca exploratória da camada 2, que não é exaustiva e não entra na base verificada.`;
+  else if (!nExtra) txt += `Os <b>${n44} casos parciais</b> da régua são os ${nPar} da base verificada.`;
+  else txt += `Os <b>${n44} casos parciais</b> da régua são ${nPar === 1 ? 'esse' : `esses ${nPar}`} e mais <b>${pl(nExtra, 'município achado', 'municípios achados')}</b> na busca exploratória da camada 2, que não é exaustiva e não entra na base verificada.`;
+  const fora = [nReg && pl(nReg, 'política regulamentada e não implantada', 'políticas regulamentadas e não implantadas'), nPis && pl(nPis, 'pista a verificar', 'pistas a verificar')].filter(Boolean);
+  if (fora.length) txt += ` Ficam fora das duas contagens ${fora.join(' e ')}.`;
+  if (rel) rel.innerHTML = txt;
 }
 
 // ---------- score de população abrangida pela Tarifa Zero (v1, 29/07/2026) ----------
@@ -975,7 +993,8 @@ function renderDetail(m) {
     ${renderArranjoDetail(m)}
     ${renderCamadaDetail(m)}
     ${renderFontesDetail(m)}
-    ${renderNoticiasDetail(m)}`;
+    ${renderNoticiasDetail(m)}
+    <p class="ponte-rede"><a href="rede-ge.html#mun-${m.id}-${encodeURIComponent(m.nome + '/' + m.uf)}">Que grupos econômicos têm endereço em ${m.nome}? Ver na Rede de empresas →</a><br><span>Endereço no cadastro não comprova que o grupo opera o sistema do município.</span></p>`;
   desenharFluxos(m);
 }
 
@@ -1345,7 +1364,7 @@ function renderBars() {
   const nNaoUsados = porte ? rowsNao.filter(m => peso(m) > 0).length : rowsNao.length;
   const rotNao = porte ? 'Não-TZ, mesmo porte' : 'Não-TZ';
 
-  let html = `<div class="barrow"><div class="lab"><span>n</span><b>TZ universal: ${rowsTZ.length} · ${rotNao}: ${nNaoUsados}</b></div></div>`;
+  let html = `<p class="sub" style="margin:0 0 8px;grid-column:1/-1;">Municípios comparados: <b>TZ universal ${rowsTZ.length.toLocaleString('pt-BR')}</b> · <b>${rotNao} ${nNaoUsados.toLocaleString('pt-BR')}</b></p>`;
   for (const met of BAR_METRICS) {
     const vTZ = median(rowsTZ.map(m => valorMetrica(m, met.k)));
     const vNao = porte
@@ -1381,13 +1400,14 @@ function renderPorteTabela(rowsTZ, rowsNao) {
       const inv = (va != null && vb != null && met.k === 'onibus' && va < vb) ? ' class="inv"' : '';
       return `<td${inv}>${va != null ? met.fmt(va) : '—'}</td><td>${vb != null ? met.fmt(vb) : '—'}</td>`;
     };
-    linhas += `<tr><td>${rot}</td><td class="n">${a.length}</td><td class="n">${b.length}</td>${mets.map(cel).join('')}</tr>`;
+    const pouco = a.length > 0 && a.length < 5;   // mediana de 1 a 4 casos: mostrar, mas avisar
+    linhas += `<tr${pouco ? ' class="pouco" title="Menos de 5 municípios com TZ nesta faixa: a mediana é frágil"' : ''}><td>${rot}${pouco ? ' <span class="aviso-n">⚠ n pequeno</span>' : ''}</td><td class="n">${a.length}</td><td class="n">${b.length}</td>${mets.map(cel).join('')}</tr>`;
   }
   el.innerHTML = `<table class="portetab">
     <thead><tr><th rowspan="2">Faixa de população</th><th colspan="2">Municípios</th><th colspan="2">PIB per capita (mediana)</th><th colspan="2">Uso do ônibus (mediana)</th></tr>
     <tr><th>TZ</th><th>Não-TZ</th><th>TZ</th><th>Não-TZ</th><th>TZ</th><th>Não-TZ</th></tr></thead>
     <tbody>${linhas}</tbody></table>
-    <p class="sub" style="margin-top:7px;">Em destaque, as faixas em que os municípios com Tarifa Zero usam <b>menos</b> o ônibus que os de mesmo porte. A tese lê assim: até 100 mil habitantes, a camada universal usa mais o ônibus; acima disso, a relação se inverte. O dado do Censo 2022 não separa causa e efeito — parte dessas políticas já operava na data do Censo e pode ter aumentado o uso.</p>`;
+    <p class="sub" style="margin-top:7px;">⚠ marca faixas com menos de 5 municípios com TZ: a mediana existe, mas um só caso a move. Em destaque, as faixas em que os municípios com Tarifa Zero usam <b>menos</b> o ônibus que os de mesmo porte. A tese lê assim: até 100 mil habitantes, a camada universal usa mais o ônibus; acima disso, a relação se inverte. O dado do Censo 2022 não separa causa e efeito — parte dessas políticas já operava na data do Censo e pode ter aumentado o uso.</p>`;
 }
 
 // ---------- crosstabs (rótulo acima da própria barra; % dentro de cada categoria) ----------
@@ -1895,7 +1915,7 @@ function renderDispersao() {
      <text x="14" y="${MT + (H - MT - MB) / 2}" fill="var(--muted)" font-size="11" text-anchor="middle" transform="rotate(-90 14 ${MT + (H - MT - MB) / 2})">Motorização (veíc/hab)</text>`;
 
   const leg = document.getElementById('dispersaoLegenda');
-  if (leg) leg.innerHTML = `<span><i style="background:var(--amarelo)"></i>TZ ativa (${tz.filter(m => m.tz_status === 'Ativa').length})</span>
+  if (leg) leg.innerHTML = `<span><i style="background:var(--amarelo)"></i>TZ universal (${tz.filter(m => m.tz_status === 'Ativa').length})</span>
     <span><i style="background:var(--rosa)"></i>TZ encerrada (${tz.filter(m => m.tz_status === 'Encerrada').length})</span>
     <span><i style="background:var(--muted)"></i>Não-TZ (${naoTz.length.toLocaleString('pt-BR')})</span>`;
 }
@@ -2000,7 +2020,7 @@ function renderReferenciasAbnt() {
 }
 
 // ---------- TZ table ----------
-let tzSort = { k: 'pib_pc', dir: -1 };
+let tzSort = { k: 'nome', dir: 1 };   // 24/10/2026: alfabética por padrão (quem procura uma cidade)
 const fontesExpandedIds = new Set();
 function renderTZTable() {
   let rows = STATS.tz_list.concat(PARCIAL_LIST).filter(r => {
@@ -2010,7 +2030,9 @@ function renderTZTable() {
     if (state.arranjo && r.tipo_arranjo !== state.arranjo) return false;
     return true;
   });
+  document.querySelectorAll('#tzTable th').forEach(th => { th.dataset.ord = th.dataset.k === tzSort.k ? (tzSort.dir > 0 ? '▲' : '▼') : ''; });
   rows = rows.slice().sort((a, b) => {
+    if (tzSort.k === 'nome') return tzSort.dir * String(a.nome).localeCompare(String(b.nome), 'pt-BR');
     const av = a[tzSort.k], bv = b[tzSort.k];
     if (av == null) return 1; if (bv == null) return -1;
     return av > bv ? tzSort.dir : av < bv ? -tzSort.dir : 0;
@@ -2143,7 +2165,7 @@ if (btnLimpar) btnLimpar.addEventListener('click', limparTudo);
 document.querySelectorAll('#tzTable th').forEach(th => {
   th.addEventListener('click', () => {
     const k = th.dataset.k;
-    tzSort.dir = (tzSort.k === k) ? -tzSort.dir : -1;
+    tzSort.dir = (tzSort.k === k) ? -tzSort.dir : (['nome', 'uf', 'tz_status', 'regic_label', 'tipo_arranjo'].includes(k) ? 1 : -1);
     tzSort.k = k;
     renderTZTable();
   });
@@ -2262,8 +2284,8 @@ function ajustaCelular() {
   const ht = document.querySelector('.htext');
   const bt = document.getElementById('lerMais');
   if (ht && bt) {
-    ht.classList.toggle('compacto', mqCel.matches);
-    bt.hidden = !mqCel.matches;
+    ht.classList.add('compacto');   // 24/10/2026: resumida em qualquer tela (parecer externo)
+    bt.hidden = false;
     bt.textContent = 'Ler mais sobre a pesquisa ▾';
   }
 }
@@ -2330,7 +2352,7 @@ svg.addEventListener('mousemove', e => {
   if (!m || !passesFilter(m)) { tooltip.style.display = 'none'; return; }
   let inner;
   if (m.tz_bin === 'TZ') {
-    inner = `<b>${m.nome} – ${m.uf} ${m.tz_status === 'Ativa' ? '· TZ ativa' : '· TZ encerrada'}</b>
+    inner = `<b>${m.nome} – ${m.uf} ${m.tz_status === 'Ativa' ? '· TZ universal' : '· TZ encerrada'}</b>
       <div class="tt-grid">
         <span>Início</span><span>${m.tz_ano ?? '—'}</span>
         ${m.tz_fim ? `<span>Fim</span><span>${m.tz_fim}</span>` : ''}
@@ -2400,3 +2422,5 @@ renderReferenciasAbnt();
 renderTZTable();
 render(); // desenha mapa, legenda, barras, cards, linha do tempo e score de população
 renderCurvaPorte();
+// fim da montagem: some o aviso de carregamento (head.html)
+document.getElementById('carregando')?.remove();

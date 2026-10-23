@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Transporte Público em Crise — A influência dos grupos econômicos nas experiências de Tarifa Zero</title>
+<title>Painel Brasil — Tarifa Zero nos 5.570 municípios · Transporte Público em Crise</title>
+<meta name="description" content="As políticas de Tarifa Zero no Brasil: a régua de classificação, o mapa dos 5.570 municípios, a comparação com o restante do país, o arranjo contratual e a remuneração do operador. Versão de teste.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230E0E10'/%3E%3Crect x='10' y='14' width='44' height='28' rx='6' fill='%23F5E400'/%3E%3Crect x='10' y='46' width='44' height='5' rx='2' fill='%23FF2D6B'/%3E%3Ccircle cx='20' cy='42' r='5' fill='%230E0E10'/%3E%3Ccircle cx='44' cy='42' r='5' fill='%230E0E10'/%3E%3Crect x='15' y='19' width='34' height='10' rx='2' fill='%230E0E10' opacity='.85'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Transporte Público em Crise">
+<meta property="og:title" content="Painel Brasil — Tarifa Zero nos 5.570 municípios">
+<meta property="og:description" content="As políticas de Tarifa Zero no Brasil: a régua de classificação, o mapa dos 5.570 municípios, a comparação com o restante do país, o arranjo contratual e a remuneração do operador. Versão de teste.">
+<meta property="og:url" content="https://tvzgomes-2.github.io/painel_tz/painel.html">
+<meta property="og:image" content="https://tvzgomes-2.github.io/painel_tz/assets/og/compartilhar.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
     /* identidade visual oficial da pesquisa (ver Identidade Visual da Pesquisa): rosa · amarelo · azul · verde sobre preto */
@@ -310,13 +321,52 @@
   .faixa-teste a{color:#F5E400;text-decoration:underline;white-space:nowrap;}
   @media (max-width:640px){ .faixa-teste{font-size:11.5px;text-align:left;padding:7px 16px;} }
 </style>
+<style>
+  /* menu único do site (24/10/2026): mesmas páginas, mesma ordem, a atual marcada */
+  .sitenav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding:9px 24px;border-bottom:1px solid #2a2a33;background:#0E0E10;font-family:'Montserrat','Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;}
+  .sitenav .marca{color:#f0f0f2;font-weight:800;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;font-size:12.5px;}
+  .sitenav .marca b{color:#F5E400;}
+  .sitenav .links{display:flex;flex-wrap:wrap;gap:4px 16px;margin-left:auto;}
+  .sitenav .links a{color:#b9b9c4;text-decoration:none;padding:3px 0;border-bottom:2px solid transparent;}
+  .sitenav .links a:hover{color:#fff;}
+  .sitenav .links a[aria-current="page"]{color:#fff;border-bottom-color:#F5E400;font-weight:700;}
+  @media (max-width:640px){ .sitenav{padding:8px 16px;font-size:12.5px;} .sitenav .links{margin-left:0;width:100%;gap:2px 14px;} .sitenav .marca{font-size:11.5px;} }
+</style>
+<style>.sobretit{margin:0 0 4px;color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;}</style>
+<style>
+  /* celular (24/10/2026): cartões em duas colunas, para o leitor chegar antes aos gráficos */
+  @media (max-width:640px){
+    #cards{grid-template-columns:1fr 1fr !important;gap:8px;}
+    #cards .card{padding:9px 10px;} #cards .card .n{font-size:19px;} #cards .card .l{font-size:11px;}
+  }
+  /* aviso de carregamento: o painel embute os dados dos 5.570 municípios (vários MB) */
+  #carregando{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:90;background:#141419;border:1px solid #F5E400;color:#f0f0f2;
+    border-radius:24px;padding:9px 16px 9px 40px;font:600 13px 'Montserrat','Poppins',Arial,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.5);white-space:nowrap;}
+  #carregando::before{content:"";position:absolute;left:14px;top:50%;width:14px;height:14px;margin-top:-8px;border:2px solid #F5E400;border-right-color:transparent;border-radius:50%;animation:girar .8s linear infinite;}
+  @keyframes girar{to{transform:rotate(360deg)}}
+</style>
+<style>
+  /* 24/10/2026 — parecer externo: relação 187 × 44, amostra pequena, ordenação, ponte à Rede */
+  .relunivs{margin:-2px 0 14px;padding:9px 13px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--amarelo);border-radius:8px;font-size:12.5px;line-height:1.55;color:var(--muted);}
+  .relunivs b{color:var(--text);}
+  @media (min-width:1100px){ #cards{grid-template-columns:repeat(6,minmax(0,1fr)) !important;} }
+  @media (min-width:641px) and (max-width:1099px){ #cards{grid-template-columns:repeat(3,minmax(0,1fr)) !important;} }
+  .portetab tr.pouco td{color:var(--muted);} .aviso-n{color:#f5a623;font-size:10.5px;font-weight:700;white-space:nowrap;}
+  #tzTable th[data-ord]:not([data-ord=""])::after{content:" " attr(data-ord);color:var(--amarelo);}
+  .ponte-rede{margin:14px 0 0;padding:10px 12px;background:var(--panel2);border-left:3px solid var(--azul);border-radius:6px;font-size:12.5px;}
+  .ponte-rede a{color:#8fb0ff;font-weight:700;} .ponte-rede span{color:var(--muted);font-size:11.5px;}
+  .lermais{display:inline-block !important;}
+  .htext.compacto .resumo{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  .htext.compacto .univ{display:none;}
+</style>
 </head>
 <body>
+<div id="carregando" role="status" aria-live="polite">Carregando os dados dos 5.570 municípios…</div>
 <div class="faixa-teste" role="note"><b>Versão de teste</b>Os números e textos deste site estão em validação e acompanham uma tese de doutorado ainda não defendida — podem mudar. Correções e contribuições: <a href="pesquisa.html">pesquisa colaborativa →</a></div>
+<nav class="sitenav" aria-label="Páginas do site"><a class="marca" href="index.html">Transporte Público em <b>Crise</b></a><span class="links"><a href="painel.html" aria-current="page">Painel Brasil</a><a href="rede-ge.html">Rede de empresas</a><a href="verbetes.html">Verbetes</a><a href="pesquisa.html">Contribua</a></span></nav>
 <header>
   <div class="htext">
-    <p style="margin:0 0 6px;"><a href="index.html" style="font-size:.85em;opacity:.75;">← voltar ao site</a> <a href="verbetes.html" style="font-size:.85em;opacity:.75;margin-left:14px;">Verbetes (conceitos) →</a> <a href="rede-ge.html" style="font-size:.85em;opacity:.75;margin-left:14px;">Rede de empresas (grupos econômicos) →</a></p>
-    <h1>Transporte Público em <span class="hl">Crise</span> <span class="badge">painel · v0.13</span></h1>
+    <h1>Painel <span class="hl">Brasil</span> <span class="badge">painel · v0.14</span></h1>
     <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero</p>
     <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a estrutura de poder dos grupos econômicos do transporte coletivo e a difusão espacial das políticas de gratuidade universal no Brasil. A hipótese não é a de uma oposição direta dos grupos ao financiamento público: é a de que a difusão da TZ é restringida pela <b>incompatibilidade entre o desenho da política e o arranjo contratual vigente</b> — onde o mercado é comercialmente atrativo, só avança o desenho que preserva a receita e a propriedade do operador; nas franjas do sistema, onde não há arranjo a preservar, a gratuidade avança em qualquer desenho. O método é misto (quantitativo + qualitativo), em panorama nacional; este painel interativo é o instrumento exploratório do eixo quantitativo.</p>
     <p class="univ">Universo: 5.570 municípios do Brasil. Base própria de 187 políticas municipais de Tarifa Zero, verificadas na norma, no contrato ou na prova de operação (retrato de 21/10/2026), cruzada com base municipal integrada de 234 variáveis (PEMOB/SIMU, MUNIC 2020, REGIC 2018, OSM, TSE 2024, DATASUS, NTU). Protótipo de trabalho — dados descritivos, não causais. Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a></p>
@@ -388,6 +438,7 @@
   <section class="tabpane" id="tab-panorama" role="tabpanel" aria-labelledby="tabbtn-panorama">
     <div class="paneintro"><h2>Panorama</h2><p>Quantas políticas de Tarifa Zero há, onde estão, desde quando, de que tipo e como são pagas — o que a tese conta no Capítulo 5 e nas Seções 7.2 a 7.4. Tudo nesta aba responde ao recorte escolhido acima.</p></div>
   <div class="cards" id="cards"></div>
+  <p class="relunivs" id="relUniversos"></p>
   <div class="reguabox">
     <h3>A régua descritiva</h3>
     <p class="sub">Onde cada caso está na escala que vai da gratuidade sem nenhuma condição (à esquerda) até os desenhos em que um portão decide quem pode viajar, ou quando (à direita). Classificação do <b>desenho</b> da política, não do seu status — por isso casos encerrados aparecem à parte. Responde ao recorte dos filtros.</p>
@@ -420,11 +471,6 @@
     <summary>Como o operador é pago e de onde vem o dinheiro — remuneração, custo e custeio</summary>
     <p class="sub">Manter um operador privado não diz como ele é pago, e é isso que decide quem carrega o risco e para onde vai o dinheiro da gratuidade (Seções 7.2 a 7.4 da tese). Pago pela <b>oferta</b> — por quilômetro, por veículo ou por um valor fixo —, o operador recebe um preço combinado e o risco de a demanda variar fica com a prefeitura. Pago pela <b>demanda</b>, por passageiro, a gratuidade que aumenta o número de passageiros aumenta na mesma proporção o pagamento. Contagens sobre a <b>Tarifa Zero universal</b> (camada 1) do recorte; <b>não apurado não é zero</b>.</p>
     <div id="remunPanel"></div>
-  </details>
-  <details class="panel" style="margin-top:16px;" open>
-    <summary>Score: população abrangida pela Tarifa Zero, por camada</summary>
-    <p class="sub">Quantas pessoas têm algum acesso à TZ, somando a população da camada universal (100%) com a estimativa disponível para a camada de grupo social — não é um índice de qualidade, é uma soma de abrangência populacional. Responde ao recorte atual (UF/faixa/REGIC/arranjo/modelo).</p>
-    <div id="popScore"></div>
   </details>
   </section>
 
@@ -533,6 +579,11 @@
 
   <section class="tabpane" id="tab-sobre" role="tabpanel" aria-labelledby="tabbtn-sobre">
     <div class="paneintro"><h2>Sobre os dados</h2><p>Glossário, notas metodológicas e referências. As ressalvas que mudam a leitura dos números estão aqui, e as mais importantes também aparecem junto de cada gráfico.</p></div>
+  <details class="panel" style="margin-top:16px;">
+    <summary>Score: população abrangida pela Tarifa Zero, por camada</summary>
+    <p class="sub">Quantas pessoas têm algum acesso à TZ, somando a população da camada universal (100%) com a estimativa disponível para a camada de grupo social — não é um índice de qualidade, é uma soma de abrangência populacional. Responde ao recorte atual (UF/faixa/REGIC/arranjo/modelo).</p>
+    <div id="popScore"></div>
+  </details>
   <details class="gloss">
     <summary>Glossário de siglas e termos</summary>
     <dl>
@@ -606,7 +657,7 @@
         <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
       </div>
     </div>
-    Painel v0.13 · 2026<br>
+    Painel Brasil v0.14 · 2026<br>
     Fontes: Dataverse Santini v8 (abr/2026) · PEMOB/SIMU (Min. Cidades) · MUNIC 2020 (IBGE) · REGIC 2018 (IBGE) · FINBRA/Siconfi 2019–2023 · IBGE (PIB 2013/2021, Censo 2022) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Base Polo Planejamento.<br>
     Painel gerado a partir de <i>base_municipal_v3.csv</i> e <i>Municípios TZ - consolidado.xlsx</i> — protótipo de trabalho, não substitui a análise da tese. Histórico de versões no CHANGELOG do repositório.
   </footer>
@@ -5318,7 +5369,7 @@ function renderLegend() {
   const nt = neutrals();
   let html = '';
   if (state.colorBy === 'tz') {
-    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Ativa (universal)</span>
+    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>TZ universal</span>
             <span><span class="sw" style="background:${corParcial(1)}"></span>Parcial · 1 camada</span>
             <span><span class="sw" style="background:${corParcial(2)}"></span>Parcial · 2 camadas</span>
             <span><span class="sw" style="background:${corParcial(3)}"></span>Parcial · 3 camadas</span>
@@ -5395,14 +5446,32 @@ function renderCards() {
   const cards = [
     { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
     { n: comOnibus.toLocaleString('pt-BR'), l: `Com sistema de ônibus declarado ${scopeLabel} (MUNIC 2020 — só 31% dos municípios responderam; ausência aqui não é prova de ausência)` },
-    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ ativas (<b>universal</b>) ${scopeLabel}`, w: warn },
+    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ <b>universal</b> em vigor ${scopeLabel}`, w: warn },
     { n: countParciais(rows).toLocaleString('pt-BR'), l: `TZ <b>parciais</b> ${scopeLabel} (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
-    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `% com histórico de TZ universal ${scopeLabel}`, w: warn },
-    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ativa ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
-    { n: pibMed != null ? 'R$ ' + fmtNum(pibMed) : '—', l: `PIB per capita mediano ${scopeLabel} (2021)` },
+    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `dos ${rows.length.toLocaleString('pt-BR')} municípios ${scopeLabel === 'no Brasil' ? 'do Brasil' : 'do recorte'} têm ou tiveram TZ universal (${tzRows.length.toLocaleString('pt-BR')})`, w: warn },
+    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
   ];
   document.getElementById('cards').innerHTML = cards.map(c =>
     `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}${c.w || ''}</div></div>`).join('');
+  // Como os números se relacionam (24/10/2026, parecer externo): os 187 da base verificada e
+  // os 44 parciais da régua não são o mesmo universo — e o leitor precisava cruzar abas para saber.
+  const conta = st => rows.filter(m => m.tz_status === st).length;
+  const nUni = conta('Ativa'), nPar = conta('Parcial (ativa)'), nEnc = conta('Encerrada');
+  const nReg = rows.filter(m => /Regulamentada/.test(m.tz_status || '')).length, nPis = rows.filter(m => /Pista/.test(m.tz_status || '')).length;
+  const n44 = countParciais(rows), nExtra = Math.max(0, n44 - nPar);
+  const rel = document.getElementById('relUniversos');
+  const pl = (n, um, varios) => `${n.toLocaleString('pt-BR')} ${n === 1 ? um : varios}`;
+  const partes = [[nUni, 'universal', 'universais'], [nPar, 'parcial', 'parciais'], [nEnc, 'encerrada', 'encerradas']].filter(([n]) => n).map(([n, a, b]) => pl(n, a, b));
+  const lista = partes.length > 1 ? partes.slice(0, -1).join(', ') + ' e ' + partes.at(-1) : (partes[0] || 'nenhuma');
+  const base = nUni + nPar + nEnc;
+  let txt = `<b>Como os números se relacionam${hasFilter ? ' no recorte' : ''}.</b> A base verificada da pesquisa — cada política conferida na norma, no contrato ou na prova de operação — tem <b>${pl(base, 'política', 'políticas')}</b>${base ? ': ' + lista : ''}. `;
+  if (!n44) txt += 'Não há casos parciais da régua neste recorte.';
+  else if (!nPar) txt += `${n44 === 1 ? 'O <b>caso parcial</b> da régua vem' : `Os <b>${n44} casos parciais</b> da régua vêm`} da busca exploratória da camada 2, que não é exaustiva e não entra na base verificada.`;
+  else if (!nExtra) txt += `Os <b>${n44} casos parciais</b> da régua são os ${nPar} da base verificada.`;
+  else txt += `Os <b>${n44} casos parciais</b> da régua são ${nPar === 1 ? 'esse' : `esses ${nPar}`} e mais <b>${pl(nExtra, 'município achado', 'municípios achados')}</b> na busca exploratória da camada 2, que não é exaustiva e não entra na base verificada.`;
+  const fora = [nReg && pl(nReg, 'política regulamentada e não implantada', 'políticas regulamentadas e não implantadas'), nPis && pl(nPis, 'pista a verificar', 'pistas a verificar')].filter(Boolean);
+  if (fora.length) txt += ` Ficam fora das duas contagens ${fora.join(' e ')}.`;
+  if (rel) rel.innerHTML = txt;
 }
 
 // ---------- score de população abrangida pela Tarifa Zero (v1, 29/07/2026) ----------
@@ -5695,7 +5764,8 @@ function renderDetail(m) {
     ${renderArranjoDetail(m)}
     ${renderCamadaDetail(m)}
     ${renderFontesDetail(m)}
-    ${renderNoticiasDetail(m)}`;
+    ${renderNoticiasDetail(m)}
+    <p class="ponte-rede"><a href="rede-ge.html#mun-${m.id}-${encodeURIComponent(m.nome + '/' + m.uf)}">Que grupos econômicos têm endereço em ${m.nome}? Ver na Rede de empresas →</a><br><span>Endereço no cadastro não comprova que o grupo opera o sistema do município.</span></p>`;
   desenharFluxos(m);
 }
 
@@ -6065,7 +6135,7 @@ function renderBars() {
   const nNaoUsados = porte ? rowsNao.filter(m => peso(m) > 0).length : rowsNao.length;
   const rotNao = porte ? 'Não-TZ, mesmo porte' : 'Não-TZ';
 
-  let html = `<div class="barrow"><div class="lab"><span>n</span><b>TZ universal: ${rowsTZ.length} · ${rotNao}: ${nNaoUsados}</b></div></div>`;
+  let html = `<p class="sub" style="margin:0 0 8px;grid-column:1/-1;">Municípios comparados: <b>TZ universal ${rowsTZ.length.toLocaleString('pt-BR')}</b> · <b>${rotNao} ${nNaoUsados.toLocaleString('pt-BR')}</b></p>`;
   for (const met of BAR_METRICS) {
     const vTZ = median(rowsTZ.map(m => valorMetrica(m, met.k)));
     const vNao = porte
@@ -6101,13 +6171,14 @@ function renderPorteTabela(rowsTZ, rowsNao) {
       const inv = (va != null && vb != null && met.k === 'onibus' && va < vb) ? ' class="inv"' : '';
       return `<td${inv}>${va != null ? met.fmt(va) : '—'}</td><td>${vb != null ? met.fmt(vb) : '—'}</td>`;
     };
-    linhas += `<tr><td>${rot}</td><td class="n">${a.length}</td><td class="n">${b.length}</td>${mets.map(cel).join('')}</tr>`;
+    const pouco = a.length > 0 && a.length < 5;   // mediana de 1 a 4 casos: mostrar, mas avisar
+    linhas += `<tr${pouco ? ' class="pouco" title="Menos de 5 municípios com TZ nesta faixa: a mediana é frágil"' : ''}><td>${rot}${pouco ? ' <span class="aviso-n">⚠ n pequeno</span>' : ''}</td><td class="n">${a.length}</td><td class="n">${b.length}</td>${mets.map(cel).join('')}</tr>`;
   }
   el.innerHTML = `<table class="portetab">
     <thead><tr><th rowspan="2">Faixa de população</th><th colspan="2">Municípios</th><th colspan="2">PIB per capita (mediana)</th><th colspan="2">Uso do ônibus (mediana)</th></tr>
     <tr><th>TZ</th><th>Não-TZ</th><th>TZ</th><th>Não-TZ</th><th>TZ</th><th>Não-TZ</th></tr></thead>
     <tbody>${linhas}</tbody></table>
-    <p class="sub" style="margin-top:7px;">Em destaque, as faixas em que os municípios com Tarifa Zero usam <b>menos</b> o ônibus que os de mesmo porte. A tese lê assim: até 100 mil habitantes, a camada universal usa mais o ônibus; acima disso, a relação se inverte. O dado do Censo 2022 não separa causa e efeito — parte dessas políticas já operava na data do Censo e pode ter aumentado o uso.</p>`;
+    <p class="sub" style="margin-top:7px;">⚠ marca faixas com menos de 5 municípios com TZ: a mediana existe, mas um só caso a move. Em destaque, as faixas em que os municípios com Tarifa Zero usam <b>menos</b> o ônibus que os de mesmo porte. A tese lê assim: até 100 mil habitantes, a camada universal usa mais o ônibus; acima disso, a relação se inverte. O dado do Censo 2022 não separa causa e efeito — parte dessas políticas já operava na data do Censo e pode ter aumentado o uso.</p>`;
 }
 
 // ---------- crosstabs (rótulo acima da própria barra; % dentro de cada categoria) ----------
@@ -6615,7 +6686,7 @@ function renderDispersao() {
      <text x="14" y="${MT + (H - MT - MB) / 2}" fill="var(--muted)" font-size="11" text-anchor="middle" transform="rotate(-90 14 ${MT + (H - MT - MB) / 2})">Motorização (veíc/hab)</text>`;
 
   const leg = document.getElementById('dispersaoLegenda');
-  if (leg) leg.innerHTML = `<span><i style="background:var(--amarelo)"></i>TZ ativa (${tz.filter(m => m.tz_status === 'Ativa').length})</span>
+  if (leg) leg.innerHTML = `<span><i style="background:var(--amarelo)"></i>TZ universal (${tz.filter(m => m.tz_status === 'Ativa').length})</span>
     <span><i style="background:var(--rosa)"></i>TZ encerrada (${tz.filter(m => m.tz_status === 'Encerrada').length})</span>
     <span><i style="background:var(--muted)"></i>Não-TZ (${naoTz.length.toLocaleString('pt-BR')})</span>`;
 }
@@ -6720,7 +6791,7 @@ function renderReferenciasAbnt() {
 }
 
 // ---------- TZ table ----------
-let tzSort = { k: 'pib_pc', dir: -1 };
+let tzSort = { k: 'nome', dir: 1 };   // 24/10/2026: alfabética por padrão (quem procura uma cidade)
 const fontesExpandedIds = new Set();
 function renderTZTable() {
   let rows = STATS.tz_list.concat(PARCIAL_LIST).filter(r => {
@@ -6730,7 +6801,9 @@ function renderTZTable() {
     if (state.arranjo && r.tipo_arranjo !== state.arranjo) return false;
     return true;
   });
+  document.querySelectorAll('#tzTable th').forEach(th => { th.dataset.ord = th.dataset.k === tzSort.k ? (tzSort.dir > 0 ? '▲' : '▼') : ''; });
   rows = rows.slice().sort((a, b) => {
+    if (tzSort.k === 'nome') return tzSort.dir * String(a.nome).localeCompare(String(b.nome), 'pt-BR');
     const av = a[tzSort.k], bv = b[tzSort.k];
     if (av == null) return 1; if (bv == null) return -1;
     return av > bv ? tzSort.dir : av < bv ? -tzSort.dir : 0;
@@ -6863,7 +6936,7 @@ if (btnLimpar) btnLimpar.addEventListener('click', limparTudo);
 document.querySelectorAll('#tzTable th').forEach(th => {
   th.addEventListener('click', () => {
     const k = th.dataset.k;
-    tzSort.dir = (tzSort.k === k) ? -tzSort.dir : -1;
+    tzSort.dir = (tzSort.k === k) ? -tzSort.dir : (['nome', 'uf', 'tz_status', 'regic_label', 'tipo_arranjo'].includes(k) ? 1 : -1);
     tzSort.k = k;
     renderTZTable();
   });
@@ -6982,8 +7055,8 @@ function ajustaCelular() {
   const ht = document.querySelector('.htext');
   const bt = document.getElementById('lerMais');
   if (ht && bt) {
-    ht.classList.toggle('compacto', mqCel.matches);
-    bt.hidden = !mqCel.matches;
+    ht.classList.add('compacto');   // 24/10/2026: resumida em qualquer tela (parecer externo)
+    bt.hidden = false;
     bt.textContent = 'Ler mais sobre a pesquisa ▾';
   }
 }
@@ -7050,7 +7123,7 @@ svg.addEventListener('mousemove', e => {
   if (!m || !passesFilter(m)) { tooltip.style.display = 'none'; return; }
   let inner;
   if (m.tz_bin === 'TZ') {
-    inner = `<b>${m.nome} – ${m.uf} ${m.tz_status === 'Ativa' ? '· TZ ativa' : '· TZ encerrada'}</b>
+    inner = `<b>${m.nome} – ${m.uf} ${m.tz_status === 'Ativa' ? '· TZ universal' : '· TZ encerrada'}</b>
       <div class="tt-grid">
         <span>Início</span><span>${m.tz_ano ?? '—'}</span>
         ${m.tz_fim ? `<span>Fim</span><span>${m.tz_fim}</span>` : ''}
@@ -7120,6 +7193,8 @@ renderReferenciasAbnt();
 renderTZTable();
 render(); // desenha mapa, legenda, barras, cards, linha do tempo e score de população
 renderCurvaPorte();
+// fim da montagem: some o aviso de carregamento (head.html)
+document.getElementById('carregando')?.remove();
 </script>
 </body>
 </html>

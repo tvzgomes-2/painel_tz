@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rede de empresas — Grupos econômicos do transporte coletivo</title>
+<meta name="description" content="Os 327 grupos econômicos do transporte coletivo: a rede societária, as unidades de controle, a concentração do capital, onde estão e os negócios fora do ônibus. Sem dados de sócio pessoa física. Versão de teste.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230E0E10'/%3E%3Crect x='10' y='14' width='44' height='28' rx='6' fill='%23F5E400'/%3E%3Crect x='10' y='46' width='44' height='5' rx='2' fill='%23FF2D6B'/%3E%3Ccircle cx='20' cy='42' r='5' fill='%230E0E10'/%3E%3Ccircle cx='44' cy='42' r='5' fill='%230E0E10'/%3E%3Crect x='15' y='19' width='34' height='10' rx='2' fill='%230E0E10' opacity='.85'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Transporte Público em Crise">
+<meta property="og:title" content="Rede de empresas — quem controla o transporte coletivo no Brasil">
+<meta property="og:description" content="Os 327 grupos econômicos do transporte coletivo: a rede societária, as unidades de controle, a concentração do capital, onde estão e os negócios fora do ônibus. Sem dados de sócio pessoa física. Versão de teste.">
+<meta property="og:url" content="https://tvzgomes-2.github.io/painel_tz/rede-ge.html">
+<meta property="og:image" content="https://tvzgomes-2.github.io/painel_tz/assets/og/compartilhar.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
     /* identidade visual oficial da pesquisa (ver Identidade Visual da Pesquisa): rosa · amarelo · azul · verde sobre preto */
@@ -341,13 +352,31 @@
   .ponte-aba{display:inline-block;margin-top:6px;font-size:12px;color:var(--amarelo);text-decoration:underline;text-decoration-style:dotted;cursor:pointer;}
   @media (max-width:640px){ nav.tabs{overflow-x:auto;scrollbar-width:none;} .tabbtn{white-space:nowrap;padding:9px 12px 8px;font-size:13px;} }
 </style>
+<style>
+  /* menu único do site (24/10/2026): mesmas páginas, mesma ordem, a atual marcada */
+  .sitenav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding:9px 24px;border-bottom:1px solid #2a2a33;background:#0E0E10;font-family:'Montserrat','Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;}
+  .sitenav .marca{color:#f0f0f2;font-weight:800;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;font-size:12.5px;}
+  .sitenav .marca b{color:#F5E400;}
+  .sitenav .links{display:flex;flex-wrap:wrap;gap:4px 16px;margin-left:auto;}
+  .sitenav .links a{color:#b9b9c4;text-decoration:none;padding:3px 0;border-bottom:2px solid transparent;}
+  .sitenav .links a:hover{color:#fff;}
+  .sitenav .links a[aria-current="page"]{color:#fff;border-bottom-color:#F5E400;font-weight:700;}
+  @media (max-width:640px){ .sitenav{padding:8px 16px;font-size:12.5px;} .sitenav .links{margin-left:0;width:100%;gap:2px 14px;} .sitenav .marca{font-size:11.5px;} }
+</style>
+<style>
+  @media (max-width:640px){
+    .gefind,#cards > div{grid-template-columns:1fr 1fr !important;gap:8px;}
+    .gefind div,#cards .card{padding:9px 10px;} .gefind b,#cards .card .n{font-size:18px;} .gefind span,#cards .card .l{font-size:11px;}
+    .tabbtn small{display:none;} nav.tabs{overflow-x:visible;} .tabbtn{flex:1 1 0;text-align:center;}
+  }
+</style>
 </head>
 <body>
 <div class="faixa-teste" role="note"><b>Versão de teste</b>Os números e textos deste site estão em validação e acompanham uma tese de doutorado ainda não defendida — podem mudar. Correções e contribuições: <a href="pesquisa.html">pesquisa colaborativa →</a></div>
+<nav class="sitenav" aria-label="Páginas do site"><a class="marca" href="index.html">Transporte Público em <b>Crise</b></a><span class="links"><a href="painel.html">Painel Brasil</a><a href="rede-ge.html" aria-current="page">Rede de empresas</a><a href="verbetes.html">Verbetes</a><a href="pesquisa.html">Contribua</a></span></nav>
 <header>
   <div class="wrap">
-    <nav class="topnav"><a href="index.html">← voltar ao site</a> <a href="painel.html">Painel Brasil (TZ)</a> <a href="verbetes.html">Verbetes (conceitos)</a></nav>
-    <h1>Rede de <span class="hl">empresas</span> <span class="badge">rede · v0.1</span></h1>
+    <h1>Rede de <span class="hl">empresas</span> <span class="badge">rede · v0.2</span></h1>
     <h2 class="sub2">Quem controla o transporte coletivo no Brasil, por vínculo societário</h2>
     <p class="resumo">Esta página mapeia a estrutura de controle do transporte coletivo brasileiro a partir dos dados societários da Receita Federal, com análise de redes sociais (ARS): quais empresas pertencem ao mesmo dono, que grupos econômicos elas formam e como esses grupos se ligam entre si. Tem duas partes: <b>quem controla</b> — os grupos, como se ligam, quanto concentram e onde estão — e <b>além do ônibus</b> — as holdings sócias e os negócios dos grupos fora do transporte (Seção 6.4). É a contraparte do <a href="painel.html">Painel Brasil</a>: a hipótese da tese é que a difusão da Tarifa Zero é restringida pela incompatibilidade entre o desenho da política e o arranjo contratual vigente — e, para pô-la à prova, é preciso saber quem são os operadores, quanto do setor eles concentram e onde estão (Capítulo 6). O grupo econômico aqui é uma agregação de vínculos societários observados, e não um sujeito com intenção.</p>
     <p><b>O que esta página não mostra:</b> nenhum nome de pessoa física como sócio (o nome de mercado de alguns grupos é o do fundador — é a marca, e sai como marca). A rede de sócios — que é o insumo do cálculo — tem milhares de pessoas nomeadas com CPF parcial, e fica no acervo da pesquisa, não aqui. O que se publica é a camada de <i>empresa</i>, <i>grupo</i> e <i>agrupamento de grupos</i> (unidade de controle, linhagem, federação), com o nome de mercado e o capital social declarado de cada um; as métricas derivadas da rede de pessoas (sócios-ponte, articulação, densidade) aparecem como números, nunca como identidades.</p>
@@ -420,11 +449,11 @@
 
   <div class="panel" style="margin-top:16px;">
     <h2>Os 327 grupos econômicos mapeados</h2>
-    <p class="sub">Ordene clicando no cabeçalho. Abaixo do rótulo do grupo, o nome de mercado. "Capital" é o capital social declarado no cadastro, em milhões de reais. "Topo do capital" marca os 26 grupos que, juntos, detêm metade do capital declarado do setor; "Unidade" é a unidade de controle de que o grupo faz parte (com a letra do grau, quando junta mais de um grupo). "Sócios-ponte" são os sócios que ligam partes do grupo que, sem eles, ficariam separadas — a medida de quanto o grupo depende de poucas pessoas para se manter coeso. "Municípios" conta onde o grupo tem estabelecimento pelo endereço do cadastro — presença, não operação.</p>
+    <p class="sub">Ordene clicando no cabeçalho. O grupo aparece pelo nome de mercado; abaixo, em cinza, o rótulo que o cálculo da rede dá a ele (em geral, a holding ou o sobrenome). "Capital" é o capital social declarado no cadastro, em milhões de reais. "Topo do capital" marca os 26 grupos que, juntos, detêm metade do capital declarado do setor; "Unidade" é a unidade de controle de que o grupo faz parte (com a letra do grau, quando junta mais de um grupo). "Sócios-ponte" são os sócios que ligam partes do grupo que, sem eles, ficariam separadas — a medida de quanto o grupo depende de poucas pessoas para se manter coeso. "Municípios" conta onde o grupo tem estabelecimento pelo endereço do cadastro — presença, não operação.</p>
     <div class="getabwrap">
       <table class="getab" id="geTable">
         <thead><tr>
-          <th data-k="nome">Grupo · nome de mercado</th><th data-k="capital" class="num">Capital (R$ mi)</th>
+          <th data-k="nome">Grupo</th><th data-k="capital" class="num">Capital (R$ mi)</th>
           <th data-k="topo" class="num" title="Entre os 26 grupos que, juntos, detêm metade do capital declarado do setor">Topo</th><th data-k="ub">Unidade</th>
           <th data-k="n_emp" class="num">Empresas</th><th data-k="n_soc" class="num">Sócios</th><th data-k="ponte" class="num">Sócios-ponte</th>
           <th data-k="dens" class="num">Densidade</th><th data-k="n_mun" class="num">Municípios</th><th data-k="lig" class="num">Ligações</th>
@@ -487,7 +516,7 @@
         <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
       </div>
     </div>
-    Rede de empresas v0.1 · 2026<br>
+    Rede de empresas v0.2 · 2026<br>
     Fontes: cadastro de CNPJ da Receita Federal (dados abertos, recorte de maio de 2024) · Tabela mestre de grupos econômicos v5 (17/10/2026) e análise de redes sociais (out/2026) do acervo da pesquisa · sócios das holdings e empresas de outros setores ligadas a eles (ago e out/2026) · Censo Demográfico 2022 (IBGE).<br>
     Página gerada a partir de <i>rede_ge.json</i> e <i>patrimonio.json</i> (<i>scripts/build_rede_ge.py</i> e <i>build_patrimonio.py</i>) — protótipo de trabalho, não substitui a análise da tese (Capítulo 6 e Apêndice E). Histórico de versões no CHANGELOG do repositório.
   </footer>

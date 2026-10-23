@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Transporte Público em Crise — Tarifa Zero e Grupos Econômicos no Brasil</title>
+<meta name="description" content="Pesquisa de doutorado (PGT/UFABC) sobre a Tarifa Zero e os grupos econômicos do transporte coletivo no Brasil: o Painel Brasil, a Rede de empresas e os verbetes da pesquisa. Versão de teste.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230E0E10'/%3E%3Crect x='10' y='14' width='44' height='28' rx='6' fill='%23F5E400'/%3E%3Crect x='10' y='46' width='44' height='5' rx='2' fill='%23FF2D6B'/%3E%3Ccircle cx='20' cy='42' r='5' fill='%230E0E10'/%3E%3Ccircle cx='44' cy='42' r='5' fill='%230E0E10'/%3E%3Crect x='15' y='19' width='34' height='10' rx='2' fill='%230E0E10' opacity='.85'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Transporte Público em Crise">
+<meta property="og:title" content="Transporte Público em Crise — Tarifa Zero e grupos econômicos no Brasil">
+<meta property="og:description" content="Pesquisa de doutorado (PGT/UFABC) sobre a Tarifa Zero e os grupos econômicos do transporte coletivo no Brasil: o Painel Brasil, a Rede de empresas e os verbetes da pesquisa. Versão de teste.">
+<meta property="og:url" content="https://tvzgomes-2.github.io/painel_tz/">
+<meta property="og:image" content="https://tvzgomes-2.github.io/painel_tz/assets/og/compartilhar.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
     /* identidade visual oficial da pesquisa (ver Identidade Visual da Pesquisa) */
@@ -19,7 +30,14 @@
   .subtitle{margin:0 0 22px;font-size:17px;font-weight:500;color:var(--text);line-height:1.45;max-width:640px;}
   .resumo{margin:0 0 40px;font-size:14px;color:var(--muted);line-height:1.65;max-width:680px;}
   .resumo b{color:var(--text);}
-  .paginas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:auto;}
+  .paginas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:auto;}
+  @media (max-width:640px){ .paginas{grid-template-columns:1fr;} }
+  /* antecipação visual (24/10/2026): um número e um mini-gráfico por página, antes do clique */
+  .card .num{display:flex;align-items:baseline;gap:8px;margin:2px 0 8px;}
+  .card .num b{font-size:34px;font-weight:800;line-height:1;color:var(--amarelo);}
+  .card .num span{font-size:12px;color:var(--muted);line-height:1.35;}
+  .card .mini{display:block;width:100%;height:auto;margin:0 0 12px;}
+  .card .mini text{font-family:inherit;}
   .card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 22px;
     text-decoration:none;color:inherit;transition:border-color .15s;}
   .card:hover{border-color:var(--accent);}
@@ -53,29 +71,53 @@
   .faixa-teste a{color:#F5E400;text-decoration:underline;white-space:nowrap;}
   @media (max-width:640px){ .faixa-teste{font-size:11.5px;text-align:left;padding:7px 16px;} }
 </style>
+<style>
+  /* menu único do site (24/10/2026): mesmas páginas, mesma ordem, a atual marcada */
+  .sitenav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding:9px 24px;border-bottom:1px solid #2a2a33;background:#0E0E10;font-family:'Montserrat','Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:13px;}
+  .sitenav .marca{color:#f0f0f2;font-weight:800;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;font-size:12.5px;}
+  .sitenav .marca b{color:#F5E400;}
+  .sitenav .links{display:flex;flex-wrap:wrap;gap:4px 16px;margin-left:auto;}
+  .sitenav .links a{color:#b9b9c4;text-decoration:none;padding:3px 0;border-bottom:2px solid transparent;}
+  .sitenav .links a:hover{color:#fff;}
+  .sitenav .links a[aria-current="page"]{color:#fff;border-bottom-color:#F5E400;font-weight:700;}
+  @media (max-width:640px){ .sitenav{padding:8px 16px;font-size:12.5px;} .sitenav .links{margin-left:0;width:100%;gap:2px 14px;} .sitenav .marca{font-size:11.5px;} }
+</style>
 </head>
 <body>
 <div class="faixa-teste" role="note"><b>Versão de teste</b>Os números e textos deste site estão em validação e acompanham uma tese de doutorado ainda não defendida — podem mudar. Correções e contribuições: <a href="pesquisa.html">pesquisa colaborativa →</a></div>
+<nav class="sitenav" aria-label="Páginas do site"><a class="marca" href="index.html" aria-current="page">Transporte Público em <b>Crise</b></a><span class="links"><a href="painel.html">Painel Brasil</a><a href="rede-ge.html">Rede de empresas</a><a href="verbetes.html">Verbetes</a><a href="pesquisa.html">Contribua</a></span></nav>
 <div class="wrap">
   <h1>Transporte Público em <span class="hl">Crise</span></h1>
   <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero no Brasil</p>
   <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a <b>estrutura de poder dos grupos econômicos</b> do transporte coletivo e a <b>difusão espacial das políticas de gratuidade universal</b> no Brasil. A hipótese não é a de uma oposição direta dos grupos ao financiamento público: é a de que a difusão da TZ é restringida pela <b>incompatibilidade entre o desenho da política e o arranjo contratual vigente</b> — onde o mercado é comercialmente atrativo, só avança o desenho que preserva a receita e a propriedade do operador; nas franjas do sistema, onde não há arranjo a preservar, a gratuidade avança em qualquer desenho. Este site reúne os instrumentos exploratórios de trabalho da pesquisa.</p>
 
   <div class="paginas">
+    <!-- números da capa: conferir a cada versão (Painel: régua; Rede: Tabela mestre v5 e Tabela 5) -->
     <a class="card" href="painel.html">
       <span class="tag">TZ</span>
       <h2>Painel Brasil</h2>
+      <div class="num"><b>174</b><span>políticas de Tarifa Zero universal,<br>mais 44 parciais e 6 encerradas</span></div>
+      <svg class="mini" viewBox="0 0 300 26" aria-hidden="true"><rect x="0" y="4" width="233" height="12" rx="3" fill="#F5E400"/><rect x="235" y="4" width="57" height="12" fill="#FF8A3D"/><rect x="294" y="4" width="6" height="12" rx="2" fill="#6b6b78"/><text x="0" y="25" font-size="8.5" fill="#9a9aa6">a régua: da gratuidade sem condição ao portão de acesso →</text></svg>
       <p>Panorama nacional da Tarifa Zero: as 174 políticas universais e os arranjos parciais classificados pela régua, o mapa dos 5.570 municípios, a comparação com o restante do país e o arranjo contratual de cada caso.</p>
     </a>
     <a class="card" href="rede-ge.html">
       <span class="tag" style="background:var(--azul);">GE</span>
       <h2>Rede de empresas</h2>
+      <div class="num"><b>327</b><span>grupos econômicos;<br>22 unidades detêm metade do capital</span></div>
+      <svg class="mini" viewBox="0 0 300 40" aria-hidden="true"><g stroke="#6b6b78" stroke-width="1"><line x1="30" y1="20" x2="62" y2="9"/><line x1="30" y1="20" x2="58" y2="31"/><line x1="62" y1="9" x2="58" y2="31"/><line x1="62" y1="9" x2="98" y2="16"/><line x1="140" y1="22" x2="170" y2="10"/><line x1="140" y1="22" x2="176" y2="32"/><line x1="170" y1="10" x2="176" y2="32"/><line x1="176" y1="32" x2="206" y2="24"/><line x1="236" y1="14" x2="262" y2="27"/><line x1="262" y1="27" x2="290" y2="13"/></g><g stroke="#FF2D6B" stroke-width="2"><line x1="98" y1="16" x2="120" y2="30"/><line x1="206" y1="24" x2="170" y2="10"/></g><g><circle cx="30" cy="20" r="7" fill="#F5E400"/><circle cx="62" cy="9" r="4" fill="#4F7FD4"/><circle cx="58" cy="31" r="4" fill="#4F7FD4"/><circle cx="98" cy="16" r="5" fill="#4F7FD4"/><circle cx="120" cy="30" r="3.5" fill="#4F7FD4"/><circle cx="140" cy="22" r="6" fill="#F5E400"/><circle cx="170" cy="10" r="4" fill="#4F7FD4"/><circle cx="176" cy="32" r="4.5" fill="#4F7FD4"/><circle cx="206" cy="24" r="3.5" fill="#4F7FD4"/><circle cx="236" cy="14" r="3.5" fill="#4F7FD4"/><circle cx="262" cy="27" r="5" fill="#F5E400"/><circle cx="290" cy="13" r="3.5" fill="#4F7FD4"/></g></svg>
       <p>Quem controla o transporte coletivo no Brasil: os 327 grupos econômicos, como se ligam por vínculo societário, quanto concentram do capital e onde têm endereço — e, além do ônibus, as holdings sócias e os negócios dos grupos fora do transporte. Nenhum dado de sócio pessoa física.</p>
     </a>
     <a class="card" href="verbetes.html">
       <span class="tag" style="background:var(--verde);color:#0E0E10;">Conceitos</span>
       <h2>Verbetes</h2>
+      <div class="num"><b>5</b><span>verbetes: Tarifa Zero, grupos econômicos,<br>o portão de acesso e as duas réguas</span></div>
       <p>Os conceitos centrais da pesquisa, explicados um por um: Tarifa Zero, Grupos econômicos, o portão de acesso e as duas réguas de classificação.</p>
+    </a>
+    <a class="card" href="pesquisa.html">
+      <span class="tag" style="background:var(--amarelo);color:#0E0E10;">Contribua</span>
+      <h2>Pesquisa colaborativa</h2>
+      <div class="num"><b style="color:var(--rosa);">+</b><span>envie um caso municipal, um estudo,<br>um relatório ou um dado de operação</span></div>
+      <p>Conhece um caso de Tarifa Zero que não está aqui, um estudo, um relatório ou um dado de operação? Envie para a pesquisa — cada contribuição é revisada antes de entrar no painel.</p>
     </a>
   </div>
 
