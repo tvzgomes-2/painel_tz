@@ -10,8 +10,16 @@ const CAMADAS_RAW = JSON.parse(document.getElementById('data-camadas').textConte
 // deliberada: o código não sofre do problema de grafia que já obrigou uma chave
 // duplicada em camadas_tz.json (caso "Embu" x "Embu das Artes").
 const MODAL_RAW = JSON.parse(document.getElementById('data-modal').textContent);
-const GRUPOS_RAW = JSON.parse(document.getElementById('data-grupos').textContent);
+// 23/10/2026: o bloco data-grupos deixou de ser embutido no Painel Brasil (a análise
+// de grupos vai para a Rede de empresas). Sem isto, os nomes dos grupos por município
+// continuariam publicados no código-fonte da página, só que invisíveis.
+const GRUPOS_RAW = JSON.parse(document.getElementById('data-grupos')?.textContent || '{}');
 const LEGISLACAO_RAW = JSON.parse(document.getElementById('data-legislacao').textContent);
+const ARRANJO_RAW = JSON.parse(document.getElementById('data-arranjo').textContent);
+const CURVA_PORTE = JSON.parse(document.getElementById('data-curva').textContent);
+const FICHAS = JSON.parse(document.getElementById('data-fichas').textContent);
+const REMUN = JSON.parse(document.getElementById('data-remun').textContent);
+const CUSTEIO = JSON.parse(document.getElementById('data-custeio').textContent);
 // Matriz origem-destino de trabalho do Censo 2022 (v0.8), mesma chave de código IBGE.
 // Vem SUPRIMIDA: top-5 destinos (e top-5 origens) por município e no mínimo 5 registros
 // amostrados por célula — 57,6% dos 120 mil pares do microdado se apoiam em UMA pessoa
@@ -75,19 +83,23 @@ for (const k in NOTICIAS_RAW) {
 function noticiasFor(m) { return (m && NOTICIAS.get(normKey(m.nome, m.uf))) || []; }
 
 // ---------- régua descritiva ampliada — camadas 2a/3/4 (além da universal) ----------
-// Consolidação 29/07/2026: 24 temporal-dias + 4 espacial-periférica + 4 grupo social = 32
-// municípios, a pedido do autor ("aplicação de uma régua descritiva... ampliando para além da
-// universal"). Exclui de propósito a camada 2b/temporal-eventos (324 gratuidades eleitorais/
-// pontuais — mesma decisão já tomada para o card "TZ parciais", ver comentário mais abaixo):
-// fenômeno de origem judicial (STF), não adesão municipal voluntária — misturar inflaria o número
-// e mudaria o sentido do que está sendo medido. Um município pode ter mais de uma camada ao mesmo
-// tempo (ex.: Belo Horizonte tem 2a + 3 + 4).
-const CAMADAS = new Map();
-for (const k in CAMADAS_RAW) {
-  const [nome, uf] = k.split('|');
-  CAMADAS.set(normKey(nome, uf), CAMADAS_RAW[k]);
-}
-function camadasFor(m) { return (m && CAMADAS.get(normKey(m.nome, m.uf))) || []; }
+// A camada 2 da régua descritiva (2a grupo social, 2b espaço, 2c dias, 2d eventos, 2e
+// finalidade), gerada por build_camadas.py da planilha canônica da régua. Um município
+// pode acumular mais de um subtipo ao mesmo tempo (Belo Horizonte e Brasília), e por isso
+// a soma por subtipo passa do número de municípios — é regra da régua, não erro de conta.
+// Fica FORA de propósito a gratuidade eleitoral: desde 2024 ela é obrigação do poder
+// público por decisão do STF, integra o PISO da régua e não forma camada nem distingue
+// casos; contá-la inflaria o número e mudaria o sentido do que está sendo medido.
+// Leia-se esta contagem como PISO, e não estimativa: a busca dos arranjos parciais não foi
+// exaustiva — sobretudo no 2e, com quatro casos registrados — e encontra mais facilmente os
+// programas das cidades grandes. Comparar 174 universais com 43 parciais como se fossem
+// medidas do mesmo tipo é erro de leitura.
+// 23/10/2026 — a chave passou de "Município|UF" para código IBGE, como nos demais
+// crosswalks. O motivo está no build_camadas.py: a planilha da régua grafa "Embu das
+// Artes" e a base do painel grafa "Embu" (3515004), e normKey() só reconcilia acento
+// e caixa, não nomes diferentes — a camada 2c do município ficou invisível de v0.11
+// até aqui. Com o código, ou casa ou o build falha; não há como sumir em silêncio.
+function camadasFor(m) { return (m && CAMADAS_RAW[String(m.id)]) || []; }
 
 // ---------- 11.9: partição modal do município (Censo 2022) ----------
 // Mesmos 5 baldes do gráfico nacional TZ × não-TZ, para as duas leituras ficarem
@@ -112,6 +124,17 @@ function gruposFor(m) { return (m && GRUPOS_RAW[String(m.id)]) || []; }
 // hoje não estavam nele — o card diz isso em vez de deixar o silêncio sugerir que
 // não há norma.
 function legislacaoFor(m) { return (m && LEGISLACAO_RAW[String(m.id)]) || null; }
+
+// ---------- 12.4: o arranjo contratual (Cap. 5.6 da tese) ----------
+// O painel mostrava `tz_operador` — o NOME de quem opera — e nada sobre o contrato.
+// A tese usa um capítulo inteiro para mostrar que a diferença decisiva não é quem
+// opera, e sim o que foi contratado: uma prefeitura com frota própria e uma
+// concessionária que recebeu a gratuidade por termo aditivo apareciam aqui como a
+// mesma coisa. Fica FORA, por decisão do autor de 23/10/2026, tudo que é régua
+// ANALÍTICA (destinatário em quatro categorias, contrapartida, posição no plano):
+// isto é a descrição contratual da Parte 2, não a leitura crítica do Capítulo 7.
+function arranjoFor(m) { return (m && ARRANJO_RAW[String(m.id)]) || null; }
+const PROVA_ROT = { alta: ['#8FBF6A', 'prova alta'], media: ['#D9CE12', 'prova média'], baixa: ['#E2892C', 'prova baixa'] };
 function odFor(m) { return (m && OD_RAW[String(m.id)]) || null; }
 
 const CONF_LABEL = {
@@ -556,7 +579,14 @@ function render() {
   renderBars();
   renderCards();
   renderRegua();
-  renderGrupos();
+  renderArranjoPanel();
+  renderRemunPanel();
+  // renderGrupos() saiu do ciclo em 23/10/2026: a análise de grupos econômicos passa
+  // para a página Rede de empresas (decisão do autor). A lista de grupos no card do
+  // município (renderGruposDetail) continua.
+  renderCrosstabs();
+  renderModalStack();
+  renderRecorte();
   renderRegiaoUf();
   renderDispersao();
   renderTimeline();
@@ -809,7 +839,20 @@ function gerarParagrafoTZ(m) {
   if (m.tz_status === 'Ativa') {
     const desde = m.tz_ano_txt ? `desde ${m.tz_ano_txt}` : 'desde uma data ainda não determinada nesta pesquisa';
     const operador = m.tz_operador ? ` A operação é feita por ${m.tz_operador}.` : '';
-    return `${nomeUf} tem <b>Tarifa Zero universal</b> ${desde}: todo o transporte coletivo municipal é gratuito para qualquer usuário, todos os dias.${operador} Isso corresponde aos ${fmtCompact(m.pop)} habitantes do município (Censo 2022), sujeitos aos gaps de estimativa já registrados no painel (ver Score de população).`;
+    // 23/10/2026 — até aqui esta frase dizia "gratuito para qualquer usuário, todos os
+    // dias" para TODA a camada 1, inclusive para os 9 casos de residência (1c). Em São
+    // Caetano do Sul, que desde 15/07/2026 cobra R$ 5,00 do não residente, o painel
+    // afirmava o contrário do que a tese documenta. A régua classifica os quatro
+    // subtipos pelo PORTÃO DE ACESSO, e é o portão que a prosa precisa dizer.
+    const PORTAO = {
+      '1a': 'todo o transporte coletivo municipal é gratuito para qualquer usuário, todos os dias: <b>não há portão de acesso</b>',
+      '1b': 'a gratuidade exige um <b>cadastro prévio</b>, mas aberto a qualquer usuário — é um portão de procedimento, que não decide quem pode viajar, e por isso o caso segue universal',
+      '1c': 'a gratuidade é <b>de quem mora no município</b>; quem vem de fora paga. Pela régua, a residência delimita o território da universalidade e não focaliza por renda nem por grupo social, e por isso o caso continua na camada universal (Kębłowski, 2020) — num tecido urbano contínuo, porém, esse portão separa vizinhos que usam o mesmo sistema',
+      '1d': 'a norma <b>declara um prazo de vigência</b>; enquanto o termo não chega, o desenho é universal',
+    };
+    const comoE = PORTAO[m.tz_regua_sub]
+      || 'o desenho é universal pela régua desta pesquisa, e o subtipo (o portão de acesso, se houver) ainda não foi apurado';
+    return `${nomeUf} tem <b>Tarifa Zero universal</b> ${desde}: ${comoE}.${operador} Isso corresponde aos ${fmtCompact(m.pop)} habitantes do município (Censo 2022), sujeitos aos gaps de estimativa já registrados no painel (ver Score de população).`;
   }
   if (m.tz_status === 'Encerrada') {
     const periodo = (m.tz_ano_txt && m.tz_fim) ? `entre ${m.tz_ano_txt} e ${m.tz_fim}`
@@ -875,11 +918,25 @@ function renderDetail(m) {
   const camadasTag = camadasFor(m).map(c =>
     `<span class="tag parcial" title="Camada ${c.camada} da régua descritiva${c.detalhe ? ' — ' + c.detalhe : ''}">${CAMADA_LABELS[c.camada] || c.camada}${c.flag ? ' ⚠' : ''}</span>`
   ).join(' ');
+  // 23/10/2026 (item 12.2): o card mostrava a camada só dos casos parciais — quem é
+  // universal não via subtipo nenhum, embora a régua da tese separe 1a a 1d. Entra a
+  // tag do subtipo e, com ela, a FORÇA DA PROVA: 31 políticas da camada 1 têm o subtipo
+  // classificado pela hipótese de um pedido de acesso à informação ainda sem resposta,
+  // e a tese marca essa classificação como provisória. Exibi-las iguais às demais era
+  // afirmar mais do que a pesquisa sustenta.
+  const subInfo = (m.tz_bin === 'TZ' && m.tz_regua_sub && REGUA_IDX[m.tz_regua_sub] != null)
+    ? REGUA[REGUA_IDX[m.tz_regua_sub]] : null;
+  const subTag = subInfo
+    ? `<span class="tag parcial" style="background:${subInfo.cor};color:rgba(0,0,0,.78);" title="Subtipo ${subInfo.k} da régua descritiva — ${subInfo.desc}">${subInfo.k} ${subInfo.rot}${m.tz_prov ? ' ◇' : ''}</span>`
+    : '';
+  const avisoProvisorio = m.tz_prov
+    ? `<p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:var(--muted);">◇ <b>Classificação provisória.</b> O subtipo deste caso é a <b>hipótese</b> que um pedido de acesso à informação ainda sem resposta testa — a resposta pode trocá-lo. São 31 casos assim na camada 1, e a contagem pode mudar à medida que os pedidos forem respondidos.${m.tz_prov_txt ? ` <span style="color:var(--muted);">Hipótese registrada na base: ${String(m.tz_prov_txt).slice(0, 220)}</span>` : ''}</p>`
+    : '';
   const incoerente = m.tz_status === 'Ativa' && m.tz_fim != null;
   const avisoIncoerencia = incoerente
     ? `<p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:#e2892c;">⚠ A base-mestre traz este caso como <b>Ativa</b> e ao mesmo tempo com data de <b>fim</b> preenchida (${m.tz_fim}). O painel exibe os dois campos como estão, sem escolher um — conflito a resolver na fonte.</p>`
     : '';
-  const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>${avisoIncoerencia}`;
+  const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>${avisoIncoerencia}${avisoProvisorio}`;
   let extra = '';
   if (m.tz_bin === 'TZ') {
     extra = `<tr><td>Início TZ</td><td>${m.tz_ano ?? '—'}${(m.tz_ano != null && m.tz_ano_txt == null) ? ' <span style="color:var(--muted);font-size:11px;">(anotação da base, não um ano)</span>' : ''}</td></tr>
@@ -887,8 +944,9 @@ function renderDetail(m) {
              <tr><td>% orçamento (fonte)</td><td>${m.tz_pct_orc ?? '—'}</td></tr>
              <tr><td>Operador</td><td>${m.tz_operador ?? '—'}</td></tr>`;
   }
-  el.innerHTML = `<div><b style="font-size:15px;">${m.nome} – ${m.uf}</b> ${tzTag}${camadasTag ? ' ' + camadasTag : ''}</div>
+  el.innerHTML = `<div><b style="font-size:15px;">${m.nome} – ${m.uf}</b> ${tzTag}${subTag ? ' ' + subTag : ''}${camadasTag ? ' ' + camadasTag : ''}</div>
     ${paragrafoTZ}
+    ${fichaFor(m) ? '<button class="btn-ficha" type="button">Abrir a ficha da tese →</button>' : ''}
     <table style="margin-top:8px;">
       <tr><td>Região</td><td>${m.regiao}</td></tr>
       <tr><td>Hierarquia urbana</td><td>${m.regic_label ?? '—'}</td></tr>
@@ -914,7 +972,7 @@ function renderDetail(m) {
     ${renderLegislacaoDetail(m)}
     ${renderODDetail(m)}
     ${renderModalDetail(m)}
-    ${renderGruposDetail(m)}
+    ${renderArranjoDetail(m)}
     ${renderCamadaDetail(m)}
     ${renderFontesDetail(m)}
     ${renderNoticiasDetail(m)}`;
@@ -1112,6 +1170,9 @@ function renderModalDetail(m) {
   </div>`;
 }
 
+// 23/10/2026 — decisão do autor: a lista de grupos econômicos sai do card do
+// município, junto com o painel de concentração; toda a análise de grupos passa para a
+// página Rede de empresas. A função fica aqui, fora do card, para ser reaproveitada lá.
 function renderGruposDetail(m) {
   const gs = gruposFor(m);
   if (!gs.length) {
@@ -1126,6 +1187,46 @@ function renderGruposDetail(m) {
   return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
     <b style="font-size:12.5px;">Grupos econômicos do transporte (${gs.length})</b>
     <ul class="grupos">${items}</ul>
+  </div>`;
+}
+
+function renderArranjoDetail(m) {
+  const a = arranjoFor(m);
+  if (!a) {
+    if (m.tz_bin !== 'TZ' && m.tz_status !== 'Parcial (ativa)') return '';
+    return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+      <b style="font-size:12.5px;">O arranjo do contrato</b>
+      <p style="margin:5px 0 0;font-size:12px;color:var(--muted);line-height:1.5;">Arranjo não apurado para este caso. Não apurado não é zero: significa que o contrato, o edital ou o termo de referência não foi localizado, não que não exista.</p>
+    </div>`;
+  }
+  const linha = (rot, v, extra) => v
+    ? `<tr><td>${rot}</td><td>${v}${extra || ''}</td></tr>` : '';
+  const pv = a.prova && PROVA_ROT[a.prova];
+  const selo = pv
+    ? ` <span title="${a.prova_txt || ''}" style="display:inline-block;margin-left:6px;padding:1px 6px;border-radius:9px;font-size:10px;font-weight:700;background:${pv[0]};color:rgba(0,0,0,.78);">${pv[1]}</span>`
+    : '';
+  return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
+    <b style="font-size:12.5px;">O arranjo do contrato</b>
+    <p style="margin:4px 0 6px;font-size:11.5px;color:var(--muted);line-height:1.5;">O que foi contratado, e por qual instrumento a gratuidade entrou. Levantamento documental da pesquisa (14/10/2026).</p>
+    <table style="margin:0;">
+      ${linha('Arranjo', a.a, selo)}
+      ${linha('Quem presta', a.esf === 'público' ? 'operação municipal' : a.esf === 'privado' ? 'empresa privada' : a.esf === 'variável' ? 'depende do contrato' : a.esf)}
+      ${linha('Locação', a.loc)}
+      ${linha('Via jurídica', a.via)}
+      ${linha('O que a norma faz', a.norma)}
+      ${(() => { const r = remunFor(m) || {}; const km = (r.km || [])[0], hab = (r.hab || [])[0];
+        return linha('Quem recebe', r.dest ? DEST_ROT[r.dest].split(' — ')[0].split(' (')[0] : null)
+          + linha('Como é pago', r.comp || a.rem, r.comp && r.comp_prova ? ` <span style="color:var(--muted);font-size:11px;">(prova ${r.comp_prova === 'alta' ? 'alta' : 'média'})</span>` : '')
+          + linha('Risco de demanda', riscoDaFormula(r.comp))
+          + linha('Preço do km', km ? `${fmtR(km.v)} <span style="color:var(--muted);font-size:11px;">(maio/2026, ${km.fonte})</span>` : null)
+          + linha('Custo por habitante', hab ? `${fmtR(hab.v, 0)} por ano <span style="color:var(--muted);font-size:11px;">(contrato de ${hab.ano})</span>` : null); })()}
+      ${(() => { const at = custeioFor(m)[0]; if (!at) return '';
+        return linha('Ato lido', at.ato ? `${at.ato}${at.instr ? ` <span style="color:var(--muted);font-size:11px;">(${at.instr})</span>` : ''}` : at.instr)
+          + linha('Custeio no ato', LEIT_ROT[at.leit] || at.leit)
+          + linha('Fontes nomeadas', at.fontes)
+          + linha('Condição no ato', at.cond); })()}
+    </table>
+    ${a.via === 'concessão/permissão preexistente' ? `<p style="margin:6px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5;">A gratuidade <b>entrou sobre um contrato que já existia</b>, com o operador que já estava lá — em geral por termo aditivo. É a forma de entrada que a tese acompanha com atenção, e são 22 casos assim na base.</p>` : ''}
   </div>`;
 }
 
@@ -1165,9 +1266,12 @@ function renderNoticiasDetail(m) {
 }
 
 // ---------- comparison bars ----------
+// Ordem do Gráfico 15 da tese (Seção 5.5): primeiro riqueza, motorização e uso do
+// ônibus, que são a leitura que a tese faz; depois os demais indicadores do painel.
 const BAR_METRICS = [
   { k: 'pib_pc', label: 'PIB per capita mediano (R$)', fmt: v => 'R$ ' + fmtNum(v) },
   { k: 'motorizacao', label: 'Motorização mediana (veíc/hab)', fmt: fmtNum },
+  { k: 'onibus', label: 'Uso do ônibus no deslocamento a trabalho ou estudo (%, Censo 2022)', fmt: v => fmtNum(v) + '%' },
   { k: 'ibeu', label: 'IBEU mediano', fmt: fmtNum },
   { k: 'idh', label: 'IDH mediano', fmt: fmtNum },
   { k: 'rec_prop_pc', label: 'Receita própria per capita mediana (R$)', fmt: v => 'R$ ' + fmtNum(v) },
@@ -1175,57 +1279,155 @@ const BAR_METRICS = [
   { k: 'cadunico_cobertura', label: 'Cobertura do CadÚnico mediana (%, ago/2025)', fmt: v => fmtNum(v) + '%' },
 ];
 
-function renderBars() {
+// ---------- 23/10/2026: a comparação passa a fazer o que a tese faz ----------
+// Dois ajustes de método, ambos da Seção 5.5 (Gráfico 15):
+// (1) OS GRUPOS. "TZ" aqui é a camada 1 (universal ativa, 174) e "Não-TZ" são os
+//     municípios sem política nenhuma. Parciais, encerradas, pistas e regulamentadas
+//     ficam fora dos dois lados — antes entravam no "TZ" ou no "Não-TZ" conforme o
+//     campo, e a comparação misturava desenhos que a régua separa.
+// (2) O PORTE. A comparação bruta é confundida pelo tamanho: a Tarifa Zero está em
+//     municípios pequenos e médios, e o "resto do país" vai das menores cidades às
+//     metrópoles. Com o controle ligado, a mediana Não-TZ é PONDERADA para ter a mesma
+//     distribuição de porte dos municípios com TZ (padronização direta, nas seis faixas
+//     que a tese usa). É assim que a tese chega ao achado que o bruto esconde: acima de
+//     100 mil habitantes a vantagem de riqueza some e o uso do ônibus se inverte.
+const FAIXAS_TESE = [
+  ['<10', 'até 10 mil', 0, 1e4], ['10-20', '10 a 20 mil', 1e4, 2e4], ['20-50', '20 a 50 mil', 2e4, 5e4],
+  ['50-100', '50 a 100 mil', 5e4, 1e5], ['100-500', '100 a 500 mil', 1e5, 5e5], ['>500', 'mais de 500 mil', 5e5, Infinity],
+];
+function faixaTese(pop) {
+  for (const f of FAIXAS_TESE) if (pop >= f[2] && pop < f[3]) return f[0];
+  return null;
+}
+function valorMetrica(m, k) {
+  if (k === 'onibus') { const md = modalFor(m); return md ? md.onibus : null; }
+  return m[k];
+}
+function medianaPonderada(pares) {   // pares: [valor, peso]
+  const v = pares.filter(p => p[0] != null && !Number.isNaN(p[0]) && p[1] > 0).sort((a, b) => a[0] - b[0]);
+  const tot = v.reduce((a, p) => a + p[1], 0);
+  if (!tot) return null;
+  let ac = 0;
+  for (const [x, w] of v) { ac += w; if (ac >= tot / 2) return x; }
+  return v[v.length - 1][0];
+}
+function gruposComparacao() {
   const rows = subsetNoTz();
-  const rowsTZ = rows.filter(m => m.tz_bin === 'TZ');
-  const rowsNao = rows.filter(m => m.tz_bin !== 'TZ');
+  return {
+    tz: rows.filter(m => m.tz_status === 'Ativa'),
+    nao: rows.filter(m => m.tz_status === 'Não TZ'),
+  };
+}
+function controlePorteLigado() {
+  const c = document.getElementById('porteCtrl');
+  return !c || c.checked;
+}
+
+function renderBars() {
+  const { tz: rowsTZ, nao: rowsNao } = gruposComparacao();
   const el = document.getElementById('bars');
+  if (!el) return;
   if (!rowsTZ.length) {
-    el.innerHTML = '<div class="empty">Nenhum município TZ neste recorte.</div>';
+    el.innerHTML = '<div class="empty">Nenhum município com Tarifa Zero universal neste recorte.</div>';
     return;
   }
-  let html = `<div class="barrow"><div class="lab"><span>n</span><b>Não TZ: ${rowsNao.length} · TZ: ${rowsTZ.length}</b></div></div>`;
+  const porte = controlePorteLigado();
+  // peso de cada município Não-TZ: (fração de TZ na faixa) / (fração de Não-TZ na faixa)
+  const nTZf = {}, nNaof = {};
+  for (const m of rowsTZ) { const f = faixaTese(m.pop); nTZf[f] = (nTZf[f] || 0) + 1; }
+  for (const m of rowsNao) { const f = faixaTese(m.pop); nNaof[f] = (nNaof[f] || 0) + 1; }
+  const peso = m => {
+    if (!porte) return 1;
+    const f = faixaTese(m.pop);
+    return (nTZf[f] && nNaof[f]) ? (nTZf[f] / rowsTZ.length) / (nNaof[f] / rowsNao.length) : 0;
+  };
+  // municípios Não-TZ que efetivamente entram na comparação controlada
+  const nNaoUsados = porte ? rowsNao.filter(m => peso(m) > 0).length : rowsNao.length;
+  const rotNao = porte ? 'Não-TZ, mesmo porte' : 'Não-TZ';
+
+  let html = `<div class="barrow"><div class="lab"><span>n</span><b>TZ universal: ${rowsTZ.length} · ${rotNao}: ${nNaoUsados}</b></div></div>`;
   for (const met of BAR_METRICS) {
-    const vNao = median(rowsNao.map(m => met.k === 'rec_prop_pc' ? m.rec_prop_pc : m[met.k]));
-    const vTZ = median(rowsTZ.map(m => met.k === 'rec_prop_pc' ? m.rec_prop_pc : m[met.k]));
+    const vTZ = median(rowsTZ.map(m => valorMetrica(m, met.k)));
+    const vNao = porte
+      ? medianaPonderada(rowsNao.map(m => [valorMetrica(m, met.k), peso(m)]))
+      : median(rowsNao.map(m => valorMetrica(m, met.k)));
     const max = Math.max(vNao || 0, vTZ || 0, 1e-9);
     html += `<div class="barrow">
       <div class="lab"><span>${met.label}</span></div>
-      <div class="lab"><span>Não TZ</span><b>${met.fmt(vNao)}</b></div>
+      <div class="lab"><span>${rotNao}</span><b>${met.fmt(vNao)}</b></div>
       <div class="bartrack"><div class="barfill a" style="width:${(100 * (vNao || 0) / max).toFixed(1)}%"></div></div>
-      <div class="lab" style="margin-top:4px;"><span>TZ</span><b>${met.fmt(vTZ)}</b></div>
+      <div class="lab" style="margin-top:4px;"><span>TZ universal</span><b>${met.fmt(vTZ)}</b></div>
       <div class="bartrack"><div class="barfill b" style="width:${(100 * (vTZ || 0) / max).toFixed(1)}%"></div></div>
     </div>`;
   }
   el.innerHTML = html;
+  renderPorteTabela(rowsTZ, rowsNao);
+}
+
+// A leitura por faixa é onde a tese tira o achado: até 100 mil habitantes, os
+// municípios com TZ usam mais o ônibus que os de mesmo porte; acima disso, menos.
+function renderPorteTabela(rowsTZ, rowsNao) {
+  const el = document.getElementById('porteTabela');
+  if (!el) return;
+  const mets = [BAR_METRICS[0], BAR_METRICS[2]];
+  let linhas = '';
+  for (const [k, rot] of FAIXAS_TESE) {
+    const a = rowsTZ.filter(m => faixaTese(m.pop) === k);
+    const b = rowsNao.filter(m => faixaTese(m.pop) === k);
+    if (!a.length && !b.length) continue;
+    const cel = met => {
+      const va = a.length ? median(a.map(m => valorMetrica(m, met.k))) : null;
+      const vb = b.length ? median(b.map(m => valorMetrica(m, met.k))) : null;
+      const inv = (va != null && vb != null && met.k === 'onibus' && va < vb) ? ' class="inv"' : '';
+      return `<td${inv}>${va != null ? met.fmt(va) : '—'}</td><td>${vb != null ? met.fmt(vb) : '—'}</td>`;
+    };
+    linhas += `<tr><td>${rot}</td><td class="n">${a.length}</td><td class="n">${b.length}</td>${mets.map(cel).join('')}</tr>`;
+  }
+  el.innerHTML = `<table class="portetab">
+    <thead><tr><th rowspan="2">Faixa de população</th><th colspan="2">Municípios</th><th colspan="2">PIB per capita (mediana)</th><th colspan="2">Uso do ônibus (mediana)</th></tr>
+    <tr><th>TZ</th><th>Não-TZ</th><th>TZ</th><th>Não-TZ</th><th>TZ</th><th>Não-TZ</th></tr></thead>
+    <tbody>${linhas}</tbody></table>
+    <p class="sub" style="margin-top:7px;">Em destaque, as faixas em que os municípios com Tarifa Zero usam <b>menos</b> o ônibus que os de mesmo porte. A tese lê assim: até 100 mil habitantes, a camada universal usa mais o ônibus; acima disso, a relação se inverte. O dado do Censo 2022 não separa causa e efeito — parte dessas políticas já operava na data do Censo e pode ter aumentado o uso.</p>`;
 }
 
 // ---------- crosstabs (rótulo acima da própria barra; % dentro de cada categoria) ----------
 function renderCrosstabs() {
   const el = document.getElementById('crosstabs');
+  if (!el) return;
+  // 23/10/2026: antes era um agregado nacional fixo (STATS), o único bloco desta
+  // área que não respondia ao recorte — quem filtrava MG via metade da comparação
+  // mudar e metade não. Agora é calculado do recorte, com a mesma definição de TZ da
+  // comparação de medianas: camada 1 ativa.
+  const rows = subsetNoTz();
   const defs = [
     { key: 'regic_nivel', title: 'Hierarquia urbana (REGIC)', order: STATS.regic_order, labelFn: k => `${k} · ${REGIC_LABELS[k]}` },
     { key: 'tipo_arranjo', title: 'Sede × satélite de arranjo', order: STATS.arranjo_order, labelFn: k => k },
-    { key: 'modelo_prestacao_simples', title: 'Modelo de prestação (MUNIC 2020, n=' + STATS.totais.modelo_prestacao_n + ')', order: STATS.modelo_order, labelFn: k => k },
+    { key: 'modelo_prestacao_simples', title: 'Modelo de prestação (MUNIC 2020 — só 31% responderam)', order: STATS.modelo_order, labelFn: k => k },
     { key: 'faixa_pop', title: 'Faixa populacional', order: STATS.faixa_order, labelFn: k => k },
   ];
   let html = '';
   for (const d of defs) {
-    const ct = STATS.crosstabs[d.key];
-    const maxPct = Math.max(...d.order.map(k => (ct[String(k)]?.pct_tz || 0)), 0.001);
+    const ct = {};
+    for (const m of rows) {
+      const k = m[d.key];
+      if (k == null || k === '') continue;
+      const c = ct[String(k)] || (ct[String(k)] = { n: 0, tz: 0 });
+      c.n++; if (m.tz_status === 'Ativa') c.tz++;
+    }
+    const itens = d.order.map(k => [k, ct[String(k)]]).filter(x => x[1] && x[1].n);
+    if (!itens.length) continue;
+    const maxPct = Math.max(...itens.map(([, c]) => c.tz / c.n), 0.001);
     html += `<div class="xt"><h4>${d.title}</h4>`;
-    for (const k of d.order) {
-      const row = ct[String(k)];
-      if (!row) continue;
-      const pct = (row.pct_tz * 100).toFixed(1);
+    for (const [k, c] of itens) {
+      const pct = c.tz / c.n;
       html += `<div class="xtitem">
-        <div class="xtlab"><span>${d.labelFn(k)}</span><b>${pct}% (n=${row.n_tz})</b></div>
-        <div class="xtrack"><div class="xtfill" style="width:${(100 * row.pct_tz / maxPct).toFixed(1)}%"></div></div>
+        <div class="xtlab"><span>${d.labelFn(k)}</span><b>${(pct * 100).toFixed(1).replace('.', ',')}% <span style="font-weight:400;color:var(--muted);">(${c.tz} de ${fmtNum(c.n)})</span></b></div>
+        <div class="xtrack"><div class="xtfill" style="width:${(100 * pct / maxPct).toFixed(1)}%"></div></div>
       </div>`;
     }
     html += `</div>`;
   }
-  el.innerHTML = html;
+  el.innerHTML = html || '<div class="empty">Sem municípios neste recorte.</div>';
 }
 
 // ---------- partição modal (Censo 2022) — TZ × Não-TZ, barra única 100% empilhada ----------
@@ -1238,24 +1440,30 @@ const MODAL_STACK_LABELS = { onibus: 'Ônibus', automovel: 'Automóvel', motocic
 function renderModalStack() {
   const el = document.getElementById('modalStack');
   if (!el) return;
-  const d = MODAL_COMPARACAO;
-  const val = (grupo, k) => (d.modos.find(m => m.k === k) || {})[grupo] || 0;
-  const linha = (grupo, label, n) => {
-    const onibus = val(grupo, 'onibus'), automovel = val(grupo, 'automovel'), motocicleta = val(grupo, 'motocicleta');
-    const ativo = val(grupo, 'a_pe') + val(grupo, 'bicicleta');
-    const outros = Math.max(0, 100 - (onibus + automovel + motocicleta + ativo));
-    const segs = [
-      { k: 'onibus', v: onibus }, { k: 'automovel', v: automovel }, { k: 'motocicleta', v: motocicleta },
-      { k: 'ativo', v: ativo }, { k: 'outros', v: outros },
-    ];
-    const bar = segs.map(s => `<div class="seg" style="width:${s.v.toFixed(2)}%;background:${MODAL_STACK_COLORS[s.k]};" title="${MODAL_STACK_LABELS[s.k]}: ${s.v.toFixed(1)}%"></div>`).join('');
+  // 23/10/2026: passa a ser calculada do recorte (antes, agregado nacional fixo).
+  // Mantém o critério de antes, que é o da Análise I da tese: o grupo TZ só conta
+  // políticas iniciadas até 2022, porque o dado é do Censo 2022 — a gratuidade
+  // adotada depois não pode ter mudado o deslocamento medido ali.
+  const rows = subsetNoTz();
+  const tz = rows.filter(m => m.tz_status === 'Ativa' && m.tz_ano_txt != null && Number(m.tz_ano_txt) <= 2022);
+  const nao = rows.filter(m => m.tz_status === 'Não TZ');
+  const mediaModos = grupo => {
+    const acc = { onibus: 0, automovel: 0, motocicleta: 0, ativo: 0, outros: 0 }; let n = 0;
+    for (const m of grupo) { const md = modalFor(m); if (!md) continue; n++; for (const k in acc) acc[k] += (md[k] || 0); }
+    if (n) for (const k in acc) acc[k] /= n;
+    return { acc, n };
+  };
+  const linha = (label, g) => {
+    const { acc, n } = mediaModos(g);
+    if (!n) return `<div class="msrow"><div class="mslab"><b>${label}</b><span>sem municípios no recorte</span></div></div>`;
+    const tot = Object.values(acc).reduce((a, b) => a + b, 0) || 1;
+    const bar = Object.keys(MODAL_STACK_LABELS).map(k => { const v = 100 * acc[k] / tot;
+      return `<div class="seg" style="width:${v.toFixed(2)}%;background:${MODAL_STACK_COLORS[k]};" title="${MODAL_STACK_LABELS[k]}: ${v.toFixed(1)}%"></div>`; }).join('');
     return `<div class="msrow"><div class="mslab"><b>${label}</b><span>n=${n}</span></div><div class="msbar">${bar}</div></div>`;
   };
-  let html = linha('tz', `TZ (adotantes até ${d.ano_ref})`, d.n_tz);
-  html += linha('ntz', 'Não-TZ', d.n_ntz);
-  html += `<div class="mslegend">${Object.keys(MODAL_STACK_LABELS).map(k =>
-    `<span><i style="background:${MODAL_STACK_COLORS[k]}"></i>${MODAL_STACK_LABELS[k]}</span>`).join('')}</div>`;
-  el.innerHTML = html;
+  el.innerHTML = linha('TZ universal (adotada até 2022)', tz) + linha('Não-TZ', nao)
+    + `<div class="mslegend">${Object.keys(MODAL_STACK_LABELS).map(k =>
+      `<span><i style="background:${MODAL_STACK_COLORS[k]}"></i>${MODAL_STACK_LABELS[k]}</span>`).join('')}</div>`;
 }
 
 // ---------- régua descritiva, no cabeçalho (22/10/2026) ----------
@@ -1278,6 +1486,259 @@ const REGUA = [
 ];
 const REGUA_IDX = Object.fromEntries(REGUA.map((r, i) => [r.k, i]));
 
+// 12.9 — a adoção por porte com o denominador da tese. Bloco ESTÁTICO de propósito:
+// o índice de indício de sistema é de um artigo inédito, e só as contagens agregadas
+// vêm para o painel (ver build_curva_porte.py). Desenhado uma vez, na carga.
+function renderCurvaPorte() {
+  const el = document.getElementById('curvaPorte');
+  if (!el || !CURVA_PORTE) return;
+  const fx = CURVA_PORTE.faixas;
+  const pct = (a, b) => b ? a / b : 0;
+  const max = Math.max(...fx.map(f => Math.max(pct(f.tz, f.n), pct(f.tz_sist, f.n_sist))), 0.001);
+  const fmtP = v => (100 * v).toFixed(1).replace('.', ',') + '%';
+  const barra = (v, cor, txt) => `<div class="cvbar"><div class="cvtrack"><div class="cvfill" style="width:${(100 * v / max).toFixed(1)}%;background:${cor};"></div></div><div class="cvn">${txt}</div></div>`;
+  const pico = fx.reduce((a, f) => pct(f.tz_sist, f.n_sist) > pct(a.tz_sist, a.n_sist) ? f : a, fx[0]);
+  el.innerHTML = `
+    <div class="rgchips" style="margin:0 0 10px;">
+      <span class="rgchip"><i style="background:#6b7280"></i>entre todos os municípios da faixa</span>
+      <span class="rgchip"><i style="background:var(--amarelo)"></i>entre os que têm indício de sistema de ônibus</span>
+    </div>
+    ${fx.map(f => `<div class="cvlin"><div class="cvrot">${f.rot}</div><div class="cvbars">
+      ${barra(pct(f.tz, f.n), '#6b7280', `<b>${fmtP(pct(f.tz, f.n))}</b> · ${f.tz} de ${fmtNum(f.n)}`)}
+      ${barra(pct(f.tz_sist, f.n_sist), 'var(--amarelo)', `<b>${fmtP(pct(f.tz_sist, f.n_sist))}</b> · ${f.tz_sist} de ${fmtNum(f.n_sist)}${f === pico ? ' ← pico' : ''}`)}
+    </div></div>`).join('')}
+    <p class="sub" style="margin-top:4px;">No total, a camada universal está em <b>${fmtP(pct(CURVA_PORTE.total.tz, CURVA_PORTE.total.n))}</b> de todos os municípios (${CURVA_PORTE.total.tz}) e em <b>${fmtP(pct(CURVA_PORTE.total.tz_sist, CURVA_PORTE.total.n_sist))}</b> dos ${fmtNum(CURVA_PORTE.total.n_sist)} com indício de sistema (${CURVA_PORTE.total.tz_sist}). O padrão é compatível com a hipótese da tese — a gratuidade universal rareia onde o sistema é maior e mais atrativo — e também com a explicação rival do custo e da complexidade, que crescem com o porte. Separar as duas é trabalho do teste, não deste gráfico.</p>`;
+}
+
+// ---------- remuneração e custo (Seções 7.2 a 7.4; pedido do autor, 23/10/2026) ----------
+// Entra a remuneração: quem recebe o recurso, por qual fórmula, quem carrega o risco de
+// demanda e quanto se paga (preço do km e custo por habitante). Fica FORA a contrapartida e a
+// posição no plano analítico, suspensas até a defesa (12.6) — por isso nenhum texto aqui
+// usa "gestão do comum", "garantia de receita sem controle" ou "Bolsa-Empresário".
+function remunFor(m) { return (m && REMUN[String(m.id)]) || null; }
+const DEST_ROT = {
+  publica: 'Operação pública — a prefeitura opera, sem operador a remunerar',
+  oferta: 'Operador privado pago pela oferta (km, veículo, valor fixo, custo)',
+  demanda: 'Operador privado pago pela demanda (por passageiro)',
+  usuario: 'Recurso entregue ao usuário (vale, crédito)',
+  privado_nd: 'Operador privado, remuneração não apurada',
+};
+const DEST_COR = { publica: '#4F7FD4', oferta: '#C9A33B', demanda: '#D05549', usuario: '#8a8f3a', privado_nd: '#6b7280' };
+// A regra de risco é a da Seção 7.2: preço fixado põe o risco de demanda na prefeitura e o
+// de custo no operador; pagar o custo apurado põe os dois na prefeitura; pagar por
+// passageiro põe a demanda no operador.
+function riscoDaFormula(comp) {
+  if (!comp) return null;
+  if (/passageiro/.test(comp)) return 'demanda com o operador';
+  if (/custo do serviço/.test(comp)) return 'os dois riscos com a prefeitura';
+  return 'demanda com a prefeitura';
+}
+function grupoFormula(comp) {
+  if (!comp) return 'não lida';
+  if (comp.includes('+')) return 'combinação de parcelas';
+  return ({ 'por km': 'só o quilômetro rodado', 'valor global fixo': 'valor global fixo',
+            'fixo por veículo': 'parcela fixa por veículo', 'custo do serviço': 'custo apurado do serviço',
+            'por passageiro': 'por passageiro' })[comp] || comp;
+}
+const fmtR = (v, d = 2) => 'R$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+function stripPlot(pts, opts) {
+  // pts: [{v, cor, tit}]; escala linear entre opts.min e opts.max
+  if (!pts.length) return '<p class="sub">Nenhum contrato com valor lido neste recorte.</p>';
+  const x = v => (100 * (Math.min(Math.max(v, opts.min), opts.max) - opts.min) / (opts.max - opts.min));
+  const ord = [...pts].sort((a, b) => a.v - b.v);
+  const med = ord.length % 2 ? ord[(ord.length - 1) / 2].v : (ord[ord.length / 2 - 1].v + ord[ord.length / 2].v) / 2;
+  const nivel = {};   // empilha pontos muito próximos para não se esconderem
+  const dots = ord.map(p => { const b = Math.round(x(p.v) / 1.6); nivel[b] = (nivel[b] || 0) + 1;
+    const dy = [0, -12, 12, -24, 24][(nivel[b] - 1) % 5];
+    return `<div class="pt" style="left:${x(p.v).toFixed(2)}%;top:${39 + dy}px;background:${p.cor};" title="${p.tit}"></div>`; }).join('');
+  const faixas = (opts.faixas || []).map(f => `<div class="faixa" style="left:${x(f.a)}%;width:${x(f.b) - x(f.a)}%;${f.tom ? 'background:' + f.tom + ';' : ''}" title="${f.rot}"></div>`).join('');
+  const ref = opts.ref ? `<div class="ref" style="left:${x(opts.ref.v)}%;" title="${opts.ref.rot}"></div>` : '';
+  const ticks = opts.ticks.map(t => `<div class="tick" style="left:${x(t)}%;">${(opts.fmtTick || opts.fmt)(t)}</div>`).join('');
+  return `<div class="strip">${faixas}<div class="eixo"></div>${ref}${dots}<div class="med" style="left:${x(med)}%;"><span>${opts.fmt(med)}</span></div>${ticks}</div>
+    <p class="sub" style="margin-top:14px;">${ord.length} ${ord.length === 1 ? 'contrato' : 'contratos'} · mediana <b>${opts.fmt(med)}</b> · de ${opts.fmt(ord[0].v)} a ${opts.fmt(ord[ord.length - 1].v)}</p>`;
+}
+
+// ---------- custeio (Seção 7.5): de onde vem o dinheiro e quanto custa reverter ----------
+function custeioFor(m) { return (m && CUSTEIO[String(m.id)]) || []; }
+// Quadro 28 da tese. Não há coluna por política no pacote, e por isso este bloco é FIXO,
+// com as contagens da tese, e diz isso; o bloco ao lado, do que o ato escreve, responde ao recorte.
+const ESCALA_COMPROMISSO = [
+  { n: 0, rot: 'Receita própria vinculada em lei e arrecadada', rev: 'revogar a lei e desfazer o vínculo' },
+  { n: 15, rot: 'Fundo criado em lei, sem receita própria comprovada', rev: 'a estrutura resiste; o recurso, não' },
+  { n: 53, rot: 'Dotação identificada (lei, LOA ou contrato)', rev: 'renovada a cada ano; desfeita sem ato específico' },
+  { n: 52, rot: 'Orçamento geral, sem dotação identificada', rev: 'nenhum ato próprio a desfazer' },
+];
+const LEIT_ORDEM = ['fontes específicas além do orçamento', 'dotação com classificação orçamentária', 'fonte genérica (dotações próprias)', 'sem cláusula de custeio'];
+const LEIT_ROT = {
+  'fontes específicas além do orçamento': 'nomeia fontes além do orçamento',
+  'dotação com classificação orçamentária': 'classifica a despesa (função, subfunção, elemento)',
+  'fonte genérica (dotações próprias)': 'só diz que correrá por dotações próprias',
+  'sem cláusula de custeio': 'não tem cláusula de custeio',
+};
+const LEIT_COR = { 'fontes específicas além do orçamento': '#4F7FD4', 'dotação com classificação orçamentária': '#6B8FC9', 'fonte genérica (dotações próprias)': '#C9A33B', 'sem cláusula de custeio': '#D05549' };
+
+function renderCusteioBloco(rows) {
+  const max = Math.max(...ESCALA_COMPROMISSO.map(e => e.n), 1);
+  const escala = ESCALA_COMPROMISSO.map((e, i) => `<div class="arrlin">
+      <div class="arrrot" style="white-space:normal;" title="${e.rot} — reverter exige: ${e.rev}"><b>${i + 1}</b> · ${e.rot}<br><span style="color:var(--muted);font-size:10.5px;">para reverter: ${e.rev}</span></div>
+      <div class="arrbarra"><div class="arrfill" style="width:${(100 * e.n / max).toFixed(1)}%;background:${['#4F7FD4', '#6B8FC9', '#C9A33B', '#D05549'][i]};"></div></div>
+      <div class="arrn">${e.n}</div></div>`).join('');
+  // o que o ato escreve — responde ao recorte
+  const atos = [];
+  for (const m of rows) for (const a of custeioFor(m)) atos.push(a);
+  const legiveis = atos.filter(a => LEIT_ORDEM.includes(a.leit));
+  const c = {}; for (const a of legiveis) c[a.leit] = (c[a.leit] || 0) + 1;
+  const maxL = Math.max(...Object.values(c), 1);
+  const leit = LEIT_ORDEM.filter(k => c[k]).map(k => `<div class="arrlin">
+      <div class="arrrot">${LEIT_ROT[k]}</div>
+      <div class="arrbarra"><div class="arrfill" style="width:${(100 * c[k] / maxL).toFixed(1)}%;background:${LEIT_COR[k]};"></div></div>
+      <div class="arrn">${c[k]} <span>${(100 * c[k] / legiveis.length).toFixed(0)}%</span></div></div>`).join('');
+  const decretos = atos.filter(a => a.instr === 'decreto').length;
+  const cond = atos.filter(a => a.cond).length;
+  return `<div class="rmgrid" style="margin-top:18px;border-top:1px solid var(--border);padding-top:14px;">
+    <div class="arrbloco"><h3>De onde vem o dinheiro — e quanto custa reverter</h3>
+      <p class="sub">A escala de compromisso da tese ordena o custeio pelo que é preciso desfazer para acabar com a política. O retrato é o de uma política <b>orçamentária anual</b>: nenhuma política vigente tem receita própria vinculada e arrecadada, e ter fundo não garantiu a continuidade — 3 das 15 com fundo acabaram ou recuaram.</p>
+      ${escala}
+      <p class="sub" style="margin-top:7px;"><span class="selo-fixo">Brasil, fixo</span> Contagens do Quadro 28 sobre as 187 políticas; em 67 a fonte não foi apurada. A Constituição veda vincular receita de impostos (art. 167, IV), e a taxa, a espécie que sobra ao município, caiu na Justiça onde foi tentada (Vargem Grande Paulista e Paranaguá) — sem acabar com a política.</p></div>
+    <div class="arrbloco"><h3>O que o ato da política escreve sobre o custeio</h3>
+      <p class="sub">Leitura das cláusulas de custeio dos atos com texto legível, no recorte. O ato que não nomeia fonte nem classifica a despesa não tem o que desfazer para ser revertido.</p>
+      ${legiveis.length ? leit : '<p class="sub">Nenhum ato lido neste recorte.</p>'}
+      <p class="sub" style="margin-top:7px;">${legiveis.length} atos legíveis${atos.length > legiveis.length ? ` (outros ${atos.length - legiveis.length} são imagem sem texto extraível ou arquivo de outro objeto)` : ''}. Dos ${atos.length} atos lidos, <b>${decretos}</b> ${decretos === 1 ? 'é decreto' : 'são decretos'}, que outro decreto revoga; <b>${cond}</b> ${cond === 1 ? 'condiciona' : 'condicionam'} a própria gratuidade — à disponibilidade orçamentária, à capacidade financeira ou a um prazo.</p></div>
+  </div>`;
+}
+
+function renderRemunPanel() {
+  const el = document.getElementById('remunPanel');
+  if (!el) return;
+  const rows = subsetNoTz();
+  const c1 = rows.filter(m => m.tz_status === 'Ativa');
+  if (!c1.length) { el.innerHTML = '<div class="empty">Nenhum município com Tarifa Zero universal neste recorte.</div>'; return; }
+  const barras = (pares, total, cores, extra) => {
+    const max = Math.max(...pares.map(p => p[1]), 1);
+    return pares.map(([k, n, rot]) => `<div class="arrlin">
+      <div class="arrrot" title="${rot}">${rot}${extra ? extra(k) : ''}</div>
+      <div class="arrbarra"><div class="arrfill" style="width:${(100 * n / max).toFixed(1)}%;background:${cores[k] || '#8F9FBE'};"></div></div>
+      <div class="arrn">${n} <span>${(100 * n / total).toFixed(0)}%</span></div></div>`).join('');
+  };
+  // 1) quem recebe
+  const cd = {}; let ndDest = 0;
+  for (const m of c1) { const r = remunFor(m); if (r && r.dest) cd[r.dest] = (cd[r.dest] || 0) + 1; else ndDest++; }
+  const apur = Object.values(cd).reduce((a, b) => a + b, 0) - (cd.privado_nd || 0);
+  const ordemD = ['publica', 'oferta', 'demanda', 'usuario', 'privado_nd'].filter(k => cd[k]);
+  const b1 = barras(ordemD.map(k => [k, cd[k], DEST_ROT[k]]), c1.length, DEST_COR);
+  // 2) por qual fórmula, entre os pagos pela oferta
+  const of = c1.filter(m => (remunFor(m) || {}).dest === 'oferta');
+  const cf = {}, riscoDe = {};
+  for (const m of of) { const comp = remunFor(m).comp; const g = grupoFormula(comp); cf[g] = (cf[g] || 0) + 1;
+    if (comp) riscoDe[g] = riscoDaFormula(comp) === riscoDe[g] || !riscoDe[g] ? riscoDaFormula(comp) : 'varia'; }
+  const ordemF = ['só o quilômetro rodado', 'valor global fixo', 'parcela fixa por veículo', 'custo apurado do serviço', 'combinação de parcelas', 'por passageiro', 'não lida'].filter(k => cf[k]);
+  const b2 = of.length ? barras(ordemF.map(k => [k, cf[k], k]), of.length, {},
+    k => riscoDe[k] && riscoDe[k] !== 'varia' ? `<span class="rmrisco">risco: ${riscoDe[k]}</span>` : '') : '<p class="sub">Nenhum operador pago pela oferta neste recorte.</p>';
+  // 3) preço do km e 4) custo por habitante — contratos dos municípios do recorte
+  const KM_COR = { 'A4 Prestação de serviço': '#C9A33B', 'A5 Concessão ou permissão': '#D05549', 'A3 Locação com motorista (L2, L3)': '#8F9FBE' };
+  const kms = [], habs = [], fora = [];
+  for (const m of rows) { const r = remunFor(m); if (!r) continue;
+    for (const k of (r.km || [])) kms.push({ v: k.v, cor: KM_COR[k.arr] || '#6b7280', tit: `${m.nome}/${m.uf} — ${fmtR(k.v)}/km (maio/2026) · ${k.arr || 'arranjo não apurado'} · ${k.fonte}${k.nota ? ' · ' + k.nota : ''}` });
+    for (const h of (r.hab || [])) { if (h.v >= 700) { fora.push(`${m.nome}/${m.uf} (${fmtR(h.v, 0)})`); continue; }
+      habs.push({ v: h.v, cor: '#4F7FD4', tit: `${m.nome}/${m.uf} — ${fmtR(h.v, 0)} por habitante/ano (contrato de ${h.ano})` }); } }
+  const legKm = Object.entries(KM_COR).map(([k, c]) => `<span class="rgchip"><i style="background:${c}"></i>${k.replace(/^A\d /, '')}</span>`).join('') + '<span class="rgchip"><i style="background:#6b7280"></i>outros</span>'
+    + '<span class="rgchip"><i style="background:rgba(255,255,255,.18)"></i>CadTerc diurno (R$ 8,14–10,77)</span><span class="rgchip"><i style="background:rgba(255,255,255,.08)"></i>diuturno (até R$ 15,09)</span><span class="rgchip"><i style="background:#FF2D6B"></i>R$ 5,64 (Veloso et al., 2025)</span>';
+
+  el.innerHTML = `
+    <div class="rmgrid">
+      <div class="arrbloco"><h3>Quem recebe o recurso</h3>
+        <p class="sub">Entre as ${c1.length} políticas universais do recorte.${algumFiltroAtivo() ? '' : ' Onde está apurado, a Tarifa Zero brasileira custeia operação pública ou paga o operador pela oferta; o pagamento por passageiro é residual.'}</p>
+        ${b1}
+        <p class="sub" style="margin-top:7px;">${ndDest ? `<b>${ndDest}</b> sem destinatário apurado. ` : ''}${cd.usuario ? '' : 'Nenhuma política universal entrega o recurso ao usuário.'}</p></div>
+      <div class="arrbloco"><h3>Por qual fórmula o operador é pago</h3>
+        <p class="sub">Entre as ${of.length} pagas pela oferta. A fórmula diz quem carrega o risco: com preço fixado, o risco de a demanda variar fica com a prefeitura; pagando o custo apurado, ela carrega também o risco de custo.</p>
+        ${b2}</div>
+    </div>
+    <div class="rmgrid" style="margin-top:18px;">
+      <div class="arrbloco"><h3>Quanto custa o quilômetro</h3>
+        <p class="sub">Preço do quilômetro nos contratos lidos, corrigido pelo IPCA para maio de 2026. As faixas são a referência pública do Estado de São Paulo para fretamento contínuo (CadTerc, ônibus de 44 lugares, 4 a 8 mil km por mês); a linha rosa, o parâmetro de R$ 5,64/km usado por Veloso et al. (2025) para estimar o custo da Tarifa Zero.</p>
+        ${stripPlot(kms, { min: 4, max: 25, ticks: [5, 10, 15, 20], fmt: v => fmtR(v), fmtTick: v => fmtR(v, 0), ref: { v: 5.64, rot: 'R$ 5,64/km — Veloso et al. (2025)' },
+          faixas: [{ a: 8.14, b: 10.77, rot: 'CadTerc, turno diurno: R$ 8,14 a R$ 10,77/km', tom: 'rgba(255,255,255,.09)' }, { a: 10.77, b: 15.09, rot: 'CadTerc, turno diuturno: até R$ 15,09/km', tom: 'rgba(255,255,255,.04)' }] })}
+        <div class="rgchips" style="margin-top:2px;">${legKm}</div></div>
+      <div class="arrbloco"><h3>Quanto custa por habitante, por ano</h3>
+        <p class="sub">Valor anual do contrato lido dividido pela população de 2022, em preços nominais do ano do contrato. Mistura preço e quantidade de serviço — não diz se a Tarifa Zero paga caro ou barato.</p>
+        ${stripPlot(habs, { min: 0, max: 330, ticks: [0, 100, 200, 300], fmt: v => fmtR(v, 0), fmtTick: v => fmtR(v, 0) })}
+        ${fora.length ? `<p class="sub">Fora da escala: ${fora.join(', ')} — um valor anual com todas as despesas incluídas e um contrato que junta o transporte escolar.</p>` : ''}</div>
+    </div>
+    ${renderCusteioBloco(rows)}
+    <p class="sub" style="margin-top:12px;border-top:1px solid var(--border);padding-top:9px;">O que os contratos permitem medir é menos do que a comparação pede: o preço do quilômetro mistura a parcela fixa do veículo e do motorista com a variável do quilômetro, e a frota quase nunca está no contrato. Os preços estão na ordem de grandeza da referência pública; a distância entre eles passa pela quilometragem por veículo e pela região, que os contratos deveriam trazer.</p>`;
+}
+
+// 12.4 — o arranjo agregado. Duas leituras, lado a lado: o que foi contratado
+// (A1–A6) e por qual instrumento a gratuidade entrou (via jurídica). A segunda é a
+// que a hipótese da tese observa: "concessão/permissão preexistente" quer dizer que a
+// gratuidade foi enxertada no contrato de quem já estava lá.
+const ARRANJO_ORDEM = ['A1 Prestação direta', 'A2 Locação só do veículo (L1)',
+  'A3 Locação com motorista (L2, L3)', 'A4 Prestação de serviço',
+  'A5 Concessão ou permissão', 'A6 Híbrido, terceirização ou empresa pública'];
+const ARRANJO_COR = {
+  'A1 Prestação direta': '#4F7FD4', 'A2 Locação só do veículo (L1)': '#6B8FC9',
+  'A3 Locação com motorista (L2, L3)': '#8F9FBE', 'A4 Prestação de serviço': '#C9A33B',
+  'A5 Concessão ou permissão': '#D05549',
+  'A6 Híbrido, terceirização ou empresa pública': '#8a8f3a',
+};
+const VIA_COR = {
+  'concessão/permissão preexistente': '#D05549', 'concessão/permissão nova, licitada': '#D98E3B',
+  'contrato licitado': '#C9A33B', 'contratação emergencial ou dispensa': '#8a8f3a',
+  'execução direta (sem contrato de operação)': '#4F7FD4',
+  'empresa pública/autarquia municipal': '#6B8FC9',
+  'adesão a ata de registro de preços': '#8F9FBE', 'convênio, consórcio ou cooperação': '#8F9FBE',
+};
+
+function renderArranjoPanel() {
+  const el = document.getElementById('arranjoPanel');
+  if (!el) return;
+  const rows = subsetNoTz().filter(m => m.tz_bin === 'TZ' || m.tz_status === 'Parcial (ativa)');
+  const dados = rows.map(arranjoFor);
+  const n = rows.length;
+  if (!n) { el.innerHTML = '<p class="sub">Nenhuma política de Tarifa Zero neste recorte.</p>'; return; }
+
+  const conta = (campo) => {
+    const c = {};
+    let na = 0;
+    for (const a of dados) {
+      const v = a && a[campo];
+      if (v) c[v] = (c[v] || 0) + 1; else na++;
+    }
+    return { c, na };
+  };
+  const bloco = (titulo, nota, campo, ordem, cores) => {
+    const { c, na } = conta(campo);
+    const chaves = (ordem || Object.keys(c).sort((a, b) => c[b] - c[a])).filter(k => c[k]);
+    const max = Math.max(...chaves.map(k => c[k]), 1);
+    const linhas = chaves.map(k => `
+      <div class="arrlin">
+        <div class="arrrot" title="${k}">${k}</div>
+        <div class="arrbarra"><div class="arrfill" style="width:${(100 * c[k] / max).toFixed(1)}%;background:${(cores && cores[k]) || '#8F9FBE'};"></div></div>
+        <div class="arrn">${c[k]} <span>${(100 * c[k] / (n - na) || 0).toFixed(0)}%</span></div>
+      </div>`).join('');
+    return `<div class="arrbloco">
+      <h3>${titulo}</h3>
+      <p class="sub">${nota}</p>
+      ${linhas}
+      <p class="sub" style="margin-top:7px;">${na ? `<b>${na}</b> de ${n} não ${na === 1 ? 'teve' : 'tiveram'} este campo apurado e ficam fora dos percentuais — não apurado não é zero.` : `Apurado em todos os ${n} casos do recorte.`}</p>
+    </div>`;
+  };
+
+  const { c: cv } = conta('via');
+  const pre = cv['concessão/permissão preexistente'] || 0;
+  const { c: cp } = conta('prova');
+  const comDoc = (cp.alta || 0);
+  el.innerHTML = `
+    <div class="arrgrid">
+      ${bloco('O que foi contratado', 'Do arranjo mais público (a prefeitura opera) ao mais privado (o serviço é delegado por concessão).', 'a', ARRANJO_ORDEM, ARRANJO_COR)}
+      ${bloco('Por qual instrumento a gratuidade entrou', 'A via jurídica diz se a política veio com contrato novo, com operação própria, ou enxertada num contrato que já existia.', 'via', null, VIA_COR)}
+    </div>
+    ${pre ? `<p class="sub" style="margin-top:10px;border-top:1px solid var(--border);padding-top:9px;">Em <b>${pre}</b> ${pre === 1 ? 'caso' : 'casos'} deste recorte a gratuidade entrou sobre uma <b>concessão que já existia</b>, com o operador que já estava lá — em geral por termo aditivo. É a forma de entrada que a tese acompanha com atenção, porque preserva o contrato e a receita de quem opera.</p>` : ''}
+    <p class="sub" style="margin-top:7px;">Força da prova: <b>${comDoc}</b> ${comDoc === 1 ? 'codificação vem' : 'codificações vêm'} de cláusula de contrato, edital ou termo de referência lido; as demais, de fonte secundária ou da MUNIC. O objeto lido diz o que foi contratado, <b>não como o contrato é executado</b>.</p>`;
+}
+
 function renderRegua() {
   const el = document.getElementById('regua');
   if (!el) return;
@@ -1298,6 +1759,7 @@ function renderRegua() {
     }
     for (const c of camadasFor(m)) if (c.camada in cont) cont[c.camada]++;
   }
+  const nProv = rows.reduce((a, m) => a + ((m.tz_bin === 'TZ' && m.tz_status !== 'Encerrada' && m.tz_prov) ? 1 : 0), 0);
   const nUniv = REGUA.filter(r => r.grupo === 1).reduce((a, r) => a + cont[r.k], 0) + universalSemSub;
   const nParc = countParciais(rows);
   const total = nUniv + nParc + encerradas;
@@ -1326,7 +1788,9 @@ function renderRegua() {
       <span class="rggrupo sep">2 Parcial <b>${nParc}</b></span>${REGUA.filter(r => r.grupo === 2).map(chip).join('')}
       ${encerradas ? `<span class="rggrupo sep">3 Encerradas <b>${encerradas}</b></span>` : ''}
     </div>
-    ${somaCamadas !== nParc ? `<p class="sub" style="margin-top:6px;">Os subtipos somam ${somaCamadas} e os municípios parciais são ${nParc}: um mesmo município pode acumular mais de uma camada (Belo Horizonte e Brasília, por exemplo), e nesses casos ele conta uma vez como município e uma vez em cada camada.</p>` : ''}`;
+    ${somaCamadas !== nParc ? `<p class="sub" style="margin-top:6px;">Os subtipos somam ${somaCamadas} e os municípios parciais são ${nParc}: um mesmo município pode acumular mais de uma camada (Belo Horizonte e Brasília, por exemplo), e nesses casos ele conta uma vez como município e uma vez em cada camada.</p>` : ''}
+    ${nProv ? `<p class="sub" style="margin-top:6px;">◇ <b>${nProv}</b> ${nProv === 1 ? 'caso universal está' : 'casos universais estão'} na barra pela <b>hipótese</b> de um pedido de acesso à informação ainda sem resposta, não por documento lido. A resposta pode trocar o subtipo, e a contagem com ela.</p>` : ''}
+    <p class="sub" style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px;">A régua não começa do zero. Antes do 1a existe um <b>piso nacional</b>, que vale em todo sistema urbano do país e por isso não distingue caso nenhum: a gratuidade a quem tem <b>65 anos ou mais</b> (Constituição, art. 230, § 2º; Estatuto da Pessoa Idosa), que alcança 11,0% da população brasileira, e, desde as eleições de 2024, a <b>gratuidade no dia de votação</b>, que o STF tornou obrigação do poder público e que alcança 76,0% da população adulta. O que cada município decide começa acima disso.</p>`;
 }
 
 // ---------- 3.3: TZ por região e por UF (pendente desde v0.3) ----------
@@ -1334,42 +1798,61 @@ function renderRegua() {
 // Mesma leitura do painel "% por eixo", em dois recortes territoriais que faltavam.
 // O n de cada barra vai junto: uma UF com 2 municípios TZ em 20 dá 10%, e sem o n
 // isso se lê como se fosse comparável a São Paulo.
+// 23/10/2026 — redesenhado a pedido do autor ("essa visualização está ruim"). Três
+// problemas do desenho anterior: (1) duas colunas de alturas muito diferentes (5 regiões
+// ao lado de 27 UFs), com um vazio grande à esquerda; (2) metade da lista era barra
+// zerada — 13 UFs sem nenhum caso ocupavam a mesma área das que têm; (3) contava o
+// "histórico" (ativas + encerradas), enquanto a tese e o resto do painel contam a
+// camada 1 — por isso o Sudeste aparecia com 118 e a tese diz 113.
+// Agora: UFs agrupadas dentro da sua região, a barra mede QUANTOS casos (a leitura da
+// Seção 5.4: quatro estados reúnem 77% dos casos) e o texto diz que FRAÇÃO dos
+// municípios da UF isso representa (a leitura que pôs o RJ em destaque). UFs sem caso
+// viram uma linha só.
+const ORDEM_REGIAO = ['Sudeste', 'Sul', 'Centro-Oeste', 'Nordeste', 'Norte'];
 function renderRegiaoUf() {
   const el = document.getElementById('regiaoUf');
   if (!el) return;
   const rows = subsetNoTz();
+  const pctBR = v => (v).toFixed(1).replace('.', ',') + '%';
 
-  const agrupa = (chave) => {
-    const mapa = new Map();
-    for (const m of rows) {
-      const k = m[chave];
-      if (k == null || k === '') continue;
-      let g = mapa.get(k);
-      if (!g) { g = { tot: 0, tz: 0 }; mapa.set(k, g); }
-      g.tot++;
-      if (m.tz_bin === 'TZ') g.tz++;
-    }
-    return [...mapa.entries()]
-      .map(([k, g]) => ({ k, ...g, pct: 100 * g.tz / g.tot }))
-      .sort((a, b) => b.pct - a.pct || b.tz - a.tz);
-  };
+  const reg = new Map();   // regiao -> { tot, tz, ufs: Map(uf -> {tot, tz}) }
+  for (const m of rows) {
+    if (!m.regiao || !m.uf) continue;
+    let r = reg.get(m.regiao);
+    if (!r) { r = { tot: 0, tz: 0, ufs: new Map() }; reg.set(m.regiao, r); }
+    let u = r.ufs.get(m.uf);
+    if (!u) { u = { tot: 0, tz: 0 }; r.ufs.set(m.uf, u); }
+    const tz = m.tz_status === 'Ativa';
+    r.tot++; u.tot++;
+    if (tz) { r.tz++; u.tz++; }
+  }
+  const totTZ = [...reg.values()].reduce((a, r) => a + r.tz, 0);
+  if (!totTZ) { el.innerHTML = '<div class="empty">Nenhum município com Tarifa Zero universal neste recorte.</div>'; return; }
+  const maxUf = Math.max(...[...reg.values()].flatMap(r => [...r.ufs.values()].map(u => u.tz)), 1);
 
-  const bloco = (titulo, lista) => {
-    if (!lista.length) return '';
-    const max = Math.max(...lista.map(x => x.pct)) || 1;
-    const bars = lista.map(x => `<div class="gerow" title="${x.k}: ${x.tz} de ${x.tot} municípios com TZ">
-      <div class="gelab">${x.k}</div>
-      <div class="getrack"><div class="gefill" style="width:${(100 * x.pct / max).toFixed(1)}%;background:var(--amarelo);"></div></div>
-      <div class="geval">${x.pct.toFixed(1)}% <span style="opacity:.65;">(${x.tz}/${x.tot})</span></div>
-    </div>`).join('');
-    return `<div><h3 style="font-size:12.5px;margin:0 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;">${titulo}</h3><div class="gebars">${bars}</div></div>`;
-  };
-
-  const porUf = agrupa('uf');
-  el.innerHTML = `<div class="ruGrid">
-    ${bloco('Por região', agrupa('regiao'))}
-    ${bloco(`Por UF (${porUf.length})`, porUf)}
-  </div>`;
+  const zeradas = [];
+  let html = '';
+  for (const nome of ORDEM_REGIAO) {
+    const r = reg.get(nome);
+    if (!r) continue;
+    const ufs = [...r.ufs.entries()].filter(([, u]) => u.tz > 0).sort((a, b) => b[1].tz - a[1].tz || b[1].tz / b[1].tot - a[1].tz / a[1].tot);
+    for (const [uf, u] of r.ufs) if (!u.tz) zeradas.push(uf);
+    if (!r.tz) continue;
+    html += `<div class="rufreg">
+      <div class="rufcab"><b>${nome}</b><span><b>${r.tz}</b> ${r.tz === 1 ? 'município' : 'municípios'} · ${pctBR(100 * r.tz / totTZ)} dos casos · ${pctBR(100 * r.tz / r.tot)} dos ${fmtNum(r.tot)} municípios da região</span></div>
+      ${ufs.map(([uf, u]) => `<div class="rufuf" title="${uf}: ${u.tz} de ${u.tot} municípios com Tarifa Zero universal">
+        <div class="rufsig">${uf}</div>
+        <div class="ruftrack"><div class="ruffill" style="width:${(100 * u.tz / maxUf).toFixed(1)}%;"></div></div>
+        <div class="rufn"><b>${u.tz}</b></div>
+        <div class="rufpct">${pctBR(100 * u.tz / u.tot)} <span>dos ${fmtNum(u.tot)}</span></div>
+      </div>`).join('')}
+    </div>`;
+  }
+  if (zeradas.length) {
+    zeradas.sort();
+    html += `<p class="rufzero"><b>Sem Tarifa Zero universal neste recorte</b> (${zeradas.length} ${zeradas.length === 1 ? 'UF' : 'UFs'}): ${zeradas.join(', ')}.</p>`;
+  }
+  el.innerHTML = `<div class="rufleg"><span><i></i>a barra mede <b>quantos</b> municípios têm Tarifa Zero universal</span><span>o percentual diz que <b>fração</b> dos municípios da UF isso representa</span></div>${html}`;
 }
 
 // ---------- 3.4: dispersão PIB per capita × motorização (pendente desde v0.3) ----------
@@ -1476,6 +1959,8 @@ const REFERENCIAS_ABNT = [
   { chave: 'Angelo 2023', ref: 'ANGELO, Danielle Andrade. <i>Tarifa Zero</i>: formas de financiamento e experiências nacionais. 2023. Trabalho de Conclusão de Curso (Graduação em Planejamento Territorial) – Universidade Federal do ABC, São Bernardo do Campo, 2023.' },
   { chave: 'brinco 2017', ref: 'BRINCO, Ricardo. Tarifação e gratuidade no transporte público urbano. <i>Indicadores Econômicos FEE</i>, Porto Alegre, v. 45, n. 2, p. 79-96, 2017.' },
   { chave: 'Campos et al. 2023', ref: 'CAMPOS, Júlia Pereira <i>et al.</i> Avaliação da qualidade do transporte público de Mariana (MG) com a implantação da política tarifa zero: uma comparação entre a perspectiva do usuário e a técnica. In: CONGRESSO DE PESQUISA E ENSINO EM TRANSPORTES, 37., 2023, Santos. <i>Anais</i>. Santos: ANPET, 2023.' },
+  { chave: 'Cardozo et al. 2024', ref: 'CARDOZO, Rodrigo Juan Martins; DE MELO, Iury Ribeiro; DA LUZ, Fernanda Catarina Ribeiro; BRASILEIRO, Anísio; DE ANDRADE, Maurício Oliveira. Tarifa zero no Brasil: uma análise exploratória das experiências atuais. In: CONGRESSO DE PESQUISA E ENSINO EM TRANSPORTES, 38., 2024, Florianópolis. <i>Anais</i> [...]. Florianópolis: ANPET, 2024.' },
+  { chave: 'Cardozo et al. 2025', ref: 'CARDOZO, Rodrigo Juan Martins; DE MELO, Iury Ribeiro; DA LUZ, Fernanda Catarina Ribeiro; BRASILEIRO, Anísio. Impactos da Tarifa Zero na motorização urbana: análise multivariada de 44 experiências brasileiras. In: CONGRESSO DE PESQUISA E ENSINO EM TRANSPORTES (ANPET), 39., 2025, Goiânia. <i>Anais</i> [...]. Goiânia: ANPET, 2025. p. 1276-1281.' },
   { chave: 'Costa & Sampaio 2024', ref: 'COSTA, Matheus Gregorini; SAMPAIO, Joelson Oliveira Ubida. Análise da viabilidade financeira da implementação da política de tarifa zero no transporte público urbano por ônibus em grandes municípios brasileiros. <i>Revista Delos</i>, v. 17, n. 61, p. e2597, 8 nov. 2024.' },
   { chave: 'Gomes et al. 2023', ref: 'GOMES, Thiago Von Zeidler; BAIARDI, Yara Cristina Labronici; ZIONI, Silvana. Caminhos para uma nova gestão e financiamento do Transporte Público Coletivo: experiências de Tarifa Zero na macrometrópole paulista. <i>Journal of Sustainable Urban Mobility</i>, v. 3, n. 1, p. 96-110, mar. 2023.' },
   { chave: 'Gonçalves & Santini 2023', ref: 'GONÇALVES, Cristiane Costa; SANTINI, Daniel. Tarifa Zero, segregação e desigualdade social: um estudo de caso sobre a experiência de Mariana (MG). <i>Journal of Sustainable Urban Mobility</i>, v. 3, n. 1, p. 111-121, 20 mar. 2023.' },
@@ -1618,8 +2103,9 @@ function selecionaMunicipioBuscado() {
 
 if (inputBusca) {
   inputBusca.addEventListener('input', () => { atualizaSugestoes(); selecionaMunicipioBuscado(); });
-  inputBusca.addEventListener('change', selecionaMunicipioBuscado);
-  inputBusca.addEventListener('keydown', e => { if (e.key === 'Enter') selecionaMunicipioBuscado(); });
+  const buscaEAbre = () => { if (selecionaMunicipioBuscado()) abrirFicha(munSelecionado); };
+  inputBusca.addEventListener('change', buscaEAbre);
+  inputBusca.addEventListener('keydown', e => { if (e.key === 'Enter') buscaEAbre(); });
 }
 
 // ---------- 11.4: limpar tudo ----------
@@ -1646,6 +2132,7 @@ function limparTudo() {
   }
   if (inputBusca) { inputBusca.value = ''; listaBusca.innerHTML = ''; }
   renderDetail(null);
+  fecharFicha();
   resetZoom();
   render(); renderTZTable();
   atualizaBotaoLimpar();
@@ -1674,7 +2161,154 @@ document.querySelector('#tzTable tbody').addEventListener('click', e => {
   if (!tr || !tr.dataset.id) return;
   const m = MUNI.get(tr.dataset.id);
   renderDetail(m);
+  abrirFicha(m);
 });
+
+// ---------- 12.10: a ficha lateral (Apêndice D da tese) ----------
+// Formato decidido pelo autor em 23/10/2026: a ficha de cada uma das 187 políticas abre
+// num painel lateral ao selecionar o município (no mapa, na tabela ou pela busca, ao
+// confirmar o nome). O card continua com os dados e o mapa; a ficha traz o que a tese
+// documenta caso a caso. O conteúdo já chega filtrado de build_fichas.py: sem régua
+// analítica caso a caso, sem grupos econômicos e sem CNPJ.
+const esc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const linkifica = t => esc(t).replace(/(https?:\/\/[^\s)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+function fichaFor(m) { return (m && FICHAS.fichas[String(m.id)]) || null; }
+
+function renderFichaBloco(b) {
+  // bullets viram lista; o resto, parágrafos. A lista de obras ("Onde aparece") é longa
+  // e de consulta: vai recolhida.
+  let html = '', lista = [], obras = null;
+  const solta = () => { if (lista.length) { html += `<ul>${lista.map(x => `<li>${linkifica(x)}</li>`).join('')}</ul>`; lista = []; } };
+  for (const t of b.itens) {
+    if (/^Onde aparece/.test(t)) { solta(); obras = []; continue; }
+    if (obras && t.startsWith('•')) { obras.push(t.replace(/^•\s*/, '')); continue; }
+    if (t.startsWith('•')) { lista.push(t.replace(/^•\s*/, '')); continue; }
+    solta();
+    const m = t.match(/^([A-ZÀ-Ú][^.:]{2,48}[.:])\s+(.*)$/);
+    html += m ? `<p><b>${esc(m[1])}</b> ${linkifica(m[2])}</p>` : `<p>${linkifica(t)}</p>`;
+  }
+  solta();
+  if (obras && obras.length) {
+    html += `<details><summary>Onde o caso aparece na literatura (${obras.length} ${obras.length === 1 ? 'obra' : 'obras'})</summary>
+      <p style="color:var(--muted);font-size:11.5px;margin-top:6px;">Menções nos fichamentos da revisão sistemática — notas de leitura do autor, não os textos originais. Uma ou duas menções não distinguem caso analisado de nome numa lista.</p>
+      <ul>${obras.map(x => `<li>${esc(x)}</li>`).join('')}</ul></details>`;
+  }
+  return html;
+}
+
+function abrirFicha(m) {
+  const f = fichaFor(m);
+  const el = document.getElementById('fichaLateral');
+  if (!el) return;
+  if (!f) { fecharFicha(); return; }
+  document.getElementById('flNome').textContent = `${m.nome} – ${m.uf}`;
+  const sub = (m.tz_regua_sub && REGUA_IDX[m.tz_regua_sub] != null) ? REGUA[REGUA_IDX[m.tz_regua_sub]] : null;
+  document.getElementById('flTags').innerHTML =
+    `<span class="tag ${m.tz_status === 'Ativa' ? 'ativa' : m.tz_status === 'Encerrada' ? 'encerrada' : 'parcial'}">${esc(m.tz_status)}</span>`
+    + (sub ? ` <span class="tag parcial" style="background:${sub.cor};color:rgba(0,0,0,.78);">${sub.k} ${sub.rot}${m.tz_prov ? ' ◇' : ''}</span>` : '');
+  const resumo = f.resumo.length
+    ? `<h3>Ficha-resumo</h3><table class="fl-resumo">${f.resumo.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${linkifica(v)}</td></tr>`).join('')}</table>` : '';
+  const blocos = f.blocos.map(b => {
+    const corpo = renderFichaBloco(b);
+    if (!corpo) return '';
+    if (b.t === 'Literatura e fontes') return `<details><summary>${esc(b.t)}</summary><div style="margin-top:8px;">${corpo}</div></details>`;
+    return `<h3>${esc(b.t)}</h3>${corpo}`;
+  }).join('');
+  document.getElementById('flCorpo').innerHTML = resumo + blocos + `
+    <div class="fl-nota"><b>Documento de trabalho da tese</b> (Apêndice D, versão ${esc(FICHAS.versao)}). Cada classificação remete a um documento datado. Campo vazio é dado <b>não apurado</b>, não fenômeno inexistente. Por decisão do autor, ficam fora desta ficha a leitura de contrapartida e a posição na régua analítica (até a defesa da tese) e os grupos econômicos (que têm página própria, a <a href="rede-ge.html">Rede de empresas</a>).</div>`;
+  el.hidden = false;
+  el.querySelector('.fl-corpo').scrollTop = 0;
+}
+function fecharFicha() {
+  const el = document.getElementById('fichaLateral');
+  if (el) el.hidden = true;
+}
+document.getElementById('flFecha')?.addEventListener('click', fecharFicha);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharFicha(); });
+document.getElementById('detail')?.addEventListener('click', e => {
+  if (e.target.closest('.btn-ficha')) abrirFicha(munSelecionado);
+});
+
+// ---------- abas (23/10/2026) ----------
+// O painel misturava dados para explorar (mapa, ficha, tabela) com a comparação
+// TZ × Não-TZ e com o panorama, intercalados numa rolagem só. Separado em quatro
+// áreas; o filtro fica fixo acima das abas e vale para todas. A aba aberta fica no
+// endereço (#explorar, #comparar...), para um link levar direto a ela.
+const ABAS = ['panorama', 'explorar', 'comparar', 'sobre'];
+function abreAba(nome, semHash) {
+  if (!ABAS.includes(nome)) nome = 'panorama';
+  for (const a of ABAS) {
+    const pane = document.getElementById('tab-' + a);
+    const btn = document.getElementById('tabbtn-' + a);
+    const on = a === nome;
+    if (pane) pane.hidden = !on;
+    if (btn) { btn.classList.toggle('on', on); btn.setAttribute('aria-selected', on ? 'true' : 'false'); }
+  }
+  if (!semHash && location.hash !== '#' + nome) history.replaceState(null, '', '#' + nome);
+}
+document.querySelectorAll('.tabbtn').forEach(b => b.addEventListener('click', () => abreAba(b.dataset.tab)));
+window.addEventListener('hashchange', () => abreAba(location.hash.slice(1), true));
+abreAba(location.hash.slice(1), true);
+
+// ---------- celular (4.3, 23/10/2026) ----------
+// Na primeira verificação formal no celular, o leitor rolava 1.271 px — o texto de
+// apresentação inteiro e seis filtros empilhados — antes de ver a primeira aba. No
+// celular, a apresentação abre resumida (com "ler mais") e os filtros abrem fechados,
+// com a contagem de filtros ativos no título; no computador nada muda.
+const mqCel = window.matchMedia('(max-width:640px)');
+function ajustaCelular() {
+  const box = document.getElementById('filtrosBox');
+  if (box) box.open = !mqCel.matches;
+  const ht = document.querySelector('.htext');
+  const bt = document.getElementById('lerMais');
+  if (ht && bt) {
+    ht.classList.toggle('compacto', mqCel.matches);
+    bt.hidden = !mqCel.matches;
+    bt.textContent = 'Ler mais sobre a pesquisa ▾';
+  }
+}
+document.getElementById('lerMais')?.addEventListener('click', () => {
+  const ht = document.querySelector('.htext');
+  const aberto = ht.classList.toggle('compacto') === false;
+  document.getElementById('lerMais').textContent = aberto ? 'Recolher ▴' : 'Ler mais sobre a pesquisa ▾';
+});
+mqCel.addEventListener('change', ajustaCelular);
+ajustaCelular();
+
+// ---------- recorte ativo, visível em qualquer aba ----------
+// Com abas, o risco é o leitor esquecer que há um filtro ligado numa aba que não está
+// vendo. Cada filtro ativo vira uma etiqueta removível na barra fixa.
+const ROTULO_FILTRO = {
+  uf: ['ufFilter', 'UF'], faixa: ['faixaFilter', 'Porte'], regic: ['regicFilter', 'Hierarquia'],
+  modelo: ['modeloFilter', 'Prestação'], tzFilter: ['tzFilter', 'Recorte'], camada: ['camadaFilter', 'Régua'],
+  arranjo: [null, 'Arranjo'],
+};
+function renderRecorte() {
+  const el = document.getElementById('recorteChips');
+  if (!el) return;
+  const chips = [];
+  for (const k in ROTULO_FILTRO) {
+    if (!state[k]) continue;
+    const [selId, rot] = ROTULO_FILTRO[k];
+    const sel = selId && document.getElementById(selId);
+    const txt = sel && sel.selectedOptions[0] ? sel.selectedOptions[0].textContent : state[k];
+    chips.push(`<button class="chip" data-k="${k}" title="Remover este filtro">${rot}: <b>${txt}</b> ✕</button>`);
+  }
+  el.innerHTML = chips.length ? chips.join('') : '<span class="chip-vazio">Brasil inteiro, sem filtro</span>';
+  const res = document.getElementById('filtrosResumo');
+  if (res) res.textContent = chips.length ? `Filtros · ${chips.length} ${chips.length === 1 ? 'ativo' : 'ativos'}` : 'Filtros';
+}
+document.getElementById('recorteChips')?.addEventListener('click', e => {
+  const c = e.target.closest('.chip');
+  if (!c) return;
+  const k = c.dataset.k;
+  state[k] = '';
+  const selId = ROTULO_FILTRO[k][0];
+  if (selId) { const sel = document.getElementById(selId); if (sel) sel.value = ''; }
+  render(); renderTZTable(); atualizaBotaoLimpar();
+});
+
+document.getElementById('porteCtrl')?.addEventListener('change', renderBars);
 
 // ---------- tooltip (completo nos TZ; suprimido fora do recorte ativo) ----------
 const tooltip = document.getElementById('tooltip');
@@ -1749,6 +2383,7 @@ svg.addEventListener('click', e => {
   const m = MUNI.get(path.dataset.id);
   if (!m || !passesFilter(m)) return;
   renderDetail(m);
+  abrirFicha(m);       // 12.10: a ficha lateral abre na seleção (fecha se o município não tem ficha)
 });
 svg.addEventListener('dblclick', e => {
   const path = e.target.closest('path.mun');
@@ -1760,8 +2395,8 @@ svg.addEventListener('dblclick', e => {
 // ---------- init ----------
 populateSelects();
 atualizaBotaoLimpar();
-renderCrosstabs();
-renderModalStack();
+
 renderReferenciasAbnt();
 renderTZTable();
 render(); // desenha mapa, legenda, barras, cards, linha do tempo e score de população
+renderCurvaPorte();

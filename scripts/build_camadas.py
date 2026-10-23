@@ -52,6 +52,62 @@ LABELS = {
     '2e': 'Finalidade (estudo, saúde)',
 }
 
+# ---- resolução da chave: código IBGE, não "Município|UF" ----
+# Até 23/10/2026 o arquivo era chaveado por "Município|UF" e o painel reconciliava
+# com normKey() (acento e caixa). Isso escondia um caso: a planilha da régua grafa
+# "Embu das Artes" (nome oficial desde 2011) e a base do painel grafa "Embu"
+# (3515004). Normalizar acento não resolve nomes diferentes — a entrada 2c do
+# município ficou órfã, invisível no mapa, no card e na barra da régua, de v0.11
+# até aqui. Agora a chave é o código IBGE, como já fazem modal_por_municipio.json,
+# grupos_por_municipio.json e legislacao_tz.json, e quem não resolve GRITA.
+BASE_JSON = os.path.join(BASE_DIR, '..', 'build', 'municipios_dados.json')
+
+# Nomes que a planilha da régua e a base do painel grafam de formas diferentes.
+# Chave: nome normalizado|UF como aparece na PLANILHA. Valor: código IBGE.
+ALIAS = {
+    'EMBU DAS ARTES|SP': 3515004,   # base do painel ainda usa o nome antigo, "Embu"
+}
+
+def chave_nome(nome, uf):
+    s = unicodedata.normalize('NFD', str(nome))
+    s = ''.join(c for c in s if unicodedata.category(c) != 'Mn')
+    s = re.sub(r"[^A-Za-z0-9 ]", ' ', s)
+    s = re.sub(r'\s+', ' ', s).strip().upper()
+    return f"{s}|{str(uf).strip().upper()}"
+
+if not os.path.exists(BASE_JSON):
+    raise SystemExit(
+        "ERRO: ../build/municipios_dados.json não encontrado. Rode build_data.py antes:\n"
+        "      a chave do camadas_tz.json agora é o código IBGE, resolvido contra a base.")
+with open(BASE_JSON, encoding='utf-8') as f:
+    _base = json.load(f)
+NOME2COD = {}
+COD2NOME = {}
+for _r in _base:
+    _cod = int(_r['id'])
+    COD2NOME[_cod] = f"{_r['nome']}/{_r['uf']}"
+    NOME2COD[chave_nome(_r['nome'], _r['uf'])] = _cod
+
+nao_resolvidos = []
+
+def resolver_cod(nome, uf, cod_planilha=None):
+    """Devolve o código IBGE do município, ou None (registrando o caso)."""
+    if cod_planilha is not None:
+        try:
+            c = int(float(cod_planilha))
+            if c in COD2NOME:
+                return c
+        except (TypeError, ValueError):
+            pass
+    k = chave_nome(nome, uf)
+    if k in NOME2COD:
+        return NOME2COD[k]
+    if k in ALIAS and ALIAS[k] in COD2NOME:
+        return ALIAS[k]
+    nao_resolvidos.append(f"{nome}/{uf}")
+    return None
+
+
 def txt(v):
     if v is None or (isinstance(v, float) and pd.isna(v)):
         return None
@@ -83,7 +139,10 @@ for _, r in df.iterrows():
     subs = txt(r.get('Subtipo'))
     if not (mun and uf and subs):
         continue
-    chave = f"{mun}|{uf}"
+    cod = resolver_cod(mun, uf, r.get('Código IBGE'))
+    if cod is None:
+        continue
+    chave = str(cod)
     for sub in [s.strip() for s in subs.split('+')]:
         if sub not in LABELS:
             print(f"  [aviso] subtipo fora da régua, ignorado: {sub!r} ({chave})")
@@ -126,7 +185,10 @@ if os.path.exists(MESTRE):
         mun, uf = txt(r.get('Município')), txt(r.get('UF'))
         if not (mun and uf and aba == '2 Parcial' and sub in LABELS):
             continue
-        chave = f"{mun}|{uf}"
+        cod = resolver_cod(mun, uf, r.get('Código IBGE') or r.get('cod_ibge'))
+        if cod is None:
+            continue
+        chave = str(cod)
         if chave in cam:
             continue
         cam[chave] = [{'camada': sub,
@@ -139,15 +201,24 @@ if complementados:
     for c in complementados:
         print("   ", c)
 
-cam = {k: cam[k] for k in sorted(cam)}
+cam = {k: cam[k] for k in sorted(cam, key=int)}
 with open(OUT, 'w', encoding='utf-8') as f:
     json.dump(cam, f, ensure_ascii=False, indent=2)
     f.write('\n')
 
 from collections import Counter
 c = Counter(e['camada'] for v in cam.values() for e in v)
-print(f"camadas_tz.json: {len(cam)} municípios, {n_linhas} entradas de camada")
+n_entradas = sum(len(v) for v in cam.values())
+print(f"camadas_tz.json: {len(cam)} municípios, {n_entradas} entradas de camada")
 for k in sorted(LABELS):
     print(f"   {k} {LABELS[k]:28} {c.get(k, 0)}")
 print(f"   com flag de provisório: {provisorios}")
 print(f"   municípios com 2+ camadas: {sum(1 for v in cam.values() if len(v) > 1)}")
+if nao_resolvidos:
+    print("  [ERRO] municípios que não casaram com a base do painel "
+          "(entrariam como chave órfã e sumiriam da tela):")
+    for n in sorted(set(nao_resolvidos)):
+        print("   ", n)
+    raise SystemExit("camadas_tz.json NÃO foi considerado válido: resolva os nomes acima "
+                     "(acrescente ao ALIAS ou corrija a planilha) e rode de novo.")
+print("   todos os municípios resolvidos por código IBGE")

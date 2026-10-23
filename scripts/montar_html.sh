@@ -48,10 +48,21 @@ OUT=../painel.html
   cat camadas_tz.json
   printf '</script>\n<script id="data-modal" type="application/json">\n'
   cat modal_por_municipio.json
-  printf '</script>\n<script id="data-grupos" type="application/json">\n'
-  cat grupos_por_municipio.json
+  # data-grupos retirado em 23/10/2026: a análise de grupos econômicos sai do Painel
+  # Brasil e vai para a Rede de empresas (decisão do autor). grupos_por_municipio.json fica
+  # no repositório para ser usado lá.
   printf '</script>\n<script id="data-legislacao" type="application/json">\n'
   cat legislacao_tz.json
+  printf '</script>\n<script id="data-arranjo" type="application/json">\n'
+  cat arranjo_tz.json
+  printf '</script>\n<script id="data-curva" type="application/json">\n'
+  cat curva_porte.json
+  printf '</script>\n<script id="data-fichas" type="application/json">\n'
+  cat fichas_tz.json
+  printf '</script>\n<script id="data-remun" type="application/json">\n'
+  cat remuneracao_tz.json
+  printf '</script>\n<script id="data-custeio" type="application/json">\n'
+  cat custeio_tz.json
   printf '</script>\n<script id="data-od" type="application/json">\n'
   cat od_por_municipio.json
   printf '</script>\n<script>\n'

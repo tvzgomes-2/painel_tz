@@ -2,9 +2,9 @@
 
 Adotada em 25/07/2026. Documento canônico da regra — o CHANGELOG.md registra o histórico de mudanças por versão, mas a regra em si vive aqui.
 
-**Escopo: por página, não por site.** O repositório é um site com páginas independentes (Painel Brasil, Rede da ARS, futuras) — cada uma com seu próprio banco de dados e seu próprio ciclo de vida. A regra abaixo é uma só, mas o número de versão é contado separadamente por página (ex.: Painel Brasil pode estar em v0.3 enquanto Rede da ARS ainda não tem nenhuma versão publicada).
+**Escopo: por página, não por site.** O repositório é um site com páginas independentes (Painel Brasil, Rede de empresas, futuras) — cada uma com seu próprio banco de dados e seu próprio ciclo de vida. A regra abaixo é uma só, mas o número de versão é contado separadamente por página (ex.: Painel Brasil pode estar em v0.3 enquanto a Rede de empresas ainda não tinha nenhuma versão publicada).
 
-O site como um todo não tem número de versão — tem uma **era**, nomeada com um modo de transporte, em ordem alfabética (como o Android fazia com sobremesas: Cupcake, Donut, Eclair...) — a primeira letra disponível de cada vez, sem precisar planejar a lista inteira com antecedência. A era muda só em eventos "major" no sentido definido abaixo (novo painel irmão publicado, ou redesign completo de alguma página) — não a cada patch/minor de uma página isolada. Era atual: **Andarilho** (A — desde a publicação do hub com 2 páginas, 25/07/2026). Próxima letra: B.
+O site como um todo não tem número de versão — tem uma **era**, nomeada com um modo de transporte, em ordem alfabética (como o Android fazia com sobremesas: Cupcake, Donut, Eclair...) — a primeira letra disponível de cada vez, sem precisar planejar a lista inteira com antecedência. A era muda só em eventos "major" no sentido definido abaixo (novo painel irmão publicado, ou redesign completo de alguma página) — não a cada patch/minor de uma página isolada. Era atual: **Bicicleta** (B — desde 23/10/2026, com a publicação de uma página irmã, a Rede de empresas (com a aba Além do ônibus; antes chamada Rede da ARS), no lançamento de teste; nome escolhido pelo autor). Antes: **Andarilho** (A — da publicação do hub com 2 páginas, 25/07/2026, a 23/10/2026). Próxima letra: C.
 
 ## Fase de prototipagem — v0.x
 

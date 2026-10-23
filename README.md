@@ -13,17 +13,15 @@ Painel interativo de trabalho, parte da pesquisa de doutorado sobre Tarifa Zero 
 
 ## O que é
 
-Site com páginas independentes da pesquisa de doutorado. Hoje tem uma página publicada:
+Site com páginas independentes da pesquisa de doutorado (Era Bicicleta, lançamento de teste de 23/10/2026):
 
-- **Painel Brasil** (`painel.html`, tag "TZ") — mapa coroplético e comparações estatísticas dos 5.570 municípios do Brasil, cruzando a base-mestre de Tarifa Zero universal (175 municípios: 165 ativas + 10 encerradas — atualizado 04/09/2026; mais municípios com TZ parcial pela régua descritiva — ver notas no painel) com uma base municipal integrada de ~230 variáveis: FINBRA/Siconfi, PIB (IBGE), frota (DENATRAN), MUNIC 2020, REGIC 2018, Censo 2022, PEMOB/SIMU (Min. Cidades), OSM, TSE 2024, NTU.
+- **Painel Brasil** (`painel.html`, tag "TZ") — a Tarifa Zero no Brasil: as políticas universais e parciais classificadas pela régua descritiva, o mapa dos 5.570 municípios, a comparação com o restante do país (inclusive dentro da mesma faixa de porte), o arranjo contratual, a remuneração do operador e a ficha de cada caso. Cruza a base-mestre de Tarifa Zero com uma base municipal integrada (FINBRA/Siconfi, PIB, frota, MUNIC, REGIC, Censo 2022, PEMOB/SIMU, OSM, TSE, NTU).
+- **Rede de empresas** (`rede-ge.html`, tag "GE") — os 327 grupos econômicos do transporte coletivo, em duas abas: **Quem controla** (a rede societária interativa, as unidades de controle, linhagens e federações, a concentração do capital — Tabela 5 da tese — e onde os grupos têm endereço) e **Além do ônibus** (as holdings sócias das empresas dos grupos e as empresas de outros setores a que os sócios delas chegam — Seção 6.4).
+- **Verbetes** (`verbetes.html`) e **Pesquisa colaborativa** (`pesquisa.html`).
 
-  Desde a v0.5 o painel também mostra **os grupos econômicos do transporte por município** (327 grupos em 796 municípios, levantamento societário/CNPJ próprio da pesquisa) e a **partição modal de cada município** (Censo 2022, todos os 5.570). Sobre os grupos, duas ressalvas que o próprio painel repete: a cobertura de 796 municípios não é amostra aleatória do país, e aparecer num município é presença societária mapeada — não prova de que o grupo opera hoje o serviço, nem de que atuou contra a Tarifa Zero ali. Por decisão do autor, o painel expõe apenas o *nome* do grupo.
+Nenhuma página publica nome de sócio pessoa física, CPF ou CNPJ. Vínculo societário mapeado não é prova de controle nem de atuação contra a Tarifa Zero.
 
-Em construção, ainda não publicada:
-
-- **Rede da ARS** (planejado `rede-ge.html`, tag "GE") — estrutura de poder dos grupos econômicos do transporte coletivo (rede societária/CNPJ).
-
-Cada página é um arquivo HTML autocontido (dados embutidos) — sem backend, sem dependências externas. Cada uma tem seu próprio número de versão (ver [`VERSIONING.md`](./VERSIONING.md)); o site como um todo é identificado por uma "era" (nome grego), trocada só em eventos grandes (novo painel irmão publicado, ou redesign completo).
+Cada página é um arquivo HTML autocontido (dados embutidos) — sem backend, sem dependências externas. Cada uma tem seu próprio número de versão (ver [`VERSIONING.md`](./VERSIONING.md)); o site como um todo é identificado por uma "era" (nome de modo de transporte, em ordem alfabética), trocada só em eventos grandes (novo painel irmão publicado, ou redesign completo).
 
 ## Ver online
 

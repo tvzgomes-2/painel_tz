@@ -1,0 +1,72 @@
+  <div class="paneintro">
+    <p>A aba <a href="#" class="ponte-aba" data-aba="controle" style="margin:0">Quem controla</a> olha as empresas de ônibus e os sócios que elas têm em comum. Esta aba sobe uma camada: <b>quem é sócio das empresas dos grupos</b> — quase sempre uma holding — e <b>em que outras empresas, de qualquer setor, os sócios dessas holdings também estão</b>. É a Seção 6.4 da tese: entre a família e a operadora ficam holdings, sociedades anônimas de participação e capital estrangeiro; para além da operadora, imobiliárias, construtoras, revendas de veículos, energia e, em poucos casos, finanças em sentido estrito. A leitura que a tese propõe é a do ônibus como <i>ativo-âncora</i>: o contrato de operação daria escala, crédito e acesso à bilhetagem sobre os quais outros negócios se apoiam.</p>
+    <p><b>O que esta aba não mostra:</b> nenhum nome de sócio pessoa física, CPF ou CNPJ. A pessoa que liga a holding à empresa de outro setor fica oculta — a aba diz só quantos sócios as duas têm em comum. Razões sociais que levam nome de pessoa saem mascaradas. E <b>vínculo de sócio não é controle</b>: o cadastro não informa a parcela de cada sócio.</p>
+  </div>
+  <div class="gefind" id="patFind"></div>
+
+  <div class="panel">
+    <h2>Como se lê a cadeia</h2>
+    <p class="sub">Três camadas, contadas a partir da empresa de ônibus. O cadastro da Receita registra quem é sócio de quem; a aba segue esse fio, sempre por empresa.</p>
+    <svg class="pat-cadeia" viewBox="0 0 980 150" role="img" aria-label="Cadeia: grupo, empresa de ônibus, holding, sócio oculto, empresa de outro setor">
+      <defs><marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#8a8a98"/></marker></defs>
+      <g font-size="12.5">
+        <rect x="10" y="45" width="150" height="58" rx="10" fill="#F5E400" fill-opacity=".14" stroke="#F5E400"/><text x="85" y="70" text-anchor="middle" fill="#F5E400" font-weight="700">Grupo econômico</text><text x="85" y="88" text-anchor="middle" fill="#9a9aa6" font-size="11">327 grupos (GE)</text>
+        <rect x="205" y="45" width="160" height="58" rx="10" fill="#4F7FD4" fill-opacity=".14" stroke="#4F7FD4"/><text x="285" y="70" text-anchor="middle" fill="#e8e8ee" font-weight="700">Empresa de ônibus</text><text x="285" y="88" text-anchor="middle" fill="#9a9aa6" font-size="11">1.040 empresas</text>
+        <rect x="410" y="45" width="160" height="58" rx="10" fill="#FF2D6B" fill-opacity=".14" stroke="#FF2D6B"/><text x="490" y="70" text-anchor="middle" fill="#e8e8ee" font-weight="700">Holding sócia</text><text x="490" y="88" text-anchor="middle" fill="#9a9aa6" font-size="11" id="cadH">361 holdings</text>
+        <circle cx="640" cy="74" r="22" fill="#2a2a33" stroke="#6b6b78" stroke-dasharray="3 3"/><text x="640" y="79" text-anchor="middle" fill="#9a9aa6" font-size="16">?</text><text x="640" y="122" text-anchor="middle" fill="#9a9aa6" font-size="11">sócio da holding</text><text x="640" y="137" text-anchor="middle" fill="#9a9aa6" font-size="11">(oculto)</text>
+        <rect x="710" y="45" width="260" height="58" rx="10" fill="#6FBE44" fill-opacity=".14" stroke="#6FBE44"/><text x="840" y="70" text-anchor="middle" fill="#e8e8ee" font-weight="700">Empresa de outro setor</text><text x="840" y="88" text-anchor="middle" fill="#9a9aa6" font-size="11" id="cadE">1.164 empresas, 28 setores</text>
+        <line x1="162" y1="74" x2="203" y2="74" stroke="#8a8a98" stroke-width="1.6" marker-end="url(#seta)"/><text x="182" y="36" text-anchor="middle" fill="#9a9aa6" font-size="10.5">reúne</text>
+        <line x1="408" y1="74" x2="367" y2="74" stroke="#8a8a98" stroke-width="1.6" marker-end="url(#seta)"/><text x="388" y="36" text-anchor="middle" fill="#9a9aa6" font-size="10.5">é sócia</text>
+        <line x1="616" y1="74" x2="572" y2="74" stroke="#8a8a98" stroke-width="1.6" marker-end="url(#seta)"/><text x="595" y="36" text-anchor="middle" fill="#9a9aa6" font-size="10.5">é sócio</text>
+        <line x1="663" y1="74" x2="708" y2="74" stroke="#8a8a98" stroke-width="1.6" marker-end="url(#seta)"/><text x="686" y="36" text-anchor="middle" fill="#9a9aa6" font-size="10.5">é sócio</text>
+        <text x="10" y="20" fill="#9a9aa6" font-size="11">1º nível</text><text x="410" y="20" fill="#9a9aa6" font-size="11">2º nível</text><text x="710" y="20" fill="#9a9aa6" font-size="11">2º nível, outras empresas</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>Em que setores</h2>
+    <p class="sub">As empresas de qualquer setor em que os sócios das holdings também são sócios, pela atividade principal no cadastro. A tese chama atenção para uma armadilha: "serviços financeiros" é, quase sempre, outra holding — aqui a categoria vem separada entre <b>holdings e participações</b> e <b>finanças em sentido estrito</b> (banco, securitizadora, crédito, seguro, gestora). Barra cheia: empresas ativas; clara: baixadas, inaptas ou suspensas. Clique num setor para filtrar a lista do grupo abaixo.</p>
+    <div class="patctl"><label><input type="checkbox" id="soAtivas"> só empresas ativas</label></div>
+    <div id="patSetores"></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;" id="patGrupo">
+    <h2>Explorar um grupo</h2>
+    <p class="sub">Escolha um grupo para ver as holdings sócias das suas empresas e as empresas de outros setores a que os sócios dessas holdings chegam. Na rede: <b style="color:#F5E400;">●</b> o grupo, <b style="color:#FF2D6B;">●</b> as holdings, e as empresas de outros setores coloridas pelo setor; a linha entre holding e empresa é um ou mais sócios em comum. Role para aproximar (os nomes das holdings aparecem ao aproximar), arraste para mover, passe o mouse para ver cada empresa.</p>
+    <div class="patctl">
+      <label>Grupo <input id="patBusca" list="patBuscaList" placeholder="nome do grupo ou nome de mercado…" autocomplete="off" spellcheck="false"><datalist id="patBuscaList"></datalist></label>
+      <label>Setor <select id="patSetor"><option value="">todos</option></select></label>
+    </div>
+    <div id="patVerRede" style="margin:-4px 0 8px;"></div>
+    <div class="patkpi" id="patKpi"></div>
+    <div class="patgrid">
+      <div class="patwrap"><svg id="patSvg"></svg><div class="zoombtns"><button id="pzMais">+</button><button id="pzMenos">−</button><button id="pzFit">⤢</button></div></div>
+      <div><div class="emplista" id="patLista"></div></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>Os grupos com mais negócios fora do ônibus</h2>
+    <p class="sub">Ordene clicando no cabeçalho; clique numa linha para explorar o grupo. Contagem de empresas distintas, ativas ou não, a que os sócios das holdings do grupo chegam.</p>
+    <div class="getabwrap"><table class="getab" id="patTabela"><thead></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>Onde os grupos se encontram fora do ônibus</h2>
+    <p class="sub">Empresas de outros setores em que sócios de holdings de unidades de controle diferentes estão juntos. É o segundo nível da rede estendida: na tese (Seção 6.3 e Figuras 16 a 18), a fusão de ilhas aparece com mais força no terceiro nível, que esta aba não traz. Encontro num negócio não é controle comum.</p>
+    <ul class="blocos" id="patBlocos"></ul>
+  </div>
+
+  <details class="panel" style="margin-top:16px;" open>
+    <summary>Notas metodológicas e limites de leitura</summary>
+    <div class="notes">
+      <p><b>De onde vem o dado.</b> Quadro de sócios da Receita Federal (dados abertos, recorte de maio de 2024). O 1º nível são os sócios das 1.040 empresas dos 327 grupos (Tabela mestre v5): 784 vínculos de sócio pessoa jurídica levam a 487 CNPJs — 126 são empresas dos próprios grupos, sócias de outras, e 361 são holdings fora delas. A tese registra 360 e anota que a recontagem de 15/10/2026 acha 361; a aba usa 361. O 2º nível são os sócios dessas holdings e, deles, as empresas de qualquer setor em que também aparecem: as 1.164 do levantamento de agosto de 2026, classificadas pela seção da CNAE principal.</p>
+      <p><b>Vínculo de sócio não é controle.</b> O cadastro público não traz a parcela de cada sócio, e uma pessoa pode ter papéis distintos e não relacionados em cada empresa. A aba mostra que o vínculo existe, não que o grupo controle a empresa de outro setor.</p>
+      <p><b>O que o método não vê.</b> As sociedades anônimas registram no quadro de sócios só os administradores — por isso nenhuma das empresas dos grupos tem "S.A." na razão social e a forma jurídica que dá acesso ao mercado de capitais fica fora da rede. Fundos de investimento não aparecem no cadastro como sócios. Nenhum grupo tem ação em bolsa. Negócios conhecidos pela imprensa e ausentes do cadastro (Quadro 20 da tese) não estão aqui.</p>
+      <p><b>O alcance do 2º nível.</b> As empresas de outros setores foram levantadas a partir dos sócios das holdings que funcionam como elo dos grupos médios e grandes; para as demais holdings, a aba mostra a holding, mas pode não mostrar as empresas a que os sócios dela chegam. O 3º nível (sócios das empresas de outros setores) não está nesta versão.</p>
+      <p><b>Razões sociais com nome de pessoa saem mascaradas.</b> O teste cruza a razão social com os nomes dos sócios pessoa física de todas as camadas e marca padrões de empresa individual ("Fulano & Cia", CPF na razão social). É conservador: mascara também alguns nomes que talvez não sejam de pessoa. Nenhum CNPJ é publicado. Situação processual (falência, recuperação judicial) sai da razão social, como na aba Quem controla.</p>
+      <p><b>"Holdings e participações" e "finanças".</b> Das 255 empresas classificadas como serviços financeiros, 242 são holdings (CNAE 64.62 e 64.63) e 13 são finanças em sentido estrito — os mesmos números da tese.</p>
+    </div>
+  </details>
+

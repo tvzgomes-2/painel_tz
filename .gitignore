@@ -18,3 +18,6 @@ build/
 
 # Cache do Python
 __pycache__/
+
+# Copia do painel de grupos retirado do Painel Brasil em 23/10/2026 (consulta interna, nao publicar)
+scripts/reserva-rede-ge_painel-grupos.html

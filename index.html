@@ -47,29 +47,35 @@
   footer .flogos a:hover, footer .fapoio a:hover{opacity:1;text-decoration:none;}
   footer .era-tag{display:inline-block;background:var(--amarelo);color:#111;font-size:10px;font-weight:800;
     text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:3px;margin-right:8px;vertical-align:middle;}
+  /* Faixa de versão de teste (23/10/2026, decisão do autor para o lançamento de teste) */
+  .faixa-teste{background:#1d1a05;border-bottom:1px solid rgba(245,228,0,.45);color:#f2ecc0;font-size:12.5px;line-height:1.5;padding:8px 16px;text-align:center;}
+  .faixa-teste b{color:#F5E400;letter-spacing:.04em;text-transform:uppercase;font-size:11.5px;margin-right:6px;}
+  .faixa-teste a{color:#F5E400;text-decoration:underline;white-space:nowrap;}
+  @media (max-width:640px){ .faixa-teste{font-size:11.5px;text-align:left;padding:7px 16px;} }
 </style>
 </head>
 <body>
+<div class="faixa-teste" role="note"><b>Versão de teste</b>Os números e textos deste site estão em validação e acompanham uma tese de doutorado ainda não defendida — podem mudar. Correções e contribuições: <a href="pesquisa.html">pesquisa colaborativa →</a></div>
 <div class="wrap">
   <h1>Transporte Público em <span class="hl">Crise</span></h1>
   <p class="subtitle">A influência dos grupos econômicos nas experiências de Tarifa Zero no Brasil</p>
-  <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a <b>estrutura de poder dos grupos econômicos</b> do transporte coletivo e a <b>difusão espacial das políticas de gratuidade universal</b> no Brasil. A hipótese central é que os grupos econômicos restringem a difusão da TZ nos municípios de maior interesse comercial, atuando como barreira sistêmica — enquanto a política floresce nas franjas do sistema, pouco atrativas ao capital. Este site reúne os instrumentos exploratórios de trabalho da pesquisa.</p>
+  <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a <b>estrutura de poder dos grupos econômicos</b> do transporte coletivo e a <b>difusão espacial das políticas de gratuidade universal</b> no Brasil. A hipótese não é a de uma oposição direta dos grupos ao financiamento público: é a de que a difusão da TZ é restringida pela <b>incompatibilidade entre o desenho da política e o arranjo contratual vigente</b> — onde o mercado é comercialmente atrativo, só avança o desenho que preserva a receita e a propriedade do operador; nas franjas do sistema, onde não há arranjo a preservar, a gratuidade avança em qualquer desenho. Este site reúne os instrumentos exploratórios de trabalho da pesquisa.</p>
 
   <div class="paginas">
     <a class="card" href="painel.html">
       <span class="tag">TZ</span>
       <h2>Painel Brasil</h2>
-      <p>Panorama nacional da Tarifa Zero: mapa, 5.570 municípios, comparações estatísticas e linha do tempo das adoções.</p>
+      <p>Panorama nacional da Tarifa Zero: as 174 políticas universais e os arranjos parciais classificados pela régua, o mapa dos 5.570 municípios, a comparação com o restante do país e o arranjo contratual de cada caso.</p>
     </a>
-    <div class="card future" title="Em construção — ainda não publicado">
+    <a class="card" href="rede-ge.html">
       <span class="tag" style="background:var(--azul);">GE</span>
-      <h2>Rede da ARS</h2>
-      <p>Estrutura de poder dos grupos econômicos do transporte coletivo (em construção — aparece aqui quando estiver pronto).</p>
-    </div>
+      <h2>Rede de empresas</h2>
+      <p>Quem controla o transporte coletivo no Brasil: os 327 grupos econômicos, como se ligam por vínculo societário, quanto concentram do capital e onde têm endereço — e, além do ônibus, as holdings sócias e os negócios dos grupos fora do transporte. Nenhum dado de sócio pessoa física.</p>
+    </a>
     <a class="card" href="verbetes.html">
       <span class="tag" style="background:var(--verde);color:#0E0E10;">Conceitos</span>
       <h2>Verbetes</h2>
-      <p>Os conceitos centrais da pesquisa, explicados um por um: Tarifa Zero, Grupos econômicos e as réguas de medição.</p>
+      <p>Os conceitos centrais da pesquisa, explicados um por um: Tarifa Zero, Grupos econômicos, o portão de acesso e as duas réguas de classificação.</p>
     </a>
   </div>
 
@@ -91,7 +97,7 @@
         <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
       </div>
     </div>
-    <span class="era-tag">Era Andarilho</span>Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a> · Histórico de versões por página no <a href="./CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a>.
+    <span class="era-tag">Era Bicicleta</span>Código, dados e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a> · Histórico de versões por página no <a href="./CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a>.
   </footer>
 </div>
 </body>

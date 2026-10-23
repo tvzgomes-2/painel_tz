@@ -1,12 +1,53 @@
 # Changelog e notas de metodologia
 
-O site tem páginas independentes, cada uma com seu próprio número de versão (ver arquitetura em `ROADMAP.md` § 0). **Tudo abaixo é sobre a página Painel Brasil (`painel.html`, tag TZ)** — é a única página com histórico até agora. Quando `rede-ge.html` (Rede da ARS) for publicada, ganha sua própria seção de changelog, separada desta.
+O site tem páginas independentes, cada uma com seu próprio número de versão (ver arquitetura em `ROADMAP.md` § 0). Cada página tem a sua seção: **Rede de empresas** primeiro (a mais nova) e **Painel Brasil** em seguida.
+
+# Rede de empresas (`rede-ge.html`, tag GE; até 23/10/2026, "Rede da ARS")
+
+## v0.1 (atual — 2026-10-23, primeira versão publicada, Era Bicicleta)
+
+**Nome:** a página se chamava "Rede da ARS" até a publicação; o autor a renomeou para **Rede de empresas** (23/10/2026). ARS (análise de redes sociais) segue como nome do método, dentro dela. O arquivo continua `rede-ge.html`.
+
+Primeira versão da página irmã do Painel Brasil, a partir do rascunho de julho (Fase 9 do ROADMAP). Leva ao site o Capítulo 6 da tese — quem controla o transporte coletivo, quanto concentra e onde está — e recebe a análise de grupos econômicos que saiu do Painel Brasil em 23/10/2026.
+
+- **O que a tese encontra**, no alto da página: 327 grupos com 1.039 das 7.681 empresas do recorte; 316 unidades de controle; os 26 grupos que detêm metade do capital declarado (22 unidades, entre 19 e 26 conforme a confiança); e estabelecimento em 1.042 municípios, onde vivem 136,8 milhões de pessoas.
+- **A rede interativa** (pedido do autor, 23/10: "a rede está meio tosca, fixa, não conseguimos dar zoom"): zoom pela roda, pelos botões e por pinça no celular; arraste do fundo para mover a vista e de um grupo para soltá-lo da vizinhança (a simulação de forças o devolve ao lugar com suavidade); botão de tela cheia (Esc sai); busca de grupo por rótulo ou nome de mercado, que centra e acende a vizinhança. O layout passa a ser calculado na página — Fruchterman-Reingold por componente, com folga pelo raio e atração da ligação fraca reduzida pelo grau, para as "panelinhas" de sócio compartilhado não virarem novelo — e os componentes são empacotados na proporção do quadro. Controles: tamanho por nº de empresas ou capital; cor por topo do capital, unidade de controle, linhagem, federação ou componente (com legenda); ligar/desligar cada tipo de ligação e exigir um mínimo de sócios em comum; mostrar os 235 grupos sem ligação numa grade sob a rede. Rótulos pelo nome de mercado, aparecendo conforme o zoom.
+- **Forças ajustáveis** (pedido do autor: "uma unidade de gravidade e repulsão para os grupos se reorganizarem"): modo "forças livres", com controles de repulsão, gravidade e comprimento da ligação que reorganizam a rede ao vivo; "Reorganizar" embaralha e deixa as forças acharem o arranjo; "Desenho original" volta ao empacotamento por componente. Com os grupos sem ligação ligados, eles entram na simulação.
+- **Medidas da rede (ARS)**, calculadas na página: densidade, grau médio, componentes, maior componente, os grupos mais conectados (grau) e os mais intermediários (intermediação de Brandes, sem peso), com a ressalva de que ligação por sócio compartilhado é vínculo fraco. A ficha ganha a posição do grupo na intermediação e o componente.
+- ~~**A rede como janela**, e não tela cheia (9.6): os 92 grupos com alguma ligação, em 16 componentes desenhados à parte e empacotados — o layout de 22/10, num cálculo só, espalhava os componentes até as bordas. Ligação rosa = mesmo bloco de controle (43); cinza = sócio compartilhado (221). O layout é calculado no build (9.4).~~ (superado pela rede interativa acima; o layout do build segue como semente)
+- **Ficha do grupo**: empresas, empresa central, contagens de sócios, sócios-ponte e de articulação, densidade e ligações (ampliada abaixo).
+- **Tabela dos 327 grupos**, ordenável, e **"Onde os grupos estão"**: os de maior alcance territorial e a busca por município — o que o Painel Brasil mostrava, agora com a Tabela mestre v5 (out/2026) em vez do levantamento de ago/2026 (796 municípios).
+- **Aba "Além do ônibus"** (Seção 6.4), pedida pelo autor em 23/10 ("adicionar a camada de empresas fora das de transporte — holdings, fundos, financeiras, construtoras") e, no mesmo dia, juntada a esta página ("queria que esses dois fossem a mesma página"): a página passa a ter duas abas, **Quem controla** e **Além do ônibus**, com links de ida e volta entre a ficha do grupo nas duas. Recalculado e conferido com a tese: 784 vínculos de sócio pessoa jurídica levam a 487 CNPJs — 126 empresas dos próprios grupos e 361 holdings (269 limitadas, 84 S.A. fechadas, 8 sociedades simples; nenhuma aberta, nenhum fundo; a tese diz 360 e anota a recontagem de 361); 1.164 empresas de 28 setores fora do transporte com sócio em comum com as holdings (863 ativas); das 255 "financeiras", 242 são holdings e 13 finanças em sentido estrito. A aba traz a cadeia em desenho (grupo → empresa de ônibus ← holding ← sócio oculto → empresa de outro setor), os setores, a rede grupo–holdings–empresas de cada grupo com a lista por setor, o ranking dos grupos e os encontros entre unidades de controle fora do ônibus (2º nível; a tese lê a fusão no 3º). A pessoa que liga a holding à empresa de outro setor nunca aparece (só a contagem de sócios em comum); razão social com nome de pessoa sai mascarada (36); situação processual sai da razão social. Dados: `build_patrimonio.py` → `patrimonio.json`; lógica em `logic-pat.js`, seção em `secao-alem.html`, montados por `montar_rede_ge.sh`.
+- **Fronteira de exposição**, verificada por auditoria no build: nenhum nome de pessoa física, CPF ou CNPJ, nenhuma narrativa de conduta e nenhum cruzamento grupo × adoção da Tarifa Zero, que é o teste da hipótese. **Nome de mercado e capital social por grupo voltam** (decisão do autor, 23/10: "reverter os dois"). O nome de mercado sai limpo: só o nome comercial, sem os parênteses e as notas da tabela mestre (nomes de sócios, rodadas de auditoria, falência, venda, licitação, "vínculo suspeito"); onde o nome comercial é o nome do fundador ou controlador (Grupo Jacob Barata), ele é publicado como marca (decisão do autor); o tipo da linhagem Lessa Carvalho, que apontava para uma pessoa, vai na forma neutra "partilha familiar" (decisão do autor); "em recuperação judicial" sai das razões sociais. O build falha se reaparecer nome de pessoa conhecido ou palavra de narrativa.
+- **Do grupo à federação** (pedido do autor: "incorporar os agrupamentos"): a escala de confiança A–E, com o efeito de cada grau na contagem; o funil da concentração em cada leitura, que reproduz a Tabela 5 da tese exatamente (327/26/0,683 · 316/22/0,697 · 306/19/0,711 · 243/6/0,797, maior 22,1%) — C e D são encadeados por união-busca, e o Gini conta as unidades de capital zero; as 22 unidades de controle com metade do capital; as 3 famílias de controle (A), as 14 linhagens (C) e as 20 federações (D), todas clicáveis.
+- **Ficha ampliada**: nome de mercado, capital (R$ mi e % do setor), unidade de controle com o grau e os grupos fundidos, família de controle, linhagem e federação (marcada como articulação, não controle).
+- **Mapa dos municípios do grupo selecionado** (pedido do autor): contornos das UFs e um ponto por município com estabelecimento, sobre os 1.042 de presença em cinza, e a **lista completa** agrupada por UF (antes cortada em 14). Para unidades com mais de um grupo, alterna entre "este grupo" e "toda a unidade". No computador a ficha fica fixa ao lado da rede.
+- **Tabela** ganha nome de mercado (sob o rótulo), capital, unidade de controle; passa a abrir ordenada por capital.
+- **Achado para a tese:** a página conta 1.042 municípios com presença de grupo e a tese, 1.040; a diferença são Poxoréu/MT e Santa Izabel do Pará/PA, que não casaram por grafia no cruzamento da tese. [A CONFIRMAR]
+
+---
+
+# Painel Brasil (`painel.html`, tag TZ)
 
 ## Política de versionamento
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.12 (atual — 2026-10-23)
+## v0.13 (atual — 2026-10-23, lançamento de teste, Era Bicicleta)
+
+**Rodada de alinhamento com a tese (r92) para o lançamento de teste.** O painel deixa de ser uma página longa e vira **quatro abas** — Panorama, Explorar, Comparar TZ × Não-TZ e Sobre os dados —, com o filtro fixo no topo e o recorte ativo em etiquetas removíveis (decisão do autor). Toda a página ganha a faixa de "versão de teste".
+
+- **Verbetes, glossário e notas reescritos contra a r92.** Saem os números de julho e a numeração antiga das camadas; a régua analítica volta a ser o plano de dois eixos, só como conceito, sem município (12.6, adiado até a defesa).
+- **Régua:** Embu volta (chave por código IBGE; o build falha se um município não casar) e a contagem de parciais fecha com a tese (44); os 31 subtipos por hipótese pré-e-SIC ganham ◇ (12.2); o piso da régua (gratuidade de 65+ e no dia da eleição) aparece sob o gráfico (12.8); a prosa do card passa a ser escrita pelo portão de acesso — o card de São Caetano do Sul dizia "gratuito para qualquer usuário", falso desde 15/07/2026.
+- **Arranjo contratual** (12.4), **adoção por porte** entre todos os municípios e entre os 1.488 com indício de sistema (12.9, só agregados — o índice é de artigo inédito), **ficha lateral do município** (12.10, Apêndice D) e **remuneração do operador e custeio** (12.11, Capítulo 7 e Seção 7.5), sem contrapartida nem posição no plano analítico.
+- **Comparar:** tudo responde ao recorte, e o controle "comparar dentro da mesma faixa de porte", ligado por padrão, reproduz o Gráfico 15 da tese (de 100 a 500 mil habitantes, 11,8% × 19,2% de uso do ônibus).
+- **Região e UF redesenhadas** (UFs dentro da região; camada 1 — o Sudeste passa de 118 para os 113 da tese).
+- **Os grupos econômicos saem do painel** e vão para a Rede da ARS (decisão do autor), inclusive a lista no card do município: o bloco `data-grupos` deixou de ser embutido.
+- **Celular verificado** (4.3): sem rolagem lateral; a apresentação rola 427 px antes da primeira aba, contra 1.271 px antes.
+- **RSL:** Cardozo et al. (2024 e 2025) entram nas referências; NTU 2023 → 2024 em 25 entradas.
+- **Colunas novas na base:** `tz_prov` e `tz_prov_txt` (subtipo provisório e a hipótese pré-e-SIC). A base sai de 61 para **63 colunas**.
+
+## v0.12 (2026-10-23)
 
 **A régua descritiva passa a ter gráfico próprio, no cabeçalho.** Pedido do autor: *"mudamos a lógica da régua de classificação, o gráfico da régua deveria aparecer logo aqui no cabeçalho"*, com a seta sobre a faixa de cartões do topo. O gráfico entra exatamente ali — abaixo dos cartões, acima da barra de filtros — e não dentro de um painel recolhível no meio da página, porque a régua é o critério que organiza todo o resto do painel: quem lê os números de capa precisa ver, na mesma tela, de que universo eles saem.
 

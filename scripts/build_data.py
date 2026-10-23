@@ -57,9 +57,20 @@ df = base.merge(tz_small, on='cod_ibge', how='left')
 # ou parcial. Sem esta separação, 7 casos parciais (Palmas/TO aos domingos, Monte Mor
 # com a Tarifa do Bem, etc.) entravam na contagem de TZ universal. Decisão do autor,
 # 22/10/2026: separar pela régua.
-tz_small_regua = tz_dedup[['cod_ibge', 'Régua — aba', 'Régua — subtipo']].rename(
-    columns={'Régua — aba': 'tz_regua_aba', 'Régua — subtipo': 'tz_regua_sub'})
+tz_small_regua = tz_dedup[['cod_ibge', 'Régua — aba', 'Régua — subtipo',
+                           'Classificação provisória (hipótese pré-e-SIC)']].rename(
+    columns={'Régua — aba': 'tz_regua_aba', 'Régua — subtipo': 'tz_regua_sub',
+             'Classificação provisória (hipótese pré-e-SIC)': 'tz_provisorio_txt'})
 df = df.merge(tz_small_regua, on='cod_ibge', how='left')
+# Força da prova (item 12.2 do ROADMAP, 23/10/2026). A tese classifica 31 políticas da
+# camada 1 PELA HIPÓTESE que um pedido de acesso à informação ainda sem resposta testa,
+# e marca a classificação como provisória (Cap. 5, "a verificação alcança todos os casos,
+# mas não está encerrada"). O painel exibia essas 31 como se fossem iguais às demais.
+# `tz_provisorio` é 1 quando o subtipo é hipótese pré-e-SIC; o texto completo da hipótese
+# fica em `tz_provisorio_txt`, para o card.
+df['tz_provisorio'] = df['tz_provisorio_txt'].notna().astype(int)
+print('subtipos por hipótese pré-e-SIC:', int(df['tz_provisorio'].sum()),
+      '| na camada 1:', int((df['tz_provisorio'].eq(1) & df['tz_regua_aba'].eq('1 Universal')).sum()))
 parcial = df['tz_situacao_mestre'].eq('Ativa') & df['tz_regua_aba'].notna() & df['tz_regua_aba'].ne('1 Universal')
 print('ativas reclassificadas como parciais pela régua:', int(parcial.sum()))
 if parcial.any():
@@ -139,6 +150,7 @@ cols = {
     'tz_ano_mestre': 'tz_ano', 'tz_fim_mestre': 'tz_fim', '% orçamento': 'tz_pct_orc', 'Operador': 'tz_operador',
     # régua descritiva (cap. 4.3 / 5.5 da tese): a classificação do desenho, não do status
     'tz_regua_aba': 'tz_regua_aba', 'tz_regua_sub': 'tz_regua_sub',
+    'tz_provisorio': 'tz_prov', 'tz_provisorio_txt': 'tz_prov_txt',
     # --- campos novos (v3) ---
     'regic_nivel_2018': 'regic_nivel', 'regic_simples': 'regic_label',
     'arranjo_pop_2018': 'arranjo_nome', 'tipo_arranjo': 'tipo_arranjo',

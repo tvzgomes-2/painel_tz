@@ -76,9 +76,15 @@
   footer .fapoio b{color:var(--text);}
   footer .flogos a, footer .fapoio a{display:inline-flex;opacity:.92;transition:opacity .15s;}
   footer .flogos a:hover, footer .fapoio a:hover{opacity:1;}
+  /* Faixa de versão de teste (23/10/2026, decisão do autor para o lançamento de teste) */
+  .faixa-teste{background:#1d1a05;border-bottom:1px solid rgba(245,228,0,.45);color:#f2ecc0;font-size:12.5px;line-height:1.5;padding:8px 16px;text-align:center;}
+  .faixa-teste b{color:#F5E400;letter-spacing:.04em;text-transform:uppercase;font-size:11.5px;margin-right:6px;}
+  .faixa-teste a{color:#F5E400;text-decoration:underline;white-space:nowrap;}
+  @media (max-width:640px){ .faixa-teste{font-size:11.5px;text-align:left;padding:7px 16px;} }
 </style>
 </head>
 <body>
+<div class="faixa-teste" role="note"><b>Versão de teste</b>Os números e textos deste site estão em validação e acompanham uma tese de doutorado ainda não defendida — podem mudar. Correções e contribuições podem ser enviadas por este formulário.</div>
 <header>
   <a class="back" href="index.html">← voltar ao site</a> <a class="back" href="verbetes.html" style="margin-left:14px;">Verbetes (conceitos) →</a>
   <h1>Pesquisa <span class="hl">colaborativa</span></h1>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rede de empresas — Grupos econômicos do transporte coletivo</title>
+<style>
+  :root{
+    /* identidade visual oficial da pesquisa (ver Identidade Visual da Pesquisa): rosa · amarelo · azul · verde sobre preto */
+    --rosa:#FF2D6B; --amarelo:#F5E400; --azul:#1A54C7; --verde:#6FBE44;
+    --bg:#0E0E10; --panel:#141419; --panel2:#1d1d25; --border:#2a2a33;
+    --text:#f0f0f2; --muted:#9a9aa6; --accent:#5c7cff;
+    --tz-ativa:var(--verde); --tz-encerrada:var(--rosa); --nao-tz:#3a3a45;
+    --map-bg:#101014; --map-stroke:#3c3c48; --uf-stroke:#8f8f9e; --tz-outline:var(--verde); --tz-outline-enc:var(--rosa);
+    --tag-ativa-fg:var(--verde); --tag-enc-fg:#f96d92;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Montserrat','Poppins',-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;}
+  header{padding:22px 24px 14px;border-bottom:2px solid var(--amarelo);display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;}
+  header .htext{flex:1 1 600px;}
+  header h1{margin:0 0 10px;font-size:30px;font-weight:800;letter-spacing:.01em;text-transform:uppercase;line-height:1.12;}
+  header h1 .hl{color:var(--amarelo);border-bottom:5px solid var(--rosa);padding-bottom:1px;}
+  header .subtitle{margin:0 0 12px;color:var(--text);font-size:15.5px;font-weight:500;line-height:1.4;}
+  header .resumo{margin:0 0 8px;color:var(--text);font-size:13px;line-height:1.55;max-width:1050px;}
+  header a{color:var(--accent);text-decoration:none;}
+  header a:hover{text-decoration:underline;}
+  header .badge{display:inline-block;background:var(--amarelo);color:#111;font-size:11.5px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:4px;margin-left:10px;
+    vertical-align:middle;transform:rotate(-2deg);}
+  header p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.5;}
+  .wrap{max-width:1440px;margin:0 auto;padding:16px 24px 60px;}
+  .cards, .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;}
+  .cards{margin:14px 0 10px;}
+  .controls{margin:0 0 16px;align-items:end;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+  .card .n{font-size:24px;font-weight:700;line-height:1.15;}
+  .card .l{color:var(--muted);font-size:11.5px;margin-top:3px;line-height:1.35;}
+  .card .warn-n{color:var(--tz-encerrada);font-size:10.5px;font-weight:600;display:block;margin-top:2px;}
+  .controls label{color:var(--muted);font-size:11.5px;display:block;margin-bottom:3px;}
+  .controls select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px;width:100%;}
+  .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:26px;align-items:start;}
+  @media (max-width:980px){.grid{grid-template-columns:1fr;}}
+  .rightcol{display:flex;flex-direction:column;gap:16px;}
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .panel h2{margin:0 0 6px;font-size:14.5px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.05em;
+    display:inline-block;border-bottom:2px solid var(--amarelo);padding-bottom:4px;}
+  .panel > summary{font-size:14.5px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.05em;
+    cursor:pointer;margin:0 0 10px;}
+  .panel > summary::marker{color:var(--amarelo);}
+  .panel .sub{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.5;}
+  .panel h3{margin:18px 0 10px;font-size:14px;font-weight:700;color:var(--text);border-top:1px solid var(--border);padding-top:14px;}
+  .toolbar{display:flex;gap:12px;align-items:flex-end;margin:0 0 12px;flex-wrap:wrap;}
+  .munisearch{flex:1 1 320px;min-width:240px;}
+  .munisearch label{color:var(--muted);font-size:11.5px;display:block;margin-bottom:3px;}
+  .munisearch input{background:var(--panel2);color:var(--text);border:1px solid var(--border);
+    border-radius:6px;padding:7px 9px;font-size:13px;width:100%;font-family:inherit;}
+  .munisearch input:focus{outline:none;border-color:var(--accent);}
+  .btn-clear{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;
+    padding:7px 12px;font-size:12.5px;cursor:pointer;font-family:inherit;white-space:nowrap;}
+  .btn-clear:hover{border-color:var(--rosa);color:var(--rosa);}
+  .btn-clear[disabled]{opacity:.45;cursor:default;}
+  .btn-clear[disabled]:hover{border-color:var(--border);color:var(--text);}
+  .grupos{margin:6px 0 0;padding-left:18px;font-size:12px;color:var(--muted);line-height:1.5;}
+  .ruGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;}
+  #dispersao{width:100%;height:auto;display:block;}
+  .gebars{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+  .gerow{display:flex;align-items:center;gap:10px;font-size:12px;}
+  .gelab{flex:0 0 46%;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .getrack{flex:1;background:var(--panel2);border-radius:4px;height:15px;overflow:hidden;}
+  .gefill{height:100%;background:var(--azul);}
+  .geval{flex:0 0 76px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .maptools{display:flex;gap:8px;align-items:center;margin:0 0 8px;}
+  .maptools button{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;
+    padding:4px 12px;font-size:12px;cursor:pointer;}
+  .maptools button:hover{border-color:var(--accent);}
+  .maptools .hint{color:var(--muted);font-size:11px;}
+  #mapSvg{width:100%;height:auto;background:var(--map-bg);border-radius:8px;display:block;touch-action:pan-y;}
+  #mapSvg path.mun{stroke:var(--map-stroke);stroke-width:.35;cursor:pointer;transition:opacity .15s;vector-effect:non-scaling-stroke;}
+  #mapSvg path.mun:hover{stroke:var(--accent);stroke-width:1.4;}
+  #mapSvg path.mun.tzpath{stroke:var(--tz-outline);stroke-width:.9;}
+  #mapSvg path.mun.tzpath.enc{stroke:var(--tz-outline-enc);}
+  #mapSvg path.mun.tzpath:hover{stroke:var(--accent);stroke-width:1.6;}
+  /* .tzparcial (v0.4.02, contorno tracejado) foi substituído em v0.4.03 por gradação de
+     preenchimento (ver corParcial() em logic.js) — classe mantida no JS só para lookup, sem
+     estilo de contorno próprio (usa o stroke padrão de path.mun). */
+  #mapSvg path.ufline{fill:none;stroke:var(--uf-stroke);stroke-width:1.1;pointer-events:none;vector-effect:non-scaling-stroke;}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11.5px;color:var(--muted);}
+  .legend span.sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
+  #tooltip{position:fixed;pointer-events:none;background:var(--panel);border:1px solid var(--border);border-radius:8px;
+    padding:9px 11px;font-size:12px;display:none;z-index:50;max-width:300px;box-shadow:0 6px 18px rgba(0,0,0,.35);color:var(--text);}
+  #tooltip b{display:block;margin-bottom:3px;font-size:13px;}
+  #tooltip .tt-grid{display:grid;grid-template-columns:auto auto;gap:1px 12px;color:var(--muted);}
+  #tooltip .tt-grid span:nth-child(even){color:var(--text);text-align:right;}
+  #detail{min-height:120px;}
+  #detail .empty{color:var(--muted);font-size:12.5px;}
+  #detail table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  #detail table td{padding:3px 0;border-bottom:1px solid var(--border);}
+  #detail table td:first-child{color:var(--muted);width:52%;}
+  .bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 32px;margin-top:6px;}
+  .bars > .barrow:first-child{grid-column:1/-1;padding-bottom:6px;border-bottom:1px solid var(--border);}
+  .barrow{font-size:12px;}
+  .barrow .lab{display:flex;justify-content:space-between;color:var(--muted);margin-bottom:3px;}
+  .barrow .lab b{color:var(--text);font-weight:600;}
+  .bartrack{position:relative;height:16px;background:var(--panel2);border-radius:4px;overflow:hidden;}
+  .barfill{position:absolute;top:0;left:0;bottom:0;border-radius:4px 0 0 4px;}
+  .barfill.a{background:var(--nao-tz);}
+  .barfill.b{background:var(--accent);}
+  .modalstack{margin-top:6px;}
+  .msrow{display:flex;align-items:center;gap:14px;margin:9px 0;}
+  .mslab{flex:0 0 190px;display:flex;flex-direction:column;font-size:12px;color:var(--muted);}
+  .mslab b{color:var(--text);font-size:13px;}
+  .msbar{flex:1;display:flex;height:30px;border-radius:5px;overflow:hidden;border:1px solid var(--border);}
+  .msbar .seg{height:100%;}
+  .mslegend{display:flex;flex-wrap:wrap;gap:14px 20px;margin-top:8px;font-size:11.5px;color:var(--muted);}
+  .mslegend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle;}
+  .refs{margin:6px 0 0;padding-left:20px;font-size:12px;line-height:1.6;color:var(--text);}
+  .refs li{margin-bottom:7px;}
+  .refs i{font-style:italic;}
+  table.tzlist{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;}
+  table.tzlist th{position:sticky;top:0;background:var(--panel);text-align:left;color:var(--muted);font-weight:600;
+    padding:5px 6px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;}
+  table.tzlist td{padding:5px 6px;border-bottom:1px solid var(--border);}
+  table.tzlist tr:hover td{background:var(--panel2);cursor:pointer;}
+  .tzlistwrap{max-height:360px;overflow:auto;margin-top:8px;border:1px solid var(--border);border-radius:8px;}
+  .cta-pesquisa{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;
+    margin-top:14px;padding:14px 16px;background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--rosa);border-radius:8px;}
+  .cta-pesquisa p{margin:0;font-size:13px;color:var(--muted);max-width:520px;}
+  .cta-pesquisa a{flex-shrink:0;background:var(--rosa);color:#fff;text-decoration:none;font-size:13px;font-weight:700;
+    padding:9px 16px;border-radius:6px;white-space:nowrap;}
+  .cta-pesquisa a:hover{background:#e0195a;}
+  .tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10.5px;font-weight:600;}
+  .tag.ativa{background:rgba(111,190,68,.16);color:var(--tag-ativa-fg);}
+  .tag.encerrada{background:rgba(255,45,107,.16);color:var(--tag-enc-fg);}
+  .tag.parcial{background:rgba(245,228,0,.16);color:var(--amarelo);}
+  .tag.aguardando{background:rgba(26,84,199,.18);color:#7ea2e8;}
+  .tag.pista{background:rgba(255,255,255,.08);color:var(--muted);}
+  .tag.fora{background:rgba(255,255,255,.06);color:var(--muted);}
+  .fontes-toggle{background:none;border:1px solid var(--border);border-radius:20px;color:var(--accent);
+    font-size:10.5px;font-weight:700;padding:1px 8px;cursor:pointer;font-family:inherit;}
+  .fontes-toggle:hover{border-color:var(--accent);}
+  tr.fontes-row td{background:var(--panel2);padding:8px 12px;}
+  ul.fontes-inline{margin:0;padding-left:18px;font-size:11.5px;color:var(--muted);line-height:1.6;}
+  ul.fontes-inline b{color:var(--text);}
+  .fontesTipoList{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+  .fonteItem{font-size:12px;color:var(--muted);line-height:1.5;border-bottom:1px solid var(--border);padding-bottom:8px;}
+  .fonteItem b{color:var(--text);}
+  .fonteItem .fonteDesc{display:block;margin-top:2px;}
+  .fonteItem a{color:var(--accent);}
+  .notes{font-size:12px;color:var(--muted);line-height:1.6;}
+  .notes b{color:var(--text);}
+  .notes .warn{color:var(--tz-encerrada);}
+  .crosstabgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:10px;}
+  .xt h4{margin:0 0 10px;font-size:12.5px;color:var(--text);font-weight:700;}
+  .xtitem{margin-bottom:11px;}
+  .xtitem .xtlab{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-bottom:3px;}
+  .xtitem .xtlab b{color:var(--text);}
+  .xtitem .xtrack{height:8px;background:var(--panel2);border-radius:4px;overflow:hidden;}
+  .xtitem .xtfill{height:100%;background:var(--accent);}
+  #timeline{width:100%;height:auto;display:block;margin-top:6px;}
+  #timeline text{font-family:inherit;}
+  details.gloss{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-top:16px;}
+  details.gloss summary{font-size:15px;font-weight:700;cursor:pointer;}
+  details.gloss dl{font-size:12.5px;color:var(--muted);line-height:1.6;margin:12px 0 0;}
+  details.gloss dt{color:var(--text);font-weight:600;float:left;clear:left;margin-right:8px;}
+  details.gloss dd{margin:0 0 8px 0;overflow:hidden;}
+  footer{margin-top:28px;padding-top:16px;border-top:2px solid var(--amarelo);color:var(--muted);font-size:11.5px;line-height:1.7;}
+  footer .fgrid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;margin-bottom:14px;}
+  footer .fgrid b{color:var(--text);font-size:12.5px;}
+  footer .fnames{display:flex;flex-direction:column;gap:5px;}
+  footer .fcredits{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:10px 24px;
+    margin:0 0 14px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  footer .flogos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  footer .flogos img{height:46px;width:auto;display:block;}
+  footer .finst{color:var(--muted);font-size:11px;}
+  footer .fapoio{display:flex;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:11px;line-height:1.55;max-width:560px;}
+  footer .fapoio img{height:46px;width:auto;display:block;}
+  footer .fapoio b{color:var(--text);}
+  footer .flogos a, footer .fapoio a{display:inline-flex;opacity:.92;transition:opacity .15s;}
+  footer .flogos a:hover, footer .fapoio a:hover{opacity:1;}
+</style>
+<style>
+  .redewrap{position:relative;}
+  #redeSvg{width:100%;height:auto;display:block;background:var(--panel2);border:1px solid var(--border);border-radius:8px;}
+  #redeSvg .ar{stroke:#3a4150;}
+  #redeSvg .ar.fusao{stroke:var(--rosa);stroke-opacity:.85;}
+  #redeSvg .no{cursor:pointer;stroke:var(--bg);stroke-width:1;}
+  #redeSvg .no.sel{stroke:#fff;stroke-width:2.5;}
+  #redeSvg .rot{font-size:9px;fill:var(--muted);pointer-events:none;}
+  .getab{width:100%;border-collapse:collapse;font-size:12px;}
+  .getab th{position:sticky;top:0;background:var(--panel);text-align:left;padding:6px;
+    border-bottom:1px solid var(--border);cursor:pointer;user-select:none;color:var(--muted);font-weight:600;}
+  .getab td{padding:5px 6px;border-bottom:1px solid var(--border);}
+  .getab tbody tr{cursor:pointer;}
+  .getab tbody tr:hover{background:var(--panel2);}
+  .getab tbody tr.sel{background:rgba(26,84,199,.18);}
+  .getabwrap{max-height:460px;overflow:auto;border:1px solid var(--border);border-radius:8px;}
+  .num{text-align:right;font-variant-numeric:tabular-nums;}
+  .gedetail table{width:100%;border-collapse:collapse;margin-top:8px;}
+  .gedetail td{padding:4px 0;border-bottom:1px solid var(--border);font-size:12px;}
+  .gedetail td:first-child{color:var(--muted);width:48%;}
+  /* Faixa de versão de teste (23/10/2026, decisão do autor para o lançamento de teste) */
+  /* 23/10/2026 — rede interativa (zoom, arraste, filtros, tela cheia) */
+  .redectl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:0 0 10px;font-size:12px;color:var(--muted);}
+  .redectl label{display:flex;align-items:center;gap:6px;}
+  .redectl select,.redectl input[type=text],.redectl input:not([type]){background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 7px;font:inherit;font-size:12px;}
+  .redectl .busca input{width:200px;}
+  .redectl input[type=range]{width:80px;accent-color:var(--amarelo);}
+  .redectl b{color:var(--text);}
+  .forcas{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;flex-basis:100%;padding:6px 8px;border:1px dashed var(--border);border-radius:8px;}
+  .forcas.on{border-color:var(--amarelo);}
+  .forcas button{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:3px 9px;font:inherit;font-size:11.5px;cursor:pointer;}
+  .forcas button:hover{border-color:var(--amarelo);}
+  .forcas b{min-width:22px;display:inline-block;}
+  #redeSvg{height:min(620px,70vh);touch-action:none;cursor:grab;user-select:none;}
+  #redeSvg:active{cursor:grabbing;}
+  #redeSvg circle.no{cursor:pointer;}
+  #redeSvg text.rot{fill:#e8e8ee;paint-order:stroke;stroke:#141419;stroke-width:3px;stroke-linejoin:round;font-family:inherit;}
+  .redewrap .zoombtns{position:absolute;top:8px;right:8px;display:flex;gap:4px;}
+  .redewrap .zoombtns button{background:rgba(20,20,25,.9);color:var(--text);border:1px solid var(--border);border-radius:6px;min-width:30px;height:30px;font:inherit;font-size:14px;cursor:pointer;padding:0 8px;}
+  .redewrap .zoombtns button#telaCheia{font-size:11.5px;}
+  .redewrap .zoombtns button:hover{border-color:var(--amarelo);}
+  .redewrap .hint{position:absolute;left:10px;bottom:8px;font-size:11.5px;color:var(--amarelo);pointer-events:none;}
+  .redeleg{max-height:92px;overflow:auto;}
+  .redeleg span{white-space:nowrap;} .redeleg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px;}
+  .redeleg .lg-lig b{margin-right:4px;}
+  details.medidas{margin-top:12px;border-top:1px solid var(--border);padding-top:10px;}
+  details.medidas summary{cursor:pointer;font-size:12.5px;font-weight:700;}
+  .medgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:8px;}
+  .medgrid div{background:var(--panel2);border-radius:8px;padding:7px 9px;}
+  .medgrid b{display:block;font-size:17px;} .medgrid span{font-size:11px;color:var(--muted);line-height:1.3;}
+  .medlistas{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:12px;}
+  .medlistas ol{margin:0;padding-left:20px;line-height:1.6;}
+  @media (max-width:640px){ .medlistas{grid-template-columns:1fr;} .redectl .busca input{width:100%;} .redectl .busca{flex:1 1 100%;} }
+  body.rede-cheia{overflow:hidden;}
+  body.rede-cheia #painelRede{position:fixed;inset:0;z-index:60;border-radius:0;overflow:auto;margin:0;}
+  body.rede-cheia #redeSvg{height:calc(100vh - 190px);}
+  .faixa-teste{background:#1d1a05;border-bottom:1px solid rgba(245,228,0,.45);color:#f2ecc0;font-size:12.5px;line-height:1.5;padding:8px 16px;text-align:center;}
+  .faixa-teste b{color:#F5E400;letter-spacing:.04em;text-transform:uppercase;font-size:11.5px;margin-right:6px;}
+  .faixa-teste a{color:#F5E400;text-decoration:underline;white-space:nowrap;}
+  @media (max-width:640px){ .faixa-teste{font-size:11.5px;text-align:left;padding:7px 16px;} }
+  .gefind{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:0 0 16px;}
+  .gefind div{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:11px 13px;}
+  .gefind b{display:block;font-size:20px;color:var(--amarelo);line-height:1.2;}
+  .gefind span{font-size:11.5px;color:var(--muted);line-height:1.45;}
+  .topo-marca{color:var(--amarelo);font-weight:700;}
+  .gelink{color:var(--text);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;}
+  .gelink:hover{color:var(--amarelo);}
+  #geTable tbody tr.sel{background:rgba(245,228,0,.10);}
+  #geTable tbody tr:hover{background:rgba(255,255,255,.04);}
+  .terrgrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;}
+  @media (max-width:820px){ .terrgrid{grid-template-columns:1fr;} }
+  .terrlin{display:grid;grid-template-columns:minmax(0,1fr) 110px 46px;gap:9px;align-items:center;margin-bottom:5px;font-size:12px;}
+  .terrlin .t{height:11px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+  .terrlin .f{height:100%;background:var(--amarelo);border-radius:3px;}
+  .terrlin .n{text-align:right;font-weight:700;}
+  .terrlin .r{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;}
+  .terrlin .r:hover{color:var(--amarelo);}
+  #muniGrupos ul{margin:8px 0 0;padding-left:18px;font-size:12.5px;}
+  #muniGrupos li{margin-bottom:3px;}
+  /* 23/10/2026 — agrupamentos (unidade, família, linhagem, federação) e mapa do grupo */
+  .muted{color:var(--muted);}
+  .mercado{color:var(--muted);font-size:12.5px;margin:2px 0 4px;}
+  .merc{color:var(--muted);font-size:11px;margin-top:1px;}
+  .grau{display:inline-block;min-width:17px;text-align:center;font-size:10px;font-weight:800;border-radius:4px;padding:0 4px;line-height:16px;vertical-align:1px;}
+  .grau.gA{background:var(--rosa);color:#fff;} .grau.gB{background:#c2507a;color:#fff;}
+  .grau.gC{background:var(--amarelo);color:#111;} .grau.gD{background:var(--azul);color:#fff;}
+  .grau.gE{background:#3a3a45;color:var(--muted);} .grau.gx{background:#2a2a33;color:var(--muted);}
+  .agrup > div{font-size:12.5px;line-height:1.5;margin:0 0 7px;}
+  .modomapa{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 6px;}
+  .modomapa button{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font:inherit;font-size:11.5px;cursor:pointer;}
+  .modomapa button.on{border-color:var(--amarelo);color:var(--amarelo);}
+  svg.munmapa{width:100%;max-width:440px;height:auto;display:block;margin:2px auto 6px;background:var(--map-bg);border-radius:8px;}
+  svg.munmapa .ufb{fill:#17171d;stroke:#4a4a58;stroke-width:.8;}
+  svg.munmapa .pfundo{fill:#5a5a68;opacity:.45;}
+  svg.munmapa .pgrupo{fill:var(--amarelo);stroke:#0E0E10;stroke-width:.8;fill-opacity:.95;cursor:default;}
+  .munlista{max-height:200px;overflow:auto;border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;line-height:1.55;}
+  .munlista p{margin:0 0 5px;}
+  #fichaPanel{scroll-margin-top:12px;}
+  @media (min-width:981px){ #fichaPanel{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;} }
+  .agrgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;}
+  @media (max-width:900px){ .agrgrid{grid-template-columns:1fr;} }
+  .funlin{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:center;font-size:12px;padding:6px 0;border-bottom:1px solid var(--border);}
+  .funlin.teto{opacity:.75;}
+  .funlin .fb{position:relative;height:20px;background:rgba(255,255,255,.04);border-radius:4px;overflow:hidden;}
+  .funlin .fbar{position:absolute;inset:0 auto 0 0;background:var(--azul);opacity:.75;}
+  .funlin .fbar.m{background:var(--amarelo);opacity:.55;}
+  .funlin .fb span{position:relative;padding-left:7px;line-height:20px;white-space:nowrap;}
+  .funlin .fx{color:var(--muted);white-space:nowrap;}
+  @media (max-width:640px){ .funlin{grid-template-columns:1fr 1fr;} .funlin .fr,.funlin .fx{grid-column:1/-1;} }
+  table.escala td{vertical-align:top;} table.escala td.regra{color:var(--muted);font-size:11.5px;line-height:1.45;}
+  .agrlist{margin:6px 0 0;padding-left:0;list-style:none;font-size:12.5px;line-height:1.5;}
+  .agrlist li{margin:0 0 7px;}
+  details.fed{font-size:12.5px;border-bottom:1px solid var(--border);padding:5px 0;}
+  details.fed summary{cursor:pointer;}
+  details.fed p{margin:6px 0 4px 22px;line-height:1.6;}
+  #muniBusca{width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit;}
+</style>
+<style>
+  .pat-cadeia{width:100%;max-width:980px;height:auto;display:block;margin:6px auto 0;}
+  .pat-cadeia text{font-family:inherit;}
+  .setbar{display:grid;grid-template-columns:minmax(0,230px) 1fr 70px;gap:10px;align-items:center;font-size:12px;margin-bottom:5px;cursor:pointer;}
+  .setbar .t{height:14px;background:rgba(255,255,255,.05);border-radius:3px;position:relative;overflow:hidden;}
+  .setbar .f{position:absolute;inset:0 auto 0 0;border-radius:3px;opacity:.35;}
+  .setbar .f.a{opacity:.95;}
+  .setbar .n{text-align:right;font-variant-numeric:tabular-nums;}
+  .setbar.on .r{color:var(--amarelo);font-weight:700;}
+  .setbar .r{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .patctl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:0 0 10px;font-size:12px;color:var(--muted);}
+  .patctl input,.patctl select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font:inherit;font-size:12.5px;}
+  #patBusca{width:280px;}
+  .patgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;align-items:start;}
+  @media (max-width:980px){ .patgrid{grid-template-columns:1fr;} #patBusca{width:100%;} .patctl label{flex:1 1 100%;} }
+  #patSvg{width:100%;height:min(560px,64vh);display:block;background:var(--panel2);border:1px solid var(--border);border-radius:8px;touch-action:none;cursor:grab;}
+  #patSvg text{font-family:inherit;fill:#e8e8ee;paint-order:stroke;stroke:#141419;stroke-width:3px;stroke-linejoin:round;pointer-events:none;}
+  .patwrap{position:relative;}
+  .patwrap .zoombtns{position:absolute;top:8px;right:8px;display:flex;gap:4px;}
+  .patwrap .zoombtns button{background:rgba(20,20,25,.9);color:var(--text);border:1px solid var(--border);border-radius:6px;min-width:30px;height:30px;font:inherit;cursor:pointer;}
+  .emplista{max-height:520px;overflow:auto;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;line-height:1.5;}
+  .emplista h4{margin:10px 0 4px;font-size:12.5px;display:flex;align-items:center;gap:6px;}
+  .emplista h4:first-child{margin-top:0;}
+  .emplista h4 i{display:inline-block;width:10px;height:10px;border-radius:50%;}
+  .emplista ul{margin:0;padding-left:18px;}
+  .emplista li.baixa{color:var(--muted);}
+  .sitag{font-size:10px;border:1px solid var(--border);border-radius:10px;padding:0 6px;color:var(--muted);margin-left:4px;}
+  .mask{color:var(--muted);font-style:italic;}
+  .patkpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:0 0 10px;}
+  .patkpi div{background:var(--panel2);border-radius:8px;padding:7px 9px;} .patkpi b{display:block;font-size:17px;} .patkpi span{font-size:11px;color:var(--muted);}
+  .glink{color:var(--text);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;}
+  .glink:hover{color:var(--amarelo);}
+  .blocos li{margin-bottom:8px;font-size:12.5px;line-height:1.5;}
+</style>
+<style>
+  /* abas (23/10/2026): a página junta "Quem controla" e "Além do ônibus" (decisão do autor) */
+  nav.tabs{display:flex;gap:2px;margin:12px 0 16px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:31;background:var(--bg);}
+  .tabbtn{background:none;border:none;border-bottom:3px solid transparent;color:var(--muted);font:inherit;font-size:14px;font-weight:700;padding:10px 16px 9px;cursor:pointer;margin-bottom:-1px;}
+  .tabbtn:hover{color:var(--text);} .tabbtn.on{color:var(--text);border-bottom-color:var(--amarelo);}
+  .tabbtn small{display:block;font-size:11px;font-weight:500;color:var(--muted);}
+  .tabpane[hidden]{display:none;}
+  .paneintro{margin:0 0 14px;} .paneintro p{margin:0 0 6px;color:var(--muted);font-size:12.5px;line-height:1.55;max-width:1050px;}
+  .paneintro b{color:var(--text);}
+  .ponte-aba{display:inline-block;margin-top:6px;font-size:12px;color:var(--amarelo);text-decoration:underline;text-decoration-style:dotted;cursor:pointer;}
+  @media (max-width:640px){ nav.tabs{overflow-x:auto;scrollbar-width:none;} .tabbtn{white-space:nowrap;padding:9px 12px 8px;font-size:13px;} }
+</style>
+</head>
+<body>
+<div class="faixa-teste" role="note"><b>Versão de teste</b>Os números e textos deste site estão em validação e acompanham uma tese de doutorado ainda não defendida — podem mudar. Correções e contribuições: <a href="pesquisa.html">pesquisa colaborativa →</a></div>
+<header>
+  <div class="wrap">
+    <nav class="topnav"><a href="index.html">← voltar ao site</a> <a href="painel.html">Painel Brasil (TZ)</a> <a href="verbetes.html">Verbetes (conceitos)</a></nav>
+    <h1>Rede de <span class="hl">empresas</span> <span class="badge">rede · v0.1</span></h1>
+    <h2 class="sub2">Quem controla o transporte coletivo no Brasil, por vínculo societário</h2>
+    <p class="resumo">Esta página mapeia a estrutura de controle do transporte coletivo brasileiro a partir dos dados societários da Receita Federal, com análise de redes sociais (ARS): quais empresas pertencem ao mesmo dono, que grupos econômicos elas formam e como esses grupos se ligam entre si. Tem duas partes: <b>quem controla</b> — os grupos, como se ligam, quanto concentram e onde estão — e <b>além do ônibus</b> — as holdings sócias e os negócios dos grupos fora do transporte (Seção 6.4). É a contraparte do <a href="painel.html">Painel Brasil</a>: a hipótese da tese é que a difusão da Tarifa Zero é restringida pela incompatibilidade entre o desenho da política e o arranjo contratual vigente — e, para pô-la à prova, é preciso saber quem são os operadores, quanto do setor eles concentram e onde estão (Capítulo 6). O grupo econômico aqui é uma agregação de vínculos societários observados, e não um sujeito com intenção.</p>
+    <p><b>O que esta página não mostra:</b> nenhum nome de pessoa física como sócio (o nome de mercado de alguns grupos é o do fundador — é a marca, e sai como marca). A rede de sócios — que é o insumo do cálculo — tem milhares de pessoas nomeadas com CPF parcial, e fica no acervo da pesquisa, não aqui. O que se publica é a camada de <i>empresa</i>, <i>grupo</i> e <i>agrupamento de grupos</i> (unidade de controle, linhagem, federação), com o nome de mercado e o capital social declarado de cada um; as métricas derivadas da rede de pessoas (sócios-ponte, articulação, densidade) aparecem como números, nunca como identidades.</p>
+  </div>
+</header>
+<div class="wrap">
+  <nav class="tabs" role="tablist">
+    <button class="tabbtn on" id="tabbtn-controle" data-tab="controle" role="tab" aria-selected="true">Quem controla<small>rede, unidades, capital, território</small></button>
+    <button class="tabbtn" id="tabbtn-alem" data-tab="alem" role="tab" aria-selected="false">Além do ônibus<small>holdings e negócios fora do transporte</small></button>
+  </nav>
+  <section class="tabpane" id="tab-controle">
+
+
+  <div class="gefind" id="geFind"></div>
+  <div class="cards" id="cards"></div>
+
+  <div class="grid">
+    <div class="panel" id="painelRede">
+      <h2>A rede dos grupos</h2>
+      <p class="sub">Cada círculo é um grupo econômico; cada linha, uma ligação societária entre dois grupos. <b style="color:var(--rosa);">Rosa</b>: a análise trata os dois como um bloco de controle só (mesmo <i>cluster</i>). <b style="color:#a0a0ae;">Cinza</b>: só compartilham sócio — quanto mais grossa, mais sócios em comum. Role ou use os botões para aproximar, arraste o fundo para mover, arraste um grupo para soltá-lo da vizinhança; no celular, pinça com dois dedos. Clique num grupo para acender a vizinhança e abrir a ficha. Em <b>forças livres</b>, a rede se reorganiza sozinha: a repulsão afasta os grupos, a gravidade os puxa ao centro e a ligação define a distância entre vizinhos — mexa e veja os blocos se formarem.</p>
+      <div class="redectl">
+        <label>Tamanho <select id="redeTam"><option value="n_emp">nº de empresas</option><option value="capital">capital social</option></select></label>
+        <label>Cor <select id="redeCor"><option value="topo">topo do capital</option><option value="unidade">unidade de controle (A/B)</option><option value="linhagem">linhagem (C)</option><option value="federacao">federação (D)</option><option value="componente">componente da rede</option></select></label>
+        <label class="chk"><input type="checkbox" id="redeFus" checked> mesmo bloco</label>
+        <label class="chk"><input type="checkbox" id="redeSoc" checked> sócio compartilhado, com ≥ <b id="redeMinWv">1</b> <input type="range" id="redeMinW" min="1" max="10" value="1" step="1" aria-label="mínimo de sócios em comum"></label>
+        <label class="chk"><input type="checkbox" id="redeIso"> grupos sem ligação</label>
+        <div class="forcas" id="redeForcas">
+          <label class="chk"><input type="checkbox" id="redeLivre"> forças livres</label>
+          <label title="Quanto os grupos se empurram">Repulsão <input type="range" id="fRep" min="10" max="150" value="50"> <b id="fRepv">50</b></label>
+          <label title="Quanto todos são puxados para o centro">Gravidade <input type="range" id="fGrav" min="0" max="30" value="3"> <b id="fGravv">3</b></label>
+          <label title="Comprimento de repouso de cada ligação">Ligação <input type="range" id="fDist" min="10" max="160" value="40"> <b id="fDistv">40</b></label>
+          <button id="fReorg" title="Embaralha e deixa as forças reorganizarem">↻ Reorganizar</button>
+          <button id="fOrig" title="Volta ao desenho empacotado por componente">Desenho original</button>
+        </div>
+        <label class="busca">Achar grupo <input id="redeBusca" list="redeBuscaList" placeholder="nome ou nome de mercado…" autocomplete="off" spellcheck="false"><datalist id="redeBuscaList"></datalist></label>
+      </div>
+      <div class="redewrap">
+        <svg id="redeSvg" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="zoombtns"><button id="zoomMais" title="Aproximar">+</button><button id="zoomMenos" title="Afastar">−</button><button id="resetRede" title="Enquadrar toda a rede">⤢</button><button id="telaCheia" title="Tela cheia">⛶ Tela cheia</button></div>
+        <span class="hint" id="redeHint"></span>
+      </div>
+      <div class="legend redeleg" id="redeLeg"></div>
+      <details class="medidas" open><summary>Medidas da rede (ARS)</summary><div id="redeMedidas"></div></details>
+    </div>
+    <div class="rightcol">
+      <div class="panel" id="fichaPanel">
+        <h2>Grupo selecionado</h2>
+        <div id="detail" class="gedetail"><div class="empty">Clique num grupo no mapa, na tabela ou nas listas de unidades. A ficha mostra o capital, os agrupamentos de que o grupo faz parte e o mapa dos municípios onde ele tem endereço.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;" id="agrupamentos">
+    <h2>Do grupo à federação</h2>
+    <p class="sub">O código de grupo (GE) é o que o cálculo da rede devolve; o controle real às vezes passa por cima dele. A tese junta os grupos numa escala de confiança de cinco graus (Seção 6.1): só os graus A e B fundem grupos numa <b>unidade de controle</b> — é a leitura principal. A <b>linhagem</b> (C) registra origem familiar comum sem capital comum no cadastro, e a <b>federação</b> (D) registra articulação — cargo ou capital em terceira empresa ou entidade setorial — sem controle comum; as duas são atributos, não somam controle, e a das federações serve só de teto. O indício (E) fica registrado, sem efeito nas contagens.</p>
+    <div id="geEscala" class="getabwrap" style="max-height:none;"></div>
+    <h3>A concentração em cada leitura</h3>
+    <div id="geFunil"></div>
+    <h3>As <span id="nTopoUb">22</span> unidades de controle que detêm metade do capital</h3>
+    <div class="getabwrap" id="geTopoUb"></div>
+    <div class="agrgrid" style="margin-top:6px;">
+      <div><h3>Famílias de controle (A) e linhagens (C)</h3>
+        <p class="sub">A família de controle tem ramos com capital cruzado — conta como uma unidade. A linhagem tem origem familiar documentada fora do cadastro e não funde nada.</p>
+        <ul class="agrlist" id="geFamilias"></ul><ul class="agrlist" id="geLinhagens"></ul></div>
+      <div><h3>Federações (D)</h3>
+        <p class="sub">Blocos de unidades articuladas entre si. Medem o alcance da articulação, não o controle. Abra para ver as unidades.</p>
+        <div id="geFederacoes"></div></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>Os 327 grupos econômicos mapeados</h2>
+    <p class="sub">Ordene clicando no cabeçalho. Abaixo do rótulo do grupo, o nome de mercado. "Capital" é o capital social declarado no cadastro, em milhões de reais. "Topo do capital" marca os 26 grupos que, juntos, detêm metade do capital declarado do setor; "Unidade" é a unidade de controle de que o grupo faz parte (com a letra do grau, quando junta mais de um grupo). "Sócios-ponte" são os sócios que ligam partes do grupo que, sem eles, ficariam separadas — a medida de quanto o grupo depende de poucas pessoas para se manter coeso. "Municípios" conta onde o grupo tem estabelecimento pelo endereço do cadastro — presença, não operação.</p>
+    <div class="getabwrap">
+      <table class="getab" id="geTable">
+        <thead><tr>
+          <th data-k="nome">Grupo · nome de mercado</th><th data-k="capital" class="num">Capital (R$ mi)</th>
+          <th data-k="topo" class="num" title="Entre os 26 grupos que, juntos, detêm metade do capital declarado do setor">Topo</th><th data-k="ub">Unidade</th>
+          <th data-k="n_emp" class="num">Empresas</th><th data-k="n_soc" class="num">Sócios</th><th data-k="ponte" class="num">Sócios-ponte</th>
+          <th data-k="dens" class="num">Densidade</th><th data-k="n_mun" class="num">Municípios</th><th data-k="lig" class="num">Ligações</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>Onde os grupos estão</h2>
+    <p class="sub">Presença de estabelecimento de empresa de grupo, pelo endereço do cadastro de CNPJ. <b>Presença não é operação:</b> a sede de uma concessionária metropolitana aparece num município enquanto o contrato cobre vários, e numa auditoria da própria pesquisa, em Araraquara, dos quatro grupos atribuídos ao município só um era operador urbano — os outros eram rodoviário, garagem e agência. Leia como mapa de onde os grupos têm endereço, não de quem opera cada sistema.</p>
+    <div class="terrgrid">
+      <div><h3 style="margin:4px 0 8px;font-size:13px;">Os grupos de maior alcance territorial</h3><div id="geTerr"></div></div>
+      <div><h3 style="margin:4px 0 8px;font-size:13px;">Que grupos têm endereço num município</h3>
+        <input id="muniBusca" list="muniBuscaList" placeholder="digite o nome do município…" autocomplete="off" spellcheck="false">
+        <datalist id="muniBuscaList"></datalist>
+        <div id="muniGrupos"><p class="sub" style="margin-top:8px;">Os grupos deste mapeamento têm estabelecimento em um quinto dos municípios do país. Ausência aqui significa que não há endereço registrado no cadastro, não que não haja operador.</p></div></div>
+    </div>
+  </div>
+
+  <details class="panel" style="margin-top:16px;" open>
+    <summary>Notas metodológicas e limites de leitura</summary>
+    <div class="notes">
+      <p><b>De onde vem o dado:</b> quadro societário da Receita Federal, recortado pelos CNAEs de transporte de passageiros, processado em análise de redes sociais (ARS). Duas empresas ficam no mesmo grupo quando o quadro societário as liga — direta ou indiretamente, inclusive por holding. O agrupamento é resultado do cálculo, não de uma lista pré-existente de grupos.</p>
+      <p><b>Grupo econômico aqui é uma inferência societária, não uma declaração da empresa.</b> Ninguém declara "pertenço ao grupo X": o vínculo é deduzido de sócios em comum. Isso acerta o controle familiar e as holdings, e erra onde o controle real passa por fora do contrato social — acordo de acionistas, controle por terceiro não sócio, laranja. Leia como a melhor aproximação disponível, não como organograma oficial.</p>
+      <p><b>As duas ligações não são a mesma coisa.</b> "Mesmo bloco de controle" (rosa) é achado forte: a análise trata os grupos como uma estrutura só. "Sócio compartilhado" (cinza) é fraco — uma pessoa pode ter participação pequena em dois grupos concorrentes sem que isso signifique controle comum. Não some os dois numa leitura só.</p>
+      <p><b>235 dos 327 grupos não têm nenhuma ligação mapeada</b> e por isso não aparecem no mapa. Isso quase sempre significa grupo pequeno e fechado — não que ele esteja isolado do setor por algum motivo relevante.</p>
+      <p><b>O capital social é valor declarado no registro</b> — frequentemente desatualizado e sem relação fixa com frota, receita ou passageiros: mede o registro, não a operação. Leia-o como ordem de grandeza. Os <b>26 grupos</b> que, juntos, detêm metade dos R$ 8,13 bilhões declarados são o "grande grupo" que a tese usa nos testes; agregados por unidade de controle, são 22 unidades, entre 19 e 26 conforme o grau de confiança exigido (Tabela 5, Seção 6.1).</p>
+      <p><b>Nome de mercado.</b> É o nome pelo qual o grupo é conhecido no setor, levantado na pesquisa. Publica-se só o nome comercial; as anotações de trabalho da tabela mestre (sócios, rodadas de auditoria, notas sobre a trajetória das empresas) ficam no acervo. Alguns nomes de mercado são o nome do fundador ou do controlador (Grupo Jacob Barata, Grupo Belarmino da Ascenção Marta): são publicados como marca, porque é por eles que o grupo é conhecido no setor — nenhum sócio é identificado a partir da rede. Grupos sem nome de mercado confirmado aparecem só pelo rótulo do cálculo.</p>
+      <p><b>Unidade, linhagem e federação não são a mesma coisa.</b> A unidade de controle junta grupos com controle comum demonstrado (A) ou provável (B) e é a leitura principal; a linhagem (C) e a federação (D) são atributos que a página mostra, mas que não somam controle. A concentração "com as federações" encadeia articulações — uma linhagem que toca duas federações as junta — e serve só de teto.</p>
+      <p><b>Presença municipal, e uma diferença de dois municípios com a tese.</b> A página conta <span id="nMunNota">1.042</span> municípios com estabelecimento de algum dos 327 grupos; a tese registra 1.040. A diferença são Poxoréu/MT e Santa Izabel do Pará/PA, cuja grafia na tabela de empresas não casou com a da base municipal no cruzamento da tese e casou aqui. [A CONFIRMAR na tese.]</p>
+      <p><b>Homônimos.</b> 20 nomes de grupo são sobrenomes usados por grupos distintos — "Santos" são sete grupos diferentes. Nesses casos o rótulo traz o código do grupo, para que dois controles distintos não sejam lidos como um só.</p>
+      <p><b>O que fica de fora, de propósito.</b> Nenhum nome de pessoa física, CPF ou CNPJ; nem as narrativas de conduta (cartel, operações policiais, falências, captura regulatória), que a tese discute com as fontes ao lado e que, fora desse contexto, virariam acusação. E não está aqui o cruzamento entre presença de grupo e adoção da Tarifa Zero: ele é o teste da hipótese, ainda não defendido.</p>
+      <p><b>Nenhum dado de pessoa física é publicado.</b> As métricas de sócios (quantidade, sócios-ponte, articulação) são contagens derivadas da rede de pessoas; os nomes e CPFs ficam no acervo da pesquisa. Decisões do autor de 22/10/2026 e, para o nome de mercado e o capital por grupo, de 23/10/2026.</p>
+      <p><b>O mapa do grupo</b> é de localização: um ponto por município onde o grupo tem estabelecimento, sobre os contornos das UFs, com os demais municípios de presença de algum grupo em cinza. Não mede área de operação nem frota.</p>
+    </div>
+  </details>
+
+  </section>
+  <section class="tabpane" id="tab-alem" hidden>
+<!--ALEM-->
+  </section>
+
+  <footer>
+    <div class="fgrid">
+      <div class="fnames">
+        <div><b>Thiago Von Zeidler Gomes</b> · Doutorando</div>
+        <div><b>Prof.ª Dr.ª Silvana Maria Zioni</b> · Orientadora</div>
+      </div>
+      <div class="flogos">
+        <a href="https://www.ufabc.edu.br/" target="_blank" rel="noopener"><img src="assets/logos/ufabc/negativo/logo-ufabc-extenso-negativo.svg" alt="Universidade Federal do ABC"></a>
+        <a href="https://propg.ufabc.edu.br/ppgpgt/" target="_blank" rel="noopener"><img src="assets/logos/pgt/negativo/logo-pgt-extenso-negativo.png" alt="Programa de Pós-Graduação em Planejamento e Gestão do Território"></a>
+        <a href="https://laplan.pesquisa.ufabc.edu.br/" target="_blank" rel="noopener"><img src="assets/logos/laplan/negativo/logo-laplan-extenso-negativo.png" alt="Laboratório de Planejamento Territorial (Laplan/UFABC)"></a>
+      </div>
+    </div>
+    <div class="fcredits">
+      <div class="fapoio">
+        <a href="https://poloplanejamento.com/" target="_blank" rel="noopener"><img src="assets/logos/polo/negativo/logo-polo-icon-negativo.svg" alt="Polo Planejamento"></a>
+        <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
+      </div>
+    </div>
+    Rede de empresas v0.1 · 2026<br>
+    Fontes: cadastro de CNPJ da Receita Federal (dados abertos, recorte de maio de 2024) · Tabela mestre de grupos econômicos v5 (17/10/2026) e análise de redes sociais (out/2026) do acervo da pesquisa · sócios das holdings e empresas de outros setores ligadas a eles (ago e out/2026) · Censo Demográfico 2022 (IBGE).<br>
+    Página gerada a partir de <i>rede_ge.json</i> e <i>patrimonio.json</i> (<i>scripts/build_rede_ge.py</i> e <i>build_patrimonio.py</i>) — protótipo de trabalho, não substitui a análise da tese (Capítulo 6 e Apêndice E). Histórico de versões no CHANGELOG do repositório.
+  </footer>
+</div>
+<div id="tooltip"></div>
+<script id="data-rede" type="application/json">
