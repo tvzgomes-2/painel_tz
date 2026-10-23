@@ -52,7 +52,19 @@ tz_small = tz_dedup[['cod_ibge', 'Situação', 'Ano início', 'Fim', '% orçamen
     columns={'Situação': 'tz_situacao_mestre', 'Ano início': 'tz_ano_mestre', 'Fim': 'tz_fim_mestre'})
 
 df = base.merge(tz_small, on='cod_ibge', how='left')
+# A coluna `Situação` da base-mestre mudou de sentido em out/2026: hoje ela diz que
+# a POLÍTICA está ativa, e são as colunas de régua que dizem se o desenho é universal
+# ou parcial. Sem esta separação, 7 casos parciais (Palmas/TO aos domingos, Monte Mor
+# com a Tarifa do Bem, etc.) entravam na contagem de TZ universal. Decisão do autor,
+# 22/10/2026: separar pela régua.
+tz_small_regua = tz_dedup[['cod_ibge', 'Régua — aba']].rename(columns={'Régua — aba': 'tz_regua_aba'})
+df = df.merge(tz_small_regua, on='cod_ibge', how='left')
+parcial = df['tz_situacao_mestre'].eq('Ativa') & df['tz_regua_aba'].notna() & df['tz_regua_aba'].ne('1 Universal')
+print('ativas reclassificadas como parciais pela régua:', int(parcial.sum()))
+if parcial.any():
+    print(df.loc[parcial, ['cod_ibge', 'nome_mun', 'uf', 'tz_regua_aba']].to_string(index=False))
 df['tz_status'] = np.where(df['tz_situacao_mestre'].notna(), df['tz_situacao_mestre'], 'Não TZ')
+df.loc[parcial, 'tz_status'] = 'Parcial (ativa)'
 print(df['tz_status'].value_counts())
 
 # --- modelo de prestação (MUNIC 2020): categórica derivada dos 5 flags 0/1 ---

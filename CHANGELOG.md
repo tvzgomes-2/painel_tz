@@ -6,6 +6,36 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
+## v0.11 (atual — 2026-10-22)
+
+Sincronização com o cofre depois de 20 dias (a base-mestre foi editada em 22/10; o painel rodava com a fotografia de 02/10) **e uma correção de taxonomia que muda o número de capa**: 187 casos na planilha, mas **174 ativas + 6 encerradas = 180 no universo universal**, porque 7 ativas são parciais pela régua.
+
+**A correção de taxonomia (decisão do autor, 22/10/2026):**
+
+- A coluna `Situação` da base-mestre **mudou de sentido** em out/2026: hoje diz que a *política* está ativa, e são as colunas `Régua — aba`/`Régua — subtipo` que dizem se o desenho é universal ou parcial. O `build_data.py` lia `Situação` direto, então 7 casos parciais entravam na contagem de TZ **universal**: Palmas/TO (domingos e feriados, 2c), Monte Mor/SP (Tarifa do Bem, 2a), Dom Silvério/MG (2a), Colina/SP (2a), Jeceaba/MG (2b), Casimiro de Abreu/RJ (2b) e Guapimirim/RJ (2b). Passam a `tz_status = 'Parcial (ativa)'` e migram para a régua descritiva.
+- Efeito: **ativas de 181 para 174**, universo de 187 para 180, população com TZ universal ativa de 7,9 mi para **7,4 mi**, e os casos parciais no painel de 33 para **42**.
+- Isso dissolve, de quebra, a contradição de Monte Mor (`Situação = Ativa` **com** `Fim = 2025-11-01`): lida pela régua, a linha é coerente — o fim marca o encerramento da fase *universal*, e desde 01/11/2025 o desenho é 2a.
+
+**A régua estava com a numeração errada no painel — os códigos significavam o oposto:**
+
+- A régua foi renumerada no cofre em 13/09/2026 e propagada em 20/09, mas o `camadas_tz.json` do painel era de 04/09. Resultado: o painel exibia **`2a = Temporal (dias)`** enquanto a régua vigente chama **2a de grupo social** e temporal-dias de **2c**. Mesmos códigos, sentidos trocados.
+- Novo `scripts/build_camadas.py`: a camada passa a ser gerada da aba "2 Parcial" de `Tipologias TZ - consolidado.xlsx` (arquivo canônico da régua, lido do congelamento mais recente, que tem manifesto SHA256), na numeração vigente — 2a grupo social, 2b espacial, 2c temporal-dias, 2d eventos, 2e finalidade. De 36 municípios na numeração velha para **44 na atual** (46 entradas). A aba eleitoral fica fora, como decidido em 07/10.
+- O filtro "Régua descritiva (camada)" e os rótulos do card passam a usar os 5 subtipos atuais.
+
+**Status novos da base-mestre, tratados explicitamente (decisão do autor, 22/10/2026):**
+
+- `Regulamentada — não implantada` (2 casos — Aparecida/SP): o card diz que **há norma aprovada e a operação não começou**, e que o caso entra na contagem quando houver início comprovado.
+- `Pista (a verificar)` (2 casos — São Sebastião da Grama/SP, rebaixada em 16/10): o card diz que é **indício sem prova de operação**, nem TZ nem negativa.
+- Antes, as duas caíam no texto de fechamento "nenhuma política mapeada" — falso justamente nelas.
+
+**Ano início em texto livre:** a base passou a usar o campo para anotar pendência (`[A CONFIRMAR]`, `não apurado`, `a apurar (MUNIC 2020 já declara isenção a toda a população)`). O painel imprimia cru ("tem Tarifa Zero universal desde a apurar (MUNIC 2020…)"). Agora a prosa usa só ano de 4 dígitos e, quando não há, diz que a data não está determinada; a tabela mostra "a apurar" com o valor original no *title*; o card de detalhe mantém o texto da base, rotulado como anotação.
+
+**O que mudou no universo, com origem:** 11 entradas (entre elas **São Caetano do Sul/SP de volta como universal**, 1c, decisão do autor de 20/09), 2 saídas (Aparecida/SP e São Sebastião da Grama/SP), 4 encerradas que voltaram a ativas (Palmas/TO, Picos/PI, Tijucas do Sul/PR e Monte Mor/SP — as três primeiras com log de decisão entre 24/09 e 06/10) e 7 correções de ano/fim (Holambra/SP de 2007 para 1994, Paulínia/SP com fim de 1997 para 2018, Tarumã/SP de 2025-08 para 2019, entre outras). Conferido linha a linha contra a coluna `Status no log`: **toda mudança tem decisão datada na fonte** — nenhuma é artefato de edição.
+
+**Pendência aberta:** os dois arquivos canônicos do cofre divergem em **Guapimirim/RJ** — `Tipologias TZ - consolidado.xlsx` lista o município em "1 Universal" sem subtipo, enquanto a base-mestre diz "2 Parcial / 2b" com log "em verificação". O painel segue a base-mestre (que é o que produz os 174 aprovados) e marca a camada com flag de divergência. Não resolvido aqui.
+
+**Também nesta versão:** a duplicata de Palmas-TO no arquivo-mestre, pendência aberta desde a v0.1 e repetida em toda nota metodológica desde então, **não existe mais** — o build acusa zero duplicatas de `cod_ibge`.
+
 ## v0.10 (atual — 2026-10-02)
 
 **Pederneiras/SP entra como Tarifa Zero universal ativa.** Achado da revisão semanal de 02/10: o município zerou a tarifa do transporte coletivo em **25/09/2026**, gratuidade para toda a população em todas as linhas municipais, **custeada integralmente com recursos próprios da prefeitura**, dentro de um **contrato de transição de um ano firmado por licitação** que antecede a concessão definitiva. Operadora: **Futura Transportes**. No painel constava como `Não TZ`, sem entrada em nenhum crosswalk.

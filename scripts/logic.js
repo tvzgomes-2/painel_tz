@@ -33,6 +33,11 @@ for (const row of MUNI_COL.data) {
   obj.rec_prop_pc = (obj.rec_prop != null && obj.pop) ? obj.rec_prop / obj.pop : null;
   obj.tz_bin = (obj.tz_status === 'Ativa' || obj.tz_status === 'Encerrada') ? 'TZ' : 'Não TZ';
   obj.tz_ano_num = obj.tz_ano != null ? parseInt(String(obj.tz_ano).slice(0, 4)) : null;
+  if (Number.isNaN(obj.tz_ano_num)) obj.tz_ano_num = null;
+  // tz_ano_txt: o que se pode escrever numa frase. Ano de 4 dígitos quando a
+  // base traz um; null quando o campo é uma anotação de pendência ("a apurar",
+  // "[A CONFIRMAR]", "não apurado") em vez de uma data.
+  obj.tz_ano_txt = obj.tz_ano_num ? String(obj.tz_ano_num) : null;
   obj.tz_fim_num = obj.tz_fim != null ? parseInt(String(obj.tz_fim).slice(0, 4)) : null;
   MUNI.set(obj.id, obj);
 }
@@ -157,7 +162,17 @@ function renderLegislacaoDetail(m) {
     <b style="font-size:12.5px;">Base legal</b>${linhas.join('')}
   </div>`;
 }
-const CAMADA_LABELS = { '2a': 'Temporal (dias)', '3': 'Espacial (periférica)', '4': 'Grupo social' };
+// Numeração vigente da régua (renumerada no cofre em 13/09/2026, propagada em 20/09).
+// ATENÇÃO ao ler versões antigas do painel: até a v0.10 estes mesmos códigos tinham
+// outro sentido — '2a' era temporal-dias, que hoje é '2c'. Os rótulos abaixo seguem
+// `Regras de classificacao das reguas` do cofre.
+const CAMADA_LABELS = {
+  '2a': 'Grupo social',
+  '2b': 'Espacial (periférica)',
+  '2c': 'Temporal (dias)',
+  '2d': 'Temporal (eventos)',
+  '2e': 'Finalidade (estudo, saúde)',
+};
 
 // ---------- lista de municípios com TZ parcial (para a tabela "Municípios com Tarifa Zero") ----------
 // Município com alguma camada (2a/3/4) que NÃO está no bucket universal (tz_bin!=='TZ') — evita
@@ -791,14 +806,28 @@ function renderTimeline() {
 function gerarParagrafoTZ(m) {
   const nomeUf = `${m.nome} (${m.uf})`;
   if (m.tz_status === 'Ativa') {
-    const desde = m.tz_ano ? `desde ${m.tz_ano}` : 'desde uma data ainda não determinada nesta pesquisa';
+    const desde = m.tz_ano_txt ? `desde ${m.tz_ano_txt}` : 'desde uma data ainda não determinada nesta pesquisa';
     const operador = m.tz_operador ? ` A operação é feita por ${m.tz_operador}.` : '';
     return `${nomeUf} tem <b>Tarifa Zero universal</b> ${desde}: todo o transporte coletivo municipal é gratuito para qualquer usuário, todos os dias.${operador} Isso corresponde aos ${fmtCompact(m.pop)} habitantes do município (Censo 2022), sujeitos aos gaps de estimativa já registrados no painel (ver Score de população).`;
   }
   if (m.tz_status === 'Encerrada') {
-    const periodo = (m.tz_ano && m.tz_fim) ? `entre ${m.tz_ano} e ${m.tz_fim}`
-      : (m.tz_ano ? `a partir de ${m.tz_ano}` : 'em um período não totalmente determinado nesta pesquisa');
+    const periodo = (m.tz_ano_txt && m.tz_fim) ? `entre ${m.tz_ano_txt} e ${m.tz_fim}`
+      : (m.tz_ano_txt ? `a partir de ${m.tz_ano_txt}` : 'em um período não totalmente determinado nesta pesquisa');
     return `${nomeUf} teve <b>Tarifa Zero universal</b> ${periodo}, mas a política foi <b>encerrada</b> e não está mais em vigor hoje. Entra na pesquisa como caso de reversão/trajetória, não como TZ ativa — não contar entre os municípios com gratuidade vigente.`;
+  }
+  // Status criados na base-mestre em out/2026. Sem tratamento próprio os dois caíam
+  // no texto genérico de fechamento ("nenhuma política mapeada"), que é falso
+  // justamente aqui: num caso há lei aprovada, no outro há pista aberta.
+  if (m.tz_status === 'Parcial (ativa)') {
+    const cs = camadasFor(m).map(c => (CAMADA_LABELS[c.camada] || c.camada).toLowerCase());
+    const quais = cs.length ? ` — ${cs.join('; ')}` : '';
+    return `${nomeUf} tem <b>gratuidade ativa, mas parcial</b>${quais}: há portão de acesso (de dia, de lugar, de grupo ou de finalidade), então o caso não entra na contagem de Tarifa Zero <i>universal</i> desta pesquisa. Entra na régua descritiva, que é onde os desenhos parciais são comparados.`;
+  }
+  if (m.tz_status === 'Regulamentada — não implantada') {
+    return `${nomeUf} <b>tem norma de gratuidade aprovada, mas a operação gratuita ainda não começou</b>. Não entra na contagem de municípios com Tarifa Zero — entra quando houver início de operação comprovado. É um caso a acompanhar, não um caso de ausência de política.`;
+  }
+  if (m.tz_status === 'Pista (a verificar)') {
+    return `${nomeUf} é uma <b>pista em aberto</b>: há indício de gratuidade em alguma fonte, mas sem prova de operação que sustente a entrada no universo da pesquisa. Não conta como Tarifa Zero e também não é uma negativa — volta ao escopo se aparecer prova de operação.`;
   }
   if (typeof m.tz_status === 'string' && m.tz_status.startsWith('Excluída')) {
     return `${nomeUf} tem um programa de gratuidade no transporte, mas foi <b>excluído do universo desta pesquisa por escopo</b>: ${m.tz_status.replace(/^Excluída\s*/, '').replace(/^\(|\)$/g, '')}. A pesquisa cobre apenas sistemas de ônibus municipais — este caso é mantido nos dados só como registro histórico, sem contar no total canônico.`;
@@ -829,18 +858,30 @@ function renderDetail(m) {
     desenharFluxos(null);
     return;
   }
-  const tzTag = m.tz_status === 'Ativa' ? '<span class="tag ativa">TZ ativa</span>'
-    : m.tz_status === 'Encerrada' ? '<span class="tag encerrada">TZ encerrada</span>' : '';
+  const TAG_STATUS = {
+    'Ativa': ['ativa', 'TZ ativa'],
+    'Encerrada': ['encerrada', 'TZ encerrada'],
+    'Regulamentada — não implantada': ['aguardando', 'Lei aprovada, sem operação'],
+    'Pista (a verificar)': ['pista', 'Pista a verificar'],
+    'Parcial (ativa)': ['parcial', 'Gratuidade parcial'],
+  };
+  const tagSpec = TAG_STATUS[m.tz_status]
+    || (typeof m.tz_status === 'string' && m.tz_status.startsWith('Excluída') ? ['fora', 'Fora de escopo'] : null);
+  const tzTag = tagSpec ? `<span class="tag ${tagSpec[0]}">${tagSpec[1]}</span>` : '';
   // 11.7: a camada da regua descritiva era uma lista no fim do card, depois de ~16
   // linhas de tabela. Sobe para tag ao lado do status de TZ; o detalhe (ressalvas,
   // pop. estimada, flags) continua embaixo, em renderCamadaDetail().
   const camadasTag = camadasFor(m).map(c =>
     `<span class="tag parcial" title="Camada ${c.camada} da régua descritiva${c.detalhe ? ' — ' + c.detalhe : ''}">${CAMADA_LABELS[c.camada] || c.camada}${c.flag ? ' ⚠' : ''}</span>`
   ).join(' ');
-  const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>`;
+  const incoerente = m.tz_status === 'Ativa' && m.tz_fim != null;
+  const avisoIncoerencia = incoerente
+    ? `<p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:#e2892c;">⚠ A base-mestre traz este caso como <b>Ativa</b> e ao mesmo tempo com data de <b>fim</b> preenchida (${m.tz_fim}). O painel exibe os dois campos como estão, sem escolher um — conflito a resolver na fonte.</p>`
+    : '';
+  const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>${avisoIncoerencia}`;
   let extra = '';
   if (m.tz_bin === 'TZ') {
-    extra = `<tr><td>Início TZ</td><td>${m.tz_ano ?? '—'}</td></tr>
+    extra = `<tr><td>Início TZ</td><td>${m.tz_ano ?? '—'}${(m.tz_ano != null && m.tz_ano_txt == null) ? ' <span style="color:var(--muted);font-size:11px;">(anotação da base, não um ano)</span>' : ''}</td></tr>
              <tr><td>Fim TZ</td><td>${m.tz_fim ?? '—'}</td></tr>
              <tr><td>% orçamento (fonte)</td><td>${m.tz_pct_orc ?? '—'}</td></tr>
              <tr><td>Operador</td><td>${m.tz_operador ?? '—'}</td></tr>`;
@@ -1428,7 +1469,7 @@ function renderTZTable() {
     parts.push(`<tr data-id="${r.id}">
       <td>${r.nome}</td><td>${r.uf}</td>
       <td>${tag}</td>
-      <td>${r.tz_ano ?? '—'}</td><td>${r.regic_label ?? '—'}</td><td>${r.tipo_arranjo ?? '—'}</td>
+      <td${(r.tz_ano != null && r.tz_ano_txt == null) ? ` title="base-mestre: ${String(r.tz_ano).replace(/"/g, '&quot;')}"` : ''}>${r.tz_ano_txt ?? (r.tz_ano != null ? '<span style="color:var(--muted);">a apurar</span>' : '—')}</td><td>${r.regic_label ?? '—'}</td><td>${r.tipo_arranjo ?? '—'}</td>
       <td>${fmtNum(r.pop)}</td><td>${fmtNum(r.pib_pc)}</td><td>${fmtNum(r.motorizacao)}</td>
       <td>${nf ? `<button type="button" class="fontes-toggle" data-id="${r.id}">${nf} ${expanded ? '▲' : '▼'}</button>` : '—'}</td>
     </tr>`);

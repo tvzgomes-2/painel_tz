@@ -1,311 +1,281 @@
 {
- "Belém|PA": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados — desde abr/2025",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Belo Horizonte|MG": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados — \"Catraca Livre\" — desde dez/2025 (14/12)",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  },
-  {
-   "camada": "3",
-   "label": "Espacial (periférica)",
-   "detalhe": "linhas que atendem vilas e favelas (capital) — desde 2025",
-   "fonte": "tz_bairros_perifericos.csv"
-  },
-  {
-   "camada": "4",
-   "label": "Grupo social",
-   "detalhe": "passe livre estudantil",
-   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
-   "pop_estimada": 579497,
-   "pop_estimada_fonte": "Censo 2022, proxy \"estudo_total\" (pessoas que se deslocam para estudar) — base_municipal_v3.csv; não é a contagem real de beneficiários do passe"
-  }
- ],
- "Brasília|DF": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados (ônibus e metrô) — desde mar/2025",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Cuiabá|MT": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados — desde mai/2025",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Maceió|AL": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos — desde abr/2022",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Palmas|TO": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados — desde mar/2023",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Itapecerica da Serra|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "sábados, domingos e feriados — \"Transporte Para Todos\"",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Ferraz de Vasconcelos|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados — desde jul/2026 (05/07)",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Presidente Prudente|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana (sáb/dom) — desde 2025",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "São Paulo|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos — \"Domingão Tarifa Zero\" — desde dez/2023",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Florianópolis|SC": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "último domingo do mês — \"Domingo na faixa\" — desde jan/2021",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)",
-   "flag": "Status 'JÁ TEMOS (como encerrada — REVER)' — conflita com o status atual deste município na base principal; conferir antes de tratar como definitivo."
-  }
- ],
- "Araucária|PR": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Salto|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Taboão da Serra|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Nova Lima|MG": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Santa Luzia|MG": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Cotia|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos — \"Tarifa Zero Inclusiva aos Domingos\" — desde jun/2026 (14/06)",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Sorocaba|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados (com Cartão Social) — desde jun/2024 (22/06)",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "São José do Rio Preto|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Alagoinhas|BA": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados — desde jan/2026 (11/01)",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Teresópolis|RJ": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados específicos — \"Domingão Tarifa Zero\" — desde jan/2025",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "São Carlos|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Rio Grande da Serra|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Ribeirão Pires|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "domingos e feriados",
-   "fonte": "camada2a_temporal_dias_analise.csv (28/07/2026)"
-  }
- ],
- "Volta Redonda|RJ": [
-  {
-   "camada": "3",
-   "label": "Espacial (periférica)",
-   "detalhe": "restrito a bairros/regiões periféricas",
-   "fonte": "tz_bairros_perifericos.csv"
-  }
- ],
- "Santo André|SP": [
-  {
-   "camada": "3",
-   "label": "Espacial (periférica)",
-   "detalhe": "linha Circular Luzitinha — micro-ônibus em comunidades periféricas (Vila Luzita) — desde abr/2026",
-   "fonte": "tz_bairros_perifericos.csv"
-  }
- ],
- "Belford Roxo|RJ": [
-  {
-   "camada": "3",
-   "label": "Espacial (periférica)",
-   "detalhe": "linha Jardim Gláucia→centro — desde expansão p/ Bela Vista, Vila Magalhães, Nova Aurora, Shangrilá",
-   "fonte": "tz_bairros_perifericos.csv"
-  }
- ],
- "Curitiba|PR": [
-  {
-   "camada": "4",
-   "label": "Grupo social",
-   "detalhe": "desempregados (programa dedicado)",
-   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)"
-  }
- ],
- "Uberlândia|MG": [
-  {
-   "camada": "4",
-   "label": "Grupo social",
-   "detalhe": "passe livre estudantil",
-   "fonte": "Tipologias de Tarifa Zero (4 camadas), nota do cofre (26-28/07/2026)",
-   "pop_estimada": 187195,
-   "pop_estimada_fonte": "Censo 2022, proxy \"estudo_total\" (pessoas que se deslocam para estudar) — base_municipal_v3.csv; não é a contagem real de beneficiários do passe"
-  }
- ],
- "São Caetano do Sul|SP": [
-  {
-   "camada": "4",
-   "label": "Grupo social",
-   "detalhe": "universalidade revogada em 15/07/2026 — caso-vitrine T3, hoje gratuidade restrita (grupo social); ver Ficha - São Caetano do Sul (SP)",
-   "fonte": "auditoria de fichas, 04/09/2026 — base principal (Municípios TZ - consolidado.xlsx) já registra tz_status=\"Reclassificada (parcial — grupo social)\" e Fim=2026-07-15"
-  }
- ],
- "Andrelândia|MG": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "só terças-feiras",
-   "fonte": "Funil orçamentário SICONFI (03/08/2026) — Pendências.md do cofre"
-  }
- ],
- "Embu das Artes|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana e feriados",
-   "fonte": "Funil orçamentário SICONFI (03/08/2026) — Pendências.md do cofre"
-  }
- ],
- "Embu|SP": [
-  {
-   "camada": "2a",
-   "label": "Temporal (dias)",
-   "detalhe": "fins de semana e feriados",
-   "fonte": "Funil orçamentário SICONFI (03/08/2026) — Pendências.md do cofre",
-   "flag": "Chave duplicada de propósito: o dataset municipal do painel (MUNIC/IBGE, id 3515004) ainda usa o nome pré-2007 \"Embu\" para o que hoje é oficialmente Embu das Artes/SP — achado de qualidade de dado, registrado para não perder o cruzamento no painel."
-  }
- ],
- "Áurea|RS": [
-  {
-   "camada": "3",
-   "label": "Espacial (periférica)",
-   "detalhe": "\"Colônia Tur\" — busca famílias no interior para compras/consultas e leva de volta",
-   "fonte": "Achados 141 candidatos (31/07/2026)",
-   "flag": "⚠️ Reclassificação PROVISÓRIA (a confirmar com o autor): é serviço interior↔sede, não circular intraurbano — pode não caber limpo nesta camada."
-  }
- ],
- "Magé|RJ": [
-  {
-   "camada": "3",
-   "label": "Espacial (periférica)",
-   "detalhe": "\"Amarelinho\" — 14 linhas fixas gratuitas diárias, não cobre toda a área do município (consórcio pago continua no resto)",
-   "fonte": "Funil orçamentário SICONFI (03/08/2026)",
-   "flag": "Reclassificação provisória (a confirmar com o autor)."
-  }
- ],
- "Parauapebas|PA": [
-  {
-   "camada": "4",
-   "label": "Grupo social",
-   "detalhe": "estudantes/candidatos de concurso (Lei 5.629/2026)",
-   "fonte": "Funil orçamentário SICONFI (03/08/2026)",
-   "flag": "⚠️ Caso de transição legislativa: Lei 5.631/2026 institui universalização 'gradual', ainda sem confirmação de vigência para o público geral — símile inverso de São Caetano do Sul. Acompanhar, não tratar como definitivo."
-  }
- ]
+  "Alagoinhas|BA": [
+    {
+      "camada": "2c",
+      "detalhe": "interior BA · domingos e feriados"
+    }
+  ],
+  "Andrelândia|MG": [
+    {
+      "camada": "2c",
+      "detalhe": "não-capital · só terças-feiras"
+    }
+  ],
+  "Angra dos Reis|RJ": [
+    {
+      "camada": "2d",
+      "detalhe": "Tarifa Zero (Lei 4.586/2026) · todas as linhas municipais, em períodos definidos por decreto · datas estratégicas por decreto; 1ª: 10/10/2026, 6h–19h (Movimenta Angra especial Dia das Crianças)"
+    }
+  ],
+  "Araucária|PR": [
+    {
+      "camada": "2c",
+      "detalhe": "RM Curitiba · fins de semana"
+    }
+  ],
+  "Belford Roxo|RJ": [
+    {
+      "camada": "2b",
+      "detalhe": "linha Jardim Gláucia→centro"
+    }
+  ],
+  "Belo Horizonte|MG": [
+    {
+      "camada": "2b",
+      "detalhe": "linhas que atendem vilas e favelas (capital)"
+    },
+    {
+      "camada": "2c",
+      "detalhe": "Catraca Livre · capital · domingos e feriados"
+    },
+    {
+      "camada": "2e",
+      "detalhe": "estudantes"
+    }
+  ],
+  "Belém|PA": [
+    {
+      "camada": "2c",
+      "detalhe": "capital · domingos e feriados"
+    }
+  ],
+  "Brasília|DF": [
+    {
+      "camada": "2c",
+      "detalhe": "Vai de Graça · capital · domingos e feriados (ônibus e metrô)"
+    },
+    {
+      "camada": "2e",
+      "detalhe": "estudantes (residência ou trabalho a mais de 1 km da escola; cartão estudantil personalizado)"
+    }
+  ],
+  "Casimiro de Abreu|RJ": [
+    {
+      "camada": "2b",
+      "detalhe": "Primaveras (Sistema Municipal de Transporte Público Gratuito) · espaço/linha (A.1.9, decisão do autor, 07/10/2026) — ônibus do Sistema Municipal de Transporte Público Gratuito (Primaveras) gratuitos a todos; vans do subsistema complementar municipal pagas (Decreto 3.237/2023, art. 7º: 'tarifa paga pelos usuários'), em operação em out/2026 (reportagem de 07/10/2026: rotas para Rio Dourado e Córrego"
+    }
+  ],
+  "Colina|SP": [
+    {
+      "camada": "2a",
+      "detalhe": "Transporte de trabalhadores (Decreto 4.878/2025) · trabalhadores residentes em Colina com atividade lícita em Barretos, cadastrados (carteirinha e comprovante de residência) · linha Colina–Barretos–Colina (intermunicipal, operação direta); Circular municipal tarifado (R$ 1,00) · segunda a sábado"
+    }
+  ],
+  "Cotia|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "Tarifa Zero Inclusiva aos Domingos · RMSP · domingos"
+    }
+  ],
+  "Cuiabá|MT": [
+    {
+      "camada": "2c",
+      "detalhe": "capital · domingos e feriados"
+    }
+  ],
+  "Curitiba|PR": [
+    {
+      "camada": "2a",
+      "detalhe": "Tarifa Zero para Quem Precisa · desempregados"
+    }
+  ],
+  "Dom Silvério|MG": [
+    {
+      "camada": "2a",
+      "detalhe": "Rotas do Campo – Tarifa Zero (Lei 1.860/2023)"
+    }
+  ],
+  "Duque de Caxias|RJ": [
+    {
+      "camada": "2b",
+      "detalhe": "Lei nº 3.589/2026 (Art.1º §1º) restringe expressamente o Programa Tarifa Zero às áreas do município NÃO atendidas integralmente por linhas regulares de concessão pública — coexiste com o sistema pago concessionado. 20 linhas cobrindo os 4 distritos."
+    }
+  ],
+  "Embu das Artes|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "RMSP · fins de semana/feriados"
+    }
+  ],
+  "Ferraz de Vasconcelos|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "RMSP · domingos e feriados"
+    }
+  ],
+  "Florianópolis|SC": [
+    {
+      "camada": "2c",
+      "detalhe": "Domingo na faixa · capital · último domingo do mês"
+    }
+  ],
+  "Guapimirim|RJ": [
+    {
+      "camada": "2b",
+      "detalhe": "Em verificação — a Lei 1.404/2022 cria a COMDEGUAPI (empresa municipal), não institui a gratuidade (fonte: site da empresa; texto da lei não obtido); operação desde 29/12/2023 ('a passagem é de graça'); ato de gratuidade não localizado",
+      "flag": "divergência entre base-mestre e planilha da régua — a confirmar"
+    }
+  ],
+  "Itapecerica da Serra|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "Transporte Para Todos · RMSP · sábados, domingos e feriados"
+    }
+  ],
+  "Jeceaba|MG": [
+    {
+      "camada": "2b",
+      "detalhe": "restrita a moradores da Zona Rural (Lei nº 1.191/2013); atributo: cadastro prévio relatado (portão de procedimento subordinado — ver A.1.3, espaço prevalece)"
+    }
+  ],
+  "Maceió|AL": [
+    {
+      "camada": "2c",
+      "detalhe": "capital · domingos"
+    }
+  ],
+  "Magé|RJ": [
+    {
+      "camada": "2b",
+      "detalhe": "'Amarelinho' — 14 linhas fixas gratuitas diárias, não cobre toda a área do município (consórcio pago continua no resto)"
+    }
+  ],
+  "Monte Mor|SP": [
+    {
+      "camada": "2a",
+      "detalhe": "Tarifa do Bem (Lei 3.379/2025) · idosos, pessoas com deficiência e usuários do CadÚnico em extrema pobreza (cadastro) · rede municipal (Rápido Luxo); demais usuários pagam R$ 6,00"
+    }
+  ],
+  "Nova Lima|MG": [
+    {
+      "camada": "2c",
+      "detalhe": "RM BH · fins de semana"
+    }
+  ],
+  "Olímpia|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "sábados"
+    }
+  ],
+  "Palmas|TO": [
+    {
+      "camada": "2c",
+      "detalhe": "capital · domingos e feriados"
+    }
+  ],
+  "Parauapebas|PA": [
+    {
+      "camada": "2e",
+      "detalhe": "⚠️ PROVISÓRIO — Lei 5.631/2026 institui universalização 'gradual', ainda sem confirmação de vigência para o público geral; caso de transição legislativa, símile inverso de São Caetano do Sul. Acompanhar, não tratar como definitivo. · estudantes/candidatos de concurso (hoje) — Lei 5.629/2026",
+      "flag": "classificação provisória, a confirmar"
+    }
+  ],
+  "Presidente Prudente|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "interior SP · fins de semana (sáb/dom)"
+    }
+  ],
+  "Ribeirão Pires|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "RMSP · domingos e feriados"
+    }
+  ],
+  "Rio Grande da Serra|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "RMSP · domingos"
+    }
+  ],
+  "Salto|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "interior SP · fins de semana"
+    }
+  ],
+  "Santa Luzia|MG": [
+    {
+      "camada": "2c",
+      "detalhe": "RM BH · fins de semana"
+    }
+  ],
+  "Santo André|SP": [
+    {
+      "camada": "2b",
+      "detalhe": "linha Circular Luzitinha — micro-ônibus em comunidades periféricas (Vila Luzita)"
+    }
+  ],
+  "Sorocaba|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "interior SP · domingos e feriados (com Cartão Social)"
+    }
+  ],
+  "São Carlos|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "interior SP · domingos"
+    }
+  ],
+  "São José do Rio Preto|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "interior SP · domingos"
+    }
+  ],
+  "São Paulo|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "Domingão Tarifa Zero · capital · domingos"
+    }
+  ],
+  "Taboão da Serra|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "RMSP · fins de semana"
+    }
+  ],
+  "Teresópolis|RJ": [
+    {
+      "camada": "2c",
+      "detalhe": "Domingão Tarifa Zero · interior RJ · domingos e feriados específicos"
+    }
+  ],
+  "Uberlândia|MG": [
+    {
+      "camada": "2e",
+      "detalhe": "Passe livre estudantil · estudantes"
+    }
+  ],
+  "Valinhos|SP": [
+    {
+      "camada": "2c",
+      "detalhe": "Tarifa Zero aos domingos e feriados (Programa de Modernização e Melhoria do Transporte Coletivo) · todo o transporte coletivo municipal; sem cartão, o motorista libera a catraca · domingos e feriados"
+    }
+  ],
+  "Volta Redonda|RJ": [
+    {
+      "camada": "2b",
+      "detalhe": "restrito a bairros/regiões periféricas"
+    }
+  ],
+  "Áurea|RS": [
+    {
+      "camada": "2b",
+      "detalhe": "⚠️ PROVISÓRIO — interior↔sede ('Colônia Tur', busca famílias para compras/consultas), não é circular intraurbano; pode não caber limpo nesta camada",
+      "flag": "classificação provisória, a confirmar"
+    }
+  ]
 }
