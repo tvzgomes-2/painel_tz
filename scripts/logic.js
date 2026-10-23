@@ -555,6 +555,7 @@ function render() {
   renderLegend();
   renderBars();
   renderCards();
+  renderRegua();
   renderGrupos();
   renderRegiaoUf();
   renderDispersao();
@@ -1255,6 +1256,77 @@ function renderModalStack() {
   html += `<div class="mslegend">${Object.keys(MODAL_STACK_LABELS).map(k =>
     `<span><i style="background:${MODAL_STACK_COLORS[k]}"></i>${MODAL_STACK_LABELS[k]}</span>`).join('')}</div>`;
   el.innerHTML = html;
+}
+
+// ---------- régua descritiva, no cabeçalho (22/10/2026) ----------
+// A régua é uma ESCALA ORDENADA, não um conjunto de rótulos: vai da ausência de
+// portão (1a) até os desenhos em que o portão condiciona quem ou quando se viaja
+// (2a-2e), com as encerradas como camada própria (3). Desenhar os casos sobre ela
+// é mais informativo que qualquer cartão: mostra onde o Brasil está na régua, e
+// que a imensa maioria dos casos é 1a — o que é o achado, não um detalhe.
+// Critério e rótulos: `Regras de classificacao das reguas` (cofre), A.1.4, 18/09/2026.
+const REGUA = [
+  { k: '1a', grupo: 1, rot: 'Ausência',     desc: 'nenhum portão de acesso',                       cor: '#F5E400' },
+  { k: '1b', grupo: 1, rot: 'Procedimento', desc: 'exige uma ação (cadastro), mas qualquer um pode cumprir', cor: '#D9CE12' },
+  { k: '1c', grupo: 1, rot: 'Residência',   desc: 'restrito a quem mora no município — não tira a universalidade (Kębłowski, 2020)', cor: '#BDB623' },
+  { k: '1d', grupo: 1, rot: 'Prazo',        desc: 'a norma declara quando termina, mas o termo ainda não chegou', cor: '#A19E33' },
+  { k: '2a', grupo: 2, rot: 'Grupo social', desc: 'portão de identidade que não é residência (renda, vínculo)', cor: '#E2892C' },
+  { k: '2b', grupo: 2, rot: 'Espaço',       desc: 'gratuidade só em certas linhas ou regiões',      cor: '#D96F3B' },
+  { k: '2c', grupo: 2, rot: 'Dias',         desc: 'gratuidade só em certos dias (domingos, feriados)', cor: '#D05549' },
+  { k: '2d', grupo: 2, rot: 'Eventos',      desc: 'gratuidade pontual decidida pelo município',     cor: '#C73B58' },
+  { k: '2e', grupo: 2, rot: 'Finalidade',   desc: 'gratuidade só para chegar a um serviço (escola, saúde)', cor: '#BE2166' },
+];
+const REGUA_IDX = Object.fromEntries(REGUA.map((r, i) => [r.k, i]));
+
+function renderRegua() {
+  const el = document.getElementById('regua');
+  if (!el) return;
+  const rows = subsetNoTz();
+
+  // Universal e encerrada vêm da régua da base-mestre; parcial vem da camada
+  // (camadas_tz.json), que é a MESMA fonte do cartão "TZ parciais" do topo —
+  // de propósito: a régua e o cartão têm de fechar o mesmo número, senão o leitor
+  // vê 7 aqui e 43 ali e não tem como saber qual vale.
+  const cont = Object.fromEntries(REGUA.map(r => [r.k, 0]));
+  let encerradas = 0, universalSemSub = 0;
+  for (const m of rows) {
+    if (m.tz_status === 'Encerrada') { encerradas++; continue; }
+    if (m.tz_bin === 'TZ') {
+      const s = m.tz_regua_sub;
+      if (s && s in cont && REGUA[REGUA_IDX[s]].grupo === 1) cont[s]++; else universalSemSub++;
+      continue;
+    }
+    for (const c of camadasFor(m)) if (c.camada in cont) cont[c.camada]++;
+  }
+  const nUniv = REGUA.filter(r => r.grupo === 1).reduce((a, r) => a + cont[r.k], 0) + universalSemSub;
+  const nParc = countParciais(rows);
+  const total = nUniv + nParc + encerradas;
+  if (!total) { el.innerHTML = '<p class="sub">Nenhum caso classificado na régua neste recorte.</p>'; return; }
+
+  const seg = (cor, n, titulo) => n
+    ? `<div class="rgseg" style="flex:${n};background:${cor};" title="${titulo}"><span>${n}</span></div>` : '';
+  const barra =
+    REGUA.filter(r => r.grupo === 1).map(r => seg(r.cor, cont[r.k], `${r.k} · ${r.rot} — ${cont[r.k]} caso(s): ${r.desc}`)).join('')
+    + seg('#8a8f3a', universalSemSub, `Universal, subtipo ainda não apurado — ${universalSemSub} caso(s)`)
+    + REGUA.filter(r => r.grupo === 2).map(r => seg(r.cor, cont[r.k], `${r.k} · ${r.rot} — ${cont[r.k]} caso(s): ${r.desc}`)).join('')
+    + seg('#6b7280', encerradas, `3 · Encerradas — ${encerradas} caso(s): a política parou`);
+
+  const chip = r => cont[r.k]
+    ? `<span class="rgchip" title="${r.desc}"><i style="background:${r.cor}"></i>${r.k} ${r.rot} <b>${cont[r.k]}</b></span>` : '';
+  const somaCamadas = REGUA.filter(r => r.grupo === 2).reduce((a, r) => a + cont[r.k], 0);
+
+  el.innerHTML = `
+    <div class="rgtopo">
+      <span class="rglado">← sem portão de acesso</span>
+      <span class="rglado dir">portão condiciona quem ou quando viaja →</span>
+    </div>
+    <div class="rgbar">${barra}</div>
+    <div class="rgchips">
+      <span class="rggrupo">1 Universal <b>${nUniv}</b></span>${REGUA.filter(r => r.grupo === 1).map(chip).join('')}${universalSemSub ? `<span class="rgchip"><i style="background:#8a8f3a"></i>subtipo a apurar <b>${universalSemSub}</b></span>` : ''}
+      <span class="rggrupo sep">2 Parcial <b>${nParc}</b></span>${REGUA.filter(r => r.grupo === 2).map(chip).join('')}
+      ${encerradas ? `<span class="rggrupo sep">3 Encerradas <b>${encerradas}</b></span>` : ''}
+    </div>
+    ${somaCamadas !== nParc ? `<p class="sub" style="margin-top:6px;">Os subtipos somam ${somaCamadas} e os municípios parciais são ${nParc}: um mesmo município pode acumular mais de uma camada (Belo Horizonte e Brasília, por exemplo), e nesses casos ele conta uma vez como município e uma vez em cada camada.</p>` : ''}`;
 }
 
 // ---------- 3.3: TZ por região e por UF (pendente desde v0.3) ----------

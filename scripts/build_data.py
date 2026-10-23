@@ -57,7 +57,8 @@ df = base.merge(tz_small, on='cod_ibge', how='left')
 # ou parcial. Sem esta separação, 7 casos parciais (Palmas/TO aos domingos, Monte Mor
 # com a Tarifa do Bem, etc.) entravam na contagem de TZ universal. Decisão do autor,
 # 22/10/2026: separar pela régua.
-tz_small_regua = tz_dedup[['cod_ibge', 'Régua — aba']].rename(columns={'Régua — aba': 'tz_regua_aba'})
+tz_small_regua = tz_dedup[['cod_ibge', 'Régua — aba', 'Régua — subtipo']].rename(
+    columns={'Régua — aba': 'tz_regua_aba', 'Régua — subtipo': 'tz_regua_sub'})
 df = df.merge(tz_small_regua, on='cod_ibge', how='left')
 parcial = df['tz_situacao_mestre'].eq('Ativa') & df['tz_regua_aba'].notna() & df['tz_regua_aba'].ne('1 Universal')
 print('ativas reclassificadas como parciais pela régua:', int(parcial.sum()))
@@ -136,6 +137,8 @@ cols = {
     'part_16': 'partido_16', 'passe_1turno_2022': 'passe_1t', 'passe_2turno_2022': 'passe_2t',
     'passe_abrangencia_2022': 'passe_abrang', 'tz_status': 'tz_status',
     'tz_ano_mestre': 'tz_ano', 'tz_fim_mestre': 'tz_fim', '% orçamento': 'tz_pct_orc', 'Operador': 'tz_operador',
+    # régua descritiva (cap. 4.3 / 5.5 da tese): a classificação do desenho, não do status
+    'tz_regua_aba': 'tz_regua_aba', 'tz_regua_sub': 'tz_regua_sub',
     # --- campos novos (v3) ---
     'regic_nivel_2018': 'regic_nivel', 'regic_simples': 'regic_label',
     'arranjo_pop_2018': 'arranjo_nome', 'tipo_arranjo': 'tipo_arranjo',

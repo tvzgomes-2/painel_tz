@@ -6,7 +6,18 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.11 (atual — 2026-10-22)
+## v0.12 (atual — 2026-10-23)
+
+**A régua descritiva passa a ter gráfico próprio, no cabeçalho.** Pedido do autor: *"mudamos a lógica da régua de classificação, o gráfico da régua deveria aparecer logo aqui no cabeçalho"*, com a seta sobre a faixa de cartões do topo. O gráfico entra exatamente ali — abaixo dos cartões, acima da barra de filtros — e não dentro de um painel recolhível no meio da página, porque a régua é o critério que organiza todo o resto do painel: quem lê os números de capa precisa ver, na mesma tela, de que universo eles saem.
+
+- **A barra é a escala, não um ranking.** Os segmentos vão, da esquerda para a direita, do desenho sem nenhum portão de acesso (1a, ausência) até o desenho em que um portão decide quem viaja ou quando (2e, finalidade), na ordem da régua e com a cor esquentando junto — amarelo nos universais, laranja e rosa nos parciais, cinza nas encerradas. Reordenar por tamanho destruiria a única informação que a figura carrega.
+- **Classifica o desenho, não o status.** Por isso as 6 encerradas aparecem à parte, em cinza, e os 4 casos fora da escala (`Regulamentada — não implantada` e `Pista (a verificar)`) não entram: não há desenho em operação para classificar. A v0.11 tinha uma nota que os contava como "sem subtipo apurado" — era falso e saiu.
+- **A barra e o cartão "TZ parciais" fecham o mesmo número, de propósito.** As duas contagens passam a sair da mesma função (`camadasFor()`): **43 parciais** no cartão e **43** na régua. Na primeira versão a régua lia o subtipo direto da base-mestre e exibia **7** — o leitor via 7 aqui e 43 ali, sem nenhum jeito de saber qual valia.
+- **46 entradas de subtipo para 43 municípios**, e a nota embaixo do gráfico diz por quê: Belo Horizonte e Brasília acumulam mais de uma camada, e contam uma vez como município e uma vez em cada camada.
+- Responde ao recorte dos filtros como os cartões (Brasil 174 universais / 43 parciais → MG 34 / 2).
+- **Coluna nova na base:** `tz_regua_sub` (`Régua — subtipo` da base-mestre) passa a ser exportada pelo `build_data.py` junto de `tz_regua_aba`, que já vinha da v0.11. A base sai de 60 para **61 colunas**.
+
+## v0.11 (2026-10-22)
 
 Sincronização com o cofre depois de 20 dias (a base-mestre foi editada em 22/10; o painel rodava com a fotografia de 02/10) **e uma correção de taxonomia que muda o número de capa**: 187 casos na planilha, mas **174 ativas + 6 encerradas = 180 no universo universal**, porque 7 ativas são parciais pela régua.
 
@@ -36,7 +47,7 @@ Sincronização com o cofre depois de 20 dias (a base-mestre foi editada em 22/1
 
 **Também nesta versão:** a duplicata de Palmas-TO no arquivo-mestre, pendência aberta desde a v0.1 e repetida em toda nota metodológica desde então, **não existe mais** — o build acusa zero duplicatas de `cod_ibge`.
 
-## v0.10 (atual — 2026-10-02)
+## v0.10 (2026-10-02)
 
 **Pederneiras/SP entra como Tarifa Zero universal ativa.** Achado da revisão semanal de 02/10: o município zerou a tarifa do transporte coletivo em **25/09/2026**, gratuidade para toda a população em todas as linhas municipais, **custeada integralmente com recursos próprios da prefeitura**, dentro de um **contrato de transição de um ano firmado por licitação** que antecede a concessão definitiva. Operadora: **Futura Transportes**. No painel constava como `Não TZ`, sem entrada em nenhum crosswalk.
 
