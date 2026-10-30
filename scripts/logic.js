@@ -20,6 +20,19 @@ const CURVA_PORTE = JSON.parse(document.getElementById('data-curva').textContent
 const FICHAS = JSON.parse(document.getElementById('data-fichas').textContent);
 const REMUN = JSON.parse(document.getElementById('data-remun').textContent);
 const CUSTEIO = JSON.parse(document.getElementById('data-custeio').textContent);
+const RSL = JSON.parse(document.getElementById('data-rsl')?.textContent || 'null');
+// 24/10/2026 (autor: "literatura aqui não responde à RSL"): trabalhos do corpus da revisão por município.
+// Grau da menção no fichamento: A estuda o caso, B analisa, C menciona de passagem (todos numa lista só).
+const RSL_ITEM = new Map((RSL?.itens || []).map(x => [x.id, x]));
+const GRAU_ROT = { A: 'estuda o caso', B: 'analisa', C: 'menciona' };
+function rslFor(m) { return ((RSL && RSL.mun && RSL.mun[String(m && m.id)]) || []).map(([i, g]) => ({ ...RSL_ITEM.get(i), g })).filter(x => x.id); }
+function rslLista(m, compacto) {
+  const L = rslFor(m); if (!L.length) return '';
+  const fortes = L.filter(x => x.g !== 'C'), fracas = L.filter(x => x.g === 'C');
+  const li = x => `<li><b>${esc(String(x.aut || '').split(';')[0].trim())}${String(x.aut || '').includes(';') ? ' et al.' : ''} (${x.ano})</b> — ${esc(x.tit || '')} <span class="grau-rsl g${x.g}">${GRAU_ROT[x.g]}</span></li>`;
+  // 30/10/2026: uma lista única (antes, os de passagem ficavam num bloco recolhido à parte); quem estuda ou analisa vem primeiro
+  return `<ul class="rsl-mun">${[...fortes, ...fracas].map(li).join('')}</ul>`;
+}
 // Matriz origem-destino de trabalho do Censo 2022 (v0.8), mesma chave de código IBGE.
 // Vem SUPRIMIDA: top-5 destinos (e top-5 origens) por município e no mínimo 5 registros
 // amostrados por célula — 57,6% dos 120 mil pares do microdado se apoiam em UMA pessoa
@@ -70,6 +83,7 @@ for (const k in FONTES_RAW) {
 }
 function fontesFor(m) { return (m && FONTES.get(normKey(m.nome, m.uf))) || []; }
 for (const r of STATS.tz_list) r.n_fontes = fontesFor(r).length;
+for (const r of STATS.tz_list) r.n_rsl = ((RSL && RSL.mun && RSL.mun[String(r.id)]) || []).length;
 
 // ---------- notícias por município (consolidação de referências, 27/07/2026) ----------
 // Reportagens de imprensa mapeadas em 05 - Referências/Reportagens por município (cofre), separadas
@@ -167,7 +181,7 @@ function renderLegislacaoDetail(m) {
     // escuro do painel: a norma fica na cor do texto e o link se anuncia pelo sublinhado.
     const rotulo = L.link
       ? `<a href="${L.link}" target="_blank" rel="noopener" title="${titulo}"
-           style="color:var(--text);text-decoration:underline;text-decoration-color:var(--amarelo);text-underline-offset:3px;">${L.norma}</a>`
+           style="color:var(--text);text-decoration:underline;text-decoration-color:var(--rosa);text-underline-offset:3px;">${L.norma}</a>`
       : `<span title="${titulo}">${L.norma}</span>`;
     linhas.push(`<div style="font-size:12.5px;color:var(--text);margin-top:4px;"><b>${rotulo}</b>${conf}</div>`);
     if (L.extra) linhas.push(`<div style="font-size:11.5px;color:var(--muted);margin-top:2px;">Também citada: ${L.extra}</div>`);
@@ -224,6 +238,7 @@ for (const m of MUNI.values()) {
     tz_status: 'Parcial',
     tz_ano: camadaAnoInicio(m),
     n_fontes: fontesFor(m).length,
+    n_rsl: ((RSL && RSL.mun && RSL.mun[String(m.id)]) || []).length,
   }));
 }
 
@@ -494,11 +509,11 @@ function corParcial(nCamadas) {
   // rampa invertida (ajuste 29/07/2026, a pedido do autor): amarelo mais forte em 1 camada,
   // decaindo conforme acumula camadas — 1→0.75, 2→0.5, 3+→0.25 (nunca 1.0 = universal, nunca 0 = não-TZ).
   const t = 1 - Math.min(nCamadas, 3) / 4;
-  return mixHex(NEUTRALS.naoTz, '#F5E400', t);
+  return mixHex(NEUTRALS.naoTz, '#E2892C', t);   // 24/10/2026: parcial em laranja, como na régua (identidade: menos amarelo)
 }
 // cores de texto pequeno (legenda da linha do tempo) — acompanham TZ_COLORS_HEX
 function tzUi() {
-  return { ativa: '#6FBE44', enc: '#f96d92', parcial: '#F5E400' };
+  return { ativa: '#6FBE44', enc: '#f96d92', parcial: '#E2892C' };
 }
 
 // tons neutros por tema (fills aplicados via JS precisam acompanhar o tema)
@@ -598,7 +613,7 @@ function renderLegend() {
   const nt = neutrals();
   let html = '';
   if (state.colorBy === 'tz') {
-    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>TZ universal</span>
+    html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Universal</span>
             <span><span class="sw" style="background:${corParcial(1)}"></span>Parcial · 1 camada</span>
             <span><span class="sw" style="background:${corParcial(2)}"></span>Parcial · 2 camadas</span>
             <span><span class="sw" style="background:${corParcial(3)}"></span>Parcial · 3 camadas</span>
@@ -672,16 +687,26 @@ function renderCards() {
   // glossario cita, e sao 31% dos municipios: amostra parcial, nao painel nacional.
   // A ressalva viaja junto com o numero, no proprio rotulo do card.
   const comOnibus = rows.reduce((n, m) => n + (m.modelo_prestacao ? 1 : 0), 0);
-  const cards = [
-    { n: rows.length.toLocaleString('pt-BR'), l: `Municípios ${scopeLabel}` },
-    { n: comOnibus.toLocaleString('pt-BR'), l: `Com sistema de ônibus declarado ${scopeLabel} (MUNIC 2020 — só 31% dos municípios responderam; ausência aqui não é prova de ausência)` },
-    { n: ativas.length.toLocaleString('pt-BR'), l: `TZ <b>universal</b> em vigor ${scopeLabel}`, w: warn },
-    { n: countParciais(rows).toLocaleString('pt-BR'), l: `TZ <b>parciais</b> ${scopeLabel} (dias, bairros ou grupo social — fora da universal; não conta as 324 gratuidades eleitorais/eventuais)` },
-    { n: (rows.length ? (100 * tzRows.length / rows.length) : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%', l: `dos ${rows.length.toLocaleString('pt-BR')} municípios ${scopeLabel === 'no Brasil' ? 'do Brasil' : 'do recorte'} têm ou tiveram TZ universal (${tzRows.length.toLocaleString('pt-BR')})`, w: warn },
-    { n: fmtCompact(popTZ), l: `Pessoas vivendo com TZ universal ${scopeLabel} (soma da população, Censo 2022)`, w: warn },
+  // v0.15 (24/10/2026): quatro destaques no cabeçalho, com denominador e data no próprio cartão.
+  // Os 44 parciais ficam fora desta fileira: são levantamento exploratório (ver seção 2).
+  const pctOf = (a, b) => b ? (100 * a / b).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) : '0';
+  const popRec = rows.reduce((t, m) => t + (m.pop || 0), 0);
+  const ofer = ativas.filter(m => (remunFor(m) || {}).dest === 'oferta').length;
+  const baseVer = rows.filter(m => ['Ativa', 'Parcial (ativa)', 'Encerrada'].includes(m.tz_status)).length;
+  const cp = CURVA_PORTE.total || {};
+  const dq = [
+    { b: ativas.length.toLocaleString('pt-BR'), l: `políticas de Tarifa Zero <b>universal</b> em vigor ${scopeLabel}${warn}`, d: `de ${baseVer.toLocaleString('pt-BR')} políticas verificadas na base · retrato de 21/10/2026` },
+    { b: fmtCompact(popTZ), l: `moradores de municípios com Tarifa Zero universal ${scopeLabel}`, d: `${pctOf(popTZ, popRec)}% da população ${hasFilter ? 'do recorte' : 'do país'} · Censo 2022` },
+    { b: `${ofer} <small>de ${ativas.length}</small>`, l: `políticas universais em que o operador privado é <b>pago pela oferta</b> (${pctOf(ofer, ativas.length)}%)`, d: 'por quilômetro, por veículo ou por valor fixo — o risco da demanda fica com a prefeitura · Seções 7.2 a 7.4' },
+    // 24/10/2026 (autor: "quantos % dos sistemas de ônibus?"): no nacional, o número principal é a
+    // fração dos SISTEMAS de ônibus; a fração de todos os municípios desce para a linha menor.
+    // O índice de sistema é município a município só no artigo inédito, então no recorte vale a outra.
+    hasFilter
+      ? { b: `${pctOf(ativas.length, rows.length)}%`, l: `dos ${rows.length.toLocaleString('pt-BR')} municípios do recorte têm Tarifa Zero universal`, d: 'a fração dos sistemas de ônibus só existe no nacional (o índice de sistema é publicado só em agregado)' }
+      : { b: `${pctOf(cp.tz_sist || 0, cp.n_sist || 1)}%`, l: `dos <b>sistemas de ônibus</b> do país têm Tarifa Zero universal — ${cp.tz_sist} dos ${(cp.n_sist || 0).toLocaleString('pt-BR')} municípios com indício de sistema`,
+          d: `${pctOf(ativas.length, rows.length)}% de todos os ${rows.length.toLocaleString('pt-BR')} municípios (${ativas.length}); os outros ${ativas.length - (cp.tz_sist || 0)} casos ficam em municípios abaixo do corte do índice — sistemas pequenos ou pouco declarados` },
   ];
-  document.getElementById('cards').innerHTML = cards.map(c =>
-    `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}${c.w || ''}</div></div>`).join('');
+  document.getElementById('destaques').innerHTML = dq.map(c => `<div class="dq"><div class="v">${c.b}</div><div class="l">${c.l}</div><div class="d">${c.d}</div></div>`).join('');
   // Como os números se relacionam (24/10/2026, parecer externo): os 187 da base verificada e
   // os 44 parciais da régua não são o mesmo universo — e o leitor precisava cruzar abas para saber.
   const conta = st => rows.filter(m => m.tz_status === st).length;
@@ -703,55 +728,221 @@ function renderCards() {
   if (rel) rel.innerHTML = txt;
 }
 
-// ---------- score de população abrangida pela Tarifa Zero (v1, 29/07/2026) ----------
-// Metodologia aprovada pelo autor (29/07/2026): "quando é universal soma todos, quando é
-// parcial, soma a estimativa de população daquele grupo". v1 simplificada:
-//   - camada universal (tz_bin==='TZ'): 100% da população residente (Censo 2022).
-//   - camada 4/grupo social COM estimativa carregada em camadas_tz.json (pop_estimada) — hoje só
-//     Belo Horizonte e Uberlândia, proxy "estudo_total" do Censo 2022 (deslocamento p/ estudo,
-//     não a contagem real de beneficiários do passe estudantil).
-//   - demais casos de TZ parcial (temporal-dias/2a, espacial-periférica/3, grupo social sem dado
-//     direto — Curitiba/desempregados) ficam de fora da soma, marcados "sem estimativa": não há
-//     recorte sub-municipal defensável na base atual (ver Pendências.md, 29/07/2026).
-//   - gratuidades por lei federal (idoso/PcD) NÃO somadas nesta v1: a base não tem população
-//     idosa/PcD por município (pendência aberta, mesma nota).
-// Evita contar 2x: um município só entra em UM dos dois buckets (universal OU parcial-estimado),
-// nunca nos dois — mesma regra de exclusividade já usada em countParciais()/tzparcial no mapa.
-function popScore(rows) {
-  let popUniversal = 0, popParcialEstimada = 0;
-  const semEstimativa = [];
-  for (const m of rows) {
-    if (m.tz_bin === 'TZ') { popUniversal += (m.pop || 0); continue; }
-    const camadas = camadasFor(m);
-    if (!camadas.length) continue;
-    const comEstimativa = camadas.find(c => c.pop_estimada != null);
-    if (comEstimativa) popParcialEstimada += comEstimativa.pop_estimada;
-    else semEstimativa.push(m.nome + '/' + m.uf);
-  }
-  return { popUniversal, popParcialEstimada, semEstimativa };
+// ---------- v0.15: leitura em três partes (o que mostra · resultado · ressalva) ----------
+// O resultado é SEMPRE o do Brasil inteiro e é calculado aqui, dos mesmos dados dos gráficos —
+// não é texto digitado, para não descolar do que o painel mostra. Os gráficos abaixo dele
+// continuam respondendo ao recorte.
+function renderLeituras() {
+  const all = [...MUNI.values()];
+  const uni = all.filter(m => m.tz_status === 'Ativa');
+  const N = uni.length, f = v => v.toLocaleString('pt-BR'), pc = (a, b) => b ? Math.round(100 * a / b) + '%' : '—';
+  const pc1 = (a, b) => b ? (100 * a / b).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%' : '—';
+  const med = arr => { const v = arr.filter(x => x != null).sort((a, b) => a - b); return v.length ? (v.length % 2 ? v[(v.length - 1) / 2] : (v[v.length / 2 - 1] + v[v.length / 2]) / 2) : null; };
+  const reais = (v, c = 2) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: c, maximumFractionDigits: c });
+  const put = (id, mostra, res, ress) => { const el = document.getElementById(id); if (el) el.innerHTML =
+    `<div><i>O que mostra</i>${mostra}</div><div class="res"><i>Resultado no Brasil</i>${res}</div><div><i>Ressalva</i>${ress}</div>`; };
+  // 1. onde e quando
+  const porReg = {}; for (const m of uni) porReg[m.regiao] = (porReg[m.regiao] || 0) + 1;
+  const porUf = {}; for (const m of uni) porUf[m.uf] = (porUf[m.uf] || 0) + 1;
+  const top4 = Object.entries(porUf).sort((a, b) => b[1] - a[1]).slice(0, 4);
+  const n4 = top4.reduce((t, x) => t + x[1], 0);
+  const ano = m => { const a = parseInt(String(m.tz_ano || '').slice(0, 4), 10); return isNaN(a) ? null : a; };
+  const desde21 = uni.filter(m => (ano(m) || 0) >= 2021).length, comAno = uni.filter(m => ano(m)).length;
+  const fx = (CURVA_PORTE.faixas || []).filter(x => x.n_sist).map(x => ({ ...x, t: x.tz_sist / x.n_sist })).sort((a, b) => b.t - a.t)[0];
+  const cp = CURVA_PORTE.total || {};
+  put('leit-onde', 'Onde estão as políticas de Tarifa Zero universal, quando foram adotadas e em municípios de que tamanho.',
+    `${f(porReg.Sudeste || 0)} das ${f(N)} políticas estão no Sudeste; ${top4.map(x => x[0]).join(', ').replace(/, ([^,]*)$/, ' e $1')} reúnem ${pc(n4, N)}. ${f(desde21)} das ${f(comAno)} com ano conhecido começaram de 2021 em diante. Entre os ${f(cp.n_sist || 0)} municípios com indício de sistema de ônibus, ${pc1(cp.tz_sist, cp.n_sist)} têm Tarifa Zero — ${fx ? pc1(fx.tz_sist, fx.n_sist) + ' na faixa de ' + fx.rot : ''} —, e nenhum acima de 500 mil habitantes.`,
+    'A barra por UF conta <b>políticas</b>; o percentual é sobre os <b>municípios</b> da UF. O gráfico por porte é fixo e nacional e usa um índice de indício de sistema de artigo inédito — só os agregados são publicados.');
+  // 2. como funciona
+  const a1 = uni.filter(m => m.tz_regua_sub === '1a').length, prov = uni.filter(m => m.tz_prov).length;
+  const n44 = countParciais(all), entradas = all.reduce((t, m) => t + (m.tz_bin !== 'TZ' ? camadasFor(m).length : 0), 0);
+  put('leit-como', 'Cada política na escala do <b>portão de acesso</b>: da gratuidade sem condição nenhuma até os desenhos em que um portão decide quem viaja, ou quando.',
+    `${f(a1)} das ${f(N)} políticas universais (${pc1(a1, N)}) não têm portão nenhum. As parciais mapeadas são ${f(n44)} <b>municípios</b> e ${f(entradas)} entradas na régua: um município pode estar em mais de uma camada.`,
+    `Classifica o desenho, não o status. ${f(prov)} subtipos (◇) são hipóteses à espera de resposta a pedido de acesso à informação. A busca das parciais não é exaustiva — por isso elas não entram nos destaques do cabeçalho.`);
+  // 3. quem opera e recebe
+  const vias = {}, arrs = {}; let semArr = 0;
+  const verif = all.filter(m => m.tz_bin === 'TZ' || m.tz_status === 'Parcial (ativa)');   // o mesmo conjunto do gráfico de arranjo
+  for (const m of verif) { const a = arranjoFor(m); if (!a || !a.via) { semArr++; continue; } vias[a.via] = (vias[a.via] || 0) + 1; if (a.a) arrs[a.a] = (arrs[a.a] || 0) + 1; }
+  const viaTop = Object.entries(vias).sort((a, b) => b[1] - a[1])[0] || ['—', 0];
+  const pre = vias['concessão/permissão preexistente'] || 0;
+  const dest = {}; let semDest = 0; for (const m of uni) { const r = remunFor(m); if (r && r.dest) dest[r.dest] = (dest[r.dest] || 0) + 1; else semDest++; }
+  put('leit-opera', 'O que a prefeitura contratou para operar a gratuidade, por qual instrumento ela entrou e quem recebe o recurso.',
+    `Das ${f(verif.length)} políticas verificadas, a gratuidade entrou mais por ${viaTop[0]} (${f(viaTop[1])}); em ${f(pre)} ela entrou sobre uma concessão que já existia. Entre as ${f(N)} universais em vigor, o operador privado é pago pela oferta em ${f(dest.oferta || 0)} (${pc1(dest.oferta || 0, N)}) e a operação é pública em ${f(dest.publica || 0)}.`,
+    `O arranjo conta as ${f(verif.length)} <b>políticas</b> verificadas (${f(semArr)} sem instrumento apurado); a remuneração, as ${f(N)} universais em vigor (${f(semDest)} sem destinatário apurado).`);
+  // 4. quem paga e quanto custa
+  const kms = [], habs = []; for (const m of all) { const r = remunFor(m); if (!r) continue; for (const k of (r.km || [])) kms.push(k.v); for (const h of (r.hab || [])) if (h.v < 700) habs.push(h.v); }
+  const apur = ESCALA_COMPROMISSO.reduce((t, e) => t + e.n, 0), anual = ESCALA_COMPROMISSO[2].n + ESCALA_COMPROMISSO[3].n;
+  put('leit-paga', 'Quanto custa o serviço contratado e quão protegido está o dinheiro que paga a gratuidade — a <b>segurança do custeio</b>.',
+    `Mediana de ${reais(med(kms))} por quilômetro em ${f(kms.length)} contratos e de ${reais(med(habs), 0)} por habitante ao ano em ${f(habs.length)}. Nenhuma política tem receita própria vinculada: ${f(anual)} das ${f(apur)} com fonte apurada (${pc(anual, apur)}) dependem do orçamento de cada ano.`.replace('(' + pc(anual, apur) + ')', '(' + pc1(anual, apur) + ')'),
+    'Preços de contratos diferentes, com serviços diferentes — comparam ordem de grandeza, não eficiência. A escala de segurança do custeio é fixa (Quadro 28 da tese), sobre as 187 políticas.');
+  // 5. quem é alcançado — do piso à universal (30/10/2026)
+  const Ab = alcanceMunicipal(all), popBR = all.reduce((t, m) => t + (m.pop || 0), 0);
+  const dias = Ab.parc['2c'] ? Ab.parc['2c'].pop : 0;
+  put('leit-alcance', 'Quem tem direito a viajar de graça, do piso que vale no país inteiro até a Tarifa Zero universal: por qual portão e quando.',
+    `Abaixo do município, a gratuidade é dada por pessoa ou por tempo: ${fmtCompact(ALC_TESE.piso[0].v)} pela idade, ${fmtCompact(ALC_TESE.piso[1].v)} só no dia da votação. Nas parciais municipais, até ${fmtCompact(dias)} moram onde a gratuidade vale só em alguns dias. Todos os moradores, todos os dias: ${fmtCompact(Ab.popUni)} — ${(100 * Ab.popUni / popBR).toLocaleString('pt-BR', { maximumFractionDigits: 1 })}% da população —, nos ${f(Ab.nUni)} municípios com Tarifa Zero universal.`,
+    '<b>Elegível não é usuário</b>, e as linhas não se somam: a mesma pessoa pode estar em várias. Nas parciais o número é teto — a população inteira do município, não o público da política.');
+}
+// atalhos do Panorama: rolam até a seção descontando a barra fixa de filtros e abas
+document.querySelectorAll('.atalhos a, .topo-sec').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  const alvo = document.querySelector(a.getAttribute('href')); if (!alvo) return;
+  const bar = document.querySelector('.stickybar'); const off = bar ? bar.getBoundingClientRect().height + 10 : 10;
+  scrollTo({ top: alvo.getBoundingClientRect().top + scrollY - off, behavior: 'smooth' });
+}));
+
+// ---------- aba Literatura (24/10/2026): a revisão sistemática da Seção 5.2 e do Apêndice B ----------
+// Funil, estratos, anos e fatores saem do pacote 6 e da matriz de fatores (build_rsl.py, que confere
+// as contagens com a tese). Os municípios citados vêm do texto da tese: o cruzamento item a item que
+// produz os 143 não está no pacote, e o painel não o refaz por conta própria.
+const RSL_MUNIS_TESE = { total: 143, top: [['São Paulo', 23], ['Maricá', 17], ['Belo Horizonte', 11], ['Caucaia', 10], ['Vargem Grande Paulista', 10]], semCit: 86, depois: 7 };
+function renderLiteratura() {
+  if (!RSL) return;
+  const F = RSL.funil, f = v => v.toLocaleString('pt-BR');
+  const fat = Object.fromEntries(RSL.fatores.map(x => [x.k, x]));
+  const desde20 = RSL.por_ano.filter(x => x.a >= 2020).reduce((t, x) => t + x.n, 0), de23a25 = RSL.por_ano.filter(x => x.a >= 2023 && x.a <= 2025).reduce((t, x) => t + x.n, 0);
+  document.getElementById('leit-rsl').innerHTML = `<div><i>O que mostra</i>O que a produção acadêmica e técnica brasileira já estudou sobre Tarifa Zero: ${f(F.corpus)} trabalhos, de bases acadêmicas, publicações do setor, anais de congressos e dossiês temáticos, lidos e fichados.</div>
+    <div class="res"><i>Resultado</i>A literatura sabe muito sobre poucos casos: cita ${RSL_MUNIS_TESE.total} municípios, ${RSL_MUNIS_TESE.semCit} dos 174 com Tarifa Zero universal não aparecem em nenhum trabalho. Fala mais de custo (${fat.F5.n}) e de demanda (${fat.F4.n}) do que de quem opera (${fat.F9.n}, só ${fat.F9.e} com achado próprio) — e nenhum trabalho mede o lado da oferta.</div>
+    <div><i>Ressalva</i>Contagem de atenção acadêmica, não de peso de evidência. Amostras pequenas e não probabilísticas, desenhos heterogêneos e, não raro, autores ligados à gestão dos programas estudados — inclusive o autor da tese.</div>`;
+  document.getElementById('rslFunil').innerHTML = `<div class="funil">
+    <div><b>${f(F.registros)}</b><span>registros reunidos</span><small>${f(F.busca)} por busca em bases · ${f(F.bola)} por bola de neve · ${f(F.dossies)} pela leitura integral de dossiês · ${f(F.outras)} por outras vias (acervo prévio, contato direto)</small></div>
+    <div><b>${f(F.fichados)}</b><span>lidos e fichados</span><small>${f(F.excluidos)} excluídos após leitura, com motivo registrado · ${f(F.reclass)} reclassificados como fonte de dados · ${f(F.indisp)} sem acesso ao texto</small></div>
+    <div><b>${f(F.corpus)}</b><span>no corpus da revisão</span><small>os que vêm das quatro frentes de busca da revisão; os outros ${f(F.fora_estratos)} fichados chegaram por bola de neve ou acervo prévio e informam outras partes da tese, fora destas contagens</small></div></div>`;
+  const maxE = Math.max(...RSL.estratos.map(e => e.n));
+  // 24/10/2026: o quadro dos estratos de busca saiu (autor: "para o leitor comum isso não importa"); fica no Apêndice B
+  if (document.getElementById('rslEstratos')) document.getElementById('rslEstratos').innerHTML = RSL.estratos.map(e => `<div class="fatlin"><div>${e.k} · ${e.rot}</div><div class="t"><i style="width:${(100 * e.n / maxE).toFixed(1)}%;background:var(--azul);"></i></div><div class="n"><b>${e.n}</b></div></div>`).join('');
+  // anos
+  const anos = RSL.por_ano, a0 = Math.min(...anos.map(x => x.a)), a1 = Math.max(...anos.map(x => x.a));
+  const W = 560, H = 200, ML = 24, MB = 26, MT = 12, n = a1 - a0 + 1, bw = (W - ML - 6) / n, maxN = Math.max(...anos.map(x => x.n));
+  const by = Object.fromEntries(anos.map(x => [x.a, x.n]));
+  let g = '';
+  for (let a = a0; a <= a1; a++) { const v = by[a] || 0; if (!v) continue; const h = (H - MB - MT) * v / maxN, x = ML + (a - a0) * bw;
+    g += `<rect x="${x + 1}" y="${H - MB - h}" width="${Math.max(2, bw - 2)}" height="${h}" rx="1.5" fill="${a >= 2023 && a <= 2025 ? 'var(--rosa)' : '#7ea2e8'}"><title>${a}: ${v} ${v === 1 ? 'item' : 'itens'}</title></rect>`;
+    if (v >= 3) g += `<text x="${x + bw / 2}" y="${H - MB - h - 3}" text-anchor="middle" font-size="9.5" fill="var(--text)">${v}</text>`; }
+  for (const a of [1991, 2000, 2010, 2020, 2026].filter(a => a >= a0 && a <= a1)) g += `<text x="${ML + (a - a0) * bw + bw / 2}" y="${H - 8}" text-anchor="middle" font-size="10" fill="var(--muted)">${a}</text>`;
+  g += `<line x1="${ML}" y1="${H - MB}" x2="${W - 4}" y2="${H - MB}" stroke="var(--border)"/>`;
+  const sv = document.getElementById('rslAnos'); sv.innerHTML = g;
+  document.getElementById('rslAnosNota').innerHTML = `A produção acompanha a expansão da política: ${f(desde20)} dos ${f(F.corpus)} itens (${Math.round(100 * desde20 / F.corpus)}%) são de 2020 em diante, e 2023 a 2025 (em amarelo) reúnem ${f(de23a25)}. A tese separa ainda os itens com contribuição empírica para casos concretos (59) dos teóricos ou retóricos (22) [A CONFIRMAR: a classificação item a item não está no pacote de dados]. 2026 é parcial.`;
+  // fatores
+  const maxF = Math.max(...RSL.fatores.map(x => x.n));
+  const col = (sent, cor, tit) => `<div><h4>${tit}</h4>${RSL.fatores.filter(x => x.s === sent).sort((a, b) => b.n - a.n).map(x => `<div class="fatlin"><div>${x.rot}${x.novo ? '<span class="novo">novo</span>' : ''}</div>
+      <div class="t"><i style="width:${(100 * x.n / maxF).toFixed(1)}%;background:${cor};opacity:.35;"></i><i style="width:${(100 * x.e / maxF).toFixed(1)}%;background:${cor};"></i></div><div class="n"><b>${x.n}</b> (${x.e} E)</div></div>`).join('')}</div>`;
+  document.getElementById('rslFatores').innerHTML = `<div class="fatgrid">${col('+', 'var(--verde)', 'Impulsionam a Tarifa Zero')}${col('−', 'var(--rosa)', 'Limitam a Tarifa Zero')}</div>
+    <p class="sub" style="margin-top:8px;">Número de trabalhos; entre parênteses, os com achado empírico próprio (E). A oposição direta dos operadores à Tarifa Zero está documentada em três trabalhos; o que mais aparece, quando a literatura olha para o operador, não é a resistência, mas a saída — o padrão que a tese encontra nos contratos (Seção 7.3).</p>`;
+  const M = RSL_MUNIS_TESE;
+  document.getElementById('rslMunis').innerHTML = `<p class="sub" style="margin:0;">Os ${f(F.corpus)} trabalhos citam <b>${M.total} municípios</b>, numa cauda longa: a maioria aparece em um ou dois. Vários dos mais estudados não têm Tarifa Zero universal — entram pela proposta, pela gratuidade eleitoral ou pelo debate. No sentido inverso, <b>${M.semCit} dos 174 municípios com Tarifa Zero universal (${Math.round(100 * M.semCit / 174)}%) não são citados por nenhum trabalho</b>, e outros ${M.depois} entraram na base depois do encerramento da revisão: o panorama nacional não pode ser montado a partir da literatura.</p>
+    <div class="munlit">${M.top.map(([nm, n]) => `<div><b>${n}</b>${nm}</div>`).join('')}</div>
+    <p class="sub" style="margin-top:8px;">Trabalhos que citam cada município, segundo a Seção 5.2 da tese.</p>
+    <p class="sub" style="margin-top:6px;"><b>No painel, município a município:</b> a ficha de cada caso (aba Explorar) e a coluna "Literatura · fontes" da lista listam os trabalhos do corpus cujo fichamento menciona o município, com o grau da menção — <span class="grau-rsl gA">estuda o caso</span> <span class="grau-rsl gB">analisa</span> <span class="grau-rsl gC">menciona</span>. Por esse cruzamento, ${(() => { const uni = [...MUNI.values()].filter(m => m.tz_status === 'Ativa'); const com = uni.filter(m => (RSL.mun[String(m.id)] || []).length).length; return `${com} dos ${uni.length} municípios com Tarifa Zero universal aparecem em algum trabalho`; })()}; a tese, com o cruzamento do Apêndice B, conta ${174 - M.semCit}. A diferença está nos fichamentos que o pacote de dados não liga a um item do corpus [A CONFIRMAR].</p>`;
+  const tb = document.querySelector('#rslTabela tbody'), bx = document.getElementById('rslBusca');
+  const desenha = () => { const q = (bx.value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const L = RSL.itens.filter(x => !q || [x.ano, x.aut, x.tit, x.vei].join(' ').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').includes(q));
+    tb.innerHTML = L.map(x => `<tr><td>${x.ano}</td><td>${esc(x.aut || '')}</td><td>${esc(x.tit || '')}</td><td>${esc(x.vei || '')}</td><td>${esc(x.sup || '')}</td></tr>`).join('') || '<tr><td colspan="5" style="color:var(--muted);">Nenhum trabalho com esse termo.</td></tr>'; };
+  bx.addEventListener('input', desenha); desenha();
 }
 
+// ---------- 5. Quem é alcançado: do piso à Tarifa Zero universal (v0.15, 30/10/2026) ----------
+// Reformulação a pedido do autor: a seção passa a mostrar também quem está no PISO (federal e
+// estadual/metropolitano) e quem as PARCIAIS alcançam, organizados pelo portão de acesso — a mesma
+// lógica da Seção 4.4 e da Tabela 3 da tese (Análise XII; dados no Apêndice A.19).
+//   - Piso federal e patamar estadual/metropolitano: valores NACIONAIS da tese, fixos (não há
+//     população por idade nem eleitorado por município na base do painel).
+//   - Municipal (parciais e universal): calculados aqui da base, respondem aos filtros.
+//   - Parciais são TETO: a população inteira do município, não o público da política.
+//   - Nada é somado: as populações se sobrepõem (o idoso paulistano está no 65+, no intermunicipal
+//     e no Domingão). "Elegível não é usuário."
+//   - O DF acumula competências de estado e município e é tratado na régua como município (Seção
+//     4.4): o Vai de Graça é 2c e o passe estudantil do DF, 2e. Por isso Brasília aparece no bloco
+//     municipal, e o passe do DF também no teto estudantil da Tabela 3 (nota).
+const ALC_TESE = {
+  piso: [
+    { rot: 'Idade: 65 anos ou mais', norma: 'Constituição, art. 230, § 2º; Estatuto da Pessoa Idosa', quem: 'um grupo', quando: 'todo dia',
+      v: 22257856, sub: '16,4 mi nos municípios com indício de sistema de ônibus — 11,0% da população deles' },
+    { rot: 'Eleição: dia de votação', norma: 'STF, desde as eleições de 2024', quem: 'adultos', quando: 'só no dia da votação',
+      v: 154319946, sub: 'população de 18 anos ou mais, aproximação do eleitorado; 114,5 mi nos municípios com indício de sistema' },
+  ],
+  estadual: [
+    { rot: 'Idosos no intermunicipal', norma: '26 normas estaduais em 18 UFs', quem: 'um grupo', quando: 'todo dia', ate: true,
+      v: 13032827, sub: '5,2 mi sob normas com corte de renda (10 UFs) · 7,8 mi sem corte (8 UFs); quase sempre com cota de assentos por veículo' },
+    { rot: 'Passe livre estudantil', norma: 'DF, Pernambuco, Goiás', quem: 'um grupo', quando: 'no trajeto escolar', ate: true,
+      v: 685865 + 810852 + 651805, sub: 'DF 0,69 mi · RM do Recife 0,81 mi · RM de Goiânia com Anápolis 0,65 mi' },
+    { rot: 'Tempo: BRT Metropolitano de Belém', norma: 'Estado do Pará (ato não lido)', quem: 'todos', quando: 'alguns dias', ate: true,
+      v: 2243895, sub: 'domingos e feriados escolhidos a cada vez, só no BRT; 7 municípios da RM de Belém' },
+  ],
+};
+// quem/quando de cada subtipo parcial — a grade "quem × quando" da proposta de 30/10/2026
+const ALC_PARC = {
+  '2c': { quem: 'todos', quando: 'alguns dias' },
+  '2e': { quem: 'quem vai a um serviço', quando: 'no trajeto' },
+  '2b': { quem: 'um lugar', quando: 'todo dia' },
+  '2a': { quem: 'um grupo', quando: 'todo dia' },
+  '2d': { quem: 'todos', quando: 'dias de evento' },
+};
+function alcanceMunicipal(rows) {
+  const uni = rows.filter(m => m.tz_status === 'Ativa');
+  const popUni = uni.reduce((t, m) => t + (m.pop || 0), 0);
+  const parc = {}; const parcMunis = new Set(); let popParcTodas = 0;
+  for (const m of rows) {
+    if (m.tz_bin === 'TZ') continue;
+    const subs = [...new Set(camadasFor(m).map(c => c.camada))].filter(k => k in ALC_PARC);
+    if (!subs.length) continue;
+    if (!parcMunis.has(m.id)) { parcMunis.add(m.id); popParcTodas += (m.pop || 0); }
+    for (const k of subs) {
+      const p = parc[k] = parc[k] || { pop: 0, n: 0, maior: null };
+      p.pop += (m.pop || 0); p.n++;
+      if (!p.maior || (m.pop || 0) > (p.maior.pop || 0)) p.maior = m;
+    }
+  }
+  return { nUni: uni.length, popUni, parc, nParc: parcMunis.size, popParcTodas };
+}
 function renderPopScore() {
   const el = document.getElementById('popScore');
   if (!el) return;
   const rows = subsetNoTz();
-  const totalPop = rows.reduce((s, m) => s + (m.pop || 0), 0);
-  const { popUniversal, popParcialEstimada, semEstimativa } = popScore(rows);
-  const popTotal = popUniversal + popParcialEstimada;
-  const pct = totalPop ? (100 * popTotal / totalPop) : 0;
-  const cards = [
-    { n: fmtCompact(popUniversal), l: 'População com TZ <b>universal</b> (100% dos moradores do município, Censo 2022)' },
-    { n: fmtCompact(popParcialEstimada), l: 'População estimada com TZ <b>parcial por grupo social</b> (proxy Censo 2022 "estudo_total" — hoje só BH e Uberlândia, passe estudantil)' },
-    { n: fmtCompact(popTotal) + ` (${pct.toFixed(2)}%)`, l: 'Total com algum acesso à TZ, das duas anteriores — % da população do recorte' },
-    { n: String(semEstimativa.length), l: 'Municípios com TZ parcial <b>sem estimativa</b> (temporal-dias, espacial ou grupo social sem dado direto) — não somados' },
-  ];
-  let html = '<div class="cards" style="margin:4px 0 0;">' + cards.map(c =>
-    `<div class="card"><div class="n">${c.n}</div><div class="l">${c.l}</div></div>`).join('') + '</div>';
-  html += `<p class="sub" style="margin-top:12px;">
-    <b>Metodologia v1 (aprovada pelo autor, 29/07/2026):</b> universal = 100% da população residente; grupo social/estudantil = proxy "estudo_total" (Censo 2022, deslocamento p/ estudo) — superestima levemente, pois nem todo estudante necessariamente usa o benefício. Camadas temporal (2a), espacial (3) e grupo social sem dado municipal direto (Curitiba/desempregados) ficam <b>fora da soma</b> — sem estimativa sub-municipal defensável na base atual. Gratuidades por lei federal (idoso/PcD) também não somadas: sem população idosa/PcD por município na base — pendência registrada no cofre da tese.
-    ${semEstimativa.length ? `<br><b>Sem estimativa (${semEstimativa.length}):</b> ${semEstimativa.join(', ')}.` : ''}
-  </p>`;
-  el.innerHTML = html;
+  const popBR = [...MUNI.values()].reduce((t, m) => t + (m.pop || 0), 0);
+  const popRec = rows.reduce((t, m) => t + (m.pop || 0), 0);
+  const filtrado = rows.length !== MUNI.size;
+  const A = alcanceMunicipal(rows);
+  const pc = (v, d) => { const x = d ? 100 * v / d : 0; return x > 0 && x < 0.1 ? '<0,1%' : x.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + '%'; };
+  const fx = v => fmtCompact(v);
+  const linha = (o, cor, den, denRot, cls = '') => {
+    const w = Math.max(0.35, 100 * o.v / popBR);
+    return `<div class="alcrow ${cls}">
+      <div class="alcrot"><b>${o.rot}</b>${o.norma ? `<small>${o.norma}</small>` : ''}
+        <div class="alcchips"><span>quem: ${o.quem}</span><span>quando: ${o.quando}</span></div></div>
+      <div class="alcmeio"><div class="alctrack"><div class="alcfill" style="width:${w.toFixed(2)}%;background:${cor};"></div></div>${o.sub ? `<small>${o.sub}</small>` : ''}</div>
+      <div class="alcv">${o.ate ? '<i>até</i> ' : ''}<b>${fx(o.v)}</b><small>${pc(o.v, den)} ${denRot}</small></div>
+    </div>`;
+  };
+  const grupo = (tit, nota) => `<div class="alcgrp"><span>${tit}</span><small>${nota}</small></div>`;
+  const CINZA = '#8b8b98', LARANJA = '#E2892C', VERDE = '#6FBE44';
+  let h = '<div class="alc">';
+  h += grupo('Piso federal', 'vale em todo o país · tese, Tabela 3');
+  h += ALC_TESE.piso.map(o => linha(o, CINZA, popBR, 'do Brasil')).join('');
+  h += grupo('Patamar estadual e metropolitano', 'valores nacionais · tese, Tabela 3');
+  h += ALC_TESE.estadual.map(o => linha(o, CINZA, popBR, 'do Brasil')).join('');
+  const denRot = filtrado ? 'do recorte' : 'do Brasil', den = filtrado ? popRec : popBR;
+  h += grupo('Municipal · Tarifa Zero parcial', filtrado ? 'responde aos filtros · teto' : 'responde aos filtros · teto: população inteira do município');
+  const parcOrd = Object.entries(A.parc).sort((a, b) => b[1].pop - a[1].pop);
+  if (!parcOrd.length) h += '<p class="sub" style="margin:6px 0;">Nenhuma Tarifa Zero parcial mapeada neste recorte.</p>';
+  for (const [k, p] of parcOrd) {
+    const r = REGUA[REGUA_IDX[k]];
+    const so = p.n > 1 && p.maior && p.maior.pop > 0.3 * p.pop ? ` · só ${p.maior.nome}: ${fx(p.maior.pop)}` : '';
+    h += linha({ rot: `${r.rot} <span class="alck">${k}</span>`, norma: r.desc, ...ALC_PARC[k], ate: true, v: p.pop,
+      sub: `${p.n} ${p.n === 1 ? 'município' : 'municípios'}${so}` }, LARANJA, den, denRot);
+  }
+  h += grupo('Municipal · Tarifa Zero universal', 'responde aos filtros');
+  h += linha({ rot: 'Nenhum portão', norma: 'camada 1 da régua, em vigor', quem: 'todos os moradores', quando: 'todo dia', v: A.popUni,
+    sub: `${A.nUni} ${A.nUni === 1 ? 'município' : 'municípios'} — a única linha sem portão de quem nem de quando` }, VERDE, den, denRot, 'univ');
+  h += '</div>';
+  h += `<p class="alcfecho">A escala supramunicipal concede gratuidade por pessoa ou por tempo, nunca a toda a população todos os dias. A gratuidade universal e permanente é, por isso, decisão municipal, e o patamar supramunicipal funciona como linha de base, e não como alternativa. <span>— tese, Seção 4.4</span></p>`;
+  h += `<details class="nota" style="margin-top:10px;"><summary>Como os números foram calculados</summary><p class="sub" style="margin-top:6px;">
+    <b>As linhas não se somam.</b> As populações se sobrepõem: o idoso de São Paulo está no 65+, no intermunicipal e no Domingão Tarifa Zero. E <b>elegível não é usuário</b>: as barras medem quem tem direito, não quem viaja.<br>
+    <b>Piso e patamar estadual</b> são valores nacionais da tese (Seção 4.4, Tabela 3; dados no Apêndice A.19, Censo 2022) e não mudam com os filtros: a base do painel não tem população por idade nem eleitorado por município. O teto dos idosos no intermunicipal inclui 2,17 mi da gratuidade baiana de 60 anos ou mais, só no hidroviário, e 2,38 mi da faixa de 60 a 64 anos no Metrô, na CPTM e na EMTU de São Paulo. As gratuidades no interestadual ficam de fora: não são escala urbana.<br>
+    <b>Municipal</b>: calculado da base do painel e responde aos filtros. Nas parciais, o número é um <b>teto</b> — a população inteira dos municípios —, não o público da política; um município com dois subtipos conta nos dois. Todas as parciais juntas: até ${fx(A.popParcTodas)} em ${A.nParc} ${A.nParc === 1 ? 'município' : 'municípios'}${filtrado ? ' do recorte' : ''}. A busca das parciais não é exaustiva.<br>
+    <b>Distrito Federal.</b> O DF acumula competências de estado e de município e, na régua, é tratado como município: o Vai de Graça (domingos e feriados) está em <i>Dias</i> e o passe estudantil do DF em <i>Finalidade</i>. O passe do DF também entra no teto estudantil da Tabela 3, que soma os três passes estaduais.<br>
+    Todas as barras estão na mesma escala, a população do Brasil (${fx(popBR)}).
+  </p></details>`;
+  el.innerHTML = h;
 }
 
 // ---------- linha do tempo das adoções (reage ao recorte) ----------
@@ -829,7 +1020,7 @@ function renderTimeline() {
         s += `<rect x="${xBar.toFixed(1)}" y="${(axisY - hA).toFixed(1)}" width="${wBar.toFixed(1)}" height="${hA.toFixed(1)}" rx="1.5" fill="${TZ_COLORS_HEX.Ativa}" data-year="${y}" data-tipo="universal"/>`;
       }
       if (ap > 0) {
-        s += `<rect x="${xBar.toFixed(1)}" y="${(axisY - hA - hAP).toFixed(1)}" width="${wBar.toFixed(1)}" height="${hAP.toFixed(1)}" rx="1.5" fill="#F5E400" data-year="${y}" data-tipo="parcial"/>`;
+        s += `<rect x="${xBar.toFixed(1)}" y="${(axisY - hA - hAP).toFixed(1)}" width="${wBar.toFixed(1)}" height="${hAP.toFixed(1)}" rx="1.5" fill="#E2892C" data-year="${y}" data-tipo="parcial"/>`;
       }
       s += `<text x="${(xBar + wBar / 2).toFixed(1)}" y="${(axisY - hA - hAP - 4).toFixed(1)}" font-size="9.5" fill="${mutedC}" text-anchor="middle">${total}</text>`;
     }
@@ -875,7 +1066,7 @@ function gerarParagrafoTZ(m) {
   if (m.tz_status === 'Encerrada') {
     const periodo = (m.tz_ano_txt && m.tz_fim) ? `entre ${m.tz_ano_txt} e ${m.tz_fim}`
       : (m.tz_ano_txt ? `a partir de ${m.tz_ano_txt}` : 'em um período não totalmente determinado nesta pesquisa');
-    return `${nomeUf} teve <b>Tarifa Zero universal</b> ${periodo}, mas a política foi <b>encerrada</b> e não está mais em vigor hoje. Entra na pesquisa como caso de reversão/trajetória, não como TZ ativa — não contar entre os municípios com gratuidade vigente.`;
+    return `${nomeUf} teve <b>Tarifa Zero universal</b> ${periodo}, mas a política foi <b>encerrada</b> e não está mais em vigor hoje. Entra na pesquisa como caso de reversão/trajetória, não como Tarifa Zero universal em vigor — não contar entre os municípios com gratuidade vigente.`;
   }
   // Status criados na base-mestre em out/2026. Sem tratamento próprio os dois caíam
   // no texto genérico de fechamento ("nenhuma política mapeada"), que é falso
@@ -901,7 +1092,7 @@ function gerarParagrafoTZ(m) {
       const prov = c.flag ? ' (classificação provisória, a confirmar)' : '';
       return `${label}${c.detalhe ? ' — ' + c.detalhe : ''}${prov}`;
     });
-    return `${nomeUf} não tem Tarifa Zero universal, mas oferece <b>gratuidade parcial</b> no transporte coletivo: ${partes.join('; ')}. Não conta no total de municípios com TZ universal desta pesquisa, mas soma-se ao universo ampliado de casos mapeados pela régua descritiva.`;
+    return `${nomeUf} não tem Tarifa Zero universal, mas oferece <b>gratuidade parcial</b> no transporte coletivo: ${partes.join('; ')}. Não conta no total de municípios com Tarifa Zero universal desta pesquisa, mas soma-se ao universo ampliado de casos mapeados pela régua descritiva.`;
   }
   return `${nomeUf} não tem nenhuma política de Tarifa Zero (universal ou parcial) mapeada até agora nesta pesquisa. Isso não significa necessariamente que o município nunca teve ou não tenha um programa de gratuidade — varreduras anteriores já mediram subnotificação nas fontes usuais (ver Achados de TZ não mapeada, 31/07-03/08/2026) — apenas que não há registro no levantamento atual.`;
 }
@@ -921,8 +1112,8 @@ function renderDetail(m) {
     return;
   }
   const TAG_STATUS = {
-    'Ativa': ['ativa', 'TZ ativa'],
-    'Encerrada': ['encerrada', 'TZ encerrada'],
+    'Ativa': ['ativa', 'Universal'],   // 24/10/2026: um nome só — "Universal" (decisão do autor; não "TZ ativa", "Ativa", "TZ universal")
+    'Encerrada': ['encerrada', 'Encerrada'],
     'Regulamentada — não implantada': ['aguardando', 'Lei aprovada, sem operação'],
     'Pista (a verificar)': ['pista', 'Pista a verificar'],
     'Parcial (ativa)': ['parcial', 'Gratuidade parcial'],
@@ -952,7 +1143,7 @@ function renderDetail(m) {
     : '';
   const incoerente = m.tz_status === 'Ativa' && m.tz_fim != null;
   const avisoIncoerencia = incoerente
-    ? `<p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:#e2892c;">⚠ A base-mestre traz este caso como <b>Ativa</b> e ao mesmo tempo com data de <b>fim</b> preenchida (${m.tz_fim}). O painel exibe os dois campos como estão, sem escolher um — conflito a resolver na fonte.</p>`
+    ? `<p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:#e2892c;">⚠ A base-mestre traz este caso como <b>Universal em vigor</b> e ao mesmo tempo com data de <b>fim</b> preenchida (${m.tz_fim}). O painel exibe os dois campos como estão, sem escolher um — conflito a resolver na fonte.</p>`
     : '';
   const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>${avisoIncoerencia}${avisoProvisorio}`;
   let extra = '';
@@ -964,7 +1155,9 @@ function renderDetail(m) {
   }
   el.innerHTML = `<div><b style="font-size:15px;">${m.nome} – ${m.uf}</b> ${tzTag}${subTag ? ' ' + subTag : ''}${camadasTag ? ' ' + camadasTag : ''}</div>
     ${paragrafoTZ}
-    ${fichaFor(m) ? '<button class="btn-ficha" type="button">Abrir a ficha da tese →</button>' : ''}
+    ${fichaFor(m) ? `<details class="fichapol"><summary>Ficha da política — Apêndice D da tese</summary><div class="fl-corpo">${fichaHtml(m)}</div></details>` : ''}
+    ${secFicha('Contrato, arranjo e régua', renderArranjoDetail(m) + renderCamadaDetail(m))}
+    <details class="fichapol"><summary>Indicadores do município</summary>
     <table style="margin-top:8px;">
       <tr><td>Região</td><td>${m.regiao}</td></tr>
       <tr><td>Hierarquia urbana</td><td>${m.regic_label ?? '—'}</td></tr>
@@ -981,19 +1174,14 @@ function renderDetail(m) {
       <tr><td>Cadastro atualizado (ago/2025)</td><td>${m.cadunico_taxa_atualizacao != null ? fmtNum(m.cadunico_taxa_atualizacao) + '% das famílias' : 'sem dado'}</td></tr>
       <tr><td>Receita própria per capita</td><td>R$ ${fmtNum(m.rec_prop_pc)}</td></tr>
       <tr><td>Óbitos no trânsito /100mil (2019)</td><td>${fmtNum(m.taxa_obitos_transito)}</td></tr>
-      <tr><td>Tarifa</td><td>${m.tz_status === 'Ativa' ? 'Gratuito (TZ universal)' : (m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) + ' (' + m.tarifa_ano + ', ' + m.tarifa_fonte + ')' : 'sem dado')}</td></tr>
+      <tr><td>Tarifa</td><td>${m.tz_status === 'Ativa' ? 'Gratuito (Tarifa Zero universal)' : (m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) + ' (' + m.tarifa_ano + ', ' + m.tarifa_fonte + ')' : 'sem dado')}</td></tr>
       <tr><td>% do custo subsidiado</td><td>${m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '% (' + m.subsidio_ntu_ano + ')' : 'sem dado'}</td></tr>
       <tr><td>Plano Diretor</td><td>${m.plano_diretor ?? '—'}</td></tr>
       <tr><td>PlanMob (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
       ${extra}
-    </table>
-    ${renderLegislacaoDetail(m)}
-    ${renderODDetail(m)}
-    ${renderModalDetail(m)}
-    ${renderArranjoDetail(m)}
-    ${renderCamadaDetail(m)}
-    ${renderFontesDetail(m)}
-    ${renderNoticiasDetail(m)}
+    </table></details>
+    ${secFicha('Deslocamentos e meio de transporte', renderODDetail(m) + renderModalDetail(m))}
+    ${secFicha(`Literatura e legislação${rslFor(m).length ? ` · RSL: ${rslFor(m).filter(x => x.g !== 'C').length} estudam ou analisam, ${rslFor(m).filter(x => x.g === 'C').length} mencionam` : ''}`, (rslFor(m).length ? `<div style="margin-top:8px;"><b style="font-size:12.5px;">Na revisão sistemática (${rslFor(m).length})</b>${rslLista(m, false)}</div>` : '<p class="sub" style="margin:8px 0 0;">Nenhum trabalho do corpus da revisão sistemática cita o município.</p>') + renderLegislacaoDetail(m) + renderNoticiasDetail(m))}
     <p class="ponte-rede"><a href="rede-ge.html#mun-${m.id}-${encodeURIComponent(m.nome + '/' + m.uf)}">Que grupos econômicos têm endereço em ${m.nome}? Ver na Rede de empresas →</a><br><span>Endereço no cadastro não comprova que o grupo opera o sistema do município.</span></p>`;
   desenharFluxos(m);
 }
@@ -1008,7 +1196,7 @@ function renderDetail(m) {
 let munSelecionado = null;
 let fluxoDir = 's';                         // 's' = saídas · 'e' = entradas
 const OD_REL_TAG = {
-  2: '<span title="destino é o polo do próprio arranjo populacional" style="color:var(--amarelo);">◆</span>',
+  2: '<span title="destino é o polo do próprio arranjo populacional" style="color:var(--rosa);">◆</span>',
   1: '<span title="mesmo arranjo populacional" style="color:var(--muted);">◇</span>',
   0: ''
 };
@@ -1053,6 +1241,7 @@ function renderODDetail(m) {
   }
   return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
     <b style="font-size:12.5px;">Deslocamento para trabalho (Censo 2022)</b>${cabeca}
+    <label class="tgl-fluxo-l"><input type="checkbox" class="tgl-fluxo"${mostrarFluxos ? ' checked' : ''}> mostrar as linhas de desejo no mapa</label>
     ${odLista(d, 's', d.st, d.sd, m)}
     ${odLista(d, 'e', d.et, d.eo, m)}
     <p style="margin:6px 0 0;font-size:10.5px;color:var(--muted);line-height:1.45;">◆ polo do próprio arranjo · ◇ mesmo arranjo. Matriz origem-destino dos microdados da amostra do Censo 2022, suprimida a células com pelo menos 5 registros amostrados — as demais têm coeficiente de variação da ordem de 100% e não são publicáveis. Ver METADADOS.md.</p>
@@ -1060,9 +1249,10 @@ function renderODDetail(m) {
 }
 
 // ---------- linhas de desejo no mapa ----------
+let mostrarFluxos = false;   // 24/10/2026: as linhas de desejo atrapalhavam a leitura do mapa — ligam só a pedido
 function desenharFluxos(m) {
   gFluxo.innerHTML = '';
-  if (!m) return;
+  if (!m || !mostrarFluxos) return;
   const d = odFor(m);
   if (!d) return;
   const lst = d[fluxoDir];
@@ -1259,6 +1449,8 @@ function renderCamadaDetail(m) {
   </div>`;
 }
 
+// ficha do município em blocos recolhidos (24/10/2026: "muito longo e tornou a página desproporcional")
+function secFicha(tit, html, aberto) { return html && html.trim() ? `<details class="fichapol"${aberto ? ' open' : ''}><summary>${tit}</summary>${html}</details>` : ''; }
 function renderFontesDetail(m) {
   const fontes = fontesFor(m);
   if (!fontes.length) return '';
@@ -1364,7 +1556,7 @@ function renderBars() {
   const nNaoUsados = porte ? rowsNao.filter(m => peso(m) > 0).length : rowsNao.length;
   const rotNao = porte ? 'Não-TZ, mesmo porte' : 'Não-TZ';
 
-  let html = `<p class="sub" style="margin:0 0 8px;grid-column:1/-1;">Municípios comparados: <b>TZ universal ${rowsTZ.length.toLocaleString('pt-BR')}</b> · <b>${rotNao} ${nNaoUsados.toLocaleString('pt-BR')}</b></p>`;
+  let html = `<p class="sub" style="margin:0 0 8px;grid-column:1/-1;">Municípios comparados: <b>Universal ${rowsTZ.length.toLocaleString('pt-BR')}</b> · <b>${rotNao} ${nNaoUsados.toLocaleString('pt-BR')}</b></p>`;
   for (const met of BAR_METRICS) {
     const vTZ = median(rowsTZ.map(m => valorMetrica(m, met.k)));
     const vNao = porte
@@ -1375,7 +1567,7 @@ function renderBars() {
       <div class="lab"><span>${met.label}</span></div>
       <div class="lab"><span>${rotNao}</span><b>${met.fmt(vNao)}</b></div>
       <div class="bartrack"><div class="barfill a" style="width:${(100 * (vNao || 0) / max).toFixed(1)}%"></div></div>
-      <div class="lab" style="margin-top:4px;"><span>TZ universal</span><b>${met.fmt(vTZ)}</b></div>
+      <div class="lab" style="margin-top:4px;"><span>Universal</span><b>${met.fmt(vTZ)}</b></div>
       <div class="bartrack"><div class="barfill b" style="width:${(100 * (vTZ || 0) / max).toFixed(1)}%"></div></div>
     </div>`;
   }
@@ -1481,7 +1673,7 @@ function renderModalStack() {
       return `<div class="seg" style="width:${v.toFixed(2)}%;background:${MODAL_STACK_COLORS[k]};" title="${MODAL_STACK_LABELS[k]}: ${v.toFixed(1)}%"></div>`; }).join('');
     return `<div class="msrow"><div class="mslab"><b>${label}</b><span>n=${n}</span></div><div class="msbar">${bar}</div></div>`;
   };
-  el.innerHTML = linha('TZ universal (adotada até 2022)', tz) + linha('Não-TZ', nao)
+  el.innerHTML = linha('Universal (adotada até 2022)', tz) + linha('Não-TZ', nao)
     + `<div class="mslegend">${Object.keys(MODAL_STACK_LABELS).map(k =>
       `<span><i style="background:${MODAL_STACK_COLORS[k]}"></i>${MODAL_STACK_LABELS[k]}</span>`).join('')}</div>`;
 }
@@ -1494,10 +1686,10 @@ function renderModalStack() {
 // que a imensa maioria dos casos é 1a — o que é o achado, não um detalhe.
 // Critério e rótulos: `Regras de classificacao das reguas` (cofre), A.1.4, 18/09/2026.
 const REGUA = [
-  { k: '1a', grupo: 1, rot: 'Ausência',     desc: 'nenhum portão de acesso',                       cor: '#F5E400' },
-  { k: '1b', grupo: 1, rot: 'Procedimento', desc: 'exige uma ação (cadastro), mas qualquer um pode cumprir', cor: '#D9CE12' },
-  { k: '1c', grupo: 1, rot: 'Residência',   desc: 'restrito a quem mora no município — não tira a universalidade (Kębłowski, 2020)', cor: '#BDB623' },
-  { k: '1d', grupo: 1, rot: 'Prazo',        desc: 'a norma declara quando termina, mas o termo ainda não chegou', cor: '#A19E33' },
+  { k: '1a', grupo: 1, rot: 'Ausência',     desc: 'nenhum portão de acesso',                       cor: '#6FBE44' },
+  { k: '1b', grupo: 1, rot: 'Procedimento', desc: 'exige uma ação (cadastro), mas qualquer um pode cumprir', cor: '#5DA83B' },
+  { k: '1c', grupo: 1, rot: 'Residência',   desc: 'restrito a quem mora no município — não tira a universalidade (Kębłowski, 2020)', cor: '#4C9232' },
+  { k: '1d', grupo: 1, rot: 'Prazo',        desc: 'a norma declara quando termina, mas o termo ainda não chegou', cor: '#3B7C29' },
   { k: '2a', grupo: 2, rot: 'Grupo social', desc: 'portão de identidade que não é residência (renda, vínculo)', cor: '#E2892C' },
   { k: '2b', grupo: 2, rot: 'Espaço',       desc: 'gratuidade só em certas linhas ou regiões',      cor: '#D96F3B' },
   { k: '2c', grupo: 2, rot: 'Dias',         desc: 'gratuidade só em certos dias (domingos, feriados)', cor: '#D05549' },
@@ -1521,11 +1713,11 @@ function renderCurvaPorte() {
   el.innerHTML = `
     <div class="rgchips" style="margin:0 0 10px;">
       <span class="rgchip"><i style="background:#6b7280"></i>entre todos os municípios da faixa</span>
-      <span class="rgchip"><i style="background:var(--amarelo)"></i>entre os que têm indício de sistema de ônibus</span>
+      <span class="rgchip"><i style="background:var(--verde)"></i>entre os que têm indício de sistema de ônibus</span>
     </div>
     ${fx.map(f => `<div class="cvlin"><div class="cvrot">${f.rot}</div><div class="cvbars">
       ${barra(pct(f.tz, f.n), '#6b7280', `<b>${fmtP(pct(f.tz, f.n))}</b> · ${f.tz} de ${fmtNum(f.n)}`)}
-      ${barra(pct(f.tz_sist, f.n_sist), 'var(--amarelo)', `<b>${fmtP(pct(f.tz_sist, f.n_sist))}</b> · ${f.tz_sist} de ${fmtNum(f.n_sist)}${f === pico ? ' ← pico' : ''}`)}
+      ${barra(pct(f.tz_sist, f.n_sist), 'var(--verde)', `<b>${fmtP(pct(f.tz_sist, f.n_sist))}</b> · ${f.tz_sist} de ${fmtNum(f.n_sist)}${f === pico ? ' ← pico' : ''}`)}
     </div></div>`).join('')}
     <p class="sub" style="margin-top:4px;">No total, a camada universal está em <b>${fmtP(pct(CURVA_PORTE.total.tz, CURVA_PORTE.total.n))}</b> de todos os municípios (${CURVA_PORTE.total.tz}) e em <b>${fmtP(pct(CURVA_PORTE.total.tz_sist, CURVA_PORTE.total.n_sist))}</b> dos ${fmtNum(CURVA_PORTE.total.n_sist)} com indício de sistema (${CURVA_PORTE.total.tz_sist}). O padrão é compatível com a hipótese da tese — a gratuidade universal rareia onde o sistema é maior e mais atrativo — e também com a explicação rival do custo e da complexidade, que crescem com o porte. Separar as duas é trabalho do teste, não deste gráfico.</p>`;
 }
@@ -1617,7 +1809,7 @@ function renderCusteioBloco(rows) {
   const decretos = atos.filter(a => a.instr === 'decreto').length;
   const cond = atos.filter(a => a.cond).length;
   return `<div class="rmgrid" style="margin-top:18px;border-top:1px solid var(--border);padding-top:14px;">
-    <div class="arrbloco"><h3>De onde vem o dinheiro — e quanto custa reverter</h3>
+    <div class="arrbloco"><h3>Segurança do custeio — o que é preciso desfazer para acabar com a política</h3>
       <p class="sub">A escala de compromisso da tese ordena o custeio pelo que é preciso desfazer para acabar com a política. O retrato é o de uma política <b>orçamentária anual</b>: nenhuma política vigente tem receita própria vinculada e arrecadada, e ter fundo não garantiu a continuidade — 3 das 15 com fundo acabaram ou recuaram.</p>
       ${escala}
       <p class="sub" style="margin-top:7px;"><span class="selo-fixo">Brasil, fixo</span> Contagens do Quadro 28 sobre as 187 políticas; em 67 a fonte não foi apurada. A Constituição veda vincular receita de impostos (art. 167, IV), e a taxa, a espécie que sobra ao município, caiu na Justiça onde foi tentada (Vargem Grande Paulista e Paranaguá) — sem acabar com a política.</p></div>
@@ -1633,7 +1825,7 @@ function renderRemunPanel() {
   if (!el) return;
   const rows = subsetNoTz();
   const c1 = rows.filter(m => m.tz_status === 'Ativa');
-  if (!c1.length) { el.innerHTML = '<div class="empty">Nenhum município com Tarifa Zero universal neste recorte.</div>'; return; }
+  if (!c1.length) { el.innerHTML = '<div class="empty">Nenhum município com Tarifa Zero universal neste recorte.</div>'; const e2 = document.getElementById('custoPanel'); if (e2) e2.innerHTML = el.innerHTML; return; }
   const barras = (pares, total, cores, extra) => {
     const max = Math.max(...pares.map(p => p[1]), 1);
     return pares.map(([k, n, rot]) => `<div class="arrlin">
@@ -1675,7 +1867,10 @@ function renderRemunPanel() {
         <p class="sub">Entre as ${of.length} pagas pela oferta. A fórmula diz quem carrega o risco: com preço fixado, o risco de a demanda variar fica com a prefeitura; pagando o custo apurado, ela carrega também o risco de custo.</p>
         ${b2}</div>
     </div>
-    <div class="rmgrid" style="margin-top:18px;">
+  `;
+  const el2 = document.getElementById('custoPanel');
+  if (el2) el2.innerHTML = `
+    <div class="rmgrid">
       <div class="arrbloco"><h3>Quanto custa o quilômetro</h3>
         <p class="sub">Preço do quilômetro nos contratos lidos, corrigido pelo IPCA para maio de 2026. As faixas são a referência pública do Estado de São Paulo para fretamento contínuo (CadTerc, ônibus de 44 lugares, 4 a 8 mil km por mês); a linha rosa, o parâmetro de R$ 5,64/km usado por Veloso et al. (2025) para estimar o custo da Tarifa Zero.</p>
         ${stripPlot(kms, { min: 4, max: 25, ticks: [5, 10, 15, 20], fmt: v => fmtR(v), fmtTick: v => fmtR(v, 0), ref: { v: 5.64, rot: 'R$ 5,64/km — Veloso et al. (2025)' },
@@ -1880,45 +2075,65 @@ function renderRegiaoUf() {
 // sobreposição real entre TZ e não-TZ — que é grande, e é justamente o que uma
 // comparação de medianas esconde. Eixo X em escala log: PIB per capita é muito
 // assimétrico e, em escala linear, 95% dos municípios viram uma mancha à esquerda.
+// 24/10/2026 (autor: "queria que fosse possível selecionar variáveis"): eixos à escolha entre as
+// métricas da comparação e a população; escala log onde a distribuição é muito assimétrica.
+const DISP_VARS = [...BAR_METRICS.map(b => ({ k: b.k, rot: b.label.replace(/ mediana?o?/, '').replace(/ mediano/, ''), fmt: b.fmt })),
+  { k: 'pop', rot: 'População (Censo 2022)', fmt: v => fmtNum(v) }];
+const DISP_LOG = new Set(['pib_pc', 'rec_prop_pc', 'pop']);
+let dispX = 'pib_pc', dispY = 'motorizacao';
 function renderDispersao() {
   const svg = document.getElementById('dispersao');
   if (!svg) return;
-  const rows = subsetNoTz().filter(m => m.pib_pc > 0 && m.motorizacao > 0);
-  const W = 760, H = 380, ML = 56, MR = 14, MT = 14, MB = 40;
-  const xs = rows.map(m => Math.log10(m.pib_pc)), ys = rows.map(m => m.motorizacao);
-  if (!rows.length) { svg.innerHTML = ''; return; }
-  const xMin = Math.min(...xs), xMax = Math.max(...xs);
-  const yMax = Math.min(Math.max(...ys), 2.0);   // corta a cauda extrema de motorização
-  const px = v => ML + (Math.log10(v) - xMin) / (xMax - xMin || 1) * (W - ML - MR);
-  const py = v => H - MB - Math.min(v, yMax) / (yMax || 1) * (H - MT - MB);
-
-  const naoTz = [], tz = [];
-  for (const m of rows) (m.tz_bin === 'TZ' ? tz : naoTz).push(m);
-  const ponto = (m, cor, r, op) =>
-    `<circle cx="${px(m.pib_pc).toFixed(1)}" cy="${py(m.motorizacao).toFixed(1)}" r="${r}" fill="${cor}" opacity="${op}"><title>${m.nome} – ${m.uf}\nPIB pc: R$ ${Math.round(m.pib_pc).toLocaleString('pt-BR')}\nMotorização: ${m.motorizacao.toFixed(3)}</title></circle>`;
-
-  const ticksX = [1000, 5000, 10000, 25000, 50000, 100000, 250000].filter(v => Math.log10(v) >= xMin && Math.log10(v) <= xMax);
-  const eixoX = ticksX.map(v => `<line x1="${px(v)}" y1="${MT}" x2="${px(v)}" y2="${H - MB}" stroke="var(--border)" stroke-width="1" opacity=".5"/>
-    <text x="${px(v)}" y="${H - MB + 15}" fill="var(--muted)" font-size="10" text-anchor="middle">${v >= 1000 ? (v / 1000) + 'k' : v}</text>`).join('');
-  const nTicksY = 4;
-  const eixoY = Array.from({ length: nTicksY + 1 }, (_, i) => {
-    const v = yMax * i / nTicksY;
-    return `<line x1="${ML}" y1="${py(v)}" x2="${W - MR}" y2="${py(v)}" stroke="var(--border)" stroke-width="1" opacity=".5"/>
-      <text x="${ML - 8}" y="${py(v) + 3}" fill="var(--muted)" font-size="10" text-anchor="end">${v.toFixed(2)}</text>`;
-  }).join('');
-
+  const vx = DISP_VARS.find(v => v.k === dispX), vy = DISP_VARS.find(v => v.k === dispY);
+  const lx = DISP_LOG.has(dispX), ly = DISP_LOG.has(dispY);
+  const ok = (v, lg) => v != null && !Number.isNaN(v) && (!lg || v > 0);
+  const rows = subsetNoTz().filter(m => ok(valorMetrica(m, dispX), lx) && ok(valorMetrica(m, dispY), ly));
+  // 30/10/2026: área de plotagem sempre quadrada (pedido do autor) — P × P, com as margens fora dela
+  const P = 480, ML = 62, MR = 14, MT = 14, MB = 40, W = ML + P + MR, H = MT + P + MB;
+  if (!rows.length) { svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" fill="var(--muted)" text-anchor="middle" font-size="13">Sem dados para estas variáveis no recorte.</text>`; return; }
+  const tx = v => lx ? Math.log10(v) : v, ty = v => ly ? Math.log10(v) : v;
+  const xsA = rows.map(m => tx(valorMetrica(m, dispX))).sort((a, b) => a - b), ysA = rows.map(m => ty(valorMetrica(m, dispY))).sort((a, b) => a - b);
+  const q = (a, p) => a[Math.min(a.length - 1, Math.max(0, Math.round(p * (a.length - 1))))];
+  // corta só a cauda extrema (0,5% de cada lado) para a nuvem não virar um ponto
+  const xMin = q(xsA, .005), xMax = q(xsA, .995), yMin = ly ? q(ysA, .005) : Math.min(0, q(ysA, .005)), yMax = q(ysA, .995);
+  const cx = v => ML + (Math.min(Math.max(tx(v), xMin), xMax) - xMin) / (xMax - xMin || 1) * (W - ML - MR);
+  const cy = v => H - MB - (Math.min(Math.max(ty(v), yMin), yMax) - yMin) / (yMax - yMin || 1) * (H - MT - MB);
+  // 30/10/2026: as parciais (camadas 2a–2e) entram como grupo próprio, em laranja, entre a nuvem e as universais
+  const naoTz = [], tz = [], parc = [];
+  for (const m of rows) (m.tz_bin === 'TZ' ? tz : camadasFor(m).length ? parc : naoTz).push(m);
+  const ponto = (m, cor, r, op) => { const a = valorMetrica(m, dispX), b = valorMetrica(m, dispY);
+    return `<circle cx="${cx(a).toFixed(1)}" cy="${cy(b).toFixed(1)}" r="${r}" fill="${cor}" opacity="${op}"><title>${m.nome} – ${m.uf}\n${vx.rot}: ${vx.fmt(a)}\n${vy.rot}: ${vy.fmt(b)}</title></circle>`; };
+  const ticks = (lo, hi, lg) => { if (lg) { const out = []; for (let e = Math.floor(lo); e <= Math.ceil(hi); e++) for (const f of [1, 2.5, 5]) { const v = Math.log10(f * 10 ** e); if (v >= lo && v <= hi) out.push(v); } return out; }
+    const st = (hi - lo) / 4; return [0, 1, 2, 3, 4].map(i => lo + i * st); };
+  const fmtT = (v, lg, fm) => { const r = lg ? 10 ** v : v; return r >= 1e6 ? (r / 1e6).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' mi' : r >= 1000 ? Math.round(r / 1000) + 'k' : r.toLocaleString('pt-BR', { maximumFractionDigits: r < 10 ? 2 : 0 }); };
+  const eixoX = ticks(xMin, xMax, lx).map(t => { const x = ML + (t - xMin) / (xMax - xMin || 1) * (W - ML - MR);
+    return `<line x1="${x}" y1="${MT}" x2="${x}" y2="${H - MB}" stroke="var(--border)" opacity=".5"/><text x="${x}" y="${H - MB + 15}" fill="var(--muted)" font-size="10" text-anchor="middle">${fmtT(t, lx)}</text>`; }).join('');
+  const eixoY = ticks(yMin, yMax, ly).map(t => { const y = H - MB - (t - yMin) / (yMax - yMin || 1) * (H - MT - MB);
+    return `<line x1="${ML}" y1="${y}" x2="${W - MR}" y2="${y}" stroke="var(--border)" opacity=".5"/><text x="${ML - 8}" y="${y + 3}" fill="var(--muted)" font-size="10" text-anchor="end">${fmtT(t, ly)}</text>`; }).join('');
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.innerHTML = eixoX + eixoY +
     naoTz.map(m => ponto(m, 'var(--muted)', 1.6, .28)).join('') +
-    tz.map(m => ponto(m, m.tz_status === 'Encerrada' ? 'var(--rosa)' : 'var(--amarelo)', 3.1, .95)).join('') +
-    `<text x="${ML + (W - ML - MR) / 2}" y="${H - 4}" fill="var(--muted)" font-size="11" text-anchor="middle">PIB per capita (R$, escala log)</text>
-     <text x="14" y="${MT + (H - MT - MB) / 2}" fill="var(--muted)" font-size="11" text-anchor="middle" transform="rotate(-90 14 ${MT + (H - MT - MB) / 2})">Motorização (veíc/hab)</text>`;
-
+    parc.map(m => ponto(m, '#E2892C', 3.1, .95)).join('') +
+    tz.map(m => ponto(m, m.tz_status === 'Encerrada' ? 'var(--rosa)' : 'var(--verde)', 3.1, .95)).join('') +
+    `<text x="${ML + (W - ML - MR) / 2}" y="${H - 4}" fill="var(--muted)" font-size="11" text-anchor="middle">${vx.rot}${lx ? ' — escala log' : ''}</text>
+     <text x="14" y="${MT + (H - MT - MB) / 2}" fill="var(--muted)" font-size="11" text-anchor="middle" transform="rotate(-90 14 ${MT + (H - MT - MB) / 2})">${vy.rot}${ly ? ' — log' : ''}</text>`;
   const leg = document.getElementById('dispersaoLegenda');
-  if (leg) leg.innerHTML = `<span><i style="background:var(--amarelo)"></i>TZ universal (${tz.filter(m => m.tz_status === 'Ativa').length})</span>
-    <span><i style="background:var(--rosa)"></i>TZ encerrada (${tz.filter(m => m.tz_status === 'Encerrada').length})</span>
-    <span><i style="background:var(--muted)"></i>Não-TZ (${naoTz.length.toLocaleString('pt-BR')})</span>`;
+  if (leg) leg.innerHTML = `<span><i style="background:var(--verde)"></i>Universal (${tz.filter(m => m.tz_status === 'Ativa').length})</span>
+    <span><i style="background:#E2892C"></i>Parcial (${parc.length})</span>
+    <span><i style="background:var(--rosa)"></i>Encerrada (${tz.filter(m => m.tz_status === 'Encerrada').length})</span>
+    <span><i style="background:var(--muted)"></i>Não-TZ (${naoTz.length.toLocaleString('pt-BR')})</span>
+    <span style="margin-left:auto;">${rows.length.toLocaleString('pt-BR')} municípios com as duas variáveis no recorte</span>`;
+  const tit = document.getElementById('dispTitulo'); if (tit) tit.textContent = `${vx.rot} × ${vy.rot}`;
 }
+(function () {
+  const opts = DISP_VARS.map(v => `<option value="${v.k}">${v.rot}</option>`).join('');
+  const sx = document.getElementById('dispX'), sy = document.getElementById('dispY');
+  if (!sx || !sy) return;
+  sx.innerHTML = opts; sy.innerHTML = opts; sx.value = dispX; sy.value = dispY;
+  sx.addEventListener('change', () => { dispX = sx.value; renderDispersao(); });
+  sy.addEventListener('change', () => { dispY = sy.value; renderDispersao(); });
+  document.getElementById('dispTroca')?.addEventListener('click', () => { [dispX, dispY] = [dispY, dispX]; sx.value = dispX; sy.value = dispY; renderDispersao(); });
+})();
 
 // ---------- 11.10: concentração dos grupos econômicos (26/08/2026) ----------
 // Conta alcance por ID de grupo, não por nome (ver nota em gruposFor): 20 nomes da
@@ -2032,6 +2247,7 @@ function renderTZTable() {
   });
   document.querySelectorAll('#tzTable th').forEach(th => { th.dataset.ord = th.dataset.k === tzSort.k ? (tzSort.dir > 0 ? '▲' : '▼') : ''; });
   rows = rows.slice().sort((a, b) => {
+    if (tzSort.k === 'n_fontes') return tzSort.dir * ((a.n_rsl || 0) - (b.n_rsl || 0));
     if (tzSort.k === 'nome') return tzSort.dir * String(a.nome).localeCompare(String(b.nome), 'pt-BR');
     const av = a[tzSort.k], bv = b[tzSort.k];
     if (av == null) return 1; if (bv == null) return -1;
@@ -2042,7 +2258,7 @@ function renderTZTable() {
   for (const r of rows) {
     const nf = r.n_fontes || 0;
     const expanded = fontesExpandedIds.has(r.id);
-    const tag = r.tz_status === 'Ativa' ? '<span class="tag ativa">Ativa</span>'
+    const tag = r.tz_status === 'Ativa' ? '<span class="tag ativa">Universal</span>'
       : r.tz_status === 'Encerrada' ? '<span class="tag encerrada">Encerrada</span>'
       : '<span class="tag parcial">Parcial</span>';
     parts.push(`<tr data-id="${r.id}">
@@ -2050,11 +2266,13 @@ function renderTZTable() {
       <td>${tag}</td>
       <td${(r.tz_ano != null && r.tz_ano_txt == null) ? ` title="base-mestre: ${String(r.tz_ano).replace(/"/g, '&quot;')}"` : ''}>${r.tz_ano_txt ?? (r.tz_ano != null ? '<span style="color:var(--muted);">a apurar</span>' : '—')}</td><td>${r.regic_label ?? '—'}</td><td>${r.tipo_arranjo ?? '—'}</td>
       <td>${fmtNum(r.pop)}</td><td>${fmtNum(r.pib_pc)}</td><td>${fmtNum(r.motorizacao)}</td>
-      <td>${nf ? `<button type="button" class="fontes-toggle" data-id="${r.id}">${nf} ${expanded ? '▲' : '▼'}</button>` : '—'}</td>
+      <td>${r.n_rsl ? `<button type="button" class="fontes-toggle" data-id="${r.id}" title="trabalhos do corpus da revisão sistemática que citam o município">${r.n_rsl} ${expanded ? '▲' : '▼'}</button>` : '—'}</td>
     </tr>`);
-    if (expanded && nf) {
+    if (expanded && r.n_rsl) {
       const list = fontesFor(r).map(f => `<li><b>${f.fonte}</b> — ${f.descricao || ''}${f.link ? ' — <a href="' + f.link + '" target="_blank" rel="noopener">link</a>' : ''}</li>`).join('');
-      parts.push(`<tr class="fontes-row"><td colspan="10"><ul class="fontes-inline">${list}</ul></td></tr>`);
+      const m = MUNI.get(String(r.id));
+      // 24/10/2026 (autor): só a RSL — as fontes do levantamento de casos saem da lista e da ficha
+      parts.push(`<tr class="fontes-row"><td colspan="10"><b>Na revisão sistemática (${r.n_rsl})</b>${rslLista(m, false)}</td></tr>`);
     }
   }
   tbody.innerHTML = parts.join('');
@@ -2218,37 +2436,31 @@ function renderFichaBloco(b) {
   return html;
 }
 
-function abrirFicha(m) {
+// 24/10/2026 (autor: "explorar está muito ruim termos duas fichas"): a ficha do Apêndice D
+// deixa de abrir numa gaveta à parte e entra na própria ficha do município, recolhível.
+function fichaHtml(m) {
   const f = fichaFor(m);
-  const el = document.getElementById('fichaLateral');
-  if (!el) return;
-  if (!f) { fecharFicha(); return; }
-  document.getElementById('flNome').textContent = `${m.nome} – ${m.uf}`;
-  const sub = (m.tz_regua_sub && REGUA_IDX[m.tz_regua_sub] != null) ? REGUA[REGUA_IDX[m.tz_regua_sub]] : null;
-  document.getElementById('flTags').innerHTML =
-    `<span class="tag ${m.tz_status === 'Ativa' ? 'ativa' : m.tz_status === 'Encerrada' ? 'encerrada' : 'parcial'}">${esc(m.tz_status)}</span>`
-    + (sub ? ` <span class="tag parcial" style="background:${sub.cor};color:rgba(0,0,0,.78);">${sub.k} ${sub.rot}${m.tz_prov ? ' ◇' : ''}</span>` : '');
+  if (!f) return '';
   const resumo = f.resumo.length
-    ? `<h3>Ficha-resumo</h3><table class="fl-resumo">${f.resumo.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${linkifica(v)}</td></tr>`).join('')}</table>` : '';
+    ? `<h3>Ficha-resumo</h3><table class="fl-resumo">${f.resumo.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${linkifica(k === 'Situação' ? String(v).replace(/^Ativa\b/, m.tz_status === 'Ativa' ? 'Universal em vigor' : 'Parcial em vigor') : v)}</td></tr>`).join('')}</table>` : '';
   const blocos = f.blocos.map(b => {
     const corpo = renderFichaBloco(b);
     if (!corpo) return '';
     if (b.t === 'Literatura e fontes') return `<details><summary>${esc(b.t)}</summary><div style="margin-top:8px;">${corpo}</div></details>`;
     return `<h3>${esc(b.t)}</h3>${corpo}`;
   }).join('');
-  document.getElementById('flCorpo').innerHTML = resumo + blocos + `
+  return resumo + blocos + `
     <div class="fl-nota"><b>Documento de trabalho da tese</b> (Apêndice D, versão ${esc(FICHAS.versao)}). Cada classificação remete a um documento datado. Campo vazio é dado <b>não apurado</b>, não fenômeno inexistente. Por decisão do autor, ficam fora desta ficha a leitura de contrapartida e a posição na régua analítica (até a defesa da tese) e os grupos econômicos (que têm página própria, a <a href="rede-ge.html">Rede de empresas</a>).</div>`;
-  el.hidden = false;
-  el.querySelector('.fl-corpo').scrollTop = 0;
 }
+function abrirFicha() { /* mantida para chamadas antigas: a ficha agora fica dentro do card */ }
 function fecharFicha() {
   const el = document.getElementById('fichaLateral');
   if (el) el.hidden = true;
 }
 document.getElementById('flFecha')?.addEventListener('click', fecharFicha);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharFicha(); });
-document.getElementById('detail')?.addEventListener('click', e => {
-  if (e.target.closest('.btn-ficha')) abrirFicha(munSelecionado);
+document.getElementById('detail')?.addEventListener('change', e => {
+  if (e.target.closest('.tgl-fluxo')) { mostrarFluxos = e.target.checked; desenharFluxos(munSelecionado); }
 });
 
 // ---------- abas (23/10/2026) ----------
@@ -2256,7 +2468,7 @@ document.getElementById('detail')?.addEventListener('click', e => {
 // TZ × Não-TZ e com o panorama, intercalados numa rolagem só. Separado em quatro
 // áreas; o filtro fica fixo acima das abas e vale para todas. A aba aberta fica no
 // endereço (#explorar, #comparar...), para um link levar direto a ela.
-const ABAS = ['panorama', 'explorar', 'comparar', 'sobre'];
+const ABAS = ['panorama', 'explorar', 'comparar', 'literatura', 'sobre'];
 function abreAba(nome, semHash) {
   if (!ABAS.includes(nome)) nome = 'panorama';
   for (const a of ABAS) {
@@ -2352,7 +2564,7 @@ svg.addEventListener('mousemove', e => {
   if (!m || !passesFilter(m)) { tooltip.style.display = 'none'; return; }
   let inner;
   if (m.tz_bin === 'TZ') {
-    inner = `<b>${m.nome} – ${m.uf} ${m.tz_status === 'Ativa' ? '· TZ universal' : '· TZ encerrada'}</b>
+    inner = `<b>${m.nome} – ${m.uf} ${m.tz_status === 'Ativa' ? '· Universal' : '· Encerrada'}</b>
       <div class="tt-grid">
         <span>Início</span><span>${m.tz_ano ?? '—'}</span>
         ${m.tz_fim ? `<span>Fim</span><span>${m.tz_fim}</span>` : ''}
@@ -2384,9 +2596,9 @@ svg.addEventListener('mouseleave', () => tooltip.style.display = 'none');
 
 // ---------- tooltip da linha do tempo (lista de municípios por barra, a pedido do autor) ----------
 const TIMELINE_TIPO_LABEL = {
-  universal: 'adoção(ões) de TZ universal',
+  universal: 'adoção(ões) de Tarifa Zero universal',
   parcial: 'adoção(ões) de TZ parcial (início aproximado)',
-  revogacao: 'revogação(ões) de TZ universal',
+  revogacao: 'revogação(ões) de Tarifa Zero universal',
 };
 const timelineSvg = document.getElementById('timeline');
 timelineSvg.addEventListener('mousemove', e => {
@@ -2422,5 +2634,7 @@ renderReferenciasAbnt();
 renderTZTable();
 render(); // desenha mapa, legenda, barras, cards, linha do tempo e score de população
 renderCurvaPorte();
+renderLeituras();
+renderLiteratura();
 // fim da montagem: some o aviso de carregamento (head.html)
 document.getElementById('carregando')?.remove();

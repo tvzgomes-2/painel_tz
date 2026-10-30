@@ -63,6 +63,8 @@ OUT=../painel.html
   cat remuneracao_tz.json
   printf '</script>\n<script id="data-custeio" type="application/json">\n'
   cat custeio_tz.json
+  printf '</script>\n<script id="data-rsl" type="application/json">\n'
+  cat rsl_tz.json
   printf '</script>\n<script id="data-od" type="application/json">\n'
   cat od_por_municipio.json
   printf '</script>\n<script>\n'
