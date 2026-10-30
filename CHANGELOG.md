@@ -4,7 +4,7 @@ O site tem páginas independentes, cada uma com seu próprio número de versão 
 
 # Rede de empresas (`rede-ge.html`, tag GE; até 23/10/2026, "Rede da ARS")
 
-## v0.2 (atual — 2026-10-24, em validação)
+## v0.2 (atual — 2026-10-24; validada e publicada em 2026-10-30, commit `94eea96`)
 
 - **Nome de mercado como nome principal** em toda a página (tabela, ficha, listas de centralidade, território, busca); o rótulo do cálculo (holding ou sobrenome) fica embaixo, em cinza. Antes, a rede mostrava "Grupo Carvalho / Mobi" e as listas "Rrf Participacoes Ltda." — o leitor via dois grupos onde havia um. Nomes de mercado repetidos (ramos da mesma família) levam o rótulo depois de um ponto.
 - **Chegada pelo Painel Brasil:** o endereço `rede-ge.html#mun-<código IBGE>-<nome>` abre a busca por município já preenchida; se nenhum grupo tem endereço ali, a página diz isso e lembra que ausência de endereço não é ausência de operador.
