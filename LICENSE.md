@@ -30,19 +30,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## Dados e conteúdo — CC BY-NC 4.0 (Atribuição-NãoComercial)
+## Dados e conteúdo — CC BY 4.0 (Atribuição)
 
-Aplica-se a: o dataset municipal compilado (`municipios_dados.json`/`stats.json`, embutidos em `painel.html`), `METADADOS.md`, `CHANGELOG.md`, `FEEDBACK.md` e o painel publicado como produto (a combinação específica de dados + visualização sobre Tarifa Zero e grupos econômicos).
+Aplica-se a: o dataset municipal compilado (`municipios_dados.json`/`stats.json`, embutidos em `painel.html`), as bases da tese depositadas neste repositório, `METADADOS.md`, `CHANGELOG.md`, `FEEDBACK.md` e o painel publicado.
 
-Você tem o direito de compartilhar e adaptar este material, **exceto para fins comerciais**, desde que dê crédito apropriado.
+Você tem o direito de compartilhar e adaptar este material, para qualquer fim, inclusive comercial, desde que dê crédito apropriado, indique a licença e diga se fez mudanças (decisão do autor, 11/11/2026; antes, CC BY-NC 4.0).
 
-Uso comercial do painel/dataset compilado é reservado ao autor e à Polo Planejamento.
-
-Texto legal completo: https://creativecommons.org/licenses/by-nc/4.0/legalcode.pt
+Texto legal completo: https://creativecommons.org/licenses/by/4.0/legalcode.pt
 
 ## ⚠️ Nota sobre `painel.html`
 
-O arquivo publicado (`painel.html`) **contém os dois** — a lógica de exibição (MIT) e o dataset compilado embutido (CC BY-NC). Reusar/adaptar a lógica de visualização isoladamente é livre (MIT); reusar o dataset compilado ou republicar o painel com fins comerciais requer autorização do autor. O hub do site (`index.html`) não tem dados embutidos — é só MIT.
+O arquivo publicado (`painel.html`) **contém os dois** — a lógica de exibição (MIT) e o dataset compilado embutido (CC BY 4.0). Os dois podem ser reusados com crédito ao autor. O hub do site (`index.html`) não tem dados embutidos — é só MIT.
 
 ## Como citar
 

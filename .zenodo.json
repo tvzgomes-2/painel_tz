@@ -1,0 +1,14 @@
+{
+  "title": "Tarifa Zero e grupos econômicos no transporte coletivo brasileiro: dados, scripts e painel da tese de doutorado (PGT/UFABC)",
+  "upload_type": "dataset",
+  "description": "Bases, scripts e painel de dados da tese de doutorado de Thiago Von Zeidler Gomes (Programa de Pós-Graduação em Planejamento e Gestão do Território, UFABC), orientada pela Prof.ª Dra. Silvana Zioni. Inclui a base de políticas municipais de Tarifa Zero (versão congelada citada na tese, com SHA-256), a régua de classificação, a rede de grupos econômicos sem nomes de sócios pessoas físicas, os roteiros de análise e o painel. Cada versão deste depósito corresponde a um congelamento citado na tese.",
+  "creators": [
+    {"name": "Gomes, Thiago Von Zeidler", "affiliation": "Universidade Federal do ABC (UFABC)"}
+  ],
+  "contributors": [
+    {"name": "Zioni, Silvana", "affiliation": "Universidade Federal do ABC (UFABC)", "type": "Supervisor"}
+  ],
+  "license": "cc-by-4.0",
+  "language": "por",
+  "keywords": ["Tarifa Zero", "transporte público coletivo", "grupos econômicos", "política urbana", "Brasil"]
+}
