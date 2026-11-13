@@ -19,9 +19,15 @@ Site com páginas independentes da pesquisa de doutorado (Era Bicicleta, lançam
 - **Rede de empresas** (`rede-ge.html`, tag "GE") — os 327 grupos econômicos do transporte coletivo, em duas abas: **Quem controla** (a rede societária interativa, as unidades de controle, linhagens e federações, a concentração do capital — Tabela 5 da tese — e onde os grupos têm endereço) e **Além do ônibus** (as holdings sócias das empresas dos grupos e as empresas de outros setores a que os sócios delas chegam — Seção 6.4).
 - **Verbetes** (`verbetes.html`) e **Pesquisa colaborativa** (`pesquisa.html`).
 
-Nenhuma página publica nome de sócio pessoa física, CPF ou CNPJ. Vínculo societário mapeado não é prova de controle nem de atuação contra a Tarifa Zero.
+Nenhuma página publica nome de sócio pessoa física nem CPF. CNPJ aparece só de empresas, quando a fonte documental o traz; o nome de mercado de alguns grupos é o do fundador e é publicado como marca. Vínculo societário mapeado não é prova de controle nem de atuação contra a Tarifa Zero.
 
 Cada página é um arquivo HTML autocontido (dados embutidos) — sem backend, sem dependências externas. Cada uma tem seu próprio número de versão (ver [`VERSIONING.md`](./VERSIONING.md)); o site como um todo é identificado por uma "era" (nome de modo de transporte, em ordem alfabética), trocada só em eventos grandes (novo painel irmão publicado, ou redesign completo).
+
+## Dados da tese (`dados/`)
+
+A pasta [`dados/`](./dados/README.md) é o depósito de dados citado na tese, na **base congelada de 11/11/2026**: base de políticas, régua, Base Municipal v3, testes, rede de grupos sem nomes de sócios pessoas físicas, arranjo e contratos, revisão sistemática, normas padronizadas e scripts, com SHA-256 de cada arquivo. Os números da tese são os desta pasta.
+
+O painel (`painel.html`, `rede-ge.html`) é o instrumento exploratório da pesquisa e, nesta versão, ainda está na **base de 21/10/2026**; os números dele podem diferir dos da tese até a próxima montagem.
 
 ## Ver online
 
