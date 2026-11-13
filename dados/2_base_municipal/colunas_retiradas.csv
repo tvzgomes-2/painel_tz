@@ -1,0 +1,4 @@
+coluna;familia;motivo;decisao;data
+obitos_2022;obitos_<ANO>;óbitos no trânsito em 2022 vindos da base da POLO (espinha dados_gerais), sem fonte primária documentada e sem uso nas análises;autor (opção C);2026-11-12
+ob_tran_22;ob_tran_22;cópia de obitos_2022, mesma origem e mesmo motivo;autor (opção C);2026-11-12
+tx_mortalidade_100mil_hab;tx_mortalidade_100mil_hab;taxa por 100 mil hab. derivada dos óbitos de 2022 da base da POLO, mesmo motivo;autor (opção C);2026-11-12

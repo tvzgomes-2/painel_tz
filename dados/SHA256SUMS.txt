@@ -1,0 +1,593 @@
+46a7ccc7447e08f9fa20a5e542bf9d667ccdb2005d7c73fe080e84ed236ee7d9  1_politicas/tz_base_mestre_2026-11-11.csv
+d13c1c74f09a126b7b2ad13837069e5fd1bd438c39f3b939c2eaa2665d6375d8  1_politicas/tz_congelamentos_sha256.txt
+b45b9a3db846290be22ed9f2e0bf860ab0852ab0ecc93c3788732e7a2c2dcec2  1_politicas/tz_dicionario.csv
+0f2f0fba8a14abc06238a539eb523d7c30da01a5ee06d45a6a236d696e05f051  1_politicas/tz_esic_pedidos.csv
+c9a30d5e4ed44b6d948ddeeee9cb17c8be732e51c8d06c78ac1918f3106961ea  1_politicas/tz_registro_alteracoes.csv
+b79a5c481ebdac0c4838fbeac6982d764d5f612568125a5cfd22abbf907a3671  1_politicas/tz_regua_descritiva_2026-11-11.csv
+1cb749777286b2205fea7ff9a732a957b5d109a8697e2c356308756b36679e3b  2_base_municipal/base_municipal_v3.csv
+78c075a5a7fb2923575e4bb9ce02d72be3e930520f7d80994721db24ed8c233a  2_base_municipal/base_municipal_v3_dicionario.csv
+972967bba95a0a56ea885d5b448d242ca724a9cb1712f55709efceeff2f837b8  2_base_municipal/colunas_retiradas.csv
+cd226a72320a97665909e29befe5e5620f235320c26715043dbcfdce38dc4d21  2_base_municipal/series/painel_tarifa_onibus_1995_2024.csv
+583c8329e6ff7f744ab2eb970a6b085ec3443f3635ba1cdd8412af8978f4c919  2_base_municipal/series/serie_ctp_ctpu_simulacao.csv
+a3e27f190c914e6ba071af2d225a50d84091f0a3e9b03e4f125870d51557542f  2_base_municipal/series/serie_ctp_vs_custo_real.csv
+eb176ddb1f98f00aacc2cdf79ad893fbd45ec5fdb9bcec11eecebbd5d58cb258  2_base_municipal/series/serie_finbra.csv
+815804aef5bf450a22ed760bd645cb33f3b488ac74d69b62749e2d7b5a7e1e65  2_base_municipal/series/serie_frota.csv
+558d594f6d611637ed7003497d0ccdfdee35b46ee9616321432d74bb07cde8ec  2_base_municipal/series/serie_frota_simu.csv
+54cf5ac863038efa081b6071055b9b046adb9907b0037a0a9ec9f81b7b1c8857  2_base_municipal/series/serie_funcao.csv
+4cb8d4881e4cb2270151cd98940e9fd58e683fd25cf0c216735cb04f1ce63e19  2_base_municipal/series/serie_informalidade_censo2022.csv
+1e223094dda523b9ddd820ecc3f8db54236ad00dc1a5459d339f91b17de23600  2_base_municipal/series/serie_munic_recursos_humanos_2020.csv
+c98890f9ee3aa2e05557615c5793ffca399a84ea1acfd135936c7b8f7dea2060  2_base_municipal/series/serie_pemob.csv
+da32d9387b4ae014d37b2cee8bc02ffe97768fae5d6152682beae5c3d0a86ef0  2_base_municipal/series/serie_pib.csv
+400eafd0ec26cae42400346f91871b9a581bc534c4ee699f19b76b1e96deeffa  2_base_municipal/series/serie_populacao.csv
+1c8051925e008e85c4badb354e1c3d8a21f0d55878ebbffd0e658884e026d58f  2_base_municipal/series/serie_sinistralidade.csv
+724d7a5cd78bbd3557f42bb4376bebc15edf2aa9ad8dc7b88b837bf50d16d8c3  2_base_municipal/series/serie_subsidio_ntu.csv
+5f20941bf1e6b5ee48323ebcbf027e26f6ca9974d6f1bd88e55df9f6baf7277f  2_base_municipal/series/serie_tarifa.csv
+a231e442e3699dc9d30c6af3ce332ab800d8f915a5a06c217676690576f9c762  2_base_municipal/series/serie_tarifa_dedup_2005_2024.csv
+ff3a8498c123394be34fddd7bed265f9a83f5c56a817ea1daa62617d44f78dbc  2_base_municipal/series/serie_tarifa_real_2024.csv
+7c585a2b8faa9b9e3522086dfb482244cbda006838e1032492658d266cbe2dd6  2_base_municipal/series/serie_tarifa_reconciliada.csv
+526f291986e5ea77d44e11f1118d74edd514ceb6fbda640fc5c17d19d343cd1a  2_base_municipal/series/serie_tarifa_simu.csv
+bcc0d5e34c3a0be0bdda3df87aea1b8bf7dadb66a42f490d38396d3292d8a99f  2_base_municipal/series/tarifa_corrigida_ipca_2005_2024.csv
+4321cbd5be1e777d8aee5b95b3e9ab43e51a959ea60b188a185c8af1b983ceea  3_testes/base_teste_nacional.csv
+37d9365191d2d21e4a24fd495c207b276cd425fa3559bfdf95aca2e9d3a1ec00  3_testes/falseador3_destinatario_r102.json
+5c7f198e8f26454c6d655ea4415da0bff02d522a5f1242928a9116bf12e6785f  3_testes/lista_estrato_alto.csv
+6bdc9184238eaf4d1c3a5a49c105f941b7abf162f1a36894d0697a970cf71b12  3_testes/lista_estrato_alto_fora_desenho_B.csv
+76aac3beda84b5b4c3f7ae506b1fd586db83e649711c3c9ea33d892d31fd26b5  3_testes/resultados_final_sensibilidade.json
+3ceae77cc6924527144f814fb38893cbe11e48cd402611e95959c4f3425c989d  3_testes/resultados_sensibilidade_indice_r102.json
+2566e39aaa01574cf2a9a85ce013d5ec5e19f1a414d31f5ca708629e07c90bf7  3_testes/resultados_sensibilidade_montemor_r99.json
+4e39821b4cad2e51a603bd7259a1cebc79703aa2c87661b97f498cf2bd93c86f  3_testes/resultados_sensibilidade_recorte_r99.json
+9ac42778febfeeef3a9cca8d2148cda88565e636cd7413a3403267ac56f6d8cb  3_testes/resultados_universo_r97_base-2026-10-21.json
+ae77a9a4ad6f1472c34a22c56b5c331303baf5d68ca81c8cf4c89ef9b200c801  3_testes/teste_arranjo_r99_base-2026-11-05.json
+367e7ff2c759cd7a261918921f122ba7e42f6b1836782e49e7e5c9f98fddda31  4_grupos/grupos_327.csv
+44b5982e833542a60f70ce11188f057afd70bbed9ffc26d325c2d9a249cc2ad1  4_grupos/grupos_empresas_v5.csv
+f4a100a9da89e4010d2515d24296c575f3c034ff3fd48ee00eb45499246e7c95  4_grupos/grupos_ligacoes.csv
+d3f4be50511799b7b3736a51cc3aecc7a6652b274967912c62350fe4d4d856d8  4_grupos/grupos_ligacoes_escala.csv
+42938751b6d20a1105e0a71f925c39317481740caaf710090135174291e724c4  4_grupos/grupos_unidades_de_controle.csv
+4c89e3d41675d2ab35184fe80c0c7fa38fc69346e224fdf1682e4d64bd623436  5_arranjo_contratos/arranjo_operacional_D1_D5.csv
+3c2aa138c93d316ed454f2c422eb1de01bcfbce1a6c1e2aa5be567b081a5516e  5_arranjo_contratos/arranjo_operacional_livro_de_codigos.csv
+be100bfd94a6fe3f624d8795a0485f1821e85b84f3ec38c3aeadde3028560369  5_arranjo_contratos/custeio_no_ato.csv
+ba00d924575a4e8cdddbe134f16c56791a6887a4cc2eb42f71335152282fe4c1  5_arranjo_contratos/custo_habitante_contratos.csv
+8f8b5cbc757785ee5ce491c9a08dc7235cf68a967206594ea8a9aaef2df01c31  5_arranjo_contratos/destinatario_contrapartida.csv
+2f6d1a4c72054422315204f61228d8570b4a45df820e7dace3f7928440b07fc5  5_arranjo_contratos/incumbente_entrada.csv
+90e68f05baf5de0207a0793a0c169d52f8c08686dbc1b1688e8a773bd4e8db5d  5_arranjo_contratos/preco_km_contratos.csv
+615302aa448b505b964220a805ae8e2651e82f633b8406514a2b5a95979259bd  6_rsl/rsl_corpus.csv
+2f209dd900b67293523eda03903c94838e0acb325207762433001643ea939a4e  6_rsl/rsl_rede_citacoes.csv
+dd99c8ac3bf5ebaf2f5d820a543cae07cc3db8cccc19e8942d96cdf2ece78c8f  6_rsl/rsl_registro.csv
+2fa0edb4a22ef52a70aa78c2a521712f27a367642b3ba895c91901a405323c15  7_documentos/indice_documentos.csv
+228ea1458f11de7d0a653c24f10b02564172bada48be2cc65749fc28b66164ae  7_documentos/normas_padronizadas/Norma — Agudos-SP — Lei Ordinária 3362-2003.md
+d3bedcf5a7d926e226e7353c65cc4ff1f7c61b76bc1f6d7d319d13a3df3a7fec  7_documentos/normas_padronizadas/Norma — Agudos-SP — Lei Ordinária 4581-2014.md
+c6906d95294869f4a59ce7ed3a5f3964f8d3edf41747edf6bf91bc87607d2636  7_documentos/normas_padronizadas/Norma — Agudos-SP — Lei Ordinária 5593-2022.md
+a59fa96b5f1a96c223a0a5dd401299caa46cc0b0c41461a99846c5d021b8f4b3  7_documentos/normas_padronizadas/Norma — Altinópolis-SP — Lei 1920-2015.md
+39bcc0d912fc8a3158e15b8427ac9b38689009dbd29e36f3cec2fcf0ca03b2f6  7_documentos/normas_padronizadas/Norma — Alumínio-SP — Emenda à Lei Orgânica 52-2023.md
+ca218b13b554d3bd22fb9ef78579f230d667cb271a8e08355497de7844567b21  7_documentos/normas_padronizadas/Norma — Alumínio-SP — Lei Ordinária 1718-2014.md
+16a511c994e72d708124887c6a35f797a555c7d7c507cc647bb955293246d97a  7_documentos/normas_padronizadas/Norma — Alumínio-SP — Lei Ordinária 1918-2017.md
+15765b2fd2c3988c1d037f6332d12530b594aefd2b9cf7f8861f4b657c10e69d  7_documentos/normas_padronizadas/Norma — Alumínio-SP — Lei Ordinária 1925-2017.md
+3e1012598fdc311c7e6927b741b0177a7a102226f90f4fafadb44003c5d7f55f  7_documentos/normas_padronizadas/Norma — Alumínio-SP — Lei Ordinária 2057-2019.md
+bd7f71e56aeea2b797e8447f1b7b5dd961f86b52a37444be9d2b94418b18d60f  7_documentos/normas_padronizadas/Norma — Alumínio-SP — Lei Ordinária 2229-2022.md
+2a9014b48f650f4ca0159cc99a323196dce98720495301b57a75892496183425  7_documentos/normas_padronizadas/Norma — Alumínio-SP — Lei Ordinária 645-2001.md
+1188efe629c88c118ed57179f4b9b263b365d95c84ad2088c26baadb58fbfe1d  7_documentos/normas_padronizadas/Norma — Angra dos Reis-RJ — Lei 4.586-2026.md
+13d1b34a800d75520fdb746953e28ad1fdfa5f4bd3c629045611525e8acb02f2  7_documentos/normas_padronizadas/Norma — Antonina-PR — Lei Ordinária 31-2024.md
+c5276ae5f8c30620d4fa31d8c93035fde67a1aebd822a0b8215f2f807f03022b  7_documentos/normas_padronizadas/Norma — Aparecida-SP — Lei 4.700-2026.md
+740dc0474584780c454a0f8a67b546265e5d95ee6baa1bc4b3c6dc68c466981a  7_documentos/normas_padronizadas/Norma — Aquiraz-CE — Decreto 28-2018.md
+23256937e70de3b7661d89089ab0d8a291d0a97796bd12846dbaead32d2645e0  7_documentos/normas_padronizadas/Norma — Aquiraz-CE — Lei Ordinária 1174-2016.md
+b5473ac6bfc71e32962f31bbae20cb3ebe828589c675791208e8c0b34b63325e  7_documentos/normas_padronizadas/Norma — Aquiraz-CE — Lei Ordinária 1279-2018.md
+6cb4c1f5de609ef4b6236afc21ebdd939c86c6230588335a26421d301c231e19  7_documentos/normas_padronizadas/Norma — Aquiraz-CE — Lei Ordinária 1821-2025.md
+9be60a77616b7a85dd51fd3fcb4768ffe011d62c84948f8629af10df3617b139  7_documentos/normas_padronizadas/Norma — Araranguá-SC — Lei Ordinária 4093-2023.md
+e5447b702a839e6236ae81483a435f458bcb57ebe8cddd9a4662018ae1e4fe75  7_documentos/normas_padronizadas/Norma — Araranguá-SC — a identificar.md
+c9d0994f71051c0c6d276c5003bcf216880588e63c9a371b8336b915d52c74b2  7_documentos/normas_padronizadas/Norma — Araraquara-SP — Lei Ordinária 11530-2025.md
+3aeb7f38b56e460b271fbd8fe87a53fe88c25a86dc9f5f5b712ad6e0af47311e  7_documentos/normas_padronizadas/Norma — Araçariguama-SP — Lei Ordinária 1015-2023.md
+06029ce4bd7375a593000406384e868cc5e65b3c6fc6e1a79e35c66a6e21bee3  7_documentos/normas_padronizadas/Norma — Araçariguama-SP — Lei Ordinária 1038-2024.md
+04e5560f02e761787479360c433247c711da2e569f5e8f2c49544c74fd5a4f73  7_documentos/normas_padronizadas/Norma — Arceburgo-MG — Decreto 015-2020.md
+3840a88e5f2017e8c70c4e84ce46367688d9b8bf770a3fc06209b8c4297d7e29  7_documentos/normas_padronizadas/Norma — Arceburgo-MG — Lei Ordinária 1.692-2013.md
+39cf5d47a7d589bcdf9c107297d0a381e48a9429ddcb2bfcdaa99050daacac2b  7_documentos/normas_padronizadas/Norma — Assis-SP — Decreto 8.377-2021.md
+73cf330ccb11b04e7b78262b5ddf128d0f503ab34d7b4f402d263f0a27d6a05e  7_documentos/normas_padronizadas/Norma — Balneário Arroio do Silva-SC — Decreto 143-2026.md
+7377a229f513f87b24bbd9fc3b2f11e351195e36c7570135976341bf3c21aa20  7_documentos/normas_padronizadas/Norma — Balneário Arroio do Silva-SC — Decreto 43-2022.md
+73a80677cd234d69d0b89729860677809e9b602eb42f25fa57ab790754c8c48e  7_documentos/normas_padronizadas/Norma — Balneário Arroio do Silva-SC — Lei Ordinária 1.195-2025.md
+6035ff250be277d9eb11b7e06416c2b4dc88f1eb15b863979c197968aee0df9e  7_documentos/normas_padronizadas/Norma — Balneário Camboriú-SC — Lei Ordinária 4765-2023.md
+1226e1f03fb97ac0841784da297c9d315d435b8b77a758b5138404732ed28004  7_documentos/normas_padronizadas/Norma — Balneário Camboriú-SC — Medida Provisória 1-2023.md
+c77bc2e2e0a129c1f7a0a910598a2df04a08606942df29b0ea2dd5f7048fb4ce  7_documentos/normas_padronizadas/Norma — Balneário Piçarras-SC — Decreto 705-2023.md
+1bcb6d0361d310cb40f3334eb8ef66b473e68cf327bdcf93447f5e456c228895  7_documentos/normas_padronizadas/Norma — Balneário Piçarras-SC — Decreto 759-2023.md
+3f89be127ea716bb513a7d19373cf0015fc3295fbc534d2dd36705ef8bfa5b65  7_documentos/normas_padronizadas/Norma — Batatais-SP — Lei Ordinária 2870-2006.md
+8a44f8e172c58cd4cc672c70ce233f508f6fb45f88c81a2552171aa2decff67a  7_documentos/normas_padronizadas/Norma — Bayeux-PB — Lei 1682-2022.md
+eafb50b5fe137e06c7c6794c451160a6afcec8b51b41df09567b01e6f4842e92  7_documentos/normas_padronizadas/Norma — Bela Vista do Toldo-SC — Lei Ordinária 1794-2025.md
+8bc690477ea066f116bb68ba1fb1e552a536fbdb4fbfce9932553df114fd15e6  7_documentos/normas_padronizadas/Norma — Bela Vista do Toldo-SC — Lei Ordinária 505-2006.md
+5b8b6809a4511c1a06b19968cb078b52ae877a93209debfe38d6ddace6926887  7_documentos/normas_padronizadas/Norma — Bela Vista do Toldo-SC — Lei Ordinária 639-2009.md
+e3b6cc61a6c64b868afe3a2ef616b1e241a828b52d3c49730951dc845c8feb97  7_documentos/normas_padronizadas/Norma — Belo Vale-MG — Lei 1.608-2023.md
+168ecad241c3b9c2a350878fce55cddb25843d936619244206643cf60bfea38c  7_documentos/normas_padronizadas/Norma — Belo Vale-MG — Lei 1.686-2025.md
+297c7befbe2dc7506ca72619eb4f4784b4011dd109002d9a35dd93588320729d  7_documentos/normas_padronizadas/Norma — Bombinhas-SC — Decreto 2.854-2022.md
+781c371077d51afe460ced4cc6a2fc5303cefe3c4f2127cd5789a8a393ddfdc0  7_documentos/normas_padronizadas/Norma — Bombinhas-SC — Lei Complementar 384-2022.md
+b27d41ee81bf76c71ca49e687106b7dbc7215cce9f589691a319985263f00442  7_documentos/normas_padronizadas/Norma — Bombinhas-SC — Lei Complementar 457-2025.md
+c98538c4a6e8723bc0b20c76709775176c0ed9c66d8c8d7aaee007dc7b0bed27  7_documentos/normas_padronizadas/Norma — Brodowski-SP — Lei Ordinária 2948-2025.md
+bef7ee79d947b95eab6534b6ae662dcad08a5ed42724c183d74fa42163b276ad  7_documentos/normas_padronizadas/Norma — Brotas-SP — Lei Ordinária 1053-1993.md
+e3dec2a533688b05b6602e66dbec7e5ebea4865546692509508ef42db9e6e942  7_documentos/normas_padronizadas/Norma — Brotas-SP — Lei Ordinária 1275-1994.md
+874fcbdac2ce4453ab5da0b35105ba98b7f45828cbd1bf7a2f8b84f233b8a6c4  7_documentos/normas_padronizadas/Norma — Brotas-SP — Lei Ordinária 1492-1997.md
+ebcec19254c38b8cf000e30c82246a617b2d7740ee4c0f8e43c2905617eb34d6  7_documentos/normas_padronizadas/Norma — Brotas-SP — Lei Ordinária 1598-1999.md
+2ae12f8525c7200dfbfdc7ee5b7b60efc573e55599078f73ec2a599b33e2fa60  7_documentos/normas_padronizadas/Norma — Brotas-SP — Lei Ordinária 3956-2025.md
+a04f1fa938297c37a403d85d60018a754da3eccd82d04c216053ad98f33330ab  7_documentos/normas_padronizadas/Norma — Brumadinho-MG — Lei Ordinária 2810-2023.md
+f549757b3ee78af89cecd89c438f31e1d1ee9b3583159ae6c58f154fc8049561  7_documentos/normas_padronizadas/Norma — Cacoal-RO — Decreto 10.253-2025.md
+957272242dd77581f6b58c7511796061be790e1b0447ff199334ee0df33d6df9  7_documentos/normas_padronizadas/Norma — Cacoal-RO — Decreto 11.341-2026.md
+594333e174e6b4e0a6901a5497356d981899bcbaef6919548d1a69fb3fa5088d  7_documentos/normas_padronizadas/Norma — Cacoal-RO — Lei Ordinária 5.506-2025.md
+0a0e418ca9aa56ce721efb15a9041ac06618086b18fd00d0a72d4f093888b7f3  7_documentos/normas_padronizadas/Norma — Cacoal-RO — Lei Ordinária 5149-2023.md
+d14dc93388a952634388ba326c176a9c8fe292c272d77cec244c8208183cbd10  7_documentos/normas_padronizadas/Norma — Cacoal-RO — Projeto de Lei 01-2023.md
+765b298b2b7f7257b11d34ffc3c52593615e8c6140f3abf93e378feae815d27f  7_documentos/normas_padronizadas/Norma — Caeté-MG — Lei 3.301-2021.md
+27b1c4785cc72a015b0e996fe48fbd0246456cd46e3f6b203704a236544f488b  7_documentos/normas_padronizadas/Norma — Caeté-MG — Lei 3.345-2021.md
+f3b7a09bdbd9eec844effa6f65ca90da67a708201eab33d70970b21df2f80257  7_documentos/normas_padronizadas/Norma — Campo Belo-MG — Lei Ordinária 3497-2015.md
+9e2030a2a10a0bd16dd931ba16358f6dff4cfe0b5f3919ef24d61953f5fe3c8b  7_documentos/normas_padronizadas/Norma — Campo Belo-MG — Lei Ordinária 3789-2018.md
+a5562a55f6e23b04d04e99a2ec64522f3d98535156c0259cbbb1f159ebc4bdf3  7_documentos/normas_padronizadas/Norma — Campo Belo-MG — Lei Ordinária 4371-2025.md
+b1e88ab543c0cfcaaeca890128a95f686c438cf980911fda8489e50ff4b7bd3b  7_documentos/normas_padronizadas/Norma — Canoas-RS — Decreto 20-2026.md
+f1267fe0c687b1aa5b1036282713aad8134c7eb74c4285c28c8caa230c29d6ba  7_documentos/normas_padronizadas/Norma — Canoas-RS — Decreto 60-2026.md
+4eec418423bb25bd483009a532c2b3b60c96414be8d717bff058d373e9d50a62  7_documentos/normas_padronizadas/Norma — Canoas-RS — Lei Ordinária 6799-2025.md
+f832952685d8e27674c3a5e87d22bb61b75a22bc6bffb838d89ed0ed85889d6b  7_documentos/normas_padronizadas/Norma — Canoas-RS — Projeto de Lei 28-2024.md
+a1db7076df7ac7e6bfc5744230b80325e352a588b93f7237afc5388995f4b213  7_documentos/normas_padronizadas/Norma — Cantagalo-RJ — Lei Ordinária 2007-2026.md
+221ede298accaec96c84251a5a760ecb4d05c6c3830ff6eda7e1b8ca44c038bf  7_documentos/normas_padronizadas/Norma — Cantagalo-RJ — Lei Ordinária 967-2010.md
+dc7cd2ce8e1c8dbc5a1ac1c5a4a55ed58bfe1d2c3659c30e48858f98875616b7  7_documentos/normas_padronizadas/Norma — Capão Bonito-SP — Lei Municipal 5.195-2023.md
+6fba7a3465fcea94715259ad99eb638c932709622077e3a0c752c840852f5207  7_documentos/normas_padronizadas/Norma — Carambeí-PR — Lei Ordinária 1467-2023.md
+cc62c45c69058a18cfb7c61dda05db57648cad920048c2defe7d6e0a7c1f5aea  7_documentos/normas_padronizadas/Norma — Casimiro de Abreu-RJ — Decreto 2187-2021.md
+c07940c938e2b927d3704e974d252d443320fd687134d4ff80aa329ef97492a3  7_documentos/normas_padronizadas/Norma — Casimiro de Abreu-RJ — Decreto 3237-2023.md
+70c718785e82f8d697ec2ff7f8a69f52545655f1a6d4820a067a942cfa308536  7_documentos/normas_padronizadas/Norma — Casimiro de Abreu-RJ — Decreto 4141-2025.md
+6286b92724334bad63b54ee40503f3728eca33698c6bc992ef1404d437bbcab7  7_documentos/normas_padronizadas/Norma — Casimiro de Abreu-RJ — Decreto 4460-2026.md
+4b9e9c20b16dbca5b75853868a272018e965852080fee808089ae4ed074139f2  7_documentos/normas_padronizadas/Norma — Caucaia-CE — Decreto 1.515-2025.md
+95e44ac3ffd4116cda975e3b45e09de50f1861c9dea2b29ff18bea3fab046f2e  7_documentos/normas_padronizadas/Norma — Caucaia-CE — Lei Ordinária 2199-2011.md
+0407123d4e3339ec1242f5ac417f2400060701b0c6e9cb1aefaf77f9481bdf24  7_documentos/normas_padronizadas/Norma — Caucaia-CE — Lei Ordinária 3396-2021.md
+d9fc23411c94c2ede2fda291ced2beaac51d9d96cd68893a0eeac20c8a2d0081  7_documentos/normas_padronizadas/Norma — Caucaia-CE — Lei Ordinária 4041-2026.md
+b3d0088b8cbca52e9d27bcdb23e9491df07ef2b6add711808e0dd9765b685088  7_documentos/normas_padronizadas/Norma — Cerquilho-SP — Lei Complementar 319-2020.md
+acdff7fe8ea440bafc2029f6c4c75fb287b7356b4bca2e3f311f4c1b317524de  7_documentos/normas_padronizadas/Norma — Cerquilho-SP — Lei Complementar 324-2021.md
+d3dbce6cea93cbe7c5baaebbe36b79729b334161406bfd6f988639133049f29d  7_documentos/normas_padronizadas/Norma — Cerquilho-SP — Lei Complementar 329-2021.md
+863676b65288f9f7489068af6f2f90fa71b85659506f0a9d3bb5d6a777fed980  7_documentos/normas_padronizadas/Norma — Cianorte-PR — Lei Complementar 221-2022.md
+f6787eed4149c11f4477b60da2a4f765f77810948fe02c17d927ff846b6f975c  7_documentos/normas_padronizadas/Norma — Clevelândia-PR — Decreto 79-2023.md
+5f92c29250d852a6487057a39304a9a5fd20de933a2bd89e86422486b7543e8f  7_documentos/normas_padronizadas/Norma — Cláudio-MG — Decreto 39-2021.md
+ef6eb6c87269bf9a4e88804f972cea11e82b0dd011dc63403372b3805bbefa3c  7_documentos/normas_padronizadas/Norma — Cláudio-MG — Lei Ordinária 1699-2021.md
+96de42067b4d83a30c358af83853e455fe7547fb708b823f7439efa6956affc9  7_documentos/normas_padronizadas/Norma — Colina-SP — Decreto 4878-2025.md
+823336eba8264aa33f6e157a558a283ce1fadf38a6f5b48aac49738008f57e70  7_documentos/normas_padronizadas/Norma — Comendador Levy Gasparian-RJ — Lei Ordinária 1110-2021.md
+f9eebb70d314ea35f9fb46c912bb9c6b8fe3493fa6aa0705578821a4ac3e65fc  7_documentos/normas_padronizadas/Norma — Comendador Levy Gasparian-RJ — Lei Ordinária 298-1999.md
+03811527b6d5b3ac2e6037ff01bbca39544dd4d19ab5757fe57117057fa54a54  7_documentos/normas_padronizadas/Norma — Conceição das Alagoas-MG — Lei 3287-2020.md
+09635b8273001f46d7391e478497cd22dbe269460c154479c1a0717b4f14e9ce  7_documentos/normas_padronizadas/Norma — Conceição das Alagoas-MG — Lei 3940-2025.md
+b10fae57158fdc58ce9c1651628865ce98f195005063300d02c5937a028cc3e2  7_documentos/normas_padronizadas/Norma — Conceição de Macabu-RJ — Lei Ordinária 1246-2013.md
+b428a508e85d53c17f7c371f1ede96fd27b3f4915113c98869b89324cc559538  7_documentos/normas_padronizadas/Norma — Conceição de Macabu-RJ — Lei Ordinária 1588-2019.md
+80252a994d882fa05e4aad4394b6f8eab5a57c4a7d7e15b29df8e51ccee89865  7_documentos/normas_padronizadas/Norma — Conceição de Macabu-RJ — Lei Ordinária 30-1998.md
+4d32f6b89ebd5994d50f5407e6943eb111625a97a56cd1d5db313f23345f1b99  7_documentos/normas_padronizadas/Norma — Coromandel-MG — Lei 3.607-2014.md
+88230419dd9544c1a294f98fe05890a08ec0867d3838e32584561ca17c92d0a4  7_documentos/normas_padronizadas/Norma — Coromandel-MG — Lei 4.826-2022.md
+1835811c9ad543252b7adf797c4d35e44668404c64e4d4ee091731e2c4832ed5  7_documentos/normas_padronizadas/Norma — Coromandel-MG — Lei 5.072-2025.md
+0f9986f5fc2d141f292097b9ff87fc86717847af12019a865446e8a66257389c  7_documentos/normas_padronizadas/Norma — Costa Rica-MS — Decreto 4818-2021.md
+27f4995b7e7baa92a423b91dd77ebc4b64c92d4ae6cd1ac958184de50cd737d7  7_documentos/normas_padronizadas/Norma — Dois Córregos-SP — Lei Ordinária 4039-2014.md
+a8bf4c248b8c1edd3764903056bc591d1dec19791ffddca3f7ee7a2c8f91a62d  7_documentos/normas_padronizadas/Norma — Dom Silvério-MG — Lei 1.860-2023.md
+50511136218ba9726e4c836e76f8511f1ce3e5625ff40b9f29743afa08797ee5  7_documentos/normas_padronizadas/Norma — Dores do Indaiá-MG — Lei Ordinária 3041-2022.md
+64763a9c02f84457a0764cdb26c3872a891e2986a75bd05750cc4dc43de28cfb  7_documentos/normas_padronizadas/Norma — Dourado-SP — Lei Ordinária 1.453-2014.md
+f369bbeb542cfeb3cafe166b11cbf3c4bb94c8b883d06f775eb486a147a574b8  7_documentos/normas_padronizadas/Norma — Eusébio-CE — Lei Ordinária 1024-2011.md
+bc4cfca86ea54217c0a92fa68989c16c85b1b785585efa60749b661cc32fafef  7_documentos/normas_padronizadas/Norma — Eusébio-CE — Lei Ordinária 960-2010.md
+c43e2f5e43de76ad07cef4051e9395543727b44d2b301e38fa62f52f31e2677b  7_documentos/normas_padronizadas/Norma — Formosa-GO — Lei Ordinária 650-2021.md
+d8ec6b0fea48ff331a7417d1acab0c122e7fc3e6557d2361fb4dadb742dec68e  7_documentos/normas_padronizadas/Norma — Formosa-GO — Projeto de Lei 26-2021.md
+8e1976039887abab1576199f43c5eb8e3d756465b6ee93e26f1d534650d1bd39  7_documentos/normas_padronizadas/Norma — Forquilhinha-SC — Lei Ordinária 2670-2023.md
+d6e55399570f132b6e5dfe5989dd5f09cb28947e05c504b955dfa70e2e989809  7_documentos/normas_padronizadas/Norma — Forquilhinha-SC — Lei Ordinária 3013-2026.md
+cab3fba4dea558f911ade306a50f2079f7bc20294981d3019d9c42ccb43bcf25  7_documentos/normas_padronizadas/Norma — Garopaba-SC — Lei Ordinária 2.667-2025.md
+23428150c78e176865f6beaebf559d885acdde095a8593ace03ce4c4f69970cd  7_documentos/normas_padronizadas/Norma — Getulina-SP — Lei 2.388-2014.md
+a1cd863c201e6fa34f97e31f7ba7fe9f6b2b0f83c7926f31823c13079a1acb39  7_documentos/normas_padronizadas/Norma — Governador Celso Ramos-SC — Lei 1.702-2023.md
+b228e545a59dbc1ec1ffda39dd0ad550b7c2f7367ce0a92d2d21dc7a9b856c81  7_documentos/normas_padronizadas/Norma — Guapimirim-RJ — Lei Municipal 1.404-2022.md
+37c46e63315027a1ec00a2df6ea6700b143647c4899671bc4a7cc9ef0be8dc73  7_documentos/normas_padronizadas/Norma — Guararema-SP — Lei Ordinária 3457-2021.md
+bdbc0f26c49f8399b1e741722566d66bd19a1e0fdaf4f461db93effdd5014208  7_documentos/normas_padronizadas/Norma — Holambra-SP — Lei Ordinária 90-1994.md
+b46110e97f1e052f5a029198b908a4bf21a2257b80dfb73456910b005772be51  7_documentos/normas_padronizadas/Norma — Ibaiti-PR — Decreto 1640-2017.md
+870d77fa440e2d211b003751d68846a1b95cce63ae018b70492c9e082c58d8e0  7_documentos/normas_padronizadas/Norma — Ibaté-SP — Lei Ordinária 3.521-2023.md
+b9e12739ad18cae68cae7f52d28cee57dd87a9de4347c432bcd82ef07fa92005  7_documentos/normas_padronizadas/Norma — Ibirité-MG — Decreto 8.401-2024.md
+140a1734d9bb97125dd3ec029d49e39b9fd5a9288d47fcd6f7aa507f37f4ec5c  7_documentos/normas_padronizadas/Norma — Ibirité-MG — Decreto 8254-2024.md
+d18dc408ef1931a6deb96862de5685020c12ec9fcaed8b495c6a320636b1e0f9  7_documentos/normas_padronizadas/Norma — Ibirité-MG — Lei Complementar 190-2022.md
+74dc6a8c6e6358a2394b6cbe17df81127a8ee22d8a23db754f71629466fa9701  7_documentos/normas_padronizadas/Norma — Igaratá-SP — Decreto 067-2025.md
+c14224af7625df5d023f285dc8bca6c6a756dfc7c1916f3805db88471f5063f2  7_documentos/normas_padronizadas/Norma — Igaratá-SP — Lei Municipal 2.322-2025.md
+4d4c9b8847785df046089623cd28a30445e52a20795d5c8fa1d29363af921733  7_documentos/normas_padronizadas/Norma — Ijaci-MG — Lei Ordinária 1511-2025.md
+ee8f1998233df99250b8a3b430b35e35e214d4165aa6570d137f77e2d425f42c  7_documentos/normas_padronizadas/Norma — Ilha Comprida-SP — Lei Ordinária 2250-2025.md
+f558f4f40e65ec6a856e649243f13768c8a04c16bbb995bdac948ce73e2c0466  7_documentos/normas_padronizadas/Norma — Irati-PR — Lei Ordinária 5240-2025.md
+e3684bfc322abfa3cca3457af495ddc142ef488714628e22ba1425464eecca32  7_documentos/normas_padronizadas/Norma — Irati-PR — a identificar.md
+b1a71a5bb0f325826a04e45875100f8a0e749b749ef0f60ea69cbb400f0cdedf  7_documentos/normas_padronizadas/Norma — Itaboraí-RJ — Lei Ordinária 2956-2022.md
+e3c9bceebc74e53d4a765c859a71851f2139a78d22bcaa94da3b847567edb6e4  7_documentos/normas_padronizadas/Norma — Itaboraí-RJ — Lei Ordinária 3070-2025.md
+3a3895820e08bde375c57fda07eeb0e804329cdeac09d230c3d4b67f4a4851ac  7_documentos/normas_padronizadas/Norma — Itaocara-RJ — Lei Ordinária 1.675-2024.md
+374c4f65d1bc4ee72e12403d2626dd45c03c1cdf007a3ec98da7b2cdd292df61  7_documentos/normas_padronizadas/Norma — Itaperuçu-PR — Lei Ordinária 855-2024.md
+e2d50cdebd5ce97bf5ea67e384bd257edd876061dfebc6ea0fb5ddeaf1df3722  7_documentos/normas_padronizadas/Norma — Itapetininga-SP — Decreto 2.898-2025.md
+4b0ce78f1ce4cf96d8f8c05d437fc2c7dbd60833fbb00de7cbd713fc2e5efe4c  7_documentos/normas_padronizadas/Norma — Itapetininga-SP — Decreto 2694-2023.md
+ae3ee6579d566931a9372fbaa2f24a209bdd4a7bebbe9b068c304b465dd49233  7_documentos/normas_padronizadas/Norma — Itapeva-SP — Decreto 11.829-2021.md
+f208ed42f9ead3784db94e3effd4a9eedf6c6ca15e5240d257b904b5f3398a42  7_documentos/normas_padronizadas/Norma — Itapeva-SP — Decreto 13.734-2024.md
+b4a6277ecbab05db15395198252eea52c379873042b5cde295264da60a00f28b  7_documentos/normas_padronizadas/Norma — Itapeva-SP — Lei Ordinária 4.039-2017.md
+64a5e99924ae198b2d319d6348a3075e15dff90a3e3006189c269cc54e569bed  7_documentos/normas_padronizadas/Norma — Itararé-SP — Lei Ordinária 4.232-2022.md
+265f6cf94d1aeda574b95b6790fff6d0c72af8a132cdfa8ad61e96d84ed28d23  7_documentos/normas_padronizadas/Norma — Itararé-SP — Lei Ordinária 4.450-2023.md
+fe11738f0f679b66d41901b306a39d60c1b24825f7c71aeb2688bae30647de17  7_documentos/normas_padronizadas/Norma — Itatiaiuçu-MG — Lei 1.251-2014.md
+6b82efe7401ab3c98f69e2b74bf19781760f7cdc2c14a5578c6975b533705bb3  7_documentos/normas_padronizadas/Norma — Itatiaiuçu-MG — Lei 1.667-2026.md
+1dd216cbfe5741f3e85aeb4ffc8d6fbb522d672eac3c22e49c98f7056fef0b5a  7_documentos/normas_padronizadas/Norma — Itatiaiuçu-MG — Lei Municipal 1.179-2019.md
+eea53ef7686ec93a52bbdb9aa47d64f3292c1e84c3448b8858778664feb295bb  7_documentos/normas_padronizadas/Norma — Itaí-SP — Lei Ordinária 2197-2026.md
+d0e26bb1df53cd8c89fb5c48695f298840270a9976c648f0506f7e75c9f2d0f5  7_documentos/normas_padronizadas/Norma — Ituiutaba-MG — Lei Ordinária 3775-2005.md
+8e2f88521e0b6be2b865b7a9bafede0e274d50579fc1ed7e2c901c6d3ebd326b  7_documentos/normas_padronizadas/Norma — Ituiutaba-MG — Lei Ordinária 5094-2023.md
+912ee5474323888a2b2c1e1fa01b07f0085b635fbc177e1164435dfd01f2fe1f  7_documentos/normas_padronizadas/Norma — Ivaiporã-PR — Lei Ordinária 1.141-2001.md
+2345b6f6559ed610fbccf57e41f30b3008f127e879b6e6e0cfa50248582791ec  7_documentos/normas_padronizadas/Norma — Jaboticabal-SP — Lei 5.038-2019.md
+0191feab3d0e7daaafc78f3f87671e033d5564d65f71268899ea9fa0dc742532  7_documentos/normas_padronizadas/Norma — Jaboticabal-SP — Lei 5.129-2021.md
+1694a5594e2749ae271885fcaeab2f5158d9685d725e3ca5250aacaf41be4a4e  7_documentos/normas_padronizadas/Norma — Jales-SP — Lei Ordinária 5.429-2022.md
+63327937808172bee24aa0d9982800094b4d23b313be4b1fb1279cf9dcdf6da8  7_documentos/normas_padronizadas/Norma — Jandaia do Sul-PR — Lei Ordinária 3700-2024.md
+b9d8d3037ff6be8b74b280a03bf2e47f7ffc655a6d5da0776bb74492d3c20043  7_documentos/normas_padronizadas/Norma — Jandaia do Sul-PR — Lei Ordinária 3854-2026.md
+9a3f4ed1e0e399ab12cb62aff9319de6d3dd2a4c18d550a12bd217b1d1e042f9  7_documentos/normas_padronizadas/Norma — Japeri-RJ — Decreto 3.737-2025.md
+43c21692d225a2823ee32db7ad9ecbc9ace491bdb466b04820431a32561c4631  7_documentos/normas_padronizadas/Norma — Japeri-RJ — Decreto Municipal 3.648-2025.md
+93bacd429666e5d34149476a9171a0df56d8a3ea69f28357b678bf32c7291b38  7_documentos/normas_padronizadas/Norma — Jeceaba-MG — Lei 1.191-2013.md
+6d5e6d284d18b688afb1c5b3df216c212db65e674a4f8138a4c9825e6db320fd  7_documentos/normas_padronizadas/Norma — Jucás-CE — Lei 85-2013.md
+b65a50dbfaf101d1274fe4ca34abbdeaa1b6bee4e11ba0c47df2b71496083ec4  7_documentos/normas_padronizadas/Norma — Lagoa da Prata-MG — Decreto 005-2024.md
+0b6d4564a8b7b266dfd8fa1f89b1c133e10eeaeaf5f26b3df2424cce20f4304d  7_documentos/normas_padronizadas/Norma — Lagoa da Prata-MG — Decreto 008-2023.md
+1003a4703fd5ce75b478aafe186216200d8b43996afa35569951b3de06a54bab  7_documentos/normas_padronizadas/Norma — Lagoa da Prata-MG — Decreto 009-2022.md
+13d2daec32895904036395537fb543889410b655d4477452d754f4004f3c5af7  7_documentos/normas_padronizadas/Norma — Lagoa da Prata-MG — Decreto 010-2025.md
+6d264e00f734ced28772cbd322a19dda6d398fa91133586ffa6fe1119f76b409  7_documentos/normas_padronizadas/Norma — Lagoa da Prata-MG — Decreto 012-2021.md
+c26db022f2781c6fb96036cf73bf3747665b88dbda14eda5cb2af93ee74d2a54  7_documentos/normas_padronizadas/Norma — Lagoa da Prata-MG — Decreto 014-2026.md
+aa81702342ba5af2c844ba6cab85a027397805d353e4041481471e225fabab7e  7_documentos/normas_padronizadas/Norma — Lagoa da Prata-MG — Lei 384-1989.md
+063d38ca6020e5c86d4d775af3893e58b27877a04c15c4cc8d06beb04d822386  7_documentos/normas_padronizadas/Norma — Lauro Müller-SC — Decreto 24-2026.md
+a667625d024516ff94c7fef6bf84cd2ca501db4f005aa4462fa2465f1a6cef61  7_documentos/normas_padronizadas/Norma — Lauro Müller-SC — Lei Ordinária 2389-2025.md
+2b72660d87249defcd176a12dc1b3182832140fcc7aae311bd954a2016a82ebf  7_documentos/normas_padronizadas/Norma — Leopoldina-MG — Lei 4.758-2023.md
+955d62aa14c2efb55817c60665eb51b49663a1b1a6c877c8f6cea2c13cc11209  7_documentos/normas_padronizadas/Norma — Leopoldina-MG — Lei Ordinária 4883-2025.md
+4a69e40c2d34fba1c0a38f92de867539c4e421f67b169a9a70d2f7f47517c441  7_documentos/normas_padronizadas/Norma — Lidianópolis-PR — Lei 817-2017.md
+b180fc288764fb84227437b8b4fb838eab08fec6a80751ec826fa7bb70acac77  7_documentos/normas_padronizadas/Norma — Lins-SP — Lei Complementar 1722-2022.md
+57e57f1f8f7306a540dba5f6fdb48e230c64def711a707543b5d185b7b7f67cc  7_documentos/normas_padronizadas/Norma — Luziânia-GO — Decreto 287-2023.md
+9d1eff997054a0d96e7857818d83905faf16b89cb003ee7e57749f9c3c7460e8  7_documentos/normas_padronizadas/Norma — Luziânia-GO — Lei Ordinária 4442-2022.md
+9ebe2d7e26d14d45787994cc2baf2d8c952a4cbc1717890b2c17906e882ef767  7_documentos/normas_padronizadas/Norma — Luziânia-GO — Lei Ordinária 4595-2023.md
+84c20f5e7efa5c4c01a1a3b3eb0538eb354e78baf952fa900605b3ad84698397  7_documentos/normas_padronizadas/Norma — Macatuba-SP — Lei Ordinária 2.052-2004.md
+0f93ee04f97c6738e2757af33c6abb64a0ff4a82eb005a4f9b6c58cd4e45e3d0  7_documentos/normas_padronizadas/Norma — Macatuba-SP — Lei Ordinária 2.769-2019.md
+bb068cf9953e52eb0e783903ee804a06b08b84690fb888246b90017079e9e659  7_documentos/normas_padronizadas/Norma — Machado-MG — Lei Ordinária 3817-2023.md
+310743f37bbc5f1c4768dff46c2b6e627092513ce57188cb82d8129e5ce0e31c  7_documentos/normas_padronizadas/Norma — Magé-RJ — Lei Ordinária 3016-2025.md
+18c2c58166e896718507ff49a4420c13fd8bc79dcc245a865d8bff6540160c75  7_documentos/normas_padronizadas/Norma — Maracaí-SP — Lei Complementar 11-1994.md
+a0bdb637ec933c7f4bb2dd25873dbc19c9121127865b5e3cef890162cf9a887d  7_documentos/normas_padronizadas/Norma — Mariana-MG — Lei Ordinária 3828-2025.md
+1642d1a74de3b47557430c91f9becaf513295597bcd109468f8c524ddb33961b  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Decreto 1434-2024.md
+3b08ccf07ddbb21ceb9958e999ca49fcdc98c476c578ba89b07811f647f8d6b9  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Complementar 244-2014.md
+6bbc93eb9c5a9a929035b81aedbe6f3f731751e9aec41a5e2499d4d061b78685  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Complementar 346-2021.md
+2603ace7bd054a3870fe867a9337f5db7fd385880f55be32fd178b16422f4b77  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Ordinária 1900-2000.md
+8d08c60865104de00a1b3514d35aca4483e22d1b0a02e48069e5bc581a51a444  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Ordinária 2134-2005.md
+2a9bcfe3a6491c44c03a3fe88bc7969c6b119b706ffb7c0884bc27eaea18e334  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Ordinária 2185-2006.md
+60fd10721e31618ce2497b19c5131e736612dbdfd38ab2b7f667ce31f7598438  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Ordinária 2307-2009.md
+3b89bdfc407510076b124109e4307064ceaff69e8f1dc19d9b06ad24a35bed01  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Ordinária 2742-2017.md
+3d11a70f52a546521e726dd9bc88ad8123392eb01c98f8e8cb4764d67bac0040  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Ordinária 3662-2025.md
+3aa450b16ae85fc60368e00468b048f31174b1e10b1cbf9dff4b5ca78c24ab51  7_documentos/normas_padronizadas/Norma — Maricá-RJ — Lei Ordinária 3727-2026.md
+88e6cc25a8be167d3c263af1af48df5aa98b284fb5cd9774bb88f853f9112f8a  7_documentos/normas_padronizadas/Norma — Mata de São João-BA — Lei Ordinária 945-2023.md
+6d71fa2d1792a09e9002c8e96efc8be5db0aaa38162603469fa63d35bcc35c17  7_documentos/normas_padronizadas/Norma — Matinhos-PR — Lei Ordinária 2.276-2021.md
+3d8740a43f4de5d7b03ad31d9791a0bac02ec7aecebeb8f72c043cea6911ba24  7_documentos/normas_padronizadas/Norma — Mendes-RJ — Lei Ordinária 1878-2017.md
+2b3f8fac58cf7ad544f6ca78c77b0a1f1b6ef36364bd4634440a3bb45b90827b  7_documentos/normas_padronizadas/Norma — Mendes-RJ — Lei Ordinária 2066-2020.md
+f27b2dd5d9b560d3a94061fdf2c3b86c16216bd781e81cd903cc4cce7eaf63cf  7_documentos/normas_padronizadas/Norma — Mendes-RJ — Lei Ordinária 2239-2022.md
+d69930ae741507712d22914baada3420ec244d240161eac5b2f5206e83872f43  7_documentos/normas_padronizadas/Norma — Mendes-RJ — Lei Ordinária 2649-2024.md
+a188747553f0fcf0c8e699dc405135cb086c19f0b0b12613a2fd82b160b1cf96  7_documentos/normas_padronizadas/Norma — Monte Carmelo-MG — Decreto 891-1994.md
+f9719ddc67c78956a0a674170ab0f0ada4d59232f586f2a6d1f3d7c56b859db6  7_documentos/normas_padronizadas/Norma — Monte Carmelo-MG — Lei 1.620-1994.md
+ba87c94f990c325c8344006c2f5de6f0de9efdc93893960841b9ecd2b560ba65  7_documentos/normas_padronizadas/Norma — Monte Mor-SP — Decreto 6721-2025.md
+660c29bfcf612c3a4028be5315b18e8197b86d8a5b333622f92f32f8b9d2eb22  7_documentos/normas_padronizadas/Norma — Monte Mor-SP — Lei Ordinária 3143-2023.md
+d61a26c674deb7d9fa012da64cdc201c87b7a2d45982a3c2099b55b6d015add6  7_documentos/normas_padronizadas/Norma — Monte Mor-SP — Lei Ordinária 3157-2023.md
+0231bd87c8c7a1a969b85cf526bfa9ae9cef78884336c1087d5a8ae93f6d4242  7_documentos/normas_padronizadas/Norma — Monte Mor-SP — Lei Ordinária 3364-2025.md
+a2bb532e9a2cd89f50afb33856faeae244d43a20902f3aa7de4a507db694e29e  7_documentos/normas_padronizadas/Norma — Monte Mor-SP — Lei Ordinária 3379-2025.md
+ece2e423aa7306d120239fe4fbaf8f0f663bdd35b91e14579b85e5a4f87cd77e  7_documentos/normas_padronizadas/Norma — Muzambinho-MG — Lei Ordinária 3216-2011.md
+e56956539141890b5fb36b9a57e94261546e8573f3dc46b39f67f08bbf6f7afb  7_documentos/normas_padronizadas/Norma — Muzambinho-MG — Lei Ordinária 3240-2011.md
+f3a0c0bd6748514847ef7bc71564d0ca31b6c1060765b0638e612bae4f47ed34  7_documentos/normas_padronizadas/Norma — Mário Campos-MG — Lei Ordinária 501-2014.md
+8f2d46feb9ae8334d27c2adff048d34acf6c1691ecabc8ca5f46f5b6609989da  7_documentos/normas_padronizadas/Norma — Mário Campos-MG — Lei Ordinária 632-2018.md
+b823a4a8ee1fc03818d70c16744515204f94413c359ffe28fc5939020a958d1b  7_documentos/normas_padronizadas/Norma — Natividade-RJ — Decreto 027-2026.md
+822aff1c66402d382f68ca779630ca52ed3f2cb48300c0c82b6d871a4a39211b  7_documentos/normas_padronizadas/Norma — Natividade-RJ — Lei Ordinária 1.414-2025.md
+61899d7f27a77a8d0c1e14d5e4026ef4d651ac4440ad7a0dfd71911a4838ec0b  7_documentos/normas_padronizadas/Norma — Nazaré Paulista-SP — Decreto 3618-2023.md
+b56005c53605ed11ec1bb7a831b156e3a3fcf610e6dda506ff9381976e0e9b49  7_documentos/normas_padronizadas/Norma — Nazaré Paulista-SP — Lei Ordinária 1.738-2023.md
+6e7ff8073ef89c642bd1bdbb1382b1759f3f7b3c85626cfe9635da1e32782d40  7_documentos/normas_padronizadas/Norma — Ouro Branco-MG — Decreto 10.798-2023.md
+49dc7db353dc7432c5f19aa66dda942495a8f254b4942c0f0dbc5572d67b95ff  7_documentos/normas_padronizadas/Norma — Ouro Branco-MG — Lei 2.608-2022.md
+61e50808986c72dead5a5071d011c8ce24a09ccd2f0e5539d92c0ed9c4491726  7_documentos/normas_padronizadas/Norma — Ouro Branco-MG — Lei Ordinária 2565-2022.md
+56e0894da48918f153f8327df775931713111d99839a644c856d506c5ccd152e  7_documentos/normas_padronizadas/Norma — Pains-MG — Lei Municipal 1.643-2025.md
+af7dad3b4fb9aaf889ab0457829f80d4297d34bec632d1ca83cc4d0d9d19204a  7_documentos/normas_padronizadas/Norma — Palmas-PR — Lei 3.046-2023.md
+5d3cca74319f02639d7aa629e9f4bd06c731bc9ac8b914abc83dfd6df492ec3c  7_documentos/normas_padronizadas/Norma — Palmas-TO — Decreto 2.320-2023.md
+555d3c45a3de0e8230477b746489029f9d67e23abd4971d51b883f942d41dd6f  7_documentos/normas_padronizadas/Norma — Palmas-TO — Decreto 2.455-2023.md
+4aa47c850122f460160e7d0cb74a7f8c159091ec6f6901bcf2a0ad440d6cefe2  7_documentos/normas_padronizadas/Norma — Palmas-TO — Decreto 2.466-2023.md
+bea4222f7a99b455ad53890dcc435c0a4a33fbf6033aa46fcec19e1dc79317b6  7_documentos/normas_padronizadas/Norma — Palmas-TO — Decreto 2.631-2025.md
+b9adb5ea213cc84f01e8c684f8b99b0eba11b2dc6bc77a9711277265b65a1110  7_documentos/normas_padronizadas/Norma — Palmas-TO — Decreto 2.654-2025.md
+d7e4f04e08f89c512ae324e0f9307db981d333d68c424d8a5df79d6321b20454  7_documentos/normas_padronizadas/Norma — Palmas-TO — Decreto 2693-2025.md
+27c4d11f4350637b2259807e9ba11f4fe28ac27cdc322c1e50ff5c64cbc5d366  7_documentos/normas_padronizadas/Norma — Paranaguá-PR — Lei Complementar 269-2021.md
+c1746806e63b1014d9dee64c576543ff96ffd1b538274326403d7479a78fb250  7_documentos/normas_padronizadas/Norma — Parobé-RS — Decreto 19-2022.md
+dbabd38875ab0620ac1fea7b621c6c60cede822691f35a29bb7236c668057c6e  7_documentos/normas_padronizadas/Norma — Pederneiras-SP — Lei 4.515-2026.md
+6a55a20ecb1ac477e6f869cee29807f3158a44260e7789ccf8c2ed848f900b9c  7_documentos/normas_padronizadas/Norma — Pedro Osório-RS — Lei 3.269-2019.md
+0f188a45e214ec1b76c2b4957daa9258bbdfb42347020fea86010cfb15d02c04  7_documentos/normas_padronizadas/Norma — Penápolis-SP — Lei Ordinária 3182-2025.md
+66db3008ae04a552c52515cdb1f70f8f51334562b4394cb5a8cc0c04979bd662  7_documentos/normas_padronizadas/Norma — Penápolis-SP — Lei Ordinária 5-2025.md
+88358686c6322fc78bcd498e4cc9e168942bc0c1a85ffcd01be558885800b3da  7_documentos/normas_padronizadas/Norma — Pescaria Brava-SC — Lei Ordinária 551-2025.md
+5018289613e62ed4c8bc37053f098d1c6d69d5d6ec16e2ff06867bb347f6ea5f  7_documentos/normas_padronizadas/Norma — Picos-PI — Decreto 054-2026.md
+d4905ae6a2443d33dc9599aeb302b8cfc7cb522fc8cdb75fa7245200c50e48a1  7_documentos/normas_padronizadas/Norma — Picos-PI — Decreto 132-2026.md
+2e184bf3a56686df53aecabb58008f8ea5b11ceb638dc8f1f2db4b5ba7a7915b  7_documentos/normas_padronizadas/Norma — Piedade-SP — Decreto 8.970-2022.md
+1d51773d4b907dbd8de5725cc446271804893b1e43ab3c73b15810ec7a18993d  7_documentos/normas_padronizadas/Norma — Pirapora do Bom Jesus-SP — Lei Municipal 1.179-2019.md
+023fba4f7c95be843e14f52dc5017d817f560c5f2985065f8980873fbe010327  7_documentos/normas_padronizadas/Norma — Pirapora-MG — Lei Ordinária 2530-2022.md
+a149daa787c2c7ed8860440b11f2b1b568afcc283f5ee8e2524539baa104141d  7_documentos/normas_padronizadas/Norma — Piratininga-SP — Lei 2.018-2011.md
+419a0e28834cfe8f453fc143ec482180d56e19c8f477099f237a928c53035fb1  7_documentos/normas_padronizadas/Norma — Pitanga-PR — Lei Ordinária 1.690-2011.md
+ea397274daf1c7846c8b2df787a67f061e0518d227068944c0a9d384b49cc34e  7_documentos/normas_padronizadas/Norma — Piumhi-MG — Lei Ordinária 2709-2023.md
+65ec2df2368acd1932942a169623ac9583135c199ac425cd67610c01097909e5  7_documentos/normas_padronizadas/Norma — Porto Belo-SC — Lei Complementar 254-2025.md
+f18b7a6f9c0d5ef70959663f05084aee73f33055f86cc9ef7173f8241cba4f11  7_documentos/normas_padronizadas/Norma — Porto Belo-SC — Lei Complementar 280-2025.md
+b4409d0667ea25c9ae4ecf3798ac455e16bbc37edf2142f134732766396ba655  7_documentos/normas_padronizadas/Norma — Porto Feliz-SP — Lei Ordinária 5856-2022.md
+751f2e2f160b083856813515ae95c75436095bd5e49481973d5273c4d3758e3f  7_documentos/normas_padronizadas/Norma — Porto Real-RJ — Lei Ordinária 274-2006.md
+ee8825981157e18ff82cd3f32fde86aa6dae8707a89e50a30f6fa243c364b763  7_documentos/normas_padronizadas/Norma — Porto Real-RJ — Lei Ordinária 292-2007.md
+2c72bd0b645b2dc7cd40a2f0e4b6de25bdcd32c1f5158a4de6a36001f296534f  7_documentos/normas_padronizadas/Norma — Porto Real-RJ — Lei Ordinária 610-2017.md
+bda4a6b6ec969bbf107d82923e44a2c21776df96df9228ae1681f288e02b8948  7_documentos/normas_padronizadas/Norma — Porto Real-RJ — Lei Ordinária 768-2021.md
+f88b7ec8ed13ccce8b9b0c5909b4f77c15cf239c3ad7353541edb2d90a40a12e  7_documentos/normas_padronizadas/Norma — Portão-RS — Lei Municipal 3.033-2022.md
+d37c90cd129e6a76e6c7342bbafb7e398994f2c1a76b60dc9502a173b197973e  7_documentos/normas_padronizadas/Norma — Portão-RS — Lei Municipal 3.291-2025.md
+140ce8e0c76a11f89a98b784770f68e68831817f207962c9bb0aaeb59a39848e  7_documentos/normas_padronizadas/Norma — Potirendaba-SP — Lei 1.778-1998.md
+8c89e8ff510d58b6136c4dda920a2d350f504be45f587a24e52496832b2e890e  7_documentos/normas_padronizadas/Norma — Presidente Kennedy-ES — Decreto 47-2026.md
+9e81c162fcf63224a5d23f062bbaca71795d7014e7d0dd150dac91a01d1ad208  7_documentos/normas_padronizadas/Norma — Presidente Kennedy-ES — Lei 1.826-2025.md
+48ce7c6fe5ca983b24a58f2beeab3b3ec3ead8e087f474b53d9d9304039a765b  7_documentos/normas_padronizadas/Norma — Presidente Kennedy-ES — Lei Ordinária 809-2009.md
+e27299185c3e0938b49c6c413ec1db9d1b810272df6bd079ce0c9309771b38ac  7_documentos/normas_padronizadas/Norma — Quatro Barras-PR — Decreto 10730-2025.md
+0b5ed0f75192f54520da41c5d58d5eef7932033f8831992b0c94e738fd811848  7_documentos/normas_padronizadas/Norma — Quatro Barras-PR — Lei Ordinária 1691-2025.md
+4906bc4400eac6d2fc4187aa5e22da9c642724057d9fc6c0b7fb0994674ff0c6  7_documentos/normas_padronizadas/Norma — Ribas do Rio Pardo-MS — Lei Ordinária 1355-2023.md
+e3acd10e12082d18ed098474be1fbd572b9599376eb33889758e49233d53ee8f  7_documentos/normas_padronizadas/Norma — Rio Branco do Sul-PR — Decreto 6219-2022.md
+b3d19e41d000d67fda8be5ad375f8f3a2a9d9599d492f628556263fcfa42a4b4  7_documentos/normas_padronizadas/Norma — Rio Branco do Sul-PR — Decreto 6440-2022.md
+69769547b78b944009e04f6b62555effe3699ed3be91a6ba2ae1530b1a9bbbb1  7_documentos/normas_padronizadas/Norma — Rio Branco do Sul-PR — Lei Ordinária 1568-2026.md
+06b78c657f2c028f199e346d35b145e1fa51006d138582970cbb66c1a8e6dd29  7_documentos/normas_padronizadas/Norma — Rio das Flores-RJ — Lei Ordinária 1649-2012.md
+b9002ad6c964ae0293d8c62bfccc6c00655eca831285fb3924f44effb9e3ef2e  7_documentos/normas_padronizadas/Norma — Rio das Flores-RJ — Lei Ordinária 1923-2018.md
+7842df412dfa09e3b0d2c394b9f7015c88644639fff256b6558bc628249af9be  7_documentos/normas_padronizadas/Norma — Santa Cruz Cabrália-BA — Lei Ordinária 766-2025.md
+f68a27e5dbd5754deddeafdd89dff13d20abf6f7fd0f07dea88db8bfd89d2313  7_documentos/normas_padronizadas/Norma — Santa Cruz do Rio Pardo-SP — Decreto 277-2023.md
+519fe4c9f3b2ff7d77b3b009a5c4f26d3e7903d41d918b348822e44ff600cfb0  7_documentos/normas_padronizadas/Norma — Santa Cruz do Rio Pardo-SP — Lei Complementar 860-2025.md
+569b739b45db72ba3982f8cf92780bdbd5ecc0d43461013d6181d78242cf58a4  7_documentos/normas_padronizadas/Norma — Santa Isabel-SP — Decreto 7.046-2023.md
+e3bd0dad9f6ccd75d3810c236419cf715ba3b29a843af1586e82eec82bddebd3  7_documentos/normas_padronizadas/Norma — Santa Isabel-SP — Lei Complementar 239-2023.md
+e874537e811eb873ce164e2583d4f994fc3cbb41a1e0ca2869c1d481104b2f5f  7_documentos/normas_padronizadas/Norma — Santana do Deserto-MG — Decreto 2999-2021.md
+bab5426bdebd68ebf05bf5e33b7b750e6e8fd8f89664fa83ff6de5035312fc26  7_documentos/normas_padronizadas/Norma — Santana do Deserto-MG — Lei Ordinária 1151-2020.md
+2363dfeb81feccc2ad0d79c2e5e91097d823ac120bea04f07cc65c0550128d86  7_documentos/normas_padronizadas/Norma — Sarzedo-MG — Lei Ordinária 934-2023.md
+d1800822d941f5811c625702596d6855e22eb6a049969fb83d282d99068f9aea  7_documentos/normas_padronizadas/Norma — Silva Jardim-RJ — Decreto 1.626-2014.md
+b5ce9bf6bfeeaedf1fd2b7821c731547fdd6d0f79a9811846e674082774acd12  7_documentos/normas_padronizadas/Norma — Silva Jardim-RJ — Decreto 1.637-2014.md
+aa51a37dcbeff00b1be544760a90db2aede84597f2f018fb22eb27cfc8ea5455  7_documentos/normas_padronizadas/Norma — Silva Jardim-RJ — Decreto 1.655-2014.md
+5a60a3d1009e453cb8cf50f0636507f97048509fdda3618e991fc8fcef8f2a41  7_documentos/normas_padronizadas/Norma — Silva Jardim-RJ — Decreto 1.700-2014.md
+0b52a5c461976b51558a8d05e86f19f4b7ca224033373e9ea6063094984c9979  7_documentos/normas_padronizadas/Norma — Silva Jardim-RJ — Decreto 1.873-2017.md
+e35e6be3349ee4778fff8e435e3de6fed239dba27c027c0103aa1fb9a4d48fcd  7_documentos/normas_padronizadas/Norma — Silva Jardim-RJ — Decreto 2.261-2021.md
+6aa059985eb0341acd0f341d1c2a80ade71a139527109521285a1432ef50284e  7_documentos/normas_padronizadas/Norma — Silva Jardim-RJ — Decreto 3.321-2026.md
+2d781a005df019551e1053aa2b0d5039189500cff93c51f5235da9d26db8e9f5  7_documentos/normas_padronizadas/Norma — Sorriso-MT — Lei Ordinária 3677-2025.md
+93ebd8b21a032fd5f84a8ebce44204adf5c58561fcdbe14c9105ae5450972aab  7_documentos/normas_padronizadas/Norma — São Caetano do Sul-SP — Decreto 12285-2026.md
+0ac6e77924573cc306e432308390da972de8b5d28b134a494c61f2384a2e4f41  7_documentos/normas_padronizadas/Norma — São Caetano do Sul-SP — Lei Ordinária 6141-2023.md
+17123e056d946e5b575876ebaa5415ff4c5ea4a64ba43fa893e3a84021619a4c  7_documentos/normas_padronizadas/Norma — São Caetano do Sul-SP — Lei Ordinária 6319-2026.md
+8d77460f42c930ad883deb26ea191a1c78a8ade5d5a197ec48c67e90968042e2  7_documentos/normas_padronizadas/Norma — São Fidélis-RJ — Lei Ordinária 1759-2023.md
+f44b603314276f1a35292263912e941504a538a77749225c74001247f987adf6  7_documentos/normas_padronizadas/Norma — São Joaquim da Barra-SP — Lei Ordinária 1206-2021.md
+de68604ff333ea1f3f3287f4762da18f707583646401d160a65654393145fae7  7_documentos/normas_padronizadas/Norma — São Joaquim da Barra-SP — Lei Ordinária 1308-2022.md
+7e17b03ba2821faf322c8b5070d3ab95c188eafee6db740eb60f49856ee2a5eb  7_documentos/normas_padronizadas/Norma — São Joaquim da Barra-SP — Lei Ordinária 1364-2023.md
+61eda9a5ef05fbd9c61bcea8360c83b2b17b9b05be3ec7992e666df9d67b9fc7  7_documentos/normas_padronizadas/Norma — São Joaquim de Bicas-MG — Lei 672-2021.md
+df7882d565780c6f8f46d6222c670cd37239e4b41a9cda6de8fe258bc79bd04a  7_documentos/normas_padronizadas/Norma — São José da Barra-MG — Lei Ordinária 538-2017.md
+dc2ec5e3a60e13aa645d1d0ec616db7619be9e25f50fe70eb752a21c1a195d7c  7_documentos/normas_padronizadas/Norma — São José da Lapa-MG — Lei Ordinária 1190-2022.md
+8379545a94444601d977da6d4183f510db403251c8b5007483e922a911b12e14  7_documentos/normas_padronizadas/Norma — São João del Rei-MG — Decreto 11869-2025.md
+104818741c02251f9dab042fcd40018180f1e197a77265b806a48d949b59b637  7_documentos/normas_padronizadas/Norma — São João del Rei-MG — Lei 6188-2025.md
+0900bb86e0e212efee69bd001344f01c1902f6be203bb5d2973050ac2a9a2cd2  7_documentos/normas_padronizadas/Norma — São João del Rei-MG — Projeto de Lei 041-2025.md
+d1507a51fb4a685c7426f65658f036b2dcdcdd9017dc6ee25cf0367a2537672d  7_documentos/normas_padronizadas/Norma — São João del Rei-MG — a identificar.md
+961aee37fd5ae9972ce39f79e0f3029eca274d73cf2b5a11d6557d515adf6906  7_documentos/normas_padronizadas/Norma — São Lourenço-MG — Lei Ordinária 3346-2018.md
+756e6524a7e9f20dbcb587b88adf5edfc387cd91c32c1e04d955d9180dc174ce  7_documentos/normas_padronizadas/Norma — São Lourenço-MG — Lei Ordinária 3372-2019.md
+37bb651752dcbca8c81581b09a48cd87e8014ecdcc4acbe72e076a7a19bbe882  7_documentos/normas_padronizadas/Norma — São Lourenço-MG — Lei Ordinária 3535-2022.md
+414f44795f3b25fb2261801f5a4dd02eac111924630bcddcac31359091efdd5b  7_documentos/normas_padronizadas/Norma — São Lourenço-MG — Lei Ordinária 3591-2023.md
+b15662682daa68f2ee17ba21610a5b381edfd70ad711ac5e0653a30b5793f1c6  7_documentos/normas_padronizadas/Norma — São Sebastião do Alto-RJ — Decreto 2.329-2023.md
+1cd2e0fcf1b77bf2775a462825d276b3c84180a0e650b89a0bdabc3295bfe004  7_documentos/normas_padronizadas/Norma — São Sebastião do Alto-RJ — Decreto 2359-2023.md
+8848676a394a45e757aa692aff81d5fced8bbb68fd5fd66b85044a7a4f12418e  7_documentos/normas_padronizadas/Norma — Tambaú-SP — Lei 3.599-2023.md
+b0921b318a44f3204c6a1b34741882ae7a89721992f2a8e4778c2aee9f4de789  7_documentos/normas_padronizadas/Norma — Tambaú-SP — Lei 3.976-2026.md
+2ee7ca21409f1e68a31b260413493ada5599e08545989afdb29ea600f8badc7b  7_documentos/normas_padronizadas/Norma — Tanguá-RJ — Decreto 343-2026.md
+aad208e60e84179b9f2ea3066de56877a28cb2dd77bfe5106d248a3a3df6d480  7_documentos/normas_padronizadas/Norma — Taquarituba-SP — Decreto 240-2022.md
+5b92d0a9f23b457986b527b6ae71387ffdd8e9463d4411bbc2dc4cb31bc22ba6  7_documentos/normas_padronizadas/Norma — Taquarituba-SP — Decreto 293-1996.md
+d05a1b8d27e17fe50d017296f64efc5a3112a8582a3e29a4b098ef467d9f7238  7_documentos/normas_padronizadas/Norma — Taquarituba-SP — Decreto 338-2022.md
+32d40cd6176642c9f2756cb3a642ee4ddf4d015c271afbae6aac26ca56511771  7_documentos/normas_padronizadas/Norma — Taquarituba-SP — Decreto 86-2019.md
+dc83f240727b9336c006a9f84ff2ceb1b11cc9bed42bf9124e125d4d8f639991  7_documentos/normas_padronizadas/Norma — Taquarituba-SP — Lei Ordinária 1741-2015.md
+f84e99c76ef5cabc93fbe7676c8359a3ad895344141765e626ff5dbb93be16c0  7_documentos/normas_padronizadas/Norma — Taquarituba-SP — Lei Ordinária 1898-2022.md
+515b8b663dfc53bda5a25d97d2766b23e412219b51619b00db5f59e34b8a65bb  7_documentos/normas_padronizadas/Norma — Tarumã-SP — Decreto 2139-2019.md
+266c6d6a8f169f59370a79e91afd85c0d47f47ff3856d4ca71882f6bfbf52842  7_documentos/normas_padronizadas/Norma — Tarumã-SP — Decreto 3260-2025.md
+7943b3938cb59da7e80f414f2baf79a248164f7ca1128901e7d528934094e99b  7_documentos/normas_padronizadas/Norma — Tarumã-SP — Lei Ordinária 1431-2019.md
+e91dd96e64b62181e4a8ccc5869551c2fb7f435d6d3848927069349961f17d09  7_documentos/normas_padronizadas/Norma — Tijucas do Sul-PR — Lei Ordinária 538-2015.md
+ffbe237405247feb6139454cd829db9291b3de09f986ad6ffd19660a2d10f659  7_documentos/normas_padronizadas/Norma — Tijucas do Sul-PR — Lei Ordinária 674-2019.md
+93b9264459a0a0089986446eb395d77123f2bbfc8d7d39b006849992f7f121ec  7_documentos/normas_padronizadas/Norma — Tijucas do Sul-PR — Lei Ordinária 791-2021.md
+26395634c510d3fa9d70fd01261096e79d987f4fccc3d6fa4e0a6dc0abb2f8d3  7_documentos/normas_padronizadas/Norma — Tijucas do Sul-PR — Projeto de Lei do Executivo 26-2015.md
+7148eb0d8938882566c805574ed43bab427a2bebbd0913262e8853bb5ab50e3f  7_documentos/normas_padronizadas/Norma — Três Barras-SC — Lei Ordinária 3461-2019.md
+e7307b4f8b6b5ec9a81dd3841de49a3ff01b584407dc9353895f8194ed8222b3  7_documentos/normas_padronizadas/Norma — Tupã-SP — Lei Ordinária 5348-2025.md
+81b3f2285332d4215ad76c58b8e0ec0f657b84529dcd060cb0e180bbb314d274  7_documentos/normas_padronizadas/Norma — Tupã-SP — Lei Ordinária 5505-2026.md
+60251aa0da518cdb6586d6cb325e198f1dd6fd1555671f9698dff0b3191a1af5  7_documentos/normas_padronizadas/Norma — Ubiratã-PR — Decreto 1-2025.md
+c8c1dfc0c62513e52b304cc46d8ad5b9bd67b7a489572c2d2548832b7ea27ed6  7_documentos/normas_padronizadas/Norma — Ubiratã-PR — Decreto 110-2024.md
+56458b34a6ceb7da233b6eb680ed3ec254d7caae6dcc052aa1bff30807dedfcc  7_documentos/normas_padronizadas/Norma — Ubiratã-PR — Lei Complementar 23-2025.md
+417b201b337fc3e175c18427584234a7d597b9d525fa5bbf924391c51cfcf5c9  7_documentos/normas_padronizadas/Norma — Ubiratã-PR — Lei Ordinária 2955-2024.md
+acd9e0fae0328110526e25367f52d7cc4decc6fd87c514d40470d027f8a9c484  7_documentos/normas_padronizadas/Norma — Valinhos-SP — Decreto 12621-2025.md
+0907674764c265ef75679656803b55278a6f0a82fead3cc72775ac6e80d1813a  7_documentos/normas_padronizadas/Norma — Valinhos-SP — Lei Ordinária 6738-2025.md
+47509fee6a357de22b8fe4a0130b99bd025ed8c858d7e5e020cc158c6969c48b  7_documentos/normas_padronizadas/Norma — Vargem Grande Paulista-SP — Lei Ordinária 1.068-2019.md
+955ce8b3d282158512cf8d96efef5f90c5f96c3536e32bfb59dbff8c53b85b05  7_documentos/normas_padronizadas/Norma — Vargem Grande Paulista-SP — Lei Ordinária 1.092-2019.md
+583e3f8d018f435e24f77c37795fb783a1d5cf879ddf7faf1b2d478f6c217fe9  7_documentos/normas_padronizadas/Norma — Venda Nova do Imigrante-ES — Lei 1.376-2020.md
+a476a02be9a14975334c066e5bca7ec316cd8a2d64a7245028fa8d6ab192ab3d  7_documentos/normas_padronizadas/Norma — Vilhena-RO — Lei Ordinária 6557-2025.md
+c3e8e83f248edf637d0f3c61b3d1e21f5c72984bbcbb7000d65d217fc9ef7fd6  7_documentos/normas_padronizadas/Norma — Águas da Prata-SP — Lei Ordinária 2518-2025.md
+bbbcc14e870d6e6c9bad5c537ab84c6afed123287b6f2c50c23b16cff0cebe08  7_documentos/normas_padronizadas/_índice - Normas padronizadas.md
+5c34e1dc6a02eb2b496e03cd081e52abe93d3b8fba1b19d866b9ab38a3028807  7_documentos/normas_padronizadas_catalogo.csv
+e015eadbcdc0844e3867b4941427a5fadb29c87f818ca81517da9d12cbd1947e  8_scripts/_tmp_patch_rodada4.py
+dd2c9b29d1d3ab345935a1342de2f9c664f830b8f45b77cfe4bade486c31c80a  8_scripts/adicionar_vinculos_formais.py
+a0e11cdabb342a4c26847725251433f4692d37ca90a3cf28ed601dc919ca8292  8_scripts/agregar_finbra_funcao.py
+35c1b11d42a2549e7706960a10518f204d47996b7c750bcebe81adfa255821a4  8_scripts/agregar_microdados_censo2022.py
+9e9fcb9a7bfa3b491fa231b5d88ff229ea72daab37966bc3b1fef5925932b0c7  8_scripts/agregar_modo_perfil_censo2022.py
+b7b818560522e573daa59020fff820c2f31e765e89ef9085cbc2c0d55a771e70  8_scripts/agregar_rais_estabelecimentos.py
+f0fdca5a0170bfd1261d45d82713ba6605c796bd5322d8e4d1af0ed6419064ab  8_scripts/ajustes_visuais_redes_socios.py
+95d7f531487b5d0a416646efdcf5ae573e3eaa4bf145ca48f4645cf9038cf29a  8_scripts/ampliar_criterio_capital_5mi.py
+da1772606aa257bc925a1e6e23c0c72e021dc75d67a011bd9ce9a38987d0a195  8_scripts/analise_III_finbra_viario_x_tpc.py
+e46c5b9ec6b95fef1235d7be62588a936011f5592cd60ad1eb14524d280598f6  8_scripts/analise_IV_censo2022_auto_x_tpc.py
+61e2a927deee98bbedcb39df4a0e24fe709f5f27863353babb33f4075832d07f  8_scripts/analise_cap4_supramunicipal.py
+c968525a1c7ffb87f45f0b578b10e3c86e283f27670f8e3bbbfb3e1868d49337  8_scripts/analise_espacial_ge_tz_graficos.py
+7c72e3e5327d7b221d4333ec668c54bf312fb30ce3c5aa36df13ac40dcbd5ce2  8_scripts/analise_espacial_ge_tz_grandes_clusters.py
+80970814c95aafe31f1556373a047eb9ee183e129a569f50a7a83247594199ba  8_scripts/analise_espacial_ge_tz_logit.py
+d251e71f0327b4bae9f71b5a598e4247ddfd591e37ad496d0515e6db1afb2941  8_scripts/analise_espacial_ge_tz_logit_recorte.py
+01bc9694b6ad0b7ae3e51a794580d22e48bf43a4a41f4831277f929957ed0891  8_scripts/analise_espacial_ge_tz_moran.py
+edbcae7387c9f3bb5e15ad9a83b5fb467c2a6a2b46d4d86d405087af9929e619  8_scripts/analise_espacial_ge_tz_moran_scatter.py
+bdeff5a43ed353ad43370999881bdbce999aa16c75b06c063b7008ba7e16a084  8_scripts/analise_espacial_ge_tz_prep.py
+c6e92dd94b1724e5df5d941640222ef3a29776b8d89ae1a8d5bcb7f056c8a3d5  8_scripts/analise_km_cadterc_2026-10-11.py
+00a89dc57fee8ae6e18bf7e6f6c8a1df6f5853b2dcb8171e8bb7e34049972910  8_scripts/analise_munic2020_regime_e_isencao.py
+5e44218a27e70b512d6cb4b65d69e9c2ed2998b4de6dd9b3acad17072c99a131  8_scripts/analises_r62.py
+25fa91444bbcc537f83f49f6127f9e5a088a2c4f16584f71a54f37a8fdbe809f  8_scripts/aplicar_categorizacao_normas.py
+7d0e5a75ac925357ff59562bb063a91272566275b961c5bf8cb7580383b9d653  8_scripts/ars_metricas_rede_2026-10-08.py
+1e6251f430b68de4e93bf264d3eae15fdb184d71f969cb757003f6020578d9ff  8_scripts/ars_rede_estendida_figuras_2026-10-08.py
+d762f86abff01c91d372858dc18afb4274cd15ab58660afa4d7901d66c3fde78  8_scripts/atualizar_rede.py
+238ba40be8dbb97af2dcbe2bdfa998a89379ee0fd68d4168e63568ffb92f807a  8_scripts/auditar_cofre.py
+04f1237dabfa152e80dfbe5d23dd65f6071802edec06efc8a6d2ba659b1bb2fa  8_scripts/auditar_contratos.py
+472c561ba1bb8e11ea912463b7e065bcdfb65095620b5ff8efa00adc99038e20  8_scripts/auditar_fichas_normas_tabela.py
+c92a98dc1ea9a684b9fa0b9f6af06d761614ad7539cef22a954b0b4a0eeb5b86  8_scripts/auditar_normas.py
+46b34e822a0da43b885a320b4b08ea8ec8704fa9551e3de109ae8d5d3e5cc6b2  8_scripts/auditar_notas_normas.py
+87c39c71ccc381a02d07852dea077eb7dacba11682c0db0515a16ea19c6b8256  8_scripts/avaliar_pacotes_simu_consolidados.py
+77b877c3dad54c8cc474418508fb570ef6a485249ab1da245530bfd231204b10  8_scripts/baixar_censo2022_informalidade.py
+14ceb087759f29701ce945b673fcb67b73761369a29df7b07922daab014a5ea5  8_scripts/baixar_documentos_busca.py
+108280ef200596d7da176382b378bf67cc899e477d95b0027899780d57d65233  8_scripts/baixar_documentos_lotes_1017.py
+631e902bbaaaf27cb6e06a3f88130c2dc1f0a38778470248a733e791d628a6c9  8_scripts/baixar_finbra_siconfi.py
+1bce74d2a249cf7c8bab28cea0367642400ae5ea84cac71e33e7c7399c3fc127  8_scripts/baixar_pdfs_antp_por_csv.py
+b393fc1ff7cf4b5c200815b2a18145ba88cbe41e38947b45be47f1455a6fd4ff  8_scripts/baixar_rais_cempre_sidra.py
+238affbace23a7f0076d44faa6a440ee39bc8b794282d4ef2bc965598b03be2c  8_scripts/baixar_regic_2018.py
+b2038293b2161deb2c37bed06958365e2b43830bd3c71673180d48653ed15e6e  8_scripts/baixar_sidra.py
+731ba6811be2aaa63b451e393c933c66f9610a3f8129da3dd44a1071837e99fa  8_scripts/baixar_simu.py
+62df9cfbdbc893b95e19f9a4004e682ae518ae79d5fb1e47da9534f50ea7fc98  8_scripts/baixar_sinistralidade_datasus.py
+0454be5e1d2c9e78bd055665e26f51755e0f214d04a54880948e2cd67174bb95  8_scripts/baixar_tse_2024.py
+04e8f466d78fcf787bbc4b66b501e9d3827b4e491fdd682ad34364387ad5ce98  8_scripts/build_tabela_consolidada.py
+1a28d5be8c7b1ad8a0759337a9ded26b1f51a81062a34a37d677ea4fc549daae  8_scripts/buscar_abertos_pacote.py
+ef63bcadf357bcdd94587203f8f4dbf9446537c79bf3a0bcd07efa266ea1dd6d  8_scripts/buscar_alternativos_sem_indicio.py
+5a76f6cf5328ea8ba4691e5ff8fac569eae3ed7032e5ff42d2b7d84eb2374038  8_scripts/buscar_diariomunicipal_sp.py
+077e43bbb4a26cd9e8989915412fe1d528bf2474bba6c6c6945cd9812bce471f  8_scripts/buscar_e_baixar_antp_descoberta.py
+4832a9237116487d7b20e7d29b8447563552c00e1375b7fbaf0d843984944ed9  8_scripts/buscar_fila_autor_1106.py
+bb6ae8001fe973f67df407768125b74c0e843e833f69cf446e53d033a875851a  8_scripts/buscar_frentes_3a5.py
+213743597bfcc5fa9f2d1c778f55586e302fd6811ba276815438a406481ec6dc  8_scripts/buscar_munic_fora_canonico.py
+64e9a9f3dd6e78ebd72db170ec21a938e74959d4282e72f4eddc9d682ee26384  8_scripts/buscar_operadores_pncp.py
+f19e12acd3000ad066990caadb6fbe98c391408a747db817237754420e920939  8_scripts/buscar_outras_contratacoes_operador.py
+92ddeec7cba051261b1270815d9ceb44e5536df5cd820cb840a5921436529d76  8_scripts/buscar_pncp.py
+ee18eb33d324b2a9f7c4809108caa50e0a774587894cc49713ec731241336dfd  8_scripts/buscar_pncp_completo.py
+ed839de2f3ba35b09ab1e6af58c0a860bb4e2c17575f2df4fc5551d36c4ec28d  8_scripts/buscar_pncp_pendencias.py
+7ca3cfa0b9b2dd38de45cda65e15be10f221e790518cc35cf372873c792b9a51  8_scripts/buscar_querido_diario.py
+4bd597f6e4d1f87d5aab261d7998b984e2ab85b5795bf5a9b03bac3c7b4338ab  8_scripts/buscar_querido_diario_candidatos.py
+8c7eddd62985d42e87efc12292cb470f1764afad14019c27a91abdaa1efed3d4  8_scripts/buscar_siscam.py
+18b9acf1d4253e3806c187d6af701c2bb598f57f4cdd2b84e986a8d851feb58a  8_scripts/buscar_texto_normas_sapl.py
+cf34ba964a6a0af1ad2ac873d8e099add367b71ed49e8031f6ff69533eea34bd  8_scripts/calcular_densidade_viaria_urbana.py
+ef7162edbf8752ca33adf8d0b93b0c5186e7f32f58a6524d5c042c7a75531841  8_scripts/calcular_extensao_viaria_osm.py
+c613fbfaaff2c0859d4a7b1e6fb45a09a61fd3a05c7d5514d4d85a7a0f42540c  8_scripts/calcular_gini_censo2022.py
+0ab7d7d2a70a290232b388ff45873dfbf47cdc6e9fd2d18512939c37110743cd  8_scripts/calcular_grupos_economicos_v2.py
+d9b101c00315c546898840ff4bbadd1c87b090f5d3bc44822f66ff7bc5799099  8_scripts/calcular_osm_viario_onibus_ciclo.py
+6ba287bc1af278a69b76d8b87ec4c9aa874def418db523efbc1a44723f4132bc  8_scripts/cap6_dados.py
+c0ef73dc3ae8269614e1c20c79dcc36cb606e37cc9aab09a20be1a742cfc7552  8_scripts/checar_camada_frontmatter.py
+55a94abd33340a4a3a6eb637d4d60925d1f673df9a904b46f6426633fef658cc  8_scripts/classificar_confianca_nucleo.py
+76f01076499b237da2937068fb53dc8963dd49c4f261b1c3667afe1bbec05b5d  8_scripts/classificar_pendencias.py
+599b8b3766df14dfa89d00a520f5eb757384703c12e0f6bb0c985bf7aa3a59d4  8_scripts/classificar_rodada.py
+ce9e9de1f77e285acbe1363ee15c216ea474a61b05127299a961c491e1b6b891  8_scripts/cobertura_tarifaria_pemob.py
+284febd3acc4705a40c50a99eef1f2e57b43c9aaeef7171e4c2967cf3f53fcd3  8_scripts/codificar_contrapartida.py
+a6e397ea16f8a7244b8749d0601dc5cbe579ff21c62fcb20d89c9450a5a47887  8_scripts/comparar_ctp_custo_real.py
+8481049841d84c6a3702dd11297cef2eb739962084909f515f2b047c6d6e21ed  8_scripts/comparar_munic.py
+5a9598a58fbe796cb8493eac15d54e9723c72813c8a19fe26b234a6d28d6fba5  8_scripts/conciliar_bases.py
+53e5a0a3b12e1ec0674e408ff17c9149b55b8c09540c918f36bc1b807992f195  8_scripts/congelar_base.py
+a381a0eea757debd8e53473d50d54c9c399119562c380c745814ba43fdfb31f2  8_scripts/consolidar_4_abas.py
+1ba73239aa4c0ceb24760aaa104c19f33417441fdddc97763e28407b1bb11b0a  8_scripts/consolidar_legislacao.py
+5e40c36f8e91d893aea50e7978207fbd91993d026a38fcbaabd34eb7062d291d  8_scripts/consolidar_mestre.py
+fd2f6643f1ac209324c22c299cb73645dad76259f32bdb568e4f2913e8c8add1  8_scripts/contagem_cnae_transporte_mesclado.py
+359b4f899b0581c4c08f94844579e817afb45378b401d9f23d27ccd8ed525569  8_scripts/contar_vinculos_cnae_transporte.py
+53e9b201b9ffe46d37074eab94d3950728b6e235334a0ef2dc037264a0f0624f  8_scripts/copy2csv.py
+d0280e403c47a1f25e5ecd1b36128e82dbd66c3db8852d49853fac7445e6603a  8_scripts/copy2gpkg.py
+64c31b601aa76a23f9e2b67a768c8fd95da79ec107d6e57841482abc5d35fb77  8_scripts/corrige_nomes_tse_2024.py
+cfcf96c80008c2345f71e4ca38dacd21a46f6bbb66e16c16f6a5de232d49f650  8_scripts/corrigir_ano_citekey.py
+6262fd6f8f9698bf1ef426b83c5780e92873c4eeff648e2c740db31059294691  8_scripts/corrigir_diario_camadas.py
+b28dffa28e936f256f2471ac57e1d12d7cb7bcd1e1b3110b239f4db589d018f3  8_scripts/criar_fichas_5_faltantes.py
+0ca8847ac316646c63916b3f89df913bd542b05888bf51a3a4d848cf9014f8e6  8_scripts/criar_fichas_parciais.py
+5927d1de40cea622a7947cf355a32bd28f1e1bafb2fd45e765676f2a29b465bd  8_scripts/cruzar_bib_r76.py
+5de5fd8e474f36e89dc56f58e0d8d81578c8851770775f88771e9deef38c984d  8_scripts/cruzar_municipal_ge_tz.py
+54eac307a76c2a804eed15885fe89c045b1bdd43e085d0bd994d33cb47a4c5ad  8_scripts/cruzar_operador_grupo.py
+824e2611320fd6f31bf426e37d1d61018c2a70b1b3dbc55adca0c80d0742a2e6  8_scripts/cruzar_pdmu.py
+99476118abecc3c47e8576c165556ef18819101288b18fd0551bbb908df3a632  8_scripts/diagnosticar_maturidade.py
+4d4dc29bdfdfbebf6861f779077aac5705f1922cbe79cce55bb0c9894fbfadaa  8_scripts/diagnostico_bigquery_socios.py
+541feb245a2aa816ebc8171ecdcf9907034f1c4d7932ff7d8f885fc66fb8fd28  8_scripts/diagnostico_ftp_rais.py
+8686f22e2bb3cf32ea90021e2ebf1ce3f92987fb326f312923beb5d524b3fb03  8_scripts/diagnostico_ftp_rais2.py
+37b5ed28ebbfb3b46e0a35e1b0367fa026196f2d0b7cd6a3f8ca4eeab46f1233  8_scripts/diagnostico_ssl_queridodiario.py
+e11a11a3df98fbd947b0cb86ca5bcf4dacf725deef2872ea84796d9d33fe4ca5  8_scripts/diagramas.py
+dd5d9cc5e9b1d4ba6554e34e1a90fd4d40825560ec2bc8c9be7486b059c600c8  8_scripts/dicionario_base_v3_completo.py
+0e0e859e02e17c77b824aba1624446563a073cab5b7771c62b0411341404c7c7  8_scripts/empresas_ligadas_holdings.py
+eadcbc8ffa333a1c1bf2d825b9191006728aea69599a94103b33029938f0887a  8_scripts/enriquecer_base_fpm.py
+fc3c38262defdd62ad5e4258a0a8c2d284ed0cce05b5134e6c44581ddea05a72  8_scripts/enriquecer_base_sinistralidade_modo.py
+15710f9d8f9cd8aa3223a77c40bf0e646c350e61e3775462882a19aaef341a40  8_scripts/enriquecer_contexto_mobilidade.py
+c56ebafb26ca483ba80d7238a9efd4025eea428cf58608e1a1fb0ecb9ae259de  8_scripts/enriquecer_fichas_cruzamento.py
+72d81372c98bebf26214050fc24b13e75ebe61f4be7aafe6817e4030bf22695c  8_scripts/enriquecer_fichas_municipais.py
+4468a2b0507905572de51c2ba4cc7a231244204f6199e967958b7078c2fa782f  8_scripts/enriquecer_fichas_rsl.py
+22d49946a7ccc916b6403129fd27c6082ac2b638dd1f7c3e7296259640d36c9d  8_scripts/enriquecer_grupos_economicos.py
+00b7cd07e1544a0c3ad9e728a1bda1e929125aa851840af3b4e7fa005ccb39ea  8_scripts/enriquecer_perfil_socioeconomico.py
+b1f7be42b4bf27d1e7445bfedae81728bd6a743ac212def4733fb7fe167d8a85  8_scripts/enriquecer_prosa_municipal.py
+f3a3fe71afdb5a527f095287183629d63660b865cb808c3d9d3683fe054730c1  8_scripts/enriquecer_regua_portao.py
+eec9f5e547e7d352d7492aaf99c00e47cb1a60bf4ef63bc2903e77f2c62dea7d  8_scripts/esgotar_cadeia_societaria.py
+32d8f8e9f84835ce2c4d938c83eac83244418545e166b52471f8f129973f22ea  8_scripts/esgotar_rede_socios_multissetor.py
+11a2e4917dfc9f0ce502972e1bb2bd85c836817fabe221ffeb723b84cf0dad78  8_scripts/espacializar_223_grupos.py
+0b38c005823fb8dad33b0f51582eee040b1532033982a949a453eaf049c8324f  8_scripts/espacializar_grupos_clusters.py
+cf582a7b2a85a95d519163c639718e1ab326fe2af7055cd83e1fdc5f514676c4  8_scripts/estilo_figuras.py
+687d800d717d138313a2372760d43904c169c690f3edc8f03735d21a9964f700  8_scripts/exportar_anexo.py
+81b26b0d7782e9e77aa6293c1400480a24f3ccd18bb92c51b6c19db70571bb74  8_scripts/exportar_anexo2.py
+2a87e30c6be9132688c791014fb4d921638a022084dfff9c016f54969e435660  8_scripts/exportar_anexo3.py
+9d862fba476e6e7eefc5e6f49d729646cc8a83972d754991aac8797b7217c445  8_scripts/exportar_controle_unificado.py
+020f973e7be08b9fa303e2700195c10f3411d9188ea9841a86d79928d9dae125  8_scripts/exportar_fichas_final.py
+c615c70e724cc9ec8116a3f89e00e9f29d17dbb70cc9b0d53c68be30706b5a30  8_scripts/exportar_lista_busca_ativa.py
+4bfb6962aee2dc75802fbe4ebd251a71cfb5f2fb5a577ba3336c9b3e008fe1bc  8_scripts/exportar_log_juridico_excel.py
+fc2988e303749c1a5ccc2519d7574f1b7ffaaefdea6b17baef729714f0b444ca  8_scripts/exportar_tese.py
+758d2d9fa129ae18d0bd23857571be3720aa028d0014103a3d47afdecc66441f  8_scripts/extrair_diesel_anp.py
+39d079a6eb5525c5407ad30d80ac84d35cc64bb23810bda1c4e6e62dc084e400  8_scripts/extrair_ntu_subsidios.py
+61160594c2572d310c185711b751f5e541bc7adb007213827b04a06aeda5f067  8_scripts/extrair_referencias.py
+e57f443af060a7f084df9cc6e05d1654d5b14cd4a5067e3a8575ed9aba80f50e  8_scripts/extrair_trechos_qd.py
+7611181c777be63ba5ebbdd5a39f1b31f3d997eca45a4759be1b73e4e2e6afaf  8_scripts/figura_cap3_analise_VIII_tarifa_real.py
+c4b3bbb5b1fb860ab8837c5957c4871a2d2bfaafca512435dec0fc27f02b9303  8_scripts/figura_cap4_regua_descritiva.py
+35905387fa67486fcf0ba600f95c0411f7f7670b290cbfc527e6458402ebcfbd  8_scripts/figura_cap6_precos.py
+a8082008cef1fa612c85c09c4a763f03f02e8850a6ab84bcfc09553f283e767f  8_scripts/figura_cap7_concentracao.py
+ef15fd8a275eb8d164827b0a88ed7f905f068dfd0a92187d4a8bf3916a7bbb59  8_scripts/figuras_cap2_analises_III_IV.py
+e60575b6aed9bd7b0873e679eabdb743b99260d7e8738d9904158d46ec5ec681  8_scripts/figuras_cap3_cap5_r08.py
+037dc58066fa286c4a5a1515630da5700148d11ba4940e3357282ca89abdbc66  8_scripts/figuras_cap6.py
+9cd3dd5c8aa674f848975d8e9a1a6bb0e87c0d54c1258dede80ac4bb30b58110  8_scripts/figuras_padrao.py
+a2331581ca7e79ed01a2e2351564384484de97d7dfe6d62d1719a99655f379ae  8_scripts/figuras_r18.py
+f953f018410c4469bcca1e0085cbf4b2b38e23dc91aabfaeadac6770135d7cf4  8_scripts/figuras_r50.py
+2739cfc868ef9e157980b243ac5625e6c1a8d318a1a77f006ee35a781cd2c99b  8_scripts/figuras_r62.py
+83d56dd2b81d964eb84a017c3cf752ff45db9c3dc227f4c086f11253eb1e13ac  8_scripts/figuras_r63.py
+5d75cb7d9288afb2b754dcf5928dfff1781e2fd84a6d33a472ebfce13d62ce63  8_scripts/figuras_r64.py
+60a6b116f88111b590c5a75eac443353cb544fd8da44abf945c01d242a921ee5  8_scripts/figuras_r65.py
+61e58d1801c3a2fa9017ed5ac79f2c343956ff3ea86d58cc8c661a3e65a340b0  8_scripts/filtrar_ativos_6cnaes.py
+aacb9e0d4b88bd2addd6afe033074977dad1daf3f0eb01ae12ab168d4f745aa3  8_scripts/filtrar_empresas_6cnaes.py
+ccb51d5bbba28414dec1b26d1e86b0f503807555c8918f0df14c8584747683f0  8_scripts/filtrar_estabelecimentos_cnae_transporte.py
+15bbf953ff1e8a80d1b6cfba3983a29dd32796889d31dbfdf9374cd266537345  8_scripts/filtrar_segunda_camada_societaria.py
+2785215c2c6634c85263022d475bc02374d5bad07b2cb3b27c852597c31ee320  8_scripts/filtrar_socios_6cnaes.py
+5a2f82a5802575d15c56c00e56a1d7ab3dd398059513b1b24ecbfb22c518cd49  8_scripts/finbra_agg.py
+9ec09e2e9666dd3a88b7408483e816f13bead30f80613a453d0576e1e0e97862  8_scripts/georreferenciar_e_cruzar_munic.py
+f323fd9ef59eb1897bc16eb9c443bd70e31c4234acf2ba018571edc5db83b252  8_scripts/gerar_indice_camadas.py
+1a0e14a642a72d7d0d57206a35fd721517a91d68818f88badf7bbcbbb28ce003  8_scripts/gerar_proximo_bloco.py
+f0bfb1b4d52bd1ed3ef18c64400dff4f32ecb64ebabd68039bb6b64c36d77d78  8_scripts/gerar_rede_3niveis.py
+6cfbad583f2c4443760418f99a9e7fab21c32e470ce61fe5a8c47dd2f5961683  8_scripts/gerar_registro_fontes.py
+b627c58af7cff793c14ce47218d2b714771f75d1f75c300cd0bb634473505c62  8_scripts/gerar_tabela_supramunicipal.py
+2729ad44cc37c5a655a4fa72bacd7599a53bab98a9b3304e2d11359d13d9c418  8_scripts/gwr_sp_teste_2026-10-07.py
+8850cda6c21b350057ee5f1fc8c70afe9e2e87936775c071be046b8628ae5211  8_scripts/gwr_sp_teste_r65_2026-10-16.py
+b6b48899c08d9f1fc60dddd3b2df2eb846c3a03ed37d23ca3594c15a424e6949  8_scripts/importar_zotero.py
+5f0de69800870373478e83cf9e9a134444db55238ede883ba824a8042131d149  8_scripts/ingerir_cadunico.py
+a863c79a0279f4ddddc3ae0c957a05fa57542f879440e4d4e8d1f673b8fdf2ad  8_scripts/integrar_bases.py
+44f12f74fdcd3f0ded37f2399baa093bf43b491ed0502591baf9d2e2be2f07c0  8_scripts/integrar_dados_pendentes.py
+52914f2fe375a7fe38fbd10be5989254833128a8086183245bc9e1f47b02b7bb  8_scripts/integrar_sinistralidade_simu.py
+096d5f9d9c6d6e1d1235256f29817e9a08b80274cd9e2719fd6c7d8b27d7f95c  8_scripts/ler_normas_arturnogueira.py
+ac6c5b257fd6aa0b7f325a80a4f3ac27f51283de1a1a7d06e9c6a880216aac91  8_scripts/levantamento_apendice_d.py
+b53d88597e643b2d908370af151a3fbf6e38bb5b8f945632a38224335c9866e0  8_scripts/levantar_abertos_casos.py
+f8c2642bc1b453ac3ad377cbf6446b9776b72cba63b596b92ef969156615012a  8_scripts/mapear_rsl_municipios.py
+4063cdf321cd9302afa21dac2d6146024d7ae5dd19774b71bce20ec1b080b9b9  8_scripts/mesclar_capital_social.py
+970035dd7ad1350664d0d5da139e2a6ed5b4bfd6fa505c2d79e9b7c031e12087  8_scripts/migrar_fichas_esqueleto8.py
+6bafcb40ee46137dd89427b07cf4dbf68ad0b183810ada6d95fb37d61745129b  8_scripts/montar_amostra_pareada_operador.py
+f1a194354b2295e943eecadb6d144f53e6d066840d275203c2020a95d4cbbe57  8_scripts/montar_base_integrada.py
+df03178ed057682c20784193378e4083ee9e0ecbb7218ac3db7df51ff2f22637  8_scripts/montar_base_v2.py
+cdc0d57913972e6e72345b0bb7491bdb97ad61c2b3663cb736f2dd24194bb7fb  8_scripts/montar_ficha_norma_sapl.py
+30855bd57bff9867fcd558da44382d27782cf1843996c63bcf80744df603aef7  8_scripts/montar_lista_pncp_pendencias.py
+8464da28641394a86c5a381910426c81b50347e341bdf6d859d261a78de1ca3c  8_scripts/montar_ntu2025_tz.py
+eed365d6ad32df939dc5c675aefc8e5747d279e77e3200c8321042ad36f4425a  8_scripts/montar_v3_fase1.py
+cf06c01cbd574091b5eb5e39610ac3632aa137bbd8b05fbbd366946275b933e2  8_scripts/montar_v3_fase2.py
+ff3b89ea4b35fd89cc5fe32b2df4be20f9ff319d20bde354ee6fdf3ed4951f07  8_scripts/mover_camadas.py
+dfdb7405538ce9b441d7c368f44f25d044a9ae707af984279401a7637cf1f1b1  8_scripts/norma_lida.py
+0da4f365569e1461dae7cf071d3320b1be8fd61a9c68cda7e2731d75a6d3d924  8_scripts/numerar_grupos_medios_grandes.py
+07a2f49d6d879c2b8ec3c629242cffafaa1377a69fddc15ca84f67f96f5f2c6e  8_scripts/numeros_base.py
+23a7c29ebcd7ec6b193bd2a00a0642bd96c5d35f915761cbc9b1a96e4e360bb1  8_scripts/ocr_norma.py
+a45c94c7cae918b4e90b2a8f1171ab6422de3fd7cd8cdbf26ef6a780d4a909c2  8_scripts/padronizar_fichas.py
+c3eed2ba80f8523379bec1fe2565fe66fd6c018ad2f5e581f5651370a33c8f4a  8_scripts/panorama_rsl.py
+4bd5049262973aa900b4197499b1ce4c6afdeec1b8f3900e0945a5c3b434b9f9  8_scripts/pistas_legislacao_zotero.py
+6ac57129221bb5a5ac95547f6830ecb5c24710852d2fca00085eff992879615f  8_scripts/precariedade_entorno_setor.py
+15fce81e60758bf4a61bed661f52dc73d6aa4609161300462258f65b3391731f  8_scripts/priorizar_sprint.py
+47adcda0d8d8a9edb64cc56320a1f284b3bc5de3a234df5d3a08d6da29742c2b  8_scripts/processar_informalidade_censo2022.py
+cdf38f11e1f74eab0de2e7720fb1f02638034f16a2bae09fe2cae2e877047ad5  8_scripts/propagar_a14_fase1.py
+a67e53228e8dcfb4d5ddc784ad6d21cd543b0e8cd449a6c04dfc72a2c569c4d7  8_scripts/propagar_camada_frontmatter.py
+e14aca820862fca5d26af665bbfc6a989ffacccc384f491b800f6b6efa3d0f6c  8_scripts/reconciliar_fichas.py
+2f9c4741bcee17760b4e395f7c0cd1595248bd47819e6e7bf1c39812c4e1bd5e  8_scripts/reconciliar_tarifa_frota.py
+4bf1fccdebac2cfe556be4251de6470541816d6df1077597e6acf0556b0637b7  8_scripts/reconstruir_identificacao_componentes.py
+a4fd2f2cba9543df97cefc107c5651eb4abbb766d3e1a74fd97f9bc98c094588  8_scripts/recontar_fontes_casos.py
+da8cbcb160afcc39c416da33a7d425e10703a56a3e492d2cec1bbd8daabf99bc  8_scripts/rede_bibliometrica.py
+febe088e8a4847f60465590e3b13623a6ceeae18fb1bdad31476db345a89b0bc  8_scripts/rede_estado_aquisicao.py
+68b0fbd355ff9bcc7d9f82cd09b8ff0f4c8d7785a173de4a2ee172d595b0533f  8_scripts/rede_vos.py
+5963b417a9a3e229fa40f53d3912d23ed5f6f28b82c1aa7523fe32f40330fd44  8_scripts/reestruturar_fichas.py
+e77f566e130f488d669e4161c4f122f57ee652082766dcaef22deaa80679d795  8_scripts/registrar_pncp_5_municipios.py
+bd099e254d1a72e5dbc67a5693db9bca15bb42f8987f7e7002860d1bea8ba3b1  8_scripts/registrar_rodada_dados_v3.py
+db188d76fa563ecbbd2ff3cef3eb1a060d2e1fbb4115aa690eb128d31944c92d  8_scripts/regressao_premio_pendular.py
+5f074f24f24a41e0457a322af1e37c1931ecfaf9a4f15e2a3f277345b98274ae  8_scripts/regua_descritiva_da_base.py
+8ddd657326a934fb1b6b7de566037994303fe13dc611ff40c57d22df0bd6a390  8_scripts/renumerar_por_capital_social.py
+89a791c8c8e9ca3cc8e81dcfe853e637dff2e063d1d7dfe1a3d1c772bc50c1ab  8_scripts/retrato_base_cap5.py
+875dfc3a9fb19d50fe7619c9d152ff75a26fa42a5fc2ad95b046d536a8c60727  8_scripts/rsl1_capes_baixar_e_filtrar.py
+6752548b307ca42c0b7d53dfebf05c5d21e7c0d810e7f9fec11b4858cefd6880  8_scripts/rsl1_capes_baixar_e_filtrar_v2_janela_estendida.py
+bb001f85afc3f1622a3cb20b9a29886b2ac20a6be3a7028e9bcab57d41361f02  8_scripts/rsl1_capes_filtrar_legado_offline.py
+a117df362b89b95be2c5fdcf12ccb12b5392a56b8cbd417dbede6c3e9b61d2b9  8_scripts/rsl1_scielo_articlemeta_harvester.py
+ecdf1c086a309e1716f0032c07b3a9c13f88dffcd31a0e3dad137141ec38f474  8_scripts/rsl2_antp_biblioteca_scraper.py
+d8e402d857afa9820b4bf843e0bf35757de19f44b0c9fc511b32adc865a16f98  8_scripts/rsl_fichas.py
+4058fb0ad36cae0aaa65fb25f5d3ac8374d7cbb73a626ec22c0b3400dbe3591e  8_scripts/rsl_inventario.py
+d2b1a2a4b6fd76a9ee05c419b018f813eb60198da191e7379df288452ddc2446  8_scripts/rsl_zotero_dump.py
+a3a0db7ecb1915d6ad19509a67a6e248049732aa647be5d92fbe611957b82338  8_scripts/sapl_varredura.py
+0c59527a4a49e8916ee0221356330ae507c1cc55f786aa5414a4dca35ac2688a  8_scripts/simular_ctp_ctpu.py
+47b9eb72f89cd74c8cf4ee9ef2312bd071d436de6a7bb7aff0b19f209f464285  8_scripts/sincronizar_fichas_rsl.py
+1ea726e9ecd5a579bfac340fba2fefe48dc10c52c09f8391a25e7c3bc5bf6bf0  8_scripts/sincronizar_log_fichas.py
+57ec82a88b8c5bc8ac7f42e114e97433909fbcc49726525ff8332fd406e9746a  8_scripts/socios_das_holdings.py
+1b096942bafbed16a57814a9f94240ab2dcfdfc5d2eb52c6e78d6ddfee43bfeb  8_scripts/sondagem_dominios_alternativos.py
+f5cfcbab27431f2934250b6e0129ba4458488a762f86606ec69d74b2ca684399  8_scripts/tabela5_operador_grupo_2026-10-11.py
+f4b97c08704658ae85ae4a3a1dfbfb58bea564984fd3236c9e951cda1745c5e0  8_scripts/teste_nacional_figura_2026-10-09.py
+740f3d14f52443427a8c7ba825c1e501814a9071b1a8cb9fad1305387b1b7cef  8_scripts/teste_nacional_logit_2026-10-09.py
+441a6ec05d02e457610232ccfcb7c02602fffc37ec7f0b5e8a6870423c832c36  8_scripts/teste_sapl_colheita.py
+a655eb1ebdd75a3692fe8b540b606eac0ca6f32fb82ec013eb6cd92d34a00ac0  8_scripts/uniao_filtrar_sapl.py
+83b432d7caf3312ceebd5d07bb243ef6bb86f82bce397e6e554bbbee4b9d1cab  8_scripts/verificar_congelamento.py
+8773968795eb8ff5f587d54c08ce6a024acf7429c071cfd9b4bdf3ef5e6900c0  README.md

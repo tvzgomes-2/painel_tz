@@ -1,0 +1,15 @@
+cod_ibge,nome_mun,uf,pop_2022,bus_ficam,posicao
+1302603,Manaus,AM,2063689,42.11,isolado
+2111201,São José De Ribamar,MA,244579,26.75,satelite
+2111300,São Luís,MA,1037775,39.65,polo
+2304400,Fortaleza,CE,2428708,30.7,polo
+2408102,Natal,RN,751300,31.22,polo
+2507507,João Pessoa,PB,833932,24.59,polo
+2607901,Jaboatão Dos Guararapes,PE,644037,35.37,satelite
+2611606,Recife,PE,1488920,33.41,polo
+2613701,São Lourenço Da Mata,PE,111249,30.77,satelite
+2800308,Aracaju,SE,602757,24.71,polo
+3203205,Linhares,ES,166786,23.89,isolado
+3205002,Serra,ES,520653,44.59,satelite
+3205309,Vitória,ES,322869,31.1,polo
+2605459,Fernando De Noronha,PE,3167,23.66,isolado

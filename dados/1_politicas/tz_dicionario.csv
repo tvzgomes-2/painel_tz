@@ -1,0 +1,140 @@
+arquivo,coluna,preenchidas,linhas,valores_distintos,exemplos
+tz_base_mestre_2026-11-11.csv,Município,193,193,192,Mata de São João | Aquiraz | Caucaia
+tz_base_mestre_2026-11-11.csv,UF,193,193,15,BA | CE | ES
+tz_base_mestre_2026-11-11.csv,Código IBGE,193,193,193,2921005 | 2301000 | 2303709
+tz_base_mestre_2026-11-11.csv,Situação,193,193,5,Ativa | Excluída (fora de escopo) | Encerrada
+tz_base_mestre_2026-11-11.csv,Ano início,191,193,45,2023 | 2018 | 2021
+tz_base_mestre_2026-11-11.csv,Fim,7,193,7,2025-02-28 | 2017 | 2021
+tz_base_mestre_2026-11-11.csv,População (2022),190,193,190,42566.0 | 80645.0 | 355679.0
+tz_base_mestre_2026-11-11.csv,Legislação,192,193,165,"Lei nº 945/2023 | Lei Municipal nº 1.279, de 06/06/2018 (cria o TGA; autorizat | Lei nº 4.041, de 30/06/2026 — institui o 'Programa Passe Liv"
+tz_base_mestre_2026-11-11.csv,Link Legislação,74,193,74,https://sapl.matadesaojoao.ba.leg.br/norma/865 | https://www.aquiraz.ce.gov.br/leis.php?id=734 | https://www.caucaia.ce.gov.br/leis.php?id=1173
+tz_base_mestre_2026-11-11.csv,Confiab.,187,193,31,média | alta | baixa
+tz_base_mestre_2026-11-11.csv,Operador,170,193,154,"J O S Transportes e Serviços Ltda (contrato vencido em 22/11 | Conect Locações (Privada) | Vitória (concessão, contrato nº 20160615002; renovada por 10"
+tz_base_mestre_2026-11-11.csv,Motivações,56,193,54,Melhorar a acessibilidade em áreas periféricas e reduzir a e | Aumentar mobilidade e beneficiar comércio local | Promover a mobilidade urbana
+tz_base_mestre_2026-11-11.csv,Frota,61,193,32,8 | Não disponível | 9 ônibus
+tz_base_mestre_2026-11-11.csv,Nº linhas,58,193,36,26 | 90 | Não mencionado
+tz_base_mestre_2026-11-11.csv,Demanda,60,193,34,Aumento de 300% após dois anos | Alta demanda devido à grande população | 62 mil pessoas por mês
+tz_base_mestre_2026-11-11.csv,% orçamento,32,193,19,Não disponível | 0.018 | Não especificado
+tz_base_mestre_2026-11-11.csv,Estudo de caso,154,193,6,Análise por Município; Fichas | Análise por Município; Fichas; Resumo | Análise por Município
+tz_base_mestre_2026-11-11.csv,Obs. legal,190,193,187,23/09/2026 (Frente C): Lei 945/2023 lida; efetivação por con | 23/09/2026 (Frente C): Frente C 23/09/2026: log fechado em 1 | 23/09/2026: Lei 4.041/2026 e Decreto 1.515/2025 lidos na ínt
+tz_base_mestre_2026-11-11.csv,Fontes (caract.),77,193,49,NTU (2023) | Angelo (2023); NTU (2023); Pereira (2023) | Brinco (2017); NTU (2023); Santini (2019); Portal da Transpa
+tz_base_mestre_2026-11-11.csv,Instrumento (eixo 1),192,193,43,lei ordinária | lei + decreto (subsídio integral; isenção por grupo) | não encontrado
+tz_base_mestre_2026-11-11.csv,Ato vigente que concede (eixo 1),140,193,138,lei ordinária 945/2023 — autorizativa; prazo: subvenção 'de  | lei ordinária 1.279/2018 (autorizativa) + Decreto 028/2018 ( | lei ordinária 4.041/2026 (os prazos de concessão de 10 anos 
+tz_base_mestre_2026-11-11.csv,Régua — aba,193,193,6,1 Universal | 2 Parcial | Não TZ
+tz_base_mestre_2026-11-11.csv,Régua — subtipo,187,193,8,1a | 1c | 2a
+tz_base_mestre_2026-11-11.csv,Régua — portão,192,193,143,"nenhum (linhas definidas por decreto — cobertura, não portão | nenhum (1a, decisão do autor, 30/10/2026; antes 1c) — Lei 1. | nenhum"
+tz_base_mestre_2026-11-11.csv,Régua — evidência do portão,178,193,178,FRENTE C 23/09/2026: 23/09 Frente C: par. único do Art. 1º ( | DECISÃO DO AUTOR 30/10/2026: 1c → 1a — Decreto 028/2018 lido | A.2(c) 23/09/2026: contrato — 5º termo aditivo ao contrato d
+tz_base_mestre_2026-11-11.csv,Cobertura da rede,181,193,172,não verificada — Art. 4º: roteiros por decreto; decreto não  | não verificada — Lei: 'em todo o território do município'; n | total — 26→32 linhas (Pereira 2023; NTU 2025); 'transporte c
+tz_base_mestre_2026-11-11.csv,Vigência — última evidência (leitura 23/09),182,193,181,"operação gratuita · 2026-02-13 (notícia oficial da Prefeitur | duvidosa · 2024-03 (NTU 2024, dados até mar/2024); ausência  | confirmada · 2026-07-20 (O Povo; Lei 4.041 de 30/06/2026) · "
+tz_base_mestre_2026-11-11.csv,"Trajetória (régua descritiva, ficha)",180,193,78,_Camada atual: universal (Ativa / universal / 2023). Sem reg | _Camada atual: universal. Sem registro de mudança de camada/ | não preenchido nesta rodada (seção ausente na ficha)
+tz_base_mestre_2026-11-11.csv,Instrumento — base da decisão,148,193,47,dispositivo lido | lei autorizativa + decreto regulamentador (Decreto 028/2018) | lei autorizativa — efetivação comprovada (subtipo na régua)
+tz_base_mestre_2026-11-11.csv,Portão visível no texto da norma,66,193,60,"linha: roteiros definidos e alteráveis por decreto (Arts. 1º | nenhum — 'munícipes' só descreve o público (Lei 1.279/2018,  | 'observadas as normas operacionais estabelecidas pelo Poder "
+tz_base_mestre_2026-11-11.csv,Prestação (eixo 2),191,193,99,contrato novo licitado | não encontrado | aditivo à concessão existente
+tz_base_mestre_2026-11-11.csv,Operador — outras versões,116,193,110,"CONTROLE-ÚNICO-11-09: Empresa privada | LEITURA-CRÍTICA: Prefeitura (base-mestre/MUNIC) — mas NTU 20 | LEITURA-CRÍTICA: Prefeitura (Secretaria de Obras), frota pró"
+tz_base_mestre_2026-11-11.csv,Operador — CNPJ,100,193,99,"41.057.909/0001-63 | 04.664.894/0001-75 (CONECT LOCAÇÃO E SERVIÇOS LTDA, matriz e | 07.137.359/0001-54 (ORGANIZAÇÃO GUIMARÃES LTDA, nome fantasi"
+tz_base_mestre_2026-11-11.csv,Remuneração do operador,186,193,107,"pela Prefeitura, preço global: R$ 2.449.783,25 por 12 meses  | não apurado | não apurado (contrato renovado não obtido; ficha registra po"
+tz_base_mestre_2026-11-11.csv,Trajetória contratual,185,193,185,"Lei 945/2023 (dez/2023) → Concorrências Eletrônicas mar/2024 | concessão (MUNIC 2017) → permissão (MUNIC 2020); TGA desde 2 | concessão tarifada (Vitória, contrato 20160615002) → 5º adit"
+tz_base_mestre_2026-11-11.csv,Lacuna contratual,185,193,182,"Não há aditivo ou novo contrato lido após 22/11/2025; a oper | contrato com Conect Locações, razão social/CNPJ; se é locaçã | texto do 5º aditivo e do contrato renovado de jun/2026 (remu"
+tz_base_mestre_2026-11-11.csv,Tipologia analítica,179,193,15,a classificar | T3-comum | excluída
+tz_base_mestre_2026-11-11.csv,Mecanismo de custeio,169,193,52,"não verificado. | orçamento municipal (subsídio direto). | orçamento municipal (subsídio direto, operação direta)."
+tz_base_mestre_2026-11-11.csv,Fonte de custeio,180,193,147,"dotações próprias do orçamento (Art. 7º); contrato R$ 2.449. | dotações da Secretaria de Infraestrutura (Lei 1.279/2018, ar | orçamento municipal (subsídio direto; R$ 30-36 mi/ano, 1,8-2"
+tz_base_mestre_2026-11-11.csv,Contrapartida,185,193,159,"sem — leitura do ato em 21/10/2026 (B.1.3): A publicação dos | sem — leitura do ato em 21/10/2026 (B.1.3): Texto integral r | com (D) — releitura do ato em 21/10/2026 (B.1.3), por decisã"
+tz_base_mestre_2026-11-11.csv,Grupo econômico,178,193,125,nenhum dos 11 mapeados (13 CNPJs núcleo) | nenhum mapeado | Barata tem estabelecimento núcleo — a cruzar com Empresa Vit
+tz_base_mestre_2026-11-11.csv,PlanMob — declarado,175,193,4,Nao | Sim | Nao respondeu
+tz_base_mestre_2026-11-11.csv,PlanMob — ano,41,193,15,2021.0 | 2019.0 | 2017.0
+tz_base_mestre_2026-11-11.csv,PlanMob — instrumento,175,193,9,Nao possui plano | Lei Municipal | Nao respondeu
+tz_base_mestre_2026-11-11.csv,PlanMob — nº da lei,34,193,34,3396/2021 | 170/2019 | 4.507/2017
+tz_base_mestre_2026-11-11.csv,PlanMob — data da lei,175,193,38,Nao possui plano | 2021-12-23 00:00:00 | Nao respondeu
+tz_base_mestre_2026-11-11.csv,PlanMob — obrigado a ter,175,193,2,sim | nao
+tz_base_mestre_2026-11-11.csv,PlanMob — ordem temporal (TZ × PlanMob),41,193,4,mesmo ano | plano ANTES da TZ | plano DEPOIS da TZ
+tz_base_mestre_2026-11-11.csv,Fontes que registram o caso,75,193,41,NTU (2024); UnB/Geourb (2025) | Fernandes Pereira et al. (2023); Angelo (2023); NTU (2024);  | Brinco (2017); Santini (2019); NTU (2024); UnB/Geourb (2025)
+tz_base_mestre_2026-11-11.csv,Nº de fontes,179,193,8,0.0 | 2.0 | 6.0
+tz_base_mestre_2026-11-11.csv,Proveniência do caso,193,193,180,base-mestre ('Encontrado (média)'); norma achada em varredur | NTU (2024) — base-mestre; norma via SAPL da Câmara (11-12/09 | Angelo (2023); NTU (2023); Pereira (2023); base-mestre
+tz_base_mestre_2026-11-11.csv,Caso temporário/eleitoral (fontes),8,193,1,1.0
+tz_base_mestre_2026-11-11.csv,Dados operacionais (ficha §2),179,193,179,"- **População (2022):** 44839
+- **Situação / modelo / início | - **População (2022):** 84737
+- **Situação / modelo / início | - **População (2022):** 375730
+- **Nome do programa (18/09/2"
+tz_base_mestre_2026-11-11.csv,e-SIC / varredura nº,76,193,76,"22 (e-SIC, Fase 1.a — enviado em 01/10/2026, protocolo 20268 | 2 (e-SIC, Fase 1.a — enviado em 25/09/2026, protocolo 202609 | 56 (e-SIC, Fase 1.a — enviado em 09/10/2026, protocolo 20261"
+tz_base_mestre_2026-11-11.csv,MUNIC 2020 (autodeclarado) — ônibus intramunicipal,181,193,3,Não | Sim | Não informou
+tz_base_mestre_2026-11-11.csv,MUNIC 2020 (autodeclarado) — isenção 'toda a população',181,193,4,- | Não | Sim
+tz_base_mestre_2026-11-11.csv,MUNIC 2020 (autodeclarado) — isenções,152,193,37,nenhum | idosos; carteiros; crianças <5 | TODA A POPULAÇÃO
+tz_base_mestre_2026-11-11.csv,MUNIC 2020 (autodeclarado) — regulamentação,152,193,10,permissão | concessão | prestação direta
+tz_base_mestre_2026-11-11.csv,MUNIC 2017 (autodeclarado) — regulamentação,142,193,13,permissão | concessão | prestação direta
+tz_base_mestre_2026-11-11.csv,MUNIC × levantamento — existência de TZ,180,193,12,consistente — TZ começou depois de 2020 | DIVERGE — nós: TZ ativa em 2020 · MUNIC: não declara 'toda a | CONCORDA — TZ nos dois
+tz_base_mestre_2026-11-11.csv,MUNIC × levantamento — prestação,94,193,9,concorda (terceiro) | concorda (direta) | parcial — MUNIC: autorização; prestação direta; não regulame
+tz_base_mestre_2026-11-11.csv,No levantamento Santini (abr/2026),183,193,2,1.0 | 0.0
+tz_base_mestre_2026-11-11.csv,Santini (abr/2026) — lista,158,193,3,vigente | encerrada | ausente em abr/2026; presente na versão de 28/09/2026
+tz_base_mestre_2026-11-11.csv,Operador × GE — resultado (cruzamento),190,193,10,"operador identificado, isolado na rede (sem grupo) | operador em grupo econômico (componente societário) | operador nomeado, sem CNPJ e sem correspondência no recorte"
+tz_base_mestre_2026-11-11.csv,Operador × GE — ligação,25,193,24,"ORGANIZACAO GUIMARAES LTDA: Barata — componente 123; GE-001 | CAF TRANSPORTES LTDA: empresa sem vínculo societário, promov | VIACAO SIDON LTDA: Assis — componente 952; GE-089 ‖ consórci"
+tz_base_mestre_2026-11-11.csv,Operador × GE — data,190,193,2,2026-11-06 | 2026-09-25
+tz_base_mestre_2026-11-11.csv,Fontes — levantamentos (recontagem),156,193,45,Santini (Dataverse) [mar/2024–abr/2026] | NTU (2024); UnB/Geourb (2025); Santini (Dataverse) [mar/2024 | Fernandes Pereira et al. (2023); Angelo (2023); NTU (2024); 
+tz_base_mestre_2026-11-11.csv,Fontes — nº de levantamentos (recontagem),182,193,9,1.0 | 3.0 | 7.0
+tz_base_mestre_2026-11-11.csv,"Fontes — corroboração (MUNIC, RSL, imprensa)",182,193,55,"RSL: nenhuma menção nos fichamentos · imprensa no acervo: 0  | RSL: 2 fichamento(s), nível C · imprensa no acervo: 0 URL(s) | RSL: 36 fichamento(s), nível A · imprensa no acervo: 7 URL(s"
+tz_base_mestre_2026-11-11.csv,"Gratuidade eleitoral 2022 (Idec/TZ BH, 2º turno)",183,193,2,sim (lista de 30/10/2022) | não consta da lista
+tz_base_mestre_2026-11-11.csv,Prova de operação — atualidade (2025/2026),189,193,184,"atende · 2026 · notícia oficial da Prefeitura, 13/02/2026 —  | atende · 2025 · Instagram oficial da Prefeitura e da SMTT (@ | atende · 2026 · campo Vigência (confirmada): 2026-07-20 (O P"
+tz_base_mestre_2026-11-11.csv,Estado terminal (completude),187,193,6,Fechado — com norma | Lacuna declarada — e-SIC sem resposta que feche o caso até o | Lacuna declarada — e-SIC sem resposta que feche o caso até o
+tz_base_mestre_2026-11-11.csv,Norma lida (A.2e),188,193,126,lida — arquivo · Mata de São João-BA - Lei 945-2023 (11-12-2 | lida — arquivo · Aquiraz-CE - Lei 1279-2018 (05-06-2018) - t | lida — arquivo · Caucaia-CE - Lei 4041-2026 - Programa Passe
+tz_base_mestre_2026-11-11.csv,Contrapartida — estado,193,193,3,sem | com | não apurado
+tz_base_mestre_2026-11-11.csv,Contrapartida — itens,32,193,7,D | T D | C T
+tz_base_mestre_2026-11-11.csv,Contrapartida — leitura,193,193,154,"leitura do ato em 21/10/2026 (B.1.3): A publicação dos rotei | leitura do ato em 21/10/2026 (B.1.3): Texto integral relido  | releitura do ato em 21/10/2026 (B.1.3), por decisão do autor"
+tz_base_mestre_2026-11-11.csv,Classificação provisória (hipótese pré-e-SIC),28,193,28,"1a por hipótese pré-e-SIC (hipótese dos documentos lidos, re | 1a por hipótese pré-e-SIC (hipótese dos documentos lidos, re | 1a por hipótese pré-e-SIC (kit de pedidos de 10/10/2026); ap"
+tz_base_mestre_2026-11-11.csv,Lacuna declarada (fim da coleta),26,193,26,sim — e-SIC nº 22 sem resposta que feche o caso até o fim da | sim — e-SIC nº 2 sem resposta que feche o caso até o fim da  | sim — e-SIC nº 63 sem resposta que feche o caso até o fim da
+tz_regua_descritiva_2026-11-11.csv,aba,610,610,9,1 Universal | 2 Parcial | 3 Encerradas
+tz_regua_descritiva_2026-11-11.csv,Município,552,610,527,Mata de São João | Aquiraz | Caucaia
+tz_regua_descritiva_2026-11-11.csv,UF,610,610,28,BA | CE | ES
+tz_regua_descritiva_2026-11-11.csv,Subtipo,229,610,12,1a | 1c | 1b
+tz_regua_descritiva_2026-11-11.csv,Situação,248,610,31,"Ativa | Ativa (1c — universal, sub-marcado residência, desde 15/07/2 | Encerrada"
+tz_regua_descritiva_2026-11-11.csv,Ano,188,610,40,2023 | 2018 | 2021
+tz_regua_descritiva_2026-11-11.csv,Legislação,184,610,154,"Lei nº 945/2023 | Lei Municipal nº 1.279, de 06/06/2018 + Decreto nº 028, de 0 | Lei nº 4.041, de 30/06/2026 — Programa Passe Livre, política"
+tz_regua_descritiva_2026-11-11.csv,Link Legislação,79,610,73,https://sapl.matadesaojoao.ba.leg.br/norma/865 | https://www.aquiraz.ce.gov.br/leis.php?id=734 · https://www. | https://www.caucaia.ce.gov.br/leis.php?id=1173
+tz_regua_descritiva_2026-11-11.csv,Operador,107,610,92,"Conect Locações (Privada) | Vitória (concessão renovada por 10 anos, jun/2026) | J.R. Serviços de Transportes Ltda (Crateús/CE) — Contrato 20"
+tz_regua_descritiva_2026-11-11.csv,Fontes,98,610,56,NTU (2023) | Angelo (2023); NTU (2023); Pereira (2023) | Brinco (2017); NTU (2023); Santini (2019)
+tz_regua_descritiva_2026-11-11.csv,Portão,248,610,176,"nenhum (linhas definidas por decreto — cobertura, não portão | nenhum (1a, decisão do autor, 30/10/2026; antes 1c) — Lei 1. | nenhum"
+tz_regua_descritiva_2026-11-11.csv,Portão — evidência,174,610,174,FRENTE C 23/09/2026: 23/09 Frente C: par. único do Art. 1º ( | DECISÃO DO AUTOR 30/10/2026: 1c → 1a — Decreto 028/2018 lido | A.2(c) 23/09/2026: contrato — 5º termo aditivo ao contrato d
+tz_regua_descritiva_2026-11-11.csv,Situação/Status,358,610,11,[2b] NOVO ‖ [2c] NOVO | JÁ TEMOS | NOVO
+tz_regua_descritiva_2026-11-11.csv,Início/Ano,344,610,31,"[2b] 2023 (abr — Lei nº 11.538/2023; corrigido 05/09/2026, a | abr/2026 |  expansão p/ Bela Vista, Vila Magalhães, Nova Aurora, Shangr"
+tz_regua_descritiva_2026-11-11.csv,Grupo,10,610,9,desempregados | estudantes | [2e] estudantes
+tz_regua_descritiva_2026-11-11.csv,Escopo,44,610,26,[2b] linhas que atendem vilas e favelas (capital) ‖ [2c] cap | restrito a bairros/regiões periféricas | linha Circular Luzitinha — micro-ônibus em comunidades perif
+tz_regua_descritiva_2026-11-11.csv,Dias,32,610,17,[2c] domingos e feriados | domingos e feriados | [2c] domingos e feriados (ônibus e metrô)
+tz_regua_descritiva_2026-11-11.csv,Programa,24,610,23,Tarifa Zero para Quem Precisa | Passe livre estudantil | [2a] Passe livre estudantil (além do domingo) ‖ [2c] Catraca
+tz_regua_descritiva_2026-11-11.csv,Código IBGE,322,610,320,1501402.0 | 5300108.0 | 3300100.0
+tz_regua_descritiva_2026-11-11.csv,Modelo,315,610,4,locação de ônibus urbano com motorista (substituiu a concess | temporária por decreto (gratuidade integral no período) | operação direta
+tz_regua_descritiva_2026-11-11.csv,Confiança,92,610,58,alta | média | [2a] alta ‖ [2b] alta
+tz_regua_descritiva_2026-11-11.csv,Fonte,417,610,95,"https://www.otempo.com.br/politica/2025/10/2/tarifa-zero-sai | A.1.12 rev. (decisão do autor, 08/10/2026): passe estudantil | A.1.12 rev. (decisão do autor, 08/10/2026): passe estudantil"
+tz_regua_descritiva_2026-11-11.csv,"Regime da 2d (A.1.7, 27/09/2026)",313,610,5,"evento não eleitoral — escolha local (A.1.7 não se aplica) | pré-2024 — escolha local (2022: autorizada pela cautelar da  | pós-2024 — obrigação (ADPF 1013; Res. TSE 23.736/2024, art. "
+tz_regua_descritiva_2026-11-11.csv,Subtipo (antes de encerrar),6,610,2,1a | 2c
+tz_regua_descritiva_2026-11-11.csv,Subtipo até 06/10/2026 (2d eleitoral),312,610,1,2d
+tz_regua_descritiva_2026-11-11.csv,"Leitura (A.1.7, 06/10/2026)",312,610,3,"trajetória — escolha local de 2022, sem classificação | piso — obrigação desde 2024 (não é camada) | trajetória sem classificação — ano não apurado"
+tz_regua_descritiva_2026-11-11.csv,ID,58,610,58,F1 | F2 | F3
+tz_regua_descritiva_2026-11-11.csv,Esfera,58,610,7,Federal (Judiciário) | Federal (Justiça Eleitoral) | Federal (Legislativo)
+tz_regua_descritiva_2026-11-11.csv,Ente,58,610,38,STF | TSE | União
+tz_regua_descritiva_2026-11-11.csv,Instrumento,58,610,57,"ADPF 1013 (medida cautelar de 29/09/2022; mérito de 18/10/20 | Resolução TSE nº 23.736/2024, art. 24 · para 2026: Resolução | Lei nº 6.091/1974 (arts. 1º e 4º)"
+tz_regua_descritiva_2026-11-11.csv,Data,58,610,57,18/10/2023 | 27/02/2024 | 15/08/1974
+tz_regua_descritiva_2026-11-11.csv,Tipo de medida,58,610,33,decisão em controle concentrado — dever de ofertar | regulamentação | transporte de eleitores pela Justiça Eleitoral
+tz_regua_descritiva_2026-11-11.csv,Serviços abrangidos,58,610,51,"transporte coletivo urbano municipal e intermunicipal, inclu | veículos públicos requisitados; zonas rurais a ≥ 2 km do loc | transporte público coletivo urbano"
+tz_regua_descritiva_2026-11-11.csv,Subtipo análogo,58,610,6,2d | — | 2c
+tz_regua_descritiva_2026-11-11.csv,Efeito sobre a base municipal,58,610,41,"Desde 2024 a gratuidade eleitoral é dever do poder público,  | Mesma leitura de F1; o § 4º obriga o poder público a informa | Antecedente: não é transporte coletivo regular nem política "
+tz_regua_descritiva_2026-11-11.csv,Arquivo no cofre,46,610,17,Legislacao e contratos TZ/normas/BR/ | Legislacao e contratos TZ/normas/BR/;  | —
+tz_regua_descritiva_2026-11-11.csv,Observação,55,610,55,"Unânime; apelo ao Congresso para editar lei; na falta, o TSE | § 2º: custeio não viola a LRF; § 3º: sem distinção entre ele | Registrar para distinguir de gratuidade no transporte coleti"
+tz_regua_descritiva_2026-11-11.csv,Data da fusão,5,610,1,2026-10-08
+tz_regua_descritiva_2026-11-11.csv,Motivo,5,610,1,A.1.15: uma linha por município na camada 2 (decisão do auto
+tz_registro_alteracoes.csv,intervalo,1621,1621,6,05-11-2026 a 11-11-2026 | 11-10-2026 a 17-10-2026 | 17-10-2026 a 18-10-2026
+tz_registro_alteracoes.csv,Data,1621,1621,19,05/11/2026 | 06/11/2026 | 08/11/2026
+tz_registro_alteracoes.csv,Município/UF,1621,1621,191,Lauro Müller/SC | Brodowski/SP | Carmo/RJ
+tz_registro_alteracoes.csv,Planilha,1621,1621,5,mestre | régua | arquivo
+tz_registro_alteracoes.csv,Campo,1621,1621,71,Operador | Prestação (eixo 2) | Remuneração do operador
+tz_registro_alteracoes.csv,Antes,1621,1621,896,não identificado nas fontes disponíveis (lei prevê prestação | não encontrado | não verificado.
+tz_registro_alteracoes.csv,Depois,1621,1621,1287,"Prefeitura de Lauro Müller — execução direta (Decreto 24/202 | prestação direta (Decreto 24/2026, que regulamenta a Lei 2.3 | não se aplica (prestação direta; despesas por dotações própr"
+tz_registro_alteracoes.csv,Justificativa,1621,1621,594,Decreto 24/2026 baixado pelo autor: execução direta | Decreto 24/2026 baixado pelo autor: execução direta: trajetó | Contrato 041/2026 baixado pelo autor: operador do circular d
+tz_registro_alteracoes.csv,Fonte (arquivo ou URL),1403,1621,467,"normas/SC/Lauro Muller-SC - Decreto 24-2026 (05-02-2026) | contratos/SP/Brodowski-SP - Contrato 041-2026 (PE 001-2026,  | contratos/SP/Brodowski-SP - Contrato 041-2026 (PE 001-2026, "
+tz_registro_alteracoes.csv,Decisão do autor?,1590,1621,121,"sim (decisão do autor, 05/11/2026 — '1 sim e 2 sim') | sim (decisão do autor, 06/11/2026 — 'ok') | sim (decisão do autor, 06/11/2026 — '1 e 2 ok')"
+tz_registro_alteracoes.csv,Frente,1590,1621,104,documento baixado pelo autor | documento lido + rodada de outra IA (conta conferida) | documento conferido + rodada de outras IAs
+tz_esic_pedidos.csv,#,76,76,76,1 | 2 | 4
+tz_esic_pedidos.csv,Município,76,76,76,Venda Nova do Imigrante | Anicuns | Costa Rica
+tz_esic_pedidos.csv,UF,76,76,10,ES | GO | MS
+tz_esic_pedidos.csv,Grupo,76,76,66,B — política sem norma | B — política sem norma; varredura manual esgotada em 24/09/2 | B — política sem norma; varredura manual esgotada (imprensa 
+tz_esic_pedidos.csv,Por que o e-SIC decide,76,76,76,"7 páginas oficiais confirmam operação própria (Central de Ve | Sem norma; 1 ônibus da Prefeitura em ""horários específicos""; | Único ato (Decreto 4.818/2021) cria tarifa paga R$ 2,00, exp"
+tz_esic_pedidos.csv,Pergunta específica a acrescentar ao modelo,76,76,76,Ato de 2014 e da retomada de 2019; as 5 rotas são todo o col | Ano de início e ato (ou confirmação de que não há); linhas/h | Ato que dispensou ou zerou a tarifa social do Decreto 4.818/
+tz_esic_pedidos.csv,Protocolo / data / prazo,76,76,51,"02539.202600/0110-01 · 25/09/2026 · prazo 19/10/2026 | 2026097815296125 · 25/09/2026 · prazo 15/10/2026 | 43ZZS4CC · 25/09/2026 · prazo 15/10/2026 (20 dias da LAI, ca"
+tz_esic_pedidos.csv,Resposta,76,76,29,respondido em 27/10/2026 (Ouvidoria): gratuito a qualquer pe | sem resposta no prazo (vencimento conservador 19/10/2026); p | sem resposta no prazo (vencimento conservador 19/10/2026); p

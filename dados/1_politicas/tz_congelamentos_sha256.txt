@@ -1,0 +1,55 @@
+# Manifestos SHA-256 das cópias congeladas da base de políticas (cópias guardadas pelo autor; não depositadas)
+
+## congelamento-2026-10-11
+0781f18d71ae8bd8478eddd0e292a73a95d48a8fbcf206f7bb9845dff3f51181  Controle unificado dos casos — base, régua, log e leitura.xlsx
+ae55232980344cb224b5e55a8f607655e5ab16da51182f76b21e274d94084433  Municípios TZ - consolidado.xlsx
+58759ef5f9a906c0e0a69a5f5666bed47f88ce49404392b8be05da39d72e9f33  Tipologias TZ - consolidado.xlsx
+50e6a24a56a016478a3d03e50377f442686750f3624cc323724c8b7eee197292  Log de busca jurídica e contratual — municípios.md.txt
+f5a234e46b04a9c703e446eb2abcdc0084bf3dcbf65df1b84c395a9cdec63903  Regras de classificacao das reguas.md.txt
+f2e6e5926366b3e68a4fc922d4f866352f7300e225c31e43034a1b9bef5c8cd6  _índice - Normas padronizadas.md.txt
+9eee454fba4ef9585b5ea7c8eb70792df9c710f2f9f2d8139e436cb9d2dc414f  e-SIC — pedidos de informação por município.md.txt
+
+## congelamento-2026-10-17
+ee40beda8bb62abbc64ee71f17e69b966b76bb79c6da4d666d6f2ed06c5cb949  Municípios TZ - consolidado.xlsx
+bbe8377b48c97beb6076ffadf5063d373d776bbda12f3d420e297e453486f786  Tipologias TZ - consolidado.xlsx
+3cf2b021e1b0d9c1e6daee75e7e055cb10729d0267815f0ba48cf1cdf51c190d  Controle unificado dos casos — base, régua, log e leitura.xlsx
+6fffb177624286ee0f8aa229d8f4c33e546aca5e2bd9ae00fb52f5d672d6d877  Log de busca jurídica e contratual — municípios.md.txt
+2148b1ee7b0fa5b90b9a426f82994346fe7d4868b22c7b58b0d00f0653f2da3e  e-SIC — pedidos de informação por município.md.txt
+dec0e9480a9e2ae11caea911abfb92b4d26337ace4ec642eeab7eb9795cf85f4  Regras de classificacao das reguas.md.txt
+f55c1af8638091c1923f3dee63182c61f78ad0d068ddc06f53a061958cc8a514  _índice - Normas padronizadas.md.txt
+
+## congelamento-2026-10-18
+145358fb86f87a9089369fddbb6e6332d09128eb278d32bf9b265df18a2b5e82  Municípios TZ - consolidado.xlsx
+bbe8377b48c97beb6076ffadf5063d373d776bbda12f3d420e297e453486f786  Tipologias TZ - consolidado.xlsx
+9f1137d59659375c0e17e2f69688c3c8f26b232290a1b93e08aedd8be79a959c  Controle unificado dos casos — base, régua, log e leitura.xlsx
+bb81c27e639e3b8282e6b93cb96d8ffc0a1caf680b957fc7d27ea0b0e13d75c0  Log de busca jurídica e contratual — municípios.md.txt
+138c3be2873ae4588bf7a144e22e956372a5cc61080f950785764c541b693e50  e-SIC — pedidos de informação por município.md.txt
+dec0e9480a9e2ae11caea911abfb92b4d26337ace4ec642eeab7eb9795cf85f4  Regras de classificacao das reguas.md.txt
+f55c1af8638091c1923f3dee63182c61f78ad0d068ddc06f53a061958cc8a514  _índice - Normas padronizadas.md.txt
+
+## congelamento-2026-10-21
+fcdb45656826d3e3dc6bc5487cf4eadd03ab466d7bd9fa54b9fe3a04cac279c2  Municípios TZ - consolidado.xlsx
+0bac5ac200a21e0082d900fe662d3bb0c372633412453a8af0ff561f2c36d9a4  Tipologias TZ - consolidado.xlsx
+6b2127f87d6754bd880e21f6332aed3adf776158770e06b55acd90aa9403c217  Controle unificado dos casos — base, régua, log e leitura.xlsx
+c61b971af4ecf771a297fe88e2fbb7ea70ee7f20934f4ca125c4d7e0221dbb4e  Log de busca jurídica e contratual — municípios.md.txt
+eedf5eff53d3f918a8b944daea4f7f3ae085c7cd5132193bd621d0b1ea7420cc  e-SIC — pedidos de informação por município.md.txt
+dec0e9480a9e2ae11caea911abfb92b4d26337ace4ec642eeab7eb9795cf85f4  Regras de classificacao das reguas.md.txt
+6fdd0b90b04e294c5c1970cc6af3839598ad0023e1b190e7a022fcb1d00a48ab  _índice - Normas padronizadas.md.txt
+
+## congelamento-2026-11-05
+47830678dd9bc1ac7f395e3489e5f9d70a33273944dc8118cd4cab51ac782768  Municípios TZ - consolidado.xlsx
+7dbf3f3292fe2b76fddc21bd82c88ec90625bd7f6690c58907c6c51a2f44a39b  Tipologias TZ - consolidado.xlsx
+2575331c6565f36ba3d25b9c61c9464f3636228a035d24e8d476012f189eab94  Controle unificado dos casos — base, régua, log e leitura.xlsx
+c77ebcb28d598b141e196a6eafeddccdb0353f985fc6747feef16f81bc27305a  Log de busca jurídica e contratual — municípios.md.txt
+f44efbdfe7187037832d5c4d9e36ac55a1679747df7357e127cbc3511b89768b  e-SIC — pedidos de informação por município.md.txt
+e5c01234a0b5078716c23b5a78ababe73b0a890568f2efe2c472eb1c30265437  Regras de classificacao das reguas.md.txt
+87e9c023af1e8ea07304a09792c615f25b2a7f2042bcb9a4fdb969394db70c60  _índice - Normas padronizadas.md.txt
+
+## congelamento-2026-11-11
+effa5a1beb8ea5c56713ebe79fc0c898dc43cd00ab26ecbc9d4c4dc875a49786  Municípios TZ - consolidado.xlsx
+c92e3bad5891cda2d812523143aaddf1262f9db2094f263e562e047577ea568a  Tipologias TZ - consolidado.xlsx
+9bfc6636f6a1f55b0cc8ba9c513dd37fcc2e6b041d16286651a4a8b73c34b477  Controle unificado dos casos — base, régua, log e leitura.xlsx
+ff24a5ef5d70ca6f77948107078dde14cf386c1615b118055a829f977dc871bc  Log de busca jurídica e contratual — municípios.md.txt
+c5f10ed54d036c3f9abb6d8174ef68f0c9e1f86fbefaf21c669a1782e9aa1fbd  e-SIC — pedidos de informação por município.md.txt
+e5c01234a0b5078716c23b5a78ababe73b0a890568f2efe2c472eb1c30265437  Regras de classificacao das reguas.md.txt
+cdfcf6581903f707435686ee7123d1699f98f05e6c4823e8fbc522896ebd90aa  _índice - Normas padronizadas.md.txt

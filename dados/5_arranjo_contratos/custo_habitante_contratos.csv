@@ -1,0 +1,44 @@
+municipio,uf,valor_mensal,como,ano_preco,pop_2022,r_hab_ano,arranjo,subtipo,grupo,fonte,ressalva,A
+Ivoti,RS,21131.52,valor mensal,2026,22983,11.03,contrato emergencial/dispensa,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Três Barras,SC,18968.92,valor de 12 meses ÷ 12,2025,19746,11.53,contrato (Contrato 112/2024),1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Portão,RS,37112.67,"urbano + rural, 12 meses ÷ 12",2026,34071,13.07,contrato por km com o mesmo operador nas,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Dois Córregos,SP,54933.44,valor de 12 meses ÷ 12,2024,24510,26.9,contrato licitado (PE 6/2024 → Contrato ,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+São Lourenço da Serra,SP,45000.0,valor de 12 meses ÷ 12,2025,16067,33.61,operação direta com veículo locado (PP 0,1a,sem operador privado (prestação direta),contrato lido (r78),,A2
+Morretes,PR,57989.96,valor mensal (aditivo de 2025),2025,18309,38.01,contrato licitado (PE 22/2024 → Contrato,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Cerquilho,SP,144795.3,valor anual ÷ 12 (2º aditivo),2026,44695,38.88,contrato licitado (PE 44/2025 → Contrato,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Pains,MG,27013.0,valor de 12 meses ÷ 12,2025,8142,39.81,contrato licitado (Concorrência 008/2025,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Vilhena,RO,335016.53,valor de 180 dias ÷ 6,2026,95832,41.95,contrato emergencial/dispensa,1b,operador fora do recorte de 6 CNAEs (sem,contrato lido (r78),,A4
+Cláudio,MG,108377.21,valor mensal,2025,30159,43.12,locação de veículos com motorista,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Sorriso,MT,398200.0,valor de 6 meses ÷ 6,2026,110635,43.19,operação direta com veículo locado (Disp,1a,sem operador privado (prestação direta),contrato lido (r78),,A2
+Dores do Indaiá,MG,45853.42,valor mensal,2025,12630,43.57,locação de ônibus com condutor e combust,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Taquarituba,SP,95000.0,≈ R$ 90 a 100 mil por mês (2026),2026,24350,46.82,contrato novo licitado — Contrato 0142/2,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Itapetininga,SP,701650.0,valor mensal,2025,157790,53.36,locação de frota com operação municipal ,1a,operador em grupo econômico (componente ,contrato lido (r78),,A2
+Mandirituba,PR,130558.04,valor mensal dos Contratos 30 e 31/2026,2026,27439,57.1,contratação de operadores por km (PE 900,1a,"operador identificado, isolado na rede (",contrato ou aditivo lido (base viva),,A4
+Mata de São João,BA,204148.6,valor de 12 meses ÷ 12,2024,42566,57.55,contrato novo licitado,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A5
+Brodowski,SP,125764.4,valor anual ÷ 12 (Contrato 041/2026; quantidades de 365 dias pelo TR),2026,25201,59.89,contrato licitado por km com motorista d,1a,"operador identificado, isolado na rede (",contrato ou aditivo lido (base viva),"Gatran desde jun/2026; período anual pela conta dos km/dia do TR (decisão do autor, 06/11/2026)",A4
+Pirapora,MG,318401.93,valor de 12 meses ÷ 12,2025,55606,68.71,contrato licitado (PE 048/2024 → Contrat,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+São José da Lapa,MG,159693.91,valor de 12 meses ÷ 12,2023,26090,73.45,contrato licitado (PE 056/2023 → Contrat,1a,"operador identificado, isolado na rede (",contrato lido (r78),,nã
+Pederneiras,SP,297650.46,valor mensal (Contrato 115/2026),2026,44827,79.68,contrato licitado (PE 74/2026 → Contrato,1d,"operador identificado, isolado na rede (",contrato ou aditivo lido (base viva),"subtipo 1d; o operador também vendeu ""passes de circular"" (Contrato 179/2025)",A4
+Pedro de Toledo,SP,80223.0,valor de 12 meses ÷ 12,2025,11281,85.34,contrato licitado (PE 14/2025 → Contrato,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Pescaria Brava,SC,79586.51,valor anual ÷ 12,2025,10190,93.72,"contrato licitado (PE 42/2025, locação c",1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Machado,MG,309210.36,valor mensal,2025,37684,98.46,aditivo à concessão existente (Adendo de,1a,operador em grupo econômico (componente ,contrato lido (r78),,A5
+Jales,SP,424040.1,valor anual ÷ 12 (Aditivo 02/2026),2026,48776,104.32,contrato licitado (PE 36/2025 → Contrato,1a,"operador identificado, isolado na rede (",contrato ou aditivo lido (base viva),"valor anual do Aditivo 02/2026 (08/07/2026–07/07/2027); o Contrato 73/2025 fixava R$ 4.610.798,40/ano; os R$ 9.850.791 do PNCP não correspondem a ato assinado (rodada de outra IA, 06/11/2026; decisão do autor)",A4
+Balneário Camboriú,SC,1295959.67,valor semestral ÷ 6,2025,139155,111.76,contrato emergencial (Dispensa 006/2025 ,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Tuiuti,SP,67452.0,valor de 12 meses ÷ 12,2025,6778,119.42,locação de veículo com motorista por km ,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Garopaba,SC,300000.0,parcela mensal,2026,29959,120.16,concessão licitada (Concorrência 1/2018 ,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A5
+Lins,SP,782000.0,valor mensal,2024,74779,125.49,contrato licitado (PE 108/2024 → Contrat,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Antonina,PR,191000.0,pagamento mensal de 2026,2026,18091,126.69,"concessão (Concorrência 4/2021, 20 anos)",1a,"operador identificado, isolado na rede (",contrato lido (r78),,A5
+Tijucas do Sul,PR,199996.75,valor de 12 meses ÷ 12,2025,17621,136.2,prestação direta (2015–2020) → locação c,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Mendes,RJ,205800.0,valor de 12 meses ÷ 12,2025,17502,141.1,locação de veículos com motorista,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Caeté,MG,461540.8,valor de 12 meses ÷ 12,2025,38776,142.83,contrato licitado (PE 2026 → Contrato 33,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Tietê,SP,539750.0,valor de 6 meses ÷ 6,2026,37663,171.97,contrato emergencial (Dispensa 29/2026 →,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Eusébio,CE,1240500.0,valor de 12 meses ÷ 12,2026,74170,200.7,contrato licitado (Concorrência 2026.03.,1c,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Belo Vale,MG,145590.15,valor de 12 meses ÷ 12,2026,8627,202.51,"contrato licitado (PE 24/2026, Processo ",1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Araçariguama,SP,370000.0,valor de 12 meses ÷ 12,2021,21522,206.3,locação de veículos com motorista (Conco,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Barra do Turvo,SP,127885.59,contraprestação mensal estimada,2025,6876,223.19,concessão (Lei 8.987/1995) por contrapre,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A5
+São Joaquim de Bicas,MG,660000.0,valor de 12 meses ÷ 12,2025,34348,230.58,locação de ônibus com motorista (PE 7/20,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Vargem Grande Paulista,SP,1079239.68,valor mensal (1º aditivo),2025,50415,256.89,"locação de ônibus com operação, conserva",1a,"operador identificado, isolado na rede (",contrato lido (r78),,A3
+Mariana,MG,1579469.08,valor mensal (1º aditivo),2025,61387,308.76,aditivo à concessão licitada (CP 001/202,1a,operador em grupo econômico (componente ,contrato lido (r78),,A5
+Alumínio,SP,1080250.0,parcela mensal,2026,17301,749.26,contrato novo licitado,1a,"operador identificado, isolado na rede (",contrato lido (r78),,A4
+Guararema,SP,1987141.82,"total mensal (set/2026) × 0.7005 (parcela urbana do custo de 2025, sem o escolar)",2026,31236,763.4,contrato licitado (Concorrência 01/2023 ,1a,operador em grupo econômico (componente ,contrato lido (r78),o Contrato 32/2024 inclui linhas escolares; parcela urbana estimada pelas medições de 2025 (Apostilamento 02),A4
+Carmo,RJ,51821.44,"valor anual ÷ 12 (Contrato 0048/2023, R$ 621.857,28 em 12 meses; 1º aditivo, Proc. 00124/2024, mesmo valor)",2024,17198,36.16,contrato licitado por km com motorista d,1a,"operador identificado, isolado na rede (","contrato ou aditivo lido (resposta ao e-SIC 45, 09/11/2026)","2 rotas distritais (17.424 + 15.312 km/ano); R$ 19,52 e R$ 18,40/km",A4

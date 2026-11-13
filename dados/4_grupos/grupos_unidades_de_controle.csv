@@ -1,0 +1,317 @@
+unidade_B,unidade_B_nome,membros (GE),n_GE,n_empresas,capital_social_total_reais,pct_capital,pct_acumulado,n_municipios_6cnaes,n_municipios_4921301,familia_controle,linhagem,federacao,grau_fusao,opera_tarifa_zero
+UB-001,Grupo Jacob Barata / Guanabara,GE-001,1,51,722444561.89,8.8862,8.8862,129,62,,,FED-01,—,sim: Caucaia
+UB-002,"Grupo Itapemirim (atual, Sidnei Piva de Jesus)",GE-002,1,2,522000000,6.4207,15.3068,2,2,,,FED-03,—,não
+UB-003,Família Gulin (5 ramos com capital cruzado),GE-008; GE-014; GE-017; GE-020; GE-236,5,19,408114770.49,5.0199,20.3267,20,15,FC-01,LIN-01 Gulin,FED-02,A,sim: Paranaguá
+UB-004,Grupo Belarmino da Ascenção Marta,GE-003,1,22,289156813,3.5567,23.8833,64,30,,,FED-04,—,sim: Monte Mor
+UB-005,Grupo Ruas,GE-004,1,13,280680000,3.4524,27.3357,1,1,,,FED-05,—,não
+UB-006,Grupo Constantino (Comporte Participações),GE-005,1,20,228741601,2.8135,30.1493,102,14,,LIN-02 Constantino (Nenê),FED-01,—,não
+UB-007,Grupo JCA (Jelson da Costa Antunes),GE-006,1,2,202680995.2,2.493,32.6423,34,25,,,FED-01,—,não
+UB-008,Viação Urbana de Campinas + Transdutra (holding Najah),GE-224; GE-264,2,2,152000000,1.8696,34.5119,2,1,,,,B,não
+UB-009,Grupo GBS (Garcia Brasil Sul),GE-007,1,2,144653433,1.7793,36.2912,102,1,,LIN-03 Boiko,FED-02,—,não
+UB-010,Grupo Mazon,GE-225,1,1,113620000,1.3975,37.6887,58,12,,,FED-06,—,não
+UB-011,Não identificado (Alfa/Yaester Transporte Escolar),GE-009,1,2,110010000,1.3531,39.0418,1,0,,,,—,não
+UB-012,Grupo SOU (Sancetur),GE-010,1,2,107600000,1.3235,40.3653,12,12,,LIN-04 Abi Chedid,,—,sim: Palmas
+UB-013,Grupo NSO (Nossa Senhora do Ó),GE-011,1,3,99500000,1.2239,41.5892,5,5,,,,—,não
+UB-014,Auto Viação ABC (família Setti & Braga),GE-012,1,3,98500000,1.2116,42.8007,1,0,,,FED-01,—,não
+UB-015,Grupo City Transporte (Roberto Pereira de Abreu),GE-013,1,6,96740000,1.1899,43.9907,6,6,,,,—,não
+UB-016,Grupo Constantino (Brasília/DF),GE-015,1,2,90000000,1.107,45.0977,4,4,,LIN-02 Constantino (Nenê),,—,não
+UB-017,Transppass + Viação Osasco,GE-228; GE-241,2,2,86105577,1.0591,46.1568,3,3,,,,B,não
+UB-018,Grupo Mobibrasil,GE-016,1,3,76550000,0.9416,47.0983,3,3,,,FED-08,—,não
+UB-019,Pêssego Transportes,GE-226,1,1,66800000,0.8216,47.92,1,1,,,,—,não
+UB-020,Unimar Transportes,GE-227,1,1,65712015,0.8083,48.7283,5,2,,,,—,não
+UB-021,Grupo Carvalho (ramo Aguiar Carvalho) / Mobi,GE-018,1,7,63150198.28,0.7768,49.505,5,5,,,,—,não
+UB-022,Grupo Turin Transportes (família Cotta),GE-019,1,12,61221043,0.753,50.258,34,32,,,FED-07,—,sim: Mariana; Ouro Branco
+UB-023,Grupo A.Cândido,GE-021,1,7,57083214.81,0.7021,50.9602,4,4,,,FED-11,—,não
+UB-024,Grupo Juarez Mendes Melo (Paraúna + Reunidas),GE-161; GE-229,2,5,56290377,0.6924,51.6526,12,5,,,FED-03,B,não
+UB-025,Grupo Abreu Magalhães,GE-022,1,2,55200000,0.679,52.3315,35,12,,,,—,não
+UB-026,Família Saad (Gatusa),GE-023,1,2,54737460,0.6733,53.0048,1,1,,,FED-05,—,não
+UB-027,Movebuss,GE-230,1,1,53890000,0.6629,53.6676,1,1,,,,—,não
+UB-028,Grupo Rodap (Santa Luzia/MG),GE-024,1,10,52426099,0.6448,54.3125,3,3,,,FED-01,—,não
+UB-029,Grupo Lessa Carvalho / Saritur,GE-025,1,14,50770633,0.6245,54.937,62,25,,LIN-11 Lessa Carvalho,FED-01,—,não
+UB-030,Grupo TTT (Transbrasiliana/Rápido Marajó/TCA),GE-026,1,3,50700000,0.6236,55.5606,15,3,,,FED-03,—,não
+UB-031,Grupo Sertran (ramo Turim/Felício),GE-027,1,6,50189398,0.6173,56.1779,18,16,,,,—,não
+UB-032,Auto Viação Camurujipe,GE-028,1,4,50041258,0.6155,56.7934,9,4,,,FED-04,—,não
+UB-033,Rápido Expresso Transportes,GE-231,1,1,50000000,0.615,57.4084,4,4,,,,—,não
+UB-034,Rouxinol Viagens e Turismo,GE-232,1,1,50000000,0.615,58.0235,6,6,,,FED-12,—,não
+UB-035,Grupo JAL (família Reis Lavouras),GE-029,1,8,49948000,0.6144,58.6378,8,6,,,FED-01,—,não
+UB-036,Grupo Zem,GE-030,1,4,49730000,0.6117,59.2495,5,5,,,,—,não
+UB-037,Grupo Del Rey,GE-031,1,3,47061131,0.5789,59.8284,3,3,,,,—,não
+UB-038,Grupo JMT (Planalto Transportes),GE-032,1,2,46145244,0.5676,60.396,23,1,,,FED-02,—,não
+UB-039,Viação Gato Preto (família Gatti),GE-233,1,1,45000000,0.5535,60.9495,1,1,,,,—,não
+UB-040,Reunidas Paulista / Grupo Constantino (Aurivânia),GE-033,1,2,44515495,0.5475,61.497,51,2,,LIN-02 Constantino (Nenê),,—,não
+UB-041,Grupo Adtsa (Tude de Melo),GE-046; GE-274,2,3,44046360,0.5418,62.0388,28,4,,,FED-10,B,não
+UB-042,Rápido Araguaia,GE-234,1,1,42414624,0.5217,62.5605,1,1,,,FED-03,—,não
+UB-043,Grupo Passaredo (ramo Dellias/Felício),GE-034,1,4,41255706,0.5074,63.0679,8,7,,,,—,não
+UB-044,Grupo Borborema (família Schwambach),GE-035,1,5,41254669,0.5074,63.5754,10,4,,,FED-10,—,não
+UB-045,Família Russo (Jundiaiense),GE-036,1,2,40549278,0.4988,64.0741,2,2,,,,—,não
+UB-046,Serveng Transportes / Airport Bus Service,GE-235,1,1,40350116,0.4963,64.5704,3,3,,,,—,não
+UB-047,Grupo Wagner Canhedo (Viplan),GE-037,1,3,40329000,0.4961,65.0665,2,2,,,,—,não
+UB-048,Expresso Nordeste (Boiko),GE-038,1,2,40000000,0.492,65.5585,30,19,,LIN-03 Boiko,,—,não
+UB-049,Grupo Sergio Tadeu Pereira (Sogil/Visate/Coleurb),GE-039,1,5,39012710,0.4799,66.0384,6,6,,,FED-02,—,não
+UB-050,Grupo Eucatur (Assis Gurgacz),GE-040,1,8,38461000,0.4731,66.5114,127,111,,,FED-01,—,não
+UB-051,Grupo NIFF (ramo Iasbek/Felício),GE-041,1,10,38198280,0.4698,66.9813,8,8,,,FED-09,—,não
+UB-052,Família Abi Chedid (Grupo Fênix + Grupo SOU/Sancetur),GE-042,1,4,38123715,0.4689,67.4502,14,13,,LIN-04 Abi Chedid,,—,não
+UB-053,"Grupo Herszkowicz (Viação Paraty, Araraquara/SP)",GE-043,1,3,37887280,0.466,67.9162,10,8,,,FED-06,—,não
+UB-054,Família Kuba (Transkuba + Kuba Viação Urbana),GE-239; GE-296,2,2,37811068,0.4651,68.3813,1,1,FC-02,LIN-05 Kuba,FED-05,A,não
+UB-055,Grupo Expresso Itamarati,GE-044,1,3,37565025,0.4621,68.8434,9,6,,,FED-01,—,não
+UB-056,Grupo Baltazar,GE-045,1,25,36258000,0.446,69.2893,12,9,,,FED-01,—,não
+UB-057,Sub-cluster Constantino/MG (Paiva Constantino),GE-047,1,7,33425298,0.4111,69.7005,40,40,,,,—,não
+UB-058,Família Bezerra Leite (Atalaia + Itamaracá),GE-086; GE-251,2,3,32897352,0.4046,70.1051,5,5,,,,B,não
+UB-059,Grupo Gulin+Corleto,GE-048,1,7,32806407,0.4035,70.5086,12,12,,,,—,não
+UB-060,ETT Carapicuíba,GE-237,1,1,32626400,0.4013,70.9099,1,1,,,FED-09,—,não
+UB-061,Grupo Transimão,GE-049,1,9,32495108,0.3997,71.3096,10,7,,,,—,não
+UB-062,Expresso São Luiz,GE-238,1,1,31150000,0.3831,71.6928,56,4,,,,—,não
+UB-063,Transwolff,GE-240,1,1,30889597,0.3799,72.0727,1,1,,LIN-14 Transwolff,,—,não
+UB-064,Alto Tietê Transportes/ATT (família Fujiura),GE-050,1,2,30799000,0.3788,72.4516,3,3,,,,—,sim: Guararema
+UB-065,Família Paschoalin,GE-051,1,3,30152000,0.3709,72.8224,5,5,,,FED-07,—,não
+UB-066,Grupo Biazus (Viação Canoense + Transcal-Sul),GE-073; GE-279,2,3,30000000,0.369,73.1914,3,3,FC-03,LIN-06 Biazus,FED-02,A,sim: Canoas
+UB-067,Família Mendes,GE-052,1,3,29228268,0.3595,73.551,9,7,,,,—,não
+UB-068,Grupo Saccol,GE-053,1,6,28582658,0.3516,73.9025,6,6,,,,—,não
+UB-069,Grupo Vega (Vasconcelos),GE-054,1,2,28486275.65,0.3504,74.2529,29,0,,,,—,não
+UB-070,Família Franceschi/Brunatto (HBF),GE-055,1,3,27490845,0.3381,74.591,2,2,,,,—,não
+UB-071,Grupo Lorenzutti,GE-056,1,3,27114366,0.3335,74.9246,2,2,,,,—,não
+UB-072,Grupo Spencer (origem cooperativista Cootan/Coopernorte 1993 -> Fênix 2003),GE-057,1,2,27000000,0.3321,75.2567,2,2,,,FED-15,—,não
+UB-073,Viação Andorinha (RJ),GE-058,1,9,26900000,0.3309,75.5875,4,4,,,,—,não
+UB-074,Grupo Realsi,GE-059,1,6,26543118,0.3265,75.914,4,4,,,FED-14,—,não
+UB-075,Grupo Brasileiro (Carletto),GE-060,1,4,26400000,0.3247,76.2387,21,20,,,,—,não
+UB-076,"Grupo Marra (Pioneira Transportes, Cascavel/PR, fundada 1971)",GE-061,1,6,26255101,0.3229,76.5617,7,6,,,FED-02,—,não
+UB-077,Radial Transporte Coletivo (Roberto Umada e Edison Fujiura),GE-062,1,3,26010000,0.3199,76.8816,3,3,,,FED-09,—,não
+UB-078,Mogi Mob,GE-242,1,1,26000000,0.3198,77.2014,1,1,,,FED-08,—,não
+UB-079,Grupo VIDA (Roque Felício Junior),GE-063,1,6,25588715,0.3147,77.5162,57,55,,,,—,não
+UB-080,Grupo Scandia,GE-064,1,5,25254181,0.3106,77.8268,3,2,,,FED-13,—,não
+UB-081,Allibus Transportes (ex-Cooper Paulistana),GE-243,1,1,25000000,0.3075,78.1343,1,1,,,FED-18,—,não
+UB-082,Grupo Teles / Transportes Santo Antônio,GE-065,1,2,24642600,0.3031,78.4374,2,2,,,FED-16,—,não
+UB-083,Grupo Buspar (Pedro Renato Ribeiro Guedes),GE-066,1,3,24211255,0.2978,78.7352,3,3,,,FED-04,—,não
+UB-084,Grupo Nacional Expresso (Maldonado),GE-067,1,3,23800000,0.2927,79.0279,60,2,,,,—,não
+UB-085,Grupo Santa Maria Del Fiore (Carvalho Duarte),GE-068,1,5,23600000,0.2903,79.3182,5,5,,,,—,não
+UB-086,A2 Transportes (ex-Cooper Líder),GE-244,1,1,23330000,0.287,79.6052,1,1,,,,—,não
+UB-087,KBPX Administração e Participação (família Kuba),GE-245,1,1,23000000,0.2829,79.8881,1,1,,LIN-05 Kuba,,—,não
+UB-088,Grupo Giordani,GE-069,1,4,22713810,0.2794,80.1675,4,4,,,,—,não
+UB-089,Sim Locadora (Nabi Abi Chedid Neto),GE-246,1,1,22200000,0.2731,80.4405,2,2,,LIN-04 Abi Chedid,,—,não
+UB-090,Grupo Rubamérica,GE-070,1,4,22180665,0.2728,80.7134,1,1,,,FED-01,—,não
+UB-091,Grupo MIMO (Moreira),GE-071,1,3,21800000,0.2681,80.9815,13,12,,,,—,não
+UB-092,Grupo Bortoncello,GE-072,1,3,21568927,0.2653,81.2468,1,1,,,FED-02,—,não
+UB-093,Nova Suíssa,GE-074,1,5,21004144,0.2584,81.5052,5,5,,,FED-13,—,não
+UB-094,JTP Transportes,GE-247,1,1,21000000,0.2583,81.7635,8,8,,,,—,não
+UB-095,Grupo Santa Zita,GE-075,1,4,20907350,0.2572,82.0206,2,2,,,FED-01,—,não
+UB-096,Grupo Verde Transportes (Eder Augusto Pinheiro),GE-076,1,3,20584660.74,0.2532,82.2738,22,19,,,,—,não
+UB-097,Grupo Marchiori,GE-077,1,5,20200000,0.2485,82.5223,7,4,,,,—,não
+UB-098,Bento Transportes,GE-248,1,1,20000000,0.246,82.7683,4,3,,,,—,não
+UB-099,Grupo Trevo (famílias Sauter/Born),GE-078,1,5,19395960.36,0.2386,83.0068,2,2,,,FED-02,—,não
+UB-100,Grupo Kreuz,GE-079,1,5,19205000,0.2362,83.2431,3,3,,,,—,não
+UB-101,Vix Holding (família Greco),GE-080,1,3,19000000,0.2337,83.4768,5,5,,,,—,não
+UB-102,Grupo Marques (Viação Jacareí),GE-081,1,3,18800000,0.2312,83.708,6,5,,,,—,não
+UB-103,Grupo Viação Rosa,GE-082,1,3,18488486,0.2274,83.9354,8,8,,,FED-17,—,sim: Itapetininga
+UB-104,Grupo Real (em recuperação judicial),GE-083,1,3,18487000,0.2274,84.1628,2,2,,,,—,não
+UB-105,Grupo Redentor (Antunes),GE-084,1,3,17864213.5,0.2197,84.3825,1,1,,,FED-01,—,não
+UB-106,EMTRAM (família Almeida),GE-085,1,2,17100000,0.2103,84.5929,74,15,,,,—,não
+UB-107,Imperial Transportes Urbanos (ex-Coop. Nova Aliança),GE-249,1,1,17000000,0.2091,84.802,1,1,,,,—,não
+UB-108,Sunpass Participações (família Freitas),GE-087,1,3,16498000,0.2029,85.0049,5,5,,,,—,não
+UB-109,Viação Piraquara,GE-250,1,1,16300000,0.2005,85.2054,1,0,,,,—,não
+UB-110,Viação Senhor do Bonfim,GE-252,1,1,16000000,0.1968,85.4022,1,1,,,,—,não
+UB-111,José Antonio Galhardo Abdalla,GE-088,1,3,15900000,0.1956,85.5978,1,1,,,,—,não
+UB-112,Célere Transportes / família Assis Cunha,GE-089,1,3,15786212,0.1942,85.7919,4,4,,,FED-07,—,sim: Ibirité
+UB-113,Grupo Silva/Agoston (Express Transportes Urbanos),GE-090,1,2,15610000,0.192,85.984,1,1,,,,—,não
+UB-114,A P da Cunha / Daniel Transportes e Turismo,GE-253,1,1,15000000,0.1845,86.1685,1,1,,,,—,não
+UB-115,Suzantur,GE-254,1,1,15000000,0.1845,86.353,24,22,,,,—,não
+UB-116,Viação Amarelinho (sob GOBUSS desde 2022),GE-255,1,1,15000000,0.1845,86.5375,7,0,,,,—,não
+UB-117,Não identificado,GE-091,1,2,14835000,0.1825,86.7199,4,2,,,,—,não
+UB-118,Grupo Viação Miracatiba,GE-092,1,2,14768685,0.1817,86.9016,3,1,,,FED-01,—,não
+UB-119,Taguatur Transportes (família Medeiros),GE-093,1,2,14572000,0.1792,87.0808,6,3,,,,—,não
+UB-120,Viação Cariri (nome fantasia: Transportes Cariri),GE-256,1,1,14177236,0.1744,87.2552,1,1,,,,—,não
+UB-121,Viação Vale do Tietê,GE-257,1,1,14000000,0.1722,87.4274,14,3,,,FED-04,—,não
+UB-122,Não identificado,GE-094,1,2,13800000,0.1697,87.5971,2,2,,,,—,sim: Assis
+UB-123,Transcol (família Bandeira de Mello),GE-095,1,2,13660000,0.168,87.7652,2,2,,,,—,não
+UB-124,Grupo Lopes,GE-096,1,3,13568384,0.1669,87.9321,3,3,,,FED-03,—,não
+UB-125,Central Expresso (Alice Carolina da Costa),GE-097,1,2,13200000,0.1624,88.0944,1,1,,,,—,não
+UB-126,Empresa São Gonçalo,GE-258,1,1,13125000,0.1614,88.2559,1,1,,,FED-07,—,não
+UB-127,Bel Tour Turismo e Transportes,GE-259,1,1,13000000,0.1599,88.4158,8,1,,,,—,não
+UB-128,Grupo Pégaso/Palmares (Orlando Pedroso Lopes Marques),GE-098,1,3,12998000,0.1599,88.5756,1,1,,,FED-01,—,não
+UB-129,Grupo São José (família Galhardo Abdalla),GE-099,1,2,12800000,0.1574,88.7331,9,6,,,,—,não
+UB-130,Grupo Ferreira (Reta Rápido/São Dimas),GE-100,1,2,12751463,0.1568,88.8899,2,2,,,FED-01,—,não
+UB-131,Grupo Bogo (Viação Canarinho),GE-101,1,3,12700000,0.1562,89.0461,2,2,,LIN-10 Bogo,,—,não
+UB-132,Auto Bless Transportes (ex-Transcap),GE-260,1,1,12500000,0.1538,89.1999,2,2,,,,—,não
+UB-133,Expresso Palmares (grupo União Santa Cruz),GE-261,1,1,12410826,0.1527,89.3525,4,4,,,,—,não
+UB-134,Grupo Celico,GE-102,1,2,12200000,0.1501,89.5026,10,0,,,,—,não
+UB-135,Prime Plus,GE-262,1,1,12135656,0.1493,89.6519,9,4,,,,—,não
+UB-136,Viação Trans Líder (VTL),GE-263,1,1,12000000,0.1476,89.7995,1,1,,,,—,não
+UB-137,Não identificado,GE-103,1,7,11536200,0.1419,89.9414,1,1,,,,—,não
+UB-138,Six Port Participações S.A. (Fervima/Pirajuçara),GE-104,1,2,11500002,0.1415,90.0828,2,1,,,,—,não
+UB-139,Tipbus (Vipol Transportes Rodoviários),GE-265,1,1,11214750,0.1379,90.2208,1,1,,,,—,não
+UB-140,Univale Transportes,GE-266,1,1,11200000,0.1378,90.3585,10,1,,,,—,não
+UB-141,SBCT Transportes,GE-267,1,1,10890463,0.134,90.4925,1,1,,,,—,não
+UB-142,Bella Via Transportes,GE-268,1,1,10805000,0.1329,90.6254,1,1,,,,—,não
+UB-143,Auto Viação Sanjotur,GE-269,1,1,10356500,0.1274,90.7528,1,1,,,,—,não
+UB-144,Grupo Adamantina (família Martins),GE-105,1,2,10272000,0.1263,90.8791,39,4,,,,—,não
+UB-145,Rogil Transportes Rodoviário,GE-270,1,1,10200000,0.1255,91.0046,1,1,,,,—,não
+UB-146,Viação Real,GE-271,1,1,10200000,0.1255,91.13,5,5,,LIN-11 Lessa Carvalho,,—,não
+UB-147,Amatur Amazônia Turismo,GE-272,1,1,10155764,0.1249,91.255,8,8,,,,—,não
+UB-148,Não identificado,GE-106,1,2,10080000,0.124,91.3789,2,2,,,,—,não
+UB-149,Circular Santa Luzia,GE-273,1,1,10050000,0.1236,91.5026,1,1,,,,—,não
+UB-150,Paraibuna Transportes,GE-275,1,1,10000000,0.123,91.6256,18,0,,,,—,não
+UB-151,Empresa de Ônibus Rosa,GE-276,1,1,10000000,0.123,91.7486,13,10,,,FED-17,—,não
+UB-152,Jamjoy Viação,GE-277,1,1,10000000,0.123,91.8716,16,0,,,,—,não
+UB-153,Carvalho Turismo Expresso,GE-278,1,1,10000000,0.123,91.9946,4,2,,,,—,não
+UB-154,Grupo Stoeberl (Transportes Coletivos Rainha),GE-107,1,2,9875000,0.1215,92.116,1,1,,,,—,não
+UB-155,Grupo Flores (Global GNZ Transportes/Transportes São José),GE-108,1,2,9390000,0.1155,92.2315,2,2,,,FED-01,—,não
+UB-156,Grupo VIPE/Fahel Participações (Viação Padre Eustáquio),GE-109,1,2,9300000,0.1144,92.3459,1,1,,,,—,sim: São Caetano do Sul
+UB-157,Família Lima (Viação Pirassununga/Lima Turismo),GE-110,1,2,9000000,0.1107,92.4566,3,3,,,,—,não
+UB-158,Grupo Lopes (Heloisio Lopes),GE-111,1,4,8883776,0.1093,92.5659,4,4,,,FED-14,—,não
+UB-159,Grupo Volpini (Vale do Ribeira),GE-112,1,3,8750000,0.1076,92.6735,3,3,,,,—,não
+UB-160,Empresas de Transportes Santana e São Paulo,GE-280,1,1,8564252,0.1053,92.7789,1,0,,,,—,não
+UB-161,Tupi/Trans Acreana,GE-281,1,1,8542641,0.1051,92.8839,1,1,,,,—,não
+UB-162,Grupo Verdes Mares/Gidion (Vercelli Participações),GE-113,1,2,8459413,0.1041,92.988,3,3,,LIN-10 Bogo,FED-20,—,não
+UB-163,Caribus,GE-282,1,1,8210000,0.101,93.089,1,1,,,FED-19,—,não
+UB-164,Família Vinhosa,GE-114,1,2,8200000,0.1009,93.1898,1,1,,,,—,não
+UB-165,Grupo Sandra,GE-115,1,2,8167701.4,0.1005,93.2903,6,3,,,,—,não
+UB-166,Auto Viação Reginas,GE-283,1,1,8000000,0.0984,93.3887,3,0,,,,—,não
+UB-167,Tusmil,GE-284,1,1,8000000,0.0984,93.4871,1,1,,,,—,não
+UB-168,Auto Ônibus São João,GE-285,1,1,8000000,0.0984,93.5855,7,7,,,,—,não
+UB-169,Rodoeste,GE-286,1,1,7919851,0.0974,93.6829,2,2,,,,—,não
+UB-170,Grupo Sobral/Translitoral,GE-116,1,3,7877000,0.0969,93.7798,3,3,,,,—,não
+UB-171,BEZERRA TRANSPORTES LTDA,GE-287,1,1,7800000,0.0959,93.8757,1,1,,,,—,não
+UB-172,Grupo Forquilhinha (família Tiscoski),GE-117,1,4,7751598,0.0953,93.9711,3,3,,,,—,sim: Forquilhinha; Garopaba
+UB-173,Grupo Beluomini,GE-118,1,4,7700000,0.0947,94.0658,1,1,,LIN-12 Redighieri,,—,não
+UB-174,Grupo Scopel (Kyria Participações),GE-119,1,2,7695360,0.0947,94.1604,2,2,,,,—,não
+UB-175,Grupo Moura (Bettania/Autobus),GE-120,1,2,7632623,0.0939,94.2543,1,1,,,FED-07,—,não
+UB-176,RODOTUR TURISMO LTDA,GE-288,1,1,7618900,0.0937,94.348,4,2,,,,—,não
+UB-177,Grupo União Transportes (família Botelho),GE-121,1,2,7590000,0.0934,94.4414,2,1,,,FED-19,—,não
+UB-178,Grupo Lage/Viação Forte (família Gomes),GE-122,1,2,7540000,0.0927,94.5341,2,2,,,,—,não
+UB-179,OTRANTUR TRANSPORTE E TURISMO LTDA,GE-289,1,1,7500000,0.0923,94.6264,2,2,,,,—,não
+UB-180,Grupo Santa Clara/Cecato (Kva Participações),GE-123,1,2,7470000,0.0919,94.7183,4,3,,,,—,não
+UB-181,VIACAO SAO GABRIEL LTDA,GE-290,1,1,7203400,0.0886,94.8069,8,5,,,,—,não
+UB-182,Família Gatti,GE-124,1,2,7119550,0.0876,94.8945,1,1,,,,—,não
+UB-183,WOLFF TRANSPORTES E TURISMO LTDA.,GE-291,1,1,7000000,0.0861,94.9806,1,1,,LIN-14 Transwolff,,—,não
+UB-184,TRANSPORTADORA GLOBO LTDA,GE-292,1,1,7000000,0.0861,95.0667,1,1,,,,—,não
+UB-185,TRANSPORTE E TURISMO SANTO ANTONIO LTDA,GE-293,1,1,7000000,0.0861,95.1528,2,2,,,FED-20,—,não
+UB-186,VIACAO CRUZEIRO DO SUL LTDA,GE-294,1,1,7000000,0.0861,95.2389,35,0,,,,—,não
+UB-187,VIA OURO COLETIVOS LTDA,GE-295,1,1,6871000,0.0845,95.3234,1,1,,,FED-01,—,não
+UB-188,Grupo Carneiro Mendonça,GE-125,1,3,6860000,0.0844,95.4077,2,2,,,,—,não
+UB-189,Grupo Alves,GE-126,1,4,6630000,0.0815,95.4893,3,2,,,FED-01,—,não
+UB-190,VIACAO ATIBAIA SAO PAULO LTDA,GE-297,1,1,6600000,0.0812,95.5705,9,8,,,,—,não
+UB-191,NOVA VIA TRANSPORTES E SERVICOS LTDA,GE-298,1,1,6500000,0.08,95.6504,2,2,,,,—,não
+UB-192,Família Pires Ribeiro,GE-127,1,2,6299638.34,0.0775,95.7279,1,1,,,,—,não
+UB-193,Grupo Cidade do Sol/Valle,GE-128,1,2,6257550,0.077,95.8049,1,1,,,FED-11,—,não
+UB-194,Família Saraiva (Nortran/Conorte),GE-129,1,5,6155496,0.0757,95.8806,1,1,,,FED-02,—,não
+UB-195,Grupo AVOA,GE-130,1,4,6144000,0.0756,95.9562,8,6,,,,—,não
+UB-196,TRANSARTES TURISMO E LOCADORA DE VEICULOS LTDA,GE-299,1,1,6100000,0.075,96.0312,1,1,,,,—,não
+UB-197,GBO TRANSPORTES LTDA,GE-300,1,1,6035000,0.0742,96.1054,1,1,,,,—,não
+UB-198,ALPRINO,GE-131,1,2,6030000,0.0742,96.1796,1,1,,,,—,não
+UB-199,RapidoSP,GE-132,1,2,6000000,0.0738,96.2534,2,2,,,,—,não
+UB-200,"Grupo Transmoreira (Contagem/RMBH, 500+ ônibus)",GE-133,1,4,6000000,0.0738,96.3272,10,10,,,,—,não
+UB-201,VIACAO VG - EM RECUPERACAO JUDICIAL LTDA,GE-301,1,1,6000000,0.0738,96.401,1,1,,,,—,não
+UB-202,FATIMA TRANSPORTES E TURISMO LTDA,GE-302,1,1,6000000,0.0738,96.4748,2,2,,,,—,não
+UB-203,TRANSLOCAVE LTDA,GE-303,1,1,6000000,0.0738,96.5486,3,3,,,,—,não
+UB-204,CAF TRANSPORTES LTDA,GE-304,1,1,6000000,0.0738,96.6224,9,9,,,,—,não
+UB-205,TRANS BUS TRANSPORTES COLETIVOS LTDA,GE-305,1,1,6000000,0.0738,96.6962,1,0,,,,—,não
+UB-206,TVM TRANSPORTES VERDEMAR LTDA,GE-306,1,1,6000000,0.0738,96.77,1,1,,,FED-14,—,não
+UB-207,Grupo Santo Antônio (família Barbosa),GE-134,1,4,5740000,0.0706,96.8406,2,1,,,FED-16,—,não
+UB-208,Grupo Portantiolo/São Jorge (Pelotas/RS),GE-135,1,3,5650000,0.0695,96.9101,2,2,,,,—,não
+UB-209,PATRIOTS TRANSPORTES URBANOS LTDA,GE-307,1,1,5600000,0.0689,96.979,1,1,,,FED-15,—,não
+UB-210,Grupo Prado,GE-136,1,2,5502000,0.0677,97.0467,1,1,,,,—,não
+UB-211,Grupo Modelo (Aracaju/SE),GE-137,1,2,5500000,0.0677,97.1143,3,2,,,,—,não
+UB-212,SILAS-SERVICOS DE TRANSPORTES URBANOS LTDA.,GE-308,1,1,5458689,0.0671,97.1815,2,2,,,,—,não
+UB-213,Stilo Transportes e Fretamentos (Andrade),GE-138,1,2,5440490,0.0669,97.2484,4,4,,,FED-01,—,não
+UB-214,Grupo Atlântico/ATT (família Santos),GE-139,1,3,5400000,0.0664,97.3148,6,6,,,,—,não
+UB-215,VIACAO TINDIQUERA LTDA,GE-309,1,1,5400000,0.0664,97.3812,1,1,,,,—,não
+UB-216,EXPRESSO PRESIDENTE GETULIO LTDA,GE-310,1,1,5389400,0.0663,97.4475,8,4,,,,—,sim: Palmas
+UB-217,Credserver Mobilidade e Serviços Holding,GE-140,1,3,5370000,0.0661,97.5136,2,2,,,,—,não
+UB-218,Família Brambati,GE-141,1,2,5250000,0.0646,97.5781,1,1,,,,—,não
+UB-219,Grupo Kopereck,GE-142,1,5,5245000,0.0645,97.6426,3,3,,,,—,não
+UB-220,PLENA TRANSPORTES E TURISMO LTDA,GE-311,1,1,5230000,0.0643,97.707,2,2,,,FED-01,—,não
+UB-221,Grupo Cavalcanti/Nilopolitana Fenix (família Silva),GE-143,1,3,5200000,0.064,97.7709,2,2,,,,—,não
+UB-222,Grupo Marassi (Sul Fluminense/RJ),GE-144,1,5,5197000,0.0639,97.8349,4,4,,,,—,não
+UB-223,AUTO VIACAO METROPOLITANA LTDA,GE-312,1,1,5113840.24,0.0629,97.8978,2,2,,,,—,não
+UB-224,Metropolitana Transportes + Viação Tabuazeiro (Grupo Picoli),GE-145,1,2,5105018,0.0628,97.9606,1,1,,,,—,não
+UB-225,EMPRESA AUTO ONIBUS MACACARI LTDA,GE-313,1,1,5100000,0.0627,98.0233,1,1,,,,—,não
+UB-226,LENOVA TRANSPORTES LTDA,GE-314,1,1,5084460,0.0625,98.0858,1,1,,,,—,não
+UB-227,TCI TRANSPORTE COLETIVO DE ITATIBA LTDA,GE-315,1,1,5034523,0.0619,98.1477,1,1,,,,—,não
+UB-228,TURP TRANSPORTE URBANO DE PETROPOLIS LTDA.,GE-316,1,1,5001000,0.0615,98.2093,1,1,,,,—,não
+UB-229,Grupo Schaedler (Viação Marumbi + Empresa Curitiba Cerro Azul),GE-146,1,2,5000000,0.0615,98.2708,6,0,,,,—,não
+UB-230,TRANSPORTE URBANO SAO MIGUEL DE ILHEUS LTDA,GE-317,1,1,5000000,0.0615,98.3323,2,2,,,,—,não
+UB-231,GRAN FONSECA AGENCIAMENTO E LOCACAO LTDA,GE-318,1,1,5000000,0.0615,98.3938,4,4,,,,—,não
+UB-232,EXPRESSO CHARQUEADAS TRANSPORTES LTDA,GE-319,1,1,5000000,0.0615,98.4553,2,2,,,,—,não
+UB-233,VIACAO CUIABA LTDA,GE-320,1,1,5000000,0.0615,98.5168,1,0,,,FED-12,—,não
+UB-234,OSWALDO BRAMBILLA TRANSPORTE COLETIVO LTDA,GE-321,1,1,5000000,0.0615,98.5783,3,3,,,,—,não
+UB-235,AUTO VIACAO VELOZ TRANSPORTES E TURISMO LTDA,GE-322,1,1,5000000,0.0615,98.6398,1,1,,,,—,não
+UB-236,TRANSPORTES URBANOS EIXO FORTE LTDA,GE-323,1,1,5000000,0.0615,98.7013,1,1,,,,—,não
+UB-237,COMERCIAL DIESEL TRANSPORTE E TERRAPLANAGEM LTDA EM RECUPERACAO JUDICIAL,GE-324,1,1,5000000,0.0615,98.7628,9,1,,,,—,não
+UB-238,COSTA SUL TRANSPORTES E TURISMO LTDA,GE-325,1,1,5000000,0.0615,98.8243,4,4,,,,—,não
+UB-239,ABL COMERCIO ATACADISTA E TRANSPORTE DE PRODUTOS AGRICOLAS LTDA,GE-326,1,1,5000000,0.0615,98.8858,1,1,,,,—,não
+UB-240,LESTE TRANSPORTE COLETIVO LTDA,GE-327,1,1,5000000,0.0615,98.9473,1,1,,,FED-03,—,não
+UB-241,Fenix Participações,GE-147,1,6,4875720,0.06,99.0072,8,8,,,,—,não
+UB-242,Grupo Anchieta (Viação Anchieta + Milênio Transportes + Via BH Coletivos + Coletivos Boa Vista),GE-148,1,4,4830600,0.0594,99.0667,2,2,,,,—,não
+UB-243,Grupo Massei,GE-149,1,4,4814000,0.0592,99.1259,3,3,,,,—,não
+UB-244,Grupo Galiassi,GE-150,1,3,4500000,0.0554,99.1812,2,2,,,,—,não
+UB-245,AESA/Consórcio União Santo André (Ronan Maria Pinto),GE-151,1,6,4170000,0.0513,99.2325,2,2,,,,—,não
+UB-246,Grupo Agulhas Negras,GE-152,1,4,3900000,0.048,99.2805,4,4,,,,—,não
+UB-247,Grupo Leblon Transporte,GE-153,1,3,3792014,0.0466,99.3271,2,2,,,,—,não
+UB-248,"Grupo Coletivo Transportes (STM + Ônibus Coletivos + STI, mesma marca desde 1988)",GE-154,1,3,3500000,0.0431,99.3702,1,1,,,FED-10,—,não
+UB-249,Consórcio Mob (sucessor do Conorte),GE-155,1,3,3292700,0.0405,99.4107,2,2,,,FED-02,—,não
+UB-250,Isse,GE-156,1,4,3000000,0.0369,99.4476,2,2,,,,—,não
+UB-251,Grupo/Viação São Benedito (Fortaleza/CE),GE-157,1,4,2660036,0.0327,99.4803,3,3,,,,—,não
+UB-252,Santa Teresinha Transporte e Turismo (Brusquetur) + Santa Luzia Transportes,GE-158,1,3,2600000,0.032,99.5123,4,4,,,,—,não
+UB-253,Grupo Bomfim (LM3 Holding),GE-159,1,5,2600000,0.032,99.5443,4,3,,,,—,não
+UB-254,Viação União,GE-160,1,3,2570000,0.0316,99.5759,8,7,,,,—,sim: Machado
+UB-255,Grupo Salvini (Viação Treze de Junho),GE-162,1,3,2300000,0.0283,99.6042,2,2,,,,—,não
+UB-256,Viação Cidade de Barreiras (em recuperação judicial),GE-163,1,4,2100000,0.0258,99.63,2,2,,,,—,não
+UB-257,Família Melo (Décio Santos de Melo),GE-164,1,3,1850000,0.0228,99.6527,4,3,,,,—,não
+UB-258,Grupo Ingá,GE-165,1,3,1681784.8,0.0207,99.6734,2,2,,,,—,não
+UB-259,Gouveia-Par Holding,GE-166,1,3,1670000,0.0205,99.694,3,1,,,,—,não
+UB-260,Família Evangelista de Souza,GE-167,1,3,1611232,0.0198,99.7138,2,2,,,FED-14,—,não
+UB-261,Família Furletti (Viação Real),GE-168,1,3,1600000,0.0197,99.7335,1,1,,,,—,não
+UB-262,Família Nascimento/Peviani,GE-169,1,4,1303000,0.016,99.7495,1,1,,,,—,não
+UB-263,Grupo Alto Minho/Niturvia,GE-170,1,3,1250000,0.0154,99.7649,2,2,,,,—,não
+UB-264,Família Paula/Duarte Ferreira,GE-171,1,3,1077186,0.0132,99.7781,3,3,,,,—,não
+UB-265,Família Lima/Amaral,GE-172,1,3,995000,0.0122,99.7904,3,3,,,,—,não
+UB-266,Grupo Ferreira/Pantanal,GE-173,1,3,870400,0.0107,99.8011,1,1,,,,—,não
+UB-267,Família Tenório,GE-174,1,3,850000,0.0105,99.8115,1,1,,,,—,não
+UB-268,Família Almeida,GE-175,1,3,800000,0.0098,99.8214,2,2,,,,—,não
+UB-269,Família Schmidt,GE-176,1,4,758000,0.0093,99.8307,1,1,,,,—,não
+UB-270,Garcia,GE-177,1,9,755800,0.0093,99.84,1,1,,,FED-18,—,não
+UB-271,Gregorio,GE-178,1,3,750000,0.0092,99.8492,1,1,,,,—,não
+UB-272,Alexandre,GE-179,1,9,736800,0.0091,99.8583,1,1,,,,—,não
+UB-273,Princesa do Sol/Rotedali/Solbus,GE-180,1,3,675000,0.0083,99.8666,1,1,,,,—,não
+UB-274,Araujo,GE-181,1,5,670000,0.0082,99.8748,1,1,,,,—,não
+UB-275,Teixeira,GE-182,1,10,661000,0.0081,99.8829,1,1,,,,—,não
+UB-276,Família Fagundes Barbosa,GE-183,1,3,600000,0.0074,99.8903,2,2,,,,—,não
+UB-277,Silva,GE-184,1,6,594400,0.0073,99.8976,1,1,,,,—,não
+UB-278,Jotur (família Spricigo),GE-185,1,3,550000,0.0068,99.9044,1,1,,,,—,não
+UB-279,Grupo Barra do Piraí (família Silva),GE-186,1,3,500000,0.0062,99.9105,1,1,,,,—,não
+UB-280,Grupo Rocha,GE-187,1,4,400000,0.0049,99.9155,3,2,,,FED-01,—,não
+UB-281,El,GE-188,1,5,398000,0.0049,99.9204,1,1,,,,—,não
+UB-282,Gino,GE-189,1,3,380000,0.0047,99.925,1,1,,,,—,não
+UB-283,Pai Eterno Turismo (família Gomes),GE-190,1,3,360000,0.0044,99.9295,1,1,,,,—,não
+UB-284,Família Abend,GE-191,1,6,360000,0.0044,99.9339,3,3,,,,—,não
+UB-285,Torres,GE-192,1,5,340000,0.0042,99.9381,1,1,,,,—,não
+UB-286,"Auto Viação Presidente Vargas + Viação Alto Petrópolis, consórcio Via Leste (EPTC, Porto Alegre)",GE-193,1,3,339600,0.0042,99.9423,1,1,,,FED-02,—,não
+UB-287,Cezarino,GE-194,1,4,319000,0.0039,99.9462,1,1,,,,—,não
+UB-288,Kino,GE-195,1,3,313000,0.0038,99.95,1,1,,,,—,não
+UB-289,Viação Santo Antônio dos Brotos (Miracema/RJ) e Viação Santo Antônio de Pádua (Santo Antônio de Pádua/RJ),GE-196,1,3,304832,0.0037,99.9538,2,2,,,,—,não
+UB-290,Santa Catarina Transportes / Viação Dom Antônio (família Bellinaso/Londero),GE-197,1,4,300000,0.0037,99.9575,2,1,,,,—,não
+UB-291,Santos,GE-198,1,3,299400,0.0037,99.9611,1,1,,,,—,não
+UB-292,Makihara,GE-199,1,3,287600,0.0035,99.9647,1,1,,,,—,não
+UB-293,Carlos,GE-200,1,7,279000,0.0034,99.9681,1,1,,,,—,não
+UB-294,Antonio Carlos Neves da Silva Transportes,GE-201,1,3,261000,0.0032,99.9713,1,1,,,,—,não
+UB-295,Jorg,GE-202,1,3,253400,0.0031,99.9744,1,1,,,,—,não
+UB-296,Carvalho,GE-203,1,3,183800,0.0023,99.9767,1,1,,,,—,não
+UB-297,Batista,GE-204,1,3,165000,0.002,99.9787,1,1,,,,—,não
+UB-298,Moura,GE-205,1,3,165000,0.002,99.9808,1,1,,,,—,não
+UB-299,Silva,GE-206,1,3,163000,0.002,99.9828,1,1,,,,—,não
+UB-300,Abrantes,GE-207,1,3,160000,0.002,99.9847,2,2,,,,—,não
+UB-301,Tavares,GE-208,1,3,140000,0.0017,99.9865,1,1,,,,—,não
+UB-302,Gammbus,GE-209,1,11,130000,0.0016,99.9881,1,1,,,,—,não
+UB-303,Basilio,GE-210,1,3,120000,0.0015,99.9895,1,1,,,,—,não
+UB-304,Martins,GE-211,1,3,110000,0.0014,99.9909,1,1,,,,—,não
+UB-305,Santos,GE-212,1,3,103000,0.0013,99.9922,1,1,,,,—,não
+UB-306,Atlântica/Litorânea/Trans Progresso,GE-213,1,3,100000,0.0012,99.9934,2,0,,LIN-12 Redighieri,,—,não
+UB-307,Nascimento,GE-214,1,4,100000,0.0012,99.9946,1,1,,,,—,não
+UB-308,Araujo,GE-215,1,3,94000,0.0012,99.9958,1,1,,,,—,não
+UB-309,Vieira,GE-216,1,4,93000,0.0011,99.9969,1,1,,,,—,não
+UB-310,Lima,GE-217,1,3,90000,0.0011,99.998,1,0,,,,—,não
+UB-311,Mota,GE-218,1,3,87800,0.0011,99.9991,1,1,,,,—,não
+UB-312,Silva,GE-219,1,6,30000,0.0004,99.9995,1,1,,,,—,não
+UB-313,Santos,GE-220,1,4,28000,0.0003,99.9998,1,1,,,,—,não
+UB-314,Angelo,GE-221,1,3,15000,0.0002,100,1,1,,,,—,não
+UB-315,VIPA/VINCO/Paulicéia perderam a licitação de Piracicaba (2021-2023) para Rápido Sumaré/Grupo Belarmino (BAMCAF),GE-222,1,3,0,0,100,2,2,,,,—,não
+UB-316,Santa Inês/Pioneira/Serra Verde (Lobato Araújo),GE-223,1,3,0,0,100,1,1,,,,—,não

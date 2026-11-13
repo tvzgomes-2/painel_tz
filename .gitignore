@@ -21,3 +21,9 @@ __pycache__/
 
 # Copia do painel de grupos retirado do Painel Brasil em 23/10/2026 (consulta interna, nao publicar)
 scripts/reserva-rede-ge_painel-grupos.html
+
+# Roteiros auxiliares com nomes de sócios pessoas físicas no código: não depositar (r103, 13/11/2026)
+dados/8_scripts/auditar_grupo_rede.py
+dados/8_scripts/expandir_nivel23_58_novos.py
+dados/8_scripts/expandir_nivel23_tamanho12.py
+dados/8_scripts/gerar_fichas_dsa23.py

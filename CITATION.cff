@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "Se usar estes dados ou roteiros, cite a versão do Zenodo correspondente."
+title: "Tarifa Zero e grupos econômicos no transporte coletivo brasileiro: dados, scripts e painel da tese de doutorado (PGT/UFABC)"
+type: dataset
+version: "2026-11-11"
+date-released: "2026-11-15"
+authors:
+  - family-names: "Gomes"
+    given-names: "Thiago Von Zeidler"
+    affiliation: "Universidade Federal do ABC (UFABC)"
+contributors:
+  - family-names: "Zioni"
+    given-names: "Silvana"
+    affiliation: "Universidade Federal do ABC (UFABC)"
+license: CC-BY-4.0
+repository-code: "https://github.com/tvzgomes-2/painel_tz"
+url: "https://tvzgomes-2.github.io/painel_tz/"
+keywords:
+  - "Tarifa Zero"
+  - "transporte público coletivo"
+  - "grupos econômicos"
+  - "política urbana"
+  - "Brasil"

@@ -1,0 +1,65 @@
+cod_ibge,nome_mun,uf,pop_2022,bus_ficam,posicao,ge_n
+2927408,Salvador,BA,2417678,47.06,polo,18
+2916401,Itapetinga,BA,65897,20.62,isolado,2
+3136702,Juiz De Fora,MG,540756,41.64,polo,9
+3122306,Divinópolis,MG,231091,26.59,isolado,3
+3167202,Sete Lagoas,MG,227397,27.78,polo,4
+3151800,Poços De Caldas,MG,163742,27.23,isolado,4
+3152501,Pouso Alegre,MG,152217,24.08,isolado,6
+3105608,Barbacena,MG,125317,22.79,polo,2
+3131703,Itabira,MG,113343,36.96,isolado,4
+3104007,Araxá,MG,111691,27.54,polo,2
+3147006,Paracatu,MG,94023,21.59,isolado,2
+3146107,Ouro Preto,MG,74821,29.36,isolado,1
+3131901,Itabirito,MG,53365,35.71,isolado,4
+3118007,Congonhas,MG,52890,40.0,satelite,2
+3162104,São Gotardo,MG,40910,33.18,isolado,1
+3166808,Serra Do Salitre,MG,11801,20.73,isolado,3
+3161700,São Gonçalo Do Abaeté,MG,7375,22.95,isolado,1
+3131604,Iraí De Minas,MG,7180,20.37,isolado,1
+5100607,Alto Taquari,MT,10904,20.49,isolado,1
+4113700,Londrina,PR,555965,22.1,polo,8
+4119905,Ponta Grossa,PR,358371,24.52,polo,4
+4108007,Florestópolis,PR,11446,27.53,isolado,1
+4118105,Paranacity,PR,9557,27.75,polo,1
+4124509,Santo Inácio,PR,6181,21.26,isolado,1
+3304557,Rio De Janeiro,RJ,6211223,40.11,polo,36
+3304904,São Gonçalo,RJ,896744,51.01,satelite,3
+3303500,Nova Iguaçu,RJ,785867,42.2,satelite,5
+3303302,Niterói,RJ,481749,40.14,satelite,5
+3303906,Petrópolis,RJ,278881,44.25,polo,6
+3302403,Macaé,RJ,246391,33.08,polo,2
+3303401,Nova Friburgo,RJ,189939,25.85,isolado,2
+3300407,Barra Mansa,RJ,169894,36.03,co-polo,4
+3302858,Mesquita,RJ,167127,25.07,satelite,3
+3304201,Resende,RJ,129612,27.15,polo,6
+3302007,Itaguaí,RJ,116841,25.6,satelite,6
+3305208,São Pedro Da Aldeia,RJ,104029,20.62,satelite,2
+3300308,Barra Do Piraí,RJ,92883,27.11,isolado,2
+3304300,Rio Bonito,RJ,56276,20.83,isolado,1
+3304003,Piraí,RJ,27474,27.62,isolado,2
+3302908,Miguel Pereira,RJ,26582,20.17,co-polo,1
+4314902,Porto Alegre,RS,1332845,37.65,polo,15
+3518800,Guarulhos,SP,1291771,41.66,satelite,8
+3509502,Campinas,SP,1139047,33.31,polo,20
+3548708,São Bernardo Do Campo,SP,810729,35.61,satelite,8
+3534401,Osasco,SP,728615,39.46,satelite,9
+3549904,São José Dos Campos,SP,697054,32.35,polo,10
+3530607,Mogi Das Cruzes,SP,451505,29.61,satelite,4
+3525904,Jundiaí,SP,443221,26.63,polo,8
+3538709,Piracicaba,SP,423323,23.05,polo,6
+3548500,Santos,SP,418608,23.16,polo,6
+3506003,Bauru,SP,379146,21.59,polo,4
+3551009,São Vicente,SP,329911,32.03,satelite,5
+3518701,Guarujá,SP,287634,22.42,satelite,2
+3552403,Sumaré,SP,279545,22.07,satelite,1
+3524402,Jacareí,SP,240275,24.54,satelite,2
+3547304,Santana De Parnaíba,SP,154105,28.99,satelite,1
+3516408,Franco Da Rocha,SP,144849,33.74,satelite,1
+3509007,Caieiras,SP,95032,29.42,satelite,1
+3509601,Campo Limpo Paulista,SP,77632,23.26,satelite,1
+3506359,Bertioga,SP,64188,20.03,isolado,2
+3508405,Cabreúva,SP,47011,32.03,satelite,2
+3556305,Valparaíso,SP,24241,24.79,polo,2
+3502200,Angatuba,SP,24022,22.42,isolado,1
+3523503,Itatinga,SP,19070,25.92,isolado,1
