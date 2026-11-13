@@ -385,6 +385,214 @@
   .cta-dados.grande .cta-txt b{font-size:16px;}
   .cta-dados.grande .cta-txt span{font-size:13px;}
   .cta-dados.grande .cta-btn{font-size:14px;padding:11px 20px;}
+
+  /* ===== proposta v1.1 (13/11/2026): sistema comum de navegação — o mesmo nas três páginas ===== */
+  :root{ --accent: var(--rosa); }
+  /* abas: as mesmas de Dados e conceitos (.abas button), com especificidade acima de "nav.tabs .tabbtn" dos moldes */
+  nav.tabs{display:flex !important;gap:10px !important;margin:6px 0 26px !important;flex-wrap:wrap !important;padding:0 0 14px !important;border-bottom:1px solid var(--border) !important;overflow:visible !important;}
+  nav.tabs .tabbtn{background:var(--panel2) !important;border:2px solid var(--border) !important;color:var(--text) !important;font:inherit;
+    font-size:16px !important;font-weight:800 !important;letter-spacing:.01em;padding:12px 26px !important;border-radius:10px !important;margin:0 !important;
+    box-shadow:none !important;cursor:pointer;transition:border-color .15s,background .15s;text-align:center;}
+  nav.tabs .tabbtn:hover{border-color:var(--amarelo) !important;background:var(--panel2) !important;}
+  nav.tabs .tabbtn.on{background:var(--amarelo) !important;border-color:var(--amarelo) !important;color:#0E0E10 !important;box-shadow:none !important;}
+  nav.tabs .tabbtn:focus-visible{outline:3px solid var(--rosa);outline-offset:2px;}
+  nav.tabs .tabbtn small{display:block;font-size:11px !important;font-weight:500;color:inherit !important;opacity:.75;}
+  @media (max-width:640px){ nav.tabs .tabbtn{flex:1 1 0 !important;padding:11px 12px !important;font-size:15px !important;} }
+  .btn-clear,.maptools button,.forcas button,.lermais{border-radius:8px !important;}
+  .btn-clear:hover,.maptools button:hover,.forcas button:hover,.zoombtns button:hover,.lermais:hover{border-color:var(--amarelo) !important;}
+  .bt1,.bt2{display:inline-block;font:inherit;font-size:13px;font-weight:700;border-radius:8px;padding:9px 16px;text-decoration:none !important;cursor:pointer;margin:4px 8px 4px 0;}
+  .bt1{background:var(--rosa);color:#fff !important;border:2px solid var(--rosa);}
+  .bt1:hover{filter:brightness(1.12);}
+  .bt2{background:var(--panel2);color:var(--text) !important;border:2px solid var(--border);}
+  .bt2:hover{border-color:var(--amarelo);}
+  .faixa-proposta{background:var(--amarelo);color:#0E0E10;font-size:12.5px;font-weight:600;padding:7px 16px;text-align:center;}
+  .faixa-proposta a{color:#0E0E10 !important;text-decoration:underline;font-weight:800;}
+  .resposta{font-size:15px;line-height:1.55;color:var(--text);margin:0 0 10px;max-width:900px;border-left:3px solid var(--rosa);padding:2px 0 2px 12px;}
+  .passo-pe{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--border);font-size:12.5px;color:var(--muted);}
+  .passo-pe .na-tese a{color:var(--muted) !important;}
+  details.mais{margin-top:14px;}
+  details.mais > summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--text);padding:8px 0;}
+  .trilha{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:13px;margin:14px 0 4px;padding:10px 14px;background:var(--panel);border:1px solid var(--border);border-radius:10px;}
+  .trilha b{color:var(--amarelo);}
+  .trilha a{color:var(--text) !important;text-decoration:none;border-bottom:1px solid var(--rosa);}
+  .trilha a:hover{color:var(--rosa) !important;}
+  /* ===== rede_etapa2 (13/11/2026) — o mesmo sistema do painel de teste ===== */
+  nav.tabs .tabbtn small{display:none !important;}
+  details.pacote{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:16px 0 0;}
+  .phead{display:flex;gap:14px;align-items:flex-start;margin:0;cursor:pointer;list-style:none;}
+  .phead::-webkit-details-marker{display:none;}
+  .phead > div{flex:1 1 auto;min-width:0;}
+  .phead h2{margin:2px 0 4px;font-size:18px;text-transform:none;letter-spacing:0;border:none;padding:0;}
+  .phead h2::after{display:none !important;}
+  .phead p{margin:0 0 4px;font-size:13.5px;line-height:1.55;color:var(--text);}
+  .pnum{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--rosa);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .pseta{flex:0 0 auto;font-size:30px;line-height:.8;color:var(--muted);transition:transform .15s;}
+  details.pacote[open] > .phead{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+  details.pacote[open] > .phead .pseta{transform:rotate(180deg);color:var(--amarelo);}
+  details.pacote > .phead:hover .pseta, details.pacote > .phead:hover h2{color:var(--amarelo);}
+  details > summary::marker{font-size:1.35em;}
+  .legenda{font-size:12.5px;color:var(--muted);margin:2px 0 10px;line-height:1.5;max-width:900px;}
+  .carimbos{margin:10px 0 4px;display:grid;gap:8px;}
+  .cb-g{display:grid;grid-template-columns:96px 1fr;gap:8px;align-items:start;}
+  .cb-t{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:6px;}
+  .carimbo{--c:#c4c4cf;display:inline-block;border:2px solid var(--c);color:var(--c);border-radius:6px;padding:2px 8px;margin:2px 6px 4px 0;
+    font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;line-height:1.35;transform:rotate(-1.5deg);background:rgba(255,255,255,.02);}
+  .carimbo:nth-child(even){transform:rotate(1deg);}
+  @media (max-width:640px){ .cb-g{grid-template-columns:1fr;gap:2px;} .cb-t{padding-top:0;} }
+  .card-acoes{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px;padding:0 0 8px;border-bottom:1px solid var(--border);}
+  .card-acoes .bt2{font-size:12px;padding:7px 11px;margin:0;}
+  details.fichapol{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin:10px 0 0;}
+  details.fichapol > summary{cursor:pointer;font-weight:700;font-size:14px;}
+  .contribua{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;background:rgba(245,228,0,.07);
+    border:3px solid var(--amarelo);border-radius:12px;padding:26px 28px;margin:22px 0 0;}
+  .contribua b{display:block;font-size:23px;line-height:1.25;margin-bottom:6px;} .contribua span{font-size:14.5px;color:var(--text);}
+  .contribua .bt1{font-size:16px;padding:14px 26px;}
+  aside.cta-dados{background:none !important;border:none !important;border-top:1px solid var(--border) !important;border-radius:0 !important;padding:12px 0 !important;margin:22px 0 0 !important;}
+  aside.cta-dados .cta-txt b{font-size:13px !important;display:inline !important;margin-right:6px;}
+  aside.cta-dados .cta-txt span{display:inline !important;}
+  aside.cta-dados .cta-btn{background:none !important;color:var(--text) !important;border:1px solid var(--border);padding:6px 12px !important;font-size:12.5px !important;}
+  aside.cta-dados .cta-btn:hover{border-color:var(--amarelo);filter:none;}
+  details.rodape-sobre{margin:26px 0 0;padding:10px 0 0;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);}
+  details.rodape-sobre > summary{cursor:pointer;font-size:12.5px;color:var(--muted);}
+  details.rodape-sobre[open] > summary{margin-bottom:10px;color:var(--text);}
+  details.rodape-sobre h3{font-size:13px;margin:14px 0 6px;color:var(--text);}
+  .ponte-tz{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:16px 0 0;}
+  .ponte-tz h2{color:var(--rosa);}
+  details.forcas-cx{display:inline-block;margin:0 8px 0 0;font-size:12px;} details.forcas-cx > summary{cursor:pointer;color:var(--muted);}
+  /* ===== rede_etapa3 (13/11/2026) ===== */
+  #cards{display:none !important;}
+  .rede-grid{display:block !important;}
+  .rede-grid > .rightcol{margin-top:14px;}
+  #redeSvg{height:min(680px,72vh) !important;}
+  #fichaPanel #detail{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:8px 22px;align-items:start;}
+  #fichaPanel #detail > .empty{grid-column:1 / -1;}
+  #fichaPanel .gd-esq, #fichaPanel .gd-dir{min-width:0;}
+  @media (max-width:820px){ #fichaPanel #detail{grid-template-columns:1fr;} }
+  #fichaPanel .munmapa{max-height:340px;}
+  .medgrid{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:12px !important;margin:4px 0 12px;}
+  .medgrid > div{background:var(--panel2);border-radius:8px;padding:10px 12px;}
+  .medgrid b{display:block;font-size:26px !important;font-weight:800;color:var(--amarelo);line-height:1.1;}
+  .medgrid span{font-size:12.5px;color:var(--text);}
+  .medlistas{display:grid;grid-template-columns:1fr 1fr;gap:16px;} .medlistas ol{margin:4px 0 0;padding-left:20px;font-size:13px;line-height:1.7;}
+  @media (max-width:640px){ .medgrid{grid-template-columns:1fr 1fr !important;} .medlistas{grid-template-columns:1fr;} }
+  .resposta-rede{font-size:15px;line-height:1.55;color:var(--text);border-left:3px solid var(--rosa);padding:2px 0 2px 12px;margin:0 0 14px;max-width:920px;}
+  .abre-getz{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:0 0 6px;}
+  .abre-getz .pergunta{font-size:19px;font-weight:800;margin:0 0 8px;}
+  .abre-getz .passos{display:flex;flex-wrap:wrap;gap:8px;}
+  .abre-getz .passos a{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 11px;font-size:12.5px;color:var(--text) !important;text-decoration:none;}
+  .abre-getz .passos a:hover{border-color:var(--amarelo);}
+  .pmeta{font-size:11.5px;color:var(--muted);}
+  .gsvg{width:100%;max-width:760px;height:auto;display:block;}
+  .gbarras{display:grid;gap:8px;margin:6px 0 4px;max-width:820px;}
+  .gb-lin{display:grid;grid-template-columns:minmax(150px,280px) 1fr 110px;gap:10px;align-items:center;font-size:13px;}
+  .gb-bar{height:18px;background:var(--panel2);border-radius:5px;overflow:hidden;} .gb-bar span{display:block;height:100%;}
+  .gb-val b{font-size:15px;} .gb-val span{font-size:11.5px;color:var(--muted);}
+  @media (max-width:640px){ .gb-lin{grid-template-columns:1fr 90px;} .gb-rot{grid-column:1 / -1;} }
+  .casos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:6px 0 0;}
+  a.caso{display:flex;flex-direction:column;gap:4px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text) !important;text-decoration:none;}
+  a.caso:hover{border-color:var(--amarelo);} a.caso b{font-size:14px;} a.caso span{font-size:12.5px;line-height:1.5;} a.caso i{font-style:normal;font-size:11.5px;color:var(--rosa);margin-top:auto;}
+  .fecho-rede{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:16px 0 0;}
+  .fecho-rede .frase{font-size:17px;font-weight:800;color:var(--rosa);margin:0 0 8px;}
+  ul.leve{margin:6px 0 4px;padding-left:18px;font-size:13.5px;line-height:1.6;} ul.leve li{margin:0 0 6px;}
+  .cadeia-fixa h2{margin-top:0;}
+  #patFed{min-width:280px;max-width:100%;}
+  /* ===== rede_etapa4 (13/11/2026) ===== */
+  .casos-ricos{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:6px 0 0;}
+  .caso-rico{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;}
+  .cr-cab b{display:block;font-size:16px;} .cr-cab span{font-size:12px;color:var(--muted);}
+  ol.cr-hist{list-style:none;margin:0;padding:0 0 0 12px;border-left:2px solid var(--rosa);display:grid;gap:7px;font-size:12.5px;line-height:1.5;}
+  ol.cr-hist li b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--amarelo);}
+  .cr-leit{margin:2px 0 0;font-size:13px;font-weight:700;color:var(--text);}
+  .cr-lk{display:flex;gap:14px;margin-top:auto;font-size:12px;} .cr-lk a{color:var(--rosa) !important;}
+  .nota-pf{font-size:11.5px;color:var(--muted);margin:22px 0 0;line-height:1.5;max-width:960px;}
+  .filtro-rede{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin:0 0 14px;}
+  .filtro-rede .fr-t{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--amarelo);}
+  .filtro-rede label{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);}
+  .filtro-rede input{background:var(--panel2);border:2px solid var(--border);border-radius:8px;color:var(--text);font:inherit;font-size:13.5px;padding:7px 10px;width:250px;}
+  .filtro-rede input:focus{border-color:var(--amarelo);outline:none;}
+  .filtro-rede .bt2{margin:0;font-size:12px;padding:7px 11px;}
+  .fr-res{flex:1 1 100%;font-size:12.5px;} .fr-res:empty{display:none;}
+  .fr-res ul{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:6px 0;padding:0;} .fr-res li{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:3px 10px;}
+  .fr-res li span{display:none;} .fr-res a{color:var(--text) !important;} .fr-res p a{color:var(--rosa) !important;}
+  @media (max-width:640px){ .filtro-rede input{width:100%;} .filtro-rede label{flex:1 1 100%;} }
+  #fichaPanel details.fichapol > summary{font-size:12.5px !important;font-weight:600;}
+  .escala-fixa table{width:100%;border-collapse:collapse;font-size:13px;}
+  .escala-fixa td,.escala-fixa th{padding:9px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle;}
+  .escala-fixa th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);}
+  .escala-fixa td.q b{font-size:20px;color:var(--amarelo);} .escala-fixa td.q span{display:block;font-size:11.5px;color:var(--muted);}
+  .escala-fixa .ef{display:flex;align-items:center;gap:8px;} .escala-fixa .ef i{display:block;height:10px;background:var(--rosa);border-radius:3px;}
+  .escala-fixa tr.teto td{opacity:.75;}
+  .medbars{display:grid;grid-template-columns:1fr 1fr;gap:20px;} @media (max-width:820px){ .medbars{grid-template-columns:1fr;} }
+  .mb-lin{display:grid;grid-template-columns:minmax(0,1fr) 120px 34px;gap:8px;align-items:center;font-size:12.5px;margin:4px 0;}
+  .mb-lin a{color:var(--text) !important;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;} .mb-lin a:hover{color:var(--amarelo) !important;}
+  .mb-bar{height:10px;background:var(--panel2);border-radius:3px;overflow:hidden;} .mb-bar i{display:block;height:100%;background:var(--amarelo);}
+  .mb-v{text-align:right;color:var(--muted);}
+  .fedchips{display:grid;gap:8px;margin:6px 0 10px;}
+  .fc-lin{display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:start;}
+  .fc-lin > b{font-size:11px;color:var(--muted);padding-top:6px;}
+  .fc-lin button{background:var(--panel2);border:1px solid var(--border);border-radius:14px;color:var(--text);font:inherit;font-size:12px;padding:4px 10px;margin:0 6px 6px 0;cursor:pointer;}
+  .fc-lin button:hover{border-color:var(--amarelo);} .fc-lin button.on{background:var(--amarelo);border-color:var(--amarelo);color:#0E0E10;font-weight:700;}
+  #patLista .hchips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 2px;} #patLista .hchips span{background:rgba(255,45,107,.12);border:1px solid rgba(255,45,107,.5);border-radius:12px;padding:2px 8px;font-size:11.5px;}
+  #patLista details.setor{margin:4px 0;} #patLista details.setor > summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 110px 30px;gap:8px;align-items:center;font-size:12.5px;}
+  #patLista details.setor > summary::-webkit-details-marker{display:none;}
+  #patLista details.setor .sb{height:10px;background:var(--panel2);border-radius:3px;overflow:hidden;} #patLista details.setor .sb i{display:block;height:100%;}
+  #patLista details.setor ul{margin:4px 0 8px;padding-left:18px;font-size:12px;}
+  /* ===== rede_etapa5 (13/11/2026) ===== */
+  .mapa-zonas{margin:14px 0 16px;}
+  .mz-ctl{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 10px;}
+  .mz-ctl button{background:var(--panel2);border:1px solid var(--border);border-radius:999px;color:var(--text);font:inherit;font-size:12.5px;font-weight:700;padding:6px 14px;cursor:pointer;}
+  .mz-ctl button.on{background:var(--amarelo);border-color:var(--amarelo);color:#0E0E10;}
+  .mz-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:start;} @media (max-width:820px){ .mz-grid{grid-template-columns:1fr;} }
+  .mz-mapa svg{width:100%;height:auto;display:block;background:var(--panel2);border-radius:10px;}
+  .mz-mapa .ufb{fill:#17171d;stroke:#4a4a58;stroke-width:.8;} .mz-mapa circle{cursor:pointer;} .mz-mapa circle.sel{stroke:#fff;stroke-width:2;}
+  #mzLeg .mz-l{display:grid;grid-template-columns:16px 1fr auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
+  #mzLeg .mz-l i{width:12px;height:12px;border-radius:50%;display:block;} #mzLeg .mz-l b{font-size:18px;color:var(--amarelo);} #mzLeg .mz-l span small{display:block;color:var(--muted);font-size:11.5px;}
+  .mz-info{margin-top:10px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:12.5px;min-height:40px;}
+  .mz-info a{color:var(--rosa) !important;margin-right:12px;}
+  p.explica{font-size:13.5px;line-height:1.6;color:var(--text);margin:8px 0 10px;max-width:920px;}
+  .pbar{display:grid;gap:14px;margin:10px 0 8px;}
+  .pb-lin{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:16px;align-items:center;} @media (max-width:640px){ .pb-lin{grid-template-columns:1fr;gap:6px;} }
+  .pb-rot b{display:block;font-size:14px;} .pb-rot span{font-size:11.5px;color:var(--muted);line-height:1.4;display:block;}
+  .pb-b{display:grid;grid-template-columns:76px minmax(0,1fr) 46px;gap:8px;align-items:center;font-size:12px;margin:3px 0;} .pb-b span{color:var(--muted);}
+  .pb-b i{display:block;height:16px;border-radius:3px;} .pb-b b{font-size:13.5px;color:var(--text);text-align:right;}
+  ul.leitura81 li{margin:6px 0;line-height:1.55;font-size:13px;}
+  details.mais > summary{cursor:pointer;font-weight:700;font-size:13px;margin:10px 0 6px;}
+  h3.h3c{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--amarelo);margin:18px 0 8px;}
+  table.q32 td,table.q32 th{font-size:12.5px;vertical-align:top;}
+  ol.linha-setor{list-style:none;margin:6px 0 10px;padding:0 0 0 14px;border-left:2px solid var(--amarelo);display:grid;gap:9px;}
+  ol.linha-setor li b{display:block;font-size:12px;color:var(--amarelo);} ol.linha-setor li span{font-size:13px;line-height:1.5;}
+  .t6{display:grid;gap:12px;margin:12px 0 8px;}
+  .t6-lin{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:14px;align-items:center;} @media (max-width:640px){ .t6-lin{grid-template-columns:1fr;gap:4px;} }
+  .t6-rot b{display:block;font-size:13.5px;} .t6-rot span{font-size:11.5px;color:var(--muted);}
+  .t6-bar{display:flex;height:26px;border-radius:4px;overflow:hidden;min-width:60px;} .t6-bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11.5px;font-weight:800;color:#0E0E10;}
+  .t6-leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:11.5px;color:var(--muted);} .t6-leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;}
+  .do-cadastro{margin:0 0 14px;}
+  ol.dc{list-style:none;margin:10px 0 6px;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;}
+  ol.dc li{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;position:relative;}
+  ol.dc li b{font-size:20px;color:var(--amarelo);line-height:1;} ol.dc li i{display:block;height:6px;background:var(--rosa);border-radius:3px;} ol.dc li span{font-size:11.5px;color:var(--muted);line-height:1.4;}
+  ol.dc li:not(:last-child)::after{content:'→';position:absolute;right:-9px;top:12px;color:var(--muted);font-size:12px;}
+  @media (max-width:1100px){ ol.dc{grid-template-columns:repeat(4,minmax(0,1fr));} } @media (max-width:640px){ ol.dc{grid-template-columns:repeat(2,minmax(0,1fr));} ol.dc li::after{display:none;} }
+  #geFind{display:none !important;} #patFind{display:none !important;}
+  .como-ler p{font-size:12.5px;line-height:1.55;margin:4px 0;color:var(--text);max-width:980px;} .como-ler a{color:var(--rosa) !important;}
+  .filtro-rede label{text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.06em;}
+  .filtro-rede input::placeholder{text-transform:uppercase;font-size:11.5px;letter-spacing:.04em;}
+  .filtro-rede .bt2{text-transform:uppercase;letter-spacing:.05em;}
+  .funil-cap{margin:4px 0 16px;}
+  .fc-bar{display:flex;height:42px;border-radius:6px;overflow:hidden;margin:8px 0 6px;}
+  .fc-bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;font-weight:800;color:#0E0E10;border-right:1px solid #0E0E10;white-space:nowrap;overflow:hidden;}
+  .fc-rot{display:flex;font-size:11.5px;color:var(--muted);} .fc-rot span{overflow:hidden;padding-right:4px;line-height:1.35;}
+  .fc-tam{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px;} @media (max-width:640px){ .fc-tam{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .fc-tam div{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;color:var(--muted);} .fc-tam b{display:block;font-size:18px;color:var(--text);}
+  .alem-achados{margin:14px 0;}
+  .ach{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;} @media (max-width:820px){ .ach{grid-template-columns:1fr;} }
+  .ach div{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--rosa);border-radius:8px;padding:10px 12px;}
+  .ach b{font-size:13.5px;} .ach p{font-size:12.5px;line-height:1.55;margin:4px 0 0;color:var(--text);}
+  table.q20 td{font-size:12px;vertical-align:top;min-width:120px;} table.q20 td:first-child{min-width:110px;font-weight:700;} table.q20 a{color:var(--amarelo) !important;}
+  #patFedChips.patctl{display:flex;flex-wrap:wrap;gap:10px 16px;margin:6px 0 10px;}
+  #patFedChips select{max-width:min(420px,80vw);}
+  .dica-zoom{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(14,14,16,.92);border:1px solid var(--amarelo);color:var(--text);font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:5;text-align:center;}
+  .dica-zoom.on{opacity:1;}
+  @media (pointer:coarse){ #redeSvg,#patSvg{touch-action:pan-y !important;} }
 </style>
 </head>
 <body>
@@ -393,31 +601,55 @@
   <div class="wrap">
     <h1>Rede de <span class="hl">empresas</span> <span class="badge">rede · v1.0.0</span></h1>
     <h2 class="sub2">Quem controla o transporte coletivo no Brasil, por vínculo societário</h2>
-    <p class="resumo">Esta página mapeia a estrutura de controle do transporte coletivo brasileiro a partir dos dados societários da Receita Federal, com análise de redes sociais (ARS): quais empresas pertencem ao mesmo dono, que grupos econômicos elas formam e como esses grupos se ligam entre si. Tem duas partes: <b>quem controla</b> — os grupos, como se ligam, quanto concentram e onde estão — e <b>além do ônibus</b> — as holdings sócias e os negócios dos grupos fora do transporte (Seção 6.4). É a contraparte do <a href="painel.html">Painel Brasil</a>: a hipótese da tese é que a difusão da Tarifa Zero é restringida pela incompatibilidade entre o desenho da política e o arranjo contratual vigente — e, para pô-la à prova, é preciso saber quem são os operadores, quanto do setor eles concentram e onde estão (Capítulo 6). O grupo econômico aqui é uma agregação de vínculos societários observados, e não um sujeito com intenção.</p>
-    <p><b>O que esta página não mostra:</b> nenhum nome de pessoa física como sócio (o nome de mercado de alguns grupos é o do fundador — é a marca, e sai como marca). A rede de sócios — que é o insumo do cálculo — tem milhares de pessoas nomeadas com CPF parcial, e fica no acervo da pesquisa, não aqui. O que se publica é a camada de <i>empresa</i>, <i>grupo</i> e <i>agrupamento de grupos</i> (unidade de controle, linhagem, federação), com o nome de mercado e o capital social declarado de cada um; as métricas derivadas da rede de pessoas (sócios-ponte, articulação, densidade) aparecem como números, nunca como identidades.</p>
+    <p class="resumo" style="font-size:15px;color:var(--text);border-left:3px solid var(--rosa);padding-left:12px;">Quem controla o ônibus no Brasil e o que isso muda na Tarifa Zero. Os grupos econômicos são donos de parte dos operadores e são a forma mais concentrada do contrato; onde estão, a gratuidade entra pelo contrato que já detêm.</p>
   </div>
 </header>
 <div class="wrap">
   <nav class="tabs" role="tablist">
-    <button class="tabbtn on" id="tabbtn-controle" data-tab="controle" role="tab" aria-selected="true">Quem controla<small>rede, unidades, capital, território</small></button>
-    <button class="tabbtn" id="tabbtn-alem" data-tab="alem" role="tab" aria-selected="false">Além do ônibus<small>holdings e negócios fora do transporte</small></button>
+    <button class="tabbtn on" id="tabbtn-getz" data-tab="getz" role="tab" aria-selected="true">GE × TZ</button>
+    <button class="tabbtn" id="tabbtn-controle" data-tab="controle" role="tab" aria-selected="false">A rede</button>
+    <button class="tabbtn" id="tabbtn-concentracao" data-tab="concentracao" role="tab" aria-selected="false">Concentração</button>
+    <button class="tabbtn" id="tabbtn-alem" data-tab="alem" role="tab" aria-selected="false">Além do ônibus</button>
   </nav>
-  <section class="tabpane" id="tab-controle">
+  <section class="tabpane" id="tab-getz" role="tabpanel">
+  <div class="abre-getz"><p class="pergunta">Os grupos econômicos barram a Tarifa Zero?</p><p class="resposta-rede">Não se opõem ao dinheiro público: querem que ele preserve os contratos. Onde estão, a gratuidade entra pelo contrato que já detêm. A tese se sustenta melhor como hipótese sobre o <b>contrato</b> do que sobre o <b>grupo</b>: por isso fala do papel, e não da influência, dos grupos.</p><div class="passos"><a href="#ge-81">1 · Adoção</a><a href="#ge-82">2 · Porta de entrada</a><a href="#ge-83">3 · Quem fica e o que muda</a><a href="#ge-84">4 · Recuos e o que o setor pede</a><a href="#ge-casos">Os casos</a></div></div>
+  <div class="panel mapa-zonas" id="ge-mapa"><h2>Onde os grupos encontram a Tarifa Zero</h2><p class="legenda">Cada ponto é um município com empresa de grupo econômico ou com Tarifa Zero universal. <b>Grupo presente</b> é ter estabelecimento de empresa de grupo com mais de uma empresa, pelo endereço do cadastro de 2024: presença não é operação. Clique num ponto para ver o município.</p><div class="mz-ctl"><button type="button" class="on" data-pos="todos">Todos</button><button type="button" data-pos="arranjo">Só os de arranjo (satélites e sedes)</button></div><div class="mz-grid"><div class="mz-mapa" id="mzMapa"></div><div class="mz-lado"><div id="mzLeg"></div><div id="mzInfo" class="mz-info">Clique num ponto.</div><p class="legenda" style="margin-top:12px;">Sozinho, o mapa não mostra barreira. Sem nenhum controle, a adoção com e sem grupo é quase igual nos satélites (10,7% e 11,2%) e nas sedes dos arranjos (8,2% e 8,3%); nas cidades isoladas, é maior com grupo (9,4% e 1,9%), porque a empresa de grupo marca que ali há um sistema de ônibus. A diferença só aparece quando se comparam cidades parecidas: é o passo 1.</p><p class="legenda">Os municípios de arranjo com grupo e sem a política, concentrados no Sudeste e no Sul, são onde a hipótese pode ser posta à prova: completar neles o operador e o contrato permitiria trocar a presença pela operação comprovada.</p></div></div><p class="pmeta" style="margin-top:6px;">Na tese: Mapa 9 e Seção 8.1. Universal: camada 1 da régua descritiva; política parcial fica fora.</p></div>
+  <script type="application/json" id="data-zonas">[["1100015","Alta Floresta D'Oeste/RO",171.5,271.6,0,0],["1100023","Ariquemes/RO",163.1,232.8,0,0],["1100049","Cacoal/RO",184.6,254.8,1,0],["1100064","Colorado Do Oeste/RO",197.9,281.5,0,0],["1100080","Costa Marques/RO",147.9,265.4,0,0],["1100114","Jaru/RO",167.2,243.0,0,0],["1100122","Ji-Paraná/RO",179.9,239.0,0,0],["1100148","Nova Brasilândia D'Oeste/RO",173.5,258.3,0,0],["1100155","Ouro Preto Do Oeste/RO",175.1,241.6,0,0],["1100189","Pimenta Bueno/RO",192.4,260.8,0,0],["1100205","Porto Velho/RO",141.6,220.5,0,2],["1100254","Presidente Médici/RO",178.0,251.8,0,0],["1100288","Rolim De Moura/RO",180.1,260.4,0,0],["1100304","Vilhena/RO",201.8,265.5,1,0],["1100320","São Miguel Do Guaporé/RO",161.3,257.7,0,0],["1200401","Rio Branco/AC",84.7,234.7,0,0],["1301100","Careiro/AM",203.6,139.9,0,0],["1301704","Humaitá/AM",171.1,196.2,0,0],["1301902","Itacoatiara/AM",223.9,131.8,0,0],["1302603","Manaus/AM",204.5,124.4,0,0],["1302702","Manicoré/AM",183.0,187.8,0,0],["1400100","Boa Vista/RR",196.4,36.9,0,0],["1400209","Caracaraí/RR",185.2,74.0,0,0],["1400308","Mucajaí/RR",176.6,45.9,0,0],["1400506","São João Da Baliza/RR",208.0,73.8,0,0],["1400605","São Luiz/RR",203.5,71.0,0,0],["1500602","Altamira/PA",296.9,174.4,0,0],["1500800","Ananindeua/PA",374.2,103.6,0,1],["1501402","Belém/PA",373.4,103.5,0,2],["1501451","Belterra/PA",277.6,135.2,0,0],["1502400","Castanhal/PA",381.8,103.6,0,0],["1502905","Curuçá/PA",381.5,95.5,0,0],["1503606","Itaituba/PA",259.7,171.2,0,0],["1504208","Marabá/PA",351.0,167.7,0,0],["1505031","Novo Progresso/PA",271.8,202.5,0,0],["1505502","Paragominas/PA",385.4,131.7,0,0],["1505536","Parauapebas/PA",342.5,176.9,0,0],["1506187","Rondon Do Pará/PA",371.8,151.8,0,0],["1506500","Santa Isabel Do Pará/PA",377.5,105.1,0,0],["1506807","Santarém/PA",280.8,123.5,0,0],["1507003","Santo Antônio Do Tauá/PA",376.1,100.3,0,0],["1507953","Tailândia/PA",368.7,127.0,0,0],["1508100","Tucuruí/PA",353.0,141.2,0,0],["1600303","Macapá/AP",340.2,75.1,0,2],["1600600","Santana/AP",331.1,82.1,0,1],["1702109","Araguaína/TO",371.3,193.8,0,0],["1705508","Colinas Do Tocantins/TO",372.0,205.7,0,0],["1707009","Dianópolis/TO",398.2,259.8,0,0],["1709500","Gurupi/TO",366.3,258.7,0,0],["1716505","Pedro Afonso/TO",379.2,222.1,0,2],["1718204","Porto Nacional/TO",373.0,242.4,0,0],["1721000","Palmas/TO",377.1,236.8,0,0],["1721208","Tocantinópolis/TO",386.8,177.6,0,2],["2101772","Bela Vista Do Maranhão/MA",419.7,140.3,0,0],["2102804","Carolina/MA",390.9,195.0,0,2],["2105302","Imperatriz/MA",385.7,164.8,0,2],["2109908","Santa Inês/MA",417.0,142.1,0,0],["2111201","São José De Ribamar/MA",435.7,122.2,0,1],["2111300","São Luís/MA",433.3,124.0,0,2],["2202901","Corrente/PI",420.7,240.5,0,0],["2205102","Itaueira/PI",450.2,196.7,0,0],["2207702","Parnaíba/PI",469.8,128.4,0,0],["2208007","Picos/PI",473.5,190.1,1,2],["2211001","Teresina/PI",455.1,162.6,0,2],["2300150","Acarape/CE",515.1,147.5,0,2],["2301000","Aquiraz/CE",518.8,143.6,2,1],["2302008","Barro/CE",513.2,190.9,0,0],["2303709","Caucaia/CE",513.0,140.7,1,1],["2304285","Eusébio/CE",517.8,142.3,2,1],["2304400","Fortaleza/CE",517.3,141.0,0,2],["2305506","Iguatu/CE",505.8,179.3,0,0],["2307304","Juazeiro Do Norte/CE",505.8,191.8,0,2],["2307403","Jucás/CE",501.3,180.8,2,2],["2309607","Pacajus/CE",517.1,146.9,0,0],["2312908","Sobral/CE",491.7,141.0,0,2],["2403251","Parnamirim/RN",564.7,173.0,0,1],["2406700","Lajes/RN",550.7,169.3,0,0],["2408003","Mossoró/RN",534.6,161.0,0,0],["2408102","Natal/RN",564.8,171.4,0,2],["2412203","São José De Mipibu/RN",563.7,175.4,0,2],["2501807","Bayeux/PB",569.2,190.8,0,1],["2503704","Cajazeiras/PB",516.3,188.4,0,0],["2504009","Campina Grande/PB",554.7,193.0,0,2],["2507507","João Pessoa/PB",569.8,191.3,0,2],["2510808","Patos/PB",534.2,189.4,0,2],["2513851","Santo André/PB",544.6,192.2,0,0],["2601102","Araripina/PE",488.0,198.3,0,2],["2601201","Arcoverde/PE",539.2,209.5,0,0],["2601904","Bezerros/PE",556.4,207.8,0,0],["2602308","Bonito/PE",557.8,211.1,0,0],["2602902","Cabo De Santo Agostinho/PE",566.4,207.9,0,1],["2604106","Caruaru/PE",553.3,206.6,0,0],["2605202","Escada/PE",564.2,209.3,0,0],["2605459","Fernando De Noronha/PE",605.2,141.9,0,0],["2606002","Garanhuns/PE",546.0,218.2,0,0],["2607901","Jaboatão Dos Guararapes/PE",568.0,206.5,0,1],["2609600","Olinda/PE",569.9,204.1,0,1],["2610004","Palmares/PE",558.9,213.8,0,0],["2610905","Pesqueira/PE",542.9,210.2,0,0],["2611101","Petrolina/PE",487.4,219.8,0,2],["2611606","Recife/PE",568.7,204.4,0,2],["2612208","Salgueiro/PE",508.4,204.6,0,0],["2613701","São Lourenço Da Mata/PE",566.6,204.3,0,1],["2613909","Serra Talhada/PE",518.9,204.4,0,0],["2614105","Sertânia/PE",534.4,207.0,0,0],["2616407","Vitória De Santo Antão/PE",563.6,206.4,0,0],["2700300","Arapiraca/AL",544.1,230.3,0,0],["2702900","Girau Do Ponciano/AL",541.3,231.1,0,0],["2704302","Maceió/AL",557.5,226.8,0,2],["2705200","Messias/AL",556.1,223.9,0,1],["2800308","Aracaju/SE",537.7,249.0,0,2],["2801504","Carmópolis/SE",539.5,244.1,0,1],["2803500","Lagarto/SE",529.8,247.2,0,0],["2803609","Laranjeiras/SE",536.1,246.1,0,1],["2804805","Nossa Senhora Do Socorro/SE",536.7,247.0,0,1],["2806701","São Cristóvão/SE",535.9,248.0,0,1],["2900702","Alagoinhas/BA",518.4,265.4,0,0],["2903201","Barreiras/BA",415.1,263.5,0,0],["2903409","Belmonte/BA",506.4,322.7,0,0],["2903904","Bom Jesus Da Lapa/BA",447.4,282.2,0,0],["2904605","Brumado/BA",470.8,296.4,0,0],["2905206","Caetité/BA",459.9,292.7,0,0],["2905701","Camaçari/BA",521.1,274.0,0,1],["2906501","Candeias/BA",517.5,274.0,0,1],["2906709","Cândido Sales/BA",477.4,314.3,0,0],["2906873","Capim Grosso/BA",495.4,253.1,0,0],["2907301","Castro Alves/BA",504.7,274.8,0,0],["2909307","Correntina/BA",417.2,286.8,0,0],["2910727","Eunápolis/BA",501.5,328.1,0,0],["2910800","Feira De Santana/BA",509.0,267.2,0,0],["2911709","Guanambi/BA",454.5,297.1,0,0],["2911907","Iaçu/BA",493.7,275.8,0,0],["2913200","Ibotirama/BA",448.8,263.8,0,0],["2913606","Ilhéus/BA",506.3,304.4,0,0],["2913903","Ipiaú/BA",499.5,294.5,0,0],["2914000","Ipirá/BA",498.2,266.9,0,0],["2914109","Ipupiara/BA",459.5,261.1,0,0],["2914406","Iraquara/BA",472.4,267.8,0,0],["2914604","Irecê/BA",468.4,253.8,0,0],["2914703","Itaberaba/BA",492.0,271.8,0,0],["2914802","Itabuna/BA",505.2,307.2,0,0],["2915601","Itamaraju/BA",499.6,338.7,0,0],["2916401","Itapetinga/BA",494.6,313.8,0,0],["2917508","Jacobina/BA",487.7,251.0,0,0],["2918001","Jequié/BA",494.0,292.5,0,0],["2918407","Juazeiro/BA",491.2,226.4,0,2],["2919207","Lauro De Freitas/BA",519.7,276.8,0,1],["2919553","Luís Eduardo Magalhães/BA",407.3,267.4,0,0],["2921005","Mata De São João/BA",522.2,271.3,2,1],["2921302","Milagres/BA",498.7,277.6,0,0],["2921609","Morpará/BA",451.1,259.8,0,0],["2921708","Morro Do Chapéu/BA",477.2,254.6,0,0],["2923001","Nova Viçosa/BA",500.6,352.4,0,0],["2923209","Oliveira Dos Brejinhos/BA",455.7,267.9,0,0],["2923605","Paramirim/BA",463.2,286.6,0,0],["2924009","Paulo Afonso/BA",520.5,226.9,0,0],["2924652","Pintadas/BA",497.0,262.2,0,0],["2924801","Piritiba/BA",487.0,259.3,0,0],["2925303","Porto Seguro/BA",505.7,333.8,0,0],["2926301","Riachão Do Jacuípe/BA",503.8,261.2,0,0],["2927200","Ruy Barbosa/BA",487.7,267.9,0,0],["2927408","Salvador/BA",516.9,276.8,0,2],["2927705","Santa Cruz Cabrália/BA",507.2,327.3,1,0],["2928109","Santa Maria Da Vitória/BA",432.9,282.1,0,2],["2928208","Santana/BA",437.9,279.9,0,0],["2928802","Santo Estêvão/BA",506.3,271.0,0,0],["2928901","São Desidério/BA",413.6,276.6,0,0],["2929909","Seabra/BA",467.9,269.9,0,0],["2930105","Senhor Do Bonfim/BA",493.9,241.3,0,0],["2930501","Serrinha/BA",509.6,259.3,0,0],["2930709","Simões Filho/BA",518.8,275.4,0,1],["2931350","Teixeira De Freitas/BA",498.1,344.4,0,0],["2932309","Ubatã/BA",502.3,295.5,0,0],["2932804","Utinga/BA",479.9,264.6,0,0],["2933307","Vitória Da Conquista/BA",482.0,310.2,0,0],["2933406","Wagner/BA",479.0,267.3,0,0],["2933604","Xique-Xique/BA",455.6,248.3,0,0],["3100203","Abaeté/MG",417.8,370.6,2,0],["3100609","Água Boa/MG",462.2,354.3,0,0],["3101508","Além Paraíba/MG",455.2,411.6,0,2],["3101607","Alfenas/MG",408.8,404.6,0,0],["3101904","Alpinópolis/MG",402.8,397.0,0,0],["3102605","Andradas/MG",400.6,415.3,0,0],["3103504","Araguari/MG",376.0,362.4,0,0],["3104007","Araxá/MG",394.8,378.6,0,2],["3104106","Arceburgo/MG",394.7,404.3,2,0],["3104205","Arcos/MG",415.1,387.8,2,0],["3105004","Baldim/MG",439.5,373.0,0,0],["3105103","Bambuí/MG",408.4,385.6,0,0],["3105400","Barão De Cocais/MG",445.2,381.9,0,0],["3105608","Barbacena/MG",440.4,402.5,0,2],["3106200","Belo Horizonte/MG",438.2,382.7,0,2],["3106408","Belo Vale/MG",436.7,390.3,2,0],["3106705","Betim/MG",434.7,383.3,0,1],["3107109","Boa Esperança/MG",413.9,399.5,0,0],["3107307","Bocaiúva/MG",442.4,343.4,0,0],["3107406","Bom Despacho/MG",419.0,379.6,0,0],["3108107","Bonfim/MG",434.8,388.9,0,0],["3109006","Brumadinho/MG",435.5,386.5,1,1],["3109105","Bueno Brandão/MG",403.6,421.2,0,0],["3110004","Caeté/MG",442.8,381.9,1,1],["3110608","Cambuí/MG",407.5,422.6,0,2],["3111101","Campina Verde/MG",353.7,375.9,0,0],["3111200","Campo Belo/MG",419.1,398.0,1,0],["3112307","Capelinha/MG",459.6,349.4,0,0],["3112802","Capitólio/MG",406.7,393.1,0,0],["3113602","Careaçu/MG",413.3,415.3,0,0],["3113800","Carmésia/MG",449.6,370.0,0,0],["3116605","Cláudio/MG",426.3,390.0,2,0],["3116803","Coluna/MG",454.5,357.4,0,0],["3117306","Conceição Das Alagoas/MG",374.6,383.0,1,0],["3118007","Congonhas/MG",439.3,391.9,0,1],["3118304","Conselheiro Lafaiete/MG",440.4,393.9,0,2],["3118601","Contagem/MG",436.4,382.3,0,1],["3118809","Coração De Jesus/MG",431.3,333.4,0,0],["3119104","Corinto/MG",428.7,358.7,0,0],["3119302","Coromandel/MG",392.3,360.0,1,0],["3119401","Coronel Fabriciano/MG",456.6,375.7,0,1],["3120904","Curvelo/MG",431.9,366.1,0,2],["3121605","Diamantina/MG",443.1,354.3,0,0],["3122207","Divinolândia De Minas/MG",458.5,365.7,0,0],["3122306","Divinópolis/MG",424.3,385.4,0,0],["3123205","Dores Do Indaiá/MG",415.2,376.3,2,0],["3124104","Esmeraldas/MG",433.3,380.0,0,1],["3124302","Espinosa/MG",452.8,307.2,0,0],["3124500","Estiva/MG",408.2,420.6,0,0],["3124807","Estrela Do Sul/MG",383.5,365.3,0,0],["3125101","Extrema/MG",404.4,426.2,0,0],["3125903","Ferros/MG",452.8,372.6,0,0],["3126109","Formiga/MG",416.0,391.8,0,0],["3126703","Francisco Sá/MG",445.1,330.0,0,0],["3127008","Fronteira/MG",362.5,387.5,0,0],["3127107","Frutal/MG",365.2,385.5,0,0],["3127701","Governador Valadares/MG",467.3,365.6,0,0],["3128006","Guanhães/MG",455.0,366.8,0,0],["3128907","Guimarânia/MG",397.5,366.0,0,0],["3129509","Ibiá/MG",400.0,377.6,0,0],["3129806","Ibirité/MG",436.6,384.2,1,1],["3130101","Igarapé/MG",432.9,385.2,0,1],["3130408","Ijaci/MG",424.1,401.6,2,1],["3131307","Ipatinga/MG",458.0,375.7,0,2],["3131604","Iraí De Minas/MG",387.2,369.7,0,0],["3131703","Itabira/MG",447.6,377.7,0,0],["3131901","Itabirito/MG",440.3,387.6,0,0],["3132404","Itajubá/MG",417.5,420.2,0,2],["3133501","Itapecerica/MG",421.9,390.9,0,0],["3133709","Itatiaiuçu/MG",430.9,387.2,2,1],["3133808","Itaúna/MG",429.2,385.4,0,2],["3134202","Ituiutaba/MG",357.2,368.5,1,0],["3134400","Iturama/MG",345.8,379.5,0,0],["3135100","Janaúba/MG",446.2,320.7,0,2],["3135209","Januária/MG",425.9,312.9,0,0],["3135506","Jequeri/MG",457.5,390.8,0,0],["3135605","Jequitaí/MG",431.2,341.6,0,0],["3136207","João Monlevade/MG",449.7,381.4,0,2],["3136306","João Pinheiro/MG",409.4,346.2,0,0],["3136652","Juatuba/MG",432.8,383.4,0,1],["3136702","Juiz De Fora/MG",445.6,410.5,0,2],["3137205","Lagoa Da Prata/MG",415.9,384.4,1,2],["3137601","Lagoa Santa/MG",439.0,378.5,0,1],["3138203","Lavras/MG",422.4,402.9,0,2],["3138401","Leopoldina/MG",457.0,407.2,1,0],["3138807","Luz/MG",413.5,382.0,0,0],["3139003","Machado/MG",409.6,409.2,1,0],["3139201","Malacacheta/MG",465.1,351.5,0,0],["3139409","Manhuaçu/MG",464.8,386.9,0,0],["3140001","Mariana/MG",447.6,388.8,1,0],["3140159","Mário Campos/MG",435.0,385.2,2,1],["3140704","Mateus Leme/MG",431.0,384.4,0,0],["3141108","Matozinhos/MG",436.8,376.7,0,2],["3141405","Medina/MG",472.9,328.2,0,0],["3142700","Montalvânia/MG",430.1,301.3,0,0],["3142809","Monte Alegre De Minas/MG",366.3,366.3,0,0],["3143104","Monte Carmelo/MG",387.3,364.3,1,0],["3143302","Montes Claros/MG",438.2,333.0,0,0],["3143401","Monte Sião/MG",401.1,420.1,0,0],["3143807","Munhoz/MG",403.7,423.4,0,0],["3143906","Muriaé/MG",460.5,400.1,0,0],["3144102","Muzambinho/MG",401.1,404.3,2,0],["3144201","Nacip Raydan/MG",464.1,361.2,0,0],["3144300","Nanuque/MG",488.2,350.6,0,0],["3144805","Nova Lima/MG",439.0,384.8,0,1],["3145000","Nova Ponte/MG",384.1,371.8,0,0],["3145604","Oliveira/MG",427.3,395.4,0,0],["3145901","Ouro Branco/MG",441.8,392.0,1,1],["3146008","Ouro Fino/MG",403.3,417.8,0,0],["3146107","Ouro Preto/MG",442.5,390.0,0,0],["3146503","Pains/MG",412.9,389.7,2,0],["3146701","Palma/MG",461.7,405.2,2,0],["3147006","Paracatu/MG",396.2,342.4,0,0],["3147105","Pará De Minas/MG",428.5,381.6,0,0],["3147907","Passos/MG",399.4,394.6,0,2],["3148004","Patos De Minas/MG",401.8,363.6,0,0],["3148103","Patrocínio/MG",393.6,367.8,0,0],["3148608","Peçanha/MG",458.9,362.3,0,0],["3148707","Pedra Azul/MG",478.2,323.1,0,0],["3151206","Pirapora/MG",424.6,345.4,1,2],["3151503","Piumhi/MG",408.2,390.5,1,0],["3151800","Poços De Caldas/MG",400.4,411.3,0,0],["3152501","Pouso Alegre/MG",409.4,418.0,0,0],["3152808","Prata/MG",365.1,374.1,0,0],["3152907","Pratápolis/MG",395.9,395.8,0,0],["3154606","Ribeirão Das Neves/MG",436.9,380.7,0,1],["3155900","Rio Preto/MG",439.2,414.4,0,1],["3156700","Sabará/MG",440.5,381.8,0,1],["3156809","Sabinópolis/MG",450.8,364.1,0,0],["3156908","Sacramento/MG",389.8,382.2,0,0],["3157005","Salinas/MG",464.6,325.6,0,0],["3157203","Santa Bárbara/MG",445.6,384.8,0,0],["3157807","Santa Luzia/MG",440.1,379.9,0,1],["3158003","Santa Maria De Itabira/MG",451.2,375.8,0,0],["3158201","Santa Maria Do Suaçuí/MG",461.6,357.5,0,0],["3158607","Santana Do Deserto/MG",449.3,413.2,2,1],["3159803","Santa Vitória/MG",346.1,369.3,0,0],["3160405","Santo Antônio Do Monte/MG",418.9,385.4,0,0],["3160702","Santos Dumont/MG",444.3,406.1,0,0],["3161106","São Francisco/MG",426.5,322.9,0,0],["3161700","São Gonçalo Do Abaeté/MG",414.8,356.7,0,0],["3161908","São Gonçalo Do Rio Abaixo/MG",447.2,381.1,0,0],["3162005","São Gonçalo Do Sapucaí/MG",414.6,412.5,0,0],["3162104","São Gotardo/MG",408.9,374.4,0,0],["3162500","São João Del Rei/MG",434.0,402.6,1,2],["3162807","São João Evangelista/MG",455.4,361.8,0,0],["3162922","São Joaquim De Bicas/MG",434.0,384.9,2,1],["3162948","São José Da Barra/MG",405.0,395.2,2,0],["3162955","São José Da Lapa/MG",437.7,379.2,2,1],["3163706","São Lourenço/MG",422.4,415.9,1,2],["3164100","São Pedro Do Suaçuí/MG",457.9,359.4,0,0],["3164308","São Roque De Minas/MG",401.2,387.1,0,0],["3164704","São Sebastião Do Paraíso/MG",393.8,397.7,0,0],["3165537","Sarzedo/MG",435.6,384.9,1,1],["3166808","Serra Do Salitre/MG",399.1,370.8,0,0],["3167202","Sete Lagoas/MG",433.7,375.4,0,2],["3168002","Taiobeiras/MG",466.1,321.1,0,0],["3168606","Teófilo Otoni/MG",475.7,349.7,0,0],["3168705","Timóteo/MG",457.9,377.2,0,1],["3169109","Toledo/MG",403.5,424.7,0,0],["3169356","Três Marias/MG",421.9,358.1,0,0],["3169604","Tupaciguara/MG",368.3,361.7,0,0],["3169901","Ubá/MG",452.5,400.9,0,2],["3170107","Uberaba/MG",380.1,378.6,0,0],["3170206","Uberlândia/MG",374.4,369.2,0,0],["3170404","Unaí/MG",398.1,330.1,0,0],["3170701","Varginha/MG",417.2,407.3,0,0],["3171006","Vazante/MG",396.0,352.4,0,0],["3171204","Vespasiano/MG",438.1,379.9,0,1],["3171303","Viçosa/MG",454.1,395.0,0,2],["3171808","Virginópolis/MG",457.4,365.8,0,0],["3172004","Visconde Do Rio Branco/MG",454.2,399.2,0,0],["3200607","Aracruz/ES",492.4,380.9,0,0],["3200706","Atilio Vivacqua/ES",478.4,398.3,2,0],["3201308","Cariacica/ES",488.9,388.5,0,1],["3201506","Colatina/ES",486.0,376.1,0,0],["3202405","Guarapari/ES",487.4,392.5,0,0],["3204302","Presidente Kennedy/ES",479.7,401.1,2,0],["3204807","São José Do Calçado/ES",471.7,398.5,0,0],["3205002","Serra/ES",491.0,386.0,0,1],["3205069","Venda Nova Do Imigrante/ES",478.8,389.6,2,0],["3205200","Vila Velha/ES",489.9,390.3,0,1],["3205309","Vitória/ES",491.1,388.4,0,2],["3300100","Angra Dos Reis/RJ",432.3,429.2,0,0],["3300209","Araruama/RJ",462.2,425.5,0,2],["3300258","Arraial Do Cabo/RJ",464.0,427.8,0,1],["3300308","Barra Do Piraí/RJ",438.7,420.6,0,0],["3300407","Barra Mansa/RJ",435.3,421.0,0,2],["3300456","Belford Roxo/RJ",446.5,424.9,0,1],["3300605","Bom Jesus Do Itabapoana/RJ",471.0,400.6,0,2],["3300704","Cabo Frio/RJ",465.8,425.1,0,2],["3300803","Cachoeiras De Macacu/RJ",456.1,422.2,0,0],["3300951","Comendador Levy Gasparian/RJ",448.3,414.7,2,1],["3301009","Campos Dos Goytacazes/RJ",474.9,409.5,0,2],["3301108","Cantagalo/RJ",461.7,412.0,2,2],["3301207","Carmo/RJ",458.3,412.4,2,0],["3301306","Casimiro De Abreu/RJ",464.5,421.3,0,1],["3301405","Conceição De Macabu/RJ",468.7,415.9,2,1],["3301702","Duque De Caxias/RJ",447.8,423.7,0,1],["3301876","Iguaba Grande/RJ",463.3,426.7,0,1],["3301900","Itaboraí/RJ",453.7,425.0,1,1],["3302007","Itaguaí/RJ",440.8,427.5,0,1],["3302106","Itaocara/RJ",465.4,409.8,2,2],["3302205","Itaperuna/RJ",467.6,402.1,0,0],["3302254","Itatiaia/RJ",428.8,420.2,0,1],["3302270","Japeri/RJ",443.0,424.1,2,1],["3302403","Macaé/RJ",466.7,418.5,0,2],["3302452","Macuco/RJ",462.6,414.2,0,0],["3302502","Magé/RJ",450.4,423.2,0,1],["3302601","Mangaratiba/RJ",436.4,428.3,0,1],["3302700","Maricá/RJ",454.8,427.5,1,1],["3302809","Mendes/RJ",441.1,422.0,1,2],["3302858","Mesquita/RJ",445.8,425.9,0,1],["3302908","Miguel Pereira/RJ",445.2,421.9,0,2],["3303005","Miracema/RJ",464.2,404.7,0,0],["3303104","Natividade/RJ",467.4,399.6,2,0],["3303302","Niterói/RJ",451.6,427.8,0,1],["3303401","Nova Friburgo/RJ",459.4,418.4,0,0],["3303500","Nova Iguaçu/RJ",444.7,424.5,0,1],["3303609","Paracambi/RJ",441.7,423.2,1,1],["3303708","Paraíba Do Sul/RJ",447.5,416.7,0,2],["3303807","Paraty/RJ",427.8,431.2,0,0],["3303856","Paty Do Alferes/RJ",446.4,419.7,0,2],["3303906","Petrópolis/RJ",449.9,419.8,0,2],["3303955","Pinheiral/RJ",437.6,422.0,0,1],["3304003","Piraí/RJ",439.0,423.4,0,0],["3304110","Porto Real/RJ",432.7,420.7,2,1],["3304144","Queimados/RJ",443.3,425.0,0,1],["3304201","Resende/RJ",429.8,420.4,0,2],["3304300","Rio Bonito/RJ",458.2,424.8,0,0],["3304524","Rio Das Ostras/RJ",467.1,421.0,0,2],["3304557","Rio De Janeiro/RJ",445.5,427.5,0,2],["3304706","Santo Antônio De Pádua/RJ",463.5,407.4,0,2],["3304805","São Fidélis/RJ",469.6,409.0,1,0],["3304904","São Gonçalo/RJ",452.2,426.2,0,1],["3305000","São João Da Barra/RJ",479.8,410.8,2,1],["3305109","São João De Meriti/RJ",446.6,425.8,0,1],["3305208","São Pedro Da Aldeia/RJ",464.2,426.1,0,1],["3305307","São Sebastião Do Alto/RJ",464.9,412.2,2,0],["3305505","Saquarema/RJ",459.0,426.9,0,1],["3305554","Seropédica/RJ",442.1,425.5,0,1],["3305604","Silva Jardim/RJ",460.5,422.5,2,0],["3305752","Tanguá/RJ",456.1,425.7,2,1],["3305802","Teresópolis/RJ",454.1,418.5,0,0],["3306107","Valença/RJ",439.1,417.4,0,2],["3306206","Vassouras/RJ",443.8,419.5,0,0],["3306305","Volta Redonda/RJ",436.5,421.3,0,2],["3500105","Adamantina/SP",335.4,407.5,0,2],["3500402","Águas Da Prata/SP",398.5,412.7,2,1],["3500501","Águas De Lindóia/SP",399.8,421.0,0,2],["3500600","Águas De São Pedro/SP",381.4,423.0,2,1],["3500709","Agudos/SP",363.4,422.8,1,0],["3501004","Altinópolis/SP",388.6,399.2,2,0],["3501152","Alumínio/SP",390.0,437.0,2,1],["3501608","Americana/SP",389.7,425.0,0,2],["3501707","Américo Brasiliense/SP",379.3,409.7,0,1],["3501905","Amparo/SP",396.9,424.9,0,2],["3502101","Andradina/SP",331.4,396.5,0,0],["3502200","Angatuba/SP",373.1,436.1,0,0],["3502507","Aparecida/SP",419.6,428.2,0,1],["3502705","Apiaí/SP",367.9,450.1,0,0],["3502754","Araçariguama/SP",393.0,435.5,2,0],["3502804","Araçatuba/SP",342.1,400.6,0,0],["3502903","Araçoiaba Da Serra/SP",385.0,437.2,0,1],["3503208","Araraquara/SP",377.0,410.4,0,2],["3503307","Araras/SP",389.3,419.5,0,0],["3503802","Artur Nogueira/SP",391.8,422.4,1,2],["3503901","Arujá/SP",404.2,434.9,0,1],["3504008","Assis/SP",344.2,423.2,1,0],["3504107","Atibaia/SP",400.0,431.9,0,2],["3504404","Avanhandava/SP",351.3,405.8,0,0],["3504503","Avaré/SP",366.5,430.2,0,0],["3505302","Barra Bonita/SP",371.5,421.3,0,2],["3505401","Barra Do Turvo/SP",373.5,457.4,2,0],["3505500","Barretos/SP",370.0,392.1,0,0],["3505708","Barueri/SP",396.2,436.5,0,1],["3505906","Batatais/SP",385.9,397.0,2,0],["3506003","Bauru/SP",363.4,417.6,0,2],["3506102","Bebedouro/SP",372.4,398.4,0,0],["3506359","Bertioga/SP",407.9,440.5,0,0],["3506508","Birigui/SP",345.5,402.6,0,2],["3506706","Boa Esperança Do Sul/SP",372.6,413.0,0,0],["3507001","Boituva/SP",384.1,433.4,0,2],["3507506","Botucatu/SP",372.1,427.1,0,0],["3507605","Bragança Paulista/SP",400.5,427.9,0,0],["3507803","Brodowski/SP",385.0,399.8,2,1],["3507902","Brotas/SP",378.5,418.0,2,0],["3508405","Cabreúva/SP",393.2,433.5,0,1],["3508504","Caçapava/SP",412.6,430.6,0,1],["3508603","Cachoeira Paulista/SP",422.7,424.1,0,0],["3508801","Cafelândia/SP",357.1,409.8,0,0],["3509007","Caieiras/SP",397.6,434.8,0,1],["3509254","Cajati/SP",376.8,455.8,0,0],["3509403","Cajuru/SP",389.2,403.2,0,0],["3509502","Campinas/SP",393.2,427.5,0,2],["3509601","Campo Limpo Paulista/SP",397.5,432.4,0,1],["3509908","Cananéia/SP",379.1,458.9,0,0],["3510203","Capão Bonito/SP",375.4,444.6,2,2],["3510302","Capela Do Alto/SP",383.2,436.4,0,0],["3510401","Capivari/SP",386.9,428.7,0,2],["3510500","Caraguatatuba/SP",415.9,438.5,0,2],["3510609","Carapicuíba/SP",396.3,437.3,0,1],["3511003","Castilho/SP",327.9,397.8,0,0],["3511102","Catanduva/SP",365.7,401.0,0,2],["3511508","Cerquilho/SP",383.1,431.7,2,2],["3512001","Colina/SP",370.7,395.1,0,0],["3512209","Conchal/SP",391.9,419.6,1,0],["3512308","Conchas/SP",378.7,428.4,2,0],["3512803","Cosmópolis/SP",391.4,423.9,0,1],["3513009","Cotia/SP",395.2,438.7,0,1],["3513405","Cruzeiro/SP",422.7,422.2,0,2],["3513504","Cubatão/SP",402.7,442.0,0,1],["3513603","Cunha/SP",424.7,429.3,0,0],["3513702","Descalvado/SP",384.6,412.4,0,0],["3513801","Diadema/SP",399.5,439.5,0,1],["3514106","Dois Córregos/SP",374.7,419.9,2,0],["3514304","Dourado/SP",374.6,415.7,2,0],["3514403","Dracena/SP",327.8,407.2,0,0],["3514809","Eldorado/SP",376.1,451.8,0,0],["3514908","Elias Fausto/SP",388.5,430.3,0,0],["3515004","Embu/SP",396.5,438.8,0,1],["3515103","Embu-Guaçu/SP",396.6,441.9,0,1],["3515152","Engenheiro Coelho/SP",391.5,421.2,0,0],["3515509","Fernandópolis/SP",346.6,388.6,0,2],["3515707","Ferraz De Vasconcelos/SP",403.2,437.8,0,1],["3516002","Flórida Paulista/SP",333.6,407.2,0,0],["3516200","Franca/SP",388.6,392.6,0,2],["3516309","Francisco Morato/SP",398.3,433.0,0,1],["3516408","Franco Da Rocha/SP",398.0,433.3,0,1],["3517000","Getulina/SP",350.2,410.7,2,0],["3517307","Guaimbê/SP",352.9,412.1,0,0],["3517406","Guaíra/SP",374.1,388.4,0,0],["3517802","Guaraçaí/SP",332.3,399.7,0,0],["3517901","Guaraci/SP",365.0,389.5,0,0],["3518206","Guararapes/SP",340.2,403.0,0,0],["3518305","Guararema/SP",407.8,435.7,1,0],["3518404","Guaratinguetá/SP",419.7,426.3,0,2],["3518701","Guarujá/SP",405.4,442.9,0,1],["3518800","Guarulhos/SP",402.5,434.7,0,1],["3519055","Holambra/SP",393.1,423.5,2,1],["3519071","Hortolândia/SP",391.1,427.2,0,1],["3519303","Ibaté/SP",378.8,413.4,1,1],["3519709","Ibiúna/SP",390.9,441.1,0,0],["3520103","Igarapava/SP",384.2,384.8,0,2],["3520202","Igaratá/SP",406.3,431.1,2,0],["3520301","Iguape/SP",386.9,452.2,0,2],["3520400","Ilhabela/SP",418.3,441.6,0,1],["3520426","Ilha Comprida/SP",383.8,456.8,2,1],["3520442","Ilha Solteira/SP",332.5,391.0,1,0],["3520509","Indaiatuba/SP",391.4,431.0,0,0],["3521002","Iperó/SP",384.9,435.0,0,2],["3521606","Irapuru/SP",331.2,406.1,0,0],["3522109","Itanhaém/SP",396.7,445.1,0,1],["3522208","Itapecerica Da Serra/SP",396.0,440.2,0,1],["3522307","Itapetininga/SP",378.4,438.8,1,2],["3522406","Itapeva/SP",366.9,443.1,1,0],["3522505","Itapevi/SP",394.6,437.1,0,1],["3522604","Itapira/SP",397.7,420.5,0,0],["3522802","Itaporanga/SP",358.5,439.1,2,0],["3523107","Itaquaquecetuba/SP",403.7,436.0,0,1],["3523206","Itararé/SP",361.1,445.6,1,0],["3523305","Itariri/SP",392.4,448.6,0,0],["3523404","Itatiba/SP",396.8,428.9,0,0],["3523503","Itatinga/SP",370.3,431.1,0,0],["3523909","Itu/SP",390.2,433.5,0,2],["3524006","Itupeva/SP",393.3,431.0,0,1],["3524303","Jaboticabal/SP",375.6,402.2,1,0],["3524402","Jacareí/SP",409.1,433.7,0,1],["3524600","Jacupiranga/SP",378.6,456.0,0,0],["3524808","Jales/SP",342.7,388.3,2,2],["3525003","Jandira/SP",395.5,437.1,0,1],["3525102","Jardinópolis/SP",382.2,398.9,2,1],["3525201","Jarinu/SP",398.1,430.3,0,1],["3525300","Jaú/SP",371.5,418.0,0,0],["3525706","José Bonifácio/SP",354.1,400.7,0,0],["3525904","Jundiaí/SP",395.8,432.3,0,2],["3526001","Junqueirópolis/SP",329.4,406.5,0,0],["3526100","Juquiá/SP",385.0,447.5,0,0],["3526209","Juquitiba/SP",394.0,443.4,0,0],["3526506","Lavínia/SP",335.7,401.0,0,0],["3526704","Leme/SP",389.3,416.6,0,2],["3526902","Limeira/SP",389.1,422.9,0,2],["3527009","Lindóia/SP",399.2,421.5,0,2],["3527108","Lins/SP",355.4,408.9,1,0],["3527207","Lorena/SP",422.3,425.5,0,2],["3527306","Louveira/SP",394.9,430.2,0,1],["3527405","Lucélia/SP",336.1,408.5,0,2],["3528007","Macatuba/SP",369.2,421.3,2,0],["3528502","Mairiporã/SP",400.3,433.7,0,1],["3528809","Maracaí/SP",339.7,424.1,1,0],["3529005","Marília/SP",350.9,416.7,0,2],["3529302","Matão/SP",373.7,408.0,0,2],["3529401","Mauá/SP",402.4,438.6,0,1],["3529708","Miguelópolis/SP",377.7,386.4,0,0],["3529906","Miracatu/SP",389.0,446.3,0,0],["3530102","Mirandópolis/SP",333.8,400.6,0,0],["3530607","Mogi Das Cruzes/SP",405.7,437.5,0,1],["3530706","Mogi Guaçu/SP",393.7,417.2,0,2],["3530805","Moji Mirim/SP",393.9,421.1,0,1],["3531100","Mongaguá/SP",398.9,445.1,0,1],["3531506","Monte Azul Paulista/SP",369.8,397.5,0,0],["3531803","Monte Mor/SP",389.9,428.1,0,1],["3532009","Morungaba/SP",397.2,427.3,2,0],["3532108","Murutinga Do Sul/SP",331.4,399.1,0,0],["3532207","Narandiba/SP",328.7,421.7,0,1],["3532405","Nazaré Paulista/SP",402.8,432.0,2,0],["3533908","Olímpia/SP",365.5,394.3,0,0],["3534401","Osasco/SP",396.9,437.1,0,1],["3534708","Ourinhos/SP",352.9,428.4,0,2],["3534906","Pacaembu/SP",332.2,406.5,0,0],["3535408","Panorama/SP",323.8,406.2,0,0],["3535507","Paraguaçu Paulista/SP",341.5,421.0,0,2],["3535804","Paranapanema/SP",368.2,435.4,0,0],["3536000","Parapuã/SP",338.5,411.9,0,0],["3536109","Pardinho/SP",374.0,430.2,0,0],["3536208","Pariquera-Açu/SP",381.7,454.3,0,0],["3536505","Paulínia/SP",391.8,425.1,0,1],["3536703","Pederneiras/SP",367.1,418.7,1,0],["3536802","Pedra Bela/SP",402.3,425.6,0,0],["3537008","Pedregulho/SP",387.7,387.1,2,0],["3537107","Pedreira/SP",395.6,425.1,0,0],["3537206","Pedro De Toledo/SP",391.6,446.7,1,0],["3537305","Penápolis/SP",349.3,405.1,1,0],["3537404","Pereira Barreto/SP",334.7,394.5,0,0],["3537602","Peruíbe/SP",393.7,448.8,0,0],["3537800","Piedade/SP",387.8,440.4,1,0],["3538006","Pindamonhangaba/SP",416.2,427.4,0,1],["3538204","Pinhalzinho/SP",400.4,425.7,0,0],["3538709","Piracicaba/SP",382.6,424.9,0,2],["3538808","Piraju/SP",359.2,431.8,0,0],["3538907","Pirajuí/SP",359.5,412.8,0,2],["3539103","Pirapora Do Bom Jesus/SP",394.2,434.6,2,1],["3539202","Pirapozinho/SP",327.0,420.9,0,1],["3539301","Pirassununga/SP",388.6,413.8,0,0],["3539400","Piratininga/SP",362.3,420.3,2,1],["3539806","Poá/SP",403.5,437.1,0,1],["3540002","Pompéia/SP",347.8,414.3,2,2],["3540606","Porto Feliz/SP",386.8,432.6,1,0],["3540705","Porto Ferreira/SP",387.8,411.9,0,0],["3540804","Potirendaba/SP",359.4,400.1,2,0],["3541307","Presidente Epitácio/SP",319.3,412.2,0,0],["3541406","Presidente Prudente/SP",331.1,413.7,0,2],["3541604","Promissão/SP",352.7,406.4,0,0],["3541901","Queluz/SP",426.0,421.6,0,0],["3542206","Rancharia/SP",337.4,418.1,0,0],["3542602","Registro/SP",381.7,451.9,0,0],["3543303","Ribeirão Pires/SP",402.8,439.1,0,1],["3543402","Ribeirão Preto/SP",382.3,402.1,0,2],["3543709","Rincão/SP",379.2,408.2,0,1],["3543907","Rio Claro/SP",385.4,419.8,0,2],["3544004","Rio Das Pedras/SP",385.5,427.0,0,1],["3544251","Rosana/SP",309.3,421.7,0,0],["3545209","Salto/SP",389.8,431.7,0,2],["3545308","Salto De Pirapora/SP",385.5,438.6,0,1],["3545803","Santa Bárbara D'Oeste/SP",388.1,425.8,0,1],["3546009","Santa Branca/SP",410.5,435.5,0,1],["3546306","Santa Cruz Das Palmeiras/SP",390.4,412.0,0,0],["3546405","Santa Cruz Do Rio Pardo/SP",357.1,426.1,1,0],["3546603","Santa Fé Do Sul/SP",336.9,387.9,0,2],["3546801","Santa Isabel/SP",405.1,433.4,2,1],["3547304","Santana De Parnaíba/SP",395.0,435.9,0,1],["3547502","Santa Rita Do Passa Quatro/SP",386.7,409.6,1,0],["3547601","Santa Rosa De Viterbo/SP",388.8,406.5,0,0],["3547809","Santo André/SP",402.5,440.0,0,1],["3548005","Santo Antônio De Posse/SP",394.7,423.0,2,0],["3548500","Santos/SP",404.4,442.0,0,1],["3548708","São Bernardo Do Campo/SP",400.5,440.6,0,1],["3548807","São Caetano Do Sul/SP",400.4,438.4,1,1],["3548906","São Carlos/SP",381.2,412.3,0,2],["3549102","São João Da Boa Vista/SP",397.2,413.8,0,2],["3549409","São Joaquim Da Barra/SP",380.5,392.3,2,0],["3549805","São José Do Rio Preto/SP",359.9,395.8,0,2],["3549904","São José Dos Campos/SP",409.5,430.1,0,2],["3549953","São Lourenço Da Serra/SP",395.1,441.7,2,1],["3550100","São Manuel/SP",371.4,423.9,0,0],["3550209","São Miguel Arcanjo/SP",380.0,442.8,0,0],["3550308","São Paulo/SP",398.9,438.5,0,2],["3550407","São Pedro/SP",380.6,422.1,0,2],["3550605","São Roque/SP",392.5,436.9,0,2],["3550704","São Sebastião/SP",414.1,440.2,0,2],["3550902","São Simão/SP",386.1,405.6,0,0],["3551009","São Vicente/SP",401.3,443.5,0,1],["3551603","Serra Negra/SP",398.4,422.9,0,0],["3551801","Sete Barras/SP",380.1,447.7,0,0],["3552106","Socorro/SP",401.0,423.1,0,0],["3552205","Sorocaba/SP",387.9,436.3,0,2],["3552403","Sumaré/SP",390.7,426.5,0,1],["3552502","Suzano/SP",403.9,438.4,0,1],["3552809","Taboão Da Serra/SP",396.9,438.3,0,1],["3553302","Tambaú/SP",390.5,407.4,1,0],["3553500","Tapiraí/SP",385.1,444.2,0,0],["3553708","Taquaritinga/SP",371.8,405.2,0,0],["3553807","Taquarituba/SP",361.7,436.9,2,0],["3553955","Tarumã/SP",342.1,425.4,1,0],["3554003","Tatuí/SP",381.2,434.2,0,0],["3554102","Taubaté/SP",416.0,430.1,0,1],["3554300","Teodoro Sampaio/SP",316.4,420.6,0,0],["3554508","Tietê/SP",383.6,429.5,2,2],["3554805","Tremembé/SP",414.0,428.1,0,1],["3554953","Tuiuti/SP",398.6,426.4,2,0],["3555000","Tupã/SP",342.9,413.0,1,2],["3555109","Tupi Paulista/SP",327.6,404.9,0,2],["3555406","Ubatuba/SP",422.8,434.6,0,2],["3556206","Valinhos/SP",394.3,429.0,0,1],["3556305","Valparaíso/SP",337.2,402.5,0,2],["3556354","Vargem/SP",402.6,427.3,2,0],["3556404","Vargem Grande Do Sul/SP",395.7,412.3,0,0],["3556453","Vargem Grande Paulista/SP",393.7,438.0,2,1],["3556503","Várzea Paulista/SP",396.8,432.1,0,1],["3556701","Vinhedo/SP",394.6,429.7,0,1],["3557006","Votorantim/SP",388.3,437.8,0,1],["3557105","Votuporanga/SP",350.6,390.9,0,2],["4100400","Almirante Tamandaré/PR",360.5,463.4,0,1],["4100509","Altônia/PR",293.1,442.8,0,0],["4100608","Alto Paraná/PR",316.8,430.0,0,0],["4100707","Alto Piquiri/PR",301.0,445.5,0,0],["4101101","Andirá/PR",346.7,429.1,0,0],["4101200","Antonina/PR",369.2,463.6,2,0],["4101408","Apucarana/PR",329.8,437.8,0,0],["4101507","Arapongas/PR",330.1,435.8,0,0],["4102000","Assis Chateaubriand/PR",298.7,449.8,0,0],["4102109","Astorga/PR",326.0,432.6,0,0],["4102406","Bandeirantes/PR",345.7,431.5,0,0],["4103370","Brasilândia Do Sul/PR",299.4,446.1,0,0],["4103453","Cafelândia/PR",302.1,454.4,0,0],["4103479","Cafezal Do Sul/PR",299.2,443.1,0,0],["4103602","Cambará/PR",349.3,428.7,0,0],["4103701","Cambé/PR",332.0,432.2,0,1],["4103800","Cambira/PR",327.6,438.0,0,1],["4104204","Campo Largo/PR",356.5,463.3,0,1],["4104303","Campo Mourão/PR",316.0,445.7,0,0],["4104600","Capitão Leônidas Marques/PR",298.5,465.2,0,0],["4104659","Carambeí/PR",348.4,457.4,2,1],["4104808","Cascavel/PR",301.5,459.1,0,2],["4105102","Centenário Do Sul/PR",328.0,426.0,2,0],["4105508","Cianorte/PR",312.9,439.3,1,0],["4105706","Clevelândia/PR",316.4,479.1,2,0],["4105805","Colombo/PR",362.3,463.8,0,1],["4105904","Colorado/PR",322.3,426.6,0,2],["4106407","Cornélio Procópio/PR",342.2,432.1,0,0],["4106605","Cruzeiro Do Oeste/PR",305.8,440.6,0,0],["4106902","Curitiba/PR",360.9,466.1,0,2],["4107306","Doutor Camargo/PR",318.8,437.3,0,0],["4107504","Engenheiro Beltrão/PR",318.1,440.1,1,0],["4107603","Faxinal/PR",331.4,443.7,1,0],["4107652","Fazenda Rio Grande/PR",360.5,469.2,0,1],["4108007","Florestópolis/PR",330.5,427.1,0,0],["4108304","Foz Do Iguaçu/PR",286.0,465.6,0,2],["4108320","Francisco Alves/PR",294.8,445.7,0,0],["4108403","Francisco Beltrão/PR",305.0,474.7,0,0],["4108601","Goioerê/PR",306.2,446.7,0,0],["4108809","Guaíra/PR",289.6,446.7,0,0],["4109401","Guarapuava/PR",328.2,464.4,0,0],["4109609","Guaratuba/PR",368.0,471.2,0,0],["4109708","Ibaiti/PR",346.4,440.7,2,0],["4109807","Ibiporã/PR",335.7,432.6,0,1],["4110078","Imbaú/PR",339.8,450.3,0,0],["4110607","Iporã/PR",296.1,444.6,0,0],["4110706","Irati/PR",338.6,466.4,1,0],["4111258","Itaperuçu/PR",358.0,460.9,2,1],["4111506","Ivaiporã/PR",326.9,448.4,1,0],["4111803","Jacarezinho/PR",351.8,430.8,0,0],["4111902","Jaguapitã/PR",327.7,429.9,0,0],["4112009","Jaguariaíva/PR",354.9,449.3,0,0],["4112108","Jandaia Do Sul/PR",326.4,438.5,1,2],["4112207","Janiópolis/PR",310.0,446.1,0,0],["4112504","Jardim Alegre/PR",325.2,447.2,0,0],["4112702","Jataizinho/PR",337.6,432.9,0,1],["4113205","Lapa/PR",352.1,471.0,0,0],["4113429","Lidianópolis/PR",326.9,445.1,1,0],["4113502","Loanda/PR",306.1,428.1,0,0],["4113700","Londrina/PR",334.4,436.6,0,2],["4113759","Lunardelli/PR",325.1,444.9,0,0],["4113809","Lupionópolis/PR",326.2,424.8,0,0],["4114104","Mandaguaçu/PR",321.0,433.1,0,1],["4114203","Mandaguari/PR",325.9,436.5,0,0],["4114302","Mandirituba/PR",360.4,471.6,2,1],["4114807","Marialva/PR",323.3,436.6,0,1],["4114906","Marilândia Do Sul/PR",332.0,440.1,0,0],["4115101","Mariluz/PR",303.7,445.1,0,0],["4115200","Maringá/PR",322.1,434.6,0,2],["4115705","Matinhos/PR",371.6,470.4,1,2],["4116208","Morretes/PR",367.2,466.8,2,0],["4116901","Nova Esperança/PR",317.6,431.8,0,0],["4117107","Nova Londrina/PR",307.5,425.0,0,2],["4117305","Ortigueira/PR",336.9,445.7,0,0],["4117503","Paiçandu/PR",320.0,436.1,0,1],["4117602","Palmas/PR",324.3,480.7,2,0],["4117909","Palotina/PR",295.9,448.3,0,0],["4118105","Paranacity/PR",319.7,426.5,0,2],["4118204","Paranaguá/PR",372.2,467.5,1,0],["4118402","Paranavaí/PR",314.0,427.3,0,2],["4118808","Peabiru/PR",317.0,443.3,0,0],["4118857","Perobal/PR",301.6,443.3,0,0],["4118907","Pérola/PR",296.8,441.6,0,0],["4119152","Pinhais/PR",362.8,465.2,0,1],["4119608","Pitanga/PR",324.6,454.0,1,0],["4119905","Ponta Grossa/PR",350.2,460.7,0,2],["4120002","Porecatu/PR",330.1,425.2,0,0],["4120408","Presidente Castelo Branco/PR",319.4,433.0,0,1],["4120507","Primeiro De Maio/PR",334.8,426.9,0,0],["4120804","Quatro Barras/PR",364.5,464.6,1,1],["4121000","Querência Do Norte/PR",299.5,430.4,0,0],["4121901","Ribeirão Do Pinhal/PR",344.6,435.0,0,0],["4122206","Rio Branco Do Sul/PR",360.0,460.2,2,1],["4122305","Rio Negro/PR",354.9,475.2,0,2],["4122404","Rolândia/PR",330.5,433.2,0,0],["4123204","Santa Cecília Do Pavão/PR",338.7,437.2,0,0],["4123402","Santa Fé/PR",323.9,429.9,0,0],["4123907","Santa Mariana/PR",342.5,429.3,0,0],["4124020","Santa Tereza Do Oeste/PR",298.1,459.1,0,1],["4124103","Santo Antônio Da Platina/PR",348.9,433.6,0,0],["4124509","Santo Inácio/PR",324.5,424.8,0,0],["4124707","São Jerônimo Da Serra/PR",339.4,439.6,0,0],["4125357","São Jorge Do Patrocínio/PR",294.0,440.3,0,0],["4125506","São José Dos Pinhais/PR",363.8,469.0,0,1],["4125605","São Mateus Do Sul/PR",344.2,472.5,0,0],["4126256","Sarandi/PR",323.6,435.7,0,1],["4126504","Sertanópolis/PR",335.1,429.8,2,0],["4127106","Telêmaco Borba/PR",342.8,447.4,0,0],["4127205","Terra Boa/PR",316.3,439.3,0,0],["4127403","Terra Roxa/PR",291.6,446.5,0,0],["4127601","Tijucas Do Sul/PR",363.5,472.4,2,0],["4127700","Toledo/PR",295.8,454.5,0,2],["4128005","Ubiratã/PR",306.6,451.6,1,0],["4128104","Umuarama/PR",301.4,439.3,0,2],["4128203","União Da Vitória/PR",334.8,475.4,0,2],["4128500","Wenceslau Braz/PR",353.7,441.7,2,0],["4201307","Araquari/SC",368.7,480.9,0,1],["4201406","Araranguá/SC",358.4,518.0,1,2],["4201950","Balneário Arroio Do Silva/SC",358.2,519.3,2,1],["4202008","Balneário Camboriú/SC",370.4,489.0,1,2],["4202131","Bela Vista Do Toldo/SC",343.5,480.3,2,0],["4202305","Biguaçu/SC",369.4,495.4,0,1],["4202404","Blumenau/SC",363.6,487.2,0,2],["4202453","Bombinhas/SC",372.0,491.4,2,1],["4202909","Brusque/SC",366.4,490.9,0,2],["4204202","Chapecó/SC",312.0,490.5,0,2],["4204608","Criciúma/SC",359.6,515.0,0,2],["4205407","Florianópolis/SC",372.0,497.9,0,2],["4205456","Forquilhinha/SC",358.1,515.5,1,1],["4205506","Fraiburgo/SC",338.4,490.0,0,0],["4205704","Garopaba/SC",370.1,504.5,2,1],["4205803","Garuva/SC",366.6,475.0,0,0],["4206009","Governador Celso Ramos/SC",371.2,494.6,2,1],["4206504","Guaramirim/SC",366.2,481.2,0,1],["4207205","Imaruí/SC",367.2,507.5,0,0],["4207304","Imbituba/SC",369.2,506.7,0,2],["4208203","Itajaí/SC",368.8,488.7,0,2],["4208450","Itapoá/SC",370.3,475.2,0,0],["4208807","Jaguaruna/SC",364.0,514.1,0,0],["4208906","Jaraguá Do Sul/SC",362.7,480.9,0,2],["4209003","Joaçaba/SC",327.3,490.8,0,2],["4209102","Joinville/SC",366.0,478.1,0,2],["4209409","Laguna/SC",367.5,511.0,0,2],["4209607","Lauro Muller/SC",358.5,509.8,2,0],["4210100","Mafra/SC",352.0,477.1,0,2],["4210506","Maravilha/SC",304.4,485.3,0,0],["4211207","Morro Da Fumaça/SC",361.4,513.5,0,1],["4211702","Orleans/SC",359.8,508.3,0,0],["4211900","Palhoça/SC",370.1,500.2,0,1],["4212650","Pescaria Brava/SC",366.8,509.9,2,0],["4212809","Balneário Piçarras/SC",369.0,485.4,2,1],["4213500","Porto Belo/SC",370.8,491.6,2,1],["4214805","Rio Do Sul/SC",356.0,492.2,0,2],["4215653","Santa Rosa Do Sul/SC",354.7,520.9,0,0],["4215802","São Bento Do Sul/SC",359.8,478.3,0,2],["4216206","São Francisco Do Sul/SC",370.2,478.1,0,0],["4216602","São José/SC",369.8,497.8,0,1],["4217204","São Miguel Do Oeste/SC",299.9,485.1,0,0],["4217709","Sombrio/SC",355.7,519.7,0,2],["4218301","Três Barras/SC",346.9,476.5,2,1],["4218707","Tubarão/SC",364.6,511.1,0,2],["4219309","Videira/SC",333.7,488.7,0,0],["4219507","Xanxerê/SC",315.7,487.5,0,0],["4300406","Alegrete/RS",265.5,529.8,0,0],["4301602","Bagé/RS",292.2,553.1,0,2],["4302105","Bento Gonçalves/RS",327.6,521.1,0,2],["4302303","Bom Jesus/RS",343.5,512.2,0,0],["4302709","Butiá/RS",321.7,536.2,0,0],["4304358","Candiota/RS",296.0,557.9,0,1],["4304606","Canoas/RS",333.6,532.6,1,1],["4304705","Carazinho/RS",308.9,507.8,0,0],["4305108","Caxias Do Sul/RS",335.6,520.1,0,2],["4306106","Cruz Alta/RS",299.1,514.9,0,0],["4307005","Erechim/RS",317.8,498.5,0,0],["4307708","Esteio/RS",334.0,531.9,0,1],["4308508","Frederico Westphalen/RS",302.1,493.9,0,0],["4308607","Garibaldi/RS",327.4,522.7,0,1],["4309050","Glorinha/RS",339.7,532.0,0,1],["4309100","Gramado/RS",337.7,524.7,0,2],["4309209","Gravataí/RS",336.8,532.6,0,1],["4309308","Guaíba/RS",330.1,536.3,0,1],["4310207","Ijuí/RS",294.3,508.3,0,0],["4310801","Ivoti/RS",333.8,527.8,2,1],["4312385","Monte Belo Do Sul/RS",326.5,520.8,0,1],["4313409","Novo Hamburgo/RS",335.0,529.7,0,1],["4313508","Osório/RS",347.0,532.8,0,2],["4314050","Parobé/RS",338.1,528.8,2,2],["4314100","Passo Fundo/RS",314.8,508.0,0,0],["4314209","Pedro Osório/RS",309.0,563.3,2,2],["4314407","Pelotas/RS",317.3,558.1,0,2],["4314803","Portão/RS",332.6,529.6,2,1],["4314902","Porto Alegre/RS",334.0,535.2,0,2],["4315305","Quaraí/RS",261.5,538.2,2,0],["4315602","Rio Grande/RS",316.2,566.6,0,0],["4316907","Santa Maria/RS",295.4,530.3,0,2],["4317103","Sant'Ana Do Livramento/RS",270.4,545.7,0,0],["4317608","Santo Antônio Da Patrulha/RS",342.9,531.9,0,0],["4318002","São Borja/RS",267.1,515.0,0,0],["4318309","São Gabriel/RS",287.8,538.7,0,2],["4318705","São Leopoldo/RS",334.0,529.9,0,1],["4321501","Torres/RS",353.2,523.9,0,2],["4322400","Uruguaiana/RS",253.4,531.7,0,0],["4322806","Veranópolis/RS",328.2,518.3,0,2],["4323002","Viamão/RS",338.1,536.7,0,1],["5000203","Água Clara/MS",309.2,383.9,0,0],["5000609","Amambai/MS",279.3,431.4,0,0],["5001904","Bataguassu/MS",313.3,411.1,0,0],["5002407","Caarapó/MS",281.6,423.0,0,0],["5002704","Campo Grande/MS",287.7,396.4,0,0],["5002951","Chapadão Do Sul/MS",311.7,369.9,1,0],["5003256","Costa Rica/MS",304.1,361.1,2,0],["5003306","Coxim/MS",283.4,357.5,0,0],["5003454","Deodápolis/MS",290.5,415.4,0,0],["5003702","Dourados/MS",280.6,416.1,0,0],["5003751","Eldorado/MS",289.6,440.5,0,0],["5003801","Fátima Do Sul/MS",286.1,419.2,0,0],["5004304","Iguatemi/MS",284.7,434.6,0,0],["5004403","Inocência/MS",321.0,378.8,0,0],["5004601","Itaquiraí/MS",291.1,434.7,0,0],["5004700","Ivinhema/MS",295.3,419.4,0,0],["5005681","Mundo Novo/MS",289.3,442.8,0,0],["5005707","Naviraí/MS",292.9,430.5,0,0],["5006002","Nova Alvorada Do Sul/MS",290.5,406.6,0,0],["5006200","Nova Andradina/MS",300.7,413.2,0,0],["5006309","Paranaíba/MS",330.8,377.2,0,0],["5006358","Paranhos/MS",272.9,439.3,0,0],["5006606","Ponta Porã/MS",269.5,416.6,0,0],["5007109","Ribas Do Rio Pardo/MS",299.3,392.9,2,0],["5007208","Rio Brilhante/MS",285.8,410.2,0,0],["5007703","Sete Quedas/MS",278.3,442.1,0,0],["5007802","Selvíria/MS",325.1,388.3,0,0],["5007950","Tacuru/MS",278.0,438.3,0,0],["5008305","Três Lagoas/MS",319.1,390.6,0,0],["5100250","Alta Floresta/MT",258.0,234.6,0,0],["5100300","Alto Araguaia/MT",300.3,346.8,0,2],["5100409","Alto Garças/MT",299.2,336.2,0,0],["5100607","Alto Taquari/MT",303.0,351.6,0,0],["5101407","Aripuanã/MT",209.3,236.8,0,0],["5101803","Barra Do Garças/MT",314.5,314.5,0,2],["5102504","Cáceres/MT",236.8,330.1,0,0],["5103205","Colíder/MT",271.1,242.6,0,0],["5103304","Comodoro/MT",209.1,282.7,0,0],["5103403","Cuiabá/MT",268.0,320.1,0,2],["5104104","Guarantã Do Norte/MT",284.2,231.3,0,0],["5104807","Jaciara/MT",275.3,323.6,0,2],["5105101","Juara/MT",240.7,250.4,0,0],["5105150","Juína/MT",214.6,254.8,0,0],["5105259","Lucas Do Rio Verde/MT",260.1,278.8,0,0],["5105507","Vila Bela Da Santíssima Trindade/MT",206.2,309.8,0,0],["5105606","Matupá/MT",286.9,234.0,0,0],["5105903","Nobres/MT",265.4,300.4,0,0],["5106216","Nova Canaã Do Norte/MT",262.7,244.1,0,0],["5106224","Nova Mutum/MT",262.1,287.9,0,0],["5106299","Paranaíta/MT",253.2,227.9,0,0],["5106422","Peixoto De Azevedo/MT",294.7,237.5,0,0],["5106752","Pontes E Lacerda/MT",214.7,315.5,0,0],["5107008","Poxoréo/MT",289.7,320.5,0,0],["5107040","Primavera Do Leste/MT",289.0,311.1,0,0],["5107602","Rondonópolis/MT",283.9,332.8,0,0],["5107701","Rosário Oeste/MT",263.3,306.8,0,0],["5107859","São Félix Do Araguaia/MT",322.3,256.1,0,0],["5107909","Sinop/MT",271.2,259.4,0,0],["5107925","Sorriso/MT",269.3,275.2,1,0],["5107958","Tangará Da Serra/MT",234.7,302.5,0,0],["5108055","Terra Nova Do Norte/MT",278.1,241.8,0,0],["5108402","Várzea Grande/MT",260.1,317.4,0,1],["5108501","Vera/MT",273.6,272.8,0,0],["5200134","Acreúna/GO",346.1,345.8,0,0],["5200258","Águas Lindas De Goiás/GO",375.5,320.3,0,1],["5200555","Alto Horizonte/GO",358.8,296.7,0,0],["5200803","Alvorada Do Norte/GO",399.6,302.5,0,2],["5201108","Anápolis/GO",365.0,328.4,0,0],["5201306","Anicuns/GO",351.1,330.0,2,0],["5201405","Aparecida De Goiânia/GO",361.5,336.3,0,1],["5202502","Aruanã/GO",337.1,306.1,2,0],["5203500","Bom Jesus De Goiás/GO",352.4,357.1,0,0],["5204300","Caçu/GO",335.9,365.9,0,0],["5204508","Caldas Novas/GO",370.1,349.8,0,2],["5204904","Campos Belos/GO",401.4,279.0,0,0],["5205109","Catalão/GO",383.6,354.1,0,2],["5205471","Chapadão Do Céu/GO",312.8,361.1,0,0],["5206404","Crixás/GO",349.6,303.8,0,0],["5208004","Formosa/GO",391.4,312.9,1,0],["5208707","Goiânia/GO",361.1,334.3,0,2],["5208905","Goiás/GO",347.2,321.7,2,0],["5209101","Goiatuba/GO",355.2,354.1,0,0],["5211503","Itumbiara/GO",358.6,359.6,0,2],["5211909","Jataí/GO",325.7,352.1,0,0],["5212501","Luziânia/GO",379.5,331.0,1,1],["5213004","Maurilândia/GO",345.8,354.4,0,2],["5213087","Minaçu/GO",374.1,285.9,0,0],["5213103","Mineiros/GO",310.8,348.0,0,0],["5213806","Morrinhos/GO",363.4,351.3,0,0],["5215231","Novo Gama/GO",378.8,325.7,0,1],["5216403","Paraúna/GO",342.6,340.1,0,0],["5217104","Piracanjuba/GO",365.3,343.9,0,0],["5217708","Pontalina/GO",357.3,347.2,0,0],["5218300","Posse/GO",402.4,297.5,0,0],["5218805","Rio Verde/GO",335.6,349.6,0,0],["5219308","Santa Helena De Goiás/GO",342.4,351.2,0,0],["5219407","Santa Rita Do Araguaia/GO",306.2,342.9,0,1],["5219753","Santo Antônio Do Descoberto/GO",375.4,324.7,0,1],["5221700","Uruana/GO",355.6,317.7,0,0],["5300108","Brasília/DF",382.1,321.9,0,2]]</script>
+  <details class="pacote" id="ge-81" open><summary class="phead"><span class="pnum">1</span><div><h2>Onde há grupo, há menos Tarifa Zero</h2><p>Entre duas cidades parecidas que gravitam em torno de uma metrópole, a que tem empresa de grupo adota a Tarifa Zero universal com cerca de um terço da frequência. Nas cidades isoladas, ter ou não grupo não muda nada.</p><div class="pmeta">Na tese: Seção 8.1, Gráfico 19 e Figura 26</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
+<p class="explica">O teste compara cidades parecidas, do mesmo porte, com a mesma capacidade fiscal e no mesmo estado (4.103 municípios das 14 UFs com ao menos uma adoção universal), e calcula a chance de adotar a Tarifa Zero universal com e sem empresa de grupo no município, em cada posição no arranjo populacional do IBGE.</p><div class="pbar"><div class="pb-lin"><div class="pb-rot"><b>Satélites dos arranjos</b><span>gravitam em torno de um centro: é onde o ônibus local encosta no mercado metropolitano · cerca de um terço</span></div><div class="pb-bars"><div class="pb-b"><span>sem grupo</span><i style="width:95%;background:#9a9aa6;"></i><b>9,5%</b></div><div class="pb-b"><span>com grupo</span><i style="width:32%;background:var(--rosa);"></i><b>3,2%</b></div></div></div><div class="pb-lin"><div class="pb-rot"><b>Sedes dos arranjos</b><span>polos e co-polos · menos da metade</span></div><div class="pb-bars"><div class="pb-b"><span>sem grupo</span><i style="width:66%;background:#9a9aa6;"></i><b>6,6%</b></div><div class="pb-b"><span>com grupo</span><i style="width:27%;background:var(--rosa);"></i><b>2,7%</b></div></div></div><div class="pb-lin"><div class="pb-rot"><b>Cidades isoladas</b><span>fora de arranjo · sem diferença</span></div><div class="pb-bars"><div class="pb-b"><span>sem grupo</span><i style="width:36%;background:#9a9aa6;"></i><b>3,6%</b></div><div class="pb-b"><span>com grupo</span><i style="width:49%;background:var(--rosa);"></i><b>4,9%</b></div></div></div></div><p class="legenda">Probabilidade ajustada: a média das previsões do modelo como se todos os municípios estivessem naquela posição, mantidas as demais características. Regressão logística de Firth, com efeito fixo de UF.</p><ul class="leve leitura81"><li><b>Os grandes grupos acentuam a queda nos satélites.</b> Com os 26 grupos que detêm metade do capital, a chance cai de 8,1% para 1,9% nos satélites; nas sedes, a diferença é pequena (4,3% e 3,4%).</li><li><b>O resultado resiste a outro universo.</b> Refeito só nos municípios que têm ônibus, por três critérios (MUNIC 2017, MUNIC 2020 e indício de sistema), a associação negativa nos satélites se mantém nos três.</li><li><b>O dinheiro pesa onde falta o serviço.</b> A dependência do Fundo de Participação dos Municípios também acompanha menos adoção, mas só onde não há ônibus: é a barreira de criar o serviço, e não a do operador.</li><li><b>O que o teste não prova.</b> Presença de grupo no cadastro não é operação, e a posição no arranjo aproxima a atratividade do mercado sem medi-la. A tese conclui que o padrão é compatível com a hipótese, e não que a demonstra.</li></ul><details class="mais"><summary>O número do modelo: razão de chances</summary><p class="legenda">Quanto a chance de adotar com grupo representa da chance sem grupo. Abaixo de 1, menos adoção.</p><svg viewBox="0 0 640 264" role="img" aria-label="Razões de chances da adoção da Tarifa Zero" class="gsvg"><line x1="250" x2="250" y1="24" y2="230" stroke="#26262d"/><text x="250" y="244" text-anchor="middle" font-size="11" fill="#9a9aa6">0</text><line x1="325" x2="325" y1="24" y2="230" stroke="#26262d"/><text x="325" y="244" text-anchor="middle" font-size="11" fill="#9a9aa6">0,25</text><line x1="400" x2="400" y1="24" y2="230" stroke="#26262d"/><text x="400" y="244" text-anchor="middle" font-size="11" fill="#9a9aa6">0,5</text><line x1="475" x2="475" y1="24" y2="230" stroke="#26262d"/><text x="475" y="244" text-anchor="middle" font-size="11" fill="#9a9aa6">0,75</text><line x1="550" x2="550" y1="24" y2="230" stroke="#26262d"/><text x="550" y="244" text-anchor="middle" font-size="11" fill="#9a9aa6">1</text><line x1="550" x2="550" y1="16" y2="230" stroke="#f0f0f2" stroke-dasharray="4 3"/><text x="544" y="18" text-anchor="end" font-size="11" fill="#f0f0f2">mesma chance (1) →</text><text x="0" y="48" font-size="12.5" fill="#f0f0f2">Satélites dos arranjos</text><line x1="334" x2="550" y1="44" y2="44" stroke="#FF2D6B" stroke-opacity=".35" stroke-width="3"/><circle cx="334" cy="44" r="7" fill="#FF2D6B"/><text x="322" y="48" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,28</text><text x="0" y="82" font-size="12.5" fill="#f0f0f2">Sedes dos arranjos (polos)</text><line x1="358" x2="550" y1="78" y2="78" stroke="#FF2D6B" stroke-opacity=".35" stroke-width="3"/><circle cx="358" cy="78" r="7" fill="#FF2D6B"/><text x="346" y="82" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,36</text><text x="0" y="116" font-size="12.5" fill="#f0f0f2">Grandes grupos, acima de 100 mil hab.</text><line x1="319" x2="550" y1="112" y2="112" stroke="#FF2D6B" stroke-opacity=".35" stroke-width="3"/><circle cx="319" cy="112" r="7" fill="#FF2D6B"/><text x="307" y="116" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,23</text><text x="0" y="150" font-size="12.5" fill="#f0f0f2">Grandes grupos, onde 20% usam ônibus</text><line x1="361" x2="550" y1="146" y2="146" stroke="#FF2D6B" stroke-opacity=".35" stroke-width="3"/><circle cx="361" cy="146" r="7" fill="#FF2D6B"/><text x="349" y="150" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,37</text><text x="0" y="184" font-size="12.5" fill="#f0f0f2">Dependência do FPM (rival fiscal)</text><line x1="412" x2="550" y1="180" y2="180" stroke="#9a9aa6" stroke-opacity=".35" stroke-width="3"/><circle cx="412" cy="180" r="7" fill="#9a9aa6"/><text x="400" y="184" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,54</text><text x="0" y="218" font-size="12.5" fill="#f0f0f2">Cidades isoladas</text><text x="540" y="218" text-anchor="end" font-size="12" fill="#9a9aa6">sem diferença</text></svg></details><p style="margin:12px 0 0;"><a class="bt2" href="#ge-mapa">Ver no mapa ↑</a><a class="bt2" href="#" data-ir="onde-grupos">Filtrar a rede por cidade →</a></p>
+  </details>
+  <details class="pacote" id="ge-82"><summary class="phead"><span class="pnum">2</span><div><h2>Onde há grupo, a gratuidade entra pela concessão</h2><p>Com operador de grupo, a gratuidade entrou por aditivo ao contrato de concessão na metade dos casos; sem grupo, em menos de um em cada cinco.</p><div class="pmeta">Na tese: Seção 8.2</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
+<p class="legenda">Políticas cuja gratuidade entrou por aditivo à concessão vigente, pelo operador atual.</p><div class="gbarras"><div class="gb-lin"><div class="gb-rot">Operador de grupo</div><div class="gb-bar"><span style="width:50.0%;background:#FF2D6B;"></span></div><div class="gb-val"><b>50%</b> <span>10 de 20</span></div></div><div class="gb-lin"><div class="gb-rot">Operador sem grupo</div><div class="gb-bar"><span style="width:16.9%;background:#5c6470;"></span></div><div class="gb-val"><b>17%</b> <span>12 de 71</span></div></div><div class="gb-lin"><div class="gb-rot">Municípios de arranjo, operador de grupo</div><div class="gb-bar"><span style="width:72.7%;background:#FF2D6B;"></span></div><div class="gb-val"><b>73%</b> <span>8 de 11</span></div></div><div class="gb-lin"><div class="gb-rot">Municípios de arranjo, sem grupo</div><div class="gb-bar"><span style="width:19.4%;background:#5c6470;"></span></div><div class="gb-val"><b>19%</b> <span>7 de 36</span></div></div></div><p class="legenda" style="margin-top:8px;">Com controle de porte, a razão de chances é 2,8, sem passar no limiar (p = 0,08); nos municípios de arranjo, 8,1 (p = 0,02). Nas cidades isoladas, não há diferença. A amostra de operadores de grupo é pequena.</p>
+  </details>
+  <details class="pacote" id="ge-83"><summary class="phead"><span class="pnum">3</span><div><h2>Quem fica e o que muda depois da entrada</h2><p>Ser de grupo não muda a chance de o operador continuar quando a gratuidade chega, nem quem recebe o recurso, quem corre o risco de demanda ou de onde vem o custeio.</p><div class="pmeta">Na tese: Seção 8.3</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
+<p class="legenda">Operadores que já estavam no sistema e continuaram quando a gratuidade chegou.</p><div class="gbarras"><div class="gb-lin"><div class="gb-rot">Empresas de grupo</div><div class="gb-bar"><span style="width:61.1%;background:#FF2D6B;"></span></div><div class="gb-val"><b>61%</b> <span>11 de 18</span></div></div><div class="gb-lin"><div class="gb-rot">Empresas sem grupo</div><div class="gb-bar"><span style="width:64.0%;background:#5c6470;"></span></div><div class="gb-val"><b>64%</b> <span>16 de 25</span></div></div></div><p class="legenda" style="margin-top:8px;">Sete empresas de grupo saíram na entrada da gratuidade. O incumbente foi identificado em 43 de 97 casos.</p><p class="legenda" style="margin-top:14px;">Políticas com contrapartida escrita (transparência, desempenho ou controle social), pelo operador.</p><div class="gbarras"><div class="gb-lin"><div class="gb-rot">Operador de grupo</div><div class="gb-bar"><span style="width:50.0%;background:#FF2D6B;"></span></div><div class="gb-val"><b>50%</b> <span>8 de 16</span></div></div><div class="gb-lin"><div class="gb-rot">Operador sem grupo</div><div class="gb-bar"><span style="width:22.6%;background:#5c6470;"></span></div><div class="gb-val"><b>23%</b> <span>14 de 62</span></div></div></div><p class="legenda" style="margin-top:8px;">A diferença fica no limite do acaso (p = 0,06) e é quase toda de desempenho ou de transparência. Controle social escrito, com operador de grupo, só em Agudos.</p>
+  </details>
+  <details class="pacote" id="ge-84"><summary class="phead"><span class="pnum">4</span><div><h2>Recuos, encerramentos e o que o setor pede</h2><p>Fins e recuos são raros, e nenhuma das políticas universais encerradas tinha operador de grupo. Onde houve recuo com grupo, a concessão ficou. O setor não recusa o dinheiro público: pede que ele preserve os contratos.</p><div class="pmeta">Na tese: Seções 8.4 e 8.5, Estudo de caso 1 e Quadros 32 a 35</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
+<h3 class="h3c">Os recuos</h3><div class="casos-ricos"><div class="caso-rico"><div class="cr-cab"><b>Monte Mor (SP)</b><span>65 mil habitantes · satélite do arranjo de Campinas · universal de 2023 a 2025</span></div><ol class="cr-hist"><li><b>29/12/2023</b> Tarifa Zero universal, por aditivo à concessão da Rápido Luxo Campinas.</li><li><b>09/09/2025</b> A Câmara aprova por 13 a 2 a lei que revoga a gratuidade universal.</li><li><b>01/11/2025</b> Vale a "Tarifa do Bem": gratuidade só para idosos, pessoas com deficiência e famílias do CadÚnico em extrema pobreza, com cadastro; os demais pagam R$ 6,00.</li><li><b>o motivo</b> O recuo é atribuído à restrição orçamentária.</li></ol><p class="cr-leit">A rede de sócios põe a concessionária no grupo Belarmino, uma das unidades do topo. A gratuidade entrou e saiu sem que a concessão mudasse de mão: é o único recuo com operador de grupo.</p><div class="cr-lk"><a href="painel.html#mun-3531803">ver no painel →</a><a href="#GE-003" class="lk-rede" data-ge="GE-003">ver o grupo na rede →</a></div></div><div class="caso-rico"><div class="cr-cab"><b>São Caetano do Sul (SP)</b><span>166 mil habitantes · satélite do arranjo de São Paulo · universal desde 2023</span></div><ol class="cr-hist"><li><b>out/2023</b> Tarifa Zero universal, por aditivo à concessão da Vipe.</li><li><b>2024 a 2026</b> A demanda passa de 20 mil para 80 mil passageiros por dia, contra 50% de aumento previsto.</li><li><b>14/07/2026</b> O 4º aditivo troca a remuneração por veículo e por quilômetro pelo custo apurado menos a receita.</li><li><b>15/07/2026</b> Um dia depois, a gratuidade passa a ser só de moradores cadastrados; quem vem de fora volta a pagar R$ 5.</li></ol><p class="cr-leit">O recuo veio com o mesmo operador, e o contrato foi refeito antes da norma.</p><div class="cr-lk"><a href="painel.html#mun-3548807">ver no painel →</a></div></div><div class="caso-rico"><div class="cr-cab"><b>Tijucas do Sul (PR)</b><span>18 mil habitantes · Região Metropolitana de Curitiba · universal desde 2015, com interrupção</span></div><ol class="cr-hist"><li><b>dez/2015</b> A Prefeitura passa a operar a gratuidade universal nas cinco linhas municipais.</li><li><b>2020 a 2023</b> O Município loca ônibus com motorista e paga a operação.</li><li><b>2022 e 2023</b> Uma concessão com tarifa de R$ 5,00 e subsídio do déficit substitui a gratuidade e é anulada em novembro de 2023.</li><li><b>desde dez/2023</b> O Município volta a pagar a operação sem tarifa: por contrato emergencial e, desde julho de 2025, por quilômetro.</li></ol><p class="cr-leit">Um recuo revertido, sem grupo. A lei de 2015 foi revogada em 2021: hoje a gratuidade está no contrato, que proíbe qualquer cobrança.</p><div class="cr-lk"><a href="painel.html#mun-4127601">ver no painel →</a></div></div></div><h3 class="h3c">As cinco políticas universais encerradas</h3><div class="getabwrap" style="max-height:none;"><table class="getab q32"><thead><tr><th>Município</th><th>População</th><th>Gratuidade</th><th>Quem operava</th><th>Como acabou</th></tr></thead><tbody><tr><td>Ubiratã (PR)</td><td>24.749</td><td>jan. a mar. 2025</td><td>Prefeitura, com ônibus e motorista próprios</td><td>fim sem ato formal citado</td></tr><tr><td>Porto Real (RJ)</td><td>20.373</td><td>2011 a 2017</td><td>Prefeitura</td><td>serviço interrompido e retomado pago, por concessão</td></tr><tr><td>Jaboticabal (SP)</td><td>71.821</td><td>nov. 2020 a abr. 2021</td><td>empresa contratada, sem grupo</td><td>lei revogada; o fundo não tinha receita</td></tr><tr><td>Pirapora do Bom Jesus (SP)</td><td>18.370</td><td>2020 a 2022</td><td>Prefeitura</td><td>ato do fim não localizado; retomada anunciada em 2025</td></tr><tr><td>Getulina (SP)</td><td>10.232</td><td>abr. a jul. 2026</td><td>Prefeitura, com motorista concursado</td><td>baixa demanda</td></tr></tbody></table></div><p class="explica">Em quatro delas, a Prefeitura operava o serviço; a quinta tinha operador local, sem grupo. Os fins documentados são de custeio e de capacidade, em municípios pequenos e médios: isso favorece a explicação rival do custo, e não a pressão de um incumbente. O que a hipótese prevê aparece em outro lugar: no desenho que acomoda a gratuidade sem tocar no contrato, como em Monte Mor.</p><p class="explica">A 3ª pesquisa da NTU (2026) contou oito municípios que deixaram a Tarifa Zero. Conferidos com a base: em dois, a gratuidade universal voltou (Picos e Tijucas do Sul); em um, virou parcial (Monte Mor); cinco estão encerradas, uma delas desde 2018. Só Monte Mor tinha operador de grupo.</p><h3 class="h3c">O que o setor pede</h3><ol class="linha-setor"><li><b>NTU, 2024</b><span>Chama a Tarifa Zero de "promissora", concentrada em cidades pequenas, e liga a expansão à renovação da frota.</span></li><li><b>NTU, 2025</b><span>A universal "não pode ser considerada tendência nacional para qualquer perfil de cidade"; seria inviável nas metrópoles.</span></li><li><b>NTU, nota oficial de 6/11/2025</b><span>Aceita a gratuidade como inclusão social, com duas condições: respeito aos contratos de concessão vigentes e a "Tarifa Zero para Quem Precisa", focalizada.</span></li><li><b>ANTP</b><span>Um fundo nacional, com o Estado como "financiador do financiador" e liberdade de operação para as empresas.</span></li><li><b>NTU, "Transportes para Todos", 2026</b><span>Cerca de 85% do custo dos sistemas pagos pelo vale-transporte modernizado, por um vale social e pelas pastas de cada gratuidade; o resto, pelo município.</span></li></ol><p class="cr-leit" style="font-size:14px;">Nenhuma proposta muda o destinatário do recurso nem a forma de remunerar o operador; o que muda é quem paga. Na régua da tese, o desenho do setor é o da garantia de receita sem controle: rompe o incentivo da remuneração por passageiro, mas não traz transparência, controle social nem exigência de desempenho.</p><p class="legenda">A fonte é interessada: é declaração de entidade de representação, e não conduta das empresas dos grupos, e a filiação das empresas às entidades não foi levantada. Em Belo Horizonte, as federações contrárias ao PL 60/2025 não têm vínculo identificado com os grupos da rede.</p>
+  </details>
+  
+  <div class="panel" id="ge-casos" style="margin-top:16px;"><h2>Os casos: quem opera a gratuidade</h2><p class="explica">O contrato diz o que a presença no cadastro não diz. Em 99 políticas, o operador está comprovado em documento (contrato, edital, empenho, norma ou notícia datada); nas demais, a operação é pública ou o operador não foi apurado, e não apurado não é zero.</p><div class="t6"><div class="t6-lin"><div class="t6-rot"><b>Empresa de um dos 327 grupos</b><span>21 políticas · 8 com 100 mil habitantes ou mais</span></div><div class="t6-bar" style="width:43%"><i style="width:57.1%;background:#FF2D6B;" title="aditivo à concessão existente: 12">12</i><i style="width:33.3%;background:#F5E400;" title="contrato novo, licitado: 7">7</i><i style="width:4.8%;background:#4C8DFF;" title="emergencial, locação com motorista ou operação pública: 1"></i><i style="width:4.8%;background:#3a3f4a;" title="forma não apurada: 1"></i></div></div><div class="t6-lin"><div class="t6-rot"><b>Empresa de ônibus sem grupo</b><span>29 políticas · 3 com 100 mil habitantes ou mais</span></div><div class="t6-bar" style="width:59%"><i style="width:27.6%;background:#FF2D6B;" title="aditivo à concessão existente: 8">8</i><i style="width:37.9%;background:#F5E400;" title="contrato novo, licitado: 11">11</i><i style="width:34.5%;background:#4C8DFF;" title="emergencial, locação com motorista ou operação pública: 10">10</i></div></div><div class="t6-lin"><div class="t6-rot"><b>Empresa fora do núcleo do ônibus</b><span>49 políticas · 3 com 100 mil habitantes ou mais</span></div><div class="t6-bar" style="width:100%"><i style="width:6.1%;background:#FF2D6B;" title="aditivo à concessão existente: 3">3</i><i style="width:55.1%;background:#F5E400;" title="contrato novo, licitado: 27">27</i><i style="width:32.7%;background:#4C8DFF;" title="emergencial, locação com motorista ou operação pública: 16">16</i><i style="width:6.1%;background:#3a3f4a;" title="forma não apurada: 3">3</i></div></div></div><div class="legend t6-leg"><span><i style="background:#FF2D6B;"></i>aditivo à concessão existente</span><span><i style="background:#F5E400;"></i>contrato novo, licitado</span><span><i style="background:#4C8DFF;"></i>emergencial, locação com motorista ou operação pública</span><span><i style="background:#3a3f4a;"></i>forma não apurada</span></div><p class="explica">Com grupo, a gratuidade entra sobretudo por aditivo à concessão (12 de 21); fora do núcleo do ônibus, por contrato novo (27 de 49), quase sempre em municípios pequenos, onde não há empresa de ônibus urbano a contratar. Das 21 políticas de grupo, 7 são de empresas de cinco unidades do topo do capital: Barata (Caucaia e, como locadora, Maricá), Gulin (Paranaguá), Belarmino (Monte Mor, até 2025), SOU (Palmas, com gratuidade parcial) e Turin (Mariana e Ouro Branco).</p><p class="pmeta">Na tese: Seção 6.6 e Tabela 6; casos resumidos das fichas do Apêndice H e das Seções 7.3 a 7.5.</p><div class="casos-ricos"><div class="caso-rico"><div class="cr-cab"><b>Caucaia (CE)</b><span>356 mil habitantes · satélite do arranjo de Fortaleza · universal desde 2021</span></div><ol class="cr-hist"><li><b>antes de 2021</b> Segundo a literatura, o operador não abandona uma linha pouco rentável: pressiona por mais subsídio municipal para continuar.</li><li><b>ago/2021</b> A Prefeitura lança o "Passe Livre", gratuidade universal por aditivo à concessão da Empresa Vitória, contratada em 2016.</li><li><b>dez/2024</b> Com dívida da Prefeitura de R$ 14 milhões, a frota é reduzida em 23%.</li><li><b>2026</b> Uma lei torna o programa permanente, e a concessão é renovada por dez anos em junho.</li></ol><p class="cr-leit">Uma empresa do grupo Barata, unidade do topo do capital, opera a gratuidade pela concessão que já detinha, agora renovada: renegociação com o incumbente, e não ruptura.</p><div class="cr-lk"><a href="painel.html#mun-2303709">ver no painel →</a><a href="#GE-001" class="lk-rede" data-ge="GE-001">ver o grupo na rede →</a></div></div><div class="caso-rico"><div class="cr-cab"><b>Maricá (RJ)</b><span>197 mil habitantes · satélite do arranjo do Rio de Janeiro · universal desde 2014</span></div><ol class="cr-hist"><li><b>2013</b> A gratuidade cobre parte das linhas, em concorrência com as concessionárias privadas.</li><li><b>dez/2014</b> A Empresa Pública de Transportes assume e a gratuidade vira universal, paga sobretudo pelos royalties do petróleo. As concessionárias contestam na Justiça.</li><li><b>2024 e 2025</b> A empresa pública passa a alugar ônibus com motorista, pagos por quilômetro: hoje, 132 dos 157 ônibus da frota gratuita são de empresas contratadas.</li><li><b>2025</b> Uma empresa do grupo Barata, o maior do país, volta como locadora, pelo maior contrato anual de Tarifa Zero do levantamento.</li></ol><p class="cr-leit">A cidade rompeu com a concessão, e o incumbente de grande grupo voltou por outro contrato.</p><div class="cr-lk"><a href="painel.html#mun-3302700">ver no painel →</a><a href="#GE-001" class="lk-rede" data-ge="GE-001">ver o grupo na rede →</a></div></div><div class="caso-rico"><div class="cr-cab"><b>Paranaguá (PR)</b><span>146 mil habitantes · fora de arranjo populacional · universal desde 2022</span></div><ol class="cr-hist"><li><b>2021</b> Uma lei complementar cria a Tarifa Zero, com um fundo de transporte próprio.</li><li><b>2022</b> A gratuidade começa por aditivo à concessão existente, com cadastro prévio para medir a demanda.</li><li><b>um ano depois</b> A demanda sobe 146%.</li><li><b>depois</b> A taxa criada para custear a política cai no Judiciário.</li></ol><p class="cr-leit">Uma empresa da família Gulin, unidade do topo do capital, opera a gratuidade pela concessão que já detinha.</p><div class="cr-lk"><a href="painel.html#mun-4118204">ver no painel →</a><a href="#GE-014" class="lk-rede" data-ge="GE-014">ver o grupo na rede →</a></div></div></div></div>
+  <div class="fecho-rede"><p class="frase">O que a gratuidade preserva, no mercado atrativo, é o contrato, com ou sem grupo.</p><p class="legenda">Os grupos são donos de parte dos operadores e são a forma mais concentrada do contrato, mas a pesquisa não mediu um efeito próprio deles sobre a adoção ou o desenho (Seção 9.1).</p><p style="margin:10px 0 0;"><a class="bt2" href="painel.html#sec-p3">No painel: como a gratuidade entra →</a><a class="bt2" href="tese/Tese%20-%20Volume%20I%20-%20Texto.pdf" target="_blank" rel="noopener">Volume I — Capítulo 8 (PDF)</a></p></div>
+  </section>
+  <section class="tabpane" id="tab-controle" hidden>
 
 
   <div class="gefind" id="geFind"></div>
-  <div class="cards" id="cards"></div>
+  <div class="cards" id="cards" hidden></div>
 
-  <div class="grid">
+  <div class="panel do-cadastro"><h2>Do cadastro ao grupo</h2><p class="legenda">Como a pesquisa chegou aos grupos, a partir do cadastro de empresas da Receita Federal (maio de 2024). Cada passo foi conferido em 136 rodadas de verificação em fontes externas: órgãos gestores, ANTT, processos e imprensa.</p><ol class="dc"><li><b>48,4 mil</b><i style="width:100%"></i><span>estabelecimentos com o ônibus municipal ou metropolitano como atividade principal, em qualquer situação</span></li><li><b>14.988</b><i style="width:89%"></i><span>estabelecimentos ativos, de 12.907 empresas (CNPJ)</span></li><li><b>13.569</b><i style="width:88%"></i><span>sócios distintos, em 16.547 vínculos; só 7.680 empresas têm sócio com capital registrado</span></li><li><b>1.238</b><i style="width:66%"></i><span>sócios-ponte, que ligam duas empresas ou mais</span></li><li><b>327</b><i style="width:54%"></i><span>grupos econômicos, com 1.040 empresas</span></li><li><b>316</b><i style="width:53%"></i><span>unidades de controle, somados os grupos com controle comum</span></li><li><b>22</b><i style="width:29%"></i><span>unidades detêm metade do capital declarado</span></li></ol><p class="pmeta">Na tese: Tabela 4 e Seção 6.1. Grupo econômico é uma inferência a partir dos sócios em comum; endereço não é operação.</p></div>
+  <div class="filtro-rede"><span class="fr-t">Filtrar a rede</span><label>por grupo <input id="redeBusca" list="redeBuscaList" placeholder="nome ou nome de mercado…" autocomplete="off" spellcheck="false"><datalist id="redeBuscaList"></datalist></label><label>por cidade <input id="muniBusca" list="muniBuscaList" placeholder="digite o nome do município…" autocomplete="off" spellcheck="false"><datalist id="muniBuscaList"></datalist></label><button type="button" class="bt2" id="limpaFiltro">Limpar</button><div id="muniGrupos" class="fr-res"><p class="sub" style="margin-top:8px;">Os grupos deste mapeamento têm estabelecimento em um quinto dos municípios do país. Ausência aqui significa que não há endereço registrado no cadastro, não que não haja operador.</p></div></div>
+  <div class="grid rede-grid">
     <div class="panel" id="painelRede">
       <h2>A rede dos grupos</h2>
-      <p class="sub">Cada círculo é um grupo econômico; cada linha, uma ligação societária entre dois grupos. <b style="color:var(--rosa);">Rosa</b>: a análise trata os dois como um bloco de controle só (mesmo <i>cluster</i>). <b style="color:#a0a0ae;">Cinza</b>: só compartilham sócio — quanto mais grossa, mais sócios em comum. Role ou use os botões para aproximar, arraste o fundo para mover, arraste um grupo para soltá-lo da vizinhança; no celular, pinça com dois dedos. Clique num grupo para acender a vizinhança e abrir a ficha. Em <b>forças livres</b>, a rede se reorganiza sozinha: a repulsão afasta os grupos, a gravidade os puxa ao centro e a ligação define a distância entre vizinhos — mexa e veja os blocos se formarem.</p>
+      <div class="como-ler"><p><b>O círculo é um grupo.</b> Dentro dele, as empresas já estão ligadas por um <b>sócio em comum</b>: é o que define o grupo econômico (1º nível). O tamanho segue o número de empresas ou o capital.</p><p><b>A linha liga dois grupos.</b> Ela aparece quando se segue a cadeia além do grupo, o <b>sócio do sócio</b>: as holdings sócias e os sócios delas. <b style="color:var(--rosa);">Rosa</b>: a ligação basta para tratar os dois grupos como um só controle (graus A e B). <b>Cinza</b>: sócios em comum, sem prova de controle comum. A espessura conta os sócios em comum.</p><p class="legenda">Como essas ligações viram unidades de controle, linhagens familiares e federações, e quanto isso muda a concentração, está na aba <a href="#concentracao" data-ir-aba="concentracao">Concentração</a>. Clique num grupo para abrir a ficha.</p></div>
       <div class="redectl">
         <label>Tamanho <select id="redeTam"><option value="n_emp">nº de empresas</option><option value="capital">capital social</option></select></label>
         <label>Cor <select id="redeCor"><option value="topo">topo do capital</option><option value="unidade">unidade de controle (A/B)</option><option value="linhagem">linhagem (C)</option><option value="federacao">federação (D)</option><option value="componente">componente da rede</option></select></label>
         <label class="chk"><input type="checkbox" id="redeFus" checked> mesmo bloco</label>
         <label class="chk"><input type="checkbox" id="redeSoc" checked> sócio compartilhado, com ≥ <b id="redeMinWv">1</b> <input type="range" id="redeMinW" min="1" max="10" value="1" step="1" aria-label="mínimo de sócios em comum"></label>
         <label class="chk"><input type="checkbox" id="redeIso"> grupos sem ligação</label>
+        <details class="mais forcas-cx"><summary>Ajustes do desenho</summary>
         <div class="forcas" id="redeForcas">
           <label class="chk"><input type="checkbox" id="redeLivre"> forças livres</label>
           <label title="Quanto os grupos se empurram">Repulsão <input type="range" id="fRep" min="10" max="150" value="50"> <b id="fRepv">50</b></label>
@@ -426,7 +658,7 @@
           <button id="fReorg" title="Embaralha e deixa as forças reorganizarem">↻ Reorganizar</button>
           <button id="fOrig" title="Volta ao desenho empacotado por componente">Desenho original</button>
         </div>
-        <label class="busca">Achar grupo <input id="redeBusca" list="redeBuscaList" placeholder="nome ou nome de mercado…" autocomplete="off" spellcheck="false"><datalist id="redeBuscaList"></datalist></label>
+        </details>
       </div>
       <div class="redewrap">
         <svg id="redeSvg" preserveAspectRatio="xMidYMid meet"></svg>
@@ -434,7 +666,6 @@
         <span class="hint" id="redeHint"></span>
       </div>
       <div class="legend redeleg" id="redeLeg"></div>
-      <details class="medidas" open><summary>Medidas da rede (ARS)</summary><div id="redeMedidas"></div></details>
     </div>
     <div class="rightcol">
       <div class="panel" id="fichaPanel">
@@ -444,14 +675,33 @@
     </div>
   </div>
 
-  <div class="panel" style="margin-top:16px;" id="agrupamentos">
-    <h2>Do grupo à federação</h2>
-    <p class="sub">O código de grupo (GE) é o que o cálculo da rede devolve; o controle real às vezes passa por cima dele. A tese junta os grupos numa escala de confiança de cinco graus (Seção 6.1): só os graus A e B fundem grupos numa <b>unidade de controle</b> — é a leitura principal. A <b>linhagem</b> (C) registra origem familiar comum sem capital comum no cadastro, e a <b>federação</b> (D) registra articulação — cargo ou capital em terceira empresa ou entidade setorial — sem controle comum; as duas são atributos, não somam controle, e a das federações serve só de teto. O indício (E) fica registrado, sem efeito nas contagens.</p>
-    <div id="geEscala" class="getabwrap" style="max-height:none;"></div>
+
+
+
+
+
+
+
+  <details class="pacote" id="onde-grupos" open><summary class="phead"><span class="pnum">1</span><div><h2>Os grupos de maior alcance</h2><p>Em quantos municípios cada grupo tem endereço. Para ver os grupos de uma cidade, use o filtro no topo da rede.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
+    <div class="terrgrid">
+      <div><h3 style="margin:4px 0 8px;font-size:13px;">Os grupos de maior alcance territorial</h3><div id="geTerr"></div></div>
+      <div>
+        </div>
+    </div>
+  </details>  
+
+  </section>
+  <section class="tabpane" id="tab-concentracao" role="tabpanel" hidden>
+  <div class="panel escala-fixa"><h2>A escala de confiança: de grupo a federação</h2><p class="legenda">Como a tese junta os 327 grupos econômicos seguindo o sócio do sócio, do vínculo mais forte ao mais fraco, e quanto cada passo muda a concentração. A leitura principal é a das unidades de controle (A + B); a das federações mede articulação entre famílias, e não controle.</p><div id="escalaFixa"></div></div>
+  <div class="paneintro" hidden><p class="resposta-rede">Poucos donos, muito capital: 22 unidades de controle detêm metade do capital declarado do setor. A tese junta os grupos numa escala de confiança, de A (controle comum demonstrado) a D (federação: articulação, e não controle).</p></div>
+  <details class="pacote" id="agrupamentos" open><summary class="phead"><span class="pnum">1</span><div><h2>Quanto o capital se concentra</h2><p>22 unidades de controle detêm metade do capital do setor. A tese junta os grupos numa escala de confiança, de A a D.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
+<div id="funilCapital" class="funil-cap"></div>
+    <div id="geEscala" class="getabwrap" style="max-height:none;" hidden></div>
     <h3>A concentração em cada leitura</h3>
     <div id="geFunil"></div>
     <h3>As <span id="nTopoUb">22</span> unidades de controle que detêm metade do capital</h3>
     <div class="getabwrap" id="geTopoUb"></div>
+    <details class="mais"><summary>Famílias de controle, linhagens e federações</summary>
     <div class="agrgrid" style="margin-top:6px;">
       <div><h3>Famílias de controle (A) e linhagens (C)</h3>
         <p class="sub">A família de controle tem ramos com capital cruzado — conta como uma unidade. A linhagem tem origem familiar documentada fora do cadastro e não funde nada.</p>
@@ -460,65 +710,27 @@
         <p class="sub">Blocos de unidades articuladas entre si. Medem o alcance da articulação, não o controle. Abra para ver as unidades.</p>
         <div id="geFederacoes"></div></div>
     </div>
-  </div>
+    </details>
 
-  <div class="panel" style="margin-top:16px;">
-    <h2>Os 327 grupos econômicos mapeados</h2>
-    <p class="sub">Ordene clicando no cabeçalho. O grupo aparece pelo nome de mercado; abaixo, em cinza, o rótulo que o cálculo da rede dá a ele (em geral, a holding ou o sobrenome). "Capital" é o capital social declarado no cadastro, em milhões de reais. "Topo do capital" marca os 26 grupos que, juntos, detêm metade do capital declarado do setor; "Unidade" é a unidade de controle de que o grupo faz parte (com a letra do grau, quando junta mais de um grupo). "Sócios-ponte" são os sócios que ligam partes do grupo que, sem eles, ficariam separadas — a medida de quanto o grupo depende de poucas pessoas para se manter coeso. "Municípios" conta onde o grupo tem estabelecimento pelo endereço do cadastro — presença, não operação.</p>
+  </details>
+  <details class="pacote" id="medidas-cx"><summary class="phead"><span class="pnum">2</span><div><h2>A rede em números</h2><p>Quantos grupos se ligam, quem é mais conectado e quem está no caminho entre os demais (análise de redes sociais, Seção 6.2).</p></div><span class="pseta" aria-hidden="true">▾</span></summary><div id="redeMedidas"></div></details>  <details class="pacote" id="lista-grupos"><summary class="phead"><span class="pnum">3</span><div><h2>Os 327 grupos econômicos</h2><p>A lista completa, com capital, empresas, sócios e municípios. Ordene pelo cabeçalho; clique numa linha para abrir a ficha.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
     <div class="getabwrap">
       <table class="getab" id="geTable">
         <thead><tr>
           <th data-k="nome">Grupo</th><th data-k="capital" class="num">Capital (R$ mi)</th>
-          <th data-k="topo" class="num" title="Entre os 26 grupos que, juntos, detêm metade do capital declarado do setor">Topo</th><th data-k="ub">Unidade</th>
+          <th data-k="topo" class="num" title="Entre os 26 grupos que, juntos, detêm metade do capital declarado do setor">Topo</th><th data-k="ub">Unidade (A/B)</th><th>Linhagem (C)</th><th>Federação (D)</th>
           <th data-k="n_emp" class="num">Empresas</th><th data-k="n_soc" class="num">Sócios</th><th data-k="ponte" class="num">Sócios-ponte</th>
           <th data-k="dens" class="num">Densidade</th><th data-k="n_mun" class="num">Municípios</th><th data-k="lig" class="num">Ligações</th>
         </tr></thead>
         <tbody></tbody>
       </table>
     </div>
-  </div>
-
-  <div class="panel" style="margin-top:16px;">
-    <h2>Onde os grupos estão</h2>
-    <p class="sub">Presença de estabelecimento de empresa de grupo, pelo endereço do cadastro de CNPJ. <b>Presença não é operação:</b> a sede de uma concessionária metropolitana aparece num município enquanto o contrato cobre vários, e numa auditoria da própria pesquisa, em Araraquara, dos quatro grupos atribuídos ao município só um era operador urbano — os outros eram rodoviário, garagem e agência. Leia como mapa de onde os grupos têm endereço, não de quem opera cada sistema.</p>
-    <div class="terrgrid">
-      <div><h3 style="margin:4px 0 8px;font-size:13px;">Os grupos de maior alcance territorial</h3><div id="geTerr"></div></div>
-      <div><h3 style="margin:4px 0 8px;font-size:13px;">Que grupos têm endereço num município</h3>
-        <input id="muniBusca" list="muniBuscaList" placeholder="digite o nome do município…" autocomplete="off" spellcheck="false">
-        <datalist id="muniBuscaList"></datalist>
-        <div id="muniGrupos"><p class="sub" style="margin-top:8px;">Os grupos deste mapeamento têm estabelecimento em um quinto dos municípios do país. Ausência aqui significa que não há endereço registrado no cadastro, não que não haja operador.</p></div></div>
-    </div>
-  </div>
-
-  <details class="panel" style="margin-top:16px;" open>
-    <summary>Notas metodológicas e limites de leitura</summary>
-    <div class="notes">
-      <p><b>De onde vem o dado:</b> quadro societário da Receita Federal, recortado pelos CNAEs de transporte de passageiros, processado em análise de redes sociais (ARS). Duas empresas ficam no mesmo grupo quando o quadro societário as liga — direta ou indiretamente, inclusive por holding. O agrupamento é resultado do cálculo, não de uma lista pré-existente de grupos.</p>
-      <p><b>Grupo econômico aqui é uma inferência societária, não uma declaração da empresa.</b> Ninguém declara "pertenço ao grupo X": o vínculo é deduzido de sócios em comum. Isso acerta o controle familiar e as holdings, e erra onde o controle real passa por fora do contrato social — acordo de acionistas, controle por terceiro não sócio, laranja. Leia como a melhor aproximação disponível, não como organograma oficial.</p>
-      <p><b>As duas ligações não são a mesma coisa.</b> "Mesmo bloco de controle" (rosa) é achado forte: a análise trata os grupos como uma estrutura só. "Sócio compartilhado" (cinza) é fraco — uma pessoa pode ter participação pequena em dois grupos concorrentes sem que isso signifique controle comum. Não some os dois numa leitura só.</p>
-      <p><b>235 dos 327 grupos não têm nenhuma ligação mapeada</b> e por isso não aparecem no mapa. Isso quase sempre significa grupo pequeno e fechado — não que ele esteja isolado do setor por algum motivo relevante.</p>
-      <p><b>O capital social é valor declarado no registro</b> — frequentemente desatualizado e sem relação fixa com frota, receita ou passageiros: mede o registro, não a operação. Leia-o como ordem de grandeza. Os <b>26 grupos</b> que, juntos, detêm metade dos R$ 8,13 bilhões declarados são o "grande grupo" que a tese usa nos testes; agregados por unidade de controle, são 22 unidades, entre 19 e 26 conforme o grau de confiança exigido (Tabela 5, Seção 6.1).</p>
-      <p><b>Nome de mercado.</b> É o nome pelo qual o grupo é conhecido no setor, levantado na pesquisa. Publica-se só o nome comercial; as anotações de trabalho da tabela mestre (sócios, rodadas de auditoria, notas sobre a trajetória das empresas) ficam no acervo. Alguns nomes de mercado são o nome do fundador ou do controlador (Grupo Jacob Barata, Grupo Belarmino da Ascenção Marta): são publicados como marca, porque é por eles que o grupo é conhecido no setor — nenhum sócio é identificado a partir da rede. Grupos sem nome de mercado confirmado aparecem só pelo rótulo do cálculo.</p>
-      <p><b>Unidade, linhagem e federação não são a mesma coisa.</b> A unidade de controle junta grupos com controle comum demonstrado (A) ou provável (B) e é a leitura principal; a linhagem (C) e a federação (D) são atributos que a página mostra, mas que não somam controle. A concentração "com as federações" encadeia articulações — uma linhagem que toca duas federações as junta — e serve só de teto.</p>
-      <p><b>Presença municipal, e uma diferença de dois municípios com a tese.</b> A página conta <span id="nMunNota">1.042</span> municípios com estabelecimento de algum dos 327 grupos; a tese registra 1.040. A diferença são Poxoréu/MT e Santa Izabel do Pará/PA, cuja grafia na tabela de empresas não casou com a da base municipal no cruzamento da tese e casou aqui. [A CONFIRMAR na tese.]</p>
-      <p><b>Homônimos.</b> 20 nomes de grupo são sobrenomes usados por grupos distintos — "Santos" são sete grupos diferentes. Nesses casos o rótulo traz o código do grupo, para que dois controles distintos não sejam lidos como um só.</p>
-      <p><b>O que fica de fora, de propósito.</b> Nenhum nome de pessoa física, CPF ou CNPJ; nem as narrativas de conduta (cartel, operações policiais, falências, captura regulatória), que a tese discute com as fontes ao lado e que, fora desse contexto, virariam acusação. E não está aqui o cruzamento entre presença de grupo e adoção da Tarifa Zero: ele é o teste da hipótese, ainda não defendido.</p>
-      <p><b>Nenhum dado de pessoa física é publicado.</b> As métricas de sócios (quantidade, sócios-ponte, articulação) são contagens derivadas da rede de pessoas; os nomes e CPFs ficam no acervo da pesquisa. Decisões do autor de 22/10/2026 e, para o nome de mercado e o capital por grupo, de 23/10/2026.</p>
-      <p><b>O mapa do grupo</b> é de localização: um ponto por município onde o grupo tem estabelecimento, sobre os contornos das UFs, com os demais municípios de presença de algum grupo em cinza. Não mede área de operação nem frota.</p>
-    </div>
-  </details>
-
-  </section>
+  </details>  </section>
   <section class="tabpane" id="tab-alem" hidden>
-  <div class="paneintro">
-    <p>A aba <a href="#" class="ponte-aba" data-aba="controle" style="margin:0">Quem controla</a> olha as empresas de ônibus e os sócios que elas têm em comum. Esta aba sobe uma camada: <b>quem é sócio das empresas dos grupos</b> — quase sempre uma holding — e <b>em que outras empresas, de qualquer setor, os sócios dessas holdings também estão</b>. É a Seção 6.4 da tese: entre a família e a operadora ficam holdings, sociedades anônimas de participação e capital estrangeiro; para além da operadora, imobiliárias, construtoras, revendas de veículos, energia e, em poucos casos, finanças em sentido estrito. A leitura que a tese propõe é a do ônibus como <i>ativo-âncora</i>: o contrato de operação daria escala, crédito e acesso à bilhetagem sobre os quais outros negócios se apoiam.</p>
-    <p><b>O que esta aba não mostra:</b> nenhum nome de sócio pessoa física, CPF ou CNPJ. A pessoa que liga a holding à empresa de outro setor fica oculta — a aba diz só quantos sócios as duas têm em comum. Razões sociais que levam nome de pessoa saem mascaradas. E <b>vínculo de sócio não é controle</b>: o cadastro não informa a parcela de cada sócio.</p>
-  </div>
+  <div class="paneintro"><p class="resposta" style="border-left:3px solid var(--rosa);padding-left:12px;font-size:15px;color:var(--text);">Além do ônibus: o que os donos das empresas de ônibus têm fora dele. Seguindo o sócio do sócio, a tese encontra holdings de família, capital fechado e negócios na cadeia do veículo, nos trilhos, na bilhetagem, nas finanças e nos imóveis. Vínculo de sócio não é controle.</p></div>
   <div class="gefind" id="patFind"></div>
 
-  <div class="panel">
-    <h2>Como se lê a cadeia</h2>
-    <p class="sub">Três camadas, contadas a partir da empresa de ônibus. O cadastro da Receita registra quem é sócio de quem; a aba segue esse fio, sempre por empresa.</p>
+  <div class="panel cadeia-fixa" id="alem-cadeia"><h2>Como se lê a cadeia</h2><p class="legenda">Do grupo de ônibus à holding sócia e às empresas de outros setores dos sócios dela, em três camadas.</p>
     <svg class="pat-cadeia" viewBox="0 0 980 150" role="img" aria-label="Cadeia: grupo, empresa de ônibus, holding, sócio oculto, empresa de outro setor">
       <defs><marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#8a8a98"/></marker></defs>
       <g font-size="12.5">
@@ -535,56 +747,45 @@
       </g>
     </svg>
   </div>
+  <div class="panel alem-achados"><h2>O que a tese encontrou fora do ônibus</h2><div class="ach"><div><b>A holding é a forma da herança</b><p>É o instrumento da sucessão, uma por ramo ou herdeiro: os Gulin têm 30 holdings com o sobrenome entre os sócios. O controle repousa na família: só em 9 dos 165 grupos com três empresas ou mais a holding é o sócio cuja saída desconectaria o grupo.</p></div><div><b>Capital fechado, nenhum em bolsa</b><p>Nenhuma empresa dos 327 grupos nem das 361 holdings sócias é companhia aberta. A financeirização documentada é de capital fechado: holdings, fundo de investimento em participações, banco, securitizadoras e crédito direto. O capital estrangeiro entra pela holding, como o português no grupo Barata.</p></div><div><b>Fora do ônibus, imóveis antes de finanças</b><p>Os sócios das 98 holdings que ligam os grupos médios e grandes estão em 1.164 empresas de outros setores. Das 255 classificadas como financeiras, 242 são outras holdings; os setores que pesam são o transporte fora do recorte (227), os imóveis (144), o comércio (106) e a construção (96).</p></div><div><b>O ônibus como ativo-âncora</b><p>O contrato de operação dá escala, crédito e acesso à bilhetagem, sobre os quais os outros negócios se apoiam. É aí que a Tarifa Zero toca o patrimônio dos grupos: ao suprimir a tarifa, suprime também a receita antecipada que circula pela bilhetagem.</p></div></div><h3 class="h3c">Os negócios correlatos dos grupos, por setor</h3><div class="getabwrap q20wrap" style="max-height:none;"><table class="getab q20"><thead><tr><th>Grupo</th><th>Veículo e carroceria</th><th>Trilhos</th><th>Bilhetagem e passagens</th><th>Finanças</th><th>Energia, mídia e imóveis</th></tr></thead><tbody><tr><td><a href="#GE-001" class="lk-rede" data-ge="GE-001">Barata</a></td><td>Guanabara Diesel e Ceará Diesel (C); concessionárias e fábrica de ônibus em 1998 (I)</td><td><span class=muted>—</span></td><td>conselho da holding da RioCard (I); ClickBus (I)</td><td>Banco Guanabara; duas securitizadoras; gestora de recursos (C)</td><td>dezenas de imobiliárias (C)</td></tr><tr><td><a href="#GE-003" class="lk-rede" data-ge="GE-003">Belarmino</a></td><td>Sambaíba Distribuidora e mais três revendas de veículos (C); concessionárias Mercedes-Benz (I)</td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td></tr><tr><td><a href="#GE-004" class="lk-rede" data-ge="GE-004">Ruas</a></td><td>Caio Induscar; concessionárias Mercedes-Benz (I)</td><td>Linhas 5 e 17 do Metrô de São Paulo (I)</td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td>publicidade nos pontos de ônibus de São Paulo, até 2021 (I)</td></tr><tr><td><a href="#GE-005" class="lk-rede" data-ge="GE-005">Comporte</a></td><td>Renovabus e Mapa Comércio (C)</td><td>Metrô BH, conselho (C); VLT da Baixada Santista, diretoria (C); Linhas 7, 11, 12 e 13 em São Paulo (I)</td><td>Mobifácil (C e I)</td><td>sociedade de crédito direto (C)</td><td>usina eólica (I); dezenas de imobiliárias (C); Gol (I)</td></tr><tr><td><a href="#GE-011" class="lk-rede" data-ge="GE-011">NSO</a></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td>11,4% do fundo da Autopass (I)</td><td><span class=muted>—</span></td><td>imobiliárias (C)</td></tr><tr><td><a href="#GE-012" class="lk-rede" data-ge="GE-012">Auto Viação ABC</a></td><td>Eletra, ônibus elétricos (C e I)</td><td><span class=muted>—</span></td><td>38,1% do fundo da Autopass (I)</td><td><span class=muted>—</span></td><td><span class=muted>—</span></td></tr><tr><td><a href="#GE-014" class="lk-rede" data-ge="GE-014">Gulin (cinco códigos)</a></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td>Embarca (I)</td><td><span class=muted>—</span></td><td>cinco holdings de energia (C); Elejor, com a Copel (I); imóveis (I)</td></tr><tr><td><a href="#GE-018" class="lk-rede" data-ge="GE-018">Carvalho / Mobi</a></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td>cerca de 12 sociedades de energia solar (C)</td></tr><tr><td><a href="#GE-151" class="lk-rede" data-ge="GE-151">Santo André</a></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td><span class=muted>—</span></td><td>jornal Diário do Grande ABC (I)</td></tr></tbody></table></div><p class="legenda">C: vínculo de sócio ou de cargo no cadastro; I: imprensa ou documento público. Vínculo no cadastro não é controle unificado; o travessão indica que nada foi encontrado, e não ausência comprovada. As sociedades anônimas só registram administradores e ficam fora da rede: a forma que dá acesso ao mercado de capitais é a que o método não enxerga.</p><p class="pmeta">Na tese: Seção 6.4, Figura 19 e Quadro 20.</p></div>
 
-  <div class="panel" style="margin-top:16px;">
-    <h2>Em que setores</h2>
-    <p class="sub">As empresas de qualquer setor em que os sócios das holdings também são sócios, pela atividade principal no cadastro. A tese chama atenção para uma armadilha: "serviços financeiros" é, quase sempre, outra holding — aqui a categoria vem separada entre <b>holdings e participações</b> e <b>finanças em sentido estrito</b> (banco, securitizadora, crédito, seguro, gestora). Barra cheia: empresas ativas; clara: baixadas, inaptas ou suspensas. Clique num setor para filtrar a lista do grupo abaixo.</p>
-    <div class="patctl"><label><input type="checkbox" id="soAtivas"> só empresas ativas</label></div>
-    <div id="patSetores"></div>
-  </div>
 
-  <div class="panel" style="margin-top:16px;" id="patGrupo">
-    <h2>Explorar um grupo</h2>
-    <p class="sub">Escolha um grupo para ver as holdings sócias das suas empresas e as empresas de outros setores a que os sócios dessas holdings chegam. Na rede: <b style="color:#F5E400;">●</b> o grupo, <b style="color:#FF2D6B;">●</b> as holdings, e as empresas de outros setores coloridas pelo setor; a linha entre holding e empresa é um ou mais sócios em comum. Role para aproximar (os nomes das holdings aparecem ao aproximar), arraste para mover, passe o mouse para ver cada empresa.</p>
+  <details class="pacote" id="patGrupo" open><summary class="phead"><span class="pnum">1</span><div><h2>Explore um grupo</h2><p>Escolha um grupo e veja as holdings sócias e os negócios dos sócios fora do ônibus.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
     <div class="patctl">
-      <label>Grupo <input id="patBusca" list="patBuscaList" placeholder="nome do grupo ou nome de mercado…" autocomplete="off" spellcheck="false"><datalist id="patBuscaList"></datalist></label>
+      <label hidden>Grupo <input id="patBusca" list="patBuscaList" placeholder="nome do grupo ou nome de mercado…" autocomplete="off" spellcheck="false"><datalist id="patBuscaList"></datalist></label>
       <label>Setor <select id="patSetor"><option value="">todos</option></select></label>
     </div>
-    <div id="patVerRede" style="margin:-4px 0 8px;"></div>
+    <div id="patFedChips" class="fedchips"></div>
+    <div id="patVerRede" style="margin:4px 0 8px;"></div>
     <div class="patkpi" id="patKpi"></div>
     <div class="patgrid">
       <div class="patwrap"><svg id="patSvg"></svg><div class="zoombtns"><button id="pzMais">+</button><button id="pzMenos">−</button><button id="pzFit">⤢</button></div></div>
       <div><div class="emplista" id="patLista"></div></div>
     </div>
-  </div>
-
-  <div class="panel" style="margin-top:16px;">
-    <h2>Os grupos com mais negócios fora do ônibus</h2>
-    <p class="sub">Ordene clicando no cabeçalho; clique numa linha para explorar o grupo. Contagem de empresas distintas, ativas ou não, a que os sócios das holdings do grupo chegam.</p>
-    <div class="getabwrap"><table class="getab" id="patTabela"><thead></thead><tbody></tbody></table></div>
-  </div>
-
-  <div class="panel" style="margin-top:16px;">
-    <h2>Onde os grupos se encontram fora do ônibus</h2>
-    <p class="sub">Empresas de outros setores em que sócios de holdings de unidades de controle diferentes estão juntos. É o segundo nível da rede estendida: na tese (Seção 6.3 e Figuras 16 a 18), a fusão de ilhas aparece com mais força no terceiro nível, que esta aba não traz. Encontro num negócio não é controle comum.</p>
-    <ul class="blocos" id="patBlocos"></ul>
-  </div>
-
-  <details class="panel" style="margin-top:16px;" open>
-    <summary>Notas metodológicas e limites de leitura</summary>
-    <div class="notes">
-      <p><b>De onde vem o dado.</b> Quadro de sócios da Receita Federal (dados abertos, recorte de maio de 2024). O 1º nível são os sócios das 1.040 empresas dos 327 grupos (Tabela mestre v5): 784 vínculos de sócio pessoa jurídica levam a 487 CNPJs — 126 são empresas dos próprios grupos, sócias de outras, e 361 são holdings fora delas. A tese registra 360 e anota que a recontagem de 15/10/2026 acha 361; a aba usa 361. O 2º nível são os sócios dessas holdings e, deles, as empresas de qualquer setor em que também aparecem: as 1.164 do levantamento de agosto de 2026, classificadas pela seção da CNAE principal.</p>
-      <p><b>Vínculo de sócio não é controle.</b> O cadastro público não traz a parcela de cada sócio, e uma pessoa pode ter papéis distintos e não relacionados em cada empresa. A aba mostra que o vínculo existe, não que o grupo controle a empresa de outro setor.</p>
-      <p><b>O que o método não vê.</b> As sociedades anônimas registram no quadro de sócios só os administradores — por isso nenhuma das empresas dos grupos tem "S.A." na razão social e a forma jurídica que dá acesso ao mercado de capitais fica fora da rede. Fundos de investimento não aparecem no cadastro como sócios. Nenhum grupo tem ação em bolsa. Negócios conhecidos pela imprensa e ausentes do cadastro (Quadro 20 da tese) não estão aqui.</p>
-      <p><b>O alcance do 2º nível.</b> As empresas de outros setores foram levantadas a partir dos sócios das holdings que funcionam como elo dos grupos médios e grandes; para as demais holdings, a aba mostra a holding, mas pode não mostrar as empresas a que os sócios dela chegam. O 3º nível (sócios das empresas de outros setores) não está nesta versão.</p>
-      <p><b>Razões sociais com nome de pessoa saem mascaradas.</b> O teste cruza a razão social com os nomes dos sócios pessoa física de todas as camadas e marca padrões de empresa individual ("Fulano & Cia", CPF na razão social). É conservador: mascara também alguns nomes que talvez não sejam de pessoa. Nenhum CNPJ é publicado. Situação processual (falência, recuperação judicial) sai da razão social, como na aba Quem controla.</p>
-      <p><b>"Holdings e participações" e "finanças".</b> Das 255 empresas classificadas como serviços financeiros, 242 são holdings (CNAE 64.62 e 64.63) e 13 são finanças em sentido estrito — os mesmos números da tese.</p>
-    </div>
   </details>
+
+  <details class="pacote" id="alem-setores"><summary class="phead"><span class="pnum">2</span><div><h2>Em que setores</h2><p>Os setores das empresas em que os sócios das holdings também são sócios.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
+    <div class="patctl"><label><input type="checkbox" id="soAtivas"> só empresas ativas</label></div>
+    <div id="patSetores"></div>
+  </details>
+
+  
+
+  <details class="pacote" id="alem-ranking"><summary class="phead"><span class="pnum">3</span><div><h2>Os grupos com mais negócios fora do ônibus</h2><p>Quantas empresas de outros setores cada grupo alcança pelos sócios das holdings. Clique numa linha para explorar o grupo.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
+    <div class="getabwrap"><table class="getab" id="patTabela"><thead></thead><tbody></tbody></table></div>
+  </details>
+
+  <details class="pacote" id="alem-encontros" hidden><summary class="phead"><span class="pnum">4</span><div><h2>Onde os grupos se encontram fora do ônibus</h2><p>Empresas de outros setores em que sócios de grupos diferentes estão juntos.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
+    <ul class="blocos" id="patBlocos"></ul>
+  </details>
+
 
 
   </section>
 
+  <div class="contribua"><div><b>Conhece um grupo ou uma empresa que falta aqui?</b><span>Envie para a pesquisa um grupo, uma ligação societária ou um contrato de operação. Cada contribuição é revisada antes de entrar no site.</span></div><a class="bt1" href="pesquisa.html">Envie para a pesquisa →</a></div>
+  
+  <p class="nota-pf">Nenhum nome de pessoa física como sócio é publicado: o nome de mercado de alguns grupos é o do fundador e aparece como marca. Grupo econômico aqui é uma inferência a partir dos sócios em comum no cadastro da Receita Federal; endereço não é operação. O método e os limites estão no Capítulo 6 e no Apêndice E da tese.</p>
   <aside class="cta-dados" aria-label="Dados da tese">
     <div class="cta-txt"><b>Dados da tese, abertos para baixar</b><span>Os oito pacotes que a tese cita, em CSV, com dicionário, SHA-256 e DOI no Zenodo. Licença CC BY 4.0.</span></div>
     <a class="cta-btn" href="dados.html#dados">Baixar os dados →</a>
@@ -607,9 +808,9 @@
         <span><b>Apoio técnico:</b> Polo Planejamento Ltda. — infraestrutura cloud e backup, organização e estruturação de dados, banco de dados compartilhado.</span>
       </div>
     </div>
-    Rede de empresas v0.2 · 2026<br>
+    Rede de empresas v1.0.0 · era Canoa · base de 11/11/2026<br>
     Fontes: cadastro de CNPJ da Receita Federal (dados abertos, recorte de maio de 2024) · Tabela mestre de grupos econômicos v5 (17/10/2026) e análise de redes sociais (out/2026) do acervo da pesquisa · sócios das holdings e empresas de outros setores ligadas a eles (ago e out/2026) · Censo Demográfico 2022 (IBGE).<br>
-    Página gerada a partir de <i>rede_ge.json</i> e <i>patrimonio.json</i> (<i>scripts/build_rede_ge.py</i> e <i>build_patrimonio.py</i>) — instrumento exploratório da pesquisa; não substitui a análise da tese (Capítulo 6 e Apêndice E). As tabelas da rede citadas na tese, sem nomes de sócios pessoas físicas, estão na <a href="dados.html">página de dados</a> (pacote 4). Histórico de versões no CHANGELOG do repositório.
+    Página gerada a partir de <i>rede_ge.json</i> e <i>patrimonio.json</i> (<i>scripts/build_rede_ge.py</i> e <i>build_patrimonio.py</i>) — o método completo e os limites estão na tese (Capítulo 6 e Apêndice E). As tabelas da rede citadas na tese, sem nomes de sócios pessoas físicas, estão na <a href="dados.html">página de dados</a> (pacote 4). Histórico de versões no CHANGELOG do repositório.
   </footer>
 </div>
 <div id="tooltip"></div>
@@ -901,7 +1102,7 @@ function enquadra(ids, anima = true) {
   if (!ss.length) return;
   const x0 = Math.min(...ss.map(s => s.x - raio(s.n))), x1 = Math.max(...ss.map(s => s.x + raio(s.n))) + (ids ? 90 : 60);
   const y0 = Math.min(...ss.map(s => s.y - raio(s.n))), y1 = Math.max(...ss.map(s => s.y + raio(s.n)));
-  const pad = 24, k = Math.min(4, Math.max(.2, Math.min((R.W - 2 * pad) / Math.max(40, x1 - x0), (R.H - 2 * pad) / Math.max(40, y1 - y0))));
+  const pad = 24, k = Math.min(2.2, Math.max(.2, Math.min((R.W - 2 * pad) / Math.max(40, x1 - x0), (R.H - 2 * pad) / Math.max(40, y1 - y0))));
   const alvo = { k, tx: (R.W - k * (x0 + x1)) / 2, ty: (R.H - k * (y0 + y1)) / 2 };
   if (!anima) { Object.assign(R, alvo); desenha(); return; }
   const ini = { k: R.k, tx: R.tx, ty: R.ty }, t0 = performance.now();
@@ -1060,8 +1261,22 @@ function seleciona(id, rolar, modo) {
   const cods = [...new Set(gruposMapa.flatMap(g => MUN_DO_GRUPO.get(g) || []))];
   const linha = (k, v) => v == null || v === '' ? '' : `<tr><td>${k}</td><td>${v}</td></tr>`;
   const links = ids => ids.filter(m => NOS.has(m)).map(m => m === id ? `<b>${esc(nomeG(NOS.get(m)))}</b>` : `<a href="#" class="gelink" data-id="${m}">${esc(nomeG(NOS.get(m)))}</a>`).join(', ');
-  box.innerHTML = `<div><b style="font-size:15px;">${esc(nomeG(n))}</b>${n.topo ? ' <span class="tag" style="background:rgba(245,228,0,.16);color:#F5E400;">topo do capital</span>' : ''}</div>
+  const car = (t, c, tt) => `<span class="carimbo" style="--c:${c}"${tt ? ` title="${String(tt).replace(/"/g, '&quot;')}"` : ''}>${t}</span>`;
+  const cbs = [];
+  if (n.topo) cbs.push(car('Topo do capital', '#F5E400', 'Entre os grupos que, juntos, detêm metade do capital declarado do setor'));
+  if (u && multi) cbs.push(car(`Unidade ${u.id} · grau ${u.grau || 'B'}`, '#FF2D6B', `${u.membros.length} grupos fundidos por controle comum`));
+  if (fc) cbs.push(car('Família de controle', '#FF2D6B', fc.nome));
+  if (lin) cbs.push(car('Linhagem', '#B48CFF', lin.nome));
+  if (fed) cbs.push(car(`Federação ${fed.id}`, '#4C8DFF', 'Articulação, e não controle'));
+  const cbn = [car(`${fmt(n.n_emp || 0)} ${n.n_emp === 1 ? 'empresa' : 'empresas'}`, '#c4c4cf'), car(`${fmt(cods.length)} ${cods.length === 1 ? 'município' : 'municípios'} com endereço`, '#c4c4cf')];
+  if (n.capital) cbn.push(car(`R$ ${mi(n.capital)} mi de capital`, '#c4c4cf', `${pctCap(n.capital)} do capital declarado do setor`));
+  if (n.lig) cbn.push(car(`${n.lig} ${n.lig === 1 ? 'ligação' : 'ligações'} na rede`, '#c4c4cf'));
+  if (window.PAT?.tem(id)) cbn.push(car('Negócios fora do ônibus', '#6FBE44'));
+  box.innerHTML = `<div><b style="font-size:17px;">${esc(nomeG(n))}</b></div>
     ${subG(n) ? `<div class="mercado">${esc(subG(n))} <span class="muted">· rótulo do cálculo</span></div>` : ''}
+    <div class="card-acoes"><button type="button" class="bt2" data-copia-ge="${id}">Copiar o link deste grupo</button><a class="bt2" href="pesquisa.html?grupo=${encodeURIComponent(nomeG(n))}">Corrigir ou contribuir</a></div>
+    <div class="carimbos">${cbs.length ? `<div class="cb-g"><span class="cb-t">Controle</span><div>${cbs.join('')}</div></div>` : ''}<div class="cb-g"><span class="cb-t">Tamanho</span><div>${cbn.join('')}</div></div></div>
+    <details class="fichapol"><summary>Os números do grupo</summary>
     <table>
       ${linha('Capital social declarado', n.capital ? `R$ ${mi(n.capital)} mi <span class="muted">(${pctCap(n.capital)} do setor)</span>` : '—')}
       ${linha('Empresas sob o mesmo controle', n.n_emp)}
@@ -1073,7 +1288,8 @@ function seleciona(id, rolar, modo) {
       ${linha('Ligações com outros grupos', n.lig)}
       ${linha('Intermediação na rede', posBet.has(id) ? `${posBet.get(id)}º de ${rankBet.length} grupos intermediários` : (n.lig ? 'não está no caminho entre outros' : null))}
       ${linha('Componente da rede', COMP.get(id) ? `${COMP.get(id)}º, com ${TAM_COMP.get(ORD_COMP[COMP.get(id) - 1])} grupos` : null)}
-    </table>
+    </table></details>
+    <details class="fichapol"><summary>Por trás dos carimbos: agrupamentos</summary>
     <div class="agrup">
       <p class="sub" style="margin:10px 0 4px;"><b>Agrupamentos</b> (escala de confiança, Seção 6.1)</p>
       ${u ? `<div><span class="grau g${multi ? (u.grau || 'B') : 'x'}">${multi ? (u.grau || 'B') : '—'}</span> <b>Unidade de controle ${u.id}</b> · ${esc(u.nome)}<br><span class="muted">${multi ? `${u.membros.length} grupos fundidos por controle ${u.grau === 'A' ? 'comum demonstrado' : 'provável'}: ${links(u.membros)}` : 'um só grupo'} · R$ ${mi(u.capital)} mi · ${pct(u.pct, 2)} do capital${u.id && ARS.unidades.indexOf(u) < ARS.n_topo_ub ? ' · <span class="topo-marca">entre as ' + ARS.n_topo_ub + ' unidades com metade do capital</span>' : ''}</span></div>` : ''}
@@ -1083,6 +1299,7 @@ function seleciona(id, rolar, modo) {
       ${!lin && !fed && !multi ? '<p class="sub" style="margin:0;">Sem linhagem nem federação registradas.</p>' : ''}
       ${window.PAT?.tem(id) ? (c => `<a href="#" class="ponte-aba" data-aba="alem" data-g="${id}">Além do ônibus: ${c.h} ${c.h === 1 ? 'holding sócia' : 'holdings sócias'}${c.e ? `, ${c.e} empresas de outros setores` : ''} →</a>`)(window.PAT.conta(id)) : ''}
     </div>
+    </details>
     <p class="sub" style="margin:12px 0 4px;"><b>Onde tem endereço</b> — ${fmt(cods.length)} ${cods.length === 1 ? 'município' : 'municípios'} (presença, não operação)</p>
     ${multi ? `<div class="modomapa"><button data-m="grupo" class="${modoMapa === 'grupo' ? 'on' : ''}">Este grupo</button><button data-m="unidade" class="${modoMapa === 'unidade' ? 'on' : ''}">Toda a unidade ${u.id} (${u.membros.length} grupos)</button></div>` : ''}
     ${cods.length ? mapaMunicipios(cods) + listaMunicipios(cods) : '<p class="sub">Sem estabelecimento com município identificado.</p>'}
@@ -1173,7 +1390,7 @@ function mostraMuni() {
   const gs = (ARS.presenca[cod] || []).map(id => NOS.get(id)).sort((a, b) => (b.topo - a.topo) || (b.capital || 0) - (a.capital || 0));
   box.innerHTML = `<p class="sub" style="margin-top:8px;"><b>${esc(ARS.mun[cod])}</b>: ${gs.length} ${gs.length === 1 ? 'grupo tem' : 'grupos têm'} endereço no município.</p>
     <ul>${gs.map(n => `<li><a href="#" class="gelink" data-id="${n.id}">${esc(nomeG(n))}</a>${n.topo ? ' <span class="topo-marca">●</span>' : ''} <span style="color:var(--muted);">— ${subG(n) ? esc(subG(n)) + ', ' : ''}${n.n_emp} ${n.n_emp === 1 ? 'empresa' : 'empresas'}</span></li>`).join('')}</ul>
-    <p class="sub">Ter endereço não é operar o sistema do município. Quem opera a Tarifa Zero de cada caso está no contrato, no <a href="painel.html#explorar">Painel Brasil</a>.</p>`;
+    <p class="sub">Ter endereço não é operar o sistema do município. Quem opera a Tarifa Zero de cada caso está no contrato, no <a href="painel.html#mun-${cod}">Painel Brasil</a>.</p>`;
 }
 busca?.addEventListener('input', () => { sugere(); mostraMuni(); });
 busca?.addEventListener('change', mostraMuni);
@@ -1208,8 +1425,8 @@ if (_mm) {
   const cod = _mm[1], nm = decodeURIComponent(_mm[2] || '');
   busca.value = ARS.mun[cod] || nm;
   if (ARS.mun[cod]) mostraMuni();
-  else document.getElementById('muniGrupos').innerHTML = `<p class="sub" style="margin-top:8px;">Nenhum dos 327 grupos tem estabelecimento registrado em <b>${esc(nm || cod)}</b> no cadastro de CNPJ. Ausência de endereço não quer dizer que não haja operador — quem opera o sistema está no contrato, no <a href="painel.html#explorar">Painel Brasil</a>.</p>`;
-  setTimeout(() => document.getElementById('muniBusca').closest('.panel').scrollIntoView({ block: 'start' }), 250);
+  else document.getElementById('muniGrupos').innerHTML = `<p class="sub" style="margin-top:8px;">Nenhum dos 327 grupos tem estabelecimento registrado em <b>${esc(nm || cod)}</b> no cadastro de CNPJ. Ausência de endereço não quer dizer que não haja operador — quem opera o sistema está no contrato, no <a href="painel.html#mun-${cod}">Painel Brasil</a>.</p>`;
+  setTimeout(() => document.getElementById('muniBusca').closest('.panel, details.pacote').scrollIntoView({ block: 'start' }), 250);
 }
 // a aba "Além do ônibus" é aberta no fim da montagem (montar_rede_ge.sh), depois de window.PAT existir
 
@@ -1422,6 +1639,313 @@ window.PAT = {
 
 })();
 if (location.hash.startsWith("#alem")) abreAba("alem");
+</script>
+<script>
+// rede_etapa2: copiar o link do grupo; abrir a caixa certa quando se chega por endereço; avisar os gráficos ao abrir
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copia-ge]'); if (!b) return;
+  const url = location.href.split('#')[0] + '#' + b.dataset.copiaGe;
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => { b.textContent = 'Link copiado'; }, () => { b.textContent = url; });
+});
+document.querySelectorAll('details.pacote').forEach(d => d.addEventListener('toggle', () => { if (d.open) window.dispatchEvent(new Event('resize')); }));
+if (/^#mun-/.test(location.hash)) { const cx = document.getElementById('onde-grupos'); if (cx) { cx.open = true; setTimeout(() => cx.scrollIntoView({ behavior: 'smooth' }), 120); } }
+</script>
+<script>
+// rede_etapa3: abas, grupo selecionado na horizontal, zoom ao selecionar, "Explore um grupo" por federação
+const ABAS_R = ['getz', 'controle', 'concentracao', 'alem'];
+abreAba = function (nome) {
+  if (!ABAS_R.includes(nome)) nome = 'getz';
+  for (const a of ABAS_R) {
+    const p = document.getElementById('tab-' + a), b = document.getElementById('tabbtn-' + a);
+    if (p) p.hidden = a !== nome;
+    if (b) { b.classList.toggle('on', a === nome); b.setAttribute('aria-selected', a === nome); }
+  }
+  if (nome === 'alem') setTimeout(() => window.PAT?.enquadra(), 0);
+  if (nome === 'controle') setTimeout(() => { mede(); if (selecionado) enquadra([selecionado, ...ADJ.get(selecionado)], false); else enquadra(null, false); }, 0);
+  if (!/^#(GE-|mun-|alem-)/.test(location.hash)) history.replaceState(null, '', nome === 'getz' ? location.pathname : '#' + nome);
+};
+function arrumaFicha() {
+  const box = document.getElementById('detail'); if (!box || box.querySelector('.gd-esq')) return;
+  const filhos = [...box.children]; const k = filhos.findIndex(e => /Onde tem endereço/.test(e.textContent || '') && e.matches('p'));
+  if (k < 0) return;
+  const esq = document.createElement('div'), dir = document.createElement('div'); esq.className = 'gd-esq'; dir.className = 'gd-dir';
+  filhos.slice(0, k).forEach(e => esq.appendChild(e)); filhos.slice(k).forEach(e => dir.appendChild(e));
+  box.append(esq, dir);
+  // menos informação: a tabela de números sai (os carimbos já dizem), a lista de municípios recolhe
+  [...box.querySelectorAll('details.fichapol')].find(d => /Os números do grupo/.test(d.textContent))?.remove();
+  const ml = box.querySelector('.munlista');
+  if (ml) { const d = document.createElement('details'); d.className = 'fichapol'; d.innerHTML = '<summary>Ver a lista dos municípios</summary>'; ml.replaceWith(d); d.appendChild(ml); }
+}
+const _sel0 = seleciona;
+seleciona = function (id, rolar, modo) {
+  _sel0(id, false, modo); arrumaFicha();
+  if (id) {
+    if (document.getElementById('tab-controle').hidden) abreAba('controle');
+    const s = SIMI.get(id); if (s && visivel(s)) enquadra([id, ...ADJ.get(id)]);
+    if (rolar) document.getElementById('painelRede')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+// a rede abre a aba certa conforme o endereço
+(() => { const h = location.hash;
+  if (/^#(GE-|mun-)/.test(h)) { abreAba('controle'); const g = decodeURIComponent(h.slice(1)); if (NOS.has(g)) seleciona(g, false); }
+  else if (/^#alem/.test(h)) abreAba('alem');
+  else if (h === '#concentracao') abreAba('concentracao');
+  else if (h === '#controle') abreAba('controle');
+  else abreAba('getz');
+})();
+// atalhos internos (passos do GE × TZ, "que grupos têm endereço")
+document.addEventListener('click', e => {
+  const a = e.target.closest('.abre-getz .passos a, [data-ir]'); if (!a) return;
+  const id = a.dataset.ir || a.getAttribute('href').slice(1), el = document.getElementById(id); if (!el) return;
+  e.preventDefault();
+  const aba = el.closest('.tabpane'); if (aba && aba.hidden) abreAba(aba.id.replace('tab-', ''));
+  if (el.matches('details')) el.open = true;
+  setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+});
+// Explore um grupo: escolha por federação (só os grupos que têm holdings levantadas)
+(() => {
+  const sel = document.getElementById('patFed'); if (!sel || !window.PAT) return;
+  const ops = ARS.federacoes.map(f => {
+    const gs = f.unidades.flatMap(u => (UNI.get(u)?.membros || [])).filter(g => NOS.has(g) && window.PAT.tem(g));
+    return gs.length ? `<optgroup label="${f.id} · ${gs.length} ${gs.length === 1 ? 'grupo' : 'grupos'}">${gs.map(g => `<option value="${g}">${esc(nomeG(NOS.get(g)))}</option>`).join('')}</optgroup>` : '';
+  }).join('');
+  sel.innerHTML += ops;
+  sel.addEventListener('change', () => { if (sel.value) window.PAT.mostra(sel.value); });
+})();
+</script>
+<script>
+// rede_etapa4
+// linhas com peso visível: espessura proporcional aos sócios em comum
+LIN_EL.forEach(l => { l._w = l._e.w; });
+const _des0 = desenha;
+let FOCO_MUN = null, ULT_MUN = null;
+desenha = function () {
+  _des0();
+  const k = R.k;
+  const foco = selecionado ? null : FOCO_MUN;
+  for (const l of LIN_EL) {
+    if (l.style.display === 'none') continue;
+    const e = l._e;
+    l.setAttribute('stroke-width', ((e.t === 'fusao' ? 2 : .4) + Math.sqrt(e.w) * .6) / Math.pow(k, .85));
+    if (foco) l.setAttribute('stroke-opacity', foco.has(e.a) && foco.has(e.b) ? .95 : .05);
+  }
+  if (foco) for (const s0 of SIM) {
+    const c = NO_EL.get(s0.id), t = TX_EL.get(s0.id); if (!c || c.style.display === 'none') continue;
+    const on = foco.has(s0.id); c.setAttribute('fill-opacity', on ? .95 : .12);
+    if (on) { t.style.display = ''; const r = raio(s0.n); t.setAttribute('x', s0.x + r + 3 / k); t.setAttribute('y', s0.y + 3.5 / k); t.setAttribute('font-size', 11 / k); }
+    else t.style.display = 'none';
+  }
+};
+// legenda: o que a espessura quer dizer
+(() => { const lg = document.getElementById('redeLeg'); if (lg && !lg.querySelector('.esp')) lg.insertAdjacentHTML('beforeend', '<span class="esp" style="margin-left:10px;">espessura da linha: quantos sócios os dois grupos têm em comum</span>'); })();
+// filtro por cidade: acende na rede os grupos com endereço no município
+function focoMuni() {
+  const cod = ROT2COD.get(busca.value.trim());
+  if (!cod) { if (!busca.value.trim() && FOCO_MUN) { FOCO_MUN = null; ULT_MUN = null; document.getElementById('muniGrupos').innerHTML = ''; desenha(); } return; }
+  if (cod === ULT_MUN) return; ULT_MUN = cod;
+  const ids = (ARS.presenca[cod] || []).filter(id => NOS.has(id));
+  FOCO_MUN = new Set(ids); if (selecionado) seleciona(null);
+  if (document.getElementById('tab-controle').hidden) abreAba('controle');
+  const vis = ids.filter(id => { const s0 = SIMI.get(id); return s0 && visivel(s0); });
+  if (vis.length) enquadra(vis); else desenha();
+}
+busca.addEventListener('input', focoMuni); busca.addEventListener('change', focoMuni);
+document.getElementById('limpaFiltro')?.addEventListener('click', () => {
+  FOCO_MUN = null; ULT_MUN = null; busca.value = ''; const rb = document.getElementById('redeBusca'); if (rb) rb.value = '';
+  document.getElementById('muniGrupos').innerHTML = ''; seleciona(null); enquadra(null);
+});
+document.getElementById('muniGrupos').innerHTML = '';
+// ao selecionar um grupo, o filtro da cidade sai de cena
+const _sel1 = seleciona;
+seleciona = function (id, rolar, modo) { if (id) { FOCO_MUN = null; ULT_MUN = null; } _sel1(id, rolar, modo); };
+
+// Concentração: a escala de confiança, quantificada
+(() => {
+  const el = document.getElementById('escalaFixa'); if (!el) return;
+  const multi = ARS.unidades.filter(u => u.membros.length > 1);
+  const qA = multi.filter(u => u.grau === 'A'), qB = multi.filter(u => u.grau !== 'A');
+  const gA = qA.reduce((t, u) => t + u.membros.length, 0), gB = qB.reduce((t, u) => t + u.membros.length, 0);
+  const gC = ARS.linhagens.reduce((t, l) => t + l.membros.length, 0);
+  const uD = ARS.federacoes.reduce((t, f) => t + f.unidades.length, 0);
+  const F = Object.fromEntries(ARS.funil.map(f => [f.grau, f]));
+  const maxM = Math.max(...ARS.funil.map(f => f.meia));
+  const efeito = f => f ? `<div class="ef"><i style="width:${(120 * f.meia / maxM).toFixed(0)}px"></i><span><b>${f.meia}</b> detêm metade do capital <span style="color:var(--muted);">(de ${f.n})</span></span></div>` : '';
+  const E = Object.fromEntries(ARS.escala.map(e => [e.grau, e]));
+  const lin = (g, q, qs, ef, teto) => `<tr${teto ? ' class="teto"' : ''}><td><span class="grau g${g}">${g}</span></td><td><b>${esc(E[g]?.nome || '')}</b></td><td class="q" title="${esc(E[g]?.regra || '')}"><b>${q}</b><span>${qs}</span></td><td>${ef}</td></tr>`;
+  el.innerHTML = `<table><thead><tr><th>Grau</th><th>O que junta</th><th>Quantos</th><th>Quantas unidades detêm metade do capital</th></tr></thead><tbody>
+    <tr><td>—</td><td><b>Grupos da rede (códigos GE)</b></td><td class="q"><b>${ARS.nos.length}</b><span>grupos</span></td><td>${efeito(F['—'])}</td></tr>
+    ${lin('A', qA.length, `unidades, juntando ${gA} grupos`, '<span style="font-size:11.5px;color:var(--muted);">somadas às de B na linha seguinte</span>', false)}
+    ${lin('B', qB.length, `unidades, juntando ${gB} grupos`, efeito(F['A+B']), false)}
+    ${lin('C', ARS.linhagens.length, `linhagens familiares, com ${gC} grupos`, efeito(F['+C']), false)}
+    ${lin('D', ARS.federacoes.length, `federações, com ${uD} unidades`, efeito(F['+D']) + '<span style="font-size:11px;color:var(--muted);">só teto: articulação, e não controle</span>', true)}
+  </tbody></table>`;
+})();
+// Concentração: a rede em números, em barras
+renderMedidas = function () {
+  const box = document.getElementById('redeMedidas'); if (!box) return;
+  const N = ARS.nos.length, E = ARS.arestas.length, lig = ARS.nos.filter(n => ADJ.get(n.id).size).length;
+  const topGrau = [...ARS.nos].sort((a, b) => ADJ.get(b.id).size - ADJ.get(a.id).size).slice(0, 10);
+  const topBet = rankBet.slice(0, 10);
+  const barras = (lista, val) => { const mx = Math.max(...lista.map(val)) || 1;
+    return lista.map(n => `<div class="mb-lin"><a href="#" class="gelink" data-id="${n.id}">${esc(nomeG(n))}</a><div class="mb-bar"><i style="width:${(100 * val(n) / mx).toFixed(0)}%"></i></div><div class="mb-v">${Math.round(val(n))}</div></div>`).join(''); };
+  box.innerHTML = `<p class="resposta-rede" style="font-size:14px;">Dos ${fmt(N)} grupos, <b>${fmt(lig)}</b> têm ligação com outro grupo, em ${ORD_COMP.length} conjuntos separados; o maior reúne ${TAM_COMP.get(ORD_COMP[0])} grupos. São ${fmt(E)} ligações: em média, ${(2 * E / N).toFixed(1).replace('.', ',')} por grupo.</p>
+    <div class="medbars"><div><h3 style="font-size:13px;margin:0 0 4px;">Os mais conectados</h3><p class="legenda">Com quantos grupos se ligam.</p>${barras(topGrau, n => ADJ.get(n.id).size)}</div>
+    <div><h3 style="font-size:13px;margin:0 0 4px;">Os que fazem a ponte</h3><p class="legenda">Quantas vezes estão no caminho mais curto entre outros dois grupos.</p>${barras(topBet, n => BETW.get(n.id))}</div></div>
+    <p class="legenda" style="margin-top:10px;">Ligação por sócio em comum é vínculo fraco: leia como posição na rede de sócios, e não como poder de controle.</p>`;
+};
+renderMedidas();
+// lista dos 327: colunas de linhagem (C) e federação (D)
+const _tab0 = renderTabela;
+renderTabela = function () {
+  _tab0();
+  document.querySelectorAll('#geTable tbody tr').forEach(tr => {
+    const n = NOS.get(tr.dataset.id), u = n && UNI.get(n.ub); if (!n) return;
+    const tds = tr.querySelectorAll('td'); const ref = tds[3]; if (!ref || tr.dataset.cd) return;
+    const lin = u?.lin && LIN.get(u.lin), fed = u?.fed;
+    ref.insertAdjacentHTML('afterend', `<td>${lin ? `<span class="grau gC">C</span> ${esc(lin.nome)}` : '—'}</td><td>${fed ? `<span class="grau gD">D</span> ${fed}` : '—'}</td>`);
+    tr.dataset.cd = '1';
+  });
+};
+renderTabela();
+
+// Além do ônibus: os grupos por federação, em botões
+(() => {
+  const box = document.getElementById('patFedChips'); if (!box || !window.PAT) return;
+  const linhas = ARS.federacoes.map(f => {
+    const gs = f.unidades.flatMap(u => (UNI.get(u)?.membros || [])).filter(g => NOS.has(g) && window.PAT.tem(g));
+    return gs.length ? `<div class="fc-lin"><b>${f.id}</b><div>${gs.map(g => `<button type="button" data-g="${g}">${esc(nomeG(NOS.get(g)))}</button>`).join('')}</div></div>` : '';
+  }).join('');
+  box.innerHTML = `<p class="legenda" style="margin:0 0 4px;">Escolha um grupo. Eles estão organizados pelas federações a que pertencem (grau D da escala de confiança).</p>${linhas}`;
+  box.addEventListener('click', e => { const b = e.target.closest('button[data-g]'); if (!b) return;
+    box.querySelectorAll('button.on').forEach(x => x.classList.remove('on')); b.classList.add('on'); window.PAT.mostra(b.dataset.g); });
+})();
+// Além do ônibus: holdings em etiquetas, setores em barras
+(() => {
+  const el = document.getElementById('patLista'); if (!el) return;
+  const arruma = () => {
+    if (el.dataset.ok === el.innerHTML.length + '') return;
+    const h4s = [...el.querySelectorAll(':scope > h4')]; if (!h4s.length) return;
+    const total = h4s.slice(1).reduce((t, h) => t + (parseInt((h.textContent.match(/\((\d+)\)\s*$/) || [0, 0])[1]) || 0), 0) || 1;
+    const novo = document.createElement('div'); let hold = '';
+    h4s.forEach((h, i) => {
+      const ul = h.nextElementSibling && h.nextElementSibling.matches('ul') ? h.nextElementSibling : null;
+      if (i === 0) {
+        const nomes = ul ? [...ul.querySelectorAll('li')].map(li => (li.firstChild?.textContent || li.textContent).trim()) : [];
+        hold = `<details class="hold" style="margin-top:12px;"><summary style="cursor:pointer;font-weight:700;font-size:13px;">${h.textContent} <span style="font-weight:400;color:var(--muted);">: ver os nomes</span></summary><div class="hchips">${nomes.map(n => `<span>${n}</span>`).join('')}</div></details>`;
+        novo.insertAdjacentHTML('beforeend', `<h4 style="margin:0 0 2px;">Empresas de outros setores, por setor</h4><p class="legenda" style="margin:0 0 6px;">Clique num setor para ver as empresas.</p>`);
+      } else {
+        const n = parseInt((h.textContent.match(/\((\d+)\)\s*$/) || [0, 0])[1]) || 0;
+        const cor = h.querySelector('i')?.style.background || 'var(--amarelo)';
+        const nome = h.textContent.replace(/\s*\(\d+\)\s*$/, '');
+        const d = document.createElement('details'); d.className = 'setor';
+        d.innerHTML = `<summary><span>${nome}</span><span class="sb"><i style="width:${(100 * n / Math.max(...h4s.slice(1).map(x => parseInt((x.textContent.match(/\((\d+)\)\s*$/) || [0, 0])[1]) || 0))).toFixed(0)}%;background:${cor};"></i></span><span style="text-align:right;color:var(--muted);">${n}</span></summary>`;
+        if (ul) d.appendChild(ul.cloneNode(true));
+        novo.appendChild(d);
+      }
+    });
+    if (hold) novo.insertAdjacentHTML('beforeend', hold);
+    [...el.querySelectorAll(':scope > p')].forEach(p => novo.appendChild(p.cloneNode(true)));
+    el.innerHTML = ''; el.appendChild(novo); el.dataset.ok = el.innerHTML.length + '';
+  };
+  new MutationObserver(arruma).observe(el, { childList: true });
+  arruma();
+  const vr = document.getElementById('patVerRede');
+  new MutationObserver(() => { const a = vr.querySelector('a'); if (a && !a.dataset.ok) { a.dataset.ok = 1; a.textContent = 'ver este grupo na aba A rede →'; } }).observe(vr, { childList: true });
+})();
+// GE × TZ: "ver o grupo na rede"
+document.addEventListener('click', e => { const a = e.target.closest('.lk-rede'); if (!a) return; e.preventDefault(); abreAba('controle'); seleciona(a.dataset.ge, true); });
+</script>
+<script>
+// rede_etapa5
+// a roda do mouse rola a página; para aproximar, clique na rede (ou Ctrl + roda, ou os botões + e −)
+(() => {
+  for (const id of ['redeSvg', 'patSvg']) {
+    const el = document.getElementById(id); if (!el) continue;
+    const pai = el.parentElement; if (getComputedStyle(pai).position === 'static') pai.style.position = 'relative';
+    const dica = document.createElement('div'); dica.className = 'dica-zoom'; dica.textContent = 'Para aproximar: clique na rede e use a roda, ou Ctrl + roda'; pai.appendChild(dica);
+    let ativo = false, t = 0;
+    el.addEventListener('pointerdown', () => { ativo = true; });
+    el.addEventListener('pointerleave', () => { ativo = false; });
+    pai.addEventListener('wheel', e => {
+      if (!e.target.closest('#' + id) || ativo || e.ctrlKey || e.metaKey) return;
+      e.stopPropagation(); dica.classList.add('on'); clearTimeout(t); t = setTimeout(() => dica.classList.remove('on'), 1300);
+    }, { capture: true });
+  }
+})();
+// GE × TZ: o mapa das zonas (Mapa 9)
+(() => {
+  const box = document.getElementById('mzMapa'); if (!box) return;
+  const Z = JSON.parse(document.getElementById('data-zonas').textContent);
+  const COR = ['#5b78b8', '#FF2D6B', '#F5E400'], RAIO = [2.3, 4.2, 3.6];
+  const ROT = [['Grupo presente, sem a política', 'o que a tese chama de bloqueio aparente'], ['Tarifa Zero universal com grupo presente', 'permeabilidade'], ['Tarifa Zero universal sem grupo', 'nas franjas do setor']];
+  const POSN = ['cidade isolada', 'satélite de arranjo', 'sede de arranjo'];
+  let filtro = 'todos', sel = null;
+  const desenhaZ = () => {
+    const vis = Z.filter(z => filtro === 'todos' || z[5] > 0);
+    const ord = [...vis].sort((a, b) => a[4] - b[4] || (a[4] === 0 ? 0 : 0));
+    box.innerHTML = `<svg viewBox="-6 -6 600 604" role="img" aria-label="Mapa das zonas de presença de grupo e Tarifa Zero">${ARS.geo.ufs.map(d => `<path d="${d}" class="ufb"/>`).join('')}${ord.map(z => `<circle cx="${z[2]}" cy="${z[3]}" r="${RAIO[z[4]]}" fill="${COR[z[4]]}" fill-opacity="${z[4] ? .95 : .55}" data-c="${z[0]}"${z[0] === sel ? ' class="sel"' : ''}><title>${esc(z[1])}</title></circle>`).join('')}</svg>`;
+    const n = [0, 0, 0]; vis.forEach(z => n[z[4]]++);
+    document.getElementById('mzLeg').innerHTML = [1, 2, 0].map(k => `<div class="mz-l"><i style="background:${COR[k]}"></i><span>${ROT[k][0]}<small>${ROT[k][1]}</small></span><b>${fmt(n[k])}</b></div>`).join('');
+  };
+  box.addEventListener('click', e => {
+    const c = e.target.closest('circle[data-c]'); if (!c) return; sel = c.dataset.c;
+    const z = Z.find(z => z[0] === sel); desenhaZ();
+    const temG = z[4] < 2;
+    document.getElementById('mzInfo').innerHTML = `<b>${esc(z[1])}</b> · ${POSN[z[5]]}<br><span style="color:${COR[z[4]]}">●</span> ${ROT[z[4]][0]}<div style="margin-top:6px;">${z[4] > 0 ? `<a href="painel.html#mun-${z[0]}">ver no painel →</a>` : ''}${temG ? `<a href="#" class="mz-rede" data-c="${z[0]}">ver os grupos da cidade na rede →</a>` : ''}</div>`;
+  });
+  document.getElementById('mzInfo').addEventListener('click', e => {
+    const a = e.target.closest('.mz-rede'); if (!a) return; e.preventDefault();
+    const nome = ARS.mun[a.dataset.c]; if (!nome) return;
+    abreAba('controle'); busca.value = nome; busca.dispatchEvent(new Event('input'));
+    setTimeout(() => document.querySelector('.filtro-rede')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+  });
+  document.querySelectorAll('.mz-ctl button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.mz-ctl button').forEach(x => x.classList.toggle('on', x === b)); filtro = b.dataset.pos; desenhaZ(); }));
+  desenhaZ();
+})();
+// links para as abas a partir do texto
+document.addEventListener('click', e => { const a = e.target.closest('[data-ir-aba]'); if (!a) return; e.preventDefault(); abreAba(a.dataset.irAba); window.scrollTo({ top: document.querySelector('.tabs, [role=tablist]')?.offsetTop || 0, behavior: 'smooth' }); });
+// Concentração: o funil do capital
+(() => {
+  const el = document.getElementById('funilCapital'); if (!el) return;
+  const us = [...ARS.unidades].sort((a, b) => (b.capital || 0) - (a.capital || 0));
+  const tot = us.reduce((t, u) => t + (u.capital || 0), 0);
+  const ac = n => us.slice(0, n).reduce((t, u) => t + (u.capital || 0), 0) / tot * 100;
+  const pc = v => v.toFixed(1).replace('.', ',') + '%';
+  const cortes = [[1, 'a maior unidade'], [5, 'da 2ª à 5ª'], [10, 'da 6ª à 10ª'], [22, 'da 11ª à 22ª']];
+  const cores = ['#F5E400', '#d9c900', '#b3a600', '#8c8200', '#3a3f4a'];
+  let ant = 0, antN = 0; const seg = [];
+  for (const [n, r] of cortes) { const v = ac(n); seg.push({ r, p: v - ant, acum: v, n: n - antN }); ant = v; antN = n; }
+  seg.push({ r: `as outras ${us.length - 22}`, p: 100 - ant, acum: 100, n: us.length - 22 });
+  const tam = [[u => u.n_emp === 1, 'com uma empresa'], [u => u.n_emp === 2, 'com duas'], [u => u.n_emp >= 3 && u.n_emp <= 9, 'de três a nove'], [u => u.n_emp >= 10, 'com dez ou mais']];
+  el.innerHTML = `<h3 style="font-size:14px;margin:4px 0 2px;">O funil do capital</h3>
+    <p class="explica" style="margin:2px 0 4px;">Os R$ ${(tot / 1e9).toFixed(2).replace('.', ',')} bilhões de capital social declarado, divididos entre as ${us.length} unidades de controle, da maior para a menor. <b>A maior detém ${pc(ac(1))}; as 5 maiores, ${pc(ac(5))}; as 10 maiores, ${pc(ac(10))}; as 22 maiores, ${pc(ac(22))}.</b> Uma em cada catorze unidades reúne metade do capital.</p>
+    <div class="fc-bar">${seg.map((g, k) => `<i style="width:${g.p}%;background:${cores[k]};${k === 4 ? 'color:#e8e8ee;' : ''}" title="${g.r}: ${pc(g.p)}">${g.p > 6 ? pc(g.p) : ''}</i>`).join('')}</div>
+    <div class="fc-rot">${seg.map(g => `<span style="width:${g.p}%">${g.r}${g.n > 1 && g.r.startsWith('da') ? ` (${g.n})` : ''}<br><b style="color:var(--text);">${pc(g.acum)}</b> acumulado</span>`).join('')}</div>
+    <div class="fc-tam">${tam.map(([f, r]) => `<div><b>${us.filter(f).length}</b>unidades ${r}</div>`).join('')}</div>
+    <p class="legenda" style="margin-top:8px;">Capital social é o registrado no cadastro: não equivale ao faturamento nem à frota, mas é a única medida de porte disponível para todas as unidades na mesma base. A Itapemirim, segunda pelo capital, está falida desde 2022.</p>`;
+})();
+// Além do ônibus: escolher por federação e por grupo, em listas
+(() => {
+  const box = document.getElementById('patFedChips'); if (!box || !window.PAT) return;
+  const fedDe = new Map();
+  ARS.federacoes.forEach(f => f.unidades.forEach(u => (UNI.get(u)?.membros || []).forEach(g => fedDe.set(g, f.id))));
+  const gs = ARS.nos.filter(n => window.PAT.tem(n.id)).sort((a, b) => nomeG(a).localeCompare(nomeG(b), 'pt-BR'));
+  const maior = f => { const ms = f.unidades.map(u => UNI.get(u)).filter(Boolean).sort((a, b) => (b.capital || 0) - (a.capital || 0)); return ms[0]?.nome || ''; };
+  const feds = ARS.federacoes.filter(f => gs.some(n => fedDe.get(n.id) === f.id));
+  box.className = 'patctl';
+  box.innerHTML = `<label>Federação <select id="patFedSel"><option value="">todas</option>${feds.map(f => `<option value="${f.id}">${f.id} · ${esc(maior(f))} e outras ${f.unidades.length - 1} unidades</option>`).join('')}<option value="-">grupos sem federação</option></select></label>
+    <label>Grupo <select id="patGrupoSel"></select></label>`;
+  const fs = box.querySelector('#patFedSel'), gsel = box.querySelector('#patGrupoSel');
+  const enche = () => {
+    const f = fs.value;
+    const lst = gs.filter(n => !f || (f === '-' ? !fedDe.has(n.id) : fedDe.get(n.id) === f));
+    gsel.innerHTML = `<option value="">escolha (${lst.length})…</option>` + lst.map(n => `<option value="${n.id}">${esc(nomeG(n))}</option>`).join('');
+  };
+  fs.addEventListener('change', () => { enche(); if (gsel.options.length === 2) { gsel.selectedIndex = 1; window.PAT.mostra(gsel.value); } });
+  gsel.addEventListener('change', () => { if (gsel.value) window.PAT.mostra(gsel.value); });
+  enche();
+})();
 </script>
 </body>
 </html>

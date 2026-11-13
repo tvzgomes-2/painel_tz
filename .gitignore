@@ -27,3 +27,11 @@ dados/8_scripts/auditar_grupo_rede.py
 dados/8_scripts/expandir_nivel23_58_novos.py
 dados/8_scripts/expandir_nivel23_tamanho12.py
 dados/8_scripts/gerar_fichas_dsa23.py
+
+# Intermediários da revisão de lançamento (gerar_proposta.py e etapas): as páginas oficiais saem de
+# oficializar_painel.py e oficializar_rede.py (13/11/2026)
+painel-proposta*.html
+rede-ge-proposta.html
+
+# Backups locais das edições por script
+*.bak-*

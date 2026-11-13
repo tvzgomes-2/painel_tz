@@ -502,6 +502,163 @@
   .cta-dados.grande .cta-txt b{font-size:16px;}
   .cta-dados.grande .cta-txt span{font-size:13px;}
   .cta-dados.grande .cta-btn{font-size:14px;padding:11px 20px;}
+
+  /* ===== proposta da revisão de lançamento (v1.0.0) (13/11/2026): sistema comum de navegação — o mesmo nas três páginas ===== */
+  :root{ --accent: var(--rosa); }
+  /* abas: as mesmas de Dados e conceitos (.abas button), com especificidade acima de "nav.tabs .tabbtn" dos moldes */
+  nav.tabs{display:flex !important;gap:10px !important;margin:6px 0 26px !important;flex-wrap:wrap !important;padding:0 0 14px !important;border-bottom:1px solid var(--border) !important;overflow:visible !important;}
+  nav.tabs .tabbtn{background:var(--panel2) !important;border:2px solid var(--border) !important;color:var(--text) !important;font:inherit;
+    font-size:16px !important;font-weight:800 !important;letter-spacing:.01em;padding:12px 26px !important;border-radius:10px !important;margin:0 !important;
+    box-shadow:none !important;cursor:pointer;transition:border-color .15s,background .15s;text-align:center;}
+  nav.tabs .tabbtn:hover{border-color:var(--amarelo) !important;background:var(--panel2) !important;}
+  nav.tabs .tabbtn.on{background:var(--amarelo) !important;border-color:var(--amarelo) !important;color:#0E0E10 !important;box-shadow:none !important;}
+  nav.tabs .tabbtn:focus-visible{outline:3px solid var(--rosa);outline-offset:2px;}
+  nav.tabs .tabbtn small{display:none !important;}
+  @media (max-width:640px){ nav.tabs .tabbtn{flex:1 1 0 !important;padding:11px 12px !important;font-size:15px !important;} }
+  .btn-clear,.maptools button,.forcas button,.lermais{border-radius:8px !important;}
+  .btn-clear:hover,.maptools button:hover,.forcas button:hover,.zoombtns button:hover,.lermais:hover{border-color:var(--amarelo) !important;}
+  .bt1,.bt2{display:inline-block;font:inherit;font-size:13px;font-weight:700;border-radius:8px;padding:9px 16px;text-decoration:none !important;cursor:pointer;margin:4px 8px 4px 0;}
+  .bt1{background:var(--rosa);color:#fff !important;border:2px solid var(--rosa);}
+  .bt1:hover{filter:brightness(1.12);}
+  .bt2{background:var(--panel2);color:var(--text) !important;border:2px solid var(--border);}
+  .bt2:hover{border-color:var(--amarelo);}
+  .faixa-proposta{background:var(--amarelo);color:#0E0E10;font-size:12.5px;font-weight:600;padding:7px 16px;text-align:center;}
+  .faixa-proposta a{color:#0E0E10 !important;text-decoration:underline;font-weight:800;}
+  .resposta{font-size:15px;line-height:1.55;color:var(--text);margin:0 0 10px;max-width:900px;border-left:3px solid var(--rosa);padding:2px 0 2px 12px;}
+  .passo-pe{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--border);font-size:12.5px;color:var(--muted);}
+  .passo-pe .na-tese a{color:var(--muted) !important;}
+  details.mais{margin-top:14px;}
+  details.mais > summary{cursor:pointer;font-weight:700;font-size:13.5px;color:var(--text);padding:8px 0;}
+  .trilha{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:13px;margin:14px 0 4px;padding:10px 14px;background:var(--panel);border:1px solid var(--border);border-radius:10px;}
+  .trilha b{color:var(--amarelo);}
+  .trilha a{color:var(--text) !important;text-decoration:none;border-bottom:1px solid var(--rosa);}
+  .trilha a:hover{color:var(--rosa) !important;}
+  .abre-box{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:0 0 22px;}
+  .abre-box .pergunta{font-size:19px;font-weight:800;line-height:1.35;margin:0 0 8px;}
+  .abre-box .passos{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;}
+  .abre-box .passos a{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:6px 11px;font-size:12.5px;color:var(--text) !important;text-decoration:none;}
+  .abre-box .passos a:hover{border-color:var(--amarelo);}
+  .abre-busca{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px;}
+  .abre-busca input{flex:1 1 260px;max-width:420px;background:var(--panel2);border:2px solid var(--border);border-radius:8px;color:var(--text);font:inherit;font-size:14px;padding:9px 12px;}
+  .abre-busca input:focus{border-color:var(--amarelo);outline:none;}
+  .leitura{display:block !important;margin:0 0 12px;}
+  .testes{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 4px;}
+  .testes td{padding:7px 8px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .testes td.or{font-weight:800;font-size:16px;white-space:nowrap;color:var(--amarelo);}
+  .fecho{background:rgba(255,45,107,.08);border:2px solid var(--rosa);border-radius:12px;padding:20px 22px;margin:8px 0 0;}
+  .fecho .frase{font-size:20px;font-weight:800;line-height:1.35;margin:0 0 10px;}
+  .explorar-nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:-4px 0 16px;font-size:12.5px;color:var(--muted);}
+  .explorar-nav a{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:5px 10px;color:var(--text) !important;text-decoration:none;}
+  .explorar-nav a:hover{border-color:var(--amarelo);}
+  .bloco-explorar{margin-top:30px;padding-top:6px;border-top:2px solid var(--border);}
+  /* a barra de filtros fica presa no topo (110 px no computador): o alvo de uma âncora para logo abaixo dela */
+  .secao,.bloco-explorar,.tabpane,.paneintro{scroll-margin-top:128px;}
+  @media (max-width:640px){ .secao,.bloco-explorar,.tabpane,.paneintro{scroll-margin-top:12px;} }
+  /* ===== proposta_etapa2 (13/11/2026) — caixas recolhidas no modelo de Dados e conceitos ===== */
+  details.pacote{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:0 0 16px;}
+  .phead{display:flex;gap:14px;align-items:flex-start;margin:0;cursor:pointer;list-style:none;}
+  .phead::-webkit-details-marker{display:none;}
+  .phead > div{flex:1 1 auto;min-width:0;}
+  .phead h2{margin:2px 0 4px;font-size:18px;}
+  .phead p{margin:0 0 4px;font-size:13.5px;line-height:1.55;color:var(--text);}
+  .pnum{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--rosa);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .pmeta{font-size:11.5px;color:var(--muted);}
+  .pseta{flex:0 0 auto;font-size:18px;color:var(--muted);transition:transform .15s;margin-top:2px;}
+  details.pacote[open] > .phead{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+  details.pacote[open] > .phead .pseta{transform:rotate(180deg);color:var(--amarelo);}
+  details.pacote > .phead:hover .pseta, details.pacote > .phead:hover h2{color:var(--amarelo);}
+  details.pacote .panel{background:var(--panel2);}
+  .legenda{font-size:12.5px;color:var(--muted);margin:2px 0 10px;line-height:1.5;max-width:900px;}
+  .ressalva-passo{font-size:11.5px;color:var(--muted);margin:10px 0 0;}
+  .cruzbars{display:grid;gap:10px;margin:6px 0 4px;}
+  .cb-lin{display:grid;grid-template-columns:minmax(150px,240px) 1fr 70px;gap:10px;align-items:center;}
+  .cb-rot{font-size:13px;}
+  .cb-bar{display:flex;height:22px;background:var(--panel2);border-radius:5px;overflow:hidden;}
+  .cb-bar span{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#0E0E10;}
+  .cb-tot{font-size:13px;text-align:right;white-space:nowrap;} .cb-hip{color:var(--muted);font-size:11.5px;}
+  .cb-leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);margin-top:10px;}
+  .cb-leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;}
+  @media (max-width:640px){ .cb-lin{grid-template-columns:1fr 54px;} .cb-rot{grid-column:1 / -1;} }
+  .q36{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 4px;}
+  .q36 td{padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45;}
+  .q36 td.an{font-weight:800;white-space:nowrap;width:1%;}
+  .q36 td.ev{white-space:nowrap;width:1%;} .q36 td.se{white-space:nowrap;width:1%;color:var(--muted);font-size:12px;}
+  .q36 .chip{display:inline-block;font-size:11px;font-weight:700;border:1px solid var(--border);border-radius:10px;padding:1px 8px;color:var(--text);background:var(--panel2);}
+  @media (max-width:640px){ .q36 td.an{white-space:normal;} .q36 td.ev, .q36 td.se{display:none;} }
+  .tese-vols{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0;}
+  .rot-vols{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--amarelo);margin:16px 0 4px;}
+  .contribua{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;background:var(--panel);
+    border:2px solid var(--amarelo);border-radius:12px;padding:18px 22px;margin:18px 0 0;}
+  .contribua b{display:block;font-size:17px;margin-bottom:3px;} .contribua span{font-size:13px;color:var(--muted);}
+  .contribua .bt1{font-size:14px;padding:11px 20px;}
+  /* hierarquia do fim da página (pedido do autor): conclusão discreta, contribuição em destaque, dados sem alarde */
+  .fecho{background:var(--panel) !important;border:1px solid var(--border) !important;}
+  .fecho .frase{font-size:17px !important;}
+  .fecho .tese-vols .bt1{background:var(--panel2);border:2px solid var(--border);color:var(--text) !important;}
+  .fecho .tese-vols .bt1:hover{border-color:var(--amarelo);filter:none;}
+  .contribua.forte{background:rgba(245,228,0,.07);border:3px solid var(--amarelo);padding:26px 28px;margin:22px 0 0;}
+  .contribua.forte b{font-size:23px;line-height:1.25;margin-bottom:6px;}
+  .contribua.forte span{font-size:14.5px;color:var(--text);}
+  .contribua.forte .bt1{font-size:16px;padding:14px 26px;}
+  aside.cta-dados{background:none !important;border:none !important;border-top:1px solid var(--border) !important;border-radius:0 !important;padding:12px 0 !important;margin:22px 0 0 !important;}
+  aside.cta-dados .cta-txt b{font-size:13px !important;display:inline !important;margin-right:6px;}
+  aside.cta-dados .cta-txt span{display:inline !important;}
+  aside.cta-dados .cta-btn{background:none !important;color:var(--text) !important;border:1px solid var(--border);padding:6px 12px !important;font-size:12.5px !important;}
+  aside.cta-dados .cta-btn:hover{border-color:var(--amarelo);filter:none;}
+  .arrbloco{min-width:0;}
+  @media (max-width:640px){ details.pacote{padding:14px 12px;} .phead{gap:10px;} }
+  .p2grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;}
+  @media (max-width:820px){ .p2grid{grid-template-columns:1fr;} }
+  .p2num{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:4px 0 14px;}
+  .p2num b{display:block;font-size:30px;font-weight:800;color:var(--amarelo);line-height:1.1;}
+  .p2num span{font-size:12.5px;color:var(--text);line-height:1.4;display:block;}
+  @media (max-width:640px){ .p2num{grid-template-columns:1fr;} .conc{grid-template-columns:1fr 70px !important;} .conc-l{grid-column:1 / -1;} }
+  .conc{display:grid;grid-template-columns:150px 1fr 74px;gap:8px 10px;align-items:center;font-size:12.5px;}
+  .conc-b{display:flex;height:18px;border-radius:5px;overflow:hidden;background:var(--panel);}
+  .conc-b span{display:block;height:100%;background:#3a3a44;} .conc-b span.hi{background:var(--amarelo);}
+  .conc-v{text-align:right;font-weight:700;}
+  ul.leve{margin:6px 0 4px;padding-left:18px;font-size:13.5px;line-height:1.6;} ul.leve li{margin:0 0 6px;}
+  .carimbos{margin:10px 0 4px;display:grid;gap:8px;}
+  .cb-g{display:grid;grid-template-columns:96px 1fr;gap:8px;align-items:start;}
+  .cb-t{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:6px;}
+  .carimbo{--c:#c4c4cf;display:inline-block;border:2px solid var(--c);color:var(--c);border-radius:6px;padding:2px 8px;margin:2px 6px 4px 0;
+    font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;line-height:1.35;transform:rotate(-1.5deg);background:rgba(255,255,255,.02);}
+  .carimbo:nth-child(even){transform:rotate(1deg);}
+  .carimbo.apagado{--c:#6b6b78;border-style:dashed;}
+  @media (max-width:640px){ .cb-g{grid-template-columns:1fr;gap:2px;} .cb-t{padding-top:0;} }
+  .card-acoes{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;}
+  .card-acoes .bt2{font-size:12px;padding:7px 11px;margin:0;}
+  .normas-limpas{margin:8px 0 4px;padding:10px 12px;background:var(--panel2);border-left:3px solid var(--rosa);border-radius:6px;font-size:12.5px;}
+  .normas-limpas > b{display:block;color:var(--text);} .normas-limpas > span{display:block;font-size:11.5px;color:var(--muted);margin:2px 0 6px;}
+  .normas-limpas .bt2{font-size:11.5px;padding:5px 9px;margin:3px 6px 0 0;}
+  #alvoPanel circle.sel{stroke:#F5E400 !important;stroke-width:3.5 !important;r:7;}
+  @media (min-width:821px){ #tab-explorar .rightcol{position:sticky;top:124px;align-self:start;max-height:calc(100vh - 140px);overflow:auto;} }
+  .fecho .frase{color:var(--rosa) !important;}
+  details.rodape-sobre{margin:26px 0 0;padding:10px 0 0;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);}
+  details.rodape-sobre > summary{cursor:pointer;font-size:12.5px;color:var(--muted);}
+  details.rodape-sobre[open] > summary{margin-bottom:10px;color:var(--text);}
+  .card-acoes.topo{position:relative;z-index:3;background:var(--panel);margin:8px 0 4px;padding:6px 0 8px;border-bottom:1px solid var(--border);}
+  .card-acoes.topo .bt1{font-size:13.5px;padding:9px 14px;}
+  .ficha-resumo{margin:10px 0 4px;} .fr-tit{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px;}
+  .ficha-resumo table.fl-resumo{width:100%;border-collapse:collapse;font-size:12px;}
+  .ficha-resumo table.fl-resumo td{padding:5px 6px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45;}
+  .ficha-resumo table.fl-resumo td:first-child{color:var(--muted);width:38%;}
+  .q36lim{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .pseta{font-size:30px !important;line-height:.8;margin-top:0 !important;}
+  details > summary::marker{font-size:1.35em;}
+  details.fichapol > summary, details.gloss > summary, details.rodape-sobre > summary{font-size:14px;}
+  .bt1.amarelo{background:var(--amarelo) !important;border-color:var(--amarelo) !important;color:#0E0E10 !important;}
+  .na-tese-card{margin:12px 0 0;padding-top:8px;border-top:1px dashed var(--border);font-size:11.5px;color:var(--muted);line-height:1.5;}
+  .na-tese-card a{color:var(--rosa);}
+  #mapSvg.contorno-forte path.mun.tzpath{stroke-width:1.8;}
+  .ctl-mapa .toolbar, .ctl-mapa .controls{margin:0 !important;display:block !important;}
+  .ctl-mapa .controls{margin-top:10px !important;}
+  .ctl-mapa label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px;}
+  .ctl-mapa input, .ctl-mapa select{width:100%;box-sizing:border-box;}
+  @media (max-width:820px){ #tab-explorar .grid > .rightcol{order:-1;} }
+  .ctl-mapa.linha{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 12px;}
+  .ctl-mapa.linha .controls{margin-top:0 !important;}
+  @media (max-width:640px){ .ctl-mapa.linha{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -511,11 +668,8 @@
   <div class="htext">
     <h1>Painel <span class="hl">Brasil</span> <span class="badge">painel · v1.0.0</span></h1>
     <p class="subtitle">O papel dos grupos econômicos nas experiências de Tarifa Zero no Brasil</p>
-    <p class="abertura">O painel mostra onde a Tarifa Zero existe, como é operada e quem financia o serviço.</p>
-    <p class="resumo">Por que a Tarifa Zero (TZ) é mais adotada em municípios com sistemas de transporte menos consolidados? Esta pesquisa de doutorado (PGT/UFABC) investiga a correlação entre a estrutura de poder dos grupos econômicos do transporte coletivo e a difusão espacial das políticas de gratuidade universal no Brasil. A hipótese não é a de uma oposição direta dos grupos ao financiamento público: é a de que a difusão da TZ é restringida pela <b>incompatibilidade entre o desenho da política e o arranjo contratual vigente</b> — onde o mercado é comercialmente atrativo, só avança o desenho que preserva a receita e a propriedade do operador; nas franjas do sistema, onde não há arranjo a preservar, a gratuidade avança em qualquer desenho. O método é misto (quantitativo + qualitativo), em panorama nacional; este painel interativo é o instrumento exploratório do eixo quantitativo.</p>
-    <p class="univ">Universo: 5.570 municípios do Brasil. Base própria de 187 políticas municipais de Tarifa Zero, verificadas na norma, no contrato ou na prova de operação (base de 11/11/2026, a mesma da tese), cruzada com base municipal integrada de 234 variáveis (PEMOB/SIMU, MUNIC 2020, REGIC 2018, OSM, TSE 2024, DATASUS, NTU). Dados descritivos, não causais. Dados da tese para baixar: <a href="dados.html">página de dados</a>. Código e documentação: <a href="https://github.com/tvzgomes-2/painel_tz" target="_blank" rel="noopener">github.com/tvzgomes-2/painel_tz</a></p>
-    <button class="lermais" id="lerMais" type="button" hidden>Ler mais sobre a pesquisa ▾</button>
-  </div>
+    <p class="abertura">Siga o argumento da tese em cinco passos ou vá direto ao Explorar e trabalhe com os dados dos 5.570 municípios.</p>
+      </div>
   <div class="destaques" id="destaques"></div>
 </header>
 <div class="wrap">
@@ -525,25 +679,12 @@
   <div class="controls filtros">
     <div><label for="ufFilter">UF</label><select id="ufFilter"><option value="">Todas</option></select></div>
     <div><label for="faixaFilter">Faixa populacional</label><select id="faixaFilter"><option value="">Todas</option></select></div>
-    <div><label for="regicFilter">Hierarquia urbana</label>
-      <select id="regicFilter">
+    <div><label for="arranjoFilter">Posição no arranjo</label>
+      <select id="arranjoFilter">
         <option value="">Todas</option>
-        <option value="1">1 · Metrópole</option>
-        <option value="2">2 · Capital Regional</option>
-        <option value="3">3 · Centro Sub-Regional</option>
-        <option value="4">4 · Centro de Zona</option>
-        <option value="5">5 · Centro Local</option>
-      </select>
-    </div>
-    <div><label for="modeloFilter">Modelo de prestação</label>
-      <select id="modeloFilter">
-        <option value="">Todos</option>
-        <option value="Concessão">Concessão</option>
-        <option value="Prestação direta">Prestação direta</option>
-        <option value="Permissão">Permissão</option>
-        <option value="Autorização">Autorização</option>
-        <option value="Não regulamentado">Não regulamentado</option>
-        <option value="Misto (2+ modelos)">Misto (2+ modelos)</option>
+        <option value="Sede/co-sede do arranjo">Sede do arranjo</option>
+        <option value="Satélite do arranjo">Franja do arranjo (satélite)</option>
+        <option value="Fora de arranjo">Isolado (fora de arranjo)</option>
       </select>
     </div>
     <div><label for="tzFilter">Recorte</label>
@@ -574,94 +715,143 @@
   </div>
 
   <nav class="tabs" role="tablist" aria-label="Áreas do painel">
-    <button class="tabbtn" role="tab" id="tabbtn-panorama" data-tab="panorama">Panorama</button>
+    <button class="tabbtn" role="tab" id="tabbtn-panorama" data-tab="panorama">O argumento</button>
     <button class="tabbtn" role="tab" id="tabbtn-explorar" data-tab="explorar">Explorar</button>
-    <button class="tabbtn" role="tab" id="tabbtn-comparar" data-tab="comparar">Comparar TZ × Não-TZ</button>
     <button class="tabbtn" role="tab" id="tabbtn-literatura" data-tab="literatura">Literatura</button>
-    <button class="tabbtn" role="tab" id="tabbtn-sobre" data-tab="sobre">Sobre os dados</button>
+    <button class="tabbtn" role="tab" id="tabbtn-comparar" data-tab="comparar">Comparar TZ × Não-TZ</button>
+    <button class="tabbtn" role="tab" id="tabbtn-piso" data-tab="piso">Do piso à Tarifa Zero</button>
   </nav>
 
   <section class="tabpane" id="tab-panorama" role="tabpanel" aria-labelledby="tabbtn-panorama">
-    <div class="paneintro"><h2>Panorama</h2><p>Cinco perguntas sobre a Tarifa Zero no Brasil. Os gráficos respondem ao recorte escolhido acima; a frase de resultado de cada seção é sempre a do Brasil inteiro.</p></div>
-
-    <section class="secao" id="sec-onde">
-      <div class="sechead"><span class="secnum">1</span><h2>Onde e quando</h2><a class="topo-sec" href="#tab-panorama">↑ topo</a></div>
+    <div class="abre-box">
+      <p class="pergunta">Por que a Tarifa Zero é mais adotada onde o sistema de ônibus é menos consolidado?</p>
+      <p class="resposta">A resposta da tese: onde não há contrato de ônibus a preservar, a gratuidade entra por qualquer via; onde o mercado é atrativo, ela entra quando cabe no contrato vigente.</p>
+      <div class="passos"><a href="#sec-p1">1 · Onde há Tarifa Zero</a><a href="#sec-p2">2 · Quem opera o ônibus</a><a href="#sec-p3">3 · Como a gratuidade entra</a><a href="#sec-p4">4 · Quem paga</a><a href="#sec-p5">5 · A quem serve o subsídio</a></div>
+      <div class="abre-busca"><input id="buscaTopo" list="muniList" placeholder="Procure a sua cidade…" autocomplete="off" spellcheck="false" aria-label="Procure a sua cidade"><span class="sub">abre a ficha do município no Explorar</span></div>
+    </div>
+    <details class="pacote passo" id="sec-p1">
+      <summary class="phead"><span class="pnum">1</span><div><h2>Onde há Tarifa Zero?</h2><p>173 políticas universais; 9,3% dos municípios com ônibus têm Tarifa Zero, e nenhum acima de 500 mil habitantes.</p><div class="pmeta">Na tese: Capítulo 5</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
       <div class="leitura" id="leit-onde"></div>
-      <div class="panel"><h3 class="pt">Tarifa Zero por região e por UF</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">Onde estão os municípios com Tarifa Zero universal (camada 1), no recorte atual. São duas leituras diferentes e as duas importam: <b>quantos</b> casos cada estado tem — quatro estados reúnem três de cada quatro casos do país — e <b>que fração</b> dos seus municípios isso representa, que é onde o Rio de Janeiro se destaca. Um estado com poucos municípios chega a um percentual alto com poucos casos; por isso os dois números vêm juntos.</p></details><div id="regiaoUf"></div></div>
-      <div class="panel" style="margin-top:14px;"><h3 class="pt">Linha do tempo das adoções</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">Barra empilhada por ano, acima do eixo: Universal (verde) na base, Parcial por ano de início aproximado (amarelo) por cima — a altura total reflete o volume real, numa única escala. Revogações da universal ficam abaixo do eixo (rosa). O início da parcial é extraído do texto de origem quando disponível — nem todo caso tem essa informação. Responde aos filtros de UF, faixa, REGIC, arranjo e modelo.</p></details><svg id="timeline"></svg></div>
-      <div class="panel" style="margin-top:14px;"><h3 class="pt">Adoção por porte — entre todos os municípios e entre os que têm ônibus</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">A Tarifa Zero pressupõe um serviço, e por isso o denominador certo não são os 5.570 municípios, mas os que têm sistema de ônibus. Com esse denominador a forma da adoção muda: em vez de crescer com o porte, ela desenha um <b>U invertido</b> — pico na faixa de 20 a 50 mil habitantes e <b>zero acima de 500 mil</b>, embora todos esses 41 municípios tenham sistema (Seção 5.4 e Gráfico 14 da tese).</p></details><div id="curvaPorte"></div><p class="sub" style="margin-top:9px;"><span class="selo-fixo">Brasil, fixo</span> Este bloco <b>não responde aos filtros</b>. "Ter ônibus" é medido por um índice de indício de sistema (0 a 12 pontos, corte em 5) que combina declaração à MUNIC, vínculos de emprego no setor, pontos de parada, despesa com transporte, frota e uso do ônibus no Censo. A classificação município a município é o produto de um artigo ainda inédito, e por isso o painel publica só as contagens agregadas. A ponta inferior da curva carrega a subdeclaração dos municípios pequenos: 34 dos 174 casos da camada 1 ficam abaixo do corte do índice.</p></div>
-    </section>
-
-    <section class="secao" id="sec-como">
-      <div class="sechead"><span class="secnum">2</span><h2>Como funciona: a régua descritiva</h2><a class="topo-sec" href="#tab-panorama">↑ topo</a></div>
-      <div class="leitura" id="leit-como"></div>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">Linha do tempo das adoções</h3><p class="legenda">Cada barra é um ano: em verde, as políticas universais que começaram nele; em amarelo, as parciais; em rosa, abaixo da linha, as que acabaram.</p><svg id="timeline"></svg></div>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">Adoção por porte — entre todos os municípios e entre os que têm ônibus</h3><p class="legenda">Contando só os municípios que têm ônibus, a adoção é maior entre 20 e 50 mil habitantes e não chega acima de 500 mil.</p><div id="curvaPorte"></div><p class="sub" style="margin-top:9px;"><span class="selo-fixo">Brasil, fixo</span> Este bloco <b>não responde aos filtros</b>. "Ter ônibus" é medido por um índice de indício de sistema (0 a 12 pontos, corte em 5) que combina declaração à MUNIC, vínculos de emprego no setor, pontos de parada, despesa com transporte, frota e uso do ônibus no Censo. A classificação município a município é o produto de um artigo ainda inédito, e por isso o painel publica só as contagens agregadas. A ponta inferior da curva carrega a subdeclaração dos municípios pequenos: 34 dos 174 casos da camada 1 ficam abaixo do corte do índice.</p></div>
+      <div class="leitura" id="leit-como" style="margin-top:18px;"></div>
       <div class="reguabox">
         <h3>Condição de acesso à gratuidade <span class="tit2">a régua descritiva da tese</span></h3>
-        <details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">Onde cada caso está na escala que vai da gratuidade sem nenhuma condição (à esquerda) até os desenhos em que um portão decide quem pode viajar, ou quando (à direita). Classificação do <b>desenho</b> da política, não do seu status — por isso casos encerrados aparecem à parte. Responde ao recorte dos filtros.</p></details>
+        <p class="legenda">Cada política na escala que vai da gratuidade sem condição nenhuma (à esquerda) até os desenhos em que um portão decide quem pode viajar, ou quando (à direita).</p>
         <div id="regua"></div>
       </div>
       <p class="relunivs" id="relUniversos"></p>
-    </section>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">% de municípios com Tarifa Zero por eixo</h3><p class="legenda">Que fração dos municípios de cada grupo tem Tarifa Zero universal, no recorte atual.</p>
+    <div class="crosstabgrid" id="crosstabs"></div>
+  </div>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">Como as pessoas se deslocam — com e sem Tarifa Zero (Censo 2022)</h3><p class="legenda">Modo de deslocamento para trabalho e estudo; com Tarifa Zero, só as políticas iniciadas até 2022. É correlação, e não causa.</p>
+    <div id="modalStack" class="modalstack"></div>
+  </div>
+      <div class="passo-pe"><button type="button" class="bt2" data-cruze="faixa_pop">Cruze você: porte no mapa →</button><span class="na-tese">Na tese: <a href="tese/Tese%20-%20Volume%20I%20-%20Texto.pdf" target="_blank" rel="noopener">Capítulo 5</a></span></div>
+      <p class="ressalva-passo">Não apurado não é zero: é falta de informação. Método e limites, no Volume I da tese.</p>
+    </details>
 
-    <section class="secao" id="sec-opera">
-      <div class="sechead"><span class="secnum">3</span><h2>A quem serve: a régua analítica</h2><a class="topo-sec" href="#tab-panorama">↑ topo</a></div>
-      <div class="leitura" id="leit-opera"></div>
-      <div class="panel"><h3 class="pt">O arranjo do contrato — como a gratuidade é operada e por qual instrumento entrou</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">A diferença decisiva não é o nome de quem opera, e sim o que foi contratado: uma prefeitura com frota própria e uma concessionária que recebeu a gratuidade por termo aditivo são arranjos opostos. Levantamento documental da pesquisa (14/10/2026), sobre as políticas em escopo. Responde ao recorte dos filtros; <b>não apurado não é zero</b>.</p></details><div id="arranjoPanel"></div></div>
-      <div class="panel" style="margin-top:14px;"><h3 class="pt">Como o operador é pago</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">Manter um operador privado não diz como ele é pago, e é isso que decide quem carrega o risco e para onde vai o dinheiro da gratuidade (Seções 7.2 a 7.4 da tese). Pago pela <b>oferta</b> — por quilômetro, por veículo ou por um valor fixo —, o operador recebe um preço combinado e o risco de a demanda variar fica com a prefeitura. Pago pela <b>demanda</b>, por passageiro, a gratuidade que aumenta o número de passageiros aumenta na mesma proporção o pagamento. Contagens sobre a <b>Tarifa Zero universal</b> (camada 1) do recorte; <b>não apurado não é zero</b>.</p></details><div id="remunPanel"></div></div>
-      <div class="panel" style="margin-top:14px;"><h3 class="pt">A contrapartida — o que a política exige em troca do recurso</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">A contrapartida é a obrigação escrita na norma, no contrato ou no decreto: <b>controle social</b> (conselho ou instância com assento da sociedade, deliberativa ou consultiva), <b>transparência</b> específica do programa ou <b>monitoramento de desempenho</b>. Tem três estados (regra B.1.3 da tese): com, sem e <b>não apurada</b> — e não apurada não é ausente. Contagens sobre a <b>Tarifa Zero universal</b> (camada 1) do recorte, base de 11/11/2026 (Seções 7.1 e 7.2 da tese). A posição de cada política no plano está no alvo, logo abaixo.</p></details><div id="contraPanel"></div></div>
-      <div class="panel" style="margin-top:14px;"><h3 class="pt">A régua analítica — a quem serve o subsídio</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">O alvo da régua analítica (Seção 7.1 da tese). Os <b>setores</b> são o destinatário do recurso: operação pública, operador pago pela oferta e operador pago pela demanda. Os <b>anéis</b>, do centro para fora, medem a distância da <b>gestão do comum</b>: no centro, a política com instância de controle social escrita na norma ou no contrato; depois, a que tem só transparência ou monitoramento de desempenho; depois, a sem nenhuma contrapartida — operação pública sem controle, ou garantia de receita sem controle quando o operador é pago pela oferta; por fora, a <b>"Bolsa-Empresário"</b>, o operador pago por passageiro sem contrapartida. Cada ponto é uma política da camada 1. Entram só as políticas com destinatário e contrapartida apurados — não apurado não é zero. Responde ao recorte (Figura 24 e Seção 7.6 da tese).</p></details><div id="alvoPanel"></div></div>
-      <div class="panel" style="margin-top:14px;"><h3 class="pt">As duas réguas cruzadas — o portão e o destinatário</h3><details class="nota"><summary>Como ler esta tabela</summary><p class="sub" style="margin:6px 0 0;">Cada célula conta as políticas da camada 1 com aquele destinatário do recurso (régua analítica) e aquele subtipo de portão (régua descritiva). O portão e o destinatário variam quase de forma independente: a gratuidade sem portão (1a) convive tanto com a operação pública quanto com o operador privado pago pela oferta (Quadro 29 da tese). Responde ao recorte.</p></details><div id="cruzadasPanel"></div></div>
-    </section>
+    <details class="pacote passo" id="sec-p2">
+      <summary class="phead"><span class="pnum">2</span><div><h2>Quem opera o ônibus?</h2><p>Onde o mercado é atrativo, há grupo econômico: 22 unidades de controle detêm metade do capital, e com empresa de grupo presente há menos adoção nas sedes e franjas dos arranjos.</p><div class="pmeta">Na tese: Capítulo 6 e Seção 8.1</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
+      <div class="p2grid">
+        <div class="panel"><h3 class="pt">Poucos donos, muito capital</h3>
+          <div class="p2num"><div><b>327</b><span>grupos econômicos controlam 1.040 empresas de ônibus</span></div><div><b>22</b><span>unidades de controle detêm metade do capital do setor</span></div><div><b>1.042</b><span>municípios têm endereço de empresa de grupo, onde vivem 136,8 milhões de pessoas</span></div></div>
+          <div class="conc"><div class="conc-l">Unidades de controle</div><div class="conc-b"><span style="width:7%;" class="hi"></span><span style="width:93%;"></span></div><div class="conc-v">22 de 316</div>
+            <div class="conc-l">Capital declarado</div><div class="conc-b"><span style="width:50%;" class="hi"></span><span style="width:50%;"></span></div><div class="conc-v">metade</div></div>
+          <p class="legenda">Em amarelo, as 22 maiores unidades de controle: 7% das unidades, metade do capital.</p>
+        </div>
+        <div class="panel"><h3 class="pt">Que grupos têm endereço na sua cidade?</h3>
+          <p class="legenda">Escolha o município e veja, na Rede de empresas, os grupos com estabelecimento nele.</p>
+          <div class="abre-busca" style="margin-top:4px;"><input id="buscaGrupo" list="muniList" placeholder="Digite o nome do município…" autocomplete="off" spellcheck="false" aria-label="Município"></div>
+          <p class="legenda" style="margin-top:10px;">Ter endereço não é operar o sistema: quem opera cada Tarifa Zero está no contrato, na ficha do município.</p>
+          <p style="margin:10px 0 0;"><a class="bt1" href="rede-ge.html">Abrir a Rede de empresas →</a></p>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">Com empresa de grupo presente, menos adoção — nas sedes e franjas dos arranjos</h3>
+        <p class="legenda">Razão de chances de adotar a Tarifa Zero com empresa de grupo presente, comparando municípios parecidos em porte, capacidade fiscal e estado. Abaixo de 1, menos adoção. É associação, e não causa.</p>
+        <svg viewBox="0 0 640 196" role="img" aria-label="Razões de chances de adotar a Tarifa Zero com empresa de grupo presente" style="width:100%;max-width:720px;height:auto;display:block;"><line x1="230.0" x2="610.0" y1="164" y2="164" stroke="#3a3a44"/><line x1="230" x2="230" y1="22" y2="164" stroke="#26262d"/><text x="230" y="180" text-anchor="middle" font-size="11" fill="#9a9aa6">0</text><line x1="309" x2="309" y1="22" y2="164" stroke="#26262d"/><text x="309" y="180" text-anchor="middle" font-size="11" fill="#9a9aa6">0,25</text><line x1="388" x2="388" y1="22" y2="164" stroke="#26262d"/><text x="388" y="180" text-anchor="middle" font-size="11" fill="#9a9aa6">0,5</text><line x1="468" x2="468" y1="22" y2="164" stroke="#26262d"/><text x="468" y="180" text-anchor="middle" font-size="11" fill="#9a9aa6">0,75</text><line x1="547" x2="547" y1="22" y2="164" stroke="#26262d"/><text x="547" y="180" text-anchor="middle" font-size="11" fill="#9a9aa6">1</text><line x1="547" x2="547" y1="14" y2="164" stroke="#f0f0f2" stroke-dasharray="4 3"/><text x="541" y="18" text-anchor="end" font-size="11" fill="#f0f0f2">mesma chance (1) →</text><text x="0" y="46" font-size="12.5" fill="#f0f0f2">Franjas dos arranjos (satélites)</text><line x1="319" x2="547" y1="42" y2="42" stroke="#FF2D6B" stroke-opacity=".35" stroke-width="3"/><circle cx="319" cy="42" r="7" fill="#FF2D6B"/><text x="307" y="46" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,28</text><text x="0" y="80" font-size="12.5" fill="#f0f0f2">Sedes dos arranjos (polos)</text><line x1="344" x2="547" y1="76" y2="76" stroke="#FF2D6B" stroke-opacity=".35" stroke-width="3"/><circle cx="344" cy="76" r="7" fill="#FF2D6B"/><text x="332" y="80" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,36</text><text x="0" y="114" font-size="12.5" fill="#f0f0f2">Grandes grupos, acima de 100 mil hab.</text><line x1="303" x2="547" y1="110" y2="110" stroke="#FF2D6B" stroke-opacity=".35" stroke-width="3"/><circle cx="303" cy="110" r="7" fill="#FF2D6B"/><text x="291" y="114" text-anchor="end" font-size="12.5" font-weight="800" fill="#F5E400">0,23</text><text x="0" y="148" font-size="12.5" fill="#f0f0f2">Cidades isoladas</text><text x="537" y="148" text-anchor="end" font-size="12" fill="#9a9aa6">sem diferença</text></svg>
+      </div>
+      <div class="passo-pe"><button type="button" class="bt2" data-cruze="tipo_arranjo">Cruze você: sede, franja e isolado no mapa →</button><span class="na-tese">Na tese: <a href="tese/Tese%20-%20Volume%20I%20-%20Texto.pdf" target="_blank" rel="noopener">Capítulo 6 e Seção 8.1</a></span></div>
+      <p class="ressalva-passo">Não apurado não é zero: é falta de informação. Método e limites, no Volume I da tese.</p>
+    </details>
 
-    <section class="secao" id="sec-paga">
-      <div class="sechead"><span class="secnum">4</span><h2>Quem paga e quanto custa</h2><a class="topo-sec" href="#tab-panorama">↑ topo</a></div>
+    <details class="pacote passo" id="sec-p3">
+      <summary class="phead"><span class="pnum">3</span><div><h2>Como a gratuidade entra?</h2><p>Onde o operador é privado, a gratuidade entra pelo contrato, paga pela oferta e com o risco de demanda no município.</p><div class="pmeta">Na tese: Seções 7.2 e 8.2</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
+      <div class="panel"><h3 class="pt">O arranjo do contrato — como a gratuidade é operada e por qual instrumento entrou</h3><p class="legenda">O que decide é o que foi contratado: a frota própria da prefeitura e a gratuidade por aditivo a uma concessão são arranjos opostos.</p><div id="arranjoPanel"></div></div>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">Como o operador é pago</h3><p class="legenda">Pago pela oferta (por quilômetro, por veículo ou valor fixo), o operador recebe mesmo sem passageiro, e o risco da demanda fica com a prefeitura.</p><div id="remunPanel"></div></div>
+      <div class="passo-pe"><button type="button" class="bt2" data-cruze="dest">Cruze você: como o operador é pago, no mapa →</button><span class="na-tese">Na tese: <a href="tese/Tese%20-%20Volume%20I%20-%20Texto.pdf" target="_blank" rel="noopener">Seções 7.2 e 8.2</a></span></div>
+      <p class="ressalva-passo">Não apurado não é zero: é falta de informação. Método e limites, no Volume I da tese.</p>
+    </details>
+
+    <details class="pacote passo" id="sec-p4">
+      <summary class="phead"><span class="pnum">4</span><div><h2>Quem paga?</h2><p>O município, sozinho: nenhuma política vigente tem receita própria vinculada.</p><div class="pmeta">Na tese: Seção 7.5</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
       <div class="leitura" id="leit-paga"></div>
       <div class="panel"><div id="custoPanel"></div></div>
-    </section>
+      <div class="passo-pe"><button type="button" class="bt2" data-cruze="rec_prop_pc">Cruze você: receita própria per capita no mapa →</button><span class="na-tese">Na tese: <a href="tese/Tese%20-%20Volume%20I%20-%20Texto.pdf" target="_blank" rel="noopener">Seção 7.5</a></span></div>
+      <p class="ressalva-passo">Não apurado não é zero: é falta de informação. Método e limites, no Volume I da tese.</p>
+    </details>
 
-    <section class="secao" id="sec-alcance">
-      <div class="sechead"><span class="secnum">5</span><h2>Quem é alcançado</h2><a class="topo-sec" href="#tab-panorama">↑ topo</a></div>
-      <div class="leitura" id="leit-alcance"></div>
-      <div class="panel"><h3 class="pt">Do piso à Tarifa Zero universal — quem tem direito, por qual portão e quando</h3><details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">Cada linha é um <b>portão de acesso</b> à gratuidade, do piso que vale no país inteiro até a Tarifa Zero universal, na ordem da Seção 4.4 da tese. A barra é a população com direito, sempre na escala da população do Brasil; os selos dizem <b>quem</b> pode viajar de graça e <b>quando</b>. Cinza: piso federal e patamar estadual (valores nacionais da tese, fixos). Laranja: Tarifa Zero parcial; verde: universal — esses dois respondem aos filtros. <b>As linhas não se somam</b>: a mesma pessoa pode estar em várias.</p></details><div id="popScore"></div></div>
-    </section>
+    <details class="pacote passo" id="sec-p5">
+      <summary class="phead"><span class="pnum">5</span><div><h2>A quem serve o subsídio?</h2><p>Só 6 das 110 políticas com destinatário e contrapartida apurados chegam à gestão do comum.</p><div class="pmeta">Na tese: Seções 7.2 e 7.6</div></div><span class="pseta" aria-hidden="true">▾</span></summary>
+      <div class="leitura" id="leit-opera"></div>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">A contrapartida — o que a política exige em troca do recurso</h3><p class="legenda">O que a norma ou o contrato exige em troca do recurso: controle social, transparência ou metas de desempenho.</p><div id="contraPanel"></div></div>
+      <div class="panel" style="margin-top:14px;"><h3 class="pt">A régua analítica — a quem serve o subsídio</h3><p class="legenda">Cada ponto é uma política. Quanto mais perto do centro, mais perto da gestão do comum, com controle social; por fora, o dinheiro vai ao operador sem nada em troca.</p><div id="alvoPanel"></div></div>
+            <div class="panel" style="margin-top:14px;"><h3 class="pt">As duas réguas cruzadas — o portão e o destinatário</h3><p class="legenda">Cada barra é um destinatário do recurso, dividida pelo portão de acesso: a gratuidade sem portão (1a) aparece em todos eles.</p><div id="cruzadasPanel"></div></div>
+      <div class="passo-pe"><button type="button" class="bt2" data-cruze="posicao">Cruze você: posição no plano, no mapa →</button><span class="na-tese">Na tese: <a href="tese/Tese%20-%20Volume%20I%20-%20Texto.pdf" target="_blank" rel="noopener">Seções 7.2 e 7.6</a></span></div>
+      <p class="ressalva-passo">Não apurado não é zero: é falta de informação. Método e limites, no Volume I da tese.</p>
+    </details>
+
+    <div class="fecho">
+      <p class="frase">A gratuidade amplia o acesso, mas não decide a quem serve o subsídio. Essa decisão está no contrato.</p>
+      <p class="sub" style="font-size:13.5px;color:var(--text);max-width:900px;">Quem paga é o município, sozinho. Onde o operador é privado, o recurso que substitui a tarifa o paga pela oferta, quase sempre sem nada em troca. Tarifa Zero sem controle público é transferência de renda ao operador com um benefício social acoplado; com custos e dados abertos e controle social, é a gestão do transporte como um comum.</p>
+      <p class="rot-vols">O que cada análise encontrou (Quadro 36 da tese)</p>
+      <div style="overflow-x:auto;"><table class="q36"><tr><td class="an">Destinatário do recurso</td><td>Das 152 políticas com destinatário apurado, 68 são operação pública, 82 pagam o operador pela oferta e 2 pela demanda.<span class="q36lim">destinatário não apurado em 21 das 173 políticas</span></td><td class="ev"><span class="chip">Documental</span></td><td class="se">Seção 7.2</td></tr><tr><td class="an">Contrapartida</td><td>Apurada em 125 das 173 e presente em 31; nos 67 contratos pagos pela oferta com informação, ausente em 46.<span class="q36lim">não apurada em 48 políticas e lida só no ato em 65</span></td><td class="ev"><span class="chip">Documental</span></td><td class="se">Seção 7.2</td></tr><tr><td class="an">Distância do comum</td><td>Das 110 políticas com destinatário e contrapartida apurados, 6 atendem aos critérios da gestão do comum.<span class="q36lim">análise restrita aos 110 casos completos</span></td><td class="ev"><span class="chip">Documental</span></td><td class="se">Seção 7.6</td></tr><tr><td class="an">Custeio</td><td>Nenhuma política vigente com receita própria vinculada já arrecadada; 59 dependem do orçamento geral e 70 têm dotação identificada.<span class="q36lim">custeio não apurado em 67 casos</span></td><td class="ev"><span class="chip">Documental</span></td><td class="se">Seção 7.5</td></tr><tr><td class="an">Território</td><td>As taxas de adoção são próximas com e sem grupo nos diferentes arranjos; o padrão não é uniforme no território.<span class="q36lim">exploratória: os padrões locais não sustentam conclusão nacional</span></td><td class="ev"><span class="chip">Estatística</span></td><td class="se">Seção 8.1</td></tr><tr><td class="an">Adoção</td><td>Com empresa de grupo presente, menos adoção nas franjas (0,28) e nas sedes (0,36) dos arranjos; nos isolados, não.<span class="q36lim">presença de grupo no cadastro não prova que ele opere o sistema</span></td><td class="ev"><span class="chip">Estatística</span></td><td class="se">Seção 8.1</td></tr><tr><td class="an">Rival fiscal</td><td>A dependência do FPM acompanha menos adoção (0,54), mas não entre os municípios que já têm ônibus.<span class="q36lim">associação, e não mecanismo causal</span></td><td class="ev"><span class="chip">Estatística</span></td><td class="se">Seção 8.1</td></tr><tr><td class="an">Porta de entrada</td><td>A gratuidade entrou por aditivo à concessão em 10 de 20 casos com operador de grupo, contra 12 de 71 sem grupo.<span class="q36lim">amostra pequena de operadores de grupo</span></td><td class="ev"><span class="chip">Estatística</span></td><td class="se">Seção 8.2</td></tr><tr><td class="an">Incumbente</td><td>O operador que já estava continua na mesma proporção, com ou sem grupo (11 de 18 e 16 de 25).<span class="q36lim">incumbente identificado em 43 de 97 casos</span></td><td class="ev"><span class="chip">Estatística</span></td><td class="se">Seção 8.3</td></tr><tr><td class="an">Desenho depois da entrada</td><td>Destinatário, risco de demanda e custeio não distinguem os operadores de grupo dos demais.<span class="q36lim">diferença sem significância depois do controle de porte</span></td><td class="ev"><span class="chip">Estatística</span></td><td class="se">Seção 8.3</td></tr><tr><td class="an">Permanência e saída</td><td>Nenhuma das cinco políticas encerradas tinha operador de grupo; os fins se ligam a custeio e capacidade.<span class="q36lim">só cinco políticas encerradas</span></td><td class="ev"><span class="chip">Documental</span></td><td class="se">Seção 8.4</td></tr><tr><td class="an">Preço</td><td>De R$ 5,79 a R$ 23,75 por quilômetro, mediana de R$ 10,37, em 43 contratos; sem padrão ligado a grupo.<span class="q36lim">descritivo: só dois aditivos com preço identificado</span></td><td class="ev"><span class="chip">Documental</span></td><td class="se">Seção 7.4</td></tr><tr><td class="an">Posição do setor</td><td>NTU e ANTP defendem o apoio público condicionado à preservação dos contratos.<span class="q36lim">posição declarada pelas entidades, e não conduta medida</span></td><td class="ev"><span class="chip">Qualitativa</span></td><td class="se">Seção 8.5</td></tr></table></div>
+      <p class="legenda">Tipo de evidência: documental (normas, contratos e atos lidos), estatística (testes entre municípios) ou qualitativa (posições declaradas). Em cinza, o limite de cada achado. "Não apurado" é falta de informação, e não ausência; a hipótese se sustenta melhor como hipótese sobre o contrato do que sobre o grupo (Seção 9.1).</p>
+      <p class="rot-vols">A tese, em dois volumes</p>
+      <div class="tese-vols"><a class="bt1" href="tese/Tese%20-%20Volume%20I%20-%20Texto.pdf" target="_blank" rel="noopener">Volume I — Texto (PDF, 16,6 MB)</a><a class="bt1" href="tese/Tese%20-%20Volume%20II%20-%20Ap%C3%AAndices.pdf" target="_blank" rel="noopener">Volume II — Apêndices (PDF, 11,9 MB)</a><a class="bt2" href="#explorar">Trabalhar com os dados no Explorar</a></div>
+    </div>
+    <div class="contribua forte"><div><b>Conhece um caso que não está aqui?</b><span>Envie um caso municipal, um estudo, um relatório ou um dado de operação. Cada contribuição é revisada antes de entrar no painel.</span></div><a class="bt1" href="pesquisa.html">Envie para a pesquisa →</a></div>
   </section>
-
+<section class="tabpane" id="tab-piso" role="tabpanel" aria-labelledby="tabbtn-piso" hidden>
+    <div class="paneintro"><h2>Do piso à Tarifa Zero universal</h2><p>Quem tem direito a andar de ônibus de graça no Brasil, por qual portão e quando: do piso que vale no país inteiro à Tarifa Zero universal, decidida por cada município.</p></div>
+      <div class="leitura" id="leit-alcance"></div>
+      <div class="panel"><h3 class="pt">Do piso à Tarifa Zero universal — quem tem direito, por qual portão e quando</h3><p class="legenda">Cada linha é um portão de acesso, do piso nacional à Tarifa Zero universal; a barra é a população com direito.</p><div id="popScore"></div></div>
+  </section>
   <section class="tabpane" id="tab-explorar" role="tabpanel" aria-labelledby="tabbtn-explorar">
     <div class="paneintro"><h2>Explorar</h2><p>O mapa e a ficha de cada município. Clique num município, busque pelo nome ou escolha na tabela; os filtros acima valem aqui e nas outras abas.</p></div>
-  <div class="toolbar">
-    <div class="munisearch">
-      <label for="muniSearch">Buscar município (qualquer um dos 5.570, com ou sem Tarifa Zero)</label>
-      <input id="muniSearch" list="muniList" placeholder="digite o nome e escolha na lista…" autocomplete="off" spellcheck="false">
-      <datalist id="muniList"></datalist>
-    </div>
-  </div>
-  <div class="controls">
-    <div><label for="colorBy">Colorir mapa por</label>
-      <select id="colorBy">
-        <option value="tz">Situação Tarifa Zero</option>
-        <option value="regic_nivel">Hierarquia urbana</option>
-        <option value="tipo_arranjo">Sede × satélite de arranjo metropolitano</option>
-        <option value="modelo_prestacao_simples">Modelo de prestação</option>
-        <option value="faixa_pop">Faixa populacional</option>
-        <option value="pib_pc">PIB per capita</option>
-        <option value="motorizacao">Motorização (veíc/hab)</option>
-        <option value="ibeu">IBEU</option>
-        <option value="idh">IDH</option>
-        <option value="cresc_pop">Crescimento pop. 2010–22</option>
-        <option value="rec_prop_pc">Receita própria per capita</option>
-        <option value="taxa_obitos_transito">Óbitos no trânsito /100mil (2019)</option>
-        <option value="pct_investimento_desp">% investimento / despesa (2022)</option>
-        <option value="tarifa">Tarifa de ônibus (n=111)</option>
-        <option value="subsidio_ntu_pct">% do custo subsidiado (n=80)</option>
-        <option value="cadunico_cobertura">Cobertura do CadÚnico (ago/2025)</option>
-        <option value="trab_fora">% que trabalha em outro município (2022)</option>
-      </select>
-    </div>
-  </div>
+    <nav class="explorar-nav" aria-label="Nesta aba"><span>Nesta aba:</span><a href="#tab-explorar">Mapa e ficha</a><a href="#lista-tz">Os municípios com Tarifa Zero</a><a href="#dispersao-caixa">Cruze duas variáveis</a><a href="#uf-alcance">Por região e UF</a></nav>
   <div class="grid">
     <div class="panel">
       <h2>Mapa</h2>
       <p class="sub">Duplo clique num município aproxima; selecionar uma UF no filtro enquadra o estado automaticamente.</p>
+      <div class="ctl-mapa linha">
+  <div class="toolbar">
+          <div class="munisearch">
+            <label for="muniSearch">Buscar município (qualquer um dos 5.570, com ou sem Tarifa Zero)</label>
+            <input id="muniSearch" list="muniList" placeholder="digite o nome e escolha na lista…" autocomplete="off" spellcheck="false">
+            <datalist id="muniList"></datalist>
+          </div>
+        </div>
+        <div class="controls">
+          <div><label for="colorBy">Colorir mapa por</label>
+            <select id="colorBy">
+              <option value="tz">Situação da Tarifa Zero</option>
+              <optgroup label="Os passos do argumento">
+              <option value="faixa_pop">1 · Porte do município</option>
+              <option value="tipo_arranjo">2 · Posição no arranjo (sede, franja, isolado)</option>
+              <option value="dest">3 · Como o operador é pago (só Tarifa Zero universal)</option>
+              <option value="rec_prop_pc">4 · Receita própria per capita</option>
+              <option value="posicao">5 · Posição no plano, o alvo (só Tarifa Zero universal)</option>
+              </optgroup>
+              <optgroup label="Contexto">
+              <option value="onibus">Uso do ônibus para trabalho ou estudo (Censo 2022)</option>
+        <option value="pib_pc">PIB per capita</option>
+              <option value="motorizacao">Motorização (veículos por habitante)</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div>
       <div class="maptools">
         <button id="resetZoom">↺ Brasil</button>
         <span class="hint" id="zoomHint"></span>
@@ -676,9 +866,7 @@
       </div>
     </div>
   </div>
-  <div class="panel" style="margin-top:16px;">
-    <h2>Municípios com Tarifa Zero (universal + parcial)</h2>
-    <p class="sub">Base própria da pesquisa (base de 11/11/2026): <b>173 políticas de Tarifa Zero universal em vigor</b> e 6 encerradas, mais os municípios da camada 2 da régua descritiva (gratuidade parcial). "Início" da parcial é uma extração aproximada de ano a partir do texto de origem — nem todo caso tem essa informação (fica "—"). Clique numa linha para abrir a ficha do município ao lado do mapa.</p>
+  <details class="pacote bloco-explorar" id="lista-tz"><summary class="phead"><span class="pnum">1</span><div><h2>Os municípios com Tarifa Zero</h2><p>173 universais em vigor, 6 encerradas e os municípios com gratuidade parcial, numa lista que se ordena e responde aos filtros. Clique numa linha para abrir a ficha.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
     <div class="tzlistwrap">
       <table class="tzlist" id="tzTable">
         <thead><tr>
@@ -690,15 +878,24 @@
         <tbody></tbody>
       </table>
     </div>
-    <div class="cta-pesquisa">
-      <p>Não achou seu município na lista, ou tem um estudo, dado ou caso que devêssemos considerar?</p>
-      <a href="pesquisa.html">Enviar contribuição para a pesquisa →</a>
-    </div>
+    <div class="contribua"><div><b>Não achou o seu município, ou tem um estudo ou dado para a pesquisa?</b><span>Cada contribuição é revisada antes de entrar no painel.</span></div><a class="bt1" href="pesquisa.html">Envie para a pesquisa →</a></div>
+  </details>
+  <details class="pacote bloco-explorar" id="dispersao-caixa"><summary class="phead"><span class="pnum">2</span><div><h2>Cruze duas variáveis</h2><p>Cada ponto é um município; escolha os eixos (começa em PIB per capita × motorização) e veja onde ficam os que têm Tarifa Zero.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
+  <div class="panel" style="margin-top:16px;">
+    <h2 id="dispTitulo">PIB per capita × motorização</h2>
+    <div class="dispctl"><label>Eixo horizontal <select id="dispX"></select></label><button type="button" id="dispTroca" title="Trocar os eixos">⇄</button><label>Eixo vertical <select id="dispY"></select></label></div>
+    <p class="sub">Cada ponto é um município do recorte atual; os com Tarifa Zero — universal, parcial ou encerrada — aparecem destacados e por cima. Escolha as duas variáveis: é a mesma comparação que o painel de medianas resume em duas barras, aqui sem a compressão — o que deixa ver a <b>sobreposição</b> entre os grupos, quase sempre grande. PIB per capita, receita própria e população usam escala logarítmica; os 0,5% mais extremos de cada lado ficam no limite do gráfico, para a nuvem não virar um ponto.</p>
+    <svg id="dispersao" viewBox="0 0 556 534" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="mslegend" id="dispersaoLegenda"></div>
   </div>
+  </details>
+  <details class="pacote bloco-explorar" id="uf-alcance"><summary class="phead"><span class="pnum">3</span><div><h2>Por região e UF</h2><p>Quantos casos cada estado tem e que fração dos seus municípios isso representa.</p></div><span class="pseta" aria-hidden="true">▾</span></summary>
+      <div class="panel"><h3 class="pt">Tarifa Zero por região e por UF</h3><p class="legenda">Quantos casos cada estado tem e que fração dos seus municípios isso representa.</p><div id="regiaoUf"></div></div>
+
+  </details>
   </section>
 
-  <section class="tabpane" id="tab-comparar" role="tabpanel" aria-labelledby="tabbtn-comparar">
-    <div class="paneintro"><h2>Comparar TZ × Não-TZ</h2><p>Como os municípios com Tarifa Zero se distinguem do restante do país (Seção 5.5 da tese). <b>Uma regra só nesta aba:</b> tudo responde ao recorte, e cada bloco traz quantos municípios há de cada lado. É descrição, não causa — o teste da hipótese é outro capítulo.</p></div>
+  <section class="tabpane" id="tab-comparar" role="tabpanel" aria-labelledby="tabbtn-comparar"><div class="paneintro"><h2>Comparar TZ × Não-TZ</h2><p>Como os municípios com Tarifa Zero se distinguem do restante do país (Seção 5.5 da tese). <b>Uma regra só nesta aba:</b> tudo responde ao recorte, e cada bloco traz quantos municípios há de cada lado. É descrição, não causa — o teste da hipótese é outro capítulo.</p></div>
   <div class="portebox">
     <label class="portetoggle"><input type="checkbox" id="porteCtrl" checked> <b>Comparar dentro da mesma faixa de porte</b></label>
     <p class="sub" id="porteNota">Ligado, cada município com Tarifa Zero é comparado só com municípios <b>do mesmo porte</b> — é como a tese compara (Gráfico 15, Seção 5.5), porque a comparação bruta é confundida pelo tamanho: a Tarifa Zero está sobretudo em municípios pequenos e médios, e o restante do país inclui das menores cidades às metrópoles. Desligue para ver o bruto.</p>
@@ -711,46 +908,41 @@
     <p class="sub">A mesma comparação, faixa a faixa — é aqui que a tese lê o achado.</p>
     <div id="porteTabela"></div>
   </details>
-  <div class="panel" style="margin-top:16px;">
-    <h2 id="dispTitulo">PIB per capita × motorização</h2>
-    <div class="dispctl"><label>Eixo horizontal <select id="dispX"></select></label><button type="button" id="dispTroca" title="Trocar os eixos">⇄</button><label>Eixo vertical <select id="dispY"></select></label></div>
-    <p class="sub">Cada ponto é um município do recorte atual; os com Tarifa Zero — universal, parcial ou encerrada — aparecem destacados e por cima. Escolha as duas variáveis: é a mesma comparação que o painel de medianas resume em duas barras, aqui sem a compressão — o que deixa ver a <b>sobreposição</b> entre os grupos, quase sempre grande. PIB per capita, receita própria e população usam escala logarítmica; os 0,5% mais extremos de cada lado ficam no limite do gráfico, para a nuvem não virar um ponto.</p>
-    <svg id="dispersao" viewBox="0 0 556 534" preserveAspectRatio="xMidYMid meet"></svg>
-    <div class="mslegend" id="dispersaoLegenda"></div>
-  </div>
-  <details class="panel" style="margin-top:16px;" open>
-    <summary>% de municípios com Tarifa Zero por eixo</summary>
-    <p class="sub">Cada barra mostra a proporção de municípios com Tarifa Zero universal <b>dentro daquela categoria</b>, no recorte atual. As categorias têm tamanhos muito diferentes — o <i>n</i> indica quantos municípios TZ há em cada uma; não compare volumes absolutos entre categorias.</p>
-    <div class="crosstabgrid" id="crosstabs"></div>
-  </details>
-  <details class="panel" style="margin-top:16px;" open>
-    <summary>Partição modal — TZ × Não-TZ (Censo 2022)</summary>
-    <p class="sub">% média de deslocamentos (trabalho/estudo) por modo, Censo Demográfico 2022 — barra única somando 100%, no recorte atual. O grupo TZ conta só as políticas <b>iniciadas até 2022</b> (mesmo critério da Análise I da tese): a gratuidade adotada depois do Censo não pode ter mudado o deslocamento medido ali. É correlação, não causa — municípios com TZ podem já ser mais urbanizados por outros motivos.</p>
-    <div id="modalStack" class="modalstack"></div>
-  </details>
   </section>
 
-  <section class="tabpane" id="tab-literatura" role="tabpanel" aria-labelledby="tabbtn-literatura" hidden>
-    <div class="paneintro"><h2>O que a literatura sabe</h2><p>A revisão sistemática da literatura sobre Tarifa Zero no Brasil (Seção 5.2 e Apêndice C da tese): o que foi buscado, o que entrou, de que a literatura fala — e do que não fala. Este bloco é fixo: não responde aos filtros.</p></div>
+  <section class="tabpane" id="tab-literatura" role="tabpanel" aria-labelledby="tabbtn-literatura" hidden><div class="paneintro"><h2>O que a literatura sabe</h2><p>A revisão sistemática da literatura sobre Tarifa Zero no Brasil (Seção 5.2 e Apêndice C da tese): o que foi buscado, o que entrou, de que a literatura fala — e do que não fala. Este bloco é fixo: não responde aos filtros.</p></div>
     <div class="leitura" id="leit-rsl"></div>
     <div class="panel"><h3 class="pt">Da busca ao corpus</h3><div id="rslFunil"></div></div>
     <div class="rslgrid" style="grid-template-columns:1fr;">
       <div class="panel"><h3 class="pt">Itens do corpus por ano de publicação</h3><svg id="rslAnos" viewBox="0 0 560 200" preserveAspectRatio="xMidYMid meet"></svg><p class="sub" id="rslAnosNota"></p></div>
     </div>
     <div class="panel" style="margin-top:14px;"><h3 class="pt">Do que a literatura fala — fatores que impulsionam e que limitam a Tarifa Zero</h3>
-      <details class="nota"><summary>Como ler este gráfico</summary><p class="sub" style="margin:6px 0 0;">Quadro 7 da tese. Cada barra é o número de trabalhos do corpus que tratam do fator; a parte cheia, os que têm achado empírico próprio, e a parte clara, os que trazem argumento ou síntese de terceiros. "Novo" marca o fator que não constava do memorial de qualificação e apareceu na leitura. Codificação sobre os fichamentos, sem segundo codificador.</p></details>
+      <p class="legenda">Quantos trabalhos tratam de cada fator; a parte cheia, os que têm achado empírico próprio.</p>
       <div id="rslFatores"></div></div>
     <div class="panel" style="margin-top:14px;"><h3 class="pt">Quais municípios a literatura estuda</h3><div id="rslMunis"></div></div>
-    <div class="panel" style="margin-top:14px;"><h3 class="pt">Os 81 trabalhos do corpus</h3>
-      <div class="patctl" style="margin-bottom:8px;"><input id="rslBusca" placeholder="buscar por autor, título, veículo ou ano…" autocomplete="off" style="background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 9px;font:inherit;width:min(420px,100%);"></div>
-      <div class="tzlistwrap" style="max-height:440px;"><table class="tzlist" id="rslTabela"><thead><tr><th>Ano</th><th>Autoria</th><th>Título</th><th>Veículo</th><th>Suporte</th></tr></thead><tbody></tbody></table></div>
-      <p class="sub" style="margin-top:7px;">Corpus encerrado em 16/09/2026. A lista completa, com protocolo, expressões de busca, exclusões e fichamentos, está no Apêndice C da tese.</p></div>
+    <div class="contribua"><div><b>Conhece um estudo sobre a Tarifa Zero que não está aqui?</b><span>Artigo, tese, relatório ou levantamento: envie para a pesquisa. Cada contribuição é revisada antes de entrar no painel.</span></div><a class="bt1" href="pesquisa.html">Envie para a pesquisa →</a></div>
+    <div class="panel" style="margin-top:14px;"><h3 class="pt">Os 81 trabalhos do corpus</h3><p class="sub" style="margin:0 0 10px;">A lista completa do corpus, com a referência de cada trabalho e busca por autor, título ou ano, está nas referências bibliográficas.</p><a class="bt2" href="dados.html#ref-corpus">Ver o corpus em Dados e conceitos → Referências</a></div>
   </section>
 
-  <section class="tabpane" id="tab-sobre" role="tabpanel" aria-labelledby="tabbtn-sobre">
-    <div class="paneintro"><h2>Sobre os dados</h2><p>Glossário, notas metodológicas e referências. As ressalvas que mudam a leitura dos números estão aqui, e as mais importantes também aparecem junto de cada gráfico.</p></div>
   
-  <details class="gloss">
+
+  <aside class="cta-dados" aria-label="Dados da tese">
+    <div class="cta-txt"><b>Dados da tese, abertos para baixar</b><span>Os oito pacotes que a tese cita, em CSV, com dicionário, SHA-256 e DOI no Zenodo. Licença CC BY 4.0.</span></div>
+    <a class="cta-btn" href="dados.html#dados">Baixar os dados →</a>
+  </aside>
+  <details class="rodape-sobre" id="sobre"><summary>Sobre os dados e glossário</summary>
+<div class="panel" style="margin-top:14px;"><h3 class="pt">O que ler antes dos números</h3>
+    <ul class="leve">
+      <li><b>187 políticas verificadas uma a uma</b>, na norma, no contrato ou na prova de funcionamento: 173 universais, 8 parciais ativas e 6 encerradas. Muitas não se chamam "tarifa zero" ("Ônibus Social", "Circular Gratuito") e por isso escapam das buscas comuns.</li>
+      <li><b>Não apurado não é zero.</b> Quando falta informação, o painel diz que falta.</li>
+      <li><b>Classe por hipótese (◇).</b> Ao fim da coleta, 26 políticas ficaram sem resposta ao pedido de acesso à informação que fechasse o caso; mantêm a classe que o pedido testava, com ressalva.</li>
+      <li><b>As parciais são um piso.</b> A busca da camada 2 não foi exaustiva e acha mais facilmente as cidades grandes; não compare o número delas com o das universais.</li>
+      <li><b>A régua lê o desenho da política</b>, e não se ela funciona bem: não mede frequência, horários nem quem deixa de usar a gratuidade.</li>
+      <li><b>Endereço não é operação.</b> Ter empresa de grupo registrada no município não prova que ela opere o ônibus de lá.</li>
+    </ul>
+    <p class="legenda">Método, fontes e limites: Volume I da tese (Capítulo 5 e Seção 9.3).</p>
+  </div>
+<details class="gloss">
     <summary>Glossário de siglas e termos</summary>
     <dl>
       <dt>TZ (Tarifa Zero)</dt><dd>política municipal que elimina a cobrança do usuário no embarque. O serviço não fica "de graça": o custo passa a ser coberto por fontes extratarifárias. Nesta pesquisa, <b>Universal</b> é a <b>camada 1</b> da régua descritiva — sem portão de acesso, ou com um portão que não decide quem pode viajar.</dd>
@@ -760,54 +952,15 @@
       <dt>Classe por hipótese (◇)</dt><dd>casos de <b>lacuna declarada</b>: o pedido de acesso à informação ficou sem resposta que fechasse o caso até o fim da coleta (11/11/2026), e o subtipo exibido é a <b>hipótese</b> que o pedido testava, mantida com ressalva. São 26 nas 187 políticas (24 na camada 1), marcados com ◇ no card.</dd>
       <dt>Não apurado não é zero</dt><dd>regra de leitura que vale para todo o painel: campo vazio significa <b>dado não apurado</b>, não fenômeno inexistente. Quando a fonte mediu e deu zero, o painel diz.</dd>
       <dt>Régua analítica</dt><dd>a segunda leitura da pesquisa — não <i>quem viaja sem pagar</i>, mas <b>a quem o recurso serve</b>: um plano de dois eixos, pelo destinatário do recurso público e pela contrapartida escrita no contrato. O conceito está nos <a href="dados.html#regua-analitica">verbetes</a>. O painel mostra os dois eixos caso a caso e a <b>posição</b> de cada política no plano — o alvo e as duas réguas cruzadas, na seção 3 do Panorama (base de 11/11/2026).</dd>
-      <dt>IBEU</dt><dd>Índice de Bem-Estar Urbano (Observatório das Metrópoles, 2013) — mede condições urbanas de vida (mobilidade, ambiente, habitação, serviços, infraestrutura); 0 a 1, maior = melhor.</dd>
-      <dt>IDH</dt><dd>Índice de Desenvolvimento Humano Municipal (Atlas PNUD, 2010) — renda, educação e longevidade; 0 a 1, maior = melhor.</dd>
-      <dt>PDMU</dt><dd>Plano Diretor de Mobilidade Urbana — plano municipal exigido pela Lei 12.587/2012 para municípios acima de 20 mil habitantes e integrantes de regiões metropolitanas.</dd>
-      <dt>REGIC</dt><dd>Regiões de Influência das Cidades (IBGE, 2018) — hierarquia funcional urbana: 1 Metrópole · 2 Capital Regional · 3 Centro Sub-Regional · 4 Centro de Zona · 5 Centro Local.</dd>
-      <dt>Arranjo metropolitano</dt><dd>agrupamento de municípios com forte integração (REGIC). <b>Sede/co-sede</b>: a cidade-polo que dá nome ao arranjo. <b>Satélite</b>: os demais municípios do arranjo. <b>Fora de arranjo</b>: municípios que não integram nenhum.</dd>
-      <dt>Modelo de prestação</dt><dd>como o município declara que o transporte coletivo é prestado — concessão, permissão, autorização, prestação direta, não regulamentado, ou misto. Fonte: <b>MUNIC 2020</b> (ver abaixo).</dd>
       <dt>MUNIC</dt><dd>Pesquisa de Informações Básicas Municipais (IBGE, 2020) — questionário respondido pelas prefeituras; a pergunta sobre modelo de prestação do transporte teve 1.727 respostas (31% dos municípios).</dd>
       <dt>Grupo econômico (transporte)</dt><dd>conjunto de empresas de transporte coletivo sob controle societário comum, identificado nesta pesquisa por vínculo de sócios/CNPJ: são <b>327 grupos</b>, reunidos em 316 unidades de controle, com estabelecimento em 1.040 municípios. A análise dos grupos <b>não está neste painel</b>: ela tem página própria, a <a href="rede-ge.html">Rede de empresas</a>.</dd>
       <dt>Base legal</dt><dd>lei ou decreto municipal que institui a gratuidade. Na base de 11/11/2026, das 187 políticas em escopo, <b>123 têm a norma lida</b>, com arquivo; <b>46 são políticas sem norma</b> — a busca foi esgotada e a gratuidade funciona por contrato ou decisão administrativa, com a operação provada —; e em 18 a norma não foi localizada. As normas lidas estão reescritas em notas padronizadas no <a href="dados.html#p7">depósito de dados</a>, e a ficha de cada município aponta para elas. A etiqueta de confiabilidade diz se o ato foi confirmado em fonte primária.</dd>
-      <dt>NTU</dt><dd>Associação Nacional das Empresas de Transportes Urbanos — fonte dos dados de subsídio ao custo dos sistemas de ônibus.</dd>
       <dt>FINBRA/Siconfi</dt><dd>Finanças do Brasil / Sistema de Informações Contábeis e Fiscais (Tesouro Nacional) — receitas e despesas municipais declaradas.</dd>
       <dt>Motorização</dt><dd>veículos registrados por habitante (DENATRAN 2023) — proxy de dependência do transporte individual.</dd>
-      <dt>CadÚnico</dt><dd>Cadastro Único para Programas Sociais (MDS) — registro das famílias de baixa renda, porta de entrada dos programas federais. A <b>cobertura</b> é o número de pessoas inscritas dividido pela população. Serve aqui como proxy de <i>demanda cativa</i>: onde muita gente depende de programas sociais, a tarifa raciona acesso em vez de modular escolha. Não é medida de pobreza — ver as ressalvas nas notas metodológicas.</dd>
-      <dt>Trabalho em outro município</dt><dd>Parcela dos ocupados que trabalham fora do município onde moram, dos <b>microdados da amostra do Censo 2022</b> (agregado municipal). É a mão de obra que uma gratuidade municipal, por definição, não atende. A matriz origem-destino completa, com as linhas de desejo no mapa, saiu do painel em 13/11/2026 para deixá-lo mais leve; a variável continua no mapa e na ficha.</dd>
       <dt>Arranjo populacional</dt><dd>Recorte do IBGE (REGIC 2018) que agrupa municípios com integração de fato — deslocamento pendular e contiguidade urbana —, independente de a região metropolitana existir por lei. É diferente de RM: a RM de Sorocaba tem 27 municípios por lei e apenas 15 em arranjo populacional. Nas listas de OD, <b>◆</b> marca que o destino é o polo do próprio arranjo e <b>◇</b> que é outro município do mesmo arranjo.</dd>
     </dl>
   </details>
-  <details class="panel" style="margin-top:16px;" open>
-    <summary>Notas metodológicas e achados a interpretar com cautela</summary>
-    <div class="notes">
-      <p><b>O universo desta pesquisa (base de 11/11/2026):</b> são <b>187 políticas municipais em escopo</b>, cada uma verificada na norma que a institui, no contrato que a opera ou na prova de funcionamento — <b>173 de gratuidade universal</b> (camada 1), 8 parciais ativas e 6 encerradas. O número é maior que o das contagens publicadas (que vão de 106 a 187) porque a pesquisa não partiu só das listas existentes: partiu também do indício — a isenção declarada na MUNIC, a empresa de transporte no cadastro, o sinal de serviço na base municipal — e verificou cada candidato na fonte primária. <b>29 políticas não constavam de nenhum levantamento de casos</b>, e 14 só esta pesquisa registra. Os casos achados assim quase nunca usam a expressão "tarifa zero": chamam-se "Ônibus Social", "Circular Gratuito", "Circula Pains", "Colônia Tur" — e é o vocabulário, mais que a política, que explica por que escapam às buscas por palavra-chave.</p>
-      <p><b>Fica fora do universo</b>, por regra e não por descuido: <b>Teresina/PI</b> (programa <i>estadual</i> de Metrô/VLT — a pesquisa cobre só sistemas de ônibus municipais), duas políticas regulamentadas e não implantadas, duas pistas em verificação e 312 registros de gratuidade eleitoral, que desde 2024 integram o <b>piso</b> da régua e não formam camada.</p>
-      <p><b>A coleta terminou, e o painel diz onde ficou a lacuna.</b> A coleta de respostas a pedidos de acesso à informação foi encerrada em 11/11/2026. <b>26 das 187</b> políticas ficaram sem resposta que fechasse o caso e são <b>lacuna declarada</b>: mantêm a classe da hipótese que o pedido testava, com ressalva — é a <b>classe por hipótese</b>, marcada com ◇ no card do município (24 na camada 1, uma parcial e uma encerrada).</p>
-      <p><b>A camada 2 é piso, não estimativa.</b> A contagem de 173 universais e a de 45 parciais não têm o mesmo peso de prova. A camada 1 partiu de um histórico de levantamentos (Santini, NTU, inventários acadêmicos, MUNIC) e de busca ativa em várias frentes; a camada 2 é a <b>primeira sistematização</b> do fenômeno no país, exploratória, e a busca <b>não foi exaustiva</b> — sobretudo no subtipo da finalidade (2e), com cinco casos registrados, enquanto a gratuidade estudantil tem alta capilaridade em leis locais que nenhum levantamento centraliza. A busca também encontra mais facilmente os programas das cidades grandes. Comparar os dois números como se fossem medidas do mesmo tipo é erro de leitura.</p>
-      <p><b>São Caetano do Sul continua na camada universal, e isso é uma decisão de régua, não um atraso de base.</b> Em 15/07/2026 a prefeitura condicionou a gratuidade ao cadastro de residentes, e o não residente passou a pagar R$ 5,00: o caso saiu do subtipo <b>1a</b> para o <b>1c</b>. Pela régua desta pesquisa, como na classificação de Kębłowski (2020), a exigência de residência delimita o <i>território</i> da universalidade e não focaliza por renda nem por grupo social — por isso a política segue na camada 1. <b>O custo dessa escolha fica registrado:</b> a régua lê o desenho formal e não vê o desmonte da operação, que ali veio antes da norma; e, numa mancha urbana contínua, o portão da residência separa usuários do mesmo sistema — o morador viaja sem pagar, quem vem da cidade vizinha paga.</p>
-      <p><b>Hierarquia urbana (REGIC) em vez de só população (base de 11/11/2026):</b> usando o nível REGIC 2018 (1=Metrópole…5=Centro Local) como proxy de centralidade, o nível 1 aparece com a <i>maior</i> proporção de TZ (13,6%, 29 de 214) e o nível 5 com a <i>menor</i> (1,7%) — à primeira vista, o oposto do que a hipótese esperaria. É artefato de composição: <b>dos 29 municípios de nível 1 com TZ, todos os 29 são satélites — nenhum é a cidade-polo do arranjo.</b> Nenhuma capital do país tem Tarifa Zero universal, e o maior caso da base é Caucaia/CE, com 355,7 mil habitantes. Por <b>sede × satélite</b>: sedes/co-sedes têm 6,7% (23 de 343), satélites 8,9% (53 de 595) e municípios fora de arranjo 2,1% (97 de 4.632). Os 23 polos com TZ são arranjos pequenos — Picos/PI, São João del Rei/MG, Cerquilho/SP, Capão Bonito/SP —, de modo que o padrão "nunca é a cidade-polo" vale para os <i>grandes</i> arranjos, não em geral.</p>
-      <p><b>O denominador muda a leitura, e o painel usa um só.</b> Como a Tarifa Zero pressupõe um serviço, o universo de comparação não são os 5.570 municípios, mas os que têm sistema de ônibus. Este painel usa os <b>1.727</b> que responderam à pergunta de transporte da MUNIC 2020 (31% do país). A tese usa, para a curva de adoção por porte, um <b>índice de indício de sistema</b> que chega a 1.488 municípios e desenha um <b>U invertido</b>: a adoção tem pico na faixa de 20 a 50 mil habitantes, cai acima disso e chega a <b>zero</b> nos 41 municípios com mais de 500 mil, todos com sistema. O painel mostra essa curva em agregado (Panorama, seção 1), porque o índice é de artigo inédito; município a município, vale o denominador da MUNIC.</p>
-      <p><b>Modelo de prestação (MUNIC 2020):</b> só 1.727/5.570 municípios (31%) responderam essa pergunta do IBGE — tratar qualquer leitura aqui como amostra parcial, não painel nacional. Dentro dela, "Prestação direta" tem a maior proporção de TZ (19,0%, 45 de 237) e "Não regulamentado" a menor (2,5%, 5 de 200); Concessão fica em 8,9% (69 de 771). Isso é o eixo mais próximo de testar a hipótese dos grupos econômicos diretamente (concessão = operador privado estabelecido), mas ainda não é a variável de presença de grupo por si — e a amostra de 1.727 pode não ser aleatória (municípios que respondem ao módulo de transporte da MUNIC tendem a ser os que já têm alguma estrutura formal).</p>
-      <p><b>Tarifa e subsídio — dados novos, cobertura muito baixa:</b> tarifa reconciliada (PEMOB/SIMU/ANTP) só existe para 111/5.570 municípios (2%); % do custo subsidiado (NTU) só para 80/5.570 (1,4%). Úteis para casos individuais na lista de TZ, mas não para generalizar ao universo nacional — no mapa, esses eixos ficam majoritariamente em cinza "sem dado" por desenho, não por erro.</p>
-      <p><b>CadÚnico entrou no painel (06/09/2026) — três ressalvas de leitura.</b> <b>(1) Mede inscrição, não pobreza:</b> a cobertura depende também da capacidade de busca ativa do CRAS — dois municípios igualmente pobres podem ter coberturas distintas por qualidade de gestão. <b>(2) É estoque, não fotografia:</b> o campo conta cadastros acumulados, incluindo registros desatualizados de quem já saiu do município — por isso <b>62 municípios pequenos passam de 100%</b> de cobertura em set/2022. Não é erro de dado; a ficha de cada município traz também o <i>% de cadastro atualizado</i>, que dá a medida do estoque ativo (aplicando essa taxa, os casos acima de 100% caem de 62 para 3 e a média municipal converge para o agregado nacional de 44,6%). <b>(3) As duas competências não são diretamente comparáveis:</b> desde jun/2023 a renda do CadÚnico passa a vir do CNIS quando é maior que a autodeclarada (IN nº 1/SAGICAD/MDS, 02/06/2023), e as réguas mudaram — a linha da pobreza foi de R$ 210 para R$ 218 (+3,8%, abaixo da inflação do período) enquanto meio salário mínimo foi de R$ 606 para R$ 759 (+25,2%). A variação entre set/2022 e ago/2025 mistura mudança de renda com mudança de instrumento de medida.</p>
-      <p><b>⚠️ A barra comparativa do CadÚnico é mediana bruta — não leia como achado.</b> Sem recorte, a cobertura mediana é <b>40,3% nos municípios com TZ contra 58,6% nos sem TZ</b>, o que sugeriria que a Tarifa Zero está <i>fora</i> de onde a vulnerabilidade se concentra. Mas boa parte disso é <b>composição, não relação</b>: a cobertura do CadÚnico cai fortemente com o PIB per capita (correlação de postos −0,69) e a TZ se concentra no Sudeste e no Sul, justamente as regiões de menor cobertura. Controlando por região, a diferença encolhe (Sudeste −6,7 p.p.; Centro-Oeste −3,9 p.p.) e chega a inverter no Sul (+4,2 p.p.) — embora persista no Nordeste (−12,4 p.p.). <b>Use os filtros</b> (UF, região, faixa populacional, REGIC) antes de tirar qualquer conclusão desta barra: em recortes com poucos municípios TZ a mediana perde robustez, e o painel sinaliza isso.</p>
-      <p><b>Grandes números respondem aos filtros:</b> os cartões do topo recalculam conforme o recorte (UF, faixa, REGIC, arranjo, modelo). Em recortes com poucos municípios TZ, os valores perdem robustez — o painel sinaliza "amostra pequena" quando há menos de 5 municípios TZ no recorte.</p>
-      <p><b>A numeração da régua mudou em setembro de 2026 — e os mesmos códigos tinham outro sentido antes.</b> A régua foi renumerada no cofre da pesquisa em 13/09/2026: hoje <b>2a</b> é grupo social e <b>2c</b> é temporal por dias da semana; na numeração anterior, <b>2a</b> era justamente temporal-dias. O painel exibiu a numeração antiga até 22/10/2026. Prints, capturas e citações desta página feitos antes dessa data usam códigos que não significam mais a mesma coisa.</p>
-      <p><b>A régua classifica o desenho, não o status.</b> Por isso os casos <i>encerrados</i> aparecem à parte, em cinza, e os casos de <i>norma aprovada sem operação</i> e de <i>pista a verificar</i> ficam fora da escala: não há desenho em operação para classificar. E a régua <b>não</b> mede o não recurso (quantos elegíveis deixam de usar a gratuidade), que exigiria dados de cadastrados e demanda indisponíveis para o conjunto dos casos, nem o <b>nível de serviço</b> — frequência, dias e horários —, para o qual não há informação comparável entre municípios. O portão é dado observável na norma; o efeito dele é coisa a medir.</p>
-      <p><b>Os grupos econômicos saíram deste painel (23/10/2026).</b> Desde a v0.5 o painel exibia o nome dos grupos por município e um gráfico de concentração territorial. A análise passa inteira para uma página própria, a <a href="rede-ge.html"><b>Rede de empresas</b></a> — onde cabe a ressalva que aqui ficava espremida num rodapé: o cruzamento mede o <i>endereço</i> do cadastro, e presença não é operação (numa auditoria da própria pesquisa, em Araraquara, dos quatro grupos atribuídos ao município só um era operador urbano).</p>
-    </div>
   </details>
-  <details class="panel" style="margin-top:16px;">
-    <summary>Referências bibliográficas</summary>
-    <p class="sub">Formato ABNT NBR 6023. Lista completa dos estudos acadêmicos citados no painel — as citações curtas (ex.: "Santini 2019") aparecem na coluna Fontes da tabela de municípios e no card do município selecionado. As fontes dos <i>dados</i> (IBGE, Siconfi, DENATRAN, NTU e demais) estão no rodapé, não aqui.</p>
-    <div id="referenciasAbnt"></div>
-  </details>
-  </section>
-
-  <aside class="cta-dados" aria-label="Dados da tese">
-    <div class="cta-txt"><b>Dados da tese, abertos para baixar</b><span>Os oito pacotes que a tese cita, em CSV, com dicionário, SHA-256 e DOI no Zenodo. Licença CC BY 4.0.</span></div>
-    <a class="cta-btn" href="dados.html#dados">Baixar os dados →</a>
-  </aside>
   <footer>
     <div class="fgrid">
       <div class="fnames">
@@ -828,7 +981,7 @@
     </div>
     Painel Brasil v1.0.0 · era Canoa · base de 11/11/2026<br>
     Fontes: Dataverse Santini v8 (abr/2026) · PEMOB/SIMU (Min. Cidades) · MUNIC 2020 (IBGE) · REGIC 2018 (IBGE) · FINBRA/Siconfi 2019–2023 · IBGE (PIB 2013/2021, Censo 2022) · Observatório das Metrópoles (IBEU) · Atlas PNUD (IDH) · TSE 2024 · DATASUS/SIM · OSM/Geofabrik · NTU (Anuário 2023/2025) · ANTP/SIMOB (histórico 2005–2017) · Base Polo Planejamento.<br>
-    Painel gerado a partir de <i>base_municipal_v3.csv</i> e <i>Municípios TZ - consolidado.xlsx</i> (congelamento de 11/11/2026) — instrumento exploratório da pesquisa; não substitui a análise da tese. Os dados citados na tese estão na <a href="dados.html">página de dados</a> (DOI 10.5281/zenodo.24186039). Histórico de versões no CHANGELOG do repositório.
+    Painel gerado a partir de <i>base_municipal_v3.csv</i> e <i>Municípios TZ - consolidado.xlsx</i> (congelamento de 11/11/2026) — o método completo e os limites estão na tese. Os dados citados na tese estão na <a href="dados.html">página de dados</a> (DOI 10.5281/zenodo.24186039). Histórico de versões no CHANGELOG do repositório.
   </footer>
 </div>
 <aside id="fichaLateral" class="fichalat" hidden aria-label="Ficha do município" tabindex="-1">
@@ -8264,9 +8417,9 @@ function renderLegislacaoDetail(m) {
   if (L.fundo) extra.push('<b>Fundo municipal</b> criado na própria lei');
   if (extra.length) linhas.push(`<div style="font-size:12px;color:var(--muted);margin-top:4px;">${extra.join(' · ')}</div>`);
   if (L.nota) linhas.push(`<div style="font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.5;"><i>${L.nota}</i></div>`);
-  if (L.padr && L.padr.length) linhas.push(`<div style="font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.6;"><b style="color:var(--text);">${L.padr.length === 1 ? 'Norma lida' : `${L.padr.length} normas lidas`}, em nota padronizada</b> (<a href="dados.html#p7" style="color:#8fb0ff;">depósito de dados</a>): ${L.padr.map(p => `<a href="${p.arq}" target="_blank" rel="noopener" style="color:#8fb0ff;" title="${p.func || ''}">${p.rot}</a>`).join(' · ')}</div>`);
+  if (L.padr && L.padr.length) linhas.splice(1, 0, `<div class="normas-limpas"><b>${L.padr.length === 1 ? 'A norma, em texto limpo' : L.padr.length + ' normas, em texto limpo'}</b><span>transcrição padronizada pela pesquisa: ementa, artigos da gratuidade, vínculo com a Tarifa Zero e fontes</span><div>${L.padr.map(p => `<a class="bt2" href="${p.arq}" target="_blank" rel="noopener">${p.rot} →</a>`).join('')}</div></div>`);
   return `<div style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;">
-    <b style="font-size:12.5px;">Base legal</b>${linhas.join('')}
+    <b style="font-size:12.5px;">Normas</b>${linhas.join('')}
   </div>`;
 }
 // Numeração vigente da régua (renumerada no cofre em 13/09/2026, propagada em 20/09).
@@ -8528,12 +8681,12 @@ document.getElementById('resetZoom').addEventListener('click', resetZoom);
 
 // ---------- color scales ----------
 const PALETTES = {
-  pib_pc: ['#c6dbef', '#9ecae1', '#4292c6', '#2171b5', '#084594'],
-  motorizacao: ['#e5d8ec', '#c2a5cf', '#9970ab', '#762a83', '#40004b'],
+  pib_pc: ['#2E3F6E', '#3D6FA8', '#43A3A3', '#8CCB7E', '#F5E400'],
+  motorizacao: ['#2E3F6E', '#3D6FA8', '#43A3A3', '#8CCB7E', '#F5E400'],
   ibeu: ['#d9f0d3', '#a6dba0', '#5aae61', '#1b7837', '#00441b'],
   idh: ['#fee8c8', '#fdbb84', '#fc8d59', '#e34a33', '#b30000'],
   cresc_pop: ['#2166ac', '#92c5de', '#f7f7f7', '#f4a582', '#b2182b'],
-  rec_prop_pc: ['#deebf7', '#9ecae1', '#4292c6', '#2171b5', '#08306b'],
+  rec_prop_pc: ['#2E3F6E', '#3D6FA8', '#43A3A3', '#8CCB7E', '#F5E400'],
   taxa_obitos_transito: ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'],
   pct_investimento_desp: ['#edf8e9', '#bae4b3', '#74c476', '#31a354', '#006d2c'],
   tarifa: ['#f2f0f7', '#cbc9e2', '#9e9ac8', '#756bb1', '#54278f'],
@@ -8542,12 +8695,12 @@ const PALETTES = {
   trab_fora: ['#fde0dd', '#fa9fb5', '#f768a1', '#c51b8a', '#7a0177'],
 };
 const FAIXA_COLORS = {
-  'Inferior a 20 mil': '#c6dbef', 'Entre 20 e 100 mil': '#6baed6',
-  'Entre 100 e 250 mil': '#3182bd', 'Entre 250 e 500 mil': '#08519c', 'Acima de 500 mil': '#08306b'
+  'Inferior a 20 mil': '#2E3F6E', 'Entre 20 e 100 mil': '#3D6FA8',
+  'Entre 100 e 250 mil': '#43A3A3', 'Entre 250 e 500 mil': '#8CCB7E', 'Acima de 500 mil': '#F5E400'
 };
 const REGIC_COLORS = { 1: '#54278f', 2: '#807dba', 3: '#9e9ac8', 4: '#bcbddc', 5: '#dadaeb' };
 const REGIC_LABELS = { 1: 'Metrópole', 2: 'Capital Regional', 3: 'Centro Sub-Regional', 4: 'Centro de Zona', 5: 'Centro Local' };
-const ARRANJO_COLORS = { 'Sede/co-sede do arranjo': '#08519c', 'Satélite do arranjo': '#6baed6', 'Fora de arranjo': '#5c6470' };
+const ARRANJO_COLORS = { 'Sede/co-sede do arranjo': '#4C8DFF', 'Satélite do arranjo': '#B48CFF', 'Fora de arranjo': '#3a3f4a' };
 const MODELO_COLORS = {
   'Concessão': '#2171b5', 'Prestação direta': '#2e9e5b', 'Permissão': '#e2892c',
   'Autorização': '#c9b458', 'Não regulamentado': '#a63603', 'Misto (2+ modelos)': '#756bb1'
@@ -8601,6 +8754,11 @@ function classify(v, breaks) {
 function colorFor(m, colorBy) {
   const nt = neutrals();
   if (!m) return nt.noData;
+  if (colorBy === 'dest' || colorBy === 'posicao') {
+    if (m.tz_status !== 'Ativa') return nt.naoTz;
+    if (colorBy === 'posicao') { const p = posicaoPlano(m); return p ? MAPA_POS[p] : nt.noData; }
+    return (MAPA_DEST[(remunFor(m) || {}).dest] || [nt.noData])[0];
+  }
   if (colorBy === 'tz') {
     if (TZ_COLORS_HEX[m.tz_status]) return TZ_COLORS_HEX[m.tz_status];
     const camadas = camadasFor(m);
@@ -8611,7 +8769,7 @@ function colorFor(m, colorBy) {
   if (colorBy === 'regic_nivel') return REGIC_COLORS[m.regic_nivel] || nt.noData;
   if (colorBy === 'tipo_arranjo') return ARRANJO_COLORS[m.tipo_arranjo] || nt.noData;
   if (colorBy === 'modelo_prestacao_simples') return m.modelo_prestacao_simples ? (MODELO_COLORS[m.modelo_prestacao_simples] || nt.noData) : nt.noData;
-  const v = colorBy === 'rec_prop_pc' ? m.rec_prop_pc : m[colorBy];
+  const v = colorBy === 'rec_prop_pc' ? m.rec_prop_pc : valorMetrica(m, colorBy);
   const breaks = STATS.breaks[colorBy];
   const cls = classify(v, breaks);
   if (cls == null) return nt.noData;
@@ -8681,10 +8839,23 @@ function render() {
   renderPopScore();
 }
 
+// proposta_etapa2: cores das duas variáveis novas do mapa
+const MAPA_DEST = { publica: ['#6FBE44', 'Operação pública'], oferta: ['#E2892C', 'Operador pago pela oferta'],
+  demanda: ['#1A54C7', 'Operador pago pela demanda'], privado_nd: ['#B9B9C4', 'Operador privado, pagamento não apurado'] };
+const MAPA_POS = { comum: '#2E9E3F', parcial: '#98D97B', ruptura: '#98D97B', pub: '#C9C9D3', receita: '#E2892C', bolsa: '#1A54C7' };
+const ROT_ARRANJO = { 'Sede/co-sede do arranjo': 'Sede do arranjo', 'Satélite do arranjo': 'Franja do arranjo (satélite)', 'Fora de arranjo': 'Isolado (fora de arranjo)' };
 function renderLegend() {
   const el = document.getElementById('legend');
   const nt = neutrals();
   let html = '';
+  if (state.colorBy === 'dest' || state.colorBy === 'posicao') {
+    const itens = state.colorBy === 'dest' ? Object.values(MAPA_DEST)
+      : ['comum', 'parcial', 'pub', 'receita', 'bolsa'].map(k => [MAPA_POS[k], POS_ROT[k]]);
+    document.getElementById('mapSvg')?.classList.add('contorno-forte');
+    el.innerHTML = itens.map(([c, r]) => `<span><span class="sw" style="background:${c}"></span>${r}</span>`).join('')
+      + `<span><span class="sw" style="background:${nt.noData}"></span>Não apurado</span><span><span class="sw" style="background:${nt.naoTz}"></span>Sem Tarifa Zero universal</span>`;
+    return;
+  }
   if (state.colorBy === 'tz') {
     html = `<span><span class="sw" style="background:${TZ_COLORS_HEX.Ativa}"></span>Universal</span>
             <span><span class="sw" style="background:${corParcial(1)}"></span>Parcial · 1 camada</span>
@@ -8697,7 +8868,7 @@ function renderLegend() {
   } else if (state.colorBy === 'regic_nivel') {
     html = STATS.regic_order.map(r => `<span><span class="sw" style="background:${REGIC_COLORS[r]}"></span>${r} · ${REGIC_LABELS[r]}</span>`).join('');
   } else if (state.colorBy === 'tipo_arranjo') {
-    html = STATS.arranjo_order.map(a => `<span><span class="sw" style="background:${ARRANJO_COLORS[a]}"></span>${a}</span>`).join('');
+    html = STATS.arranjo_order.map(a => `<span><span class="sw" style="background:${ARRANJO_COLORS[a]}"></span>${ROT_ARRANJO[a] || a}</span>`).join('');
   } else if (state.colorBy === 'modelo_prestacao_simples') {
     html = STATS.modelo_order.map(a => `<span><span class="sw" style="background:${MODELO_COLORS[a]}"></span>${a}</span>`).join('')
       + `<span><span class="sw" style="background:${nt.noData}"></span>Sem dado (MUNIC 2020, ${5570 - STATS.totais.modelo_prestacao_n} municípios)</span>`;
@@ -8708,6 +8879,9 @@ function renderLegend() {
     html = pal.map((c, i) => `<span><span class="sw" style="background:${c}"></span>${fmtNum(breaks[i])} – ${fmtNum(breaks[i + 1])}</span>`).join('');
     if (n != null) html += `<span style="color:#e2892c;">⚠ apenas ${n} municípios com dado — restante em cinza</span>`;
   }
+  const outro = state.colorBy !== 'tz';
+  document.getElementById('mapSvg')?.classList.toggle('contorno-forte', outro);
+  if (outro) html += `<span><span class="sw" style="background:transparent;border:2px solid var(--verde);"></span>Contorno verde: tem Tarifa Zero universal</span><span><span class="sw" style="background:transparent;border:2px solid var(--rosa);"></span>Contorno rosa: encerrada</span>`;
   el.innerHTML = html;
 }
 
@@ -8813,7 +8987,7 @@ function renderLeituras() {
   const med = arr => { const v = arr.filter(x => x != null).sort((a, b) => a - b); return v.length ? (v.length % 2 ? v[(v.length - 1) / 2] : (v[v.length / 2 - 1] + v[v.length / 2]) / 2) : null; };
   const reais = (v, c = 2) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: c, maximumFractionDigits: c });
   const put = (id, mostra, res, ress) => { const el = document.getElementById(id); if (el) el.innerHTML =
-    `<div><i>O que mostra</i>${mostra}</div><div class="res"><i>Resultado no Brasil</i>${res}</div><div><i>Ressalva</i>${ress}</div>`; };
+    `<p class="resposta">${res}</p>`; };
   // 1. onde e quando
   const porReg = {}; for (const m of uni) porReg[m.regiao] = (porReg[m.regiao] || 0) + 1;
   const porUf = {}; for (const m of uni) porUf[m.uf] = (porUf[m.uf] || 0) + 1;
@@ -8899,7 +9073,7 @@ function renderLiteratura() {
   document.getElementById('rslAnosNota').innerHTML = `A produção acompanha a expansão da política: ${f(desde20)} dos ${f(F.corpus)} itens (${Math.round(100 * desde20 / F.corpus)}%) são de 2020 em diante, e 2023 a 2025 (em rosa) reúnem ${f(de23a25)}. A tese separa ainda os itens com contribuição empírica para casos concretos (59) dos teóricos ou retóricos (22); a classificação item a item está no Apêndice C (Seção C.4). 2026 é parcial.`;
   // fatores
   const maxF = Math.max(...RSL.fatores.map(x => x.n));
-  const col = (sent, cor, tit) => `<div><h4>${tit}</h4>${RSL.fatores.filter(x => x.s === sent).sort((a, b) => b.n - a.n).map(x => `<div class="fatlin"><div>${x.rot}${x.novo ? '<span class="novo">novo</span>' : ''}</div>
+  const col = (sent, cor, tit) => `<div><h4>${tit}</h4>${RSL.fatores.filter(x => x.s === sent).sort((a, b) => b.n - a.n).map(x => `<div class="fatlin"><div>${x.rot}</div>
       <div class="t"><i style="width:${(100 * x.n / maxF).toFixed(1)}%;background:${cor};opacity:.35;"></i><i style="width:${(100 * x.e / maxF).toFixed(1)}%;background:${cor};"></i></div><div class="n"><b>${x.n}</b> (${x.e} E)</div></div>`).join('')}</div>`;
   document.getElementById('rslFatores').innerHTML = `<div class="fatgrid">${col('+', 'var(--verde)', 'Impulsionam a Tarifa Zero')}${col('−', 'var(--rosa)', 'Limitam a Tarifa Zero')}</div>
     <p class="sub" style="margin-top:8px;">Número de trabalhos; entre parênteses, os com achado empírico próprio (E). A oposição direta dos operadores à Tarifa Zero está documentada em três trabalhos; o que mais aparece, quando a literatura olha para o operador, não é a resistência, mas a saída — o padrão que a tese encontra nos contratos (Seção 7.3).</p>`;
@@ -8912,7 +9086,7 @@ function renderLiteratura() {
   const desenha = () => { const q = (bx.value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
     const L = RSL.itens.filter(x => !q || [x.ano, x.aut, x.tit, x.vei].join(' ').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').includes(q));
     tb.innerHTML = L.map(x => `<tr><td>${x.ano}</td><td>${esc(x.aut || '')}</td><td>${esc(x.tit || '')}</td><td>${esc(x.vei || '')}</td><td>${esc(x.sup || '')}</td></tr>`).join('') || '<tr><td colspan="5" style="color:var(--muted);">Nenhum trabalho com esse termo.</td></tr>'; };
-  bx.addEventListener('input', desenha); desenha();
+  if (tb && bx) { bx.addEventListener('input', desenha); desenha(); }
 }
 
 // ---------- 5. Quem é alcançado: do piso à Tarifa Zero universal (v0.15, 30/10/2026) ----------
@@ -9010,13 +9184,7 @@ function renderPopScore() {
     sub: `${A.nUni} ${A.nUni === 1 ? 'município' : 'municípios'} — a única linha sem portão de quem nem de quando` }, VERDE, den, denRot, 'univ');
   h += '</div>';
   h += `<p class="alcfecho">A escala supramunicipal concede gratuidade por pessoa ou por tempo, nunca a toda a população todos os dias. A gratuidade universal e permanente é, por isso, decisão municipal, e o patamar supramunicipal funciona como linha de base, e não como alternativa. <span>— tese, Seção 4.4</span></p>`;
-  h += `<details class="nota" style="margin-top:10px;"><summary>Como os números foram calculados</summary><p class="sub" style="margin-top:6px;">
-    <b>As linhas não se somam.</b> As populações se sobrepõem: o idoso de São Paulo está no 65+, no intermunicipal e no Domingão Tarifa Zero. E <b>elegível não é usuário</b>: as barras medem quem tem direito, não quem viaja.<br>
-    <b>Piso e patamar estadual</b> são valores nacionais da tese (Seção 4.4, Tabela 3; dados no Apêndice B, Análise XII, Censo 2022) e não mudam com os filtros: a base do painel não tem população por idade nem eleitorado por município. O teto dos idosos no intermunicipal inclui 2,17 mi da gratuidade baiana de 60 anos ou mais, só no hidroviário, e 2,38 mi da faixa de 60 a 64 anos no Metrô, na CPTM e na EMTU de São Paulo. As gratuidades no interestadual ficam de fora: não são escala urbana.<br>
-    <b>Municipal</b>: calculado da base do painel e responde aos filtros. Nas parciais, o número é um <b>teto</b> — a população inteira dos municípios —, não o público da política; um município com dois subtipos conta nos dois. Todas as parciais juntas: até ${fx(A.popParcTodas)} em ${A.nParc} ${A.nParc === 1 ? 'município' : 'municípios'}${filtrado ? ' do recorte' : ''}. A busca das parciais não é exaustiva.<br>
-    <b>Distrito Federal.</b> O DF acumula competências de estado e de município e, na régua, é tratado como município: o Vai de Graça (domingos e feriados) está em <i>Dias</i> e o passe estudantil do DF em <i>Finalidade</i>. O passe do DF também entra no teto estudantil da Tabela 3, que soma os três passes estaduais.<br>
-    Todas as barras estão na mesma escala, a população do Brasil (${fx(popBR)}).
-  </p></details>`;
+  h += `<p class="legenda" style="margin-top:10px;">As linhas não se somam: a mesma pessoa pode ter direito por mais de um portão. E ter direito não é o mesmo que usar.</p>`;
   el.innerHTML = h;
 }
 
@@ -9136,7 +9304,7 @@ function gerarParagrafoTZ(m) {
     };
     const comoE = PORTAO[m.tz_regua_sub]
       || 'o desenho é universal pela régua desta pesquisa, e o subtipo (o portão de acesso, se houver) ainda não foi apurado';
-    return `${nomeUf} tem <b>Tarifa Zero universal</b> ${desde}: ${comoE}.${operador} Isso corresponde aos ${fmtCompact(m.pop)} habitantes do município (Censo 2022) — morador não é usuário (ver Quem é alcançado, no Panorama).`;
+    return `${nomeUf} tem <b>Tarifa Zero universal</b> ${desde}: ${comoE}.${operador} Isso corresponde aos ${fmtCompact(m.pop)} habitantes do município (Censo 2022) — morador não é usuário (ver a aba Do piso à Tarifa Zero).`;
   }
   if (m.tz_status === 'Encerrada') {
     const periodo = (m.tz_ano_txt && m.tz_fim) ? `entre ${m.tz_ano_txt} e ${m.tz_fim}`
@@ -9173,6 +9341,52 @@ function gerarParagrafoTZ(m) {
 }
 
 // ---------- detail panel ----------
+// proposta_etapa2: carimbos do card — régua descritiva, régua analítica e categorias
+const ROT_DEST = { publica: 'Operação pública', oferta: 'Operador pago pela oferta', demanda: 'Operador pago pela demanda', privado_nd: 'Operador privado, pagamento não apurado' };
+const ROT_CPI = { C: 'controle social', T: 'transparência', D: 'desempenho' };
+function carimbo(txt, cor, titulo, apagado) {
+  return `<span class="carimbo${apagado ? ' apagado' : ''}" style="${cor ? '--c:' + cor : ''}"${titulo ? ` title="${String(titulo).replace(/"/g, '&quot;')}"` : ''}>${txt}</span>`;
+}
+function carimbosHtml(m) {
+  const nt = neutrals(), uni = m.tz_status === 'Ativa';
+  // régua descritiva
+  const desc = [];
+  const ST = { 'Ativa': ['Tarifa Zero universal', '#6FBE44'], 'Encerrada': ['Encerrada', '#FF2D6B'], 'Parcial (ativa)': ['Gratuidade parcial', '#E2892C'],
+    'Regulamentada — não implantada': ['Lei aprovada, sem operação', '#9a9aa6'], 'Pista (a verificar)': ['Pista a verificar', '#9a9aa6'] };
+  if (ST[m.tz_status]) desc.push(carimbo(ST[m.tz_status][0], ST[m.tz_status][1]));
+  const sub = (m.tz_bin === 'TZ' && m.tz_regua_sub && REGUA_IDX[m.tz_regua_sub] != null) ? REGUA[REGUA_IDX[m.tz_regua_sub]] : null;
+  if (sub) desc.push(carimbo(`${sub.k} · ${sub.rot}${m.tz_prov ? ' ◇' : ''}`, sub.cor, `${sub.desc}${m.tz_prov ? ' — classe por hipótese (lacuna declarada)' : ''}`));
+  for (const c of camadasFor(m)) desc.push(carimbo(`${c.camada} · ${(CAMADA_LABELS[c.camada] || '').replace(/^\S+\s·\s/, '') || 'parcial'}`, '#E2892C', c.detalhe || ''));
+  if (!desc.length) desc.push(carimbo('Sem Tarifa Zero', '#9a9aa6'));
+  // régua analítica (só a camada 1)
+  const ana = [];
+  if (uni) {
+    const r = remunFor(m) || {};
+    ana.push(ROT_DEST[r.dest] ? carimbo(ROT_DEST[r.dest], (MAPA_DEST[r.dest] || [])[0]) : carimbo('Destinatário não apurado', '', '', true));
+    if (r.cp === 'com') ana.push(carimbo('Contrapartida: ' + (r.cpi || '').split('').map(k => ROT_CPI[k]).filter(Boolean).join(', '), '#98D97B', r.cpl || ''));
+    else if (r.cp === 'sem') ana.push(carimbo('Sem contrapartida', '#E2892C', r.cpl || ''));
+    else ana.push(carimbo('Contrapartida não apurada', '', '', true));
+    const p = posicaoPlano(m);
+    ana.push(p ? carimbo(POS_ROT[p], MAPA_POS[p], 'Posição no plano da régua analítica (o alvo, passo 5)') : carimbo('Posição no plano não apurada', '', '', true));
+  }
+  // categorias
+  const cat = [];
+  if (m.faixa_pop) cat.push(carimbo(m.faixa_pop.replace('Inferior a', 'Até').replace('Entre ', '').replace(' e ', ' a ') + ' hab.', '#c4c4cf'));
+  if (m.tipo_arranjo) cat.push(carimbo(ROT_ARRANJO[m.tipo_arranjo] || m.tipo_arranjo, m.tipo_arranjo === 'Fora de arranjo' ? '#9aa3b0' : ARRANJO_COLORS[m.tipo_arranjo], m.arranjo_nome || ''));
+  const a = arranjoFor(m);
+  if (a && a.a) cat.push(carimbo(a.a.replace(/^A\d\s/, ''), '#c4c4cf', 'Arranjo operacional (D1)'));
+  if (a && a.via) cat.push(carimbo('Entrou por ' + a.via.replace(/\s*\(.*\)$/, ''), '#c4c4cf', 'Instrumento de entrada da gratuidade'));
+  if (m.tz_bin === 'TZ' && m.tz_ano_num) cat.push(carimbo('Desde ' + m.tz_ano_num, '#c4c4cf'));
+  // municípios parecidos (mesmo porte e mesma posição no arranjo)
+  let par = '';
+  if (!uni && m.faixa_pop && m.tipo_arranjo) {
+    const pr = [...MUNI.values()].filter(x => x.faixa_pop === m.faixa_pop && x.tipo_arranjo === m.tipo_arranjo);
+    const n = pr.filter(x => x.tz_status === 'Ativa').length;
+    par = `<p class="legenda" style="margin:6px 0 0;">Entre os ${fmtNum(pr.length)} municípios do mesmo porte e da mesma posição no arranjo, <b>${fmtNum(n)}</b> (${(100 * n / Math.max(1, pr.length)).toFixed(1).replace('.', ',')}%) têm Tarifa Zero universal.</p>`;
+  }
+  const linha = (rot, xs) => xs.length ? `<div class="cb-g"><span class="cb-t">${rot}</span><div>${xs.join('')}</div></div>` : '';
+  return `<div class="carimbos">${linha('Régua descritiva', desc)}${linha('Régua analítica', ana)}${linha('Categorias', cat)}</div>${par}`;
+}
 function renderDetail(m) {
   const el = document.getElementById('detail');
   // Não reconstruir o card quando o município já é o que está na tela. A busca
@@ -9182,7 +9396,7 @@ function renderDetail(m) {
   if (m && munSelecionado && String(munSelecionado.id) === String(m.id)) return;
   munSelecionado = m || null;
   if (!m) {
-    el.innerHTML = '<div class="empty">Clique em um município no mapa ou na lista abaixo.</div>';
+    el.innerHTML = '<div class="empty">Clique num município no mapa, busque pelo nome acima ou experimente: <a href="#mun-3302700">Maricá</a>, <a href="#mun-2303709">Caucaia</a>, <a href="#mun-3548807">São Caetano do Sul</a>.</div>';
     desenharFluxos(null);
     return;
   }
@@ -9220,7 +9434,7 @@ function renderDetail(m) {
   const avisoIncoerencia = incoerente
     ? `<p style="margin:6px 0 0;font-size:11.5px;line-height:1.5;color:#e2892c;">⚠ A base-mestre traz este caso como <b>Universal em vigor</b> e ao mesmo tempo com data de <b>fim</b> preenchida (${m.tz_fim}). O painel exibe os dois campos como estão, sem escolher um — conflito a resolver na fonte.</p>`
     : '';
-  const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${gerarParagrafoTZ(m)}</p>${avisoIncoerencia}${avisoProvisorio}`;
+  const paragrafoTZ = `<p style="margin:8px 0 0;font-size:12.5px;line-height:1.55;color:var(--text);">${(m.tz_bin !== 'TZ' && !camadasFor(m).length) ? 'Nenhuma política de Tarifa Zero registrada nesta pesquisa. Isso não prova que nunca houve: a busca pode não ter achado.' : gerarParagrafoTZ(m)}</p>${avisoIncoerencia}${avisoProvisorio}`;
   let extra = '';
   if (m.tz_bin === 'TZ') {
     extra = `<tr><td>Início TZ</td><td>${m.tz_ano ?? '—'}${(m.tz_ano != null && m.tz_ano_txt == null) ? ' <span style="color:var(--muted);font-size:11px;">(anotação da base, não um ano)</span>' : ''}</td></tr>
@@ -9228,37 +9442,17 @@ function renderDetail(m) {
              <tr><td>% orçamento (fonte)</td><td>${m.tz_pct_orc ?? '—'}</td></tr>
              <tr><td>Operador</td><td>${operadorHtml(m.tz_operador) ?? '—'}</td></tr>`;
   }
-  el.innerHTML = `<div><b style="font-size:15px;">${m.nome} – ${m.uf}</b> ${tzTag}${subTag ? ' ' + subTag : ''}${camadasTag ? ' ' + camadasTag : ''}</div>
-    ${paragrafoTZ}
-    ${fichaFor(m) ? `<details class="fichapol"><summary>Ficha da política — Apêndice H da tese</summary><div class="fl-corpo">${fichaHtml(m)}</div></details>` : ''}
-    ${secFicha('Contrato, arranjo e régua', renderArranjoDetail(m) + renderCamadaDetail(m))}
-    <details class="fichapol"><summary>Indicadores do município</summary>
-    <table style="margin-top:8px;">
-      <tr><td>Região</td><td>${m.regiao}</td></tr>
-      <tr><td>Hierarquia urbana</td><td>${m.regic_label ?? '—'}</td></tr>
-      <tr><td>Arranjo metropolitano</td><td>${m.tipo_arranjo ?? '—'}${m.arranjo_nome ? ' — ' + m.arranjo_nome : ''}</td></tr>
-      <tr><td>Modelo de prestação</td><td>${m.modelo_prestacao ?? 'sem dado'}</td></tr>
-      <tr><td>Faixa populacional</td><td>${m.faixa_pop}</td></tr>
-      <tr><td>População (2022)</td><td>${fmtNum(m.pop)}</td></tr>
-      <tr><td>PIB per capita (2021)</td><td>R$ ${fmtNum(m.pib_pc)}</td></tr>
-      <tr><td>Motorização (veíc/hab)</td><td>${fmtNum(m.motorizacao)}</td></tr>
-      <tr><td>IBEU</td><td>${fmtNum(m.ibeu)}</td></tr>
-      <tr><td>IDH</td><td>${fmtNum(m.idh)}</td></tr>
-      <tr><td>Cobertura do CadÚnico (ago/2025)</td><td>${m.cadunico_cobertura != null ? fmtNum(m.cadunico_cobertura) + '% (' + fmtNum(m.cadunico_pes) + ' pessoas)' : 'sem dado'}</td></tr>
-      <tr><td>Cobertura do CadÚnico (set/2022)</td><td>${m.cadunico_cobertura_2022 != null ? fmtNum(m.cadunico_cobertura_2022) + '%' : 'sem dado'}</td></tr>
-      <tr><td>Cadastro atualizado (ago/2025)</td><td>${m.cadunico_taxa_atualizacao != null ? fmtNum(m.cadunico_taxa_atualizacao) + '% das famílias' : 'sem dado'}</td></tr>
-      <tr><td>Receita própria per capita</td><td>R$ ${fmtNum(m.rec_prop_pc)}</td></tr>
-      <tr><td>Óbitos no trânsito /100mil (2019)</td><td>${fmtNum(m.taxa_obitos_transito)}</td></tr>
-      <tr><td>Tarifa</td><td>${m.tz_status === 'Ativa' ? 'Gratuito (Tarifa Zero universal)' : (m.tarifa != null ? 'R$ ' + fmtNum(m.tarifa) + ' (' + m.tarifa_ano + ', ' + m.tarifa_fonte + ')' : 'sem dado')}</td></tr>
-      <tr><td>% do custo subsidiado</td><td>${m.subsidio_ntu_pct != null ? fmtNum(m.subsidio_ntu_pct) + '% (' + m.subsidio_ntu_ano + ')' : 'sem dado'}</td></tr>
-      <tr><td>Plano Diretor</td><td>${m.plano_diretor ?? '—'}</td></tr>
-      <tr><td>PlanMob (2025)</td><td>${m.pdmu_2025 ?? '—'}</td></tr>
-      ${extra}
-    </table></details>
-    ${secFicha('Deslocamentos e meio de transporte', renderODDetail(m) + renderModalDetail(m))}
-    ${secFicha(`Literatura e legislação${rslFor(m).length ? ` · RSL: ${rslFor(m).filter(x => x.g !== 'C').length} estudam ou analisam, ${rslFor(m).filter(x => x.g === 'C').length} mencionam` : ''}`, levantHtml(m) + (rslFor(m).length ? `<div style="margin-top:8px;"><b style="font-size:12.5px;">Na revisão sistemática (${rslFor(m).length})</b>${rslLista(m, false)}</div>` : '<p class="sub" style="margin:8px 0 0;">Nenhum trabalho do corpus da revisão sistemática cita o município.</p>') + renderLegislacaoDetail(m) + renderNoticiasDetail(m))}
-    <p class="ponte-rede"><a href="rede-ge.html#mun-${m.id}-${encodeURIComponent(m.nome + '/' + m.uf)}">Que grupos econômicos têm endereço em ${m.nome}? Ver na Rede de empresas →</a><br><span>Endereço no cadastro não comprova que o grupo opera o sistema do município.</span></p>`;
+  el.innerHTML = `<div><b style="font-size:17px;">${m.nome} – ${m.uf}</b></div>
+    <div class="card-acoes topo"><button type="button" class="bt2" data-copia-mun="${m.id}">Copiar o link deste município</button><a class="bt2" href="rede-ge.html#mun-${m.id}-${encodeURIComponent(m.nome + '/' + m.uf)}" title="Ter endereço de empresa de grupo não comprova que ela opere o ônibus do município">Explore os grupos da cidade →</a><a class="bt2" href="pesquisa.html?municipio=${encodeURIComponent(m.nome + ' - ' + m.uf)}">Corrigir ou contribuir</a></div>
+    ${carimbosHtml(m)}
+    ${fichaFor(m) ? '' : paragrafoTZ}
+        ${secFicha('Por trás dos carimbos: ficha-resumo, contrato e régua', (fichaFor(m) ? `<div class="ficha-resumo"><div class="fr-tit">Ficha-resumo · Apêndice H da tese</div>${(fichaHtml(m).match(/<table class="fl-resumo">[\s\S]*?<\/table>/) || [''])[0]}</div>` : '') + renderArranjoDetail(m) + renderCamadaDetail(m))}
+    ${secFicha(`Normas e literatura${rslFor(m).length ? ` · RSL: ${rslFor(m).filter(x => x.g !== 'C').length} estudam ou analisam, ${rslFor(m).filter(x => x.g === 'C').length} mencionam` : ''}`, renderLegislacaoDetail(m) + `<div style="margin-top:12px;border-top:1px dashed var(--border);padding-top:8px;"><b style="font-size:12.5px;">Literatura</b></div>` + levantHtml(m) + (rslFor(m).length ? `<div style="margin-top:8px;"><b style="font-size:12.5px;">Na revisão sistemática (${rslFor(m).length})</b>${rslLista(m, false)}</div>` : '<p class="sub" style="margin:8px 0 0;">Nenhum trabalho do corpus da revisão sistemática cita o município.</p>') + renderNoticiasDetail(m) + `<p class="na-tese-card">Na tese: a ficha de ${m.nome} no Apêndice H; as normas lidas no Apêndice D; a revisão sistemática no Apêndice C. <a href="tese/Tese%20-%20Volume%20II%20-%20Ap%C3%AAndices.pdf" target="_blank" rel="noopener">Abrir o Volume II (PDF) →</a></p>`)}
+    `;
   desenharFluxos(m);
+  // proposta_etapa2: o município escolhido fica marcado no alvo do passo 5
+  document.querySelectorAll('#alvoPanel circle.sel').forEach(c => c.classList.remove('sel'));
+  document.querySelector(`#alvoPanel circle[data-mun="${m.id}"]`)?.classList.add('sel');
 }
 
 
@@ -9559,11 +9753,7 @@ const BAR_METRICS = [
   { k: 'pib_pc', label: 'PIB per capita mediano (R$)', fmt: v => 'R$ ' + fmtNum(v) },
   { k: 'motorizacao', label: 'Motorização mediana (veíc/hab)', fmt: fmtNum },
   { k: 'onibus', label: 'Uso do ônibus no deslocamento a trabalho ou estudo (%, Censo 2022)', fmt: v => fmtNum(v) + '%' },
-  { k: 'ibeu', label: 'IBEU mediano', fmt: fmtNum },
-  { k: 'idh', label: 'IDH mediano', fmt: fmtNum },
   { k: 'rec_prop_pc', label: 'Receita própria per capita mediana (R$)', fmt: v => 'R$ ' + fmtNum(v) },
-  { k: 'taxa_obitos_transito', label: 'Óbitos no trânsito /100mil mediano (2019)', fmt: fmtNum },
-  { k: 'cadunico_cobertura', label: 'Cobertura do CadÚnico mediana (%, ago/2025)', fmt: v => fmtNum(v) + '%' },
 ];
 
 // ---------- 23/10/2026: a comparação passa a fazer o que a tese faz ----------
@@ -9688,8 +9878,7 @@ function renderCrosstabs() {
   // comparação de medianas: camada 1 ativa.
   const rows = subsetNoTz();
   const defs = [
-    { key: 'regic_nivel', title: 'Hierarquia urbana (REGIC)', order: STATS.regic_order, labelFn: k => `${k} · ${REGIC_LABELS[k]}` },
-    { key: 'tipo_arranjo', title: 'Sede × satélite de arranjo', order: STATS.arranjo_order, labelFn: k => k },
+    { key: 'tipo_arranjo', title: 'Sede, franja ou isolado', order: STATS.arranjo_order, labelFn: k => ROT_ARRANJO[k] || k },
     { key: 'modelo_prestacao_simples', title: 'Modelo de prestação (MUNIC 2020 — só 31% responderam)', order: STATS.modelo_order, labelFn: k => k },
     { key: 'faixa_pop', title: 'Faixa populacional', order: STATS.faixa_order, labelFn: k => k },
   ];
@@ -9978,7 +10167,7 @@ function renderAlvo() {
       const marg = Math.min(14, (a1 - a0) / 4);
       fila.forEach((x, i) => {
         const [px, py] = xy(a0 + marg + (a1 - a0 - 2 * marg) * (fila.length === 1 ? .5 : i / (fila.length - 1)), r);
-        g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="4.4" fill="${x.m.tz_prov ? '#fff' : '#0E0E10'}" stroke="${x.m.tz_prov ? '#0E0E10' : '#fff'}" stroke-width="1.3"><title>${x.m.nome}/${x.m.uf} — ${POS_ROT[x.p]} · subtipo ${x.m.tz_regua_sub}${x.m.tz_prov ? ' (classe por hipótese)' : ''}</title></circle>`;
+        g += `<circle data-mun="${x.m.id}" style="cursor:pointer" cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="4.4" fill="${x.m.tz_prov ? '#fff' : '#0E0E10'}" stroke="${x.m.tz_prov ? '#0E0E10' : '#fff'}" stroke-width="1.3"><title>${x.m.nome}/${x.m.uf} — ${POS_ROT[x.p]} · subtipo ${x.m.tz_regua_sub}${x.m.tz_prov ? ' (classe por hipótese)' : ''}</title></circle>`;
       });
     });
   }
@@ -9989,24 +10178,26 @@ function renderAlvo() {
   el.innerHTML = `<div class="alvo-wrap"><svg viewBox="-70 -40 ${W + 140} ${W + 80}" role="img" aria-label="Alvo da régua analítica: ${pts.length} políticas posicionadas por destinatário do recurso e contrapartida">${g}</svg>
     <div class="alvo-leg"><p class="sub" style="margin:0 0 6px;"><b>${pts.length} de ${c1.length}</b> políticas universais do recorte têm destinatário e contrapartida apurados.</p>${leg}
     ${comum.length ? `<p class="sub" style="margin-top:10px;">Gestão do comum: ${comum.join(', ')}.</p>` : ''}
-    <p class="sub" style="margin-top:8px;">Cada ponto é uma política; ponto branco: classe por hipótese (lacuna declarada). Passe o mouse para ver o município e o subtipo de portão — o cruzamento com o portão está na tabela abaixo.</p></div></div>`;
+    <p class="sub" style="margin-top:8px;">Cada ponto é uma política; ponto branco: classe por hipótese (lacuna declarada). Passe o mouse para ver o município e o subtipo de portão.</p></div></div>`;
 }
 function renderCruzadas() {
+  // proposta_etapa2: barras por destinatário do recurso, divididas pelo subtipo de portão (Quadro 29 da tese)
   const el = document.getElementById('cruzadasPanel');
   if (!el) return;
   const c1 = subsetNoTz().filter(m => m.tz_status === 'Ativa');
-  const SUB = ['1a', '1b', '1c', '1d'];
+  const SUB = [['1a', 'sem portão', '#6FBE44'], ['1b', 'cadastro aberto', '#B5E39A'], ['1c', 'residência', '#3B7C29'], ['1d', 'prazo declarado', '#D4E157']];
   const LIN = [['publica', 'Operação pública'], ['oferta', 'Operador pago pela oferta'], ['demanda', 'Operador pago pela demanda'],
-    ['privado_nd', 'Operador privado, remuneração não apurada'], ['nd', 'Destinatário não apurado']];
+    ['privado_nd', 'Operador privado, pagamento não apurado'], ['nd', 'Destinatário não apurado']];
   const t = {}, prov = {};
   for (const m of c1) { const d = (remunFor(m) || {}).dest || 'nd', k = LIN.some(l => l[0] === d) ? d : 'nd';
     t[k] = t[k] || {}; t[k][m.tz_regua_sub] = (t[k][m.tz_regua_sub] || 0) + 1; if (m.tz_prov) prov[k] = (prov[k] || 0) + 1; }
-  const cel = v => v ? `<td>${v}</td>` : '<td class="z">—</td>';
-  const tot = s => c1.filter(m => m.tz_regua_sub === s).length;
-  el.innerHTML = `<div style="overflow-x:auto;"><table class="cruz"><thead><tr><th>Destinatário do recurso</th>${SUB.map(s => `<th>${s}</th>`).join('')}<th>Total</th><th>por hipótese</th></tr></thead><tbody>
-    ${LIN.filter(([k]) => t[k]).map(([k, rot]) => `<tr><td>${rot}</td>${SUB.map(s => cel((t[k] || {})[s])).join('')}<td><b>${SUB.reduce((a, s) => a + ((t[k] || {})[s] || 0), 0)}</b></td>${cel(prov[k])}</tr>`).join('')}
-    <tr class="tot"><td>Total</td>${SUB.map(s => `<td>${tot(s)}</td>`).join('')}<td>${c1.length}</td><td>${Object.values(prov).reduce((a, b) => a + b, 0) || '—'}</td></tr></tbody></table></div>
-    <p class="sub" style="margin-top:8px;">Subtipos: 1a sem portão · 1b cadastro aberto · 1c residência · 1d prazo declarado. "Por hipótese": classe mantida pela hipótese do pedido de acesso à informação sem resposta (lacuna declarada), já incluída nas colunas.</p>`;
+  const linhas = LIN.filter(([k]) => t[k]);
+  const soma = k => SUB.reduce((a, [s]) => a + ((t[k] || {})[s] || 0), 0);
+  const max = Math.max(1, ...linhas.map(([k]) => soma(k)));
+  el.innerHTML = `<div class="cruzbars">${linhas.map(([k, rot]) => `<div class="cb-lin"><div class="cb-rot">${rot}</div><div class="cb-bar" style="width:${(100 * soma(k) / max).toFixed(1)}%;min-width:4px;">${
+      SUB.map(([s, sr, cor]) => { const v = (t[k] || {})[s] || 0; return v ? `<span style="width:${(100 * v / soma(k)).toFixed(2)}%;background:${cor};" title="${rot} · ${s} (${sr}): ${v}">${v / max >= 0.05 ? v : ''}</span>` : ''; }).join('')
+    }</div><div class="cb-tot"><b>${soma(k)}</b>${prov[k] ? ` <span class="cb-hip" title="classe por hipótese, já incluída">${prov[k]}&#9671;</span>` : ''}</div></div>`).join('')}</div>
+    <div class="cb-leg">${SUB.map(([s, sr, cor]) => `<span><i style="background:${cor}"></i>${s} · ${sr}</span>`).join('')}<span>&#9671; por hipótese (já incluída na barra)</span></div>`;
 }
 function renderRemunPanel() {
   const el = document.getElementById('remunPanel');
@@ -10489,8 +10680,7 @@ document.getElementById('ufFilter').addEventListener('change', e => {
   if (state.uf) zoomToUF(state.uf); else resetZoom();
 });
 document.getElementById('faixaFilter').addEventListener('change', e => { state.faixa = e.target.value; render(); renderTZTable(); atualizaBotaoLimpar(); });
-document.getElementById('regicFilter').addEventListener('change', e => { state.regic = e.target.value; render(); renderTZTable(); atualizaBotaoLimpar(); });
-document.getElementById('modeloFilter').addEventListener('change', e => { state.modelo = e.target.value; render(); atualizaBotaoLimpar(); });
+document.getElementById('arranjoFilter').addEventListener('change', e => { state.arranjo = e.target.value; render(); renderTZTable(); atualizaBotaoLimpar(); });
 document.getElementById('tzFilter').addEventListener('change', e => { state.tzFilter = e.target.value; render(); atualizaBotaoLimpar(); });
 document.getElementById('camadaFilter').addEventListener('change', e => { state.camada = e.target.value; render(); renderTZTable(); atualizaBotaoLimpar(); });
 
@@ -10554,7 +10744,7 @@ function atualizaBotaoLimpar() {
 function limparTudo() {
   state.uf = ''; state.faixa = ''; state.regic = ''; state.arranjo = '';
   state.modelo = ''; state.tzFilter = ''; state.camada = '';
-  for (const id of ['ufFilter', 'faixaFilter', 'regicFilter', 'modeloFilter', 'tzFilter', 'camadaFilter']) {
+  for (const id of ['ufFilter', 'faixaFilter', 'arranjoFilter', 'tzFilter', 'camadaFilter']) {
     const el = document.getElementById(id);
     if (el) el.value = '';
   }
@@ -10656,13 +10846,34 @@ document.getElementById('detail')?.addEventListener('change', e => {
 // TZ × Não-TZ e com o panorama, intercalados numa rolagem só. Separado em quatro
 // áreas; o filtro fica fixo acima das abas e vale para todas. A aba aberta fica no
 // endereço (#explorar, #comparar...), para um link levar direto a ela.
-const ABAS = ['panorama', 'explorar', 'comparar', 'literatura', 'sobre'];
+const ABAS = ['panorama', 'piso', 'explorar', 'comparar', 'literatura', 'sobre'];
+// proposta da revisão de lançamento (v1.0.0): duas abas; Comparar, Literatura e Sobre os dados descem para dentro do Explorar
+const DENTRO_EXPLORAR = {};
 function abreAba(nome, semHash) {
-  if (!ABAS.includes(nome)) nome = 'panorama';
+  let rolarPara = null;
+  if (DENTRO_EXPLORAR[nome]) { rolarPara = 'tab-' + nome; nome = 'explorar'; }
+  if (/^mun-\d+/.test(nome || '')) nome = 'explorar';
+  // âncora para um trecho (#uf-alcance, #sec-p3, #tab-explorar…): abre a aba que contém o trecho e rola até ele
+  if (nome && !['panorama', 'piso', 'comparar', 'literatura', 'explorar'].includes(nome) && !/^mun-\d+/.test(nome)) {
+    const el = document.getElementById(nome), pane = el && el.closest('.tabpane');
+    if (el && (pane || el.classList.contains('tabpane'))) {
+      rolarPara = nome;
+      nome = (pane || el).id.replace('tab-', '');
+      if (DENTRO_EXPLORAR[nome]) nome = 'explorar';
+    }
+  }
+  if (!['panorama', 'piso', 'comparar', 'literatura', 'explorar'].includes(nome)) nome = 'panorama';
+  if (rolarPara) setTimeout(() => {
+    const alvo = document.getElementById(rolarPara);
+    if (!alvo) return;
+    const cx = alvo.matches('details') ? alvo : (alvo.querySelector(':scope > details.pacote') || alvo.closest('details.pacote'));
+    if (cx) cx.open = true;
+    alvo.scrollIntoView({ behavior: 'smooth' });
+  }, 60);
   for (const a of ABAS) {
     const pane = document.getElementById('tab-' + a);
     const btn = document.getElementById('tabbtn-' + a);
-    const on = a === nome;
+    const on = !!(a === nome || (nome === 'explorar' && DENTRO_EXPLORAR[a]));
     if (pane) pane.hidden = !on;
     if (btn) { btn.classList.toggle('on', on); btn.setAttribute('aria-selected', on ? 'true' : 'false'); }
   }
@@ -10703,7 +10914,7 @@ ajustaCelular();
 const ROTULO_FILTRO = {
   uf: ['ufFilter', 'UF'], faixa: ['faixaFilter', 'Porte'], regic: ['regicFilter', 'Hierarquia'],
   modelo: ['modeloFilter', 'Prestação'], tzFilter: ['tzFilter', 'Recorte'], camada: ['camadaFilter', 'Régua'],
-  arranjo: [null, 'Arranjo'],
+  arranjo: ['arranjoFilter', 'Arranjo'],
 };
 function renderRecorte() {
   const el = document.getElementById('recorteChips');
@@ -10766,7 +10977,10 @@ svg.addEventListener('mousemove', e => {
   } else {
     const metricLabel = {
       tz: m.tz_status, faixa_pop: m.faixa_pop,
-      regic_nivel: m.regic_label, tipo_arranjo: m.tipo_arranjo,
+      regic_nivel: m.regic_label, tipo_arranjo: ROT_ARRANJO[m.tipo_arranjo] || m.tipo_arranjo,
+      dest: m.tz_status !== 'Ativa' ? 'sem Tarifa Zero universal' : ((MAPA_DEST[(remunFor(m) || {}).dest] || [0, 'não apurado'])[1]),
+      onibus: valorMetrica(m, 'onibus') != null ? fmtNum(valorMetrica(m, 'onibus')) + '% vão de ônibus' : 'sem dado',
+      posicao: m.tz_status !== 'Ativa' ? 'sem Tarifa Zero universal' : (posicaoPlano(m) ? POS_ROT[posicaoPlano(m)] : 'não apurada'),
       modelo_prestacao_simples: m.modelo_prestacao ?? 'sem dado',
       pib_pc: 'R$ ' + fmtNum(m.pib_pc), motorizacao: fmtNum(m.motorizacao), ibeu: fmtNum(m.ibeu), idh: fmtNum(m.idh),
       cresc_pop: fmtNum(m.cresc_pop), rec_prop_pc: 'R$ ' + fmtNum(m.rec_prop_pc),
@@ -10826,6 +11040,80 @@ renderLeituras();
 renderLiteratura();
 // fim da montagem: some o aviso de carregamento (head.html)
 document.getElementById('carregando')?.remove();
+
+
+// ---------- proposta da revisão de lançamento (v1.0.0) (13/11/2026): pontos de trabalho com os dados ----------
+function abreMunicipio(m) {
+  if (!m) return;
+  abreAba('explorar', true);
+  renderDetail(m);
+  const ft = features.find(x => x.id === String(m.id));
+  if (ft) zoomToMuni(ft);
+  setTimeout(() => document.getElementById('detail')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+}
+// procure a sua cidade (abertura)
+(() => {
+  const t = document.getElementById('buscaTopo');
+  if (!t || !inputBusca) return;
+  t.addEventListener('input', () => { inputBusca.value = t.value; atualizaSugestoes(); });
+  const vai = () => { const m = MUNI_POR_ROTULO.get(t.value.trim()); if (m) { inputBusca.value = t.value; abreMunicipio(m); } };
+  t.addEventListener('change', vai);
+  t.addEventListener('keydown', e => { if (e.key === 'Enter') vai(); });
+})();
+// cruze você: abre o Explorar com a variável do passo na cor do mapa
+document.querySelectorAll('[data-cruze]').forEach(bt => bt.addEventListener('click', () => {
+  const sel = document.getElementById('colorBy');
+  if (sel) { sel.value = bt.dataset.cruze; sel.dispatchEvent(new Event('change')); }
+  abreAba('explorar');
+  setTimeout(() => document.getElementById('mapSvg')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+}));
+// o alvo: clique num ponto abre o município
+document.getElementById('alvoPanel')?.addEventListener('click', e => {
+  const c = e.target.closest('circle[data-mun]');
+  if (c) abreMunicipio(MUNI.get(String(c.dataset.mun)) || MUNI.get(Number(c.dataset.mun)));
+});
+// endereço direto para um município: painel.html#mun-3550308 (ponte vinda da Rede)
+function irParaMunDoEndereco(tent = 0) {
+  const mm = /^#mun-(\d+)/.exec(location.hash);
+  if (!mm) return;
+  const m = MUNI.get(mm[1]) || MUNI.get(Number(mm[1]));
+  if (m && features.length) abreMunicipio(m);
+  else if (tent < 40) setTimeout(() => irParaMunDoEndereco(tent + 1), 250);
+}
+window.addEventListener('hashchange', () => irParaMunDoEndereco());
+irParaMunDoEndereco();
+</script>
+<script>
+// passo 2: que grupos têm endereço na sua cidade → Rede de empresas, já no município
+(() => { const t = document.getElementById('buscaGrupo'); if (!t) return;
+  t.addEventListener('input', () => { inputBusca.value = t.value; atualizaSugestoes(); });
+  const vai = () => { const m = MUNI_POR_ROTULO.get(t.value.trim()); if (m) location.href = 'rede-ge.html#mun-' + m.id + '-' + encodeURIComponent(m.nome); };
+  t.addEventListener('change', vai); t.addEventListener('keydown', e => { if (e.key === 'Enter') vai(); });
+})();
+</script>
+<script>
+// proposta_etapa2: ao abrir uma caixa, avisa os gráficos (alguns medem a largura ao desenhar)
+document.querySelectorAll('details.pacote').forEach(d => d.addEventListener('toggle', () => { if (d.open) window.dispatchEvent(new Event('resize')); }));
+// os atalhos para o mesmo trecho também abrem a caixa quando o endereço não muda
+document.querySelectorAll('a[href^="#sec-p"], .explorar-nav a').forEach(a => a.addEventListener('click', () => {
+  const id = a.getAttribute('href').slice(1), el = document.getElementById(id) || document.getElementById('tab-' + id);
+  const cx = el && (el.matches('details') ? el : (el.querySelector(':scope > details.pacote') || el.closest('details.pacote')));
+  if (cx) cx.open = true;
+}));
+</script>
+<script>
+// card: copiar o link do município
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copia-mun]'); if (!b) return;
+  const url = location.href.split('#')[0] + '#mun-' + b.dataset.copiaMun;
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => { b.textContent = 'Link copiado'; }, () => { b.textContent = url; });
+});
+</script>
+<script>
+// uso do ônibus no mapa: quintis calculados dos dados do Censo embutidos no painel
+(() => { const v = [...MUNI.values()].map(m => valorMetrica(m, 'onibus')).filter(x => x != null && !Number.isNaN(x)).sort((a, b) => a - b);
+  if (!v.length) return; const q = p => v[Math.floor(p * (v.length - 1))];
+  STATS.breaks.onibus = [q(0), q(.2), q(.4), q(.6), q(.8), q(1)]; PALETTES.onibus = PALETTES.pib_pc; })();
 </script>
 </body>
 </html>
