@@ -7,14 +7,14 @@ pago e QUANTO custa, por município (Seções 7.2 a 7.4 da tese; pedido do autor
 Fontes, todas do pacote 5 da tese ("05 Arranjo, contratos e custos.xlsx"):
   - destinatario_contrapartida: o destinatário do recurso em quatro categorias (operação
     pública, operador pago pela oferta, pago pela demanda, recurso ao usuário). Só a coluna
-    do DESTINATÁRIO entra — a contrapartida não (ver fronteira abaixo).
+    do DESTINATÁRIO entrava até a v0.15; desde a v1.0.0 (13/11/2026) entra também a contrapartida.
   - arranjo_D1_D5: a fórmula de remuneração (por km, valor global fixo, por veículo, custo
     do serviço, por passageiro, combinações) e a força da prova da leitura.
   - preco_km_41_contratos: preço do quilômetro em reais de maio de 2026 (IPCA).
   - custo_por_habitante: valor anual do contrato lido ÷ população de 2022.
 
 FRONTEIRA (decisões do autor de 23/10/2026): entra a remuneração — quem recebe, por qual
-fórmula, quem carrega o risco de demanda e quanto se paga. Fica FORA a contrapartida e a
+fórmula, quem carrega o risco de demanda e quanto se paga. Desde 13/11/2026 entra a contrapartida (três estados); fica FORA a
 posição no plano analítico (gestão do comum, garantia de receita sem controle,
 "Bolsa-Empresário"), suspensas até a defesa (12.6); e fica fora a coluna de grupo econômico
 de custo_por_habitante e qualquer nota que cite grupo (a análise de grupos vai para a Rede
@@ -32,6 +32,22 @@ PACOTE = os.path.join(VAULT, '01 - Projeto', 'Envio à orientadora — 24-11-202
                       '02 Bases de dados (xlsx)', '05 Arranjo, contratos e custos.xlsx')
 BASE_JSON = os.path.join(BASE_DIR, '..', 'build', 'municipios_dados.json')
 OUT = os.path.join(BASE_DIR, 'remuneracao_tz.json')
+# 13/11/2026 (v1.0.0): base de 11/11/2026. As abas do pacote 5 de 22/10 dão lugar às tabelas
+# depositadas em dados/5_arranjo_contratos/ (DOI 10.5281/zenodo.24186039) — lidas, nunca escritas
+# — e, no arranjo A1–A6, ao levantamento harmonizado com a base de 11/11 (r102), que é o que a
+# tese usa e não está no depósito. TZ_PACOTE5 volta ao pacote antigo, para refazer a v0.15.
+DADOS5 = os.path.join(BASE_DIR, '..', 'dados', '5_arranjo_contratos')
+CSV5 = {'arranjo_D1_D5': 'arranjo_operacional_D1_D5.csv', 'destinatario_contrapartida': 'destinatario_contrapartida.csv',
+        'preco_km_41_contratos': 'preco_km_contratos.csv', 'custo_por_habitante': 'custo_habitante_contratos.csv',
+        'custeio_no_ato': 'custeio_no_ato.csv',
+        'arranjo_A1_A6': os.path.join(VAULT, '03 - Dados', '_data', 'Analises_Cap5_r75', 'arranjo_A1-A6_base-2026-11-11_r102.csv')}
+def ler(aba):
+    if os.environ.get('TZ_PACOTE5'):
+        return pd.read_excel(os.environ['TZ_PACOTE5'], sheet_name=aba)
+    f = CSV5[aba]
+    f = f if os.path.isabs(f) else os.path.join(DADOS5, f)
+    print(f'fonte de {aba}: {os.path.relpath(f, os.path.join(BASE_DIR, ".."))}')
+    return pd.read_csv(f)
 RE_GRUPO = re.compile(r'grupos? econ|GE-\d{3}|\bgrupo [A-Z]', re.I)
 
 def txt(v):
@@ -58,13 +74,25 @@ cont = Counter()
 
 DEST = {'(i) operação pública': 'publica', '(ii) oferta': 'oferta', '(iii) demanda': 'demanda',
         '(iv) usuário': 'usuario', 'privado, remuneração não apurada': 'privado_nd'}
-dc = pd.read_excel(PACOTE, sheet_name='destinatario_contrapartida')
+dc = ler('destinatario_contrapartida')
 for _, r in dc.iterrows():
     c = cod7(r.get('Código IBGE')); d = DEST.get(txt(r.get('dest4')))
     if c and d: out[c]['dest'] = d; cont['destinatário'] += 1
+    # 13/11/2026 (v1.0.0, decisão do autor: "atualizar tudo para base nova"): a CONTRAPARTIDA entra,
+    # nos três estados da regra B.1.3 (com, sem, não apurado) e com os itens: C controle social,
+    # T transparência específica do programa, D monitoramento de desempenho. Segue fora a posição
+    # de cada política no plano analítico (Seção 7.6 da tese).
+    est = txt(r.get('Contrapartida — estado')) or ('não apurado' if c else None)
+    if c and est:
+        out[c]['cp'] = {'com': 'com', 'sem': 'sem'}.get(est, 'nd')
+        itens = txt(r.get('Contrapartida — itens'))
+        if itens: out[c]['cpi'] = itens.replace(' ', '')
+        leit = txt(r.get('Contrapartida — leitura'))
+        if leit: out[c]['cpl'] = leit
+        cont['contrapartida ' + out[c]['cp']] += 1
 
 PROVA = {'cláusula lida': 'alta', 'edital/TR': 'alta', 'fonte secundária': 'media'}
-d5 = pd.read_excel(PACOTE, sheet_name='arranjo_D1_D5')
+d5 = ler('arranjo_D1_D5')
 for _, r in d5.iterrows():
     c = cod7(r.get('Código IBGE')); comp = txt(r.get('Remuneração — componentes'))
     if not c or not comp or comp.startswith('não se aplica'): continue
@@ -74,7 +102,7 @@ for _, r in d5.iterrows():
     cont['fórmula'] += 1
 
 FONTE_KM = {'doc': 'lido em documento', 'sec': 'fonte secundária', 'calc': 'valor anual ÷ quilometragem do termo de referência'}
-pk = pd.read_excel(PACOTE, sheet_name='preco_km_41_contratos')
+pk = ler('preco_km_41_contratos')
 for _, r in pk.iterrows():
     c = cod_nome(r['mun'], r['uf'])
     if not c: cont['preço/km sem município'] += 1; continue
@@ -85,7 +113,7 @@ for _, r in pk.iterrows():
                                         'arr': txt(r.get('A')), 'nota': nota})
     cont['contratos com preço/km'] += 1
 
-ch = pd.read_excel(PACOTE, sheet_name='custo_por_habitante')
+ch = ler('custo_por_habitante')
 for _, r in ch.iterrows():
     c = cod_nome(r['municipio'], r['uf'])
     if not c: cont['custo/hab sem município'] += 1; continue

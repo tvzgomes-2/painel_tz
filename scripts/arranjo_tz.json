@@ -193,7 +193,7 @@
   "a": "A1 Prestação direta",
   "esf": "público",
   "via": "execução direta (sem contrato de operação)",
-  "norma": "institui a gratuidade",
+  "norma": "autoriza, efetivada por contrato ou operação",
   "rem": "prestação direta (sem operador a remunerar)",
   "prova": "alta",
   "prova_txt": "cláusula de contrato lida"
@@ -218,7 +218,11 @@
   "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
  },
  "3137205": {
-  "rem": "indeterminado"
+  "a": "A4 Prestação de serviço",
+  "esf": "variável",
+  "rem": "desvinculada do passageiro",
+  "prova": "alta",
+  "prova_txt": "resposta a pedido de acesso à informação"
  },
  "3138401": {
   "a": "A4 Prestação de serviço",
@@ -417,9 +421,10 @@
   "a": "A4 Prestação de serviço",
   "esf": "variável",
   "via": "contrato licitado",
+  "norma": "nenhum ato (política sem norma)",
   "rem": "desvinculada do passageiro",
   "prova": "alta",
-  "prova_txt": "edital ou termo de referência lido"
+  "prova_txt": "cláusula de contrato lida"
  },
  "3301306": {
   "norma": "nenhum ato (política sem norma)",
@@ -436,10 +441,10 @@
   "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
  },
  "3301850": {
-  "a": "A4 Prestação de serviço",
+  "a": "A6 Híbrido, terceirização ou empresa pública",
   "esf": "variável",
-  "via": "contrato licitado",
-  "rem": "desvinculada do passageiro",
+  "via": "empresa pública/autarquia municipal",
+  "rem": "prestação direta (sem operador a remunerar)",
   "prova": "media",
   "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
  },
@@ -472,11 +477,12 @@
   "prova_txt": "cláusula de contrato lida"
  },
  "3302700": {
-  "a": "A6 Híbrido, terceirização ou empresa pública",
+  "a": "A3 Locação com motorista (L2, L3)",
   "esf": "variável",
-  "via": "empresa pública/autarquia municipal",
+  "via": "contrato licitado",
   "norma": "institui a gratuidade",
-  "rem": "prestação direta (sem operador a remunerar)",
+  "rem": "desvinculada do passageiro",
+  "loc": "L3 veículo + mão de obra + combustível",
   "prova": "alta",
   "prova_txt": "cláusula de contrato lida"
  },
@@ -580,7 +586,7 @@
   "via": "contrato licitado",
   "norma": "institui a gratuidade",
   "rem": "desvinculada do passageiro",
-  "loc": "locação, motorista a apurar",
+  "loc": "L2 veículo + mão de obra",
   "prova": "media",
   "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
  },
@@ -652,7 +658,9 @@
   "esf": "variável",
   "via": "contrato licitado",
   "norma": "nenhum ato (política sem norma)",
-  "rem": "indeterminado"
+  "rem": "desvinculada do passageiro",
+  "prova": "alta",
+  "prova_txt": "cláusula de contrato lida"
  },
  "3507902": {
   "a": "A1 Prestação direta",
@@ -783,7 +791,8 @@
  "3520442": {
   "a": "A1 Prestação direta",
   "esf": "público",
-  "rem": "indeterminado",
+  "via": "execução direta (sem contrato de operação)",
+  "rem": "prestação direta (sem operador a remunerar)",
   "prova": "baixa",
   "prova_txt": "MUNIC 2020 — autodeclaração da prefeitura, anterior à política"
  },
@@ -949,13 +958,22 @@
   "esf": "variável",
   "via": "contratação emergencial ou dispensa",
   "norma": "institui a gratuidade",
-  "rem": "indeterminado",
+  "rem": "desvinculada do passageiro",
   "prova": "media",
   "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
  },
  "3539103": {
   "norma": "institui a gratuidade",
   "rem": "indeterminado"
+ },
+ "3539400": {
+  "a": "A1 Prestação direta",
+  "esf": "público",
+  "via": "execução direta (sem contrato de operação)",
+  "norma": "institui a gratuidade",
+  "rem": "prestação direta (sem operador a remunerar)",
+  "prova": "alta",
+  "prova_txt": "resposta a pedido de acesso à informação"
  },
  "3540002": {
   "a": "A2 Locação só do veículo (L1)",
@@ -978,9 +996,10 @@
   "a": "A1 Prestação direta",
   "esf": "público",
   "via": "execução direta (sem contrato de operação)",
+  "norma": "nenhum ato (política sem norma)",
   "rem": "prestação direta (sem operador a remunerar)",
-  "prova": "media",
-  "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
+  "prova": "alta",
+  "prova_txt": "resposta a pedido de acesso à informação"
  },
  "3546405": {
   "a": "A6 Híbrido, terceirização ou empresa pública",
@@ -1281,9 +1300,13 @@
   "prova_txt": "MUNIC 2020 — autodeclaração da prefeitura, anterior à política"
  },
  "4120804": {
+  "a": "A5 Concessão ou permissão",
+  "esf": "privado",
   "via": "convênio, consórcio ou cooperação",
   "norma": "efetiva lei autorizativa",
-  "rem": "vinculada ao passageiro"
+  "rem": "desvinculada do passageiro",
+  "prova": "alta",
+  "prova_txt": "cláusula de contrato lida"
  },
  "4122206": {
   "a": "A1 Prestação direta",
@@ -1324,9 +1347,10 @@
   "a": "A1 Prestação direta",
   "esf": "público",
   "via": "execução direta (sem contrato de operação)",
+  "norma": "nenhum ato (política sem norma)",
   "rem": "prestação direta (sem operador a remunerar)",
-  "prova": "media",
-  "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
+  "prova": "alta",
+  "prova_txt": "resposta a pedido de acesso à informação"
  },
  "4201406": {
   "a": "A4 Prestação de serviço",
@@ -1375,9 +1399,13 @@
   "prova_txt": "cláusula de contrato lida"
  },
  "4205456": {
+  "a": "A4 Prestação de serviço",
+  "esf": "variável",
   "via": "contrato licitado",
   "norma": "autoriza, efetivada por contrato ou operação",
-  "rem": "indeterminado"
+  "rem": "indeterminado",
+  "prova": "alta",
+  "prova_txt": "cláusula de contrato lida"
  },
  "4205704": {
   "a": "A5 Concessão ou permissão",
@@ -1389,9 +1417,13 @@
   "prova_txt": "edital ou termo de referência lido"
  },
  "4206009": {
+  "a": "A4 Prestação de serviço",
+  "esf": "variável",
   "via": "contrato licitado",
   "norma": "institui a gratuidade",
-  "rem": "desvinculada do passageiro"
+  "rem": "desvinculada do passageiro",
+  "prova": "alta",
+  "prova_txt": "cláusula de contrato lida"
  },
  "4209607": {
   "a": "A1 Prestação direta",
@@ -1399,8 +1431,8 @@
   "via": "execução direta (sem contrato de operação)",
   "norma": "institui a gratuidade",
   "rem": "prestação direta (sem operador a remunerar)",
-  "prova": "media",
-  "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
+  "prova": "alta",
+  "prova_txt": "cláusula de contrato lida"
  },
  "4212650": {
   "a": "A3 Locação com motorista (L2, L3)",
@@ -1417,7 +1449,7 @@
   "esf": "variável",
   "via": "contrato licitado",
   "norma": "institui a gratuidade",
-  "rem": "indeterminado",
+  "rem": "desvinculada do passageiro",
   "loc": "L2/L3 (combustível a apurar)",
   "prova": "media",
   "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
@@ -1459,8 +1491,14 @@
   "prova_txt": "edital ou termo de referência lido"
  },
  "4314050": {
+  "a": "A3 Locação com motorista (L2, L3)",
+  "esf": "variável",
+  "via": "contrato licitado",
   "norma": "institui a gratuidade",
-  "rem": "desvinculada do passageiro"
+  "rem": "desvinculada do passageiro",
+  "loc": "L3 veículo + mão de obra + combustível",
+  "prova": "alta",
+  "prova_txt": "cláusula de contrato lida"
  },
  "4314209": {
   "a": "A1 Prestação direta",
@@ -1535,7 +1573,10 @@
   "prova_txt": "fonte secundária (notícia, portal, histórico de busca)"
  },
  "5202502": {
-  "rem": "indeterminado"
+  "a": "A1 Prestação direta",
+  "esf": "público",
+  "via": "execução direta (sem contrato de operação)",
+  "rem": "prestação direta (sem operador a remunerar)"
  },
  "5208004": {
   "a": "A4 Prestação de serviço",

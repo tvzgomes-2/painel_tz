@@ -1,9 +1,10 @@
 cff-version: 1.2.0
 message: "Se usar estes dados ou roteiros, cite a versão do Zenodo correspondente."
-title: "Tarifa Zero e grupos econômicos no transporte coletivo brasileiro: dados, scripts e painel da tese de doutorado (PGT/UFABC)"
+title: "Transporte público em crise: o papel dos grupos econômicos nas experiências de Tarifa Zero no Brasil — dados, scripts e painel da tese de doutorado (PGT/UFABC)"
 type: dataset
 version: "2026-11-11"
-date-released: "2026-11-15"
+date-released: "2026-11-13"
+doi: "10.5281/zenodo.24186039"
 authors:
   - family-names: "Gomes"
     given-names: "Thiago Von Zeidler"
@@ -12,6 +13,14 @@ contributors:
   - family-names: "Zioni"
     given-names: "Silvana"
     affiliation: "Universidade Federal do ABC (UFABC)"
+doi: "10.5281/zenodo.24186038"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24186038"
+    description: "DOI de todas as versões (aponta para a mais recente)"
+  - type: doi
+    value: "10.5281/zenodo.24186039"
+    description: "Release dados-v1.0.0 (base congelada de 11/11/2026), a versão citada na tese"
 license: CC-BY-4.0
 repository-code: "https://github.com/tvzgomes-2/painel_tz"
 url: "https://tvzgomes-2.github.io/painel_tz/"
@@ -21,3 +30,14 @@ keywords:
   - "grupos econômicos"
   - "política urbana"
   - "Brasil"
+references:
+  - type: thesis
+    title: "Transporte público em crise: o papel dos grupos econômicos nas experiências de Tarifa Zero no Brasil"
+    authors:
+      - family-names: "Gomes"
+        given-names: "Thiago Von Zeidler"
+    thesis-type: "Tese (Doutorado em Planejamento e Gestão do Território)"
+    institution:
+      name: "Universidade Federal do ABC (UFABC)"
+      city: "São Bernardo do Campo"
+    year: 2026

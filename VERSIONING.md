@@ -4,7 +4,7 @@ Adotada em 25/07/2026. Documento canônico da regra — o CHANGELOG.md registra 
 
 **Escopo: por página, não por site.** O repositório é um site com páginas independentes (Painel Brasil, Rede de empresas, futuras) — cada uma com seu próprio banco de dados e seu próprio ciclo de vida. A regra abaixo é uma só, mas o número de versão é contado separadamente por página (ex.: Painel Brasil pode estar em v0.3 enquanto a Rede de empresas ainda não tinha nenhuma versão publicada).
 
-O site como um todo não tem número de versão — tem uma **era**, nomeada com um modo de transporte, em ordem alfabética (como o Android fazia com sobremesas: Cupcake, Donut, Eclair...) — a primeira letra disponível de cada vez, sem precisar planejar a lista inteira com antecedência. A era muda só em eventos "major" no sentido definido abaixo (novo painel irmão publicado, ou redesign completo de alguma página) — não a cada patch/minor de uma página isolada. Era atual: **Bicicleta** (B — desde 23/10/2026, com a publicação de uma página irmã, a Rede de empresas (com a aba Além do ônibus; antes chamada Rede da ARS), no lançamento de teste; nome escolhido pelo autor). Antes: **Andarilho** (A — da publicação do hub com 2 páginas, 25/07/2026, a 23/10/2026). Próxima letra: C.
+O site como um todo não tem número de versão — tem uma **era**, nomeada com um modo de transporte, em ordem alfabética (como o Android fazia com sobremesas: Cupcake, Donut, Eclair...) — a primeira letra disponível de cada vez, sem precisar planejar a lista inteira com antecedência. A era muda só em eventos "major" no sentido definido abaixo (novo painel irmão publicado, ou redesign completo de alguma página) — não a cada patch/minor de uma página isolada. Era atual: **Canoa** (C — desde 13/11/2026, com a saída da fase de teste: Painel Brasil, Rede de empresas e a página nova de Dados da tese em v1.0.0, na base congelada de 11/11/2026; nome escolhido pelo autor). Antes: **Bicicleta** (B — de 23/10/2026, com a publicação de uma página irmã, a Rede de empresas (com a aba Além do ônibus; antes chamada Rede da ARS), no lançamento de teste, a 13/11/2026). Antes dela: **Andarilho** (A — da publicação do hub com 2 páginas, 25/07/2026, a 23/10/2026). Próxima letra: D.
 
 ## Fase de prototipagem — v0.x
 
@@ -55,3 +55,8 @@ Quatro ambiguidades da primeira versão desta regra foram resolvidas com o autor
 - Quando um patch e uma mudança estrutural coincidem na mesma janela de tempo, o que aconteceu no patch **fica só no CHANGELOG** — não precisa ser referenciado de novo na entrada do minor.
 - Gatilhos de major: **adição de um painel irmão** ou **redesign completo de UI**. (Mudança de escopo territorial não entra como gatilho — o painel já cobre todo o território nacional com granularidade municipal, o nível mais fino possível; não há "escopo maior" para expandir.)
 - Na fase de prototipagem (v0.x), regressões/hotfixes não têm marcação própria — **qualquer mudança soma +0.1**, sem granularidade extra.
+
+## Atualização dos dados (decisão do autor, 13/11/2026)
+
+O site fica na mesma base que a tese cita: hoje, a **base congelada de 11/11/2026** (pasta `dados/`, release `dados-v1.0.0`, DOI 10.5281/zenodo.24186039). Notícia ou correção que chegue depois (uma adoção nova, um ato lido) não entra direto no painel: vai para o *Registro de alterações pós-congelamento*, no cofre, e entra no site junto com o próximo congelamento e a próxima release de dados. O build (`scripts/build_tudo.sh`) lê o congelamento mais recente e para se a conferência com ele falhar (`scripts/conferir_congelamento.py`).
+

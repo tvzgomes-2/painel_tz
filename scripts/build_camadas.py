@@ -176,7 +176,8 @@ for _, r in df.iterrows():
 # 2b e o log da linha diz "em verificação"). Sem complemento o município ficaria
 # marcado como parcial no painel e sem camada nenhuma — parcial de quê, não se sabe.
 # Entra com o subtipo da base-mestre e flag de divergência; não se resolve aqui.
-MESTRE = os.path.join(DADOS, 'casos por fonte', 'Municípios TZ - consolidado.xlsx')
+# 13/11/2026: a base-mestre do mesmo congelamento da régua, não a cópia viva (ver build_data.py)
+MESTRE = os.path.join(os.path.dirname(TIP), 'Municípios TZ - consolidado.xlsx')
 complementados = []
 if os.path.exists(MESTRE):
     mt = pd.read_excel(MESTRE, sheet_name='consolidado')

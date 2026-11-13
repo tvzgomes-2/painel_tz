@@ -10,10 +10,10 @@ python3 - <<'PY'
 h = open('head-ge.html', encoding='utf-8').read()
 s = open('secao-alem.html', encoding='utf-8').read()
 assert h.count('<!--ALEM-->') == 1
-open('.head-ge-montado.html', 'w', encoding='utf-8').write(h.replace('<!--ALEM-->', s))
+open('../build/.head-ge-montado.html', 'w', encoding='utf-8').write(h.replace('<!--ALEM-->', s))
 PY
 {
-  cat .head-ge-montado.html
+  cat ../build/.head-ge-montado.html
   cat rede_ge.json
   printf '\n</script>\n<script id="data-pat" type="application/json">'
   cat patrimonio.json
@@ -23,5 +23,5 @@ PY
   cat logic-pat.js
   printf '\n})();\nif (location.hash.startsWith("#alem")) abreAba("alem");\n</script>\n</body>\n</html>\n'
 } > "$OUT"
-rm -f .head-ge-montado.html
+# o arquivo intermediário fica em build/ (não versionado); não é apagado, para não depender de permissão de exclusão
 echo "gerado: $OUT ($(wc -c < "$OUT") bytes)"

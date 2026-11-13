@@ -24,6 +24,22 @@ PACOTE = os.path.join(VAULT, '01 - Projeto', 'Envio à orientadora — 24-11-202
                       '02 Bases de dados (xlsx)', '05 Arranjo, contratos e custos.xlsx')
 BASE_JSON = os.path.join(BASE_DIR, '..', 'build', 'municipios_dados.json')
 OUT = os.path.join(BASE_DIR, 'custeio_tz.json')
+# 13/11/2026 (v1.0.0): base de 11/11/2026. As abas do pacote 5 de 22/10 dão lugar às tabelas
+# depositadas em dados/5_arranjo_contratos/ (DOI 10.5281/zenodo.24186039) — lidas, nunca escritas
+# — e, no arranjo A1–A6, ao levantamento harmonizado com a base de 11/11 (r102), que é o que a
+# tese usa e não está no depósito. TZ_PACOTE5 volta ao pacote antigo, para refazer a v0.15.
+DADOS5 = os.path.join(BASE_DIR, '..', 'dados', '5_arranjo_contratos')
+CSV5 = {'arranjo_D1_D5': 'arranjo_operacional_D1_D5.csv', 'destinatario_contrapartida': 'destinatario_contrapartida.csv',
+        'preco_km_41_contratos': 'preco_km_contratos.csv', 'custo_por_habitante': 'custo_habitante_contratos.csv',
+        'custeio_no_ato': 'custeio_no_ato.csv',
+        'arranjo_A1_A6': os.path.join(VAULT, '03 - Dados', '_data', 'Analises_Cap5_r75', 'arranjo_A1-A6_base-2026-11-11_r102.csv')}
+def ler(aba):
+    if os.environ.get('TZ_PACOTE5'):
+        return pd.read_excel(os.environ['TZ_PACOTE5'], sheet_name=aba)
+    f = CSV5[aba]
+    f = f if os.path.isabs(f) else os.path.join(DADOS5, f)
+    print(f'fonte de {aba}: {os.path.relpath(f, os.path.join(BASE_DIR, ".."))}')
+    return pd.read_csv(f)
 
 def txt(v):
     if v is None or (isinstance(v, float) and pd.isna(v)): return None
@@ -49,7 +65,7 @@ def nome_ato(arquivo, mun, uf):
     if not m: return None
     return re.sub(r'\s+', ' ', m.group(0)).strip()
 
-df = pd.read_excel(PACOTE, sheet_name='custeio_no_ato')
+df = ler('custeio_no_ato')
 out, cont, sem = {}, Counter(), []
 for _, r in df.iterrows():
     mun, uf = txt(r['municipio']), txt(r['uf'])

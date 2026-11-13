@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rede de empresas — Grupos econômicos do transporte coletivo</title>
-<meta name="description" content="Os 327 grupos econômicos do transporte coletivo: a rede societária, as unidades de controle, a concentração do capital, onde estão e os negócios fora do ônibus. Sem dados de sócio pessoa física. Versão de teste.">
+<meta name="description" content="Os 327 grupos econômicos do transporte coletivo: a rede societária, as unidades de controle, a concentração do capital, onde estão e os negócios fora do ônibus. Sem dados de sócio pessoa física.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230E0E10'/%3E%3Crect x='10' y='14' width='44' height='28' rx='6' fill='%23F5E400'/%3E%3Crect x='10' y='46' width='44' height='5' rx='2' fill='%23FF2D6B'/%3E%3Ccircle cx='20' cy='42' r='5' fill='%230E0E10'/%3E%3Ccircle cx='44' cy='42' r='5' fill='%230E0E10'/%3E%3Crect x='15' y='19' width='34' height='10' rx='2' fill='%230E0E10' opacity='.85'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Transporte Público em Crise">
 <meta property="og:title" content="Rede de empresas — quem controla o transporte coletivo no Brasil">
-<meta property="og:description" content="Os 327 grupos econômicos do transporte coletivo: a rede societária, as unidades de controle, a concentração do capital, onde estão e os negócios fora do ônibus. Sem dados de sócio pessoa física. Versão de teste.">
+<meta property="og:description" content="Os 327 grupos econômicos do transporte coletivo: a rede societária, as unidades de controle, a concentração do capital, onde estão e os negócios fora do ônibus. Sem dados de sócio pessoa física.">
 <meta property="og:url" content="https://tvzgomes-2.github.io/painel_tz/rede-ge.html">
 <meta property="og:image" content="https://tvzgomes-2.github.io/painel_tz/assets/og/compartilhar.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -370,13 +370,28 @@
     .tabbtn small{display:none;} nav.tabs{overflow-x:visible;} .tabbtn{flex:1 1 0;text-align:center;}
   }
 </style>
+<style>
+  /* chamada para os dados da tese (13/11/2026): no hub, logo abaixo da apresentação; nas demais páginas, junto ao rodapé */
+  .cta-dados{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;
+    background:#17171a;border:1px solid #2c2c33;border-left:4px solid #FF2D6B;border-radius:10px;padding:14px 18px;margin:22px 0 18px;
+    font-family:'Poppins','Montserrat',-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+  .cta-dados .cta-txt{flex:1 1 320px;min-width:0;}
+  .cta-dados .cta-txt b{display:block;color:#f2f2f0;font-size:14px;font-weight:800;margin-bottom:3px;}
+  .cta-dados .cta-txt span{display:block;color:#a3a3ab;font-size:12px;line-height:1.55;}
+  .cta-dados .cta-btn{flex:0 0 auto;background:#FF2D6B;color:#fff !important;text-decoration:none !important;font-weight:700;font-size:13px;
+    padding:9px 16px;border-radius:6px;white-space:nowrap;}
+  .cta-dados .cta-btn:hover{filter:brightness(1.12);}
+  .cta-dados.grande{padding:18px 22px;margin:4px 0 26px;}
+  .cta-dados.grande .cta-txt b{font-size:16px;}
+  .cta-dados.grande .cta-txt span{font-size:13px;}
+  .cta-dados.grande .cta-btn{font-size:14px;padding:11px 20px;}
+</style>
 </head>
 <body>
-<div class="faixa-teste" role="note"><b>Versão de teste</b>Os números e textos deste site estão em validação e acompanham uma tese de doutorado ainda não defendida — podem mudar. Correções e contribuições: <a href="pesquisa.html">pesquisa colaborativa →</a></div>
-<nav class="sitenav" aria-label="Páginas do site"><a class="marca" href="index.html">Transporte Público em <b>Crise</b></a><span class="links"><a href="painel.html">Painel Brasil</a><a href="rede-ge.html" aria-current="page">Rede de empresas</a><a href="verbetes.html">Verbetes</a><a href="pesquisa.html">Contribua</a></span></nav>
+<nav class="sitenav" aria-label="Páginas do site"><a class="marca" href="index.html">Transporte Público em <b>Crise</b></a><span class="links"><a href="painel.html">Painel Brasil</a><a href="rede-ge.html" aria-current="page">Rede de empresas</a><a href="dados.html">Dados e conceitos</a><a href="pesquisa.html">Contribua</a></span></nav>
 <header>
   <div class="wrap">
-    <h1>Rede de <span class="hl">empresas</span> <span class="badge">rede · v0.2</span></h1>
+    <h1>Rede de <span class="hl">empresas</span> <span class="badge">rede · v1.0.0</span></h1>
     <h2 class="sub2">Quem controla o transporte coletivo no Brasil, por vínculo societário</h2>
     <p class="resumo">Esta página mapeia a estrutura de controle do transporte coletivo brasileiro a partir dos dados societários da Receita Federal, com análise de redes sociais (ARS): quais empresas pertencem ao mesmo dono, que grupos econômicos elas formam e como esses grupos se ligam entre si. Tem duas partes: <b>quem controla</b> — os grupos, como se ligam, quanto concentram e onde estão — e <b>além do ônibus</b> — as holdings sócias e os negócios dos grupos fora do transporte (Seção 6.4). É a contraparte do <a href="painel.html">Painel Brasil</a>: a hipótese da tese é que a difusão da Tarifa Zero é restringida pela incompatibilidade entre o desenho da política e o arranjo contratual vigente — e, para pô-la à prova, é preciso saber quem são os operadores, quanto do setor eles concentram e onde estão (Capítulo 6). O grupo econômico aqui é uma agregação de vínculos societários observados, e não um sujeito com intenção.</p>
     <p><b>O que esta página não mostra:</b> nenhum nome de pessoa física como sócio (o nome de mercado de alguns grupos é o do fundador — é a marca, e sai como marca). A rede de sócios — que é o insumo do cálculo — tem milhares de pessoas nomeadas com CPF parcial, e fica no acervo da pesquisa, não aqui. O que se publica é a camada de <i>empresa</i>, <i>grupo</i> e <i>agrupamento de grupos</i> (unidade de controle, linhagem, federação), com o nome de mercado e o capital social declarado de cada um; as métricas derivadas da rede de pessoas (sócios-ponte, articulação, densidade) aparecem como números, nunca como identidades.</p>
@@ -498,6 +513,10 @@
 <!--ALEM-->
   </section>
 
+  <aside class="cta-dados" aria-label="Dados da tese">
+    <div class="cta-txt"><b>Dados da tese, abertos para baixar</b><span>Os oito pacotes que a tese cita, em CSV, com dicionário, SHA-256 e DOI no Zenodo. Licença CC BY 4.0.</span></div>
+    <a class="cta-btn" href="dados.html#dados">Baixar os dados →</a>
+  </aside>
   <footer>
     <div class="fgrid">
       <div class="fnames">
@@ -518,7 +537,7 @@
     </div>
     Rede de empresas v0.2 · 2026<br>
     Fontes: cadastro de CNPJ da Receita Federal (dados abertos, recorte de maio de 2024) · Tabela mestre de grupos econômicos v5 (17/10/2026) e análise de redes sociais (out/2026) do acervo da pesquisa · sócios das holdings e empresas de outros setores ligadas a eles (ago e out/2026) · Censo Demográfico 2022 (IBGE).<br>
-    Página gerada a partir de <i>rede_ge.json</i> e <i>patrimonio.json</i> (<i>scripts/build_rede_ge.py</i> e <i>build_patrimonio.py</i>) — protótipo de trabalho, não substitui a análise da tese (Capítulo 6 e Apêndice E). Histórico de versões no CHANGELOG do repositório.
+    Página gerada a partir de <i>rede_ge.json</i> e <i>patrimonio.json</i> (<i>scripts/build_rede_ge.py</i> e <i>build_patrimonio.py</i>) — instrumento exploratório da pesquisa; não substitui a análise da tese (Capítulo 6 e Apêndice E). As tabelas da rede citadas na tese, sem nomes de sócios pessoas físicas, estão na <a href="dados.html">página de dados</a> (pacote 4). Histórico de versões no CHANGELOG do repositório.
   </footer>
 </div>
 <div id="tooltip"></div>

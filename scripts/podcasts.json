@@ -1,0 +1,166 @@
+{
+  "_sobre": "Episódios da aba Podcast de dados.html, lidos por scripts/build_dados.py (13/11/2026). Áudios e transcrições em assets/podcast/, fora do depósito dados/. Correções conferidas com o Volume I da tese.",
+  "intro": "Três conversas em áudio, para quem quer conhecer a tese antes de ler o texto: a crise do ônibus, quem são os donos da Tarifa Zero e quem paga a conta. Foram geradas com inteligência artificial a partir da tese: as vozes não são do autor nem da orientadora. Servem de porta de entrada: simplificam, usam analogias e, em alguns pontos, erram ou exageram. Embaixo de cada episódio estão as correções, com o minuto (aproximado na Parte 3, que não tem marcação de tempo) e o lugar da tese. A referência é sempre a tese.",
+  "nomes": "Nas conversas, o autor aparece como “Tiago Gomes” e, nas duas primeiras, a orientadora como “Silvana Zione”: são Thiago Von Zeidler Gomes e Silvana Maria Zioni. O repositório citado é o painel_tz, no GitHub (tvzgomes-2/painel_tz).",
+  "episodios": [
+    {
+      "n": 1,
+      "titulo": "Tarifa Zero e o colapso dos ônibus",
+      "duracao": "28 min",
+      "capitulos": "Parte 1 da tese, Capítulos 1 a 4",
+      "resumo": "O transporte como direito social desde a Emenda Constitucional 90/2015, a pressão do carro, da moto e dos aplicativos sobre o ônibus, o ciclo vicioso da tarifa que joga o custo sobre quem ganha menos e a régua descritiva, que separa a Tarifa Zero universal das gratuidades com portão.",
+      "audio": "assets/podcast/tz-parte-1-tarifa-zero-e-o-colapso-dos-onibus.mp3",
+      "transcricao": "assets/podcast/tz-parte-1-tarifa-zero-e-o-colapso-dos-onibus-transcricao.txt",
+      "correcoes": [
+        [
+          "10:15",
+          "O ônibus responde por 23,3% das viagens ao trabalho.",
+          "23,3% é o transporte coletivo inteiro: ônibus, BRT, trem e metrô. No deslocamento ao trabalho (Censo 2022), o carro tem 32,3%, a caminhada 17,8% e a moto, com o mototáxi, 17,1%.",
+          "Análise I (Censo 2022)"
+        ],
+        [
+          "13:46",
+          "A produtividade caiu cerca de 40%: quase metade do público sumiu.",
+          "A queda é de produtividade, e não de metade do público. Nos nove grandes sistemas acompanhados pela NTU, os passageiros por veículo por dia caíram 42% de 1996 a 2019, e os passageiros por quilômetro, 40% de 1993 a 2019. Em 2025, estavam 16% abaixo do nível de antes da pandemia.",
+          "Análise VI (NTU) e Seção 3.1"
+        ],
+        [
+          "20:15",
+          "O primeiro nível da régua se chama “a base”.",
+          "Na tese, é o piso da régua: as gratuidades garantidas em lei nacional, como a das pessoas com 65 anos ou mais e a do dia de votação. A Tarifa Zero começa acima desse piso.",
+          "Seção 4.4 e Figura 7"
+        ]
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "Quem são os donos da Tarifa Zero",
+      "duracao": "25 min",
+      "capitulos": "Parte 2 da tese, Capítulos 5 e 6",
+      "resumo": "Onde estão as 187 políticas de Tarifa Zero, em municípios pequenos e médios e nenhuma acima de 500 mil habitantes, os seis arranjos de operação, o caminho do cadastro da Receita Federal aos 327 grupos econômicos, as 22 unidades de controle que detêm metade do capital e quem, de fato, opera a gratuidade.",
+      "audio": "assets/podcast/tz-parte-2-quem-sao-os-donos-da-tarifa-zero.mp3",
+      "transcricao": "assets/podcast/tz-parte-2-quem-sao-os-donos-da-tarifa-zero-transcricao.txt",
+      "correcoes": [
+        [
+          "3:16",
+          "Há 45 políticas parciais.",
+          "Das 187 políticas, 181 estão ativas: 173 universais (camada 1) e 8 parciais. Seis foram encerradas.",
+          "Seção 5.4"
+        ],
+        [
+          "7:10",
+          "A pesquisa prova que, nos municípios pequenos, a gratuidade é operada por empresas de transporte escolar ou de fretamento.",
+          "O que a tese mostra é um gradiente de porte: abaixo de 20 mil habitantes, 14 dos 22 operadores comprovados estão fora do núcleo do ônibus urbano (turismo, fretamento, escolar, locação). A imagem da mesma van que leva as crianças à escola é da conversa, e não um achado.",
+          "Seção 6.6"
+        ],
+        [
+          "10:25",
+          "As quase 13 mil empresas despencaram para 327 grupos.",
+          "Os 327 grupos reúnem 1.040 das 12.907 empresas ativas. A maior parte das empresas não se liga a nenhuma outra: 54,7% das 7.680 com sócio no capital têm no máximo um vínculo.",
+          "Tabela 4 e Seção 6.3"
+        ],
+        [
+          "11:44",
+          "Um ramo da família fica com o metropolitano, outro com as rodovias, mas o controle da holding continua no núcleo original.",
+          "Muitas vezes é o contrário: a partilha corta o capital entre os ramos, e resta só a linhagem familiar (grau C), que a tese trata como atributo, e não como controle comum.",
+          "Seção 6.3"
+        ],
+        [
+          "11:57",
+          "Os grupos se articulam em federações e dividem as rotas que vão a licitação para não concorrer entre si.",
+          "A tese não documenta divisão de rotas. Federação é articulação por cargo ou por capital em terceira empresa, sem controle comum, e serve só de teto para a concentração.",
+          "Seção 6.3"
+        ],
+        [
+          "13:13",
+          "O resto do patrimônio fica totalmente blindado dentro da holding, como bonecas russas.",
+          "A imagem é da conversa. A tese segue as holdings e os negócios dos sócios, mas vínculo de sócio não é controle unificado, e o cadastro não informa a parcela de cada sócio.",
+          "Seção 6.4"
+        ],
+        [
+          "14:08",
+          "As empresas “zumbis” servem para manter votos em consórcios ou cruzar participações sem expor a holding.",
+          "Na tese, zumbi é a empresa ativa no cadastro e sem operação: 19 grupos não têm operação de transporte coletivo localizada. Os usos citados na conversa não estão na tese.",
+          "Seções 6.2 e 6.5"
+        ],
+        [
+          "17:13",
+          "A frota justifica emitir debêntures e tomar crédito barato em bancos públicos para financiar o braço imobiliário.",
+          "A emissão de títulos pelas empresas dos grupos não foi verificada. O crédito federal documentado (Refrota, Novo PAC) financia frota e só vai a operadores com concessão ou permissão. O ônibus como ativo-âncora é uma leitura compatível com os dados, e não um achado demonstrado.",
+          "Seções 6.4 e 8.5"
+        ],
+        [
+          "18:13",
+          "21 dos 99 operadores comprovados são de algum dos 22 megagrupos.",
+          "As 21 políticas são operadas por empresas de 19 dos 327 grupos. Só 7 são de empresas de cinco das 22 unidades do topo do capital.",
+          "Seção 6.6 e Tabela 6"
+        ],
+        [
+          "18:55",
+          "Onde há grupo, a gratuidade nunca entra por ruptura: entra sempre por aditivo ao contrato.",
+          "Com grupo, o aditivo à concessão é a forma mais comum (12 de 21), mas não a única. Em Maricá, a cidade rompeu com a concessão, e uma empresa de grande grupo voltou como locadora.",
+          "Tabela 6 e Seções 7.4 e 8.2"
+        ],
+        [
+          "20:10",
+          "Entre Cerquilho e Tietê, as linhas intermunicipais pagas são o refúgio dos grandes grupos.",
+          "No par Cerquilho–Tietê, nenhuma das empresas pertence aos 327 grupos. O caso mostra o poder do operador local, que reúne vários contratos do município, e não o de um grande grupo.",
+          "Estudo de caso 2, Seção 6.7"
+        ],
+        [
+          "11:43 e 24:32",
+          "As 22 unidades do topo são 22 famílias.",
+          "Entre as 22 há empresas isoladas e uma falida desde 2022 (Itapemirim). O capital social é o registrado no cadastro: não mede faturamento nem operação.",
+          "Seção 6.2 e Quadro 18"
+        ]
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "Quem paga a conta da Tarifa Zero",
+      "duracao": "14 min",
+      "capitulos": "Parte 3 da tese, Capítulos 7 a 9",
+      "resumo": "A régua analítica, que pergunta quem recebe o recurso e que contrapartida entrega: a gestão do comum, a garantia de receita sem controle e a “Bolsa-Empresário”. Depois, os três testes do Capítulo 8 (adoção, forma de entrada e permanência do operador), a conclusão da tese e a disputa em Brasília pelo financiamento, do Marco Legal à PEC do Sistema Único de Mobilidade.",
+      "audio": "assets/podcast/tz-parte-3-quem-paga-a-conta-da-tarifa-zero.mp3",
+      "transcricao": "assets/podcast/tz-parte-3-quem-paga-a-conta-da-tarifa-zero-transcricao.txt",
+      "correcoes": [
+        [
+          "~6:05",
+          "68 municípios fazem operação pública direta, com a prefeitura dona da frota.",
+          "Das 152 políticas com destinatário apurado, 68 custeiam operação pública, o que inclui a locação de veículos: a prefeitura não precisa ser dona da frota. Outras 82 pagam um operador privado pela oferta e 2, pela demanda.",
+          "Seção 7.2"
+        ],
+        [
+          "~8:50",
+          "Com grupo forte, a gratuidade entrou por aditivo em 8 de 11 casos; sem grupo, em 7 de 36.",
+          "Os números são dos municípios de arranjo (satélites e sedes): com grupo, 8 de 11; sem grupo, 7 de 36. Nas cidades isoladas, com grupo, 2 de 9. Com o controle de porte e só 20 casos de grupo, a diferença fica no limite do acaso (p = 0,06).",
+          "Seções 8.2 e 8.3"
+        ],
+        [
+          "~9:10",
+          "O dono mantém a sua margem de lucro de 20%.",
+          "A analogia é da conversa: a tese não mede a margem de lucro dos operadores.",
+          "—"
+        ],
+        [
+          "~9:30",
+          "De 18 operadores de grandes grupos, 11 ficaram.",
+          "São operadores de qualquer um dos 327 grupos econômicos, e não só dos grandes: ficaram 11 de 18 com grupo e 16 de 25 sem grupo, sem diferença entre os dois (p = 1,00).",
+          "Seção 8.3 e Tabela 13"
+        ],
+        [
+          "~10:20",
+          "A hipótese inicial se confirma, com ressalvas.",
+          "A tese conclui que os resultados são compatíveis com a hipótese, sem demonstrar o mecanismo: presença no cadastro não é operação. E a hipótese se sustenta melhor sobre o contrato do que sobre o grupo.",
+          "Seção 9.1"
+        ],
+        [
+          "~10:50",
+          "O Marco Legal separa a tarifa da remuneração a partir de 2027.",
+          "Correto, com uma precisão: a Lei nº 15.432/2026 entra em vigor em junho de 2027. A PEC 18/2026 reserva ao menos 26,8% das emendas parlamentares impositivas à gratuidade aos sábados, domingos e feriados.",
+          "Seção 9.4"
+        ]
+      ]
+    }
+  ]
+}

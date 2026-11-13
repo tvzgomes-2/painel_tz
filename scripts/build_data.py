@@ -27,8 +27,16 @@ base = pd.read_csv(os.path.join(VAULT, '03 - Dados', '_data', 'Base Municipal v3
                     dtype={'cod_ibge': str}, low_memory=False)
 base['cod_ibge'] = base['cod_ibge'].str.zfill(7)
 
-tz = pd.read_excel(os.path.join(VAULT, '03 - Dados', '_data', 'casos por fonte', 'Municípios TZ - consolidado.xlsx'),
-                    sheet_name='consolidado')
+# Base-mestre (13/11/2026, v0.16): o painel passa a sair do CONGELAMENTO citado na tese, e não
+# da cópia viva — a viva recebe alterações depois do congelamento (Registro de alterações
+# pós-congelamento). TZ_CONGELAMENTO escolhe outro (ex.: 2026-10-21, para refazer a v0.15);
+# sem ela, vale o congelamento mais recente.
+DADOS = os.path.join(VAULT, '03 - Dados', '_data')
+CONG = os.environ.get('TZ_CONGELAMENTO') or sorted(
+    d[len('congelamento-'):] for d in os.listdir(DADOS) if d.startswith('congelamento-'))[-1]
+MESTRE = os.path.join(DADOS, f'congelamento-{CONG}', 'Municípios TZ - consolidado.xlsx')
+print('base-mestre:', MESTRE)
+tz = pd.read_excel(MESTRE, sheet_name='consolidado')
 
 name_uf_to_code = {(r['nome_mun'].strip().lower(), r['uf']): r['cod_ibge'] for _, r in base.iterrows()}
 missing = tz['Código IBGE'].isna()
@@ -48,8 +56,10 @@ print(tz[dup_mask][['Município', 'UF', 'Situação', 'Ano início']])
 tz_dedup = tz.drop_duplicates(subset='cod_ibge', keep='first')
 print('canonico apos dedup:', tz_dedup.shape)
 
-tz_small = tz_dedup[['cod_ibge', 'Situação', 'Ano início', 'Fim', '% orçamento', 'Operador']].rename(
-    columns={'Situação': 'tz_situacao_mestre', 'Ano início': 'tz_ano_mestre', 'Fim': 'tz_fim_mestre'})
+tz_small = tz_dedup[['cod_ibge', 'Situação', 'Ano início', 'Fim', '% orçamento', 'Operador',
+                     'Fontes — levantamentos (recontagem)', 'Fontes — nº de levantamentos (recontagem)']].rename(
+    columns={'Situação': 'tz_situacao_mestre', 'Ano início': 'tz_ano_mestre', 'Fim': 'tz_fim_mestre',
+             'Fontes — levantamentos (recontagem)': 'tz_levant_txt', 'Fontes — nº de levantamentos (recontagem)': 'tz_levant_n'})
 
 df = base.merge(tz_small, on='cod_ibge', how='left')
 # A coluna `Situação` da base-mestre mudou de sentido em out/2026: hoje ela diz que
@@ -57,6 +67,15 @@ df = base.merge(tz_small, on='cod_ibge', how='left')
 # ou parcial. Sem esta separação, 7 casos parciais (Palmas/TO aos domingos, Monte Mor
 # com a Tarifa do Bem, etc.) entravam na contagem de TZ universal. Decisão do autor,
 # 22/10/2026: separar pela régua.
+# Base de 11/11/2026: a coleta de e-SIC acabou, e os pedidos sem resposta viraram LACUNA
+# DECLARADA, com a classe da hipótese mantida e ressalvada ("classe por hipótese", 26 casos).
+# A coluna da hipótese pré-e-SIC continua preenchida em casos já fechados pela resposta
+# (Lagoa da Prata e Sertanópolis, fechados em 04/11), então a marca do painel passa a vir da
+# coluna da lacuna, e o texto da hipótese só acompanha quem está nela.
+LAC = 'Lacuna declarada (fim da coleta)'
+if LAC in tz_dedup.columns:
+    tz_dedup = tz_dedup.copy()
+    tz_dedup.loc[tz_dedup[LAC].isna(), 'Classificação provisória (hipótese pré-e-SIC)'] = np.nan
 tz_small_regua = tz_dedup[['cod_ibge', 'Régua — aba', 'Régua — subtipo',
                            'Classificação provisória (hipótese pré-e-SIC)']].rename(
     columns={'Régua — aba': 'tz_regua_aba', 'Régua — subtipo': 'tz_regua_sub',
@@ -148,6 +167,9 @@ cols = {
     'part_16': 'partido_16', 'passe_1turno_2022': 'passe_1t', 'passe_2turno_2022': 'passe_2t',
     'passe_abrangencia_2022': 'passe_abrang', 'tz_status': 'tz_status',
     'tz_ano_mestre': 'tz_ano', 'tz_fim_mestre': 'tz_fim', '% orçamento': 'tz_pct_orc', 'Operador': 'tz_operador',
+    # 13/11/2026: quais levantamentos anteriores registram o caso (Seção 5.1 da tese) — substitui o
+    # crosswalk casos_por_fonte.json, de julho, que cobria 63 das 187 políticas
+    'tz_levant_txt': 'tz_levant', 'tz_levant_n': 'tz_levant_n',
     # régua descritiva (cap. 4.3 / 5.5 da tese): a classificação do desenho, não do status
     'tz_regua_aba': 'tz_regua_aba', 'tz_regua_sub': 'tz_regua_sub',
     'tz_provisorio': 'tz_prov', 'tz_provisorio_txt': 'tz_prov_txt',

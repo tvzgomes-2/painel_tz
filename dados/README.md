@@ -41,7 +41,7 @@ Esta pasta é o depósito de dados citado na tese. Tudo está na **base congelad
 
 Dados: Creative Commons Atribuição 4.0 (CC BY 4.0). Código: MIT. Ver `../LICENSE.md` e `../CITATION.cff`.
 
-Como citar: GOMES, Thiago Von Zeidler. *Tarifa Zero e grupos econômicos no transporte coletivo brasileiro: dados, scripts e painel da tese de doutorado (PGT/UFABC)*. Versão 2026-11-11. Zenodo, 2026. DOI: [A CONFIRMAR na release].
+Como citar: GOMES, Thiago Von Zeidler. *Tarifa Zero e grupos econômicos no transporte coletivo brasileiro: dados, scripts e painel da tese de doutorado (PGT/UFABC)*. Versão 2026-11-11. Zenodo, 2026. DOI: https://doi.org/10.5281/zenodo.24186039 (esta versão); https://doi.org/10.5281/zenodo.24186038 (todas as versões).
 
 ## Integridade
 

@@ -1,4 +1,4 @@
-# build_rsl.py — dados da aba "Literatura" do Painel Brasil (Seção 5.2 e Apêndice B da tese).
+# build_rsl.py — dados da aba "Literatura" do Painel Brasil (Seção 5.2 e Apêndice C da tese, r103).
 # Pedido do autor (24/10/2026): "RSL não está incorporada".
 # Fontes: pacote 6 da tese (06 Revisão sistemática da literatura.xlsx — corpus_rsl, citacoes)
 # e a matriz de fatores da codificação dos 81 itens (09/10/2026, v2) — o Quadro 7.
@@ -91,7 +91,7 @@ for _, r in ml.iterrows():
 mun = {k: sorted([[i, g] for i, g in v.items()], key=lambda x: (x[1], x[0])) for k, v in mun.items()}
 print(f"municípios com algum trabalho do corpus: {len(mun)} | com estudo ou análise (A/B): {sum(1 for v in mun.values() if any(g in 'AB' for _, g in v))} | sem código IBGE: {len(sem_cod)} {sorted(sem_cod)[:6]}")
 uni = {str(m['id']) for m in base if m.get('tz_status') == 'Ativa'}
-print(f"dos 174 universais: {len(uni & set(mun))} com algum trabalho; {len(uni - set(mun))} sem nenhum (a tese diz 86 sem citação, pelo método do Apêndice B)")
+print(f"dos {len(uni)} universais: {len(uni & set(mun))} com algum trabalho identificado; {len(uni - set(mun))} sem (a tese, pela ficha de cada política no Apêndice H, conta 81 citados e 92 sem)")
 saida = {'funil': funil, 'estratos': estratos, 'por_ano': por_ano, 'itens': itens, 'fatores': fatores, 'mun': mun,
          'retrato': 'corpus encerrado em 16/09/2026; matriz de fatores de 09/10/2026'}
 json.dump(saida, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))

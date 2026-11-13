@@ -33,9 +33,23 @@ VAULT = os.environ.get('TZ_VAULT') or os.path.join(BASE_DIR, '..', '..', 'doutor
 PACOTE = os.path.join(VAULT, '01 - Projeto', 'Envio à orientadora — 24-11-2026',
                       '02 Bases de dados (xlsx)', '05 Arranjo, contratos e custos.xlsx')
 OUT = os.path.join(BASE_DIR, 'arranjo_tz.json')
+# 13/11/2026 (v1.0.0): base de 11/11/2026. As abas do pacote 5 de 22/10 dão lugar às tabelas
+# depositadas em dados/5_arranjo_contratos/ (DOI 10.5281/zenodo.24186039) — lidas, nunca escritas
+# — e, no arranjo A1–A6, ao levantamento harmonizado com a base de 11/11 (r102), que é o que a
+# tese usa e não está no depósito. TZ_PACOTE5 volta ao pacote antigo, para refazer a v0.15.
+DADOS5 = os.path.join(BASE_DIR, '..', 'dados', '5_arranjo_contratos')
+CSV5 = {'arranjo_D1_D5': 'arranjo_operacional_D1_D5.csv', 'destinatario_contrapartida': 'destinatario_contrapartida.csv',
+        'preco_km_41_contratos': 'preco_km_contratos.csv', 'custo_por_habitante': 'custo_habitante_contratos.csv',
+        'custeio_no_ato': 'custeio_no_ato.csv',
+        'arranjo_A1_A6': os.path.join(VAULT, '03 - Dados', '_data', 'Analises_Cap5_r75', 'arranjo_A1-A6_base-2026-11-11_r102.csv')}
+def ler(aba):
+    if os.environ.get('TZ_PACOTE5'):
+        return pd.read_excel(os.environ['TZ_PACOTE5'], sheet_name=aba)
+    f = CSV5[aba]
+    f = f if os.path.isabs(f) else os.path.join(DADOS5, f)
+    print(f'fonte de {aba}: {os.path.relpath(f, os.path.join(BASE_DIR, ".."))}')
+    return pd.read_csv(f)
 
-if not os.path.exists(PACOTE):
-    raise SystemExit(f"ERRO: pacote não encontrado em {PACOTE}")
 
 
 def txt(v):
@@ -47,7 +61,7 @@ def txt(v):
     return s
 
 
-df = pd.read_excel(PACOTE, sheet_name='arranjo_A1_A6')
+df = ler('arranjo_A1_A6')
 print('linhas na aba:', len(df))
 
 # A força da prova de cada codificação. A tese é explícita: 80 das 186 codificações do
@@ -60,6 +74,7 @@ PROVA = {
     'fonte secundária': ('media', 'fonte secundária (notícia, portal, histórico de busca)'),
     'MUNIC 2020 (autodeclaração)': ('baixa', 'MUNIC 2020 — autodeclaração da prefeitura, anterior à política'),
     'resposta a e-SIC': ('alta', 'resposta a pedido de acesso à informação'),
+    'resposta a pedido de acesso': ('alta', 'resposta a pedido de acesso à informação'),
 }
 
 out = {}

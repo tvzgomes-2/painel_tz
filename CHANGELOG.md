@@ -1,10 +1,39 @@
 # Changelog e notas de metodologia
 
-O site tem páginas independentes, cada uma com seu próprio número de versão (ver arquitetura em `ROADMAP.md` § 0). Cada página tem a sua seção: **Rede de empresas** primeiro (a mais nova) e **Painel Brasil** em seguida.
+O site tem páginas independentes, cada uma com seu próprio número de versão (ver arquitetura em `ROADMAP.md` § 0). Cada página tem a sua seção: **Dados da tese** primeiro (a mais nova), **Rede de empresas** e **Painel Brasil** em seguida. Desde 13/11/2026 o site está na **era Canoa**: as três páginas saem da fase de teste em v1.0.0, na base congelada de 11/11/2026.
+
+# Dados e conceitos (`dados.html`, tag Dados; até 13/11/2026, "Dados da tese")
+
+## v1.0.0 (atual — 2026-11-13, em validação; era Canoa)
+
+Página nova, pedida pelo autor em 13/11/2026 ("importante ter um novo painel para downloads dos dados da tese"). É a quinta página do site e, com a saída da fase de teste, abre a **era Canoa** (ver `VERSIONING.md`).
+
+- **Dados e Conceitos fundidos** (decisão do autor, 13/11/2026: "os dados e conceitos deveriam ser fundidos"): a página passa a se chamar **Dados e conceitos**, com duas abas — **Dados da tese** (abre por padrão e em `#dados`) e **Conceitos** (os cinco verbetes, em `#conceitos` ou no `#id` de cada verbete). `verbetes.html` vira um redirecionamento que preserva a âncora (`verbetes.html#regua-analitica` → `dados.html#regua-analitica`); a fonte dos verbetes passa a `scripts/verbetes-fonte.html`. No menu de todas as páginas e no hub, um item só, "Dados e conceitos".
+- **Os dois volumes da tese em PDF** (decisão do autor: publicar antes da defesa, com o texto como está): `scripts/build_tese_pdf.py` converte a revisão limpa mais recente de cada volume (hoje a r103, já com as fichas de Wenceslau Braz e Carmo corrigidas pelo chat da tese) para `tese/`, depois de conferir que não há marca de revisão, comentário nem célula cortada. Os botões da página passam a baixar os PDFs (17,4 MB e 12,5 MB). A conversão é do LibreOffice, com substituição das fontes do Word; para a versão final, exportar o PDF pelo próprio Word.
+- **Dicionário nas colunas:** na lista de colunas de cada CSV, as que têm entrada no dicionário mostram o rótulo, a fonte e a unidade (Base Municipal v3) ou o preenchimento e exemplos (base de políticas) ao passar o mouse.
+- **Sem o bloco "Ressalvas de uso"** e, em "O que ficou de fora", sem os itens dos comprovantes de e-SIC e das três colunas retiradas da Base Municipal v3 (decisão do autor, 13/11/2026): a página deixa de repetir esses trechos do `dados/README.md`, onde eles continuam. Sai também a nota de rodapé sobre como a página é gerada. E a frase sobre baixar arquivo por arquivo e conferir o SHA256SUMS.txt, no quadro "Baixar tudo". A nota dos DOIs fica numa linha só: o DOI da versão já está na citação, e a nota traz só o de todas as versões e as licenças. As abas viram botões grandes (a selecionada em amarelo). Na aba Conceitos, sai o aviso de "liberação progressiva" e o histórico de revisão dos verbetes (decisão do autor).
+- **Metadados para buscadores de dados:** a página traz a descrição schema.org do conjunto de dados (Dataset, com DOI, licença, autoria e distribuição), que o Google Dataset Search lê.
+
+- **O que traz:** os oito pacotes da pasta `dados/` (release `dados-v1.0.0`, DOI [10.5281/zenodo.24186039](https://doi.org/10.5281/zenodo.24186039)), cada um com a descrição e o apêndice do `dados/README.md`; arquivo por arquivo, com link de download, tamanho, linhas e colunas (nos CSV, com a lista de colunas) e SHA-256 (clique copia); filtro por nome; a citação pronta para copiar; os dois DOIs (o desta versão e o de todas as versões); o arquivo completo no Zenodo e o ZIP da release no GitHub; "O que ficou de fora" e "Ressalvas de uso", do próprio README do depósito.
+- **Gerada, não escrita à mão:** `scripts/build_dados.py` lê `dados/` e nunca escreve nela. Só entram os arquivos versionados no git: os quatro roteiros que o `.gitignore` deixa fora do depósito, por trazerem nomes de sócios no código, não aparecem. Arquivos Markdown (as 315 normas padronizadas) abrem no GitHub, já formatados; os demais são baixados direto.
+- **Dados pessoais:** a varredura de `scripts/pessoas_fisicas.py` não acha nenhum nome de sócio pessoa física na página.
+- **Título e citação compatíveis com a tese** (pedido do autor, 13/11/2026): o depósito passa a se chamar como a tese — "Transporte público em crise: o papel dos grupos econômicos nas experiências de Tarifa Zero no Brasil — dados, scripts e painel da tese de doutorado (PGT/UFABC)" — em `CITATION.cff` (com a tese em `references`) e em `.zenodo.json`, que vale a partir da próxima release. A página traz **duas citações**, cada uma com botão de copiar: a da tese (ABNT; folhas e data da defesa [A CONFIRMAR] depois da defesa) e a dos dados (DOI da versão). **Os dois volumes da tese** têm botão previsto: o `build_dados.py` liga o botão quando o PDF estiver em `tese/` (`Tese - Volume I - Texto.pdf`, `Tese - Volume II - Apêndices.pdf`); até lá, ele aparece desativado, com "disponível depois da defesa".
+- **Subtítulo alinhado com a tese** (decisão do autor, 13/11/2026): no hub e no Painel Brasil, "A influência dos grupos econômicos…" passa a "O papel dos grupos econômicos nas experiências de Tarifa Zero no Brasil", como na capa da tese.
+- **Chamada para os dados** (pedido do autor, 13/11/2026): no hub, um bloco em destaque logo abaixo da apresentação, antes dos cards ("Os dados da tese são abertos", botão "Ver e baixar os dados"); no Painel Brasil, na Rede de empresas, nos Verbetes e na Pesquisa colaborativa, um bloco com o botão "Baixar os dados", junto ao rodapé. Mesmo estilo nas cinco páginas.
+- Menu do site com o novo item **Dados** em todas as páginas; card próprio no hub, que também passa aos números da base de 11/11 (173 universais, 45 parciais, 6 encerradas, barra nas cores de dado do painel) e à era Canoa. Os **Verbetes** passam aos mesmos números (operador documentado: 99 políticas; empresas de grupo operam 19 das 173 universais, Seção 6.6) e o da régua analítica deixa de dizer que o painel publica só a régua descritiva; a faixa "Versão de teste" sai de todas as páginas.
+
 
 # Rede de empresas (`rede-ge.html`, tag GE; até 23/10/2026, "Rede da ARS")
 
-## v0.2 (atual — 2026-10-24; validada e publicada em 2026-10-30, commit `94eea96`)
+## v1.0.0 (atual — 2026-11-13, em validação; era Canoa)
+
+Saída da fase de teste (decisão do autor, 13/11/2026: "saímos da versão de teste!"). Pelo `VERSIONING.md`, o lançamento é a v1.0.0.
+
+- **Sem mudança de número:** a Tabela mestre v5 (17/10/2026) é a versão fechada que a tese usa na base de 11/11/2026 (327 grupos, 1.040 empresas dos grupos, 361 holdings). Os builders (`build_rede_ge.py`, `build_patrimonio.py`) foram rodados de novo e devolvem **o mesmo conteúdo**; mudam só a ordem das ligações e, por décimos, as coordenadas do layout da rede, que não são determinísticas. Ficam os JSON da v0.2, para não mexer no desenho à toa.
+- Sai a faixa "Versão de teste"; selo `rede · v1.0.0`; menu com **Dados**; rodapé aponta para o pacote 4 da página de dados (as tabelas da rede sem nomes de sócios pessoas físicas).
+- **Varredura de dados pessoais** (`scripts/pessoas_fisicas.py`, contra os 85.845 nomes completos de sócios PF do quadro de sócios recortado): nenhum nome de sócio PF fora de razão social de empresa ou de nome de mercado de grupo. Cinco nomes de mercado são o nome completo do fundador ou controlador; ficam pela decisão 1b do autor (23/10/2026) e pela regra do prompt de 13/11 ("o nome de mercado dos grupos e a razão social das empresas podem ficar"), mas estão listados no resumo da rodada para o autor confirmar.
+
+## v0.2 (2026-10-24; validada e publicada em 2026-10-30, commit `94eea96`)
 
 - **Nome de mercado como nome principal** em toda a página (tabela, ficha, listas de centralidade, território, busca); o rótulo do cálculo (holding ou sobrenome) fica embaixo, em cinza. Antes, a rede mostrava "Grupo Carvalho / Mobi" e as listas "Rrf Participacoes Ltda." — o leitor via dois grupos onde havia um. Nomes de mercado repetidos (ramos da mesma família) levam o rótulo depois de um ponto.
 - **Chegada pelo Painel Brasil:** o endereço `rede-ge.html#mun-<código IBGE>-<nome>` abre a busca por município já preenchida; se nenhum grupo tem endereço ali, a página diz isso e lembra que ausência de endereço não é ausência de operador.
@@ -40,7 +69,76 @@ Primeira versão da página irmã do Painel Brasil, a partir do rascunho de julh
 
 Regra completa (fases, patch/minor/major, hierarquia de precedência, nota de remapeamento v1/v2/v3 → v0.1/v0.2/v0.3) em [`VERSIONING.md`](./VERSIONING.md). A regra é uma só para todas as páginas do site; o que muda é que cada página conta seu próprio número.
 
-## v0.15 (atual — 2026-10-30)
+## v1.0.0 (atual — 2026-11-13, em validação; era Canoa)
+
+**O painel passa à base congelada de 11/11/2026, a mesma da tese, e sai da fase de teste.** Pedido do autor em duas partes: o prompt de 13/11/2026 (`01 - Projeto/Prompt — painel na base de 11-11-2026 (outra frente, 13-11-2026).md`, no cofre), que pedia a v0.16, e a decisão do mesmo dia de sair da versão de teste, que faz desta a v1.0.0.
+
+**Antes de trocar a fonte, a conferência de reprodutibilidade.** `montar_html.sh` sobre `build/` e os crosswalks da v0.15 gera arquivo `cmp`-idêntico ao `painel.html` do commit `13bdd09` (7.412.275 bytes). A reconstrução completa a partir das fontes, porém, não se refaz: a v0.15 foi montada da cópia viva da base-mestre de 22/10, que não foi congelada, e o congelamento de 21/10 ainda não tinha a coluna da hipótese pré-e-SIC. Por isso, daqui em diante, o build lê o **congelamento** e não a cópia viva.
+
+**Fontes trocadas** (cada builder diz no topo de onde lê; nada em `dados/` foi alterado):
+
+| Bloco | Até a v0.15 | Na v1.0.0 |
+|---|---|---|
+| Base-mestre (`build_data.py`) | cópia viva de 22/10 | `congelamento-2026-11-11` (variável `TZ_CONGELAMENTO` escolhe outro) |
+| Régua (`build_camadas.py`) | congelamento mais recente + base viva | congelamento de 11/11, régua e base do mesmo congelamento |
+| Arranjo A1–A6 (`build_arranjo.py`) | pacote 5, base de 21/10 | levantamento harmonizado com a base de 11/11 (r102), que já traz Maricá pela operação |
+| Destinatário, fórmula, preço/km, custo/hab (`build_remuneracao.py`), custeio no ato (`build_custeio.py`) | pacote 5 | tabelas do depósito, `dados/5_arranjo_contratos/` (só leitura; `TZ_PACOTE5` volta ao pacote antigo) |
+| Fichas (`build_fichas.py`) | Apêndice D da r92 | **Apêndice H da r103**: 187 fichas, base de 11/11 |
+| Curva por porte, estatísticas | recalculadas da base nova | idem |
+
+**O que mudou no dado:** 173 universais (1a 152 · 1b 9 · 1c 8 · 1d 4), 8 parciais ativas na base e 6 encerradas. Rio das Flores passa de universal a parcial (2b); Colina, de 2a a 2e; Jeceaba, de 2b a 2a; Aquiraz, de 1c a 1a; Balneário Piçarras, de 1c a 1b; São José da Barra, de 1b a 1c. Régua: 45 parciais, 48 entradas (2e com 5). População com Tarifa Zero universal: 7.393.227 (3,6%). Curva: 9,3% dos 1.488 municípios com indício de sistema (139). Destinatário: 82 das 173 universais pagas pela oferta (47,4%). Quadro 28 da r103: fundo 13 · dotação 70 · orçamento geral 59, e 45 sem fonte apurada.
+
+**Classe por hipótese.** A coleta de e-SIC terminou em 11/11/2026; os 26 pedidos sem resposta que feche o caso viraram **lacuna declarada**, com a classe da hipótese mantida e ressalvada. A marca ◇ passa a vir da coluna da lacuna (26: 24 na camada 1, uma parcial e uma encerrada), e não mais da coluna da hipótese, que segue preenchida em dois casos já fechados (Lagoa da Prata e Sertanópolis, 04/11). Card, régua, leitura, glossário e notas trocam "classificação provisória" por "classe por hipótese".
+
+**Dados pessoais.**
+- `build_fichas.py` troca o nome da sócia da Bamonte Transportes pelo cargo nos três trechos da ficha de Alumínio/SP que a nomeiam (o texto do autor: "pela representante legal da Bamonte Transportes Ltda."), e qualquer outro nome completo de sócio PF que sobre fora de razão social e nome de mercado vira "[pessoa física]". O nome não volta no build.
+- `scripts/pessoas_fisicas.py` (novo) faz a varredura das páginas geradas contra o quadro de sócios recortado (fora do repositório). No painel, sobram 5 ocorrências, todas na coluna do **prefeito eleito em 2024** (TSE), por homonímia possível com sócios; são dado público de cargo eletivo e ficam.
+- Duas fichas do Apêndice H da r103 trazem células truncadas na própria tese (Wenceslau Braz e Carmo: "c", "n", "f", "p" no lugar de régua, ato, verificação e remuneração). As linhas saem do quadro-resumo no painel e o build avisa; a correção é na tese.
+
+**Textos.** Data da base em todas as páginas ("base de 11/11/2026"); notas metodológicas recalculadas (fora de arranjo 97 de 4.632; prestação direta 19,0%, 45 de 237); a nota do denominador deixa de dizer que o índice "ainda não está no painel"; RSL com a r103 (92 dos 173 sem citação: 87 verificados e 5 que entraram depois; a separação 59/22 sai do [A CONFIRMAR], porque o Apêndice C, Seção C.4, a traz item a item); remissões aos apêndices da r103 (fichas no H, RSL no C, Análise XII no B.12); o card do município deixa de citar o "Score de população", que saiu na v0.15. O ano de início passa a ler "dez/2014" e "~2021"; uma nota como "a apurar (MUNIC 2020…)" não vira início em 2020.
+
+**Contrapartida no painel** (decisão do autor, 13/11/2026: "atualizar tudo para base nova", revendo a 12.6). Novo painel na seção 3 do Panorama, "A contrapartida — o que a política exige em troca do recurso": os três estados da regra B.1.3 (com, sem, não apurada) sobre a camada 1 do recorte, os itens (controle social, transparência, desempenho), os municípios com controle social escrito e o cruzamento com os contratos pagos pela oferta (Seção 7.2). Nacional: apurada em 125 das 173, 31 com alguma e 94 sem; controle social em 8, transparência em 12, desempenho em 19, as três só em Cianorte; nos 82 pagos pela oferta, apurada em 67 (6 com controle social, 15 só com transparência ou desempenho, 46 sem) — os números do Volume I r103. A linha entra na ficha do município (com a leitura do ato no ⓘ), na leitura da seção 3 e no quadro-resumo das fichas do Apêndice H; o filtro das fichas passa a cortar só a **posição no plano** analítico (gestão do comum, garantia de receita sem controle, "Bolsa-Empresário"), que segue fora do site. Fonte: `dados/5_arranjo_contratos/destinatario_contrapartida.csv`.
+
+**Resultados das duas réguas no painel** (decisão do autor, 13/11/2026: "deveríamos ter seções nos painéis com os resultados das duas"). A seção 2 passa a se chamar "Como funciona: a régua descritiva" e a seção 3, "A quem serve: a régua analítica". Na seção 3, dois painéis novos depois da contrapartida: **o alvo** (Figura 24 da tese) — setores pelo destinatário do recurso, anéis pela distância da gestão do comum, um ponto por política, branco quando a classe é por hipótese — e **as duas réguas cruzadas** (Quadro 29), destinatário × subtipo de portão, com a coluna "por hipótese". Os dois respondem aos filtros. A regra de posição segue a Seção 7.1: controle social escrito = gestão do comum; só transparência ou desempenho = controle parcial; sem contrapartida = operação pública sem controle, garantia de receita sem controle (pago pela oferta) ou "Bolsa-Empresário" (pago pela demanda); fora do alvo quando o destinatário ou a contrapartida não foram apurados. Nacional, base de 11/11/2026: 110 de 173 posicionadas — gestão do comum 6 (Agudos, Brodowski, Capão Bonito, Cianorte, Irati, São João Del Rei), controle parcial 20, operação pública sem controle 36, garantia de receita sem controle 46, "Bolsa-Empresário" 2; cruzamento 1a × oferta 71, 1a × pública 63, 1a × demanda 2, 24 por hipótese — os números da Seção 7.6 do Volume I r103. A ficha do município ganha a linha "Posição no plano"; o filtro de frases de posição nas fichas do Apêndice H foi desligado (`RE_ANALITICA` fica só como registro); o verbete da régua analítica, o glossário e as notas deixam de dizer que a posição está fora do painel.
+
+**Base legal na base de 11/11/2026** (pedido do autor). `scripts/build_legislacao_base.py` (novo) substitui a cadeia `build_legislacao.py` + `build_legislacao_padrao.py`, que lia o levantamento de 18/09 e uma tabela consolidada que saiu do cofre. Lê a base congelada (ato vigente, legislação, link, confiabilidade, norma lida, mecanismo de custeio) e o catálogo das normas padronizadas do depósito: 187 políticas — 123 com a norma lida, 46 políticas sem norma, 18 com a norma não localizada —, e a ficha de cada município passa a linkar as 301 notas padronizadas das 148 políticas que as têm (no GitHub, já formatadas). O texto de trabalho da base (alertas, marcas de edição) é limpo no build. O glossário troca os números de julho pelos de 11/11.
+
+**Saída da fase de teste:** sai a faixa "Versão de teste"; selo `painel · v1.0.0`; rodapé com a era e a base; "protótipo de trabalho" vira "instrumento exploratório da pesquisa"; links para a página de dados no cabeçalho e no rodapé; menu com **Dados**.
+
+**Rodada de revisão geral (13/11/2026, a pedido do autor: "aplique/corrija o que for possível").**
+- **Painel mais leve, autocontido** (decisão do autor: "manter autocontido, mas limpar dados pesados"): de 7,6 MB para 4,7 MB. Sai a **matriz origem-destino** (726 KB; as linhas de desejo no mapa e as listas de destinos na ficha — fica a parcela de ocupados que trabalha fora do município); saem do bloco de dados as **22 colunas que o painel não usa** (`scripts/exportar_colunar.py`, que falha se uma delas voltar a ser usada) e os números com casas demais ficam com 5 algarismos significativos; a partição modal vai em colunas. O que ainda pesa: geometria (1,2 MB), base municipal (1,9 MB), fichas (0,5 MB).
+- **Grupo do operador na ficha** (decisão do autor): onde o operador é empresa de grupo (Maricá, Forquilhinha), o texto fica com o nome do grupo e um link para ele na Rede de empresas; o código GE sai.
+- **Levantamentos de casos na ficha:** quais levantamentos anteriores registram cada política (Santini, NTU, inventários acadêmicos), da base de 11/11 — ou que nenhum registra, quando o caso entrou pela busca da pesquisa (Seção 5.1). Substitui o crosswalk de fontes de julho, que cobria 63 das 187 políticas.
+- **Literatura por município:** a contagem que vale passa a ser a da linha "Literatura (revisão sistemática)" de cada ficha do Apêndice H (81 dos 173 universais citados, como na tese); a lista de trabalhos é a que o painel consegue ligar a um item do corpus.
+- **Acessibilidade:** os sete filtros ganham rótulo ligado ao campo; nenhum texto abaixo de 11 px.
+- **Build:** `scripts/build_tudo.sh` monta o site inteiro na ordem certa e para no primeiro erro, com a conferência automática contra o congelamento (`scripts/conferir_congelamento.py`: 193 linhas e 18 números canônicos) e a varredura de nomes de sócios. Números do hub e dos verbetes passam a sair dos dados (`scripts/atualizar_numeros.py`). Scripts que herdariam dado antigo vão para `scripts/_aposentados/`. As 34 entradas do registro de decisões anteriores a 23/10 vão para `ROADMAP-arquivo.md`.
+- **Regra de atualização** (decisão do autor, em `VERSIONING.md`): o site fica no congelamento que a tese cita; o que chega depois vai para o Registro de alterações pós-congelamento e entra com o próximo congelamento e a próxima release.
+- A revisão semanal automática das sextas foi **pausada até a defesa** (decisão do autor), porque o roteiro dela era o da fase de teste.
+
+**Conferência painel × congelamento** (`03 - Dados/Congelamento da base — 11-11-2026.md` e `dados/1_politicas/tz_base_mestre_2026-11-11.csv`):
+
+| Indicador | Congelamento de 11/11 | Painel v1.0.0 | Leitura |
+|---|---|---|---|
+| Linha a linha (193 linhas) | situação, aba e subtipo | iguais nas 193 | = |
+| Em escopo · ativas · encerradas | 187 · 181 · 6 | 187 · 181 · 6 | = |
+| Camada 1 | 173: 1a 152 · 1b 9 · 1c 8 · 1d 4 | idem | = |
+| Parciais ativas na base | 8 (Dom Silvério, Jeceaba, Monte Mor 2a; Casimiro de Abreu, Guapimirim, Rio das Flores 2b; Palmas 2c; Colina 2e) | idem | = |
+| Encerradas | Ubiratã, Porto Real, Jaboticabal, Paulínia, Pirapora do Bom Jesus, Getulina | idem | = |
+| Aba 2 da régua | 45: 2a 4 · 2b 10 · 2c 28 · 2d 1 · 2e 5 | idem | = |
+| Regulamentadas não implantadas · pistas | 2 · 2 | 2 · 2 | = |
+| Lacuna declarada | 26 | 26 (◇) | = |
+| UF dos 187 | SP 65 · MG 36 · PR 25 · RJ 20 · SC 13 · RS 6 · GO 5 · CE 4 · ES 3 · MS 3 · BA 2 · RO 2 · MT 1 · PI 1 · TO 1 | idem | = |
+| População dos 187 | 21 · 45 · 76 · 29 · 16 | idem | = |
+| Ano de início dos 187 | ≤2000 7 · 2001–12 13 · 2013–19 31 · 2020–22 40 · 2023 40 · 2024 9 · 2025 30 · 2026 12 · NA 5 | igual, salvo 2020–22 39 e NA 6 | **diferença de 1:** Mandirituba ("a apurar (MUNIC 2020 já declara isenção…)"): o script do congelamento lê 2020 dentro da nota; o painel não |
+| Prestação (eixo 2) | direta 63 · contrato 82 · locação 21 · não apurada 21 | não exibida; o painel mostra o arranjo A1–A6 do levantamento harmonizado: A1 61 · A2 6 · A3 26 · A4 43 · A5 32 · A6 5 · não apurado 14 | classificações diferentes; o A1–A6 é o do Volume I (Seção 5.6). A tese diz 32 concessões no quadro-resumo e 31 no texto da Seção 5.6 (o texto conta só as ativas) |
+| Operador com CNPJ · operador em grupo | 99 · 20 (21 na Tabela 6, com Maricá) | não exibidos: grupo econômico fica na Rede de empresas, sem cruzamento grupo × Tarifa Zero | — |
+| Contrapartida (camada 1) | com 31 · sem 94 · não apurada 48 | idem (painel novo na seção 3) | = |
+| Prova de operação, norma lida, PlanMob, nº de levantamentos | no congelamento | não exibidos | — |
+| Quadro 28 (r103) | fundo 13 · dotação 70 · orçamento 59 · não apurada 45 | idem | = |
+| Curva por porte (r103, Seção 5.4) | 139 de 1.488 (9,3%); 34 abaixo do corte | idem | = |
+| RSL (r103, Seção 5.2) | 143 municípios; 92 dos 173 sem citação | idem; o cruzamento próprio do painel acha 70 universais citadas, a tese 81 | diferença conhecida, [A CONFIRMAR] |
+
+## v0.15 (2026-10-30)
 
 **O Panorama vira cinco perguntas.** Parecer externo colado pelo autor para começar a versão: a aba reunia régua, linha do tempo, UF, porte, contratos, remuneração, custeio e população numa fileira longa, e o leitor precisava percorrer quase tudo para achar uma pergunta.
 
