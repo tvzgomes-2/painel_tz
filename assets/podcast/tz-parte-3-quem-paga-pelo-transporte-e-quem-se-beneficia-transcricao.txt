@@ -1,0 +1,203 @@
+Transporte público em crise — a tese em conversa
+Parte 3 — Quem é que paga pelo transporte e quem se beneficia? (16 min)
+Conversa gerada com inteligência artificial a partir da tese de Thiago Von Zeidler Gomes (PGT/UFABC, 2026), orientada por Silvana Maria Zioni.
+Transcrição automática, sem revisão: nomes próprios podem sair errados. Os avisos [ATENÇÃO] marcam, no trecho em que acontece, o que a tese diz onde a conversa simplifica demais ou erra. Onde está cada ponto na tese, e as correções, na página Dados e conceitos (https://tvzgomes-2.github.io/painel_tz/dados.html#podcast). A referência é sempre a tese.
+
+(0:00 - 0:16)
+É muito comum, sabe, quando a gente tenta analisar uma política pública, a nossa tendência natural é olhar para a coisa toda como se fosse um placar de jogo. Sim, um jogo com começo, meio e fim. Isso aí, tem aquele time que ganha, o time que perde e o apito final.
+
+(0:17 - 0:32)
+É uma visão reconfortante pensar assim, porque é simples, não acha? É uma visão quase esportiva, eu diria, da gestão pública. A gente tenta reduzir tudo a um simples funcionou ou não funcionou. Mas a realidade das nossas cidades, ela não cabe em um placar.
+
+(0:32 - 0:41)
+Principalmente quando a gente decide analisar o transporte público. Porque, de repente, saber se a política funcionou ou não, deixou de ser a questão principal. Verdade.
+
+(0:41 - 1:00)
+Analisar quem ganha com a mobilidade urbana, não é olhar para um placar, mas sim tentar descobrir quem é o dono da bola. Quem está ditando as regras desse jogo e, o mais importante, quem é que paga o aluguel do campo no final do mês. E essa analogia reflete perfeitamente as águas turvas da gestão de contratos públicos.
+
+(1:00 - 1:15)
+O campo quase nunca pertence a quem está ali jogando. E as regras costumam estar muito bem trancadas nas gavetas de quem é, de fato, o verdadeiro dono da bola. É com essa imagem mental que eu dou as boas-vindas a quem nos ouve para o encerramento da nossa jornada sobre a mobilidade urbana.
+
+(1:15 - 1:26)
+É a nossa terceira e última parte desse mergulho. Foi um caminho bastante revelador até aqui. Foi, sim, muito revelador desconstruir como a gente entende o direito de circular pelas cidades.
+
+(1:27 - 1:49)
+E hoje nós vamos focar naquela pergunta que amarra toda essa discussão. Afinal, quem é que paga pelo transporte e quem se beneficia de verdade? E para responder a isso, nós vamos mergulhar hoje num trabalho monumental que muda a forma como enxergamos esse setor no Brasil. Ah, o estudo da UFABC, certo? Isso! A tese de doutorado brilhante do Tiago von Fintch Gomes.
+
+(1:49 - 2:05)
+O título completo da pesquisa é Transporte Público em Crise O papel dos grupos econômicos nas experiências de tarifa zero no Brasil Um título forte. Bastante. Foi uma tese defendida na Universidade Federal do ABC, sob a orientação da professora Silvana Maria Zioni.
+
+(2:05 - 2:24)
+E o objetivo do nosso papo de hoje é traduzir todo o rigor científico dessa tese para a vida real. E o que mais me chama atenção nesse trabalho é que ele não procura um vilão fácil, sabe? A intenção não é apontar o dedo e dizer Olha lá, a megacorporação bloqueando o ônibus gratuito. É, não tem essa caricatura do vilão de novela.
+
+(2:25 - 2:48)
+A intenção é desmontar a máquina e ver como a engrenagem roda de verdade. Mas, assim, isso me levanta uma dúvida muito prática sobre o método da pesquisa. Como é que alguém consegue provar, com dados, que uma grande empresa está moldando ou barrando uma política pública? Afinal, os donos de viação não registram em cartório uma ata dizendo Ah, hoje nós vamos bloquear o passe livre.
+
+(2:48 - 2:56)
+Pois é, a dificuldade é exatamente essa. Na ciência, a gente tem um conceito chamado de contrafatual. Pense num seguinte cenário.
+
+(2:56 - 3:02)
+No mundo ideal, a gente teria uma máquina do tempo. Uma máquina do tempo ajudaria bastante na pesquisa. Com certeza.
+
+(3:03 - 3:21)
+Nós pegaríamos uma cidade específica, colocaríamos um grande grupo econômico controlando os ônibus ali e observaríamos se a prefeitura consegue aprovar a tarefa zero. Certo. Depois, a gente voltaria no tempo, tiraria esse grupo gigante, colocaria uma empresa pequena de bairro no lugar e observaríamos de novo o que acontece.
+
+(3:22 - 3:44)
+Seria o teste de laboratório perfeito, né? A gente veria as duas realidades paralelas, isolando só a variável da empresa. Mas, como não temos essa máquina do tempo e também não dá pra ver os contratos daquelas cidades que não adotaram a política porque costumam ser uma caixa preta, a pesquisa precisou cruzar outras estratégias. Então, como eles resolveram isso? Não há uma prova única e isolada.
+
+(3:45 - 3:57)
+O veredito do estudo junta três grandes peças de um quebra-cabeça. Três linhas de evidência. A primeira é olhar para o desenho real da política, o que está efetivamente escrito nas leis e nos contratos de quem adotou.
+
+(3:58 - 4:15)
+E a segunda peça? A segunda é a comparação estatística cuidadosa entre cidades que são muito parecidas. E a terceira linha de evidência é acompanhar a trajetória de cada cidade, caso a caso. Bom, vamos começar pela primeira peça do quebra-cabeça, então, que é o desenho da coisa, seguir o rastro do dinheiro.
+
+(4:16 - 4:24)
+A gente estabeleceu, acho que desde a primeira parte da nossa análise, uma régua muito clara. Zerar catraca não basta. Não basta mesmo.
+
+(4:24 - 4:35)
+Porque quando a tarifa zera para o passageiro que sobe no ônibus, ela não zera para a prefeitura. Alguém tem que pagar o combustível, o pneu, o salário de quem está dirigindo. É aí que o levantamento do Tiago entra.
+
+(4:36 - 4:56)
+Ele destrinchou isso com dados apurados até 11 de novembro de 2026. Ele olhou para 152 políticas universais de tarifa zero no Brasil, onde foi possível descobrir o destino exato do dinheiro público. E o que esse mapa financeiro revelou? Dessas 152 políticas, 68 são classificadas como operação pública.
+
+(4:56 - 5:13)
+Olha, eu preciso fazer uma pausa aqui, porque o nosso senso comum costuma atrair a gente. Quando eu leio operação pública, a imagem imediata que vem à cabeça é o prefeito comprando o ônibus direto da fábrica e colocando funcionários concursados para dirigir. É o que quase todo mundo imagina.
+
+[ATENÇÃO — o que a tese diz (Seções 7.2 e 7.3 e Tabela 8): A tese diz que a operação pública inclui a locação de veículos, mas não que ela seja a maior parte. Entre as políticas universais, a execução direta, sem empresa a remunerar, aparece em 56.]
+
+(5:14 - 5:22)
+Mas está longe de ser só isso. A pesquisa esclarece que a operação pública inclui muito a locação de frota. Ah, então a prefeitura não é dona do veículo.
+
+(5:23 - 5:35)
+Na maioria das vezes, não. Ela aluga os ônibus de uma empresa, que às vezes já fornece os motoristas no pacote. A grande diferença é que quem dita a regra, o formato da operação, é o próprio município.
+
+(5:35 - 5:49)
+A prefeitura desenha a rota, define os horários e assume a gestão. Ela não repassa esse poder de decisão para uma concessionária privada tradicional. É como uma terceirização da frota, mas o cérebro da operação continua sendo o poder público.
+
+(5:49 - 6:02)
+Só que isso corresponde por 68 cidades. Onde está o resto do dinheiro? O grosso está nas outras 82 políticas. Nelas, a prefeitura contrata e paga um operador privado pela chamada oferta.
+
+(6:02 - 6:12)
+Oferta seria pagar por quilômetro rodado? Isso. Pagar pelos quilômetros que o ônibus rodou ou pela quantidade de viagens completadas. E aqui, os dados mostram um cenário preocupante.
+
+(6:12 - 6:35)
+Ao investigar fundo, 67 desses contratos de oferta, descobriu-se que 46 deles não exigem absolutamente nenhuma contrapartida de transparência ou de melhoria. Deixa eu ver se eu entendi a gravidade disso. A prefeitura assume todo o custo, paga a empresa por quilômetro rodado e não coloca no papel nenhuma exigência para a empresa abrir os custos ou melhorar o conforto de quem está no ônibus.
+
+(6:35 - 6:47)
+Nenhuma exigência em 46 desses 67 contratos. A receita da empresa fica totalmente garantida pelo dinheiro público, mas não tem controle em troca. E tem algo ainda mais curioso.
+
+(6:47 - 7:04)
+Para fechar a conta das 152 cidades, a gente precisa falar de duas específicas, Canoas e Nazaré Paulista. O que tem de diferente nessas duas? Nesses dois lugares, a prefeitura não paga por oferta. Ela paga pela demanda, ou seja, por passageiro transportado.
+
+(7:04 - 7:13)
+Pagamento por demanda na tarifa zero. Mas assim, isso gera um incentivo muito estranho. É como se eu fechasse um restaurante inteiro para dar uma festa.
+
+(7:13 - 7:22)
+O cozinheiro, o espaço, o custo fixo já estão lá. Se eu pago pela oferta, eu aluguei o restaurante inteiro por um valor fixo e todo mundo come à vontade. É uma boa analogia.
+
+(7:23 - 7:35)
+Mas pagar pela demanda seria o dono do restaurante me cobrar separadamente cada vez que um convidado meu levanta para repetir o prato. Se a gratuidade atrai naturalmente mais gente para o ônibus, a conta não explode. Explode absurdamente.
+
+(7:36 - 7:44)
+Enquanto isso, o custo real da empresa de colocar aquele ônibus na rua quase não mudou. O setor até tem um apelido para esse modelo. Eles chamam de Bolsa Empresário.
+
+(7:44 - 7:54)
+Bolsa Empresário? Caramba. O passageiro roda de graça, atrai um monte de gente e o dono da aviação fatura por cabeça. E a prefeitura que lute para pagar a conta.
+
+(7:55 - 8:16)
+Com base nisso, eu fico me perguntando. A gente está perto daquele ideal da mobilidade desenhada como um direito comum? O que o pessoal chama de gestão do comum? Eu diria que a gente tomou um banho de água fria com os dados. Entre 110 políticas com informações completas na pesquisa, apenas 6 chegam a essa classificação de gestão do comum.
+
+(8:16 - 8:34)
+Só 6 em mais de 100? Pois é. Quase todo o custeio da gratuidade no Brasil sai do orçamento geral da prefeitura ou de alguma dotação anual. Nenhuma cidade analisada tinha uma receita própria e vinculada confirmada para bancar o sistema. O dinheiro sai do mesmo caixa que paga a saúde e educação.
+
+(8:34 - 9:16)
+E isso significa que se a arrecadação da cidade cair, o transporte é o primeiro a sofrer cortes? Sem dúvida. E para piorar, olhando para os preços pagos pela oferta em 43 contratos, o valor varia de R$ 5,79 até R$ 23,75 por quilômetro. É uma diferença enorme.
+
+Tem uma média aí? A mediana fica em R$ 10,37. E o detalhe, não existe um padrão claro que explique essas diferenças baseado no fato da cidade ter ou não um grande grupo econômico operando lá. Então, se não há padrão nos preços, onde é que a presença desses grandes grupos realmente faz diferença? Isso nos leva para a segunda parte da pesquisa, o teste dos dados.
+
+(9:17 - 9:30)
+Exatamente, os três testes estatísticos do Tiago. Ele comparou cidades do mesmo porte, com a mesma renda e situadas no mesmo Estado para ver o que acontece onde tem grupo econômico. E o primeiro teste é sobre a adoção da política.
+
+(9:31 - 9:46)
+E a presença do grupo barra a adoção? Depende da geografia. Nos municípios satélites, que orbitam grandes cidades, a chance de adoção da tarifa zero cai drasticamente. Passa de 9,5% para cerca de 3,2%.
+
+(9:46 - 10:03)
+Cai para cerca de um terço da chance? Sim, cerca de um terço. Já nos municípios polos, os centros dessas regiões, a adoção cai de 6,6% para 2,7%. E nas cidades mais isoladas, no interior? Nas isoladas, a presença de um grupo não fez diferença.
+
+(10:03 - 10:13)
+Mas tem uma ressalva. A pesquisa olhou para o registro, o cadastro da empresa na cidade. E ter um registro não prova que os ônibus dela estão efetivamente operando ali naquele momento.
+
+(10:13 - 10:31)
+Entendo. E aquela verba federal, o FPM? Isso não ajuda as prefeituras menores a adotarem a política? A dependência do FPM, na verdade, reduz a adoção no país como um todo. Mas o estudo esclarece que essa barreira existe mais para cidades que precisam criar o sistema de transporte do zero.
+
+[ATENÇÃO — o que a tese diz (Seção 8.1): A tese diz só que, entre os municípios que já têm ônibus, a dependência do FPM deixa de se associar à adoção. Não fala em troca de operador nem de contrato.]
+
+(10:32 - 11:03)
+Para quem já tem ônibus rodando na rua, depender dessa verba federal não é um obstáculo para trocar o operador ou o formato do contrato. Bom, digamos então que a cidade passou por isso tudo e aprovou a gratuidade. Como essa mudança cruza a porta de entrada da prefeitura? Esse é o segundo teste da tese, não é? Quando a gratuidade chega? Ela entra pela porta da frente, com uma licitação nova, ou entra pelos fundos? Na maioria dos grandes arranjos populacionais, ela costuma entrar como um aditivo ao contrato que já existe.
+
+(11:04 - 11:30)
+É o famoso puxadinho. O puxadinho contratual. Isso.
+
+Em 8 de 11 casos com a presença de grupo nessas regiões maiores, a mudança foi via aditivo. Nas cidades sem grupos, foram 7 aditivos em 36 casos. Nas isoladas com grupo, foram só 2 em 9. Olhando esses números absolutos, parece que o megagrupo tem o poder de evitar uma licitação nova e forçar o município a usar o aditivo, mantendo o controle da situação.
+
+(11:31 - 11:40)
+Parece. Mas aí a gente precisa controlar os dados estatisticamente pelo tamanho da cidade. Quando o autor fez isso, essa diferença geral ficou no limite do acaso.
+
+[ATENÇÃO — o que a tese diz (Seção 8.2): Com o controle de porte, a direção prevista se mantém (razão de chances de 7,7), mas com intervalo largo e p = 0,06, com 20 casos: o teste não confirma nem afasta o efeito do grupo. Não autoriza concluir que o grupo não importa.]
+
+(11:40 - 12:01)
+O que significa que as cidades maiores têm uma tendência própria a fazer aditivos, não importa tanto quem está do outro lado da mesa. E sobre quem já estava prestando serviço, a tal da empresa incumbente? Tem uma provocação interessante que o estudo levanta. A gente tende a pensar que o grupo econômico é muito poderoso, e por isso ele sempre sobrevive à mudança.
+
+(12:01 - 12:15)
+Isso é verdade? É o terceiro teste. E o dado é surpreendente. Quando a gratuidade chega onde já havia uma empresa privada operando, permaneceram 11 de 18 empresas ligadas a algum dos 327 grupos identificados.
+
+(12:16 - 12:31)
+11 de 18? E as empresas comuns, que não são de grupos? Permaneceram 16 de 25. Mas espera aí, a proporção é a mesma? A mesma proporção. Cerca de 6 em cada 10 empresas ficam, independentemente de serem de grandes grupos ou não.
+
+(12:31 - 13:06)
+Ou seja, depois que a política entra, as regras de quem recebe, de quem assume o risco de demanda, não distinguem os grupos das empresas comuns. O dinheiro público abraça quem já estava lá. E para visualizar isso no mundo real, como é que ficam as trajetórias dessas cidades? Porque algumas políticas simplesmente não sobreviveram, acabaram encerradas.
+
+Foi pressão de grupo econômico? Nenhuma das cinco políticas universais que acabaram no país tinha grupos econômicos por trás. Elas acabaram por falta de dinheiro mesmo, ou por falta de capacidade de gestão da prefeitura. E tem os casos de recuo.
+
+(13:06 - 13:11)
+Tipo o Montemor. Exato. Montemor deu um passo atrás, recuou na política.
+
+(13:11 - 13:31)
+Mas sabe o que eles mantiveram? A concessão com a empresa. A empresa saiu ilesa. Totalmente.
+
+[ATENÇÃO — o que a tese diz (Seção 9.1): A tese diz que, pelo critério fixado no Capítulo 8, a hipótese não é refutada, mas o apoio é desigual, e que ela se sustenta melhor como hipótese sobre o contrato do que sobre o grupo econômico. Não diz “plenamente compatíveis”.]
+
+E São Caetano do Sul também. Eles restringiram o passe livre apenas para quem é morador, mas blindaram e preservaram o operador privado. A grande moral da história é que as entidades empresariais até aceitam a política de subsídio da prefeitura.
+
+(13:31 - 13:55)
+Desde que os seus contratos sejam intocados e o risco de rodar com ônibus vazio passe todo para o Estado. Juntando toda essa teoria, o desenho dos contratos, os testes estatísticos e a sobrevivência das empresas, qual é o veredito da tese lá na síntese final? O veredito é que os resultados são plenamente compatíveis com a hipótese de que o setor privado atua para moldar o cenário. Mas o apoio que os dados dão a isso é desigual.
+
+(13:55 - 14:10)
+A grande barreira não é necessariamente o grupo econômico operando nas sombras. Qual é a barreira então? O peso e a amarra do contrato vigente. É por isso que o título da pesquisa é tão preciso quando fala no papel dos grupos e não na influência causal direta.
+
+(14:11 - 14:24)
+Eles moldam o campo porque já estão lá dentro, protegidos por contratos muito fortes e difíceis de romper. Isso faz a gente refletir sobre como essa dinâmica vai impactar o amanhã. Porque agora a gente tem uma agenda nacional fervendo em Brasília sobre mobilidade.
+
+(14:25 - 14:40)
+Sim, o futuro está em jogo agora. Nós temos a Lei 15.432, de 2026, que reorganiza o setor e vai entrar em vigor em junho de 2027. O problema é que ela foi esvaziada de fontes obrigatórias de dinheiro após vários vetos presidenciais.
+
+(14:40 - 14:51)
+Ela permite mudar as coisas, mas não diz de onde vem o recurso. Exatamente. E, correndo em paralelo, temos a PEC 18, também de 2026, que propõe gratuidade aos sábados, domingos e feriados.
+
+(14:51 - 15:06)
+E, para pagar por isso, a ideia é usar pelo menos 26,8% das emendas parlamentares impositivas. Usar a emenda parlamentar, que é supervolátil, para sustentar um serviço contínuo. E ainda tem aquele plano maior, o Sistema Único de Mobilidade.
+
+(15:06 - 15:18)
+A PEC 25, de 2023. A intenção é criar um SUS do transporte. Mas a grande questão que o estudo deixa é não adianta injetar dinheiro novo se a estrutura do contrato não muda.
+
+(15:18 - 15:32)
+É. O alerta que fica é gigantesco. A gente chega ao fim da nossa trilogia e eu só tenho a agradecer à audiência pela companhia nesse mergulho profundo sobre um tema tão vital para o nosso direito à cidade. E eu quero deixar um recado.
+
+(15:32 - 15:45)
+Pode falar. Para quem adora fuçar dados ou quer conferir a realidade da sua própria cidade, o Thiago Wontzler Gomes deixou tudo aberto num repositório no GitHub. O nome do repositório é PainelTZ.
+
+(15:45 - 16:11)
+Só procurar por PainelTZ, tudo junto, que você encontra todo esse mapa nacional. E eu quero me despedir deixando uma sementinha para a reflexão de quem nos ouve. Se o dinheiro que sustenta os ônibus está saindo do orçamento geral, que toda a população paga, por que o controle sobre as rotas, os lucros e a qualidade ainda continua trancado nas gavetas dos contratos antigos? É com essa pulga atrás da orelha que a gente encerra a nossa análise de hoje.
+
+(16:12 - 16:14)
+Um abraço e até a próxima.

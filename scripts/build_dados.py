@@ -276,6 +276,8 @@ def _transcricao(rel):
     out = []
     for b in corpo.strip().split('\n\n'):
         m = re.match(r'^\((\d+:\d+) - (\d+:\d+)\)\n(.*)$', b, re.S)
+        if b.startswith('[ATENÇÃO'):
+            out.append(f'<p class="aviso">{e(b.strip()[1:-1])}</p>'); continue
         out.append(f'<p><span class="ts">{m.group(1)}</span> {e(m.group(3).strip())}</p>' if m else f'<p>{e(b.strip())}</p>')
     return ''.join(out)
 def _episodio(ep):
@@ -283,7 +285,13 @@ def _episodio(ep):
     ok = os.path.exists(os.path.join(RAIZ, au))
     tam_au = tam(os.path.getsize(os.path.join(RAIZ, au))) if ok else ''
     ext = os.path.splitext(au)[1][1:].upper()
-    cor = ''.join(f'<tr><td class="min">{e(m)}</td><td>{e(d)}</td><td>{e(t)}</td><td class="onde">{e(o)}</td></tr>' for m, d, t, o in ep['correcoes'])
+    def _lin(r):
+        av = r[3] if len(r) > 3 else ''
+        cls = ' class="av"' if av else ''
+        nota = f'<p class="aviso">Atenção — o que a tese diz: {e(av)}</p>' if av else ''
+        return f'<tr{cls}><td class="min">{e(r[0])}</td><td>{e(r[1])}{nota}</td><td class="onde">{e(r[2])}</td></tr>'
+    rot = ''.join(_lin(r) for r in ep.get('roteiro', []))
+    n_av = sum(1 for r in ep.get('roteiro', []) if len(r) > 3 and r[3])
     return (f'<article class="ep" id="podcast-{ep["n"]}"><div class="ep-cab"><span class="ep-n">Parte {ep["n"]}</span>'
             f'<h3>{e(ep["titulo"])}</h3><p class="ep-meta">{e(ep["duracao"])} · {e(ep["capitulos"])}</p></div>'
             f'<p class="ep-res">{e(ep["resumo"])}</p>'
@@ -291,9 +299,9 @@ def _episodio(ep):
             + '<p class="ep-bt">'
             + (f'<a class="btn" href="{quote(au)}" download>Baixar o áudio ({ext}, {tam_au})</a> ' if ok else '')
             + f'<a class="btn sec" href="{quote(tx)}" download>Baixar a transcrição (TXT)</a></p>'
-            f'<details class="ep-cor" open><summary>O que conferir com a tese · {len(ep["correcoes"])} pontos</summary>'
-            f'<div class="tabwrap"><table class="cor"><thead><tr><th>Minuto</th><th>A conversa diz</th><th>A tese diz</th><th>Onde</th></tr></thead><tbody>{cor}</tbody></table></div></details>'
-            f'<details class="ep-tx"><summary>Ler a transcrição</summary><p class="ep-meta">Transcrição automática, sem revisão: os erros da conversa estão nela.</p><div class="tx">{_transcricao(tx)}</div></details></article>')
+            + (f'<details class="ep-rot" open><summary>Onde está na tese · {len(ep["roteiro"]) - n_av} trechos e {n_av} avisos</summary>'
+               f'<div class="tabwrap"><table class="cor rot"><thead><tr><th>Minuto</th><th>Assunto</th><th>Na tese</th></tr></thead><tbody>{rot}</tbody></table></div></details>' if rot else '')
+            + f'<details class="ep-tx"><summary>Ler a transcrição</summary><p class="ep-meta">Transcrição automática, sem revisão. Os avisos em destaque dizem o que a tese diz onde a conversa simplifica demais ou erra.</p><div class="tx">{_transcricao(tx)}</div></details></article>')
 PODCAST = ('<style>'
     '.pod-intro{max-width:900px;}'
     '.pod-nomes{font-size:12.5px;color:var(--muted);max-width:900px;margin:-4px 0 18px;}'
@@ -305,9 +313,10 @@ PODCAST = ('<style>'
     '.ep .tabwrap{overflow-x:auto;margin-top:8px;} table.cor{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px;}'
     'table.cor th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--border);}'
     'table.cor td{vertical-align:top;padding:8px;border-bottom:1px solid var(--border);line-height:1.5;} table.cor td.min{white-space:nowrap;font-weight:700;color:var(--amarelo);} table.cor td.onde{font-size:11.5px;color:var(--muted);min-width:110px;}'
+    '.aviso{margin:6px 0 2px;padding:6px 10px;border-left:3px solid var(--rosa);background:rgba(255,45,107,.08);font-size:12.5px;line-height:1.5;color:var(--text);} table.cor tr.av td.min{color:var(--rosa);}'
     '.ep .tx{max-height:480px;overflow:auto;font-size:13px;line-height:1.6;padding-right:8px;} .ep .tx .ts{font-size:11px;font-weight:700;color:var(--muted);margin-right:4px;}'
     '</style>'
-    f'<p class="intro-aba pod-intro">{e(POD["intro"])}</p><p class="pod-nomes">{e(POD["nomes"])}</p>'
+    f'<p class="intro-aba pod-intro">{e(POD["intro"])}</p>' + (f'<p class="pod-nomes">{e(POD["nomes"])}</p>' if POD.get('nomes') else '')
     + ''.join(_episodio(ep) for ep in POD['episodios']))
 
 pagina = f'''<!DOCTYPE html>

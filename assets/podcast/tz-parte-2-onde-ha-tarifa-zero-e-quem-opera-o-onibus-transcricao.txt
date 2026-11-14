@@ -1,0 +1,257 @@
+Transporte público em crise — a tese em conversa
+Parte 2 — Onde há Tarifa Zero e quem opera o ônibus? (21 min)
+Conversa gerada com inteligência artificial a partir da tese de Thiago Von Zeidler Gomes (PGT/UFABC, 2026), orientada por Silvana Maria Zioni.
+Transcrição automática, sem revisão: nomes próprios podem sair errados. Os avisos [ATENÇÃO] marcam, no trecho em que acontece, o que a tese diz onde a conversa simplifica demais ou erra. Onde está cada ponto na tese, e as correções, na página Dados e conceitos (https://tvzgomes-2.github.io/painel_tz/dados.html#podcast). A referência é sempre a tese.
+
+(0:00 - 0:39)
+Quando a gente ouve a expressão transporte público gratuito, acho que a primeira imagem que se forma na cabeça da maioria de quem nos escuta costuma ser bem grandiosa, né? Com certeza. Avenidas largas, aquele trânsito denso. Isso.
+
+A gente logo imagina terminais enormes, lotados na hora do rush e uma frota interminável cruzando o asfalto das metrópoles. É, a associação mais imediata que fazemos. Mas e se a verdadeira revolução silenciosa da mobilidade no Brasil estiver acontecendo em municípios tão pequenos que muitas vezes a Prefeitura nem possui uma Secretaria de Trânsito? Pois é. Esse é um contraste muito forte.
+
+(0:40 - 0:55)
+Hoje, nós vamos abrir os dados reais para desvendar as engrenagens físicas e financeiras que realmente fazem os ônibus rodarem no nosso país. Sejam muito bem-vindas e bem-vindos a mais um Mergulho Profundo. Olá a todos que nos acompanham nesta imersão.
+
+(0:55 - 1:07)
+É muito bom estar aqui. E para situar quem está chegando agora, nós estamos na parte 2 de uma série introdutória. Uma série pensada para traduzir a mecânica das nossas cidades para quem não é especialista na área.
+
+(1:07 - 1:23)
+Isso mesmo. E o nosso mapa de navegação de hoje continua sendo a tese de doutorado do pesquisador Thiago Von Seidler Gomes. Um trabalho muito denso desenvolvido na Universidade Federal do ABC, a UFABC, sob a orientação da professora doutora Silvana Maria Zioni.
+
+(1:23 - 1:38)
+Um trabalho monumental, né? É um trabalho monumental. E o título completo da pesquisa já entrega o peso da investigação. O título é Transporte Público em Crise O papel dos grupos econômicos nas experiências de tarifa zero no Brasil.
+
+(1:38 - 1:49)
+Um título direto ao ponto. Muito direto. E um aspecto que eu acho que precisa ser celebrado desde já é que essa não é uma daquelas pesquisas trancadas a sete chaves dentro da universidade.
+
+(1:49 - 2:00)
+Ah, de jeito nenhum. A transparência é um pilar desse trabalho. O autor disponibilizou toda a base de informações de forma muito aberta num repositório no GitHub que se chama PainelTZ.
+
+(2:00 - 2:15)
+Então, para os nossos ouvintes que gostam de fuçar planilhas e checar tudo por conta própria, basta buscar por PainelTZ na internet, que o acesso é livre. É um convite excelente. E, para guiar nossa conversa, nossa investigação de hoje, nós vamos perseguir uma pergunta central.
+
+(2:15 - 2:53)
+Qual seria? A pergunta é Onde há tarifa zero e quem opera o ônibus? Bom, vamos desempacotar isso então, começando pela geografia da coisa toda. Quando o pesquisador deixa o debate teórico de lado, desce ali para a burocracia do dia a dia e começa a levantar cada norma municipal, cada contrato, o que ele encontra? Qual é o tamanho real da gratuidade hoje no território nacional? Olha, o retrato é bem surpreendente pelo volume e vale ressaltar que a leitura dos dados reflete um levantamento feito com um rigor metodológico muito forte. Foi um processo de checar norma a norma, contrato a contrato.
+
+(2:53 - 2:59)
+Um trabalho de formiguinha. Sem dúvida. E com a base de dados congelada em 11 de novembro de 2026.
+
+(3:00 - 3:15)
+E nesse recorte de tempo, a pesquisa verificou a existência de 187 políticas municipais. 187. É um número que indica que aquela fase do projeto piloto, daquela experimentação isolada, já ficou para trás? Ficou mesmo.
+
+(3:16 - 3:28)
+Mas me tira uma dúvida. Dessas 187 que foram mapeadas, todas estão com as catracas liberadas neste momento? A grande maioria, sim. O levantamento constatou que 181 dessas políticas estão ativas.
+
+(3:29 - 3:45)
+E aqui, a pesquisa faz uma separação fundamental para a gente entender o impacto real nas ruas. Que separação é essa? Dessas ativas, 173 são políticas de caráter universal. Ou seja, qualquer pessoa que subir no ônibus, viaja de graça, não importa quem seja.
+
+[ATENÇÃO — o que a tese diz (Seções 4.3 e 5.4): Parcial é a política com portão de pessoa, de tempo, de espaço ou de finalidade. Entre as 8, três mantêm uma linha municipal paga em paralelo às gratuitas.]
+
+(3:45 - 4:05)
+Precisamente. E apenas 8 políticas são parciais, que são aquelas restritas a algum grupo demográfico específico. Certo.
+
+173 universais e 8 parciais. Ah, só para completar o quadro. O levantamento também identificou 6 políticas que existiram no passado, mas que já foram encerradas.
+
+(4:05 - 4:21)
+Entendi. Então, se a tarifa zero universal está firme e ativa em 173 municípios, nós voltamos para aquela minha provocação do comecinho da conversa. Onde essas políticas estão fincadas geograficamente? Porque o debate que a gente assiste costuma focar só nas grandes capitais.
+
+(4:22 - 4:55)
+Pois é, mas os dados apontam para uma direção completamente diferente do eixo metropolitano que costumamos discutir. A leitura dos dados indica que essas políticas universais estão muito concentradas nas regiões sudeste e sul do Brasil. Sudeste e sul.
+
+E o tamanho dessas cidades? Aí é que vem o dado revelador. Elas germinam quase que exclusivamente em cidades pequenas e médias. Para termos uma noção clara, a mediana populacional dos municípios com tarifa zero universal no Brasil é de apenas 26,1 mil habitantes.
+
+(4:56 - 5:01)
+26 mil habitantes. Nossa, isso muda a perspectiva totalmente. Muda bastante.
+
+(5:01 - 5:13)
+E tem um dado adicional que desafia muitas das nossas premissas sobre mobilidade. Nenhuma cidade, zero cidades com tarifa zero universal no país ultrapassa a marca de 500 mil habitantes. Nenhuma acima de 500 mil.
+
+(5:13 - 5:23)
+Hum, impressionante. A gente precisa tentar visualizar o que é a administração de uma cidade desse porte, de 20 e poucos mil habitantes. É uma realidade administrativa bem peculiar.
+
+(5:24 - 5:39)
+Sim, porque geralmente, quem mora nessa cidade sabe, a prefeitura opera com um orçamento muito apertado. A administração funciona ali em algumas poucas salas e não existe, estruturalmente falando, um departamento gigantesco de engenharia de tráfego. Com certeza.
+
+(5:39 - 6:00)
+A tese aborda justamente essa realidade utilizando o conceito de déficit de institucionalidade. Déficit de institucionalidade. E como isso se traduz no dia a dia? Significa que a pesquisa documentou várias cidades onde o transporte gratuito foi criado e roda todos os dias sem que exista, por exemplo, um decreto regulamentador detalhando as regras.
+
+[ATENÇÃO — o que a tese diz (Seção 5.3 e Quadro 9): Isso não está na tese. O déficit de institucionalidade mede cinco peças (lei, decreto, fonte de custeio, forma de operação e documento da operação): só 9 das 187 políticas têm as cinco.]
+
+(6:00 - 6:25)
+E muitas vezes não há sequer uma Secretaria Municipal exclusiva para cuidar de transporte. Nossa, então quem gerencia isso? Muitas vezes o serviço acaba sendo gerido pela Secretaria de Obras ou pela Secretaria de Administração Geral do município. Mas como um serviço complexo desses sai do papel no meio desse, digamos, vazio burocrático? Afinal, o ônibus precisa de manutenção, combustível, escala de motorista.
+
+(6:25 - 6:52)
+Como a contratação é formatada? Para entender isso, a pesquisa mapeou seis arranjos operacionais diferentes nessas cidades. E eles cobrem um espectro bem amplo, desde a gestão puramente pública até a iniciativa privada. Vai desde a operação 100% pública, onde a Prefeitura compra a frota e assina a carteira dos motoristas, passando por modelos de locação de veículos e pagamento por quilômetro rodado, até chegar na concessão privada tradicional.
+
+(6:53 - 7:14)
+Mas, olha, exigiria um esforço gigantesco aplicar uma concessão privada clássica, cheia de exigências complexas, numa cidade de 20 mil habitantes, né? Eu fico imaginando que é como organizar um evento comunitário num bairro pequeno. Como assim? A organização do bairro não vai contratar uma produtora internacional para montar o palco. Eles fazem um improviso estruturado.
+
+(7:15 - 7:26)
+A comunidade usa as ferramentas que já tem na mão. Um vizinho empresta o equipamento, o outro ajuda na portaria, e o evento acontece de forma orgânica, com os recursos dali. A analogia é excelente.
+
+(7:26 - 7:42)
+É um improviso estruturado mesmo. A pesquisa, inclusive, classifica essa adaptação como um gradiente de porte. E o que esse gradiente mostra na prática? Mostra que, à medida que o tamanho do município diminui, o perfil da empresa que presta o serviço também muda de forma radical.
+
+(7:43 - 8:01)
+Se olharmos apenas para os municípios com menos de 20 mil habitantes, a leitura dos dados indica uma mudança clara. Que mudança? Nesses municípios, foram comprovados 22 operadores com CNPJ nos documentos. E, desses 22, 14 operam totalmente fora do núcleo tradicional do ônibus urbano.
+
+(8:01 - 8:17)
+Espera, 14 de 22 operam fora do transporte urbano de passageiros. Então, de onde essas empresas vêm? São empresas que atuam em nichos como fretamento, agências de turismo, ou até empresas focadas apenas em locação de veículos. Ah, dá pra entender.
+
+(8:17 - 8:42)
+É uma logística muito pragmática. A empresa já tem a garagem na cidade, já tem a frota que atende a indústria da região, e acaba assumindo as rotas gratuitas da prefeitura. Isso mesmo.
+
+É uma adaptação do mercado local. Bom, se a Tarifa Zero prospera dessa forma nas cidades menores, aproveitando essas empresas de turismo e locação, eu me sinto obrigada a perguntar sobre os grandes tubarões do setor. É o próximo passo lógico.
+
+(8:43 - 8:57)
+E é aqui que a gente entra na segunda metade da nossa pergunta guia de hoje. Afinal, quem controla o grande ônibus privado no Brasil? Porque a narrativa que mais escutamos é a de que existe um cartel nacional impenetrável. O famoso monopólio absoluto.
+
+(8:57 - 9:15)
+Isso. E o que os dados da base da Receita Federal dizem quando começamos a cruzar os sócios e as empresas? Dizem que esse imaginário de um monopólio monolítico, controlando tudo de cima a baixo, precisa ser revisto com base na documentação. O cenário verificado pela pesquisa é o seguinte.
+
+(9:15 - 9:27)
+Existem 327 grupos econômicos atuando no transporte. E esses grupos somados reúnem 1.040 empresas ativas. 1.040 empresas dentro de grupos.
+
+(9:27 - 9:38)
+Mas de um total de quantas no país? De 12.907 empresas ativas cadastradas. Nossa, 12 mil empresas. E só mil e poucas estão nos grandes grupos.
+
+(9:39 - 9:55)
+O mercado é muito mais fragmentado do que parece. Bastante fragmentado na base. E para ilustrar isso com dados, das 7.680 empresas que possuem algum sócio no capital social, 54,7% delas tem no máximo um único vínculo societário.
+
+(9:55 - 10:05)
+Ou seja, mais da metade das viações operam as suas rotas isoladas, sem pertencer a essas teias corporativas enormes. Exato. A base opera de forma muito independente.
+
+(10:05 - 10:25)
+Mas mesmo com essa base toda fragmentada, a força financeira costuma se aglomerar no topo, né? Como esses grupos se estruturam na parte alta da tabela? No topo, a concentração do capital social é realmente muito forte. A pesquisa organizou aqueles 327 grupos em 316 unidades de controle. 316.
+
+(10:26 - 10:30)
+Certo. Tá. E o peso financeiro fica evidente lá em cima.
+
+[ATENÇÃO — o que a tese diz (Seção 6.2): R$ 8,13 bilhões é o capital declarado de todas as 316 unidades. As 22 do topo detêm metade dele (50,3%), cerca de R$ 4,1 bilhões.]
+
+(10:30 - 10:47)
+Apenas 22 dessas unidades de controle concentram 50,3% de todo o capital social declarado. Metade de todo o dinheiro declarado está na mão de 22 unidades. Sim, o que representa cerca de 8,13 bilhões de reais concentrados nesse topo.
+
+(10:47 - 11:07)
+Olha, quando a gente ouve que 22 unidades controlam bilhões assim, a conclusão imediata que quem nos escuta pode tirar é aquela clássica narrativa de novela. Ah, são 22 famílias bilionárias numa sala secreta dividindo o país. É tentador pensar assim, mas é fundamental esclarecer que não é o caso.
+
+(11:07 - 11:19)
+Não são 22 famílias ditando regras unificadas. Não. A leitura minuciosa mostra que, dentro desse topo, há empresas completamente isoladas que só estão lá por conta do volume formal de capital registrado.
+
+(11:19 - 11:31)
+Ah, e temos, inclusive, anomalias contábeis no meio disso. Anomalias? Como o quê? A Itapemirim, por exemplo. Ela figura no topo por causa do seu capital social histórico monumental.
+
+(11:31 - 11:40)
+Mas a gente sabe que ela é uma empresa falida. Ela não tem operação de ônibus urbano real rodando nas cidades hoje em dia. Mas o papel diz que ela é uma gigante financeira.
+
+(11:41 - 12:00)
+Nossa, isso reforça muito que capital social declarado no papel não significa ônibus na rua rodando nem motorista contratado, né? Sem dúvida. O papel não mede a frota ou a operação diária. E o que eu acho fascinante aqui é como a pesquisa disseca as relações societárias com muito rigor técnico, desfazendo várias confusões.
+
+(12:01 - 12:21)
+Explica melhor como isso funciona, porque cruzar CNPJ na internet costuma gerar muita teoria da conspiração. Como a pesquisa analisa isso? A tese classifica esses vínculos em diferentes graus. Por exemplo, existe a partilha familiar, que é o vínculo de grau C. Muitas vezes você olha o cadastro e vê membros da mesma família em várias empresas.
+
+(12:22 - 12:36)
+A primeira impressão é que o pai de família controla tudo de um escritório central, certo? Mas muitas vezes não tem nenhum controle comum ali. O que restou foi sua linhagem familiar. Os herdeiros dividiram os negócios e cada um opera de forma totalmente independente da do outro.
+
+(12:37 - 12:42)
+Entendi. Eles compartilham o sobrenome, mas os caixas da empresa são separados. Isso mesmo.
+
+[ATENÇÃO — o que a tese diz (Seção 6.3): Federação é a articulação entre unidades por sócio ou administrador em terceira empresa ou instituição do setor, pela rede estendida ou por empresa conjunta de três ou mais grupos, sem capital comum. Mede articulação, e não controle.]
+
+(12:42 - 12:57)
+E temos também as federações, que a pesquisa chama de grau D. Federações. Como viações de cidades diferentes se associam? São articulações institucionais. Um sindicato patronal, uma associação para operar a bilhetagem.
+
+(12:58 - 13:10)
+E é muito importante frisar. A pesquisa deixa claro que essas federações são apenas para articulação política ou técnica. Não existe nenhuma divisão de rotas documentada na tese baseada nesses consórcios.
+
+(13:10 - 13:24)
+Sabe que isso ajuda a desconstruir aquela imagem de que o mercado tem uma blindagem como bonecas russas? A gente costuma imaginar que é uma blindagem como bonecas russas. Uma empresa dentro da outra, totalmente unificada. Mas a realidade não opera assim.
+
+(13:25 - 13:40)
+Ter sócios em comum ou até uma holding acima não significa de forma alguma um controle unificado de todas as rotas. E vale lembrar, o cadastro sequer informa a parcela que cada sócio possui. É como, me vem à mente, uma associação de moradores de bairro.
+
+(13:40 - 13:48)
+Pode ser. Os vizinhos ali compartilham um clube, assinam petições juntos para a prefeitura asfaltar a rua. Tem uma união fortíssima da porta para fora.
+
+(13:49 - 14:03)
+Mas, da porta para dentro, cada morador manda na própria casa, não divide o salário e decide a sua vida sozinho. Essa é uma leitura muito alinhada com o que os dados indicam. Cada empresa tem sua autonomia, mesmo operando em conjunto politicamente.
+
+[ATENÇÃO — o que a tese diz (Seção 6.5): São 19 grupos do recorte sem operação de transporte coletivo localizada (por falência, intervenção, caducidade, saída de consórcio ou parada sem registro); em três deles, sem falência nem baixa do CNPJ.]
+
+(14:03 - 14:18)
+Mas, no meio desse emaranhado de vínculos e TNPJs, a pesquisa também encontrou as chamadas empresas zumbis, não é? Encontrou, sim. O levantamento identificou 19 grupos na situação de manter empresas zumbis. Empresas ativas que não fazem nada.
+
+(14:19 - 14:37)
+E como funciona isso no setor de transportes? São empresas que estão formalmente ativas no cadastro da Receita, tudo certinho, mas não foi localizada nenhuma operação real de transporte vinculada a elas nas cidades onde estão registradas. Existem só no papel e não tem garagem, não tem frota. É o que os dados apontam.
+
+(14:37 - 14:48)
+19 grupos com empresas nessa condição. E aproveitando essa questão do dinheiro e dos papéis, tem um ponto que nossos ouvintes sempre questionam quando falamos desses grandes empresários. O financiamento público.
+
+[ATENÇÃO — o que a tese diz (Seção 6.4): Na tese, “não foi verificada” quer dizer que não foi pesquisada, e não que foi pouco encontrada: a consulta à CVM e à B3 fica como passo seguinte.]
+
+(14:49 - 15:12)
+Há uma ideia de que as viações pegam crédito subsidiado para o ônibus e desviam para construir prédio e investir no mercado imobiliário da família. A pesquisa buscou rastrear isso e os dados exigem bastante cuidado. Primeiro, a emissão de debêntures, que é um meio comum de levantar fortunas no mercado corporativo, não foi verificada de forma expressiva por essas empresas de ônibus urbano na pesquisa.
+
+(15:12 - 15:29)
+E as linhas de crédito do governo? Linhas como o Refrota e o Novo PAC possuem regras rígidas. Elas financiam estritamente a frota, o chassi e a carroceria, e exclusivamente para as empresas concessionárias de transporte. O dinheiro já vai carimbado para a fábrica do ônibus praticamente.
+
+[ATENÇÃO — o que a tese diz (Seção 8.5): A tese não analisa isso. Registra só que o crédito federal financia frota e exige concessão ou permissão.]
+
+(15:29 - 15:41)
+Exato. Não existe margem nesses financiamentos específicos para direcionar o capital diretamente para o braço imobiliário da família. A tese pontua que a ideia do ônibus funcionar como um ativo âncora.
+
+(15:41 - 15:47)
+Uma garantia estável que viabiliza outros negócios. Isso. Essa é uma leitura até compatível com a dinâmica do mercado.
+
+(15:48 - 16:08)
+Mas não é um achado que tenha sido categoricamente demonstrado pelos dados da pesquisa. Muito bom esclarecer isso com base nos dados. Bom, então o que acontece quando esse mercado tradicional corporativo que a gente acabou de mapear se encontra com as políticas de tarifa zero que vimos lá na primeira parte da conversa? Quando cruzamos essas duas realidades, vemos que elas quase não se tocam.
+
+(16:09 - 16:38)
+A intersecção é pequena. Pequena quanto? Das 99 políticas de tarifa zero onde o CNPJ do operador pode ser comprovado, apenas 21 são operadas por empresas que pertencem àqueles 19 grupos, do total de 327. 21 de 99.
+
+[ATENÇÃO — o que a tese diz (Seções 6.2 e 6.6): As 7 políticas são de empresas de cinco das 22 unidades do topo (Barata, Gulin, Belarmino, SOU e Turin), e não das cinco maiores.]
+
+E dessas 21, quantas pertencem às gigantes lá do topo? Se olharmos para as 5 maiores, que estão nas 22 unidades de controle do topo, só 7 políticas vêm delas. Sete. É quase nada.
+
+(16:38 - 17:07)
+Mas nos casos em que a tarifa zero bate à porta de uma cidade operada por um grupo estruturado, como isso entra no contrato? A prefeitura rasga o contrato antigo e faz uma licitação nova? Se conectarmos isso ao cenário maior, preservar o contrato vigente e a operação que já está na rua é o caminho mais percorrido. Das 21 políticas com presença de grupos, a forma mais comum de entrada da tarifa zero foi através de um aditivo ou contrato de concessão existente. Foram 12 casos resolvidos com aditivo.
+
+(17:08 - 17:26)
+A prefeitura simplesmente faz um ajuste e assume o custo, sem tirar a empresa dali. Mas isso é uma regra universal. Todo mundo faz aditivo? Não.
+
+E é por isso que documentar as exceções é vital. O município de Maricá, no Rio de Janeiro, é o exemplo clássico de ruptura. Lá, a prefeitura não fez um aditivo para manter a empresa privada.
+
+(17:27 - 17:37)
+Houve uma ruptura com a concessão anterior e a cidade assumiu a gestão gratuita, sob outra lógica. Então, o aditivo é comum, mas não é a única saída. A prefeitura tem ferramentas se quiser.
+
+(17:38 - 18:06)
+E quando olhamos para o interior? Aquelas cidades menores, onde as empresas não fazem parte de nenhum desses 327 grandes grupos, quem manda na negociação quando não existe um conglomerado gigante por trás? A pesquisa traz um estudo de caso muito revelador sobre isso, focado nas cidades vizinhas de Querquinho e Tietê, no interior de São Paulo. Querquinho e Tietê. O que os dados mostram lá? Em nenhuma dessas duas cidades, a empresa que opera o ônibus pertence a um dos grandes grupos econômicos.
+
+(18:06 - 18:12)
+São empresas puramente locais. Operadores independentes. E a prefeitura tem mais poder de barganha com eles.
+
+(18:12 - 18:25)
+Pelo contrário. Os dados ilustram perfeitamente o poder imenso que um operador local, mesmo sem um grupo por trás, tem sobre o município. Ele domina o território, detém as garagens locais e conhece a operação como ninguém.
+
+(18:26 - 18:45)
+Nossa, e tem uma dinâmica ali, que eu estava lendo na pesquisa, que mostra o contraste que quem mora na região vive todo dia. O cidadão pega o transporte urbano dentro de Querquinho e é totalmente gratuito. Mas, se ele precisa cruzar a linha da cidade e trabalhar em Tietê, no transporte intermunicipal... A cobrança tarifária existe.
+
+(18:45 - 18:52)
+Sim. E, muitas vezes, estamos falando da mesma empresa, da mesma frota rodando. É uma fronteira completamente invisível.
+
+(18:52 - 19:13)
+A pessoa não paga num momento, e 10 minutos depois, por estar numa rota que cruza a divisa, o transporte vira mercadoria de novo. É um contraste institucional muito forte, convivendo na mesma garagem, no mesmo asfalto. Bom, nós vimos hoje, passando por toda essa pesquisa, que a tarifa zero se espalha de forma vigorosa pelas franjas das cidades menores do Sul e do Sudeste.
+
+(19:14 - 19:31)
+E, enquanto isso, os grandes grupos econômicos dominam o núcleo de maneira muito mais difusa e fragmentada do que imaginávamos, sem aquela estrutura impenetrável. Isso mesmo. E o cruzamento entre os dois lados ainda é muito restrito, geralmente moldado por aditivos em contratos já vigentes.
+
+(19:31 - 19:50)
+Para quem ficou curioso, para explorar as minúcias do CNPJ, as tabelas completas, o repositório aberto do pesquisador Tiago Vonseiler Gomes, está disponível e se chama Painel TZ lá no GitHub. O Painel TZ é uma base de dados incrível para a pesquisa. E acho que tudo isso levanta uma questão importante para a gente refletir.
+
+(19:51 - 20:25)
+Qual questão? Nós vimos que o poder local de empresas pequenas já dita regras super específicas em cidades menores, como no caso de Querquilho. O que vai acontecer quando a pressão popular pela tarifa zero começar a bater com mais força nas portas dos contratos gigantes e blindados das grandes metrópoles? Quando o transporte intermunicipal e urbano, que se confundem todo dia na vida do trabalhador, tiverem que entrar na mesma balança da gratuidade? É uma provocação e tanto. Fica o convite para quem nos escuta observar os ônibus da sua própria cidade com um olhar diferente amanhã de manhã.
+
+(20:25 - 20:36)
+Entender que por trás daquele veículo tem toda uma malha de arranjos e negociações silenciosas operando. Foi ótimo mergulhar nesses dados hoje. Um grande abraço a todos.
+
+(20:36 - 20:42)
+Um abraço, até o próximo Mergulho Profundo e continuem acompanhando e questionando as estruturas das nossas cidades.

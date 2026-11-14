@@ -18,7 +18,7 @@ Site com páginas independentes da pesquisa de doutorado (era Canoa, desde 13/11
 
 - **Painel Brasil** (`painel.html`, tag "TZ") — a Tarifa Zero no Brasil: as políticas universais e parciais classificadas pela régua descritiva, o mapa dos 5.570 municípios, a comparação com o restante do país (inclusive dentro da mesma faixa de porte), o arranjo contratual, a remuneração do operador e a ficha de cada caso. Cruza a base-mestre de Tarifa Zero com uma base municipal integrada (FINBRA/Siconfi, PIB, frota, MUNIC, REGIC, Censo 2022, PEMOB/SIMU, OSM, TSE, NTU).
 - **Rede de empresas** (`rede-ge.html`, tag "GE") — os 327 grupos econômicos do transporte coletivo, em duas abas: **Quem controla** (a rede societária interativa, as unidades de controle, linhagens e federações, a concentração do capital — Tabela 5 da tese — e onde os grupos têm endereço) e **Além do ônibus** (as holdings sócias das empresas dos grupos e as empresas de outros setores a que os sócios delas chegam — Seção 6.4).
-- **Dados e conceitos** (`dados.html`) — duas abas: **Dados da tese** (os oito pacotes de `dados/` para baixar, arquivo por arquivo, com tamanho, colunas e dicionário, SHA-256, as duas citações, o DOI e os dois volumes da tese em PDF) e **Conceitos** (os verbetes). Gerada por `scripts/build_dados.py`, que só lê `dados/`; os verbetes têm a fonte em `scripts/verbetes-fonte.html` (`verbetes.html` redireciona para a aba).
+- **Dados e conceitos** (`dados.html`) — duas abas: **Dados da tese** (os oito pacotes de `dados/` para baixar, arquivo por arquivo, com tamanho, colunas e dicionário, SHA-256, as duas citações, o DOI e, até a defesa, o cartaz que anuncia os dois volumes da tese), **Conceitos** (os verbetes), **Referências** e **Podcast** (três conversas em áudio sobre a tese, com o roteiro e os avisos de onde a conversa erra). Gerada por `scripts/build_dados.py`, que só lê `dados/`; os verbetes têm a fonte em `scripts/verbetes-fonte.html` (`verbetes.html` redireciona para a aba).
 - **Pesquisa colaborativa** (`pesquisa.html`).
 
 Nenhuma página publica nome de sócio pessoa física nem CPF. CNPJ aparece só de empresas, quando a fonte documental o traz; o nome de mercado de alguns grupos é o do fundador e é publicado como marca. Vínculo societário mapeado não é prova de controle nem de atuação contra a Tarifa Zero.
@@ -52,7 +52,7 @@ Ver [`ROADMAP.md`](./ROADMAP.md) — arquitetura do site (hub + páginas) e aná
 ```
 index.html          hub do site — links para as páginas (editado à mão; os números vêm de scripts/atualizar_numeros.py)
 dados.html          página "Dados e conceitos" (gerada por scripts/build_dados.py a partir de dados/ e de scripts/verbetes-fonte.html)
-tese/               os dois volumes da tese em PDF (gerados por scripts/build_tese_pdf.py a partir do .docx mais recente)
+tese/               os dois volumes da tese em PDF, fora do git até a defesa (dez/2026); gerados por scripts/build_tese_pdf.py
 painel.html         página "Painel Brasil" (TZ), publicada (autocontida — não editar direto, ver scripts/)
 README.md           este arquivo
 CHANGELOG.md         histórico de versões e notas de metodologia/achados, por página

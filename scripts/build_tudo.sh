@@ -19,9 +19,10 @@ passo "9. dados enxutos para o painel";                  python3 scripts/exporta
 passo "10. conferência com o congelamento";              python3 scripts/conferir_congelamento.py
 passo "11. páginas";                                     python3 scripts/atualizar_numeros.py; bash scripts/montar_html.sh; bash scripts/montar_rede_ge.sh
 passo "11b. revisão de lançamento (13/11/2026): painel e rede oficiais"
-python3 scripts/gerar_proposta.py; python3 scripts/proposta_etapa2.py | tail -1
+python3 scripts/gerar_proposta.py; python3 scripts/proposta_etapa2.py | tail -1; python3 scripts/proposta_etapa3.py | tail -1
 python3 scripts/rede_etapa2.py | tail -1; python3 scripts/rede_etapa3.py | tail -1; python3 scripts/rede_etapa4.py | tail -1; python3 scripts/rede_etapa5.py | tail -1
 python3 scripts/oficializar_painel.py; python3 scripts/oficializar_rede.py
 passo "11c. dados e conceitos (com a aba Podcast)";      python3 scripts/build_dados.py
+passo "11d. a tese só depois da defesa (tirar este passo depois da banca)"; python3 scripts/tese_apos_defesa.py
 passo "12. dados pessoais (nomes de sócios PF)";         python3 scripts/pessoas_fisicas.py painel.html rede-ge.html dados.html index.html verbetes.html pesquisa.html | grep -a "ocorrência\|→" || true
 echo; echo "Pronto. Confira o resumo da varredura acima (só razão social e nome de mercado podem ficar) e rode o teste no navegador antes do commit."

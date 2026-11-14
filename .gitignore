@@ -35,3 +35,6 @@ rede-ge-proposta.html
 
 # Backups locais das edições por script
 *.bak-*
+
+# Os PDFs da tese só entram depois da defesa (dez/2026); até lá o site mostra o cartaz (scripts/tese_apos_defesa.py)
+tese/*.pdf

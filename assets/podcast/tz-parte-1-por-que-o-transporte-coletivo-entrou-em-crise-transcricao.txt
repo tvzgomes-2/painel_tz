@@ -1,0 +1,322 @@
+Transporte público em crise — a tese em conversa
+Parte 1 — Por que o transporte coletivo entrou em crise? (27 min)
+Conversa gerada com inteligência artificial a partir da tese de Thiago Von Zeidler Gomes (PGT/UFABC, 2026), orientada por Silvana Maria Zioni.
+Transcrição automática, sem revisão: nomes próprios podem sair errados. Os avisos [ATENÇÃO] marcam, no trecho em que acontece, o que a tese diz onde a conversa simplifica demais ou erra. Onde está cada ponto na tese, e as correções, na página Dados e conceitos (https://tvzgomes-2.github.io/painel_tz/dados.html#podcast). A referência é sempre a tese.
+
+(0:00 - 0:09)
+Vamos imaginar, por um instante, que a gente tem nas mãos um molho de chaves. Certo. E cada chave abre uma porta essencial para a vida cotidiana.
+
+(0:10 - 0:24)
+A porta do posto de saúde, a porta da escola, a porta do local de trabalho. Os acessos básicos, né? Exato. Mas, para alcançar qualquer uma dessas portas pela cidade, existe um portão principal gigantesco.
+
+(0:24 - 0:44)
+E, se não houver como passar por esse portão inicial, todas as outras chaves no nosso bolso perdem completamente a utilidade. Nossa, essa é uma forma excelente de visualizar o problema. Porque esse portão principal dita quem consegue acessar os direitos mais fundamentais e quem fica bem, isolado.
+
+(0:44 - 1:03)
+Fica trancado do lado de fora, né? Pois é. Trata-se de uma barreira primária que precede todas as outras oportunidades urbanas. E é justamente sobre a travessia desse grande portão que a gente vai debater na nossa conversa de hoje. Demos início aqui à parte 1 de uma série introdutória em três etapas.
+
+(1:04 - 1:09)
+Uma jornada e tanto. Com certeza. O nosso fio condutor é uma pergunta bem direta.
+
+(1:10 - 1:23)
+Por que o transporte coletivo entrou em crise? É a pergunta de um milhão de dólares. Né? E para desvendar isso, a gente vai explorar uma pesquisa muito rica. A tese de doutorado intitulada Transporte Público em Crise.
+
+(1:24 - 1:30)
+O papel dos grupos econômicos nas experiências de tarifa zero no Brasil. Um material de primeiríssima linha. Demais.
+
+(1:30 - 1:46)
+O trabalho foi desenvolvido pelo pesquisador Tiago Vonseidler Gomes, lá na Universidade Federal do ABC, e com orientação da professora Silvana Maria Zioni. O que mais chama atenção nesse trabalho é a forma como ele aborda um enigma estrutural do nosso país. Sim, ele não fica só na superfície.
+
+(1:46 - 2:02)
+Exato. A pesquisa parte de uma constatação até bem curiosa, e busca entender o porquê de um fenômeno específico. Por que a política de tarifa zero avança e ganha força justamente nos municípios onde os sistemas de transporte público são menos consolidados.
+
+(2:02 - 2:13)
+É uma provocação muito boa para a gente iniciar. Mas vale destacar para quem nos ouve que, nesta nossa primeira análise, o foco vai ser estritamente a fundamentação do problema. Os quatro primeiros capítulos da tese.
+
+(2:13 - 2:23)
+Isso mesmo. A gente não vai antecipar hoje os resultados empíricos, nem as conclusões que o autor apresenta lá nas partes 2 e 3 do trabalho. Vamos construir essa fundação com bastante calma, então.
+
+(2:24 - 2:33)
+Porque para entender a crise atual, a gente precisa primeiro definir o que o transporte deveria ser na teoria. Para depois contrastar com o que ele se tornou na prática. Exatamente.
+
+(2:34 - 2:46)
+Então, vamos desdobrar aquela imagem das chaves. A pesquisa resgata a emenda constitucional 90, que foi aprovada lá em 2015. E essa emenda colocou o transporte lá no artigo 6º da nossa Constituição.
+
+(2:47 - 3:03)
+Lado a lado com a saúde, educação, moradia. Pois é. O que significa que, no papel, a mobilidade não é um mero serviço comercial que leva alguém de um ponto A para o ponto B. É um direito social. Sem a mobilidade, todos os outros direitos ficam trancados.
+
+(3:04 - 3:23)
+E ao conectar essa garantia constitucional com o histórico do planejamento urbano, a gente percebe uma mudança teórica crucial, que está documentada na tese. Qual mudança, exatamente? Bom, durante décadas, as cidades operaram sob o chamado paradigma tradicional. Nesse modelo mais antigo, a lente principal era a engenharia de tráfego.
+
+(3:23 - 3:39)
+O foco nos carros, né? Isso. O foco quase exclusivo estava no fluxo de veículos, na tentativa de reduzir o tempo de viagem das máquinas. A métrica de sucesso de um prefeito era basicamente quantos carros conseguiam passar por uma avenida sem causar um engarrafamento gigantesco.
+
+(3:40 - 3:50)
+Uma visão bem mecanicista da cidade. Totalmente. E o que a tese propõe, apoiado numa literatura bem mais recente, é a urgência de adotar o novo paradigma da mobilidade.
+
+(3:50 - 4:03)
+E qual é a diferença prática desse novo paradigma para quem está no dia a dia? A mudança radical de foco. O centro da análise deixa de ser o fluxo das máquinas de metal e passa a ser o acesso das pessoas. Faz muito sentido.
+
+(4:03 - 4:17)
+O deslocamento não é mais visto só como um custo ou um tempo chato que precisa ser cortado. Ele é uma prática social essencial para a vida comunitária. E é a partir dessa visão mais humana que surge o conceito da mobilidade como um bem comum.
+
+(4:17 - 4:32)
+Um bem comum, como a água ou o ar. Mas no sentido de uma infraestrutura que precisa ser gerida de forma coletiva, sabe? Para garantir o bem-estar da sociedade como um todo. Isso em contraposição a uma lógica puramente comercial e de lucro.
+
+(4:32 - 4:52)
+E como contraponto a essa ideia de bem comum, o texto introduz um conceito que eu achei muito forte, que é o cercamento da catraca. Esse termo é fantástico para ilustrar o problema. Porque o que a tese argumenta é que a catraca não é só um pedaço de metal que gira quando a gente empurra ou um simples instrumento contábil da empresa de ônibus.
+
+(4:52 - 5:04)
+Não mesmo. O conceito vai muito, muito além da mecânica do ônibus. O cercamento da catraca funciona, na prática real das ruas, como uma fronteira social e econômica super rígida.
+
+(5:04 - 5:15)
+Uma barreira física mesmo. É uma barreira física mesmo. É um mecanismo que transforma uma infraestrutura urbana, que por lei deveria ser de uso coletivo, num produto exclusivo para quem pode pagar.
+
+(5:15 - 5:32)
+O simples ato de pagar tarifa define quem pertence à dinâmica viva da cidade e quem é excluído dela. Ou seja, ao colocar um preço para atravessar aquele portão inicial das chaves, se impõe uma escassez artificial sobre um recurso que é essencial para a sobrevivência urbana. Exato.
+
+(5:33 - 5:46)
+E isso traz uma perspectiva bastante dura sobre o que significa, de fato, não conseguir se mover. Porque a imobilidade de uma pessoa não é um acidente geográfico, né? Nem uma simples escolha de, ah, hoje eu prefiro ficar em casa. Não, de forma alguma.
+
+(5:46 - 6:00)
+A imobilidade, dentro dessa leitura mais aprofundada, é uma condição politicamente produzida. No novo paradigma da mobilidade, nós não contabilizamos só as viagens que efetivamente acontecem todo dia. A gente passa a olhar para o que não acontece.
+
+(6:00 - 6:13)
+Perfeito. A gente passa a olhar para um movimento que foi impedido de acontecer. A falta de dinheiro para pagar a tarifa ou a ausência de uma linha de ônibus no bairro cria um nível de exclusão que afeta de forma altamente desigual à população.
+
+(6:13 - 6:21)
+Atingindo em cheio as pessoas mais vulneráveis, claro. Sempre. Trata-se de uma restrição sistemática e estrutural ao direito à cidade.
+
+(6:21 - 6:42)
+Então, se a gente entende o transporte como esse direito constitucional maravilhoso, mas que esbarra com força na catraca, a próxima dúvida é quase automática. O que está causando tudo isso? Exatamente. Se há um direito tão essencial, o que está empurrando o sistema de transporte coletivo inteiro para a beira do abismo? E a pesquisa sinaliza muito bem que a resposta começa fora do ônibus.
+
+(6:42 - 6:56)
+São as pressões externas. Pois é. A raiz desse colapso passa por uma prioridade que foi construída politicamente ao longo de muitas décadas no Brasil, que é a hegemonia do transporte individual. O carro como o rei da rua.
+
+(6:56 - 7:16)
+É. Houve um direcionamento histórico de recursos públicos maciços, bilhões e bilhões, para viabilizar e expandir a infraestrutura viária para carros e motos. Tudo isso deixando o transporte coletivo totalmente em segundo plano. E o Censo de 2022, que é detalhado lá na análise 1 da tese, desenha esse cenário com uma clareza que chega a ser impressionante.
+
+(7:16 - 7:23)
+Os números são um banho de realidade fria. Sim. Os números da divisão de como as pessoas vão para o trabalho mostram o seguinte.
+
+(7:24 - 7:42)
+O transporte coletivo inteiro somado, e é crucial a gente frisar aqui que isso inclui ônibus, BRT, trem e metrô, todos eles juntos, corresponde a apenas 23,3% dos deslocamentos. É um número muito baixo considerando o tamanho das nossas cidades. Sim.
+
+(7:42 - 7:56)
+E em contrapartida, o uso do automóvel sozinho representa 32,3%. A caminhada fica com 17,8% e a motocicleta, somada ao mototáxi, chega a 17,1%. Um cenário pulverizado.
+
+(7:56 - 8:35)
+Mas aqui eu trago um questionamento para a nossa conversa. Quando a gente observa o salto enorme dos aplicativos de transporte e das motocicletas, não estaríamos apenas diante de uma evolução tecnológica natural da sociedade? É o que muita gente diz, né? Pois é. O ônibus não seria apenas um modelo mais antigo, meio analógico, que não conseguiu acompanhar o ritmo de um mercado mais ágil? Olha, essa leitura, embora seja muito difundida por aí, é completamente desconstruída pela análise dos dados na perquisa. Como assim? A ascensão da motocicleta, por exemplo, não representa simplesmente uma preferência moderna por um transporte mais rápido ou com o vento no rosto.
+
+(8:35 - 8:44)
+Na verdade, a moto se consolidou como o veículo de quem ganha muito pouco e vive em áreas periféricas. Áreas onde o ônibus simplesmente não chega. Exato.
+
+(8:44 - 8:59)
+Ou até parou de circular por falta de investimento. Especialmente nas regiões Norte e Nordeste, ou em municípios menores, pelo Brasil afora, a motocicleta entra para ocupar um vácuo de infraestrutura que foi deixado pelo Estado. Não é uma escolha de luxo, é sobrevivência.
+
+(8:59 - 9:07)
+Sim. É uma solução individual e, frequentemente, muito precária. Ela vem associada a altos índices de acidentes horríveis.
+
+(9:07 - 9:25)
+Tudo para contornar a ausência de um sistema coletivo que seja minimamente funcional. Entendo o ponto sobre as motos, faz todo sentido. Mas e os aplicativos de transporte? Porque a promessa, lá no começo, sempre foi de que eles iam revolucionar a mobilidade urbana, tirando carros da rua, otimizando as viagens de todo mundo.
+
+(9:26 - 9:45)
+Promessa da tecnologia salvadora. Mas os aplicativos, na verdade, só renovam a velha promessa do automóvel de oferecer uma saída individual, rápida e confortável. Onde está a pegadinha, então? O problema, segundo o material que a gente está analisando, é como essas plataformas alteram a estrutura de custos do sistema urbano inteiro.
+
+(9:45 - 9:56)
+A plataformização transfere o custo pesadíssimo da compra e da manutenção do veículo, além de todo o risco da operação diária, para as costas do motorista. Que trabalho exausto. Sim.
+
+(9:56 - 10:11)
+E, simultaneamente, transfere o custo da manutenção do asfalto esburacado, o impacto no trânsito e o ônus gigante na saúde pública devido a acidentes, lá para o orçamento do município. É, a prefeitura que paga a conta do hospital e do tapa-buraco. Exatamente.
+
+(10:11 - 10:30)
+E tudo isso ocorre sem garantir ao sistema geral de mobilidade a previsibilidade financeira que o transporte público estruturado necessita para operar bem. Uma conta que não fecha. Logo, trata-se menos de uma evolução puramente tecnológica e genial e muito mais de uma reorganização econômica predatória.
+
+(10:31 - 10:47)
+Eles sugam a demanda justamente daquelas rotas que seriam as mais lucrativas para o ônibus, desequilibrando tudo. Tem um detalhe burocrático levantado na tese que beira o absurdo, de verdade. A pesquisa discorre sobre uma certa invisibilidade estatística do ônibus.
+
+(10:47 - 11:24)
+Ah, esse conceito é assustadoramente real. Como é que um veículo do tamanho de um ônibus, sabe que faz um barulho imenso, prestando um serviço público essencial todo dia, pode ser invisível para o Estado? É bizarro, né? Mas o termo descreve uma assimetria de informações que revela muito, mas muito mesmo, sobre as prioridades governamentais. De que forma? Bom, o Estado brasileiro tem um aparato altamente sofisticado que consegue contar, através dos registros do Detran e tudo mais, exatamente quantos carros e quantas motos existem e circulam a cada mês no país inteiro.
+
+(11:25 - 11:37)
+Eles sabem até a cor do carro. Exato. No entanto, quando se trata do transporte coletivo, as diversas bases de dados oficiais do governo divergem profundamente sobre algo que deveria ser muito básico.
+
+(11:37 - 11:49)
+Tipo o quê? O número de passageiros? Pior. Sobre o número de municípios brasileiros que sequer possuem um sistema de ônibus operante. Nossa, o Estado não sabe nem onde tem ônibus rodando.
+
+(11:49 - 12:09)
+Pois é. Diferentes cadastros federais e setoriais apresentam números completamente distantes entre si. Ou seja, o modo de transporte que atende predominantemente a população de menor renda sofre de uma imprecisão histórica e crônica nesses registros oficiais. O famoso apagão de dados, só que seletivo.
+
+(12:09 - 12:29)
+Exatamente. O Estado enxerga muito bem o carro particular, mas tem uma imensa dificuldade de enxergar o ônibus coletivo. Com essas pressões externas todas, a competição desleal das motos, o modelo predatório dos aplicativos, a invisibilidade estatal drenando a força do sistema, a gente precisa agora olhar pra dentro do transporte coletivo.
+
+(12:29 - 12:42)
+Sim, pra entender como ele reage a essa perda de espaço constante. E aqui a situação fica muito, muito intrigante. Mas a gente tem que ir com cautela na interpretação dos números das associações do setor.
+
+(12:42 - 12:56)
+Fundamental ter essa cautela. Porque quando a gente diz que os grandes sistemas entraram em colapso interno, isso não quer dizer simplesmente que metade dos passageiros desapareceu de um dia pro outro e de repente os ônibus ficaram rodando vazios pelas ruas, certo? Não. Longe disso.
+
+(12:56 - 13:26)
+O que essas estatísticas, na verdade, estão medindo? Esse cuidado metodológico que você puxou é vital pra compreendermos o tamanho real da crise. Os dados dos nove grandes sistemas monitorados historicamente pela NTU, que é a Associação Nacional das Empresas de Transportes Urbanos, não medem uma simples debandada absoluta em que os ônibus passaram a rodar vazios do nada. O que eles medem, então? O que esses indicadores da NPU medem com muita precisão é a queda vertiginosa da produtividade do sistema ao longo do tempo.
+
+(13:26 - 13:56)
+Peraí, quando a gente fala em produtividade do ônibus, o senso comum pensa imediatamente em lotação. Se eu pego um ônibus às sete da manhã e ele tá super lotado, com gente saindo pela porta, como é que o sistema pode estar perdendo produtividade? É um paradoxo visual, né? Mas o conceito de produtividade aqui se refere à relação matemática entre o esforço operacional, que é basicamente o custo de manter o veículo rodando o dia todo, e o número de pessoas pagantes ao longo desse trajeto completo. E não apenas naquele pico desesperador das sete da manhã.
+
+(13:56 - 13:58)
+Ah, entendi. Conta o dia todo. Sim.
+
+[ATENÇÃO — o que a tese diz (Seção 3.1, Análise VI): A queda é de 42%: cada ônibus leva hoje cerca de 58% do que levava em 1996 (de 575 para 336 passageiros por dia até 2019), e não a metade.]
+
+(13:59 - 14:12)
+E os dados mostram que os passageiros equivalentes transportados por veículo por dia caíram um absurdo 42% entre 1996 e 2019. Quase metade da eficiência foi para o ralo. Exato.
+
+(14:12 - 14:24)
+O indicador despencou de 575 para 336 passageiros por veículo ao dia nesse período. E o cenário pós-pandemia não trouxe milagre de recuperação, não. Não voltou ao normal.
+
+(14:24 - 14:38)
+Piorou. Em 2025, esse número estava em 282 passageiros, um patamar 16% abaixo do nível que já era considerado bem crítico antes da crise sanitária. Olha, a matemática disso aí se recusa a fechar.
+
+[ATENÇÃO — o que a tese diz (Seção 3.1, Análise VI): A queda é de 42%: cada ônibus leva hoje cerca de 58% do que levava em 1996 (de 575 para 336 passageiros por dia até 2019), e não a metade.]
+
+(14:38 - 14:53)
+O veículo faz o mesmo trajeto longo, gasta a mesma quantidade gigantesca de óleo diesel, o pneu sofre o mesmo desgaste no asfalto, o motorista precisa receber seu salário integral no fim do mês. Com certeza. Mas a catraca gira para quase metade das pessoas que girava lá nos anos 90.
+
+(14:54 - 15:07)
+O custo fixo para operar a máquina permanece, mas a arrecadação despenca. Esse é o grande nó da questão estrutural. E o índice de passageiros por quilômetro rodado reflete exatamente a mesma deterioração.
+
+(15:07 - 15:26)
+Houve uma queda de 40% entre 1993 e 2019. Passando de quanto para quanto? Passando de 2,49 para 1,50 passageiros a cada quilômetro rodado. E uma pesquisa mais recente, que foi feita pela CNT em parceria com a própria NTU, confirma essa fuga contínua.
+
+(15:26 - 15:47)
+O que a pesquisa diz? Mostra que o uso do ônibus pela população brasileira caiu de 45,2% lá em 2017 para 30,9% agora em 2024. Ou seja, a produtividade está despencando de forma muito consistente há três décadas. Isso nos leva direto para o que a literatura analisa como o círculo vicioso do transporte.
+
+(15:48 - 16:12)
+Como é que a gente pode visualizar o funcionamento dessa engrenagem meio que destrutiva? É, o círculo vicioso opera com uma lógica que é bem implacável e totalmente circular. Tudo sempre começa com a perda de passageiros, seja pela migração forçada para as motos ou pelo uso pontual dos aplicativos, que a gente comentou. Com menos pagantes ali, girando a catraca, a produtividade financeira do sistema cai.
+
+(16:12 - 16:32)
+Mas o custo de manter o ônibus rodando não diminui na mesma proporção, como você bem lembrou. O diesel continua caro? Pois é. E como o modelo tradicional é financiado quase que exclusivamente pelo dinheirinho arrecadado ali na catraca, a única resposta do sistema para fechar as contas no fim do mês é o quê? Aumentar a tarifa. A tarifa sobe.
+
+(16:32 - 16:56)
+E o que acontece em seguida? Essa passagem mais cara assusta e afasta ainda mais pessoas, que simplesmente não conseguem mais pagar pelo serviço e acabam sendo expulsos do sistema. Aí, com menos gente, o ciclo se reinicia, ficando cada vez mais insustentável. E o peso financeiro de sustentar toda essa engrenagem quebrada acaba recaindo brutalmente sobre quem não tem nenhuma outra alternativa.
+
+(16:57 - 17:07)
+É a parte mais perversa da história. A pesquisa traz um dado alarmante sobre isso. O peso da tarifa no orçamento é cinco vezes maior para as famílias mais pobres do que para as famílias mais ricas.
+
+(17:08 - 17:10)
+Cinco vezes. É um abismo. Sim.
+
+(17:11 - 17:31)
+Quem segura o sistema em pé, quem está pagando a conta dessa ineficiência toda, é justamente a parcela da população que tem a menor capacidade de pagamento. É. O formato atual penaliza severamente essa população de baixa renda. A regressividade desse modelo é cruel, porque cobra o mesmíssimo valor de tarifa de quem ganha um salário mínimo e de quem ganha 10 salários.
+
+(17:31 - 17:45)
+Não tem justiça social nenhuma. Nenhuma. E isso concentra todo o peso do financiamento ali na tarifa, na catraca, o que acaba sufocando o orçamento das famílias que dependem do ônibus todo santo dia para acessar a cidade, buscar emprego, buscar sobrevivência.
+
+(17:46 - 18:00)
+Bom, diante de um sistema que basicamente se devora por dentro e encarece até expulsar seus próprios usuários, surge no debate a alternativa que é o grande núcleo dessa pesquisa. E a gente precisa definir a fundo o que isso significa na prática. Com certeza.
+
+(18:01 - 18:12)
+O termo popular por aí costuma ser a ônibus de graça, mas a política analisada tecnicamente é a tarifa zero. Vamos olhar para a mecânica da coisa. O ônibus ainda precisa de combustível.
+
+(18:12 - 18:20)
+As garagens precisam de manutenção diária. O motorista não está lá trabalhando voluntariamente, né? Seria impossível. Então o serviço não é de graça.
+
+(18:20 - 18:34)
+Esclarecer essa diferença é o ponto de partida para qualquer debate que queira ser sério sobre essa política pública. A tarifa zero não significa em hipótese nenhuma que o sistema passou a operar a feito mágica sem custos. O dinheiro sai de algum lugar.
+
+(18:34 - 18:51)
+O que muda, e muda radicalmente, é a lógica de financiamento. A tarifa zero baseia-se num princípio fortíssimo, que é o custeio público. O dinheiro necessário para colocar aquele ônibus pesado na rua deixa de ser arrancado da catraca, ali do bolso do usuário no momento do embarque.
+
+(18:51 - 19:03)
+E passa para onde? Passa a ser provido pelo orçamento público do município inteiro. O custeio sai dos impostos gerais, fundos específicos ou outras receitas da prefeitura. É uma mudança de mentalidade, né? Sim.
+
+(19:04 - 19:32)
+Trata-se de enxergar o transporte, finalmente, como um direito bancado pela coletividade como um todo, e não mais como uma simples mercadoria que é comprada em doses individuais na catraca. E como o Brasil é um país imenso, com realidades muito plurais, os municípios implementam essa lógica de formas muito diferentes. Para organizar essas dezenas de experiências e a gente conseguir entender em que estágio cada cidade está, o autor da tese propõe uma ferramenta metodológica que ele chama de régua descritiva.
+
+(19:33 - 19:43)
+Uma sacada genial da pesquisa, diga-se de passagem. É um jeito de classificar as políticas em ordem crescente, baseado nos chamados portões de acesso. Vamos dissecar essa régua juntos.
+
+(19:44 - 19:57)
+Para começar bem do chão, temos o que a pesquisa chama estritamente de piso. Sim, o piso. E é fundamental usarmos o termo piso aqui, sempre piso e nunca base, para demarcar a estrutura legal da coisa toda.
+
+(19:58 - 20:17)
+Exatamente. O piso da régua descritiva corresponde àquele conjunto básico de gratuidades que são obrigatórias por lei nacional. Ou seja, nenhum prefeito, em lugar nenhum do Brasil, decide criar ou cancelar o piso, porque ele já está garantido pela nossa Constituição e por legislações federais superiores.
+
+(20:17 - 20:56)
+E quais seriam os exemplos desse piso? Os exemplos clássicos e universais no Brasil são a gratuidade para pessoas maiores de 65 anos e, uma que foi mais recentemente consolidada, a gratuidade assegrada para todo mundo no dia das eleições. Tá, então toda cidade já tem o piso? Todo sistema de transporte urbano brasileiro precisa, obrigatoriamente, operar já sobre esse piso. A política de tarifa zero, de caráter municipal mesmo, que é fruto de uma decisão local corajosa de uma prefeitura, só começa a ser desenhada a partir do momento em que o município decide ir além desse piso nacional.
+
+(20:56 - 21:15)
+Perfeito. Entendido o piso, a gente sobe o primeiro degrau da nossa régua e chega na camada parcial. Nessa camada, a catraca física já não cobra dinheiro de algumas pessoas, mas a pesquisa aponta que essa catraca é substituída por outros tipos de filtros invisíveis, os chamados portões.
+
+(21:15 - 21:32)
+Isso. A camada parcial se define justamente pela presença desses portões restritivos. O portão, ali na terminologia da tese, não é um equipamento de metal na porta do ônibus, mas sim a condição, a regrinha que o cidadão precisa cumprir para conseguir passar sem pagar a tarifa.
+
+[ATENÇÃO — o que a tese diz (Seção 4.3): A tese distingue cinco portões: de pessoa (renda ou vínculo), de tempo (dias, como o domingo), de espaço ou linha, de finalidade (a viagem só até a escola ou o serviço de saúde) e de procedimento (cadastro, carteirinha, requerimento).]
+
+(21:32 - 21:50)
+E quais são esses portões que a pesquisa identifica? O autor identifica duas naturezas principais de portões. O primeiro é o portão econômico. Nesse caso, a gratuidade é condicionada a um teto de renda, restringindo o benefício apenas àqueles cidadãos que comprovem vulnerabilidade socioeconômica com papéis e tudo mais.
+
+(21:50 - 21:58)
+Certo. E o segundo? O segundo é o portão burocrático. Aqui a gratuidade fica atrelada a uma exigência administrativa.
+
+(21:58 - 22:17)
+Pode ser a necessidade de ter um cadastro ativo e aprovado na prefeitura, ou a limitação do passe livre apenas aos domingos, ou até a restrição de que o usuário seja estudante fazendo estritamente aquele trajeto entre casa e escola. Entendi. Então você tira a barreira do dinheiro da passagem, mas coloca uma barreira de papelada.
+
+(22:17 - 22:29)
+Resumiu perfeitamente. Esses portões retiram a barreira financeira direta, diária, mas impõem uma forte barreira de controle e burocracia sobre a mobilidade das pessoas. Faz todo sentido.
+
+(22:30 - 22:43)
+Chegamos então ao nível máximo da régua descritiva da pesquisa, que é a camada universal. É onde a política atinge o seu potencial máximo. Na camada universal, os tais portões de restrição deixam de existir completamente.
+
+(22:44 - 22:52)
+Acaba a burocracia para rodar catraca. Isso. A política de gratuidade se estende a todos os usuários do sistema de transporte daquela cidade.
+
+(22:52 - 23:04)
+E isso sem nenhuma restrição chata de dia da semana, de horário específico ou de classe social. Liberdade total. Mas tem uma observação metodológica bem importante da pesquisa sobre isso.
+
+(23:04 - 23:25)
+Os modelos que exigem apenas que a pessoa seja moradora cadastrada no município também entram nessa camada universal. Mesmo precisando de um cadastro de residência. Sim, porque mesmo existindo essa exigência de residência local, o acesso em si não impõe portões econômicos ou de renda, nem limitações de perfil populacional interno.
+
+(23:26 - 23:41)
+O deslocamento dentro da cidade torna-se, de fato, livre para todos os munícipes. E a régua, por ser um instrumento descritivo fiel à realidade nua e crua, não ignora os passos que são dados para trás. Ela também categoriza as políticas que foram encerradas.
+
+(23:41 - 23:49)
+Um ponto doloroso, mas super necessário. Sim. Isso evidencia que a implementação da tarifa zero não é mágica, nem é imutável.
+
+(23:50 - 24:15)
+Tem cidades que implementaram com empolgação e, por causa de entraves orçamentários graves, pressões econômicas ou até simples mudanças de gestão política, acabaram revertendo a decisão e voltando a cobrar passagem. Pois é. O debate sobre como financiar de forma sustentável o direito à cidade é conflituoso e não tem pausa. O mapeamento cuidadoso dessas experiências encerradas é vital para a pesquisa.
+
+(24:16 - 24:23)
+Mostra que não é só boa vontade. De forma alguma. Revela as tensões práticas fortíssimas de adotar um novo paradigma da mobilidade.
+
+(24:24 - 24:43)
+Tirar o financiamento da tarifa do dia a dia e colocá-lo no orçamento público exige uma reestruturação profunda nas contas da cidade. E esse processo, infelizmente, está sujeito a sucessos brilhantes e a fracassos ao longo do tempo. Bom, fazendo um apanhado geral da nossa conversa de hoje para quem está acompanhando a gente.
+
+(24:44 - 24:50)
+A crise do transporte público está muito longe de ser um aborrecimento comum de trânsito. Longe. Longe.
+
+(24:50 - 25:03)
+É uma fratura exposta na forma como a gente garante o direito à cidade. O sistema atual está amarrado num modelo tarifário que pune severamente as famílias mais vulneráveis. Famílias que precisam daquele dinheiro para o supermercado.
+
+(25:03 - 25:28)
+Exato. E, ao mesmo tempo, perde passageiros diariamente para o avanço das motocicletas, para o transporte individual que sempre foi estimulado pelo Estado e para os aplicativos que, como a gente viu, transferem seus custos para a coletividade. A contradição central que a gente explorou aqui, muito bem baseada na tese, é que o modelo de financiamento do transporte coletivo, focado exclusivamente no usuário pagante, já entrou em colapso.
+
+(25:28 - 25:35)
+E entrou em colapso devido à sua própria ineficiência produtiva e social. A conta fechou, mas no vermelho. Isso.
+
+(25:35 - 26:06)
+A discussão sobre a tarifa zero, toda mapeada ali pela régua descritiva, representa a nossa grande tentativa atual de buscar alternativas estruturais de custeio público. Tudo isso para enfrentar de frente esse cenário de esgotamento total. E olha, para quem nos acompanha e deseja explorar os dados primários com os próprios olhos, olhar as tabelas, os gráficos de produtividade, que caem absurdamente, e ver a distribuição dos municípios por aquela régua descritiva maravilhosa, o autor da tese mantém um repositório aberto e muito detalhado no GitHub.
+
+(26:06 - 26:12)
+Uma atitude excelente de transparência acadêmica. Demais. Basta buscar lá na internet por PainelTZ.
+
+(26:13 - 26:23)
+Lá estão os códigos e as bases originais que alimentam as análises que trouxemos hoje. É um material público valiosíssimo para quem quer entender o cenário real e complexo do nosso país. Com certeza.
+
+(26:23 - 27:09)
+O acesso direto a esses dados permite que a discussão sobre mobilidade no Brasil saia finalmente do campo das opiniões genéricas, de achismos, e passe a operar com base em evidências materiais claras sobre o colapso e as alternativas em andamento. E para fechar nossa análise dessa parte 1 com chave de ouro, e já aquecer os motores para o nosso próximo capítulo, eu quero deixar uma reflexão no ar para quem está ouvindo, resgatando de novo aquela imagem do molho de chaves do começo. Se a catraca do ônibus operou historicamente como um filtro rigoroso, decidindo na porta quem tem dinheiro para acessar o parque, para acessar a vaga de emprego, o hospital, o que acontece com a geografia e com a economia de um município quando essa barreira financeira é permanentemente demolida? Uma pergunta que explode a cabeça.
+
+(27:09 - 27:18)
+Né? A cidade, na sua essência, muda de forma quando as pessoas estão, finalmente, livres para se mover. Muda a vida. Fica o questionamento para a gente amadurecer.
+
+(27:19 - 27:26)
+Na nossa próxima conversa, a gente vai mergulhar na parte 2 da tese para buscar algumas dessas respostas na prática. Até lá.

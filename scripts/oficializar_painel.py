@@ -25,7 +25,7 @@ assert k == 1, 'faixa da proposta não achada'
 s = s.replace('<span class="badge">painel · v1.0.0 · proposta</span>', '<span class="badge">painel · v1.0.0</span>')
 s = s.replace('painel-proposta.html', 'painel.html')
 s = s.replace('rede-ge-proposta.html', 'rede-ge.html')
-s = s.replace('<meta name="proposta" content="proposta_etapa2">\n', '')
+s = re.sub(r'<meta name="proposta" content="[^"]*">\n?', '', s)   # etapa 2 e etapa 3 (13/11/2026)
 # 13/11/2026 (autor): o site deixa de se apresentar como protótipo ou instrumento exploratório
 s = s.replace(' — instrumento exploratório da pesquisa; não substitui a análise da tese.', ' — o método completo e os limites estão na tese.')
 open(DESTINO, 'w', encoding='utf-8').write(s)
